@@ -1,5 +1,5 @@
-using System.Collections.ObjectModel;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using Raftel.Core.Attributes;
 using Raftel.Data.DbContexts;
 using Raftel.Data.DbContexts.Auditing;
@@ -80,6 +80,44 @@ public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(f
 
             property.OldValue.Should().BeNullOrEmpty();
             property.NewValue.Should().Be(entityProperty.GetValue(aggregate)?.ToString());
+        }
+    }
+
+
+    [Fact]
+    public async Task EntityChange_WithChange_ShouldCreateUpdatedEntityChange()
+    {
+        var dbContextFactory = GetRequiredService<IDbContextFactory>();
+        var changesStore = GetRequiredService<AuditChangesStore>();
+        var dbContext = dbContextFactory.Create<TestingDbContext>();
+
+        var oldAggregate = SampleAggregate.Create();
+        oldAggregate.StringValue = "Monkey D. Luffy";
+        oldAggregate.IntegerValue = 123;
+        oldAggregate.Processed = true;
+        await dbContext.AddAsync(oldAggregate);
+        await dbContext.SaveChangesAsync();
+
+        var originalValues = await dbContext.Set<SampleAggregate>().AsNoTracking()
+            .FirstOrDefaultAsync(_ => _.Id == oldAggregate.Id);
+
+        var updatedAggregate = await dbContext.Set<SampleAggregate>().FirstOrDefaultAsync(_ => _.Id == oldAggregate.Id);
+        updatedAggregate.StringValue = "Roronoa Zoro";
+        updatedAggregate.IntegerValue = 321;
+        updatedAggregate.Processed = false;
+        var updateLog = changesStore.CreateLog(dbContext.ChangeTracker);
+
+        var updateEvent = updateLog.First();
+        updateEvent.OccurredOn.Should().BeBefore(DateTime.UtcNow);
+        updateEvent.EntityId.Should().Be(oldAggregate.Id.ToString());
+        updateEvent.Kind.Should().Be(AuditEventKind.Updated);
+        updateEvent.Properties.Should().HaveCount(3);
+
+        foreach (var property in updateEvent.Properties)
+        {
+            var entityProperty = typeof(SampleAggregate).GetProperty(property.Name);
+            property.NewValue.Should().Be(entityProperty.GetValue(updatedAggregate)?.ToString());
+            property.OldValue.Should().Be(entityProperty.GetValue(originalValues)?.ToString());
         }
     }
 }

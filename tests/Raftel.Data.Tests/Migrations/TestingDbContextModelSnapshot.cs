@@ -17,7 +17,7 @@ namespace Raftel.Data.Tests.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -50,12 +50,31 @@ namespace Raftel.Data.Tests.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("IntegerValue")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Processed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StringValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SampleModels");
+                });
+
+            modelBuilder.Entity("Raftel.Data.Tests.Types.Models.SampleNotAuditedAggregate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("Processed")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SampleModels");
+                    b.ToTable("SampleNotAuditedAggregates");
                 });
 #pragma warning restore 612, 618
         }
