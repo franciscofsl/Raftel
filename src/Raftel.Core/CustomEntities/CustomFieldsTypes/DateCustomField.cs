@@ -17,7 +17,8 @@ public sealed class DateCustomField : CustomFieldBase
             : Result.Failure(CustomEntitiesErrors.CustomFieldValueNotOfConfiguredType);
     }
 
-    internal override Result CheckDependentFieldValue(object dependencyValue, object dependantValue, EqualityKind equalityKind)
+    internal override Result CheckDependentFieldValue(object dependencyValue, object dependantValue,
+        EqualityKind equalityKind)
     {
         var startDate = dependencyValue as DateOnly?;
         var endDate = dependantValue as DateOnly?;
@@ -42,9 +43,14 @@ public sealed class DateCustomField : CustomFieldBase
             return Result.Ok();
         }
 
-        if (endDate < startDate)
+        if (Equals(equalityKind, EqualityKind.GreaterThan))
         {
-            return Result.Failure(CustomEntitiesErrors.InvalidDateRange);
+            if (endDate < startDate)
+            {
+                return Result.Failure(CustomEntitiesErrors.InvalidDateRange);
+            }
+
+            return Result.Ok();
         }
 
         return Result.Ok();
