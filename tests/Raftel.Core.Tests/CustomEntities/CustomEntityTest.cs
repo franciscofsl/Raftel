@@ -296,4 +296,62 @@ public class CustomEntityTest
 
         customEntity.ValueOf(customField).Should().Be(3);
     }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDecimalValue_IfIsLowerOutsideOfRange()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var customField = customEntityConfiguration.AddCustomField("Age", "Person Age", CustomFieldKind.Decimal);
+
+        if (customField is DecimalCustomField decimalCustomField)
+        {
+            decimalCustomField.Range = new Range<decimal>(2, 5);
+        }
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        var result = customEntity.UpdateField(customField, 1m);
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.ValueNotInRange);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDecimalValue_IfIsGreaterOutsideOfRange()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var customField = customEntityConfiguration.AddCustomField("Age", "Person Age", CustomFieldKind.Decimal);
+
+        if (customField is DecimalCustomField decimalCustomField)
+        {
+            decimalCustomField.Range = new Range<decimal>(2, 5);
+        }
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        var result = customEntity.UpdateField(customField, 6m);
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.ValueNotInRange);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldUpdateDecimalValue_IfIsWithinRange()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var customField = customEntityConfiguration.AddCustomField("Age", "Person Age", CustomFieldKind.Decimal);
+
+        if (customField is DecimalCustomField decimalCustomField)
+        {
+            decimalCustomField.Range = new Range<decimal>(1, 5);
+        }
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        var result = customEntity.UpdateField(customField, 3m);
+        result.Success.Should().BeTrue();
+
+        customEntity.ValueOf(customField).Should().Be(3m);
+    }
 }
