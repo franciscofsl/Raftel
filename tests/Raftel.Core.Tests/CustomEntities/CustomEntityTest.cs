@@ -1,4 +1,6 @@
-﻿using Raftel.Core.CustomEntities;
+﻿using Raftel.Core.Common.ValueObjects;
+using Raftel.Core.CustomEntities;
+using Raftel.Core.CustomEntities.CustomFieldsTypes;
 
 namespace Raftel.Core.Tests.CustomEntities;
 
@@ -235,5 +237,63 @@ public class CustomEntityTest
         var result = customEntity.UpdateField(customField, null);
 
         result.Error.Code.Should().Be(CustomEntitiesErrors.CustomFieldIsRequired);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateIntegerValue_IfIsLowerOutsideOfRange()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var customField = customEntityConfiguration.AddCustomField("Age", "Person Age", CustomFieldKind.Integer);
+
+        if (customField is IntCustomField intCustomField)
+        {
+            intCustomField.Range = new Range<int>(2, 5);
+        }
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        var result = customEntity.UpdateField(customField, 1);
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.ValueNotInRange);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateIntegerValue_IfIsGreaterOutsideOfRange()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var customField = customEntityConfiguration.AddCustomField("Age", "Person Age", CustomFieldKind.Integer);
+
+        if (customField is IntCustomField intCustomField)
+        {
+            intCustomField.Range = new Range<int>(2, 5);
+        }
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        var result = customEntity.UpdateField(customField, 6);
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.ValueNotInRange);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldUpdateIntegerValue_IfIsWithinRange()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var customField = customEntityConfiguration.AddCustomField("Age", "Person Age", CustomFieldKind.Integer);
+
+        if (customField is IntCustomField intCustomField)
+        {
+            intCustomField.Range = new Range<int>(2, 5);
+        }
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        var result = customEntity.UpdateField(customField, 3);
+        result.Success.Should().BeTrue();
+
+        customEntity.ValueOf(customField).Should().Be(3);
     }
 }

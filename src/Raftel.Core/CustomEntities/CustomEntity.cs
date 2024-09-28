@@ -42,7 +42,7 @@ public class CustomEntity : AggregateRoot<CustomEntityId>
         {
             return result;
         }
-
+        
         _values[customFieldBase.Id] = value;
         return Result.Ok();
     }

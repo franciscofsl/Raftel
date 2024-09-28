@@ -34,6 +34,7 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
             _ => throw new ArgumentOutOfRangeException(nameof(kind), $"Unsupported custom field kind: {kind.Id}")
         };
     }
+
     public abstract CustomFieldKind Kind { get; }
 
     public bool IsRequired { get; private set; }
@@ -45,12 +46,33 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
     internal Result CanBeUpdatedInEntity(object value)
     {
         var validTypeResult = ValueHasValidType(value);
-        return validTypeResult.Success
-            ? IsOptionalValue(value)
-            : validTypeResult;
+
+        if (validTypeResult.IsFailure)
+        {
+            return validTypeResult;
+        }
+        
+        var isOptionalValueResult = IsOptionalValue(value);
+        if (isOptionalValueResult.IsFailure)
+        {
+            return isOptionalValueResult;
+        }
+
+        var beforeUpdateValidationsResult = BeforeUpdateValidations(value);
+        if (beforeUpdateValidationsResult.IsFailure)
+        {
+            return beforeUpdateValidationsResult;
+        }
+
+        return validTypeResult;
     }
 
     protected abstract Result ValueHasValidType(object value);
+
+    protected virtual Result BeforeUpdateValidations(object value)
+    {
+        return Result.Ok();
+    }
 
     protected Result IsOptionalValue(object value)
     {

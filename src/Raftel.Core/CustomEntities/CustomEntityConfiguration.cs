@@ -37,7 +37,7 @@ public class CustomEntityConfiguration : AggregateRoot<CustomEntityConfiguration
         return CustomEntity.Create(this);
     }
 
-    public CustomFieldBase AddCustomField(string key, string name, CustomFieldKind kind, bool isRequired)
+    public CustomFieldBase AddCustomField(string key, string name, CustomFieldKind kind, bool isRequired = false)
     { 
         var customField = CustomFieldBase.Create(key, name, kind, isRequired);
         _fields.Add(customField);
