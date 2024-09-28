@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Raftel.Core.Attributes;
+using Raftel.Core.Auditing;
 using Raftel.Data.DbContexts;
 using Raftel.Data.DbContexts.Auditing;
 using Raftel.Data.Tests.DbContext;
@@ -8,7 +9,7 @@ using Raftel.Data.Tests.Types.Models;
 
 namespace Raftel.Data.Tests;
 
-public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(fixture)
+public class AuditingTest(TestingDbFixture fixture) : DataTestBase(fixture)
 {
     [Fact]
     public void CreateLog_WithoutChanges_ShouldCreateEmptyLog()
@@ -175,5 +176,24 @@ public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(f
         var deleteEvent = log.First();
         deleteEvent.Kind.Should().Be(AuditEventKind.Deleted);
         deleteEvent.Properties.Should().BeEmpty();
+    }
+
+    [Fact]
+    public async Task EntityChangesLog_ShouldSaveLog_OnEntitySave()
+    {
+        var dbContextFactory = GetRequiredService<IDbContextFactory>();
+        var entityChangesReader = GetRequiredService<IEntityChangesReader>();
+        var dbContext = dbContextFactory.Create<TestingDbContext>();
+        
+        var entity = SampleAggregate.Create();
+        entity.StringValue = "Monkey D. Luffy";
+        entity.IntegerValue = 123;
+        entity.Processed = true;
+        await dbContext.AddAsync(entity);
+        await dbContext.SaveChangesAsync();
+
+        var log = await entityChangesReader.ForEntityAsync(entity.Id.ToString());
+
+        log.IsEmpty().Should().BeFalse();
     }
 }

@@ -22,6 +22,57 @@ namespace Raftel.Data.Tests.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Raftel.Core.Auditing.EntityChange", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("EntityId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Kind")
+                        .HasColumnType("int")
+                        .HasColumnName("Kind");
+
+                    b.Property<DateTime>("OccurredOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EntityChanges", (string)null);
+                });
+
+            modelBuilder.Entity("Raftel.Core.Auditing.PropertyChange", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("EntityChangeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OldValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EntityChangeId");
+
+                    b.ToTable("EntityPropertiesChanges", (string)null);
+                });
+
             modelBuilder.Entity("Raftel.Data.Outbox.OutboxMessage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -42,7 +93,7 @@ namespace Raftel.Data.Tests.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OutboxMessages");
+                    b.ToTable("OutboxMessages", (string)null);
                 });
 
             modelBuilder.Entity("Raftel.Data.Tests.Types.Models.SampleAggregate", b =>
@@ -75,6 +126,18 @@ namespace Raftel.Data.Tests.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SampleNotAuditedAggregates");
+                });
+
+            modelBuilder.Entity("Raftel.Core.Auditing.PropertyChange", b =>
+                {
+                    b.HasOne("Raftel.Core.Auditing.EntityChange", null)
+                        .WithMany("Properties")
+                        .HasForeignKey("EntityChangeId");
+                });
+
+            modelBuilder.Entity("Raftel.Core.Auditing.EntityChange", b =>
+                {
+                    b.Navigation("Properties");
                 });
 #pragma warning restore 612, 618
         }

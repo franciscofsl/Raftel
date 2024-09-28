@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Raftel.Core.Auditing;
 using Raftel.Core.Contracts;
 using Raftel.Data.DbContexts.Auditing;
 using Raftel.Data.Outbox;
@@ -16,12 +17,13 @@ public abstract class EfCoreModule : RaftelModule
     }
 
     protected virtual IReadOnlyList<Assembly> AssembliesToLoadRepositories { get; }
-    
+
     public override void ConfigureCustomServices(IServiceCollection services)
     {
         services.AddTransient(typeof(IRepository<,>), typeof(EfRepository<,>));
         services.AddSingleton<ConvertDomainEventsToOutboxMessagesInterceptor>();
         services.AddTransient<AuditChangesStore>();
+        services.AddTransient<IEntityChangesReader, EntityChangesReader>();
 
         services.Scan(scan => scan
             .FromAssemblies(AssembliesToLoadRepositories)

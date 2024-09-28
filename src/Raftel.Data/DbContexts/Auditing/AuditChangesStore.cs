@@ -27,20 +27,18 @@ public class AuditChangesStore
         return new EntityChange(idValue?.ToString(), entry.State.ToKind(), properties);
     }
 
-    private static PropertyChanges EntityEntryPropertiesToPropertyChanges(EntityEntry entry)
+    private static IReadOnlyList<PropertyChange> EntityEntryPropertiesToPropertyChanges(EntityEntry entry)
     {
         if (entry.State is EntityState.Deleted)
         {
-            return PropertyChanges.Empty;
+            return Enumerable.Empty<PropertyChange>().ToList();
         }
 
-        var propertyChanges = entry.Properties
+        return entry.Properties
             .Where(_ => _.Metadata.Name != "Id")
             .WhereIf(entry.State == EntityState.Modified, _ => _.IsModified)
             .Select(PropertyEntryToPropertyChange)
             .ToList();
-
-        return new PropertyChanges(propertyChanges);
     }
 
     private static PropertyChange PropertyEntryToPropertyChange(PropertyEntry propertyEntry)
