@@ -405,4 +405,23 @@ public class CustomEntityTest
 
         result.Error.Code.Should().Be(CustomEntitiesErrors.InvalidDateRange);
     }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDependentDateCustomField_If_EqualityKindIsEqual_And_NotSatisfy()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var startDateField = customEntityConfiguration
+            .AddCustomField("Start", "Start date", CustomFieldKind.Date, true);
+        var endDateField = customEntityConfiguration.AddCustomField("End", "End date", CustomFieldKind.Date);
+
+        endDateField.DependsOf(startDateField, EqualityKind.Equal);
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        customEntity.UpdateField(startDateField, new DateOnly(2019, 1, 6));
+        var result = customEntity.UpdateField(endDateField, new DateOnly(2019, 1, 5));
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.DatesShouldBeEquals);
+    }
 }

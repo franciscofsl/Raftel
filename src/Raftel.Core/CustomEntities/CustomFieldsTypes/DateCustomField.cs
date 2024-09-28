@@ -22,6 +22,16 @@ public sealed class DateCustomField : CustomFieldBase
         var startDate = dependencyValue as DateOnly?;
         var endDate = dependantValue as DateOnly?;
 
+        if (Equals(equalityKind, EqualityKind.Equal))
+        {
+            if (startDate.HasValue && startDate != endDate)
+            {
+                return Result.Failure(CustomEntitiesErrors.DatesShouldBeEquals);
+            }
+
+            return Result.Ok();
+        }
+
         if (endDate < startDate)
         {
             return Result.Failure(CustomEntitiesErrors.InvalidDateRange);
