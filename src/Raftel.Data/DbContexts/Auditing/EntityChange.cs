@@ -52,6 +52,7 @@ public class PropertyChanges : IEnumerable<PropertyChange>
     {
         var propertyChanges = entry.Properties
             .Where(_ => _.Metadata.Name != "Id")
+            .WhereIf(entry.State == EntityState.Modified, _ => _.IsModified)
             .Select(PropertyChange.Create).ToList();
         return new PropertyChanges(propertyChanges);
     }

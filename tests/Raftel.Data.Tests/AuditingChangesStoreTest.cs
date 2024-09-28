@@ -83,6 +83,40 @@ public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(f
         }
     }
 
+    [Fact]
+    public async Task EntityChange_WithChange_ShouldCreateUpdatedEntityChange_WithOnlyModifiedProperties()
+    {
+        var dbContextFactory = GetRequiredService<IDbContextFactory>();
+        var changesStore = GetRequiredService<AuditChangesStore>();
+        var dbContext = dbContextFactory.Create<TestingDbContext>();
+
+        var oldAggregate = SampleAggregate.Create();
+        oldAggregate.StringValue = "Monkey D. Luffy";
+        oldAggregate.IntegerValue = 123;
+        oldAggregate.Processed = true;
+        await dbContext.AddAsync(oldAggregate);
+        await dbContext.SaveChangesAsync();
+
+        var originalValues = await dbContext.Set<SampleAggregate>().AsNoTracking()
+            .FirstOrDefaultAsync(_ => _.Id == oldAggregate.Id);
+
+        var updatedAggregate = await dbContext.Set<SampleAggregate>().FirstOrDefaultAsync(_ => _.Id == oldAggregate.Id);
+        updatedAggregate.StringValue = "Tony Tony Chopper";
+        var updateLog = changesStore.CreateLog(dbContext.ChangeTracker);
+
+        var updateEvent = updateLog.First();
+        updateEvent.OccurredOn.Should().BeBefore(DateTime.UtcNow);
+        updateEvent.EntityId.Should().Be(oldAggregate.Id.ToString());
+        updateEvent.Kind.Should().Be(AuditEventKind.Updated);
+        updateEvent.Properties.Should().HaveCount(1);
+
+        foreach (var property in updateEvent.Properties)
+        {
+            var entityProperty = typeof(SampleAggregate).GetProperty(property.Name);
+            property.NewValue.Should().Be(entityProperty.GetValue(updatedAggregate)?.ToString());
+            property.OldValue.Should().Be(entityProperty.GetValue(originalValues)?.ToString());
+        }
+    }
 
     [Fact]
     public async Task EntityChange_WithChange_ShouldCreateUpdatedEntityChange()
