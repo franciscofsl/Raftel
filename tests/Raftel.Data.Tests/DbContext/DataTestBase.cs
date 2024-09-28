@@ -1,10 +1,10 @@
 namespace Raftel.Data.Tests.DbContext;
 
-public class TestingTest : IClassFixture<TestingDbFixture>
+public class DataTestBase : IClassFixture<TestingDbFixture>
 {
     private readonly TestingDbFixture _fixture;
 
-    public TestingTest(TestingDbFixture fixture)
+    public DataTestBase(TestingDbFixture fixture)
     {
         _fixture = fixture;
     }

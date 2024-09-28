@@ -8,9 +8,9 @@ using Raftel.Infrastructure.BackgroundJobs;
 
 namespace Raftel.Data.Tests;
 
-public class RaftelDbContextTest : TestingTest
+public class RaftelDbContextTestBase : DataTestBase
 {
-    public RaftelDbContextTest(TestingDbFixture fixture) : base(fixture)
+    public RaftelDbContextTestBase(TestingDbFixture fixture) : base(fixture)
     {
     }
 
@@ -29,9 +29,9 @@ public class RaftelDbContextTest : TestingTest
 
         var mock = Substitute.For<IJobExecutionContext>();
         mock.CancellationToken.Returns(new CancellationToken());
-        
-        await processor.Execute(mock);
 
+        await processor.Execute(mock);
+        await Task.Delay(1000);
         var createdAggregate = await repository.GetAsync(aggregate.Id);
 
         createdAggregate.Processed.Should().BeTrue();

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Raftel.Data.DbContexts;
+using Raftel.Data.DbContexts.Auditing;
 using Raftel.Data.Outbox;
 
 namespace Raftel.Data;
@@ -16,10 +18,13 @@ public static class Extensions
 
         if (!string.IsNullOrEmpty(connectionString))
         {
+            services.AddTransient<IDbContextFactory, RaftelDbContextFactory>();
+            services.AddTransient<AuditChangesInterceptor>();
             services.AddDbContext<IDbContext, TDbContext>(
                 (sp, options) => options
                     .UseSqlServer(connectionString)
-                    .AddInterceptors(sp.GetRequiredService<ConvertDomainEventsToOutboxMessagesInterceptor>()));
+                    .AddInterceptors(sp.GetRequiredService<ConvertDomainEventsToOutboxMessagesInterceptor>())
+                    .AddInterceptors(sp.GetRequiredService<AuditChangesInterceptor>()), ServiceLifetime.Transient);
         }
     }
 }

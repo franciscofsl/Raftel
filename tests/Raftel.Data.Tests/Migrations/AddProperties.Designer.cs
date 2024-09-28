@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Raftel.Data.Tests.Types.Models;
 
@@ -11,9 +12,11 @@ using Raftel.Data.Tests.Types.Models;
 namespace Raftel.Data.Tests.Migrations
 {
     [DbContext(typeof(TestingDbContext))]
-    partial class TestingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240928102539_AddProperties")]
+    partial class AddProperties
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,57 +24,6 @@ namespace Raftel.Data.Tests.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Raftel.Core.Auditing.EntityChange", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("EntityId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Kind")
-                        .HasColumnType("int")
-                        .HasColumnName("Kind");
-
-                    b.Property<DateTime>("OccurredOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EntityChanges", (string)null);
-                });
-
-            modelBuilder.Entity("Raftel.Core.Auditing.PropertyChange", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("EntityChangeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NewValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OldValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TypeName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityChangeId");
-
-                    b.ToTable("EntityPropertiesChanges", (string)null);
-                });
 
             modelBuilder.Entity("Raftel.Data.Outbox.OutboxMessage", b =>
                 {
@@ -93,7 +45,7 @@ namespace Raftel.Data.Tests.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OutboxMessages", (string)null);
+                    b.ToTable("OutboxMessages");
                 });
 
             modelBuilder.Entity("Raftel.Data.Tests.Types.Models.SampleAggregate", b =>
@@ -126,18 +78,6 @@ namespace Raftel.Data.Tests.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SampleNotAuditedAggregates");
-                });
-
-            modelBuilder.Entity("Raftel.Core.Auditing.PropertyChange", b =>
-                {
-                    b.HasOne("Raftel.Core.Auditing.EntityChange", null)
-                        .WithMany("Properties")
-                        .HasForeignKey("EntityChangeId");
-                });
-
-            modelBuilder.Entity("Raftel.Core.Auditing.EntityChange", b =>
-                {
-                    b.Navigation("Properties");
                 });
 #pragma warning restore 612, 618
         }
