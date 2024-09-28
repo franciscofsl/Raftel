@@ -29,9 +29,9 @@ public class RaftelDbContextTestBase : DataTestBase
 
         var mock = Substitute.For<IJobExecutionContext>();
         mock.CancellationToken.Returns(new CancellationToken());
-        
-        await processor.Execute(mock);
 
+        await processor.Execute(mock);
+        await Task.Delay(1000);
         var createdAggregate = await repository.GetAsync(aggregate.Id);
 
         createdAggregate.Processed.Should().BeTrue();

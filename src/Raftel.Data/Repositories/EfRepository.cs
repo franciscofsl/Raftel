@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Raftel.Core.BaseTypes;
 using Raftel.Core.Contracts;
 using Raftel.Core.Specifications;
+using Raftel.Data.DbContexts;
 using Raftel.Shared.Exceptions;
 
 namespace Raftel.Data.Repositories;
@@ -12,16 +13,16 @@ public class EfRepository<TAggregateRoot, TEntityId>
     where TAggregateRoot : AggregateRoot<TEntityId>
     where TEntityId : EntityId
 {
-    public EfRepository(IDbContext context)
-    {
-        DbContext = context;
-    }
+    private readonly IDbContextFactory _contextFactory;
 
-    protected IDbContext DbContext { get; }
+    public EfRepository(IDbContextFactory dbContextFactory)
+    {
+        _contextFactory = dbContextFactory;
+    }
 
     public async Task<TAggregateRoot> GetAsync(TEntityId id)
     {
-        var query = GetQueryableAsync();
+        var query = GetQueryable();
 
         var entity = await query.FirstOrDefaultAsync(_ => _.Id == id);
 
@@ -35,7 +36,7 @@ public class EfRepository<TAggregateRoot, TEntityId>
 
     public Task<List<TAggregateRoot>> GetListAsync(Filter<TAggregateRoot> filter = null)
     {
-        var query = GetQueryableAsync();
+        var query = GetQueryable();
 
         if (filter is not null)
         {
@@ -49,7 +50,7 @@ public class EfRepository<TAggregateRoot, TEntityId>
     public Task<List<TReturnModel>> GetListAsync<TReturnModel>(Expression<Func<TAggregateRoot, TReturnModel>> map,
         Filter<TAggregateRoot> filter = null)
     {
-        var query = GetQueryableAsync();
+        var query = GetQueryable();
 
         if (filter is not null)
         {
@@ -62,10 +63,11 @@ public class EfRepository<TAggregateRoot, TEntityId>
 
     public async Task<TAggregateRoot> InsertAsync(TAggregateRoot entity, bool save = true)
     {
-        await DbContext.Set<TAggregateRoot>().AddAsync(entity);
+        var dbContext = CreateDbContext();
+        await dbContext.Set<TAggregateRoot>().AddAsync(entity);
         if (save)
         {
-            await DbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
         }
 
         return entity;
@@ -73,34 +75,33 @@ public class EfRepository<TAggregateRoot, TEntityId>
 
     public async Task UpdateAsync(TAggregateRoot entity, bool save = true)
     {
-        DbContext.Set<TAggregateRoot>().Update(entity);
+        var dbContext = CreateDbContext();
+        dbContext.Set<TAggregateRoot>().Update(entity);
         if (save)
         {
-            await DbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
         }
     }
 
     public async Task DeleteAsync(TAggregateRoot entity, bool save = true)
     {
-        DbContext.Set<TAggregateRoot>().Remove(entity);
+        var dbContext = CreateDbContext();
+        dbContext.Set<TAggregateRoot>().Remove(entity);
         if (save)
         {
-            await DbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
         }
     }
 
-    protected IQueryable<TAggregateRoot> GetQueryableAsync()
+    protected IDbContext CreateDbContext()
     {
-        var query = DbContext.Set<TAggregateRoot>().AsQueryable();
-
-        query = ApplyIncludes(query);
-
-        return query;
+        return _contextFactory.Create<IDbContext>();
     }
-
+    
     protected IQueryable<TAggregateRoot> GetQueryable()
     {
-        var query = DbContext.Set<TAggregateRoot>().AsQueryable();
+        var dbContext = CreateDbContext();
+        var query = dbContext.Set<TAggregateRoot>().AsQueryable();
 
         return ApplyIncludes(query);
     }

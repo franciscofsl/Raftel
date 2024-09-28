@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Raftel.Data.DbContexts;
 using Raftel.Data.DbContexts.Auditing;
 using Raftel.Data.Tests.DbContext;
 using Raftel.Data.Tests.Types.Models;
@@ -10,8 +11,9 @@ public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(f
     [Fact]
     public void CreateLog_WithoutChanges_ShouldCreateEmptyLog()
     {
-        var dbContext = GetRequiredService<TestingDbContext>();
+        var dbContextFactory = GetRequiredService<IDbContextFactory>();
         var changesStore = GetRequiredService<AuditChangesStore>();
+        var dbContext = dbContextFactory.Create<TestingDbContext>();
 
         var log = changesStore.CreateLog(dbContext.ChangeTracker);
 
@@ -22,8 +24,9 @@ public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(f
     [Fact]
     public async Task CreateLog_ShouldCreateLog_WithAuditedEntries()
     {
-        var dbContext = GetRequiredService<TestingDbContext>();
+        var dbContextFactory = GetRequiredService<IDbContextFactory>();
         var changesStore = GetRequiredService<AuditChangesStore>();
+        var dbContext = dbContextFactory.Create<TestingDbContext>();
 
         await dbContext.AddAsync(SampleAggregate.Create());
 
