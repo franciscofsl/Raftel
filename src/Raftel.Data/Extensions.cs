@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Raftel.Data.DbContexts.Interceptors;
+using Raftel.Data.DbContexts.Auditing;
 using Raftel.Data.Outbox;
 
 namespace Raftel.Data;
@@ -17,6 +17,7 @@ public static class Extensions
 
         if (!string.IsNullOrEmpty(connectionString))
         {
+            services.AddTransient<AuditChangesInterceptor>();
             services.AddDbContext<IDbContext, TDbContext>(
                 (sp, options) => options
                     .UseSqlServer(connectionString)
