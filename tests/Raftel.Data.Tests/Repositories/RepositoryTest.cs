@@ -6,9 +6,9 @@ using Raftel.Data.Tests.Types.Models;
 
 namespace Raftel.Data.Tests.Repositories;
 
-public class RepositoryTest : TestingTest
+public class RepositoryTestBase : DataTestBase
 {
-    public RepositoryTest(TestingDbFixture fixture) : base(fixture)
+    public RepositoryTestBase(TestingDbFixture fixture) : base(fixture)
     {
     }
 

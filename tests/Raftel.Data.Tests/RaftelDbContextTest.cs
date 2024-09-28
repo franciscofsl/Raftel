@@ -8,9 +8,9 @@ using Raftel.Infrastructure.BackgroundJobs;
 
 namespace Raftel.Data.Tests;
 
-public class RaftelDbContextTest : TestingTest
+public class RaftelDbContextTestBase : DataTestBase
 {
-    public RaftelDbContextTest(TestingDbFixture fixture) : base(fixture)
+    public RaftelDbContextTestBase(TestingDbFixture fixture) : base(fixture)
     {
     }
 
