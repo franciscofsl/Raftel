@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Raftel.Data.DbContexts.Interceptors;
 using Raftel.Data.Outbox;
 
 namespace Raftel.Data;
@@ -19,7 +20,8 @@ public static class Extensions
             services.AddDbContext<IDbContext, TDbContext>(
                 (sp, options) => options
                     .UseSqlServer(connectionString)
-                    .AddInterceptors(sp.GetRequiredService<ConvertDomainEventsToOutboxMessagesInterceptor>()));
+                    .AddInterceptors(sp.GetRequiredService<ConvertDomainEventsToOutboxMessagesInterceptor>())
+                    .AddInterceptors(sp.GetRequiredService<AuditChangesInterceptor>()));
         }
     }
 }
