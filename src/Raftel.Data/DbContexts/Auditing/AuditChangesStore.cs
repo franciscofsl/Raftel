@@ -1,4 +1,6 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Raftel.Core.Attributes;
 
 namespace Raftel.Data.DbContexts.Auditing;
 
@@ -6,7 +8,11 @@ public class AuditChangesStore
 {
     public EntityChangesLog CreateLog(ChangeTracker changeTracker)
     {
-
-        return new EntityChangesLog([]);
+        var entries = changeTracker
+            .Entries()
+            .Where(_ => _.Entity.GetType().GetCustomAttribute(typeof(AuditedAttribute)) != null)
+            .ToList();
+        
+        return new EntityChangesLog(entries.Select(_ => new EntityChange()).ToList());
     }
 }

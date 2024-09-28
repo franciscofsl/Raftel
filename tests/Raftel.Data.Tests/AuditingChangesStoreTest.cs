@@ -11,12 +11,24 @@ public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(f
     public void CreateLog_WithoutChanges_ShouldCreateEmptyLog()
     {
         var dbContext = GetRequiredService<TestingDbContext>();
-
         var changesStore = GetRequiredService<AuditChangesStore>();
 
         var log = changesStore.CreateLog(dbContext.ChangeTracker);
 
         log.Should().NotBeNull();
         log.IsEmpty().Should().BeTrue();
+    }
+
+    [Fact]
+    public async Task CreateLog_ShouldCreateLog_WithAuditedEntries()
+    {
+        var dbContext = GetRequiredService<TestingDbContext>();
+        var changesStore = GetRequiredService<AuditChangesStore>();
+
+        await dbContext.AddAsync(SampleAggregate.Create());
+
+        var log = changesStore.CreateLog(dbContext.ChangeTracker);
+
+        log.IsEmpty().Should().BeFalse();
     }
 }

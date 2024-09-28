@@ -1,7 +1,9 @@
-﻿using Raftel.Core.BaseTypes;
+﻿using Raftel.Core.Attributes;
+using Raftel.Core.BaseTypes;
 
 namespace Raftel.Data.Tests.Types.Models;
 
+[Audited]
 public class SampleAggregate : AggregateRoot<SampleId>
 {
     private SampleAggregate()
