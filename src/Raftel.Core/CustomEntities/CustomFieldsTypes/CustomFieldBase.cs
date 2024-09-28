@@ -6,6 +6,8 @@ namespace Raftel.Core.CustomEntities.CustomFieldsTypes;
 
 public abstract class CustomFieldBase : Entity<CustomFieldId>
 {
+    private readonly List<CustomFieldBase> _dependentFields = new();
+
     [ExcludeFromCodeCoverage]
     protected CustomFieldBase()
     {
@@ -43,7 +45,18 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
 
     public string Name { get; private init; }
 
-    internal Result CanBeUpdatedInEntity(object value)
+    public Result DependsOf(CustomFieldBase dependency)
+    {
+        if (_dependentFields.Any(_ => _.Id == dependency.Id))
+        {
+            return Result.Failure(CustomEntitiesErrors.FieldAlreadyHaveThisDependency);
+        }
+
+        _dependentFields.Add(dependency);
+        return Result.Ok();
+    }
+
+    internal Result CanBeUpdatedInEntity(CustomEntity customEntity, object value)
     {
         var validTypeResult = ValueHasValidType(value);
 
@@ -51,7 +64,13 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
         {
             return validTypeResult;
         }
-        
+
+        var validDependenciesResult = DependenciesHasValue(customEntity);
+        if (validDependenciesResult.IsFailure)
+        {
+            return validDependenciesResult;
+        }
+
         var isOptionalValueResult = IsOptionalValue(value);
         if (isOptionalValueResult.IsFailure)
         {
@@ -67,6 +86,7 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
         return validTypeResult;
     }
 
+
     protected abstract Result ValueHasValidType(object value);
 
     protected virtual Result BeforeUpdateValidations(object value)
@@ -74,11 +94,25 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
         return Result.Ok();
     }
 
-    protected Result IsOptionalValue(object value)
+    private Result IsOptionalValue(object value)
     {
         if (IsRequired && value is null)
         {
             return Result.Failure(CustomEntitiesErrors.CustomFieldIsRequired);
+        }
+
+        return Result.Ok();
+    }
+
+    private Result DependenciesHasValue(CustomEntity customEntity)
+    {
+        foreach (var dependency in _dependentFields)
+        {
+            var value = customEntity.ValueOf(dependency);
+            if (value is null)
+            {
+                return Result.Failure(CustomEntitiesErrors.DependencyNotHasValue);
+            }
         }
 
         return Result.Ok();

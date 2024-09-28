@@ -37,7 +37,7 @@ public class CustomEntity : AggregateRoot<CustomEntityId>
             return Result.Failure(CustomEntitiesErrors.CustomFieldNotSupportedByEntity);
         }
 
-        var result = customFieldBase.CanBeUpdatedInEntity(value);
+        var result = customFieldBase.CanBeUpdatedInEntity(this, value);
         if (result.IsFailure)
         {
             return result;

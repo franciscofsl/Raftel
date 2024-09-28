@@ -354,4 +354,36 @@ public class CustomEntityTest
 
         customEntity.ValueOf(customField).Should().Be(3m);
     }
+
+    [Fact]
+    public void UpdateField_ShouldNotAddDependency_IfAlreadyAdded()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var startDateField = customEntityConfiguration.AddCustomField("Start", "Start date", CustomFieldKind.Date);
+        var endDateField = customEntityConfiguration.AddCustomField("End", "End date", CustomFieldKind.Date);
+
+        endDateField.DependsOf(startDateField);
+
+        var result = endDateField.DependsOf(startDateField);
+        result.Error.Code.Should().Be(CustomEntitiesErrors.FieldAlreadyHaveThisDependency);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDateValue_If_DependentDateFieldIsNull()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var startDateField =
+            customEntityConfiguration.AddCustomField("Start", "Start date", CustomFieldKind.Date, true);
+        var endDateField = customEntityConfiguration.AddCustomField("End", "End date", CustomFieldKind.Date);
+
+        endDateField.DependsOf(startDateField);
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        var result = customEntity.UpdateField(endDateField, new DateOnly(2019, 1, 5));
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.DependencyNotHasValue);
+    }
 }

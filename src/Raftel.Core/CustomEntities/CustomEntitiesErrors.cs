@@ -12,4 +12,7 @@ public static class CustomEntitiesErrors
         "CustomEntities:CustomFields:CustomFieldNotSupportedByEntity";
 
     public static string ValueNotInRange = "CustomEntities:CustomFields:ValueNotInRange";
+
+    public static string FieldAlreadyHaveThisDependency = "CustomEntities:CustomFields:FieldAlreadyHaveThisDependency";
+    public static string DependencyNotHasValue = "CustomEntities:CustomFields:DependencyNotHasValue";
 }
