@@ -29,4 +29,9 @@ public sealed class CustomFieldKind
     public static CustomFieldKind Date => new((int)CustomFieldKindId.Date, "Date");
     public static CustomFieldKind Time => new((int)CustomFieldKindId.Time, "Time");
     public static CustomFieldKind DateTime => new((int)CustomFieldKindId.DateTime, "DateTime");
+
+    public override bool Equals(object obj)
+    {
+        return obj is CustomFieldKind other && Id == other.Id;
+    }
 }

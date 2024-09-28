@@ -71,6 +71,12 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
             return validDependenciesResult;
         }
 
+        var validDependenciesValuesResult = DependenciesHasValidValues(customEntity, value);
+        if (validDependenciesValuesResult.IsFailure)
+        {
+            return validDependenciesValuesResult;
+        }
+
         var isOptionalValueResult = IsOptionalValue(value);
         if (isOptionalValueResult.IsFailure)
         {
@@ -85,7 +91,6 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
 
         return validTypeResult;
     }
-
 
     protected abstract Result ValueHasValidType(object value);
 
@@ -115,6 +120,28 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
             }
         }
 
+        return Result.Ok();
+    }
+
+    private Result DependenciesHasValidValues(CustomEntity customEntity, object value)
+    {
+        foreach (var dependency in _dependentFields)
+        {
+            var dependencyValue = customEntity.ValueOf(dependency);
+            var result = dependency.IsValidValueWithDependentField(dependencyValue, this, value);
+
+            if (result.IsFailure)
+            {
+                return result;
+            }
+        }
+
+        return Result.Ok();
+    }
+
+    protected virtual Result IsValidValueWithDependentField(object dependencyValue, CustomFieldBase dependentField,
+        object dependentValue)
+    {
         return Result.Ok();
     }
 }
