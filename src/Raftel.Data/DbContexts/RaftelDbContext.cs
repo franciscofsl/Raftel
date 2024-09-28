@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
-using Raftel.Core.BaseTypes;
+using Raftel.Core.Auditing;
 using Raftel.Core.Events;
+using Raftel.Data.DbContexts.Auditing;
 using Raftel.Data.Outbox;
 
 namespace Raftel.Data.DbContexts;
@@ -24,6 +25,8 @@ public class RaftelDbContext<TDbContext> : DbContext, IDbContext
 
     public DbSet<OutboxMessage> OutboxMessages { get; set; }
 
+    public DbSet<EntityChange> EntityChanges { get; set; }
+
     [ExcludeFromCodeCoverage]
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -32,5 +35,11 @@ public class RaftelDbContext<TDbContext> : DbContext, IDbContext
             optionsBuilder.UseSqlServer(
                 "Server=localhost,1434;Database=CookBook;User=sa;Password=SqlServer_Docker2023;MultipleActiveResultSets=true;TrustServerCertificate=True;");
         }
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(RaftelDbContext<>).Assembly);
     }
 }

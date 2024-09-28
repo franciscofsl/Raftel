@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Raftel.Data.DbContexts.Auditing;
+namespace Raftel.Core.Auditing;
 
 public class EntityChangesLog(IEnumerable<EntityChange> changes) : IEnumerable<EntityChange>
 {

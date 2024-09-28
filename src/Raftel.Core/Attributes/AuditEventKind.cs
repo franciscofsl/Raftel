@@ -2,6 +2,12 @@
 
 public sealed class AuditEventKind
 {
+    [ExcludeFromCodeCoverage]
+    private AuditEventKind()
+    {
+        /* For ORM */
+    }
+
     private AuditEventKind(int kind, string key)
     {
         Id = kind;
@@ -22,8 +28,18 @@ public sealed class AuditEventKind
     public static AuditEventKind Updated => new AuditEventKind((int)AuditEventTypeKind.Updated, "Updated");
     public static AuditEventKind Deleted => new AuditEventKind((int)AuditEventTypeKind.Deleted, "Deleted");
 
+    public static IReadOnlyList<AuditEventKind> All => new[]
+    {
+        Created, Updated, Deleted
+    };
+
     public override bool Equals(object obj)
     {
         return obj is AuditEventKind otherKind && Id == otherKind.Id;
+    }
+
+    public static AuditEventKind ById(int id)
+    {
+        return All.FirstOrDefault(_ => _.Id == id);
     }
 }
