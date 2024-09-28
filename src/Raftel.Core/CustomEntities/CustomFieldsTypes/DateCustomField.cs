@@ -32,6 +32,16 @@ public sealed class DateCustomField : CustomFieldBase
             return Result.Ok();
         }
 
+        if (Equals(equalityKind, EqualityKind.NotEqual))
+        {
+            if (startDate.HasValue && startDate == endDate)
+            {
+                return Result.Failure(CustomEntitiesErrors.DatesShouldBeDifferent);
+            }
+
+            return Result.Ok();
+        }
+
         if (endDate < startDate)
         {
             return Result.Failure(CustomEntitiesErrors.InvalidDateRange);

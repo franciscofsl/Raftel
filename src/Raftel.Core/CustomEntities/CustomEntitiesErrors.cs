@@ -17,4 +17,5 @@ public static class CustomEntitiesErrors
     public static string DependencyNotHasValue = "CustomEntities:CustomFields:DependencyNotHasValue";
     public static string InvalidDateRange = "CustomEntities:CustomFields:InvalidDateRange";
     public static string DatesShouldBeEquals = "CustomEntities:CustomFields:DatesShouldBeEquals";
+    public static string DatesShouldBeDifferent = "CustomEntities:CustomFields:DatesShouldBeDifferent";
 }

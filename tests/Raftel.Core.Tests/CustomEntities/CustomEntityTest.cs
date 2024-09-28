@@ -415,13 +415,13 @@ public class CustomEntityTest
             .AddCustomField("Start", "Start date", CustomFieldKind.Date, true);
         var endDateField = customEntityConfiguration.AddCustomField("End", "End date", CustomFieldKind.Date);
 
-        endDateField.DependsOf(startDateField, EqualityKind.Equal);
+        endDateField.DependsOf(startDateField, EqualityKind.NotEqual);
 
         var customEntity = customEntityConfiguration.NewEntity();
 
         customEntity.UpdateField(startDateField, new DateOnly(2019, 1, 6));
-        var result = customEntity.UpdateField(endDateField, new DateOnly(2019, 1, 5));
+        var result = customEntity.UpdateField(endDateField, new DateOnly(2019, 1, 6));
 
-        result.Error.Code.Should().Be(CustomEntitiesErrors.DatesShouldBeEquals);
+        result.Error.Code.Should().Be(CustomEntitiesErrors.DatesShouldBeDifferent);
     }
 }
