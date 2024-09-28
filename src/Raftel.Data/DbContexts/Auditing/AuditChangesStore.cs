@@ -10,7 +10,7 @@ public class AuditChangesStore
     {
         var entries = changeTracker
             .Entries()
-            .Where(_ => _.Entity.GetType().GetCustomAttribute(typeof(AuditedAttribute)) != null)
+            .Where(_ => _.Entity.GetType().GetCustomAttribute(typeof(AuditableAttribute)) != null)
             .ToList();
         
         return new EntityChangesLog(entries.Select(_ => new EntityChange()).ToList());

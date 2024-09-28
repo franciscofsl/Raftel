@@ -3,4 +3,4 @@
 using System;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-public class AuditedAttribute : Attribute;
+public class AuditableAttribute : Attribute;

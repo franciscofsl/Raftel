@@ -3,7 +3,7 @@ using Raftel.Core.BaseTypes;
 
 namespace Raftel.Data.Tests.Types.Models;
 
-[Audited]
+[Auditable]
 public class SampleAggregate : AggregateRoot<SampleId>
 {
     private SampleAggregate()
