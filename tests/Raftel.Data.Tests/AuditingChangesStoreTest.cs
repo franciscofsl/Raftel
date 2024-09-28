@@ -154,4 +154,26 @@ public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(f
             property.OldValue.Should().Be(entityProperty.GetValue(originalValues)?.ToString());
         }
     }
+
+    [Fact]
+    public async Task EntityChange_WithChange_ShouldCreateDeleteChange_WithoutProperties()
+    {
+        var dbContextFactory = GetRequiredService<IDbContextFactory>();
+        var changesStore = GetRequiredService<AuditChangesStore>();
+        var dbContext = dbContextFactory.Create<TestingDbContext>();
+
+        var entity = SampleAggregate.Create();
+        entity.StringValue = "Monkey D. Luffy";
+        entity.IntegerValue = 123;
+        entity.Processed = true;
+        await dbContext.AddAsync(entity);
+        await dbContext.SaveChangesAsync();
+
+        dbContext.Remove(entity);
+        var log = changesStore.CreateLog(dbContext.ChangeTracker);
+
+        var deleteEvent = log.First();
+        deleteEvent.Kind.Should().Be(AuditEventKind.Deleted);
+        deleteEvent.Properties.Should().BeEmpty();
+    }
 }

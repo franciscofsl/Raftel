@@ -28,13 +28,17 @@ public class EntityChange
             OccurredOn = DateTime.UtcNow,
             EntityId = idValue?.ToString(),
             Kind = entry.State.ToKind(),
-            Properties = PropertyChanges.Create(entry)
+            Properties = entry.State is EntityState.Deleted
+                ? PropertyChanges.Empty
+                : PropertyChanges.Create(entry)
         };
     }
 }
 
 public class PropertyChanges : IEnumerable<PropertyChange>
 {
+    public static PropertyChanges Empty => new(Enumerable.Empty<PropertyChange>().ToList());
+    
     private readonly List<PropertyChange> _changes = [];
 
     [ExcludeFromCodeCoverage]
@@ -47,6 +51,7 @@ public class PropertyChanges : IEnumerable<PropertyChange>
     {
         _changes = changes;
     }
+
 
     public static PropertyChanges Create(EntityEntry entry)
     {
