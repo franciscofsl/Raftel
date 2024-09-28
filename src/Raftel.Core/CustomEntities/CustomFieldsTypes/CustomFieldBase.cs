@@ -6,7 +6,7 @@ namespace Raftel.Core.CustomEntities.CustomFieldsTypes;
 
 public abstract class CustomFieldBase : Entity<CustomFieldId>
 {
-    private readonly List<CustomFieldBase> _dependentFields = new();
+    private readonly List<CustomFieldDependency> _fieldDependencies = new();
 
     [ExcludeFromCodeCoverage]
     protected CustomFieldBase()
@@ -45,14 +45,14 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
 
     public string Name { get; private init; }
 
-    public Result DependsOf(CustomFieldBase dependency)
+    public Result DependsOf(CustomFieldBase dependency, EqualityKind equalityKind)
     {
-        if (_dependentFields.Any(_ => _.Id == dependency.Id))
+        if (_fieldDependencies.Any(_ => _.DependencyField.Id == dependency.Id))
         {
             return Result.Failure(CustomEntitiesErrors.FieldAlreadyHaveThisDependency);
         }
 
-        _dependentFields.Add(dependency);
+        _fieldDependencies.Add(new CustomFieldDependency(dependency, equalityKind));
         return Result.Ok();
     }
 
@@ -71,7 +71,7 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
             return validDependenciesResult;
         }
 
-        var validDependenciesValuesResult = DependenciesHasValidValues(customEntity, value);
+        var validDependenciesValuesResult = FieldDependenciesHasValidValues(customEntity, value);
         if (validDependenciesValuesResult.IsFailure)
         {
             return validDependenciesValuesResult;
@@ -111,9 +111,9 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
 
     private Result DependenciesHasValue(CustomEntity customEntity)
     {
-        foreach (var dependency in _dependentFields)
+        foreach (var dependency in _fieldDependencies)
         {
-            var value = customEntity.ValueOf(dependency);
+            var value = customEntity.ValueOf(dependency.DependencyField);
             if (value is null)
             {
                 return Result.Failure(CustomEntitiesErrors.DependencyNotHasValue);
@@ -123,13 +123,11 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
         return Result.Ok();
     }
 
-    private Result DependenciesHasValidValues(CustomEntity customEntity, object value)
+    private Result FieldDependenciesHasValidValues(CustomEntity customEntity, object newValue)
     {
-        foreach (var dependency in _dependentFields)
+        foreach (var fieldDependency in _fieldDependencies)
         {
-            var dependencyValue = customEntity.ValueOf(dependency);
-            var result = dependency.IsValidValueWithDependentField(dependencyValue, this, value);
-
+            var result = fieldDependency.Validate(customEntity, newValue);
             if (result.IsFailure)
             {
                 return result;
@@ -139,8 +137,8 @@ public abstract class CustomFieldBase : Entity<CustomFieldId>
         return Result.Ok();
     }
 
-    protected virtual Result IsValidValueWithDependentField(object dependencyValue, CustomFieldBase dependentField,
-        object dependentValue)
+    internal virtual Result CheckDependentFieldValue(object dependencyValue, object dependantValue,
+        EqualityKind equalityKind)
     {
         return Result.Ok();
     }

@@ -363,9 +363,9 @@ public class CustomEntityTest
         var startDateField = customEntityConfiguration.AddCustomField("Start", "Start date", CustomFieldKind.Date);
         var endDateField = customEntityConfiguration.AddCustomField("End", "End date", CustomFieldKind.Date);
 
-        endDateField.DependsOf(startDateField);
+        endDateField.DependsOf(startDateField, EqualityKind.GreaterThan);
 
-        var result = endDateField.DependsOf(startDateField);
+        var result = endDateField.DependsOf(startDateField, EqualityKind.GreaterThan);
         result.Error.Code.Should().Be(CustomEntitiesErrors.FieldAlreadyHaveThisDependency);
     }
 
@@ -378,7 +378,7 @@ public class CustomEntityTest
             customEntityConfiguration.AddCustomField("Start", "Start date", CustomFieldKind.Date, true);
         var endDateField = customEntityConfiguration.AddCustomField("End", "End date", CustomFieldKind.Date);
 
-        endDateField.DependsOf(startDateField);
+        endDateField.DependsOf(startDateField, EqualityKind.GreaterThan);
 
         var customEntity = customEntityConfiguration.NewEntity();
 
@@ -396,7 +396,7 @@ public class CustomEntityTest
             .AddCustomField("Start", "Start date", CustomFieldKind.Date, true);
         var endDateField = customEntityConfiguration.AddCustomField("End", "End date", CustomFieldKind.Date);
 
-        endDateField.DependsOf(startDateField);
+        endDateField.DependsOf(startDateField, EqualityKind.GreaterThan);
 
         var customEntity = customEntityConfiguration.NewEntity();
 

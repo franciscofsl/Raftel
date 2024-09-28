@@ -17,16 +17,10 @@ public sealed class DateCustomField : CustomFieldBase
             : Result.Failure(CustomEntitiesErrors.CustomFieldValueNotOfConfiguredType);
     }
 
-    protected override Result IsValidValueWithDependentField(object dependencyValue, CustomFieldBase dependentField,
-        object dependentValue)
+    internal override Result CheckDependentFieldValue(object dependencyValue, object dependantValue, EqualityKind equalityKind)
     {
-        if (!Equals(dependentField.Kind, CustomFieldKind.Date))
-        {
-            return Result.Ok();
-        }
-
         var startDate = dependencyValue as DateOnly?;
-        var endDate = dependentValue as DateOnly?;
+        var endDate = dependantValue as DateOnly?;
 
         if (endDate < startDate)
         {
