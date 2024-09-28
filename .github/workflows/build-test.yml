@@ -19,7 +19,7 @@ jobs:
           dotnet-version: 8.0.x
       - name: Start dependencies (docker-compose)
         run: |
-          docker-compose up -d
+          docker compose up -d
       - name: Wait for SQL Server container
         run: sleep 30s
         shell: bash
