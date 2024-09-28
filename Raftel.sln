@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Blazor.Shared", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Testing", "src\Raftel.Testing\Raftel.Testing.csproj", "{4BA3273F-FFED-4CEB-95AC-A6B7C05EFA3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Extensions", "src\Raftel.Extensions\Raftel.Extensions.csproj", "{02326494-C979-4F8E-8184-9C4075BE2F03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,7 @@ Global
 		{0B85BC10-3E3A-434F-B7B8-B92942122E2A} = {04FE4293-7CB6-4C4F-85C2-2035FD91F004}
 		{9AF13721-2243-4C04-95A6-835A8D27C420} = {04FE4293-7CB6-4C4F-85C2-2035FD91F004}
 		{4BA3273F-FFED-4CEB-95AC-A6B7C05EFA3F} = {04FE4293-7CB6-4C4F-85C2-2035FD91F004}
+		{02326494-C979-4F8E-8184-9C4075BE2F03} = {04FE4293-7CB6-4C4F-85C2-2035FD91F004}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{65E8B309-4396-4D5F-8CB4-653B315D3D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -96,5 +99,9 @@ Global
 		{4BA3273F-FFED-4CEB-95AC-A6B7C05EFA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BA3273F-FFED-4CEB-95AC-A6B7C05EFA3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BA3273F-FFED-4CEB-95AC-A6B7C05EFA3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02326494-C979-4F8E-8184-9C4075BE2F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02326494-C979-4F8E-8184-9C4075BE2F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02326494-C979-4F8E-8184-9C4075BE2F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02326494-C979-4F8E-8184-9C4075BE2F03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

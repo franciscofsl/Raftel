@@ -52,13 +52,17 @@ public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(f
     }
 
     [Fact]
-    public async Task EntityChange_WithChange_ShouldCreateCreateEntityChange()
+    public async Task EntityChange_WithChange_ShouldCreateCreateEntityChange_WithOldValueEmpty()
     {
         var dbContextFactory = GetRequiredService<IDbContextFactory>();
         var changesStore = GetRequiredService<AuditChangesStore>();
         var dbContext = dbContextFactory.Create<TestingDbContext>();
 
         var aggregate = SampleAggregate.Create();
+        aggregate.StringValue = "Monkey D. Luffy";
+        aggregate.IntegerValue = 123;
+        aggregate.Processed = true;
+
         await dbContext.AddAsync(aggregate);
 
         var log = changesStore.CreateLog(dbContext.ChangeTracker);
@@ -68,5 +72,14 @@ public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(f
         entityChange.OccurredOn.Should().BeBefore(DateTime.UtcNow);
         entityChange.EntityId.Should().Be(aggregate.Id.ToString());
         entityChange.Kind.Should().Be(AuditEventKind.Created);
+        entityChange.Properties.Should().HaveCount(3);
+
+        foreach (var property in entityChange.Properties)
+        {
+            var entityProperty = aggregate.GetType().GetProperty(property.Name);
+
+            property.OldValue.Should().BeNullOrEmpty();
+            property.NewValue.Should().Be(entityProperty.GetValue(aggregate)?.ToString());
+        }
     }
 }
