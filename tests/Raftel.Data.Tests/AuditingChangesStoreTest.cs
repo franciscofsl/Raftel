@@ -1,4 +1,6 @@
+using System.Collections.ObjectModel;
 using FluentAssertions;
+using Raftel.Core.Attributes;
 using Raftel.Data.DbContexts;
 using Raftel.Data.DbContexts.Auditing;
 using Raftel.Data.Tests.DbContext;
@@ -47,5 +49,24 @@ public class AuditingChangesStoreTest(TestingDbFixture fixture) : DataTestBase(f
         var log = changesStore.CreateLog(dbContext.ChangeTracker);
 
         log.IsEmpty().Should().BeTrue();
+    }
+
+    [Fact]
+    public async Task EntityChange_WithChange_ShouldCreateCreateEntityChange()
+    {
+        var dbContextFactory = GetRequiredService<IDbContextFactory>();
+        var changesStore = GetRequiredService<AuditChangesStore>();
+        var dbContext = dbContextFactory.Create<TestingDbContext>();
+
+        var aggregate = SampleAggregate.Create();
+        await dbContext.AddAsync(aggregate);
+
+        var log = changesStore.CreateLog(dbContext.ChangeTracker);
+        log.Should().ContainSingle();
+
+        var entityChange = log.First();
+        entityChange.OccurredOn.Should().BeBefore(DateTime.UtcNow);
+        entityChange.EntityId.Should().Be(aggregate.Id.ToString());
+        entityChange.Kind.Should().Be(AuditEventKind.Created);
     }
 }
