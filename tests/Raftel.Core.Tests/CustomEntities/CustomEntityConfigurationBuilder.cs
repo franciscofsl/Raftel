@@ -7,8 +7,7 @@ public class CustomEntityConfigurationBuilder
     private string _key = "defaultKey";
     private string _singularName = "defaultSingular";
     private string _pluralName = "defaultPlural";
-    private bool _visible = true;
-    private CustomFieldsConfiguration _customFields = new CustomFieldsConfiguration();
+    private bool _visible = true; 
 
     public static CustomEntityConfigurationBuilder Instance()
     {
@@ -38,22 +37,13 @@ public class CustomEntityConfigurationBuilder
         _visible = visible;
         return this;
     }
-
-    public CustomEntityConfigurationBuilder WithCustomFields(CustomFieldsConfiguration customFields)
-    {
-        _customFields = customFields;
-        return this;
-    }
+ 
 
     public CustomEntityConfiguration Build()
     {
         var entityConfiguration = CustomEntityConfiguration.Create(_key, _singularName, _pluralName);
         entityConfiguration.Visible = _visible;
-        var customFieldsField = typeof(CustomEntityConfiguration)
-            .GetField("<CustomFields>k__BackingField",
-                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-
-        customFieldsField?.SetValue(entityConfiguration, _customFields);
+     
 
         return entityConfiguration;
     }
