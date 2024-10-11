@@ -33,6 +33,10 @@ public sealed class DateTimeCustomField : CustomFieldBase
             return Result.Failure(CustomEntitiesErrors.DatesShouldBeEquals);
         }
 
+        if (Equals(equalityKind, EqualityKind.NotEqual) && startDate == endDate)
+        {
+            return Result.Failure(CustomEntitiesErrors.DatesShouldBeDifferent);
+        }
         return Result.Ok();
     }
 }
