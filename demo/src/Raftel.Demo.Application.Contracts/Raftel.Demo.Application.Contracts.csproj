@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\src\Raftel.Blazor.Shared\Raftel.Blazor.Shared.csproj" />
+      <ProjectReference Include="..\..\..\src\Raftel.Shared\Raftel.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

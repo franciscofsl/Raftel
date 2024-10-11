@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\src\Raftel.Application\Raftel.Application.csproj" />
       <ProjectReference Include="..\Raftel.Demo.Application.Contracts\Raftel.Demo.Application.Contracts.csproj" />
       <ProjectReference Include="..\Raftel.Demo.Core\Raftel.Demo.Core.csproj" />
     </ItemGroup>
