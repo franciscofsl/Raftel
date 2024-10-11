@@ -42,6 +42,12 @@ public sealed class DateTimeCustomField : CustomFieldBase
         {
             return Result.Failure(CustomEntitiesErrors.DateMustBeGreaterThan);
         }
+
+        if (Equals(equalityKind, EqualityKind.GreaterOrEqual) && endDate < startDate)
+        {
+            return Result.Failure(CustomEntitiesErrors.DateMustBeGreaterOrEqualThan);
+        }
+
         if (Equals(equalityKind, EqualityKind.LessThan) && endDate >= startDate)
         {
             return Result.Failure(CustomEntitiesErrors.DateMustBeLessThan);
