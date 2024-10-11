@@ -1,3 +1,4 @@
+using Raftel.Demo.Blazor;
 using Raftel.Demo.Blazor.Client.Pages;
 using Raftel.Demo.Blazor.Components;
 
@@ -7,6 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddScoped(sp =>
+    new HttpClient
+    {
+        BaseAddress = new Uri(builder.Configuration["FrontendUrl"] ?? "https://localhost:5002")
+    });
+builder.Services.AddHttpClient();
+
+builder.Services.AddTransient<WeatherForecastRestClient>();
 
 var app = builder.Build();
 
