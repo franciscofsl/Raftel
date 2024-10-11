@@ -17,6 +17,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Raftel.Demo.Testing\Raftel.Demo.Testing.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
         <Using Include="Xunit"/>
     </ItemGroup>
 
