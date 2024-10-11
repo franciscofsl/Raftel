@@ -13,3 +13,27 @@ services:
         ACCEPT_EULA: "Y"
     networks:
       - cookbook-network
+
+  raftel.demo.blazor:
+    image: raftel.demo.blazor
+    build:
+      context: .
+      dockerfile: demo/src/Raftel.Demo.Blazor/Raftel.Demo.Blazor/Dockerfile
+
+  raftel.demo.blazor.client:
+    image: raftel.demo.blazor.client
+    build:
+      context: .
+      dockerfile: demo/src/Raftel.Demo.Blazor/Raftel.Demo.Blazor.Client/Dockerfile
+
+  raftel.demo.blazor-1:
+    image: raftel.demo.blazor-1
+    build:
+      context: .
+      dockerfile: demo/src/Raftel.Demo.Blazor/Raftel.Demo.Blazor/Dockerfile
+
+  raftel.demo.blazor.client-1:
+    image: raftel.demo.blazor.client-1
+    build:
+      context: .
+      dockerfile: demo/src/Raftel.Demo.Blazor/Raftel.Demo.Blazor.Client/Dockerfile
