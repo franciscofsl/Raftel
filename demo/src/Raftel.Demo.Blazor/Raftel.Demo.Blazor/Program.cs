@@ -1,4 +1,7 @@
+using Raftel.Blazor;
+using Raftel.Blazor.Menu;
 using Raftel.Demo.Blazor;
+using Raftel.Demo.Blazor.Navigation;
 using _Imports = Raftel.Demo.Blazor.Client._Imports;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,11 +14,13 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped(sp =>
     new HttpClient
     {
-        BaseAddress = new Uri(builder.Configuration["FrontendUrl"] ?? "https://localhost:5002")
+        BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5002")
     });
 builder.Services.AddHttpClient();
+builder.Services.AddSingleton<MenuDefinitionProvider, SamplesMenuDefinitionProvider>();
 
 builder.Services.AddTransient<WeatherForecastRestClient>();
+builder.AddRaftelBlazor();
 
 var app = builder.Build();
 
@@ -36,7 +41,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapRazorComponents<App>()
+app.MapRazorComponents<SamplesApp>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(_Imports).Assembly);
