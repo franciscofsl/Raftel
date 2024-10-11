@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\src\Raftel.Data\Raftel.Data.csproj" />
+      <ProjectReference Include="..\Raftel.Demo.Core\Raftel.Demo.Core.csproj" />
+    </ItemGroup>
+
 </Project>
