@@ -7,6 +7,6 @@ namespace Raftel.Demo.Application;
 
 [ExcludeFromCodeCoverage]
 [ModulesToInclude(typeof(DemoCoreModule))]
-public sealed class SamplenetApplicationModule : RaftelApplicationModule
+public sealed class DemoApplicationModule : RaftelApplicationModule
 {
 }

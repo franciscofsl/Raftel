@@ -37,3 +37,9 @@ services:
     build:
       context: .
       dockerfile: demo/src/Raftel.Demo.Blazor/Raftel.Demo.Blazor.Client/Dockerfile
+
+  raftel.demo.server:
+    image: raftel.demo.server
+    build:
+      context: .
+      dockerfile: demo/src/Raftel.Demo.Server/Dockerfile
