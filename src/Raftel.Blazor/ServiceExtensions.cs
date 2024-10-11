@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +23,7 @@ namespace Raftel.Blazor;
 
 public static class ServiceExtensions
 {
-    public static void AddRaftelBlazor(this WebAssemblyHostBuilder builder)
+    public static void AddRaftelBlazor(this WebApplicationBuilder builder)
     {
         var license = builder.Configuration["SyncfusionLicense"];
         SyncfusionLicenseProvider.RegisterLicense(license);
@@ -66,7 +67,7 @@ public static class ServiceExtensions
         });
     }
 
-    private static void ConfigureEventNotifiers(WebAssemblyHostBuilder builder, List<Assembly> assemblies)
+    private static void ConfigureEventNotifiers(WebApplicationBuilder builder, List<Assembly> assemblies)
     {
         builder.Services
             .Scan(scan => scan
@@ -76,12 +77,12 @@ public static class ServiceExtensions
                 .WithSingletonLifetime());
     }
 
-    public static void AddRestClient<TService>(this WebAssemblyHostBuilder builder, string uri = null)
+    public static void AddRestClient<TService>(this WebApplicationBuilder builder, string uri = null)
         where TService : class, IRestService
-    {
+    { 
         builder.Services.AddRefitClient<TService>().ConfigureHttpClient(c =>
         {
-            c.BaseAddress = new Uri(uri ?? builder.HostEnvironment.BaseAddress);
+            c.BaseAddress = new Uri(uri ?? builder.Configuration["BackendUrl"]);
         });
     }
 

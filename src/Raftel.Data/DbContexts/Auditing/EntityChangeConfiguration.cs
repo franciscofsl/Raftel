@@ -11,7 +11,7 @@ public class EntityChangeConfiguration : IEntityTypeConfiguration<EntityChange>
     {
         builder.ToTable("EntityChanges");
         builder.HasKey(_ => _.Id);
-
+        
         builder.Property(_ => _.Kind)
             .HasConversion(_ => _.Id, _ => AuditEventKind.ById(_))
             .HasColumnName("Kind")

@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using Raftel.Core.Attributes;
 using Raftel.Core.Auditing;
 using Raftel.Core.Events;
-using Raftel.Data.DbContexts.Auditing;
 using Raftel.Data.Outbox;
 
 namespace Raftel.Data.DbContexts;
@@ -40,6 +40,9 @@ public class RaftelDbContext<TDbContext> : DbContext, IDbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Ignore<AuditEventKind>();
+        // modelBuilder.Entity<AuditEventKind>().HasNoKey();
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(RaftelDbContext<>).Assembly);
     }
 }

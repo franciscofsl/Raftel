@@ -1,0 +1,13 @@
+﻿.logo {
+    padding: 5px;
+}
+
+.image {
+    height: 45px;
+}
+
+.Raftel-body {
+    height: calc(100vh - 103px);
+    max-height: calc(100vh - 103px);
+    overflow-y:  auto;
+}

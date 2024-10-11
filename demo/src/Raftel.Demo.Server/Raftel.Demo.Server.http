@@ -1,0 +1,6 @@
+@Raftel.Demo.Server_HostAddress = http://localhost:5048
+
+GET {{Raftel.Demo.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
