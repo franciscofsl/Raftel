@@ -23,34 +23,39 @@ public sealed class DateCustomField : CustomFieldBase
         var startDate = dependencyValue as DateOnly?;
         var endDate = dependantValue as DateOnly?;
 
-        if (Equals(equalityKind, EqualityKind.Equal))
+        if (startDate == null || endDate == null)
         {
-            if (startDate.HasValue && startDate != endDate)
-            {
-                return Result.Failure(CustomEntitiesErrors.DatesShouldBeEquals);
-            }
-
             return Result.Ok();
         }
 
-        if (Equals(equalityKind, EqualityKind.NotEqual))
+        if (Equals(equalityKind, EqualityKind.Equal) && startDate != endDate)
         {
-            if (startDate.HasValue && startDate == endDate)
-            {
-                return Result.Failure(CustomEntitiesErrors.DatesShouldBeDifferent);
-            }
-
-            return Result.Ok();
+            return Result.Failure(CustomEntitiesErrors.DatesShouldBeEquals);
         }
 
-        if (Equals(equalityKind, EqualityKind.GreaterThan))
+        if (Equals(equalityKind, EqualityKind.NotEqual) && startDate == endDate)
         {
-            if (endDate < startDate)
-            {
-                return Result.Failure(CustomEntitiesErrors.InvalidDateRange);
-            }
+            return Result.Failure(CustomEntitiesErrors.DatesShouldBeDifferent);
+        }
 
-            return Result.Ok();
+        if (Equals(equalityKind, EqualityKind.GreaterThan) && endDate <= startDate)
+        {
+            return Result.Failure(CustomEntitiesErrors.DateMustBeGreaterThan);
+        }
+
+        if (Equals(equalityKind, EqualityKind.GreaterOrEqual) && endDate < startDate)
+        {
+            return Result.Failure(CustomEntitiesErrors.DateMustBeGreaterOrEqualThan);
+        }
+
+        if (Equals(equalityKind, EqualityKind.LessThan) && endDate >= startDate)
+        {
+            return Result.Failure(CustomEntitiesErrors.DateMustBeLessThan);
+        }
+
+        if (Equals(equalityKind, EqualityKind.LessOrEqual) && endDate > startDate)
+        {
+            return Result.Failure(CustomEntitiesErrors.DateMustBeLessOrEqualThan);
         }
 
         return Result.Ok();

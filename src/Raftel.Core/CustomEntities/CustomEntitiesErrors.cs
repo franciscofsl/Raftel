@@ -15,7 +15,10 @@ public static class CustomEntitiesErrors
 
     public static string FieldAlreadyHaveThisDependency = "CustomEntities:CustomFields:FieldAlreadyHaveThisDependency";
     public static string DependencyNotHasValue = "CustomEntities:CustomFields:DependencyNotHasValue";
-    public static string InvalidDateRange = "CustomEntities:CustomFields:InvalidDateRange";
+    public static string DateMustBeGreaterThan = "CustomEntities:CustomFields:InvalidDateRange";
     public static string DatesShouldBeEquals = "CustomEntities:CustomFields:DatesShouldBeEquals";
     public static string DatesShouldBeDifferent = "CustomEntities:CustomFields:DatesShouldBeDifferent";
+    public static string DateMustBeGreaterOrEqualThan = "CustomEntities:CustomFields:DateMustBeGreaterOrEqualThan";
+    public static string DateMustBeLessThan = "CustomEntities:CustomFields:DateMustBeLessThan";
+    public static string DateMustBeLessOrEqualThan = "CustomEntities:CustomFields:DateMustBeLessOrEqualThan";
 }

@@ -403,7 +403,7 @@ public class CustomEntityTest
         customEntity.UpdateField(startDateField, new DateOnly(2019, 1, 6));
         var result = customEntity.UpdateField(endDateField, new DateOnly(2019, 1, 5));
 
-        result.Error.Code.Should().Be(CustomEntitiesErrors.InvalidDateRange);
+        result.Error.Code.Should().Be(CustomEntitiesErrors.DateMustBeGreaterThan);
     }
 
     [Fact]
