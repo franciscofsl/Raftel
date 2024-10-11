@@ -1,6 +1,5 @@
 using Raftel.Demo.Blazor;
-using Raftel.Demo.Blazor.Client.Pages;
-using Raftel.Demo.Blazor.Components;
+using _Imports = Raftel.Demo.Blazor.Client._Imports;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +39,6 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(Raftel.Demo.Blazor.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(typeof(_Imports).Assembly);
 
 app.Run();
