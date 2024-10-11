@@ -17,6 +17,8 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\src\Raftel.Demo.Application.Contracts\Raftel.Demo.Application.Contracts.csproj" />
+        <ProjectReference Include="..\..\src\Raftel.Demo.Application\Raftel.Demo.Application.csproj" />
         <ProjectReference Include="..\Raftel.Demo.Testing\Raftel.Demo.Testing.csproj" />
     </ItemGroup>
     

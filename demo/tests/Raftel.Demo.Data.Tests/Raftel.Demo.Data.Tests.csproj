@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\src\Raftel.Demo.Data\Raftel.Demo.Data.csproj" />
         <ProjectReference Include="..\Raftel.Demo.Testing\Raftel.Demo.Testing.csproj" />
     </ItemGroup>
     

@@ -17,6 +17,14 @@
     </ItemGroup>
     
     <ItemGroup>
+        <ProjectReference Include="..\..\src\Raftel.Demo.Application.Contracts\Raftel.Demo.Application.Contracts.csproj" />
+        <ProjectReference Include="..\..\src\Raftel.Demo.Application\Raftel.Demo.Application.csproj" />
+        <ProjectReference Include="..\..\src\Raftel.Demo.Blazor\Raftel.Demo.Blazor.Client\Raftel.Demo.Blazor.Client.csproj" />
+        <ProjectReference Include="..\..\src\Raftel.Demo.Blazor\Raftel.Demo.Blazor\Raftel.Demo.Blazor.csproj" />
+        <ProjectReference Include="..\..\src\Raftel.Demo.Core\Raftel.Demo.Core.csproj" />
+        <ProjectReference Include="..\..\src\Raftel.Demo.Data\Raftel.Demo.Data.csproj" />
+        <ProjectReference Include="..\..\src\Raftel.Demo.Infrastructure\Raftel.Demo.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\src\Raftel.Demo.Shared\Raftel.Demo.Shared.csproj" />
         <ProjectReference Include="..\Raftel.Demo.Testing\Raftel.Demo.Testing.csproj" />
     </ItemGroup>
 
