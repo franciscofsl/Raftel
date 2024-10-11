@@ -578,4 +578,24 @@ public class CustomEntityTest
 
         result.Error.Code.Should().Be(CustomEntitiesErrors.DatesShouldBeDifferent);
     }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDependentDateTimeCustomField_If_EqualityKindIsGreaterThan_And_NotSatisfy()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var startDateTimeField = customEntityConfiguration
+            .AddCustomField("Start", "Start date and time", CustomFieldKind.DateTime, true);
+        var endDateTimeField =
+            customEntityConfiguration.AddCustomField("End", "End date and time", CustomFieldKind.DateTime);
+
+        endDateTimeField.DependsOf(startDateTimeField, EqualityKind.GreaterThan);
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        customEntity.UpdateField(startDateTimeField, new DateTime(2019, 1, 6, 14, 30, 0));
+        var result = customEntity.UpdateField(endDateTimeField, new DateTime(2019, 1, 6, 13, 30, 0));
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.DateMustBeGreaterThan);
+    }
 }
