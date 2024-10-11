@@ -41,7 +41,8 @@ public class RaftelDbContext<TDbContext> : DbContext, IDbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<AuditEventKind>().HasNoKey();
+        modelBuilder.Ignore<AuditEventKind>();
+        // modelBuilder.Entity<AuditEventKind>().HasNoKey();
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(RaftelDbContext<>).Assembly);
     }
 }

@@ -22,6 +22,6 @@ public class DemoDbContext : RaftelDbContext<DemoDbContext>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(DemoDbContext).Assembly);
     }
 }

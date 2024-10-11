@@ -2,12 +2,6 @@
 
 public sealed class AuditEventKind
 {
-    [ExcludeFromCodeCoverage]
-    private AuditEventKind()
-    {
-        /* For ORM */
-    }
-
     private AuditEventKind(int kind, string key)
     {
         Id = kind;
