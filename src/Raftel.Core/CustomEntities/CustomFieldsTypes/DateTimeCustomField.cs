@@ -16,4 +16,23 @@ public sealed class DateTimeCustomField : CustomFieldBase
             ? Result.Ok()
             : Result.Failure(CustomEntitiesErrors.CustomFieldValueNotOfConfiguredType);
     }
+
+    internal override Result CheckDependentFieldValue(object dependencyValue, object dependantValue,
+        EqualityKind equalityKind)
+    {
+        var startDate = dependencyValue as DateTime?;
+        var endDate = dependantValue as DateTime?;
+
+        if (startDate == null || endDate == null)
+        {
+            return Result.Ok();
+        }
+
+        if (Equals(equalityKind, EqualityKind.Equal) && startDate != endDate)
+        {
+            return Result.Failure(CustomEntitiesErrors.DatesShouldBeEquals);
+        }
+
+        return Result.Ok();
+    }
 }
