@@ -21,4 +21,11 @@ public static class CustomEntitiesErrors
     public static string DateMustBeGreaterOrEqualThan = "CustomEntities:CustomFields:DateMustBeGreaterOrEqualThan";
     public static string DateMustBeLessThan = "CustomEntities:CustomFields:DateMustBeLessThan";
     public static string DateMustBeLessOrEqualThan = "CustomEntities:CustomFields:DateMustBeLessOrEqualThan";
+
+    public static string TextShouldBeEqual = "CustomEntities:CustomFields:TextShouldBeEqual";
+    public static string TextShouldBeDifferent = "CustomEntities:CustomFields:TextShouldBeDifferent";
+    public static string TextMustContain = "CustomEntities:CustomFields:TextMustContain";
+    public static string TextMustNotContain = "CustomEntities:CustomFields:TextMustNotContain";
+    public static string TextMustStartWith = "CustomEntities:CustomFields:TextMustStartWith";
+    public static string TextMustEndWith = "CustomEntities:CustomFields:TextMustEndWith";
 }

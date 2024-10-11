@@ -424,4 +424,118 @@ public class CustomEntityTest
 
         result.Error.Code.Should().Be(CustomEntitiesErrors.DatesShouldBeDifferent);
     }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDependentTextCustomField_If_EqualityKindIsEqual_And_NotSatisfy()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var field1 = customEntityConfiguration
+            .AddCustomField("Field1", "First text field", CustomFieldKind.Text, true);
+        var field2 = customEntityConfiguration.AddCustomField("Field2", "Second text field", CustomFieldKind.Text);
+
+        field2.DependsOf(field1, EqualityKind.Equal);
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        customEntity.UpdateField(field1, "Hello");
+        var result = customEntity.UpdateField(field2, "World");
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.TextShouldBeEqual);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDependentTextCustomField_If_EqualityKindIsNotEqual_And_NotSatisfy()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var field1 = customEntityConfiguration
+            .AddCustomField("Field1", "First text field", CustomFieldKind.Text, true);
+        var field2 = customEntityConfiguration.AddCustomField("Field2", "Second text field", CustomFieldKind.Text);
+
+        field2.DependsOf(field1, EqualityKind.NotEqual);
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        customEntity.UpdateField(field1, "Hello");
+        var result = customEntity.UpdateField(field2, "Hello");
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.TextShouldBeDifferent);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDependentTextCustomField_If_EqualityKindIsContains_And_NotSatisfy()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var field1 = customEntityConfiguration
+            .AddCustomField("Field1", "First text field", CustomFieldKind.Text, true);
+        var field2 = customEntityConfiguration.AddCustomField("Field2", "Second text field", CustomFieldKind.Text);
+
+        field2.DependsOf(field1, EqualityKind.Contains);
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        customEntity.UpdateField(field1, "Hello");
+        var result = customEntity.UpdateField(field2, "World");
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.TextMustContain);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDependentTextCustomField_If_EqualityKindIsDoesNotContain_And_NotSatisfy()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var field1 = customEntityConfiguration
+            .AddCustomField("Field1", "First text field", CustomFieldKind.Text, true);
+        var field2 = customEntityConfiguration.AddCustomField("Field2", "Second text field", CustomFieldKind.Text);
+
+        field2.DependsOf(field1, EqualityKind.DoesNotContain);
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        customEntity.UpdateField(field1, "Hello");
+        var result = customEntity.UpdateField(field2, "Hello, World!");
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.TextMustNotContain);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDependentTextCustomField_If_EqualityKindIsStartsWith_And_NotSatisfy()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var field1 = customEntityConfiguration
+            .AddCustomField("Field1", "First text field", CustomFieldKind.Text, true);
+        var field2 = customEntityConfiguration.AddCustomField("Field2", "Second text field", CustomFieldKind.Text);
+
+        field2.DependsOf(field1, EqualityKind.StartsWith);
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        customEntity.UpdateField(field1, "Hello");
+        var result = customEntity.UpdateField(field2, "World, Hello!");
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.TextMustStartWith);
+    }
+
+    [Fact]
+    public void UpdateField_ShouldNotUpdateDependentTextCustomField_If_EqualityKindIsEndsWith_And_NotSatisfy()
+    {
+        var customEntityConfiguration = CustomEntityConfigurationBuilder.Instance().Build();
+
+        var field1 = customEntityConfiguration
+            .AddCustomField("Field1", "First text field", CustomFieldKind.Text, true);
+        var field2 = customEntityConfiguration.AddCustomField("Field2", "Second text field", CustomFieldKind.Text);
+
+        field2.DependsOf(field1, EqualityKind.EndsWith);
+
+        var customEntity = customEntityConfiguration.NewEntity();
+
+        customEntity.UpdateField(field1, "Hello");
+        var result = customEntity.UpdateField(field2, "Hello, World");
+
+        result.Error.Code.Should().Be(CustomEntitiesErrors.TextMustEndWith);
+    }
 }
