@@ -11,6 +11,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.6"/>
+        <PackageReference Include="Syncfusion.Blazor" />
     </ItemGroup>
 
     <ItemGroup>
