@@ -1,0 +1,21 @@
+﻿@using Raftel.Application.Contracts.Localization
+@using Raftel.Blazor.Grid
+@using Raftel.Blazor.Localization.TextResources.Setups
+@using Raftel.Blazor.Shared.Localization
+@using Raftel.Blazor.Localization.TextResources.Operations.Create
+@using Raftel.Blazor.Localization.TextResources.Operations.Edit
+@inherits SnComponentBase
+
+<SnGrid @ref="_grid"
+        TItem="TextResourceDto"
+        TSetup="TextResourceGridSetup"
+        TFilter="TextResourceFilterDto"
+        Title="TextResources:Page:Title"
+        Setup="@(new TextResourceGridSetup())"
+        GetDataFn="GetAllTextResourcesAsync"
+        OnCreateClicked="CreateTextResourceAsync"
+        OnEditClicked="EditTextResourceAsync"
+        OnDeleteClicked="DeleteTextResourceAsync"/>
+
+<CreateTextResource @ref="_createForm"></CreateTextResource>
+<EditTextResource @ref="_editTextResource"></EditTextResource>

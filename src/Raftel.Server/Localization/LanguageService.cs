@@ -23,7 +23,8 @@ public class LanguageService(IQueryDispatcher queryDispatcher, ICommandDispatche
     {
         var command = new CreateLanguageCommand
         {
-            Name = createDto.Name
+            Name = createDto.Name,
+            IsoCode = createDto.IsoCode
         };
 
         var result = await CommandDispatcher.Dispatch(command);

@@ -39,6 +39,8 @@
 
     <ItemGroup>
       <AdditionalFiles Include="Forms\Groups\SnFormGroup.razor" />
+      <AdditionalFiles Include="Localization\TextResources\Operations\Create\CreateLanguage.razor" />
+      <AdditionalFiles Include="Localization\TextResources\Operations\Edit\EditLanguage.razor" />
     </ItemGroup>
 
     <ItemGroup>
