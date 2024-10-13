@@ -7,12 +7,12 @@ using Raftel.Core.Localization.ValueObjects;
 
 namespace Raftel.Application.Tests.Localization.Commands;
 
-public class DeleteLanguageCommandHandlerTests
+public class DeleteLanguageCommandHandlerTest
 {
     private readonly ILanguagesRepository _languagesRepository;
     private readonly DeleteLanguageCommandHandler _handler;
 
-    public DeleteLanguageCommandHandlerTests()
+    public DeleteLanguageCommandHandlerTest()
     {
         _languagesRepository = Substitute.For<ILanguagesRepository>();
         _handler = new DeleteLanguageCommandHandler(_languagesRepository);
