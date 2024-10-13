@@ -1,5 +1,6 @@
 using Raftel.Blazor;
 using Raftel.Blazor.Menu;
+using Raftel.Blazor.Shared.Localization;
 using Raftel.Demo.Blazor;
 using Raftel.Demo.Blazor.Navigation;
 using _Imports = Raftel.Demo.Blazor.Client._Imports;
@@ -20,7 +21,9 @@ builder.Services.AddHttpClient();
 builder.Services.AddSingleton<MenuDefinitionProvider, SamplesMenuDefinitionProvider>();
 
 builder.Services.AddTransient<WeatherForecastRestClient>();
+
 builder.AddRaftelBlazor();
+builder.Services.AddGrpcService<ILanguageService>();
 
 var app = builder.Build();
 
