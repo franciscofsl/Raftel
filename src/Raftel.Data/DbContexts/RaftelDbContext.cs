@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Raftel.Core.Attributes;
 using Raftel.Core.Auditing;
 using Raftel.Core.Events;
+using Raftel.Core.Localization;
 using Raftel.Data.Outbox;
 
 namespace Raftel.Data.DbContexts;
@@ -26,6 +27,10 @@ public class RaftelDbContext<TDbContext> : DbContext, IDbContext
     public DbSet<OutboxMessage> OutboxMessages { get; set; }
 
     public DbSet<EntityChange> EntityChanges { get; set; }
+    
+    public DbSet<Language> Languages { get; set; }
+    
+    public DbSet<TranslationResource> TranslationResources { get; set; }
 
     [ExcludeFromCodeCoverage]
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
