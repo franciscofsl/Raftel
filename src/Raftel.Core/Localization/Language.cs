@@ -6,7 +6,7 @@ namespace Raftel.Core.Localization;
 
 public sealed class Language : AggregateRoot<LanguageId>
 {
-    public string Name { get; private set; }
+    public string Name { get; set; }
 
     public string IsoCode { get; private set; }
 
