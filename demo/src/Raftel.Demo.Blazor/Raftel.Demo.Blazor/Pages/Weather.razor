@@ -51,7 +51,7 @@ else
     {
         // var items = await WeatherForecastRestClient.GetListAsync();
 
-        var items = await LanguageService.GetListAsync(new LanguagueFilterDto());
+        var items = await LanguageService.GetListAsync(new LanguageFilterDto());
         
         forecasts = items.Items.Select(_ => new WeatherForecast
         {

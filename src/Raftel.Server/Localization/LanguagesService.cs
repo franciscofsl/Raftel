@@ -16,7 +16,7 @@ namespace Raftel.Server.Localization;
 
 [ServiceContract]
 public class LanguageService(IQueryDispatcher queryDispatcher, ICommandDispatcher commandDispatcher)
-    : CrudService<LanguageDto, CreateLanguageDto, LanguageDto, LanguagueFilterDto>(queryDispatcher, commandDispatcher),
+    : CrudService<LanguageDto, CreateLanguageDto, LanguageDto, LanguageFilterDto>(queryDispatcher, commandDispatcher),
         ILanguageService
 {
     public override async Task<LanguageDto> CreateAsync(CreateLanguageDto createDto)
@@ -55,7 +55,7 @@ public class LanguageService(IQueryDispatcher queryDispatcher, ICommandDispatche
         return QueryDispatcher.Dispatch(query);
     }
 
-    public override async Task<PagedResult<LanguageDto>> GetListAsync(LanguagueFilterDto filter)
+    public override async Task<PagedResult<LanguageDto>> GetListAsync(LanguageFilterDto filter)
     {
         var languageDtos = await QueryDispatcher.Dispatch(new GetLanguagesQuery());
 

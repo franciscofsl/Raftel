@@ -3,6 +3,6 @@ using Raftel.Blazor.Shared.Grpc;
 
 namespace Raftel.Blazor.Shared.Localization;
 
-public interface ILanguageService : ICrudService<LanguageDto, CreateLanguageDto, LanguageDto, LanguagueFilterDto>
+public interface ILanguageService : ICrudService<LanguageDto, CreateLanguageDto, LanguageDto, LanguageFilterDto>
 {
 }

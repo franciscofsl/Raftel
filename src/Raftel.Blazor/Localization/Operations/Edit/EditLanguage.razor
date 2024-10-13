@@ -1,0 +1,10 @@
+﻿@using Raftel.Application.Contracts.Localization
+@inherits SnComponentBase
+
+<SnAdvancedModalForm
+    @ref="_form"
+    TItem="LanguageDto"
+    Title="Languages.EditNewLanguage"
+    Configuration="@GetConfiguration()"
+    OnGetItemFn="@GetLanguageAsync"
+    OnSaveClicked="async (item) => await SaveAsync(item)"/>

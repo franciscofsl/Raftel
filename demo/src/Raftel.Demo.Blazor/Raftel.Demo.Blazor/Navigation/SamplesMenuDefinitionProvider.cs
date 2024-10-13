@@ -13,6 +13,15 @@ public class SamplesMenuDefinitionProvider : MenuDefinitionProvider
                 Path = "Home",
                 Text = "Menu:Home"
             })
+            .CreateSubMenu(new Menu()
+                {
+                    Text = "Menu:Administration"
+                }
+                .CreateSubMenu(new Menu()
+                {
+                    Text = "Menu:Languages",
+                    Path = "Administration/Languages"
+                }))
             .CreateSubMenu(BuildSamplesMenu());
     }
 
