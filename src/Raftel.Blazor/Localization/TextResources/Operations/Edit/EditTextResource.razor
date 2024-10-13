@@ -3,12 +3,9 @@
 
 <SnAdvancedModalForm
     @ref="_form"
-    TItem="LanguageDto"
-    Title="Languages.EditNewLanguage"
+    TItem="TextResourceDto"
+    Title="TextResources.EditNewTextResource"
     Configuration="@GetConfiguration()"
-    OnGetItemFn="@GetLanguageAsync"
+    OnGetItemFn="@GetTextResourceAsync"
     OnSaveClicked="async (item) => await SaveAsync(item)">
-    <Content>
-        <TextResourcesGrid Language="@context" />
-    </Content>
 </SnAdvancedModalForm>

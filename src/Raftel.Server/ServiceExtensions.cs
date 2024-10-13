@@ -9,6 +9,7 @@ public static class ServiceExtensions
     {
         app.UseGrpcWeb(new GrpcWebOptions() { DefaultEnabled = true });
         app.MapGrpcService<LanguageService>();
+        app.MapGrpcService<TextResourceService>();
         return app;
     }
 }

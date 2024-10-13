@@ -1,10 +1,11 @@
 ﻿using Raftel.Application.Cqrs.Commands;
+using Raftel.Application.Localization.Commands.AddTranslationResource;
 using Raftel.Core.Localization;
 using Raftel.Shared.Results;
 
-namespace Raftel.Application.Localization.Commands.AddTranslationResource;
+namespace Raftel.Application.Localization.Commands.UpdateTranslationResource;
 
-public class AddTranslationResourceCommandHandler(ILanguagesRepository languagesRepository)
+public class UpdateTranslationResourceCommandHandler(ILanguagesRepository languagesRepository)
     : ICommandHandler<AddTranslationResourceCommand, Result<TranslationResource>>
 {
     public async Task<Result<TranslationResource>> Handle(AddTranslationResourceCommand command,
@@ -12,12 +13,6 @@ public class AddTranslationResourceCommandHandler(ILanguagesRepository languages
     {
         var language = await languagesRepository.GetAsync(command.LanguageId);
 
-        var result = language.AddTranslationResource(command.Key, command.Value);
-        if (result.Success)
-        {
-            await languagesRepository.UpdateAsync(language);
-        }
-
-        return result;
+        return language.AddTranslationResource(command.Key, command.Value);
     }
 }

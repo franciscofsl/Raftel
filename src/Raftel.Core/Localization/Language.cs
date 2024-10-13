@@ -39,4 +39,13 @@ public sealed class Language : AggregateRoot<LanguageId>
         _resources.Add(resource);
         return Result.Ok(resource);
     }
+
+    public void RemoveTextResource(TranslationResourceId resourceId)
+    {
+        var resource = Resources.FirstOrDefault(_ => _.Id == resourceId);
+        if (resource is not null)
+        {
+            _resources.Remove(resource);
+        }
+    }
 }

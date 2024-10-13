@@ -19,6 +19,8 @@ public partial class TextResourcesGrid
 
     [Inject] private TextResourceGridNotifier TextResourceGridNotifier { get; set; }
 
+    [Parameter] public LanguageDto Language { get; set; }
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -42,9 +44,10 @@ public partial class TextResourcesGrid
         {
             return new GridData<TextResourceDto>();
         }
-        
+
+        filter.LanguageId = Language.Id;
         var items = await Service.GetListAsync(filter);
-        
+
         return new GridData<TextResourceDto>
         {
             Items = items.Items
@@ -56,16 +59,16 @@ public partial class TextResourcesGrid
         await _createForm.ShowAsync();
     }
 
-    private Task EditTextResourceAsync(TextResourceDto TextResource)
+    private Task EditTextResourceAsync(TextResourceDto resource)
     {
-        return _editTextResource.ShowAsync(TextResource.Id);
+        return _editTextResource.ShowAsync(resource.Id);
     }
 
-    private async Task DeleteTextResourceAsync(TextResourceDto TextResource)
+    private async Task DeleteTextResourceAsync(TextResourceDto resource)
     {
         await Service.DeleteAsync(new EntityByIdFilter
         {
-            Id = TextResource.Id
+            Id = resource.Id
         });
         await RefreshAsync();
     }

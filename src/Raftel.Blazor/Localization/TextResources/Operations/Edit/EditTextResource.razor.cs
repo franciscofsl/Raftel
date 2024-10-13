@@ -10,18 +10,18 @@ namespace Raftel.Blazor.Localization.TextResources.Operations.Edit;
 
 public partial class EditTextResource
 {
-    private SnAdvancedModalForm<LanguageDto> _form;
+    private SnAdvancedModalForm<TextResourceDto> _form;
 
     [Inject] private TextResourceGridNotifier TextResourceGridNotifier { get; set; }
 
-    [Inject] private ILanguageService Service { get; set; }
+    [Inject] private ITextResourceService Service { get; set; }
 
     public Task ShowAsync(Guid id)
     {
         return _form.ShowAsync(id);
     }
 
-    private async Task<LanguageDto> GetLanguageAsync(Guid id)
+    private async Task<TextResourceDto> GetTextResourceAsync(Guid id)
     {
         return await Service.GetAsync(new EntityByIdFilter
         {
@@ -29,27 +29,27 @@ public partial class EditTextResource
         });
     }
 
-    private async Task SaveAsync(LanguageDto item)
+    private async Task SaveAsync(TextResourceDto item)
     {
         await Service.UpdateAsync(item);
         await TextResourceGridNotifier.Update();
         await _form.CloseAsync();
     }
 
-    private FormConfiguration<LanguageDto> GetConfiguration()
+    private FormConfiguration<TextResourceDto> GetConfiguration()
     {
-        return FormConfigurator<LanguageDto>
+        return FormConfigurator<TextResourceDto>
             .Create()
             .AddGroup(_ => _
-                .Title("Languages.Create")
+                .Title("TextResources.Create")
                 .Fields(c => c
-                    .Add(t => t.IsoCode, new TextField()
+                    .Add(t => t.Key, new TextField()
                     {
-                        DisplayName = "Languages.IsoCode"
+                        DisplayName = "TextResources.IsoCode"
                     })
-                    .Add(t => t.Name, new TextField()
+                    .Add(t => t.Value, new TextField()
                     {
-                        DisplayName = "Languages.Name"
+                        DisplayName = "TextResources.Name"
                     })))
             .Configure();
     }

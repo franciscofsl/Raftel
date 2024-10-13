@@ -24,6 +24,7 @@ builder.Services.AddTransient<WeatherForecastRestClient>();
 
 builder.AddRaftelBlazor();
 builder.Services.AddGrpcService<ILanguageService>();
+builder.Services.AddGrpcService<ITextResourceService>();
 
 var app = builder.Build();
 
