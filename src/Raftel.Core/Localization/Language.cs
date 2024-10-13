@@ -1,14 +1,17 @@
 ﻿using Raftel.Core.BaseTypes;
 using Raftel.Core.Localization.ValueObjects;
+using Raftel.Shared.Results;
 
 namespace Raftel.Core.Localization;
 
 public sealed class Language : AggregateRoot<LanguageId>
 {
     public string Name { get; private set; }
+
     public string IsoCode { get; private set; }
 
     private readonly List<TranslationResource> _resources = new();
+
     public IReadOnlyCollection<TranslationResource> Resources => _resources.AsReadOnly();
 
     private Language()
@@ -25,10 +28,15 @@ public sealed class Language : AggregateRoot<LanguageId>
         };
     }
 
-    public TranslationResource AddTranslationResource(string key, string value)
+    public Result<TranslationResource> AddTranslationResource(string key, string value)
     {
+        if (Resources.Any(_ => _.Key == key))
+        {
+            return Result.Failure<TranslationResource>(LocalizationErrors.DuplicatedResource);
+        }
+
         var resource = TranslationResource.Create(key, value);
         _resources.Add(resource);
-        return resource;
+        return Result.Ok(resource);
     }
 }
