@@ -61,6 +61,15 @@ public class EfRepository<TAggregateRoot, TEntityId>
         return query.Select(map).ToListAsync();
     }
 
+    public Task<bool> AnyAsync(Filter<TAggregateRoot> filter = null)
+    {
+        var query = GetQueryable();
+
+        return filter is null
+            ? query.AnyAsync() 
+            : query.AnyAsync(filter.ToExpression());
+    }
+
     public async Task<TAggregateRoot> InsertAsync(TAggregateRoot entity, bool save = true)
     {
         var dbContext = CreateDbContext();
@@ -97,7 +106,7 @@ public class EfRepository<TAggregateRoot, TEntityId>
     {
         return _contextFactory.Create<IDbContext>();
     }
-    
+
     protected IQueryable<TAggregateRoot> GetQueryable()
     {
         var dbContext = CreateDbContext();

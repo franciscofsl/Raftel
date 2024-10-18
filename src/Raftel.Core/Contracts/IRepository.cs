@@ -20,4 +20,6 @@ public interface IRepository<TAggregateRoot, TEntityId>
 
     Task<List<TReturnModel>> GetListAsync<TReturnModel>(Expression<Func<TAggregateRoot, TReturnModel>> map,
         Filter<TAggregateRoot> filter = null);
+
+    Task<bool> AnyAsync(Filter<TAggregateRoot> filter = null);
 }
