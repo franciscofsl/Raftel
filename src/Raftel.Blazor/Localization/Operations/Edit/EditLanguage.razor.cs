@@ -41,15 +41,15 @@ public partial class EditLanguage
         return FormConfigurator<LanguageDto>
             .Create()
             .AddGroup(_ => _
-                .Title("Languages.Create")
+                .Title("Languages:EditLanguage")
                 .Fields(c => c
                     .Add(t => t.IsoCode, new TextField()
                     {
-                        DisplayName = "Languages.IsoCode"
+                        DisplayName = "Languages:IsoCode"
                     })
                     .Add(t => t.Name, new TextField()
                     {
-                        DisplayName = "Languages.Name"
+                        DisplayName = "Languages:Name"
                     })))
             .Configure();
     }

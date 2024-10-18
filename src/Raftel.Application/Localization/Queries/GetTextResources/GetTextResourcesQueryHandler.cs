@@ -10,7 +10,7 @@ public class GetTextResourcesQueryHandler(ILanguagesRepository repository)
     public async Task<List<TextResourceDto>> Handle(GetTextResourcesQuery query,
         CancellationToken cancellationToken = default)
     {
-        var language = await repository.GetAsync(query.LanguageId);
+        var language = await repository.FirstOrDefaultAsync();
 
         return language.Resources
             .Select(_ => new TextResourceDto
