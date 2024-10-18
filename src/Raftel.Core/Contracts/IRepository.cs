@@ -22,4 +22,5 @@ public interface IRepository<TAggregateRoot, TEntityId>
         Filter<TAggregateRoot> filter = null);
 
     Task<bool> AnyAsync(Filter<TAggregateRoot> filter = null);
+    Task<TAggregateRoot> FirstOrDefaultAsync(Filter<TAggregateRoot> filter = null);
 }

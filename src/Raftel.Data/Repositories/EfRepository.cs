@@ -66,7 +66,7 @@ public class EfRepository<TAggregateRoot, TEntityId>
         var query = GetQueryable();
 
         return filter is null
-            ? query.AnyAsync() 
+            ? query.AnyAsync()
             : query.AnyAsync(filter.ToExpression());
     }
 
@@ -100,6 +100,15 @@ public class EfRepository<TAggregateRoot, TEntityId>
         {
             await dbContext.SaveChangesAsync();
         }
+    }
+
+    public Task<TAggregateRoot> FirstOrDefaultAsync(Filter<TAggregateRoot> filter = null)
+    {
+        var query = GetQueryable();
+
+        return filter is null
+            ? query.FirstOrDefaultAsync()
+            : query.FirstOrDefaultAsync(filter.ToExpression());
     }
 
     protected IDbContext CreateDbContext()
