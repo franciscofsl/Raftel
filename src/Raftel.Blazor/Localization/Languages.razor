@@ -1,0 +1,22 @@
+﻿@page "/administration/languages"
+@using Raftel.Application.Contracts.Localization
+@using Raftel.Blazor.Grid
+@using Raftel.Blazor.Localization.Operations.Create
+@using Raftel.Blazor.Localization.Operations.Edit
+@using Raftel.Blazor.Localization.Setups
+@using Raftel.Blazor.Shared.Localization
+@inherits SnComponentBase
+
+<SnGrid @ref="_grid"
+        TItem="LanguageDto"
+        TSetup="LanguageGridSetup"
+        TFilter="LanguageFilterDto"
+        Title="@L["Languages.Page.Title"]"
+        Setup="@(new LanguageGridSetup())"
+        GetDataFn="GetAllLanguagesAsync"
+        OnCreateClicked="CreateLanguageAsync"
+        OnEditClicked="EditLanguageAsync"
+        OnDeleteClicked="DeleteLanguageAsync"/>
+
+<CreateLanguage @ref="_createForm"></CreateLanguage>
+<EditLanguage @ref="_editLanguage"></EditLanguage>

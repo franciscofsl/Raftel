@@ -9,13 +9,13 @@
             {
                 @if (subMenu.SubMenus.Any())
                 {
-                    <SfDropDownButton CssClass="@("e-inherit e-appbar-menu e-primary")" Content="@subMenu.Text" IconCss="@subMenu.Icon">
+                    <SfDropDownButton CssClass="@("e-inherit e-appbar-menu e-primary")" Content="@L[subMenu.Text]" IconCss="@subMenu.Icon">
                         <DropDownMenuItems>
                             @foreach (var option in subMenu.SubMenus)
                             {
                                 <DropDownMenuItem
                                     IconCss="@option.Icon"
-                                    Text="@option.Text"
+                                    Text="@L[option.Text]"
                                     Url="@option.Path"/>
                             }
                         </DropDownMenuItems>
@@ -25,7 +25,7 @@
                 {
                     <SfButton
                         CssClass="@("e-inherit e-appbar-menu e-primary")"
-                        Content="@subMenu.Text"
+                        Content="@L[subMenu.Text]"
                         IconCss="@subMenu.Icon"
                         @onclick="async () => await OpenPage(subMenu.Path)"/>
                 }

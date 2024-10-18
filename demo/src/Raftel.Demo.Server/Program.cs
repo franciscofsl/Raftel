@@ -1,6 +1,7 @@
 using System.IO.Compression;
 using ProtoBuf.Grpc.Server;
 using Raftel.Demo.Server;
+using Raftel.Server;
 using Raftel.Shared.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,12 +30,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseGrpcWeb(new GrpcWebOptions() { DefaultEnabled = true });
+app.ConfigureRaftelWebApp();
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.UseSwagger();

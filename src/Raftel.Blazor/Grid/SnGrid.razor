@@ -11,14 +11,14 @@
             {
                 <SnLinkButton
                     Icon="fas fa-plus"
-                    Text="Common.Add"
+                    Text="@L["Common:Add"]"
                     OnClick="@(async () => await OnCreateClickedAsync())"/>
             }
             @if (OnEditClicked.HasDelegate)
             {
                 <SnLinkButton
                     Icon="fas fa-pen"
-                    Text="Common.Edit"
+                    Text="@L["Common:Edit"]"
                     Disabled="@(SelectedItem is null)"
                     OnClick="@(async () => await OnEditClickedAsync())"/>
             }
@@ -26,7 +26,7 @@
             {
                 <SnLinkButton
                     Icon="fas fa-trash-alt"
-                    Text="Common.Delete"
+                    Text="@L["Common:Delete"]"
                     Disabled="@(SelectedItem is null)"
                     OnClick="@(async () => await OnDeleteClickedAsync())"/>
             }

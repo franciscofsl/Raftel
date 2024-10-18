@@ -18,13 +18,13 @@ public static class Extensions
 
         if (!string.IsNullOrEmpty(connectionString))
         {
-            services.AddTransient<IDbContextFactory, RaftelDbContextFactory>();
-            services.AddTransient<AuditChangesInterceptor>();
+            services.AddScoped<IDbContextFactory, RaftelDbContextFactory>();
+            services.AddScoped<AuditChangesInterceptor>();
             services.AddDbContext<IDbContext, TDbContext>(
                 (sp, options) => options
                     .UseSqlServer(connectionString)
                     .AddInterceptors(sp.GetRequiredService<ConvertDomainEventsToOutboxMessagesInterceptor>())
-                    .AddInterceptors(sp.GetRequiredService<AuditChangesInterceptor>()), ServiceLifetime.Transient);
+                    .AddInterceptors(sp.GetRequiredService<AuditChangesInterceptor>()));
         }
     }
 }

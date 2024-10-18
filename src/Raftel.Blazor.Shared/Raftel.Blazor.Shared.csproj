@@ -12,4 +12,7 @@
     <ItemGroup>
         <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Raftel.Application.Contracts\Raftel.Application.Contracts.csproj" />
+    </ItemGroup>
 </Project>

@@ -17,6 +17,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" /> 
+        <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" /> 
         <PackageReference Include="protobuf-net.Grpc" /> 
         <PackageReference Include="Refit" />
         <PackageReference Include="Refit.HttpClientFactory" />
@@ -39,6 +40,8 @@
 
     <ItemGroup>
       <AdditionalFiles Include="Forms\Groups\SnFormGroup.razor" />
+      <AdditionalFiles Include="Localization\TextResources\Operations\Create\CreateLanguage.razor" />
+      <AdditionalFiles Include="Localization\TextResources\Operations\Edit\EditLanguage.razor" />
     </ItemGroup>
 
     <ItemGroup>

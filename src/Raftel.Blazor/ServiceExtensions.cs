@@ -7,14 +7,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using ProtoBuf.Grpc.Client;
+using Raftel.Blazor.Localization.Services;
 using Refit;
 using Raftel.Blazor.Services;
 using Raftel.Blazor.Services.LocalStorage;
 using Raftel.Blazor.Services.LocalStorage.JsonConverters;
 using Raftel.Blazor.Services.LocalStorage.Serialization;
 using Raftel.Blazor.Services.LocalStorage.StorageOptions;
+using Raftel.Blazor.Shared.Localization;
 using Raftel.Blazor.Toast;
 using Syncfusion.Blazor;
 using Syncfusion.Licensing;
@@ -25,6 +28,23 @@ public static class ServiceExtensions
 {
     public static void AddRaftelBlazor(this WebApplicationBuilder builder)
     {
+        builder.Services.AddSingleton<IStringLocalizerFactory, InMemoryStringLocalizerFactory>();
+        builder.Services.AddSingleton<IStringLocalizer, InMemoryLocalizer>(serviceProvider =>
+        {
+            var translationsService = serviceProvider.GetService<ITextResourceService>();
+
+            var items = translationsService
+                .GetListAsync(new TextResourceFilterDto
+                {
+                    LanguageId = Guid.Parse("0cebb178-3908-23b5-4cce-3a15973a37ae")
+                })
+                .GetAwaiter()
+                .GetResult();
+
+            var dictionary = items.Items.ToDictionary(_ => _.Key, _ => _.Value);
+            return new InMemoryLocalizer(dictionary);
+        });
+        
         var license = builder.Configuration["SyncfusionLicense"];
         SyncfusionLicenseProvider.RegisterLicense(license);
         builder.Services.AddSyncfusionBlazor();
@@ -79,7 +99,7 @@ public static class ServiceExtensions
 
     public static void AddRestClient<TService>(this WebApplicationBuilder builder, string uri = null)
         where TService : class, IRestService
-    { 
+    {
         builder.Services.AddRefitClient<TService>().ConfigureHttpClient(c =>
         {
             c.BaseAddress = new Uri(uri ?? builder.Configuration["BackendUrl"]);

@@ -1,6 +1,7 @@
-﻿@using Raftel.Blazor.Layouts
+﻿@using Raftel.Blazor
+@using Raftel.Blazor.Layouts
 @using Raftel.Blazor.Toast
-<Router AppAssembly="typeof(Program).Assembly" AdditionalAssemblies="new[] { typeof(Client._Imports).Assembly }">
+<Router AppAssembly="typeof(Program).Assembly" AdditionalAssemblies="new[] { typeof(Client._Imports).Assembly, typeof(SnComponentBase).Assembly }">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="typeof(WorkAreaLayout)"/>
         <FocusOnNavigate RouteData="routeData" Selector="h1"/>

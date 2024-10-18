@@ -1,0 +1,334 @@
+@import "../base/base.scss";
+
+/*! Carousel component FluentUI theme definitions and variables */
+
+// COLORS VARIABLES
+$carousel-navigator-btn-bg: transparent !default;
+$carousel-navigator-btn-bg-hover: rgba($primary-text-color, .4) !default;
+$carousel-navigator-icon-color: $primary-text-color !default;
+$carousel-indicator-bar-bg: $primary-text-color !default;
+$carousel-indicator-bar-border: 1px solid rgba($primary-text-color, .4) !default;
+$carousel-indicator-bar-bg-active: $primary !default;
+$carousel-indicator-border-color-focus: $black !default;
+
+// ANIMATION VARIABLES
+$carousel-animation-duration: .6s !default;
+$carousel-animation-timing-function: ease-in-out !default;
+
+// DIMENSION VARIABLES
+$carousel-navigator-btn-border-radius-hover: 50% !default;
+$carousel-indicator-padding: 6px !default;
+$carousel-indicator-height: 48px !default;
+$carousel-indicator-bar-border-radius: 50% !default;
+$carousel-indicator-bar-height: 12px !default;
+$carousel-indicator-bar-width: 12px !default;
+
+@include export-module('carousel-layout') {
+
+  /*! carousel component styles */
+  .e-carousel {
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    .e-carousel-items,
+    .e-carousel-slide-container {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      padding: 0;
+      position: relative;
+      width: 100%;
+    }
+
+    &.e-partial {
+      .e-carousel-slide-container {
+        padding: 0 100px;
+
+        @media screen and (max-width: 480px) {
+          padding: 0 75px;
+        }
+
+        @media screen and (max-width: 320px) {
+          padding: 0 50px;
+        }
+      }
+
+      .e-carousel-items {
+        width: calc(var(--carousel-items-count) * 100%);
+        display: flex;
+        flex-direction: row;
+        transition-property: transform;
+        transition-duration: $carousel-animation-duration;
+        transition-timing-function: $carousel-animation-timing-function;
+      }
+
+      .e-carousel-item {
+        height: 100%;
+        overflow: hidden;
+        padding: 0;
+        position: relative;
+        width: calc(100% / var(--carousel-items-count));
+      }
+    }
+
+    &.e-blazor-carousel.e-partial {
+      .e-carousel-items {
+        transform: translateX(calc(-100% / var(--carousel-items-count) * (var(--carousel-items-current))));
+        transition: transform $carousel-animation-duration $carousel-animation-timing-function;
+      }
+    }
+
+    &.e-carousel-slide-animation:not(.e-partial) {
+      .e-carousel-item {
+        backface-visibility: hidden;
+        display: none;
+        float: left;
+        height: 100%;
+        margin-right: -100%;
+        position: relative;
+        transition: transform $carousel-animation-duration $carousel-animation-timing-function;
+        width: 100%;
+
+        &.e-prev,
+        &.e-next,
+        &.e-active {
+          display: block;
+        }
+
+        &.e-next:not(.e-transition-start),
+        &.e-active.e-transition-end {
+          transform: translateX(100%);
+        }
+
+        &.e-prev:not(.e-transition-end),
+        &.e-active.e-transition-start {
+          transform: translateX(-100%);
+        }
+      }
+    }
+
+    &.e-carousel-fade-animation:not(.e-partial) {
+      .e-carousel-item {
+        backface-visibility: hidden;
+        display: block;
+        float: left;
+        height: 100%;
+        margin-right: -100%;
+        opacity: 0;
+        position: relative;
+        transition: opacity $carousel-animation-duration $carousel-animation-timing-function;
+        width: 100%;
+        z-index: 0;
+
+        &.e-active {
+          opacity: 1;
+          z-index: 1;
+        }
+      }
+    }
+
+    &.e-carousel-animation-none:not(.e-partial) {
+      .e-carousel-item {
+        display: none;
+        height: 100%;
+        width: 100%;
+
+        &.e-active {
+          display: block;
+        }
+      }
+    }
+
+    &.e-carousel-custom-animation:not(.e-partial) {
+      .e-carousel-item {
+        display: block;
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        width: 100%;
+
+        &.e-active {
+          opacity: 1;
+          pointer-events: visible;
+        }
+      }
+    }
+
+    .e-carousel-navigators {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      justify-content: space-between;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+
+      .e-play-pause,
+      .e-previous,
+      .e-next {
+        padding: .5em;
+        pointer-events: auto;
+
+        .e-btn {
+          border: 0;
+          box-shadow: none;
+
+          &:hover {
+            border-radius: $carousel-navigator-btn-border-radius-hover;
+          }
+
+          &.e-rtl {
+            transform: rotate(180deg);
+          }
+        }
+
+        &.e-hover-arrows {
+          display: none;
+        }
+      }
+    }
+
+    .e-carousel-indicators {
+      align-items: center;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      min-height: $carousel-indicator-height;
+      padding: 0;
+      pointer-events: none;
+      position: absolute;
+      width: 100%;
+      z-index: 1;
+
+      .e-indicator-bars {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        pointer-events: auto;
+
+        .e-indicator-bar {
+          padding: 0;
+
+          .e-indicator {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            padding: $carousel-indicator-padding;
+          }
+
+          .e-indicator div {
+            border: $carousel-indicator-bar-border;
+            border-radius: $carousel-indicator-bar-border-radius;
+            height: $carousel-indicator-bar-height;
+            transition-duration: $carousel-animation-duration;
+            transition-property: background-color, border-color;
+            transition-timing-function: $carousel-animation-timing-function;
+            width: $carousel-indicator-bar-width;
+          }
+
+          .e-indicator .e-ripple-element {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@include export-module('carousel-theme') {
+
+  /*! carousel component theme */
+  .e-carousel {
+    .e-carousel-navigators {
+
+      .e-previous .e-btn:not(:disabled),
+      .e-next .e-btn:not(:disabled),
+      .e-play-pause .e-btn:not(:disabled) {
+        background-color: $carousel-navigator-btn-bg;
+
+        .e-btn-icon {
+          color: $carousel-navigator-icon-color;
+        }
+
+        &:active,
+        &:focus,
+        &:hover {
+          background-color: $carousel-navigator-btn-bg-hover;
+          outline: none;
+        }
+      }
+    }
+
+    .e-carousel-indicators .e-indicator-bar {
+      .e-indicator {
+        background-color: transparent;
+        border-color: transparent;
+        box-shadow: none;
+
+        div {
+          background-color: $carousel-indicator-bar-bg;
+          border-color: $carousel-indicator-bar-bg;
+        }
+
+        &:active,
+        &:focus,
+        &:hover {
+          background-color: transparent;
+          border-color: transparent;
+          box-shadow: none;
+          outline: none;
+        }
+
+        &:focus-visible {
+          border-color: $carousel-indicator-border-color-focus;
+        }
+      }
+
+      &.e-active .e-indicator div {
+        background-color: $carousel-indicator-bar-bg-active;
+        border-color: $carousel-indicator-bar-bg-active;
+      }
+    }
+  }
+}
+
+
+@include export-module('carousel-fluent-icons') {
+  .e-carousel {
+
+    .e-previous-icon::before {
+      content: '\e765';
+    }
+
+    .e-next-icon::before {
+      content: '\e748';
+    }
+
+    .e-play-icon::before {
+      content: '\e70c';
+    }
+
+    .e-pause-icon::before {
+      content: '\e77b';
+    }
+
+    &.e-rtl {
+      .e-previous-icon::before {
+        content: '\e748';
+      }
+
+      .e-next-icon::before {
+        content: '\e765';
+      }
+    }
+  }
+}
+

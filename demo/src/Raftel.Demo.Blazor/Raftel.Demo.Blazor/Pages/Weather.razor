@@ -1,4 +1,6 @@
 ﻿@page "/weather"
+@using Raftel.Application.Contracts.Localization
+@using Raftel.Blazor.Shared.Localization
 @attribute [StreamRendering]
 
 <PageTitle>Weather</PageTitle>
@@ -42,16 +44,20 @@ else
     private WeatherForecast[]? forecasts;
 
     [Inject] private WeatherForecastRestClient WeatherForecastRestClient { get; set; }
+    
+    [Inject] private ILanguageService LanguageService { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        var items = await WeatherForecastRestClient.GetListAsync();
+        // var items = await WeatherForecastRestClient.GetListAsync();
 
-        forecasts = items.Select(_ => new WeatherForecast
+        var items = await LanguageService.GetListAsync(new LanguageFilterDto());
+        
+        forecasts = items.Items.Select(_ => new WeatherForecast
         {
-            Date = _.Date,
-            TemperatureC = _.TemperatureC,
-            Summary = _.Summary
+            Date = DateOnly.MaxValue,
+            TemperatureC = 6,
+            Summary = _.Name,
         }).ToArray();
     }
 

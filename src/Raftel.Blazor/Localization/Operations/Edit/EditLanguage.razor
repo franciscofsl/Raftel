@@ -1,0 +1,15 @@
+﻿@using Raftel.Application.Contracts.Localization
+@using Raftel.Blazor.Localization.TextResources
+@inherits SnComponentBase
+
+<SnAdvancedModalForm
+    @ref="_form"
+    TItem="LanguageDto"
+    Title="Languages.EditNewLanguage"
+    Configuration="@GetConfiguration()"
+    OnGetItemFn="@GetLanguageAsync"
+    OnSaveClicked="async (item) => await SaveAsync(item)">
+    <Content>
+        <TextResourcesGrid Language="@context" />
+    </Content>
+</SnAdvancedModalForm>

@@ -17,7 +17,7 @@ namespace Raftel.Demo.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -73,6 +73,50 @@ namespace Raftel.Demo.Data.Migrations
                     b.ToTable("EntityPropertiesChanges", (string)null);
                 });
 
+            modelBuilder.Entity("Raftel.Core.Localization.Language", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("IsoCode")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages", (string)null);
+                });
+
+            modelBuilder.Entity("Raftel.Core.Localization.TranslationResource", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<Guid>("LanguageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("TranslationResources", (string)null);
+                });
+
             modelBuilder.Entity("Raftel.Data.Outbox.OutboxMessage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -113,9 +157,23 @@ namespace Raftel.Demo.Data.Migrations
                         .HasForeignKey("EntityChangeId");
                 });
 
+            modelBuilder.Entity("Raftel.Core.Localization.TranslationResource", b =>
+                {
+                    b.HasOne("Raftel.Core.Localization.Language", null)
+                        .WithMany("Resources")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Raftel.Core.Auditing.EntityChange", b =>
                 {
                     b.Navigation("Properties");
+                });
+
+            modelBuilder.Entity("Raftel.Core.Localization.Language", b =>
+                {
+                    b.Navigation("Resources");
                 });
 #pragma warning restore 612, 618
         }

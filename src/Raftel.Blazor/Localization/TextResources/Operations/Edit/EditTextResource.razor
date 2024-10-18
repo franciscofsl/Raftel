@@ -1,0 +1,11 @@
+﻿@using Raftel.Application.Contracts.Localization
+@inherits SnComponentBase
+
+<SnAdvancedModalForm
+    @ref="_form"
+    TItem="TextResourceDto"
+    Title="TextResources.EditNewTextResource"
+    Configuration="@GetConfiguration()"
+    OnGetItemFn="@GetTextResourceAsync"
+    OnSaveClicked="async (item) => await SaveAsync(item)">
+</SnAdvancedModalForm>
