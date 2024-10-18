@@ -10,7 +10,7 @@
 
 <div class="form-field @(Field.FullSpan ? "wide" : string.Empty) @(Field.LabelPosition is LabelPosition.Top ? "label-top" : string.Empty)">
     <div class="form-field-label" style=" @(Field.LabelPosition is LabelPosition.Top ? "align-self: flex-start;" : string.Empty)">
-        <label>@Field.DisplayName</label>
+        <label>@L[Field.DisplayName]</label>
     </div>
 
     @if (Field.LabelPosition is LabelPosition.Left)

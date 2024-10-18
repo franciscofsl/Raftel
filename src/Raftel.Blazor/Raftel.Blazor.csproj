@@ -17,6 +17,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" /> 
+        <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" /> 
         <PackageReference Include="protobuf-net.Grpc" /> 
         <PackageReference Include="Refit" />
         <PackageReference Include="Refit.HttpClientFactory" />

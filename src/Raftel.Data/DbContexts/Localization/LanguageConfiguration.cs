@@ -25,6 +25,6 @@ public class LanguageConfiguration : IEntityTypeConfiguration<Language>
             .HasMaxLength(5)
             .IsRequired();
 
-        builder.HasMany(l => l.Resources).WithOne();
+        builder.HasMany(l => l.Resources).WithOne().IsRequired();
     }
 }
