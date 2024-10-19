@@ -80,9 +80,10 @@ public class FolderTests
     public void RemoveDocument_ShouldNotRemoveDocument_WhenDocumentDoesNotExist()
     {
         var folder = Folder.Create("Documents");
-        var nonExistentDocument = Document.Create("NonExistentDocument", ".txt", 0, Guid.NewGuid());
+        var folder2 = Folder.Create("Documents 2");
+        var nonExistentDocument = folder2.AddDocument("NonExistentDocument", ".txt", 0, Guid.NewGuid());
 
-        folder.RemoveDocument(nonExistentDocument);
+        folder.RemoveDocument(nonExistentDocument.Value);
 
         folder.Documents.Should().BeEmpty();
     }

@@ -51,7 +51,7 @@ public sealed class Folder : AggregateRoot<Guid>
 
     public Result<Document> AddDocument(string name, string extension, long size, Guid blobFileId)
     {
-        var document = Document.Create(name, extension, size, blobFileId);
+        var document = Document.Create(this, name, extension, size, blobFileId);
         _documents.Add(document);
         return Result.Ok(document);
     }

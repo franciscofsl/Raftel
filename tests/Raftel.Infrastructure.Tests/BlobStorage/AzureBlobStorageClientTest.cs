@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using Raftel.Application.BlobStorage.Contracts;
+using Raftel.Core.Storage;
+using Raftel.Data.DbContexts.BlobStorage;
 using Raftel.Testing;
 
 namespace Raftel.Infrastructure.Tests.BlobStorage;
@@ -32,5 +34,14 @@ public class AzureBlobStorageClientTest : TestBase<RaftelInfrastructureTestAppli
 
         var exists = await blobStorageClient.BlobExistsAsync(blobName);
         exists.Should().BeFalse();
+    }
+
+    [Fact]
+    public async Task Algo()
+    {
+        var dbcontext = GetRequiredService<BlobDbContext>();
+        var folder = Folder.Create("New folder");
+
+        await dbcontext.Folders.AddAsync(folder);
     }
 }

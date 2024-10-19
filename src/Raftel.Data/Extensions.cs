@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Driver;
 using Raftel.Data.DbContexts;
 using Raftel.Data.DbContexts.Auditing;
+using Raftel.Data.DbContexts.BlobStorage;
 using Raftel.Data.Outbox;
 
 namespace Raftel.Data;
@@ -26,5 +28,15 @@ public static class Extensions
                     .AddInterceptors(sp.GetRequiredService<ConvertDomainEventsToOutboxMessagesInterceptor>())
                     .AddInterceptors(sp.GetRequiredService<AuditChangesInterceptor>()));
         }
+
+        var mongoConnectionString = configuration.GetConnectionString("MongoDb");
+        if (string.IsNullOrEmpty(mongoConnectionString))
+        {
+            return;
+        }
+
+        var mongoClient = new MongoClient(mongoConnectionString);
+
+        services.AddDbContext<BlobDbContext>(opt => opt.UseMongoDB(mongoClient, "Raftel"));
     }
 }

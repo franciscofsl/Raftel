@@ -1,16 +1,15 @@
-﻿using System;
-using Raftel.Core.BaseTypes;
+﻿using Raftel.Core.BaseTypes;
 using Raftel.Shared.GuidGenerators;
 
 namespace Raftel.Core.Storage;
 
-public sealed class Document : AggregateRoot<Guid>
+public sealed class Document : Entity<Guid>
 {
     private Document()
     {
     }
 
-    public static Document Create(string name, string extension, long size, Guid blobFileId)
+    internal static Document Create(Folder folder, string name, string extension, long size, Guid blobFileId)
     {
         return new Document
         {
@@ -20,6 +19,7 @@ public sealed class Document : AggregateRoot<Guid>
             Size = size,
             CreationDate = DateTime.UtcNow,
             BlobFileId = blobFileId,
+            FolderId = folder.Id
         };
     }
 
@@ -28,4 +28,5 @@ public sealed class Document : AggregateRoot<Guid>
     public long Size { get; private set; }
     public DateTime CreationDate { get; private set; }
     public Guid BlobFileId { get; private set; }
+    public Guid FolderId { get; private set; }
 }
