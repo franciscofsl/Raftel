@@ -1,45 +1,31 @@
 version: "3.7"
 
 networks:
-  cookbook-network:
-  
+  raftel-network:
+
 services:
-  cookbook-sqlserver:
+  sqlserver:
     image: "mcr.microsoft.com/mssql/server"
     ports:
       - "1433:1433"
     environment:
-        SA_PASSWORD: "SqlServer_Docker2023"
-        ACCEPT_EULA: "Y"
+      SA_PASSWORD: "SqlServer_Docker2023"
+      ACCEPT_EULA: "Y"
     networks:
-      - cookbook-network
+      - raftel-network
 
-  raftel.demo.blazor:
-    image: raftel.demo.blazor
-    build:
-      context: .
-      dockerfile: demo/src/Raftel.Demo.Blazor/Raftel.Demo.Blazor/Dockerfile
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
+    networks:
+      - raftel-network
+    volumes:
+      - azurite_data:/data
 
-  raftel.demo.blazor.client:
-    image: raftel.demo.blazor.client
-    build:
-      context: .
-      dockerfile: demo/src/Raftel.Demo.Blazor/Raftel.Demo.Blazor.Client/Dockerfile
 
-  raftel.demo.blazor-1:
-    image: raftel.demo.blazor-1
-    build:
-      context: .
-      dockerfile: demo/src/Raftel.Demo.Blazor/Raftel.Demo.Blazor/Dockerfile
+volumes:
+  azurite_data:
 
-  raftel.demo.blazor.client-1:
-    image: raftel.demo.blazor.client-1
-    build:
-      context: .
-      dockerfile: demo/src/Raftel.Demo.Blazor/Raftel.Demo.Blazor.Client/Dockerfile
-
-  raftel.demo.server:
-    image: raftel.demo.server
-    build:
-      context: .
-      dockerfile: demo/src/Raftel.Demo.Server/Dockerfile
