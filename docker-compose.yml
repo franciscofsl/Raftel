@@ -6,6 +6,7 @@ networks:
 services:
   sqlserver:
     image: "mcr.microsoft.com/mssql/server"
+    container_name: sqlserver
     ports:
       - "1433:1433"
     environment:
@@ -13,9 +14,21 @@ services:
       ACCEPT_EULA: "Y"
     networks:
       - raftel-network
+ 
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
     
   azurite:
     image: mcr.microsoft.com/azure-storage/azurite
+    container_name: azurite
     hostname: azurite
     restart: always
     command: "azurite-blob --blobHost 0.0.0.0 --blobPort 10000"
@@ -26,3 +39,4 @@ services:
 
 volumes:
   azurite_data:
+  mongo_data:
