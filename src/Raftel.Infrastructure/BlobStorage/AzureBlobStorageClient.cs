@@ -1,7 +1,8 @@
-﻿using Raftel.Application.BlobStorage.Contracts;
+﻿using Microsoft.Extensions.Options;
+using Raftel.Application.BlobStorage.Contracts;
 
 namespace Raftel.Infrastructure.BlobStorage;
 
-public class AzureBlobStorageClient : IAzureBlobStorageClient
+public class AzureBlobStorageClient(IOptions<AzureBlobStorageOptions> options) : IAzureBlobStorageClient
 {
 }
