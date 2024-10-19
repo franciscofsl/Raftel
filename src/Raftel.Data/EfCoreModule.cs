@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Core.Auditing;
 using Raftel.Core.Contracts;
@@ -20,7 +21,7 @@ public abstract class EfCoreModule : RaftelModule
 
     protected virtual IReadOnlyList<Assembly> AssembliesToLoadRepositories { get; }
 
-    public override void ConfigureCustomServices(IServiceCollection services)
+    public override void ConfigureCustomServices(IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient(typeof(IRepository<,>), typeof(EfRepository<,>));
         services.AddTransient<ILanguagesRepository, LanguagesRepository>();

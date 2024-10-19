@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Raftel.Shared.Modules;
@@ -5,7 +6,7 @@ namespace Raftel.Shared.Modules;
 public static class ModulesToIncludeExtensions
 {
     public static void ConfigureSafeServices(this ModulesToIncludeAttribute modulesToIncludeAttribute,
-        IServiceCollection services)
+        IServiceCollection services, IConfiguration configuration)
     {
         if (modulesToIncludeAttribute is null)
         {
@@ -14,7 +15,7 @@ public static class ModulesToIncludeExtensions
 
         foreach (var module in modulesToIncludeAttribute.Modules)
         {
-            module.ConfigureServices(services);
+            module.ConfigureServices(services, configuration);
         }
     }
 }

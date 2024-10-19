@@ -1,4 +1,6 @@
-﻿using Raftel.Core;
+﻿using Microsoft.Extensions.Configuration;
+using NSubstitute;
+using Raftel.Core;
 
 namespace Raftel.Core.Tests.Events;
 
@@ -11,7 +13,7 @@ public class DomainEventPublisherTest
     {
         var serviceCollection = new ServiceCollection();
         var dddModule = new DddModule();
-        dddModule.ConfigureCustomServices(serviceCollection);
+        dddModule.ConfigureCustomServices(serviceCollection, Substitute.For<IConfiguration>());
         serviceCollection.AddTransient<IDomainEventHandler<TestDomainEvent>, TestDomainEventHandler>();
 
         var serviceProvider = serviceCollection.BuildServiceProvider();
@@ -28,7 +30,7 @@ public class DomainEventPublisherTest
     {
         var serviceCollection = new ServiceCollection();
         var dddModule = new DddModule();
-        dddModule.ConfigureCustomServices(serviceCollection);
+        dddModule.ConfigureCustomServices(serviceCollection, Substitute.For<IConfiguration>());
         serviceCollection.AddTransient<IDomainEventHandler<TestDomainEvent>, TestDomainEventHandler>();
 
         var serviceProvider = serviceCollection.BuildServiceProvider();

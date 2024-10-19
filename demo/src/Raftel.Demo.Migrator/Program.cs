@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Raftel.Data;
@@ -15,7 +16,11 @@ internal class Program
         var host = Host.CreateDefaultBuilder(args)
             .ConfigureServices((hostContext, services) =>
             {
-                services.AddRaftelApplication<DemoApplication>();
+                var configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
+                services.AddRaftelApplication<DemoApplication>(configuration);
 
                 var seeders = typeof(Program).Assembly
                     .GetTypes()
@@ -23,7 +28,6 @@ internal class Program
                     .ToList();
 
                 seeders.ForEach(seeder => services.AddSingleton(typeof(ISeeder), seeder));
-
             })
             .Build();
 

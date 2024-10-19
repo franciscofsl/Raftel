@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Cqrs.Commands;
 using Raftel.Application.Cqrs.Queries;
@@ -9,7 +10,7 @@ namespace Raftel.Application.Cqrs;
 [ExcludeFromCodeCoverage]
 public class CqrsModule : RaftelModule
 {
-    public override void ConfigureCustomServices(IServiceCollection services)
+    public override void ConfigureCustomServices(IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<ICommandDispatcher, CommandDispatcher>();
         services.AddScoped<IQueryDispatcher, QueryDispatcher>();

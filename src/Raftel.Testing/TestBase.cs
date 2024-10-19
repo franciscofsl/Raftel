@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Raftel.Shared.Modules;
 
 namespace Raftel.Testing;
@@ -8,7 +9,13 @@ public abstract class TestBase<TRaftelApplication> where TRaftelApplication : Ra
     protected TestBase()
     {
         var services = new ServiceCollection();
-        Application = services.AddRaftelApplication<TRaftelApplication>();
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
+
+        services.AddSingleton<IConfiguration>(configuration);
+        Application = services.AddRaftelApplication<TRaftelApplication>(configuration);
         ServiceProvider = services.BuildServiceProvider();
     }
 

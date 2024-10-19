@@ -1,21 +1,22 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Raftel.Shared.Modules;
 
 public abstract class RaftelModule
 {
-    public virtual void ConfigureCustomServices(IServiceCollection services)
+    public virtual void ConfigureCustomServices(IServiceCollection services, IConfiguration configuration)
     {
     }
 
-    public void ConfigureServices(IServiceCollection services)
+    public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
-        ConfigureCustomServices(services);
+        ConfigureCustomServices(services, configuration);
         var modules = GetModules();
 
         foreach (var module in modules)
         {
-            module.ConfigureServices(services);
+            module.ConfigureServices(services, configuration);
         }
     }
 

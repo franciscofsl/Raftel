@@ -1,8 +1,10 @@
-﻿using Raftel.Shared.Modules;
+﻿using Raftel.Infrastructure.BlobStorage;
+using Raftel.Shared.Modules;
 
 namespace Raftel.Infrastructure;
 
-[ModulesToInclude(typeof(OutboxModule))]
+[ModulesToInclude(typeof(OutboxModule),
+    typeof(BlobStorageModule))]
 public class RaftelInfrastructureModule : RaftelModule
 {
     
