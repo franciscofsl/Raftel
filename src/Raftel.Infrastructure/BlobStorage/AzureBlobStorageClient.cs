@@ -26,4 +26,9 @@ public class AzureBlobStorageClient : IAzureBlobStorageClient
         var blobClient = _blobContainerClient.GetBlobClient(blobName);
         return await blobClient.ExistsAsync();
     }
+
+    public Task DeleteAsync(string blobName)
+    {
+        return _blobContainerClient.DeleteBlobIfExistsAsync(blobName);
+    }
 }
