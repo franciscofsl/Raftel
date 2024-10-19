@@ -49,11 +49,6 @@ namespace Raftel.Data.DbContexts.BlobStorage
                 .HasMaxLength(255);
 
             modelBuilder.Entity<Document>()
-                .Property(d => d.Extension)
-                .IsRequired()
-                .HasMaxLength(10);
-
-            modelBuilder.Entity<Document>()
                 .Property(d => d.Size)
                 .IsRequired();
 

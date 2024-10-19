@@ -55,8 +55,8 @@ public class FolderTests
     public void AddDocument_ShouldAddDocument_WhenValidParametersAreProvided()
     {
         var folder = Folder.Create("Documents");
-        var blobFileId = Guid.NewGuid();
-        var result = folder.AddDocument("Document1", ".txt", 1024, blobFileId);
+        var content = "Test content for blob storage."u8.ToArray();
+        var result = folder.AddDocument("Document1", content);
 
         result.Success.Should().BeTrue();
         result.Value.Should().NotBeNull();
@@ -68,8 +68,9 @@ public class FolderTests
     public void RemoveDocument_ShouldRemoveDocument_WhenDocumentExists()
     {
         var folder = Folder.Create("Documents");
-        var blobFileId = Guid.NewGuid();
-        var document = folder.AddDocument("Document1", ".txt", 1024, blobFileId).Value;
+
+        var content = "Test content for blob storage."u8.ToArray();
+        var document = folder.AddDocument("Document1", content).Value;
 
         folder.RemoveDocument(document);
 
@@ -81,7 +82,8 @@ public class FolderTests
     {
         var folder = Folder.Create("Documents");
         var folder2 = Folder.Create("Documents 2");
-        var nonExistentDocument = folder2.AddDocument("NonExistentDocument", ".txt", 0, Guid.NewGuid());
+        var content = "Test content for blob storage."u8.ToArray();
+        var nonExistentDocument = folder2.AddDocument("NonExistentDocument", content);
 
         folder.RemoveDocument(nonExistentDocument.Value);
 

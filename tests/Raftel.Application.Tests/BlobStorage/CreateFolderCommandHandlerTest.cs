@@ -11,7 +11,7 @@ public class CreateFolderCommandHandlerTest
     {
         var folderStore = Substitute.For<IFolderStore>();
         var handler = new CreateFolderCommandHandler(folderStore);
-        
+
         var result = await handler.Handle(new CreateFolderCommand("Test"));
         result.Success.Should().BeTrue();
         folderStore.Received(1).AddAsync(Arg.Any<Folder>());

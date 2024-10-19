@@ -1,4 +1,5 @@
 ﻿using Raftel.Core.BaseTypes;
+using Raftel.Core.Storage.Events;
 using Raftel.Shared.GuidGenerators;
 using Raftel.Shared.Results;
 
@@ -49,9 +50,9 @@ public sealed class Folder : AggregateRoot<Guid>
         }
     }
 
-    public Result<Document> AddDocument(string name, string extension, long size, Guid blobFileId)
+    public Result<Document> AddDocument(string name, byte[] content)
     {
-        var document = Document.Create(this, name, extension, size, blobFileId);
+        var document = Document.Create(this, name, content);
         _documents.Add(document);
         return Result.Ok(document);
     }
