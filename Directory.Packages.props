@@ -5,6 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Aspire.Hosting.SqlServer" Version="8.2.1" />
+    <PackageVersion Include="Azure.Storage.Blobs" Version="12.22.2" />
     <PackageVersion Include="FluentAssertions" Version="6.12.1" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.10" />
