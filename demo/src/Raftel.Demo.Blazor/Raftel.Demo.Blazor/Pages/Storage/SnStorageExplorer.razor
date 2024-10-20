@@ -26,14 +26,24 @@
             </button>
         </div>
 
-        <div class="file-explorer-files">
+        <div class="file-explorer-files"
+             @ondrop="OnDrop"
+             @ondragover="OnDragOver"
+             @ondragleave="OnDragLeave"
+             @ondrop:preventDefault="true"
+             @ondragover:preventDefault="true"
+             style="border: 2px dashed #ccc; padding: 20px;">
 
             @foreach (var folderDto in _folders)
             {
                 <FolderCard Folder="folderDto"/>
             }
-
-
+            @foreach (var fileDto in _files)
+            {
+                <p>@fileDto.Name</p>
+            }
         </div>
+
+
     </div>
 </div>
