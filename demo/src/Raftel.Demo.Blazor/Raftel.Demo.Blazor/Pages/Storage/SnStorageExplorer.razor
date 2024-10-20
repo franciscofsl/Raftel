@@ -1,0 +1,39 @@
+﻿@inherits Raftel.Blazor.SnComponentBase
+
+<div class="file-explorer">
+    <div class="file-explorer-toolbar">
+        <button>
+            wefwef
+        </button>
+        <button>
+            wefwef
+        </button>
+        <button>
+            wefwef
+        </button>
+    </div>
+
+    <div class="file-explorer-container">
+        <div class="file-explorer-menu">
+            <button>
+                wefwef
+            </button>
+            <button>
+                wefwef
+            </button>
+            <button>
+                wefwef
+            </button>
+        </div>
+
+        <div class="file-explorer-files">
+
+            @foreach (var folderDto in _folders)
+            {
+                <FolderCard Folder="folderDto"/>
+            }
+
+
+        </div>
+    </div>
+</div>

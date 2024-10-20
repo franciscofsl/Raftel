@@ -12,6 +12,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+ColorPalette.Application.Main = "#702775";
+ColorPalette.Application.Hover = "#b891b8";
+
 builder.Services.AddScoped(sp =>
     new HttpClient
     {

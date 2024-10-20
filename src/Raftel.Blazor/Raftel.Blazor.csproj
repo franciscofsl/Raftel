@@ -51,6 +51,7 @@
 
     <ItemGroup>
       <Folder Include="Services\LocalStorage\" />
+      <Folder Include="Storage\" />
     </ItemGroup>
 
     <ItemGroup>

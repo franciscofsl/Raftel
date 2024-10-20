@@ -4,7 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Raftel.Core.Auditing;
 using Raftel.Core.Contracts;
 using Raftel.Core.Localization;
+using Raftel.Core.Storage;
 using Raftel.Data.DbContexts.Auditing;
+using Raftel.Data.DbContexts.BlobStorage;
 using Raftel.Data.Outbox;
 using Raftel.Data.Repositories;
 using Raftel.Data.Repositories.Localization;
@@ -28,6 +30,7 @@ public abstract class EfCoreModule : RaftelModule
         services.AddSingleton<ConvertDomainEventsToOutboxMessagesInterceptor>();
         services.AddTransient<AuditChangesStore>();
         services.AddTransient<IEntityChangesReader, EntityChangesReader>();
+        services.AddTransient<IFolderStore, FolderStore>();
 
         services.Scan(scan => scan
             .FromAssemblies(AssembliesToLoadRepositories)
