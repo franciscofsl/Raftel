@@ -1,25 +1,29 @@
-﻿using Microsoft.AspNetCore.Components.Web;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using Raftel.Application.Contracts.Storage;
+using Raftel.Blazor.Shared.Storage;
+using Raftel.Shared.Extensions;
 
 namespace Raftel.Demo.Blazor.Pages.Storage;
 
 public partial class SnStorageExplorer
 {
-    private List<FolderDto> _folders = Enumerable
-        .Range(0, 5)
-        .Select(_ => new FolderDto()
-        {
-            Name = $"Folder {_}",
-        })
-        .ToList();
+    private List<FolderDto> _folders = new();
+    private List<FileDto> _files = new();
 
-    private List<FileDto> _files = Enumerable
-        .Range(0, 0)
-        .Select(_ => new FileDto()
-        {
-            Name = $"File {_}",
-        })
-        .ToList();
+    [Inject] private IFolderService FolderService { get; set; }
 
+    protected override Task OnInitializedAsync()
+    {
+        LoadFoldersAsync().Forget();
+        return base.OnInitializedAsync();
+    }
+
+    private async Task LoadFoldersAsync()
+    {
+        var folders = await FolderService.GetListAsync(new FolderFilterDto());
+        _folders = folders.Items;
+    }
 
     private void OnDragOver(DragEventArgs e)
     {
@@ -53,12 +57,14 @@ public partial class SnStorageExplorer
             }
         }
     }
-}
 
-public class FolderDto
-{
-    public string Name { get; set; }
-    public bool IsSelected { get; set; }
+    private Task NewFolder()
+    {
+        return FolderService.CreateAsync(new CreateFolderDto()
+        {
+            Name = $"NEW FOLDER AT {DateTime.Now}"
+        });
+    }
 }
 
 public class FileDto
