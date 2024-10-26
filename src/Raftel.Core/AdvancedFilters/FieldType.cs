@@ -2,4 +2,8 @@
 
 public enum FieldType
 {
+    String,
+    Boolean,
+    Number,
+    Date
 }
