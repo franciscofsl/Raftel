@@ -37,7 +37,7 @@ public class AdvancedFilterTest
     }
 
     [Fact]
-    public void AdvancedFilter_ShouldFilterForTextEndsWith_IfNameStartsWith()
+    public void AdvancedFilter_ShouldFilterForTextEndsWith_IfNameEndsWith()
     {
         var filter = AdvancedFilter
             .ForModel<Pirate>()
@@ -53,11 +53,43 @@ public class AdvancedFilterTest
     }
 
     [Fact]
-    public void AdvancedFilter_ShouldNotFilterForTextEndsWith_IfNameNotStartsWith()
+    public void AdvancedFilter_ShouldNotFilterForTextEndsWith_IfNameNotEndsWith()
     {
         var filter = AdvancedFilter
             .ForModel<Pirate>()
             .EndsWith(_ => _.Name, "ro")
+            .Build();
+
+        var pirate = new Pirate()
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForTextContains_IfNameContains()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .Contains(_ => _.Name, "ff")
+            .Build();
+
+        var pirate = new Pirate()
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForTextContains_IfNameNotContains()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .Contains(_ => _.Name, "ro")
             .Build();
 
         var pirate = new Pirate()
