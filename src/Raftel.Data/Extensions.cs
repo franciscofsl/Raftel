@@ -7,7 +7,7 @@ using Raftel.Data.Outbox;
 
 namespace Raftel.Data;
 
-public static class Extensions
+public static class ServiceCollectionExtensions
 {
     public static void AddRaftelDbContext<TDbContext>(this IServiceCollection services, string connectionString = null)
         where TDbContext : DbContext, IDbContext
