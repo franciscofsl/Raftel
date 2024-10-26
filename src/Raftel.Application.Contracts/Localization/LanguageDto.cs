@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace Raftel.Application.Contracts.Localization;
+﻿namespace Raftel.Application.Contracts.Localization;
 
 [DataContract]
 public class LanguageDto
