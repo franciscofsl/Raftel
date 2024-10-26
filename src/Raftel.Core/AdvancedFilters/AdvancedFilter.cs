@@ -42,6 +42,12 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
         return AddRule(Operator.Equal, expression, FieldType.String, value, condition);
     }
 
+    public AdvancedFilter<TModel> NotEqual(Expression<Func<TModel, object>> expression, string value,
+        Condition condition = Condition.And)
+    {
+        return AddRule(Operator.NotEqual, expression, FieldType.String, value, condition);
+    }
+
     public Func<TModel, bool> Build()
     {
         var parameter = Expression.Parameter(typeof(TModel), "model");
@@ -90,29 +96,27 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
     private Expression CreateExpression(ParameterExpression parameter, Rule rule)
     {
         var member = Expression.Property(parameter, rule.Field);
+        var constantValue = Expression.Constant(rule.Value.ToString());
 
-        switch (rule.Operator)
+        return rule.Operator switch
         {
-            case Operator.StartsWith:
-                return Expression.Call(member,
-                    typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }),
-                    Expression.Constant(rule.Value.ToString()));
-            case Operator.EndsWith:
-                return Expression.Call(member,
-                    typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }),
-                    Expression.Constant(rule.Value.ToString()));
-            case Operator.Contains:
-                return Expression.Call(member,
-                    typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }),
-                    Expression.Constant(rule.Value.ToString()));
-            case Operator.Equal:
-                return Expression.Call(member,
-                    typeof(string).GetMethod(nameof(string.Equals), new[] { typeof(string) }),
-                    Expression.Constant(rule.Value.ToString()));
+            Operator.StartsWith => Expression.Call(member,
+                typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }), constantValue),
+            
+            Operator.EndsWith => Expression.Call(member,
+                typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }), constantValue),
 
-            default:
-                throw new NotImplementedException($"Operator {rule.Operator} is not implemented.");
-        }
+            Operator.Contains => Expression.Call(member,
+                typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }), constantValue),
+
+            Operator.Equal => Expression.Call(member,
+                typeof(string).GetMethod(nameof(string.Equals), new[] { typeof(string) }), constantValue),
+
+            Operator.NotEqual => Expression.Not(Expression.Call(member,
+                typeof(string).GetMethod(nameof(string.Equals), new[] { typeof(string) }), constantValue)),
+
+            _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
+        };
     }
 
     private Expression CombineExpressions(Expression left, Expression right, Condition condition)
