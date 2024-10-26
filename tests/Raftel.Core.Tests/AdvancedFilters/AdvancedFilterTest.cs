@@ -100,6 +100,38 @@ public class AdvancedFilterTest
         filter(pirate).Should().BeFalse();
     }
 
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForTextEqual_IfNameEqual()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .Equal(_ => _.Name, "Luffy")
+            .Build();
+
+        var pirate = new Pirate()
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForTextEqual_IfNameNotEqual()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .Equal(_ => _.Name, "Zoro")
+            .Build();
+
+        var pirate = new Pirate()
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeFalse();
+    }
+
     private class Pirate
     {
         public string Name { get; set; }

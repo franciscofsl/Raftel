@@ -29,11 +29,17 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
     {
         return AddRule(Operator.EndsWith, expression, FieldType.String, value, condition);
     }
-    
+
     public AdvancedFilter<TModel> Contains(Expression<Func<TModel, object>> expression, string value,
         Condition condition = Condition.And)
     {
         return AddRule(Operator.Contains, expression, FieldType.String, value, condition);
+    }
+
+    public AdvancedFilter<TModel> Equal(Expression<Func<TModel, object>> expression, string value,
+        Condition condition = Condition.And)
+    {
+        return AddRule(Operator.Equal, expression, FieldType.String, value, condition);
     }
 
     public Func<TModel, bool> Build()
@@ -88,15 +94,22 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
         switch (rule.Operator)
         {
             case Operator.StartsWith:
-                return Expression.Call(member, typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }),
+                return Expression.Call(member,
+                    typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }),
                     Expression.Constant(rule.Value.ToString()));
             case Operator.EndsWith:
-                return Expression.Call(member, typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }),
+                return Expression.Call(member,
+                    typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }),
                     Expression.Constant(rule.Value.ToString()));
             case Operator.Contains:
-                return Expression.Call(member, typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }),
+                return Expression.Call(member,
+                    typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }),
                     Expression.Constant(rule.Value.ToString()));
-             
+            case Operator.Equal:
+                return Expression.Call(member,
+                    typeof(string).GetMethod(nameof(string.Equals), new[] { typeof(string) }),
+                    Expression.Constant(rule.Value.ToString()));
+
             default:
                 throw new NotImplementedException($"Operator {rule.Operator} is not implemented.");
         }
