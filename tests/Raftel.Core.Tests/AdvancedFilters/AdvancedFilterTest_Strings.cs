@@ -388,6 +388,37 @@ public partial class AdvancedFilterTest
         filter(pirate).Should().BeFalse();
     }
 
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForNull_IfPropertyIsNull()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .Null(_ => _.Name)
+            .Build();
+
+        var pirate = new Pirate
+        {
+            Name = null
+        };
+
+        filter(pirate).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForNull_IfPropertyIsNotNull()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .Null(_ => _.Name)
+            .Build();
+
+        var pirate = new Pirate
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeFalse();
+    }
     private class Pirate
     {
         public string Name { get; set; }
