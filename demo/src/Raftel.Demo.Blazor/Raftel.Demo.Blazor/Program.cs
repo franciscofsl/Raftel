@@ -1,6 +1,7 @@
 using Raftel.Blazor;
 using Raftel.Blazor.Menu;
 using Raftel.Blazor.Shared.Localization;
+using Raftel.Blazor.Shared.Storage;
 using Raftel.Demo.Blazor;
 using Raftel.Demo.Blazor.Navigation;
 using _Imports = Raftel.Demo.Blazor.Client._Imports;
@@ -11,6 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+ColorPalette.Application.Main = "#702775";
+ColorPalette.Application.Hover = "#b891b8";
 
 builder.Services.AddScoped(sp =>
     new HttpClient
@@ -25,6 +29,7 @@ builder.Services.AddTransient<WeatherForecastRestClient>();
 builder.AddRaftelBlazor();
 builder.Services.AddGrpcService<ILanguageService>();
 builder.Services.AddGrpcService<ITextResourceService>();
+builder.Services.AddGrpcService<IFolderService>();
 
 var app = builder.Build();
 

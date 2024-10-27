@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Data;
 using Raftel.Demo.Core.Samples;
@@ -10,9 +11,9 @@ namespace Raftel.Demo.Data;
 [ExcludeFromCodeCoverage]
 public class DemoDataModule : EfCoreModule
 {
-    public override void ConfigureCustomServices(IServiceCollection services)
+    public override void ConfigureCustomServices(IServiceCollection services, IConfiguration configuration)
     {
-        base.ConfigureCustomServices(services);
+        base.ConfigureCustomServices(services, configuration);
         services.AddRaftelDbContext<DemoDbContext>();
         services.AddTransient<ISamplesRepository, SamplesRepository>();
     }

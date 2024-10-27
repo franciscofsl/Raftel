@@ -1,4 +1,5 @@
-﻿using Raftel.Shared.Modules;
+﻿using Microsoft.Extensions.Configuration;
+using Raftel.Shared.Modules;
 
 namespace Raftel.Core.Tests.Modules;
 
@@ -26,9 +27,5 @@ public class ModulesToIncludeTests
     [ModulesToInclude(typeof(TestRaftelModule))]
     private class TestRaftelModule : RaftelModule
     {
-        public override void ConfigureCustomServices(IServiceCollection services)
-        {
-            base.ConfigureCustomServices(services);
-        }
     }
 }

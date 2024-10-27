@@ -1,5 +1,3 @@
-using System.Runtime.Serialization;
-
 namespace Raftel.Application.Contracts.Localization;
 
 [DataContract]

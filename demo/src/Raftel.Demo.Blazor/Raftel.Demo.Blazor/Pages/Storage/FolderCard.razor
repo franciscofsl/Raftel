@@ -1,0 +1,69 @@
+﻿@using Raftel.Application.Contracts.Storage
+@if (Folder != null)
+{
+    <div class="folder-card">
+        <div class="folder"></div>
+        <div class="metadata">
+            <span class="file-name">@Folder.Name</span>
+        </div>
+        <div class="folder-selected-state" @onclick="@SelectedStateChanged">
+            <i class="@_selectedIcon"></i>
+        </div>
+    </div>
+}
+
+@code {
+    private const string UnChecked = "far fa-check-circle";
+    private const string Checked = "fas fa-check-circle";
+
+    private string _selectedIcon = UnChecked;
+
+    [Parameter] public FolderDto Folder { get; set; }
+
+    public static DateTime GenerateRandomDateTime()
+    {
+        Random random = new Random();
+        return DateTime.MinValue.AddSeconds(random.Next());
+    }
+
+    public static string GetRelativeTime()
+    {
+        var fecha = GenerateRandomDateTime();
+        var ts = DateTime.UtcNow - fecha.ToUniversalTime(); // Diferencia entre ahora y la fecha dada
+        if (ts.TotalSeconds < 60)
+        {
+            return $"Hace {(int)ts.TotalSeconds} segundos";
+        }
+
+        if (ts.TotalMinutes < 60)
+        {
+            return $"Hace {(int)ts.TotalMinutes} minutos";
+        }
+
+        if (ts.TotalHours < 24)
+        {
+            return $"Hace {(int)ts.TotalHours} horas";
+        }
+
+        if (ts.TotalDays < 30)
+        {
+            return $"Hace {(int)ts.TotalDays} días";
+        }
+
+        if (ts.TotalDays < 365)
+        {
+            return $"Hace {(int)(ts.TotalDays / 30)} meses";
+        }
+
+        return $"Hace {(int)(ts.TotalDays / 365)} años";
+    }
+
+    private void SelectedStateChanged()
+    {
+        Folder.IsSelected = !Folder.IsSelected;
+        _selectedIcon = Folder.IsSelected
+            ? Checked
+            : UnChecked;
+    }
+
+}

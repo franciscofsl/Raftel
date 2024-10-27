@@ -6,11 +6,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Raftel.Application\Raftel.Application.csproj" />
       <ProjectReference Include="..\Raftel.Core\Raftel.Core.csproj" />
       <ProjectReference Include="..\Raftel.Data\Raftel.Data.csproj" />
     </ItemGroup>
     
     <ItemGroup>
+      <PackageReference Include="Azure.Storage.Blobs" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
       <PackageReference Include="Quartz" />
       <PackageReference Include="Quartz.Extensions.Hosting" />
     </ItemGroup>

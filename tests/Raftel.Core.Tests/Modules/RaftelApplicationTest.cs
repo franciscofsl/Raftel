@@ -1,4 +1,6 @@
-﻿using Raftel.Shared.Modules;
+﻿using Microsoft.Extensions.Configuration;
+using NSubstitute;
+using Raftel.Shared.Modules;
 
 namespace Raftel.Core.Tests.Modules;
 
@@ -9,7 +11,7 @@ public class RaftelApplicationTest
     {
         var serviceCollection = new ServiceCollection();
 
-        var application = serviceCollection.AddRaftelApplication<FakeApplication>();
+        var application = serviceCollection.AddRaftelApplication<FakeApplication>(Substitute.For<IConfiguration>());
 
         application.Should().NotBeNull();
     }
@@ -17,11 +19,9 @@ public class RaftelApplicationTest
     [ModulesToInclude(typeof(FakeModule))]
     private class FakeApplication : RaftelApplication
     {
-        
     }
 
     private class FakeModule : RaftelModule
     {
-        
     }
 }

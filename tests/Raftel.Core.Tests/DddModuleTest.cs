@@ -1,4 +1,5 @@
-﻿using Raftel.Core;
+﻿using Microsoft.Extensions.Configuration;
+using NSubstitute;
 
 namespace Raftel.Core.Tests;
 
@@ -9,7 +10,7 @@ public class DddModuleTest
     {
         var serviceCollection = new ServiceCollection();
         var dddModule = new DddModule();
-        dddModule.ConfigureCustomServices(serviceCollection);
+        dddModule.ConfigureCustomServices(serviceCollection, Substitute.For<IConfiguration>());
 
         var serviceProvider = serviceCollection.BuildServiceProvider();
         var domainEventPublisher = serviceProvider.GetRequiredService<IDomainEventPublisher>();

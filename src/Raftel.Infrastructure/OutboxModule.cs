@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using Raftel.Infrastructure.BackgroundJobs;
 using Raftel.Shared.Modules;
@@ -7,7 +8,7 @@ namespace Raftel.Infrastructure;
 
 public sealed class OutboxModule : RaftelModule
 {
-    public override void ConfigureCustomServices(IServiceCollection services)
+    public override void ConfigureCustomServices(IServiceCollection services, IConfiguration configuration)
     {
         services.AddQuartz(configurator =>
         {

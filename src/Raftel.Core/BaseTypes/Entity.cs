@@ -2,7 +2,7 @@
 
 namespace Raftel.Core.BaseTypes;
 
-public abstract class Entity<TKey> : WithDomainEvents where TKey : EntityId
+public abstract class Entity<TKey> : WithDomainEvents
 {
     public TKey Id { get; protected init; }
 

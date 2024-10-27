@@ -1,4 +1,6 @@
-﻿using Raftel.Shared.Modules;
+﻿using Microsoft.Extensions.Configuration;
+using NSubstitute;
+using Raftel.Shared.Modules;
 
 namespace Raftel.Core.Tests.Modules;
 
@@ -10,7 +12,7 @@ public class RaftelModuleTest
         var module = new TestRaftelModule();
 
         FluentActions
-            .Invoking(() => module.ConfigureCustomServices(new ServiceCollection()))
+            .Invoking(() => module.ConfigureCustomServices(new ServiceCollection(), Substitute.For<IConfiguration>()))
             .Should()
             .NotThrow();
     }
@@ -21,7 +23,7 @@ public class RaftelModuleTest
         var module = new TestRaftelModule();
 
         FluentActions
-            .Invoking(() => module.ConfigureServices(new ServiceCollection()))
+            .Invoking(() => module.ConfigureServices(new ServiceCollection(), Substitute.For<IConfiguration>()))
             .Should()
             .NotThrow();
     }
@@ -43,7 +45,7 @@ public class RaftelModuleTest
         var module = new TestRaftelModuleWithAttribute();
 
         FluentActions
-            .Invoking(() => module.ConfigureServices(new ServiceCollection()))
+            .Invoking(() => module.ConfigureServices(new ServiceCollection(), Substitute.For<IConfiguration>()))
             .Should()
             .NotThrow();
     }

@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NSubstitute;
 using Raftel.Data.DbContexts;
 using Raftel.Shared.Modules;
 
@@ -47,9 +49,8 @@ public abstract class RaftelDbFixture<TDbContext> : IDisposable
 
     protected virtual void OnConfigureServices(IServiceCollection services)
     {
-        
     }
-    
+
     private void MigrateDbContext()
     {
         var dbContext = _serviceProvider.GetRequiredService<TDbContext>();
@@ -61,11 +62,11 @@ public abstract class RaftelDbFixture<TDbContext> : IDisposable
         var services = new ServiceCollection();
 
         var modulesToIncludeAttribute = GetType().GetCustomAttribute<ModulesToIncludeAttribute>();
-        modulesToIncludeAttribute.ConfigureSafeServices(services);
+        modulesToIncludeAttribute.ConfigureSafeServices(services, Substitute.For<IConfiguration>());
 
         OnConfigureServices(services);
         ConfigureDbContext(services);
-        
+
         return services.BuildServiceProvider();
     }
 
@@ -82,7 +83,7 @@ public abstract class RaftelDbFixture<TDbContext> : IDisposable
         var dbName = $"TestingDatabase-{Guid.NewGuid()}";
         var connectionString =
             $"Server=localhost,1433;Database={dbName};User=sa;Password=SqlServer_Docker2023;MultipleActiveResultSets=true;TrustServerCertificate=True;";
-        
+
         services.AddRaftelDbContext<TDbContext>(connectionString);
     }
 }

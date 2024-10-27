@@ -1,0 +1,26 @@
+﻿.file-explorer {
+    background: #fafafa;
+}
+
+.file-explorer-toolbar {
+}
+
+.file-explorer-container {
+    display: grid;
+    grid-template-columns: 275px 1fr;
+}
+
+.file-explorer-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.file-explorer-files {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 15px;
+}
+ 

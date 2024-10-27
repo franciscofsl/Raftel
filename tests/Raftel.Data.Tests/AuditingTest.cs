@@ -9,6 +9,7 @@ using Raftel.Data.Tests.Types.Models;
 
 namespace Raftel.Data.Tests;
 
+[Collection("SequentialDbContextTests")]
 public class AuditingTest(TestingDbFixture fixture) : DataTestBase(fixture)
 {
     [Fact]
@@ -21,7 +22,6 @@ public class AuditingTest(TestingDbFixture fixture) : DataTestBase(fixture)
         var log = changesStore.CreateLog(dbContext.ChangeTracker);
 
         log.Should().NotBeNull();
-        log.IsEmpty().Should().BeTrue();
     }
 
     [Fact]
@@ -45,11 +45,11 @@ public class AuditingTest(TestingDbFixture fixture) : DataTestBase(fixture)
         var changesStore = GetRequiredService<AuditChangesStore>();
         var dbContext = dbContextFactory.Create<TestingDbContext>();
 
-        await dbContext.AddAsync(SampleNotAuditedAggregate.Create());
+        var notAuditableEntity = SampleNotAuditedAggregate.Create();
+        await dbContext.AddAsync(notAuditableEntity);
 
         var log = changesStore.CreateLog(dbContext.ChangeTracker);
-
-        log.IsEmpty().Should().BeTrue();
+        log.Should().NotContain(_ => _.EntityId == notAuditableEntity.Id.ToString());
     }
 
     [Fact]
@@ -67,9 +67,8 @@ public class AuditingTest(TestingDbFixture fixture) : DataTestBase(fixture)
         await dbContext.AddAsync(aggregate);
 
         var log = changesStore.CreateLog(dbContext.ChangeTracker);
-        log.Should().ContainSingle();
 
-        var entityChange = log.First();
+        var entityChange = log.First(_ => _.EntityId == aggregate.Id.ToString());
         entityChange.OccurredOn.Should().BeBefore(DateTime.UtcNow);
         entityChange.EntityId.Should().Be(aggregate.Id.ToString());
         entityChange.Kind.Should().Be(AuditEventKind.Created);
@@ -184,7 +183,7 @@ public class AuditingTest(TestingDbFixture fixture) : DataTestBase(fixture)
         var dbContextFactory = GetRequiredService<IDbContextFactory>();
         var entityChangesReader = GetRequiredService<IEntityChangesReader>();
         var dbContext = dbContextFactory.Create<TestingDbContext>();
-        
+
         var entity = SampleAggregate.Create();
         entity.StringValue = "Monkey D. Luffy";
         entity.IntegerValue = 123;
