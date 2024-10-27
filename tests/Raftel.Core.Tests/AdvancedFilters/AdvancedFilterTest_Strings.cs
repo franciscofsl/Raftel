@@ -355,6 +355,39 @@ public partial class AdvancedFilterTest
 
         filter(pirate).Should().BeFalse();
     }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForTextNotEmpty_IfNameIsNotEmpty()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .NotEmpty(_ => _.Name)
+            .Build();
+
+        var pirate = new Pirate
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForTextNotEmpty_IfNameIsEmpty()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .NotEmpty(_ => _.Name)
+            .Build();
+
+        var pirate = new Pirate
+        {
+            Name = string.Empty
+        };
+
+        filter(pirate).Should().BeFalse();
+    }
+
     private class Pirate
     {
         public string Name { get; set; }
