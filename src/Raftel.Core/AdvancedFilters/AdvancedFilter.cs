@@ -78,6 +78,11 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
         return AddRule(Operator.NotIn, expression, FieldType.String, values, condition);
     }
 
+    public AdvancedFilter<TModel> Empty(Expression<Func<TModel, object>> expression,
+        Condition condition = Condition.And)
+    {
+        return AddRule(Operator.Empty, expression, FieldType.String, null, condition);
+    }
     public Func<TModel, bool> Build()
     {
         var parameter = Expression.Parameter(typeof(TModel), "model");
@@ -126,7 +131,8 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
     private Expression CreateExpression(ParameterExpression parameter, Rule rule)
     {
         var member = Expression.Property(parameter, rule.Field);
-        var constantValue = Expression.Constant(rule.Value.ToString());
+        var constantValue = Expression.Constant(rule.Value?.ToString());
+        var constantEmptyString = Expression.Constant(string.Empty);
 
         return rule.Operator switch
         {
@@ -159,6 +165,7 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
 
             Operator.NotIn => Expression.Not(Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains),
                 new[] { typeof(string) }, Expression.Constant(rule.Value), member)),
+            Operator.Empty => Expression.Equal(member, constantEmptyString),
 
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
         };
