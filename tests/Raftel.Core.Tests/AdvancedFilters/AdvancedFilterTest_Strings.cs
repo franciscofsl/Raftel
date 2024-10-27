@@ -507,15 +507,14 @@ public partial class AdvancedFilterBuilderTest
             .ForModel<Pirate>()
             .And(b => b.Equal(p => p.Name, "Nami"))
             .And(p => p.StartsWith(p2 => p2.LastName, "V"))
-            .Or(p => p.NotNull(p2 => p2.LastName));
+            .Or(p => p.NotNull(p2 => p2.LastName))
+            .Build();
 
-        var nami = _pirates[2]; // Nami
-        var sanji = _pirates[3]; // Sanji
-        var franky = _pirates[6]; // Franky
+        var pirates = _pirates.Where(filter).ToList();
 
-        filter.Build()(nami).Should().BeTrue(); // Nami should match (Name is Nami)
-        filter.Build()(sanji).Should().BeTrue(); // Sanji should match (LastName is not null)
-        filter.Build()(franky).Should().BeTrue(); // Franky should match (LastName is not null)
+        pirates.Should().Contain(_ => _.Name == "Nami");
+        pirates.Should().Contain(_ => _.Name == "Sanji");
+        pirates.Should().Contain(_ => _.Name == "Franky");
     }
 
     [Fact]
