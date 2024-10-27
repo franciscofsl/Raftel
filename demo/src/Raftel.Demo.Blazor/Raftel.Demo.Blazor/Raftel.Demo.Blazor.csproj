@@ -10,8 +10,8 @@
     <ItemGroup>
         <PackageReference Include="Syncfusion.Blazor" />
         <ProjectReference Include="..\..\..\..\src\Raftel.Blazor\Raftel.Blazor.csproj" />
-        <ProjectReference Include="..\Raftel.Demo.Blazor.Client\Raftel.Demo.Blazor.Client.csproj"/>
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.6"/>
+        <ProjectReference Include="..\Raftel.Demo.Blazor.Client\Raftel.Demo.Blazor.Client.csproj" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
     </ItemGroup>
 
     <ItemGroup>

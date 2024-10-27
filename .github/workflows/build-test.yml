@@ -17,9 +17,13 @@ jobs:
         uses: actions/setup-dotnet@v1.7.2
         with:
           dotnet-version: 8.0.x
+      - name: Install required workloads
+        run: |
+          dotnet workload install aspire
       - name: Start dependencies (docker-compose)
         run: |
-          docker compose up -d
+          docker compose -f ./docker-compose.yml up -d
+        working-directory: ${{env.working-directory}}
       - name: Wait for SQL Server container
         run: sleep 30s
         shell: bash

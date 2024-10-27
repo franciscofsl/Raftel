@@ -44,7 +44,7 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"franciscofsl_Sawnet" /o:"franciscofsl" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.coverage.exclusions=**/src/Sawnet.Blazor/**,**/tests/**,**/cli/**,**/libs/src/Sawnet.Blazor/**,**/libs/src/Sawnet.Testing/** /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
           dotnet tool install --global dotnet-coverage
-          docker-compose up -d
+          docker compose -f ./docker-compose.yml up -d
           Start-Sleep -s 30
           dotnet clean
           dotnet build --no-incremental
