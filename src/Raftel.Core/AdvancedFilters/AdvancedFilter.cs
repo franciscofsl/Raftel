@@ -48,6 +48,12 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
         return AddRule(Operator.Contains, expression, FieldType.String, value, condition);
     }
 
+    public AdvancedFilter<TModel> NotContains(Expression<Func<TModel, object>> expression, string value,
+        Condition condition = Condition.And)
+    {
+        return AddRule(Operator.NotContains, expression, FieldType.String, value, condition);
+    }
+
     public AdvancedFilter<TModel> Equal(Expression<Func<TModel, object>> expression, string value,
         Condition condition = Condition.And)
     {
@@ -126,6 +132,9 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
 
             Operator.Contains => Expression.Call(member,
                 typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }), constantValue),
+            
+            Operator.NotContains => Expression.Not(Expression.Call(member,
+                typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }), constantValue)),
 
             Operator.Equal => Expression.Call(member,
                 typeof(string).GetMethod(nameof(string.Equals), new[] { typeof(string) }), constantValue),
