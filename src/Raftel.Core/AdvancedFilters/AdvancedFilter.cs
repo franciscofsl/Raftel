@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
-
-namespace Raftel.Core.AdvancedFilters;
+using Raftel.Core.AdvancedFilters;
 
 public class AdvancedFilter
 {
@@ -14,91 +13,114 @@ public class AdvancedFilter
     }
 }
 
-public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
+public class AdvancedFilter<TModel>
 {
     private List<Rule> _rules = new();
+    private Condition _currentCondition;
 
-    public AdvancedFilter<TModel> StartsWith(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
+    public AdvancedFilter(Condition condition = Condition.And)
     {
-        return AddRule(Operator.StartsWith, expression, FieldType.String, value, condition);
+        _currentCondition = condition;
     }
 
-    public AdvancedFilter<TModel> NotStartsWith(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> StartsWith(Expression<Func<TModel, object>> expression, string value)
     {
-        return AddRule(Operator.NotStartsWith, expression, FieldType.String, value, condition);
+        return AddRule(Operator.StartsWith, expression, FieldType.String, value);
     }
 
-    public AdvancedFilter<TModel> EndsWith(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> NotStartsWith(Expression<Func<TModel, object>> expression, string value)
     {
-        return AddRule(Operator.EndsWith, expression, FieldType.String, value, condition);
+        return AddRule(Operator.NotStartsWith, expression, FieldType.String, value);
     }
 
-    public AdvancedFilter<TModel> NotEndsWith(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> EndsWith(Expression<Func<TModel, object>> expression, string value)
     {
-        return AddRule(Operator.NotEndsWith, expression, FieldType.String, value, condition);
+        return AddRule(Operator.EndsWith, expression, FieldType.String, value);
     }
 
-    public AdvancedFilter<TModel> Contains(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> NotEndsWith(Expression<Func<TModel, object>> expression, string value)
     {
-        return AddRule(Operator.Contains, expression, FieldType.String, value, condition);
+        return AddRule(Operator.NotEndsWith, expression, FieldType.String, value);
     }
 
-    public AdvancedFilter<TModel> NotContains(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> Contains(Expression<Func<TModel, object>> expression, string value)
     {
-        return AddRule(Operator.NotContains, expression, FieldType.String, value, condition);
+        return AddRule(Operator.Contains, expression, FieldType.String, value);
     }
 
-    public AdvancedFilter<TModel> Equal(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> NotContains(Expression<Func<TModel, object>> expression, string value)
     {
-        return AddRule(Operator.Equal, expression, FieldType.String, value, condition);
+        return AddRule(Operator.NotContains, expression, FieldType.String, value);
     }
 
-    public AdvancedFilter<TModel> NotEqual(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> Equal(Expression<Func<TModel, object>> expression, string value)
     {
-        return AddRule(Operator.NotEqual, expression, FieldType.String, value, condition);
+        return AddRule(Operator.Equal, expression, FieldType.String, value);
     }
 
-    public AdvancedFilter<TModel> In(Expression<Func<TModel, object>> expression, string[] values,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> NotEqual(Expression<Func<TModel, object>> expression, string value)
     {
-        return AddRule(Operator.In, expression, FieldType.String, values, condition);
+        return AddRule(Operator.NotEqual, expression, FieldType.String, value);
     }
 
-    public AdvancedFilter<TModel> NotIn(Expression<Func<TModel, object>> expression, string[] values,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> In(Expression<Func<TModel, object>> expression, string[] values)
     {
-        return AddRule(Operator.NotIn, expression, FieldType.String, values, condition);
+        return AddRule(Operator.In, expression, FieldType.String, values);
     }
 
-    public AdvancedFilter<TModel> Empty(Expression<Func<TModel, object>> expression,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> NotIn(Expression<Func<TModel, object>> expression, string[] values)
     {
-        return AddRule(Operator.Empty, expression, FieldType.String, null, condition);
+        return AddRule(Operator.NotIn, expression, FieldType.String, values);
     }
 
-    public AdvancedFilter<TModel> NotEmpty(Expression<Func<TModel, object>> expression,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> Empty(Expression<Func<TModel, object>> expression)
     {
-        return AddRule(Operator.NotEmpty, expression, FieldType.String, null, condition);
+        return AddRule(Operator.Empty, expression, FieldType.String, null);
     }
 
-    public AdvancedFilter<TModel> Null(Expression<Func<TModel, object>> expression, Condition condition = Condition.And)
+    public AdvancedFilter<TModel> NotEmpty(Expression<Func<TModel, object>> expression)
     {
-        return AddRule(Operator.Null, expression, FieldType.String, null, condition);
+        return AddRule(Operator.NotEmpty, expression, FieldType.String, null);
     }
 
-    public AdvancedFilter<TModel> NotNull(Expression<Func<TModel, object>> expression,
-        Condition condition = Condition.And)
+    public AdvancedFilter<TModel> Null(Expression<Func<TModel, object>> expression)
     {
-        return AddRule(Operator.NotNull, expression, FieldType.String, null, condition);
+        return AddRule(Operator.Null, expression, FieldType.String, null);
+    }
+
+    public AdvancedFilter<TModel> NotNull(Expression<Func<TModel, object>> expression)
+    {
+        return AddRule(Operator.NotNull, expression, FieldType.String, null);
+    }
+
+    public AdvancedFilter<TModel> And(Expression<Func<AdvancedFilter<TModel>, AdvancedFilter<TModel>>> filterExpression)
+    {
+        var subFilter = filterExpression.Compile()(this);
+
+        var rules = subFilter._rules
+            .Select(_ => _ with
+            {
+                Condition = Condition.And
+            })
+            .ToList();
+        _rules.AddRange(rules);
+
+        return this;
+    }
+
+    public AdvancedFilter<TModel> Or(Expression<Func<AdvancedFilter<TModel>, AdvancedFilter<TModel>>> filterExpression)
+    {
+        var subFilter = filterExpression.Compile()(this);
+         
+        var rules = subFilter._rules
+            .Select(_ => _ with
+            {
+                Condition = Condition.Or
+            })
+            .ToList();
+        _rules.AddRange(rules);
+
+        return this;
     }
 
     public Func<TModel, bool> Build()
@@ -130,19 +152,11 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
     }
 
     private AdvancedFilter<TModel> AddRule(Operator operatorType, Expression<Func<TModel, object>> expression,
-        FieldType type, object value,
-        Condition condition = Condition.And)
+        FieldType type, object value)
     {
         var body = expression.Body as MemberExpression;
         var propertyName = body.Member.Name;
-        _rules.Add(new Rule(operatorType, propertyName, type, value, condition));
-        return this;
-    }
-
-    private AdvancedFilter<TModel> AddRule(Operator operatorType, string field, FieldType type, object value,
-        Condition condition = Condition.And)
-    {
-        _rules.Add(new Rule(operatorType, field, type, value, condition));
+        _rules.Add(new Rule(operatorType, propertyName, type, value, _currentCondition));
         return this;
     }
 
@@ -172,13 +186,12 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
             Operator.NotContains => Expression.Not(Expression.Call(member,
                 typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }), constantValue)),
 
-            Operator.Equal => Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.Equals), new[] { typeof(string) }), constantValue),
+            Operator.Equal => Expression.Equal(member, constantValue),
 
-            Operator.NotEqual => Expression.Not(Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.Equals), new[] { typeof(string) }), constantValue)),
+            Operator.NotEqual => Expression.Not(Expression.Equal(member, constantValue)),
 
-            Operator.In => Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains), new[] { typeof(string) },
+            Operator.In => Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains),
+                new[] { typeof(string) },
                 Expression.Constant(rule.Value), member),
 
             Operator.NotIn => Expression.Not(Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains),

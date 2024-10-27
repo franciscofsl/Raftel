@@ -452,6 +452,27 @@ public partial class AdvancedFilterTest
         filter(pirate).Should().BeFalse();
     }
 
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForCombinedConditions()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .Equal(_ => _.Name, "Chopper")
+            .And(_ => _.StartsWith(p => p.Name, "Sanji"))
+            .Or(_ => _.StartsWith(p => p.Name, "L"))
+            .Build();
+
+        var chopper = new Pirate { Name = "Chopper" };
+        var sanji = new Pirate { Name = "Sanji" };
+        var luffy = new Pirate { Name = "Luffy" };
+        var zoro = new Pirate { Name = "Zoro" };
+
+        filter(chopper).Should().BeTrue();
+        filter(sanji).Should().BeTrue();
+        filter(luffy).Should().BeTrue();
+        filter(zoro).Should().BeFalse();
+    }
+    
     private class Pirate
     {
         public string Name { get; set; }
