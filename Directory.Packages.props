@@ -4,8 +4,8 @@
         <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
     </PropertyGroup>
     <ItemGroup>
-
         <PackageVersion Include="Aspire.Hosting.AppHost" Version="8.2.1"/>
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.0"/>
         <PackageVersion Include="Aspire.Hosting.SqlServer" Version="8.2.1"/>
         <PackageVersion Include="Azure.Storage.Blobs" Version="12.22.2"/>
         <PackageVersion Include="coverlet.collector" Version="6.0.2"/>
