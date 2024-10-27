@@ -2,7 +2,7 @@
 
 namespace Raftel.Core.Tests.AdvancedFilters;
 
-public class AdvancedFilterTest
+public partial class AdvancedFilterTest
 {
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextStartsWith_IfNameStartsWith()
@@ -34,6 +34,38 @@ public class AdvancedFilterTest
         };
 
         filter(pirate).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForTextNotStartsWith_IfNameNotStartsWith()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .NotStartsWith(_ => _.Name, "Lu")
+            .Build();
+
+        var pirate = new Pirate()
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForTextNotStartsWith_IfNameStartsWith()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .NotStartsWith(_ => _.Name, "Zo")
+            .Build();
+
+        var pirate = new Pirate()
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeTrue();
     }
 
     [Fact]

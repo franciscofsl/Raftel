@@ -24,6 +24,12 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
         return AddRule(Operator.StartsWith, expression, FieldType.String, value, condition);
     }
 
+    public AdvancedFilter<TModel> NotStartsWith(Expression<Func<TModel, object>> expression, string value,
+        Condition condition = Condition.And)
+    {
+        return AddRule(Operator.NotStartsWith, expression, FieldType.String, value, condition);
+    }
+
     public AdvancedFilter<TModel> EndsWith(Expression<Func<TModel, object>> expression, string value,
         Condition condition = Condition.And)
     {
@@ -103,6 +109,9 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
             Operator.StartsWith => Expression.Call(member,
                 typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }), constantValue),
             
+            Operator.NotStartsWith => Expression.Not(Expression.Call(member,
+                typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }), constantValue)),
+
             Operator.EndsWith => Expression.Call(member,
                 typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }), constantValue),
 
