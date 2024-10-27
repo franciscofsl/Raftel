@@ -24,7 +24,7 @@
         <PackageReference Include="Scrutor" />
         <PackageReference Include="Syncfusion.Blazor" />
         <PackageReference Include="Syncfusion.Licensing" />
-        <PackageReference Include="Microsoft.AspNetCore" />
+        <PackageReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
 
     <ItemGroup>
