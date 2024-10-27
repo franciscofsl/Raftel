@@ -292,6 +292,38 @@ public partial class AdvancedFilterTest
         filter(pirate).Should().BeFalse();
     }
 
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForTextNotIn_IfNameNotInList()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .NotIn(_ => _.Name, new[] { "Luffy", "Zoro" })
+            .Build();
+
+        var pirate = new Pirate
+        {
+            Name = "Sanji"
+        };
+
+        filter(pirate).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForTextNotIn_IfNameInList()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .NotIn(_ => _.Name, new[] { "Luffy", "Zoro" })
+            .Build();
+
+        var pirate = new Pirate
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeFalse();
+    }
+
     private class Pirate
     {
         public string Name { get; set; }
