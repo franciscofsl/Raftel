@@ -3,10 +3,17 @@
 public enum Operator
 {
     StartsWith,
+    NotStartsWith,
     EndsWith,
+    NotEndsWith,
     Contains,
+    NotContains,
     Equal,
     NotEqual,
+    In,
+    NotIn,
+    Null,
+    NotNull,
     GreaterThan,
     LessThan,
     GreaterThanOrEqual,
@@ -15,5 +22,7 @@ public enum Operator
     IsFalse,
     DateEqual,
     DateBefore,
-    DateAfter
+    DateAfter,
+    Between,
+    NotBetween
 }
