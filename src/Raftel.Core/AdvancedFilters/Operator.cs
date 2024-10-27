@@ -12,6 +12,8 @@ public enum Operator
     NotEqual,
     In,
     NotIn,
+    Empty,
+    NotEmpty,
     Null,
     NotNull,
     GreaterThan,
