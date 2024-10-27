@@ -99,7 +99,39 @@ public partial class AdvancedFilterTest
 
         filter(pirate).Should().BeFalse();
     }
+    
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForTextNotEndsWith_IfNameEndsWith()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .NotEndsWith(_ => _.Name, "y")
+            .Build();
 
+        var pirate = new Pirate()
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForTextNotEndsWith_IfNameNotEndsWith()
+    {
+        var filter = AdvancedFilter
+            .ForModel<Pirate>()
+            .NotEndsWith(_ => _.Name, "ro")
+            .Build();
+
+        var pirate = new Pirate()
+        {
+            Name = "Luffy"
+        };
+
+        filter(pirate).Should().BeTrue();
+    }
+    
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextContains_IfNameContains()
     {
