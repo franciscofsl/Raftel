@@ -2,14 +2,27 @@
 
 namespace Raftel.Core.Tests.AdvancedFilters;
 
-public partial class AdvancedFilterTest
+public partial class AdvancedFilterBuilderTest
 {
+    private readonly List<Pirate> _pirates = new()
+    {
+        new Pirate { Name = "Monkey", LastName = "D. Luffy" },
+        new Pirate { Name = "Roronoa", LastName = "Zoro" },
+        new Pirate { Name = "Nami", LastName = "Swan" },
+        new Pirate { Name = "Sanji", LastName = "Vinsmoke" },
+        new Pirate { Name = "Tony", LastName = "Tony Chopper" },
+        new Pirate { Name = "Nico", LastName = "Robin" },
+        new Pirate { Name = "Franky", LastName = "N" },
+        new Pirate { Name = "Brook", LastName = "N" },
+        new Pirate { Name = "Jinbe", LastName = "N" }
+    };
+
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextStartsWith_IfNameStartsWith()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .StartsWith(_ => _.Name, "Lu")
+            .And(b => b.StartsWith(_ => _.Name, "Lu"))
             .Build();
 
         var pirate = new Pirate()
@@ -23,9 +36,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextStartsWith_IfNameNotStartsWith()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .StartsWith(_ => _.Name, "Zo")
+            .And(b => b.StartsWith(_ => _.Name, "Zo"))
             .Build();
 
         var pirate = new Pirate()
@@ -39,9 +52,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextNotStartsWith_IfNameNotStartsWith()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotStartsWith(_ => _.Name, "Lu")
+            .And(b => b.NotStartsWith(_ => _.Name, "Lu"))
             .Build();
 
         var pirate = new Pirate()
@@ -55,9 +68,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextNotStartsWith_IfNameStartsWith()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotStartsWith(_ => _.Name, "Zo")
+            .And(b => b.NotStartsWith(_ => _.Name, "Zo"))
             .Build();
 
         var pirate = new Pirate()
@@ -71,9 +84,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextEndsWith_IfNameEndsWith()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .EndsWith(_ => _.Name, "y")
+            .And(b => b.EndsWith(_ => _.Name, "y"))
             .Build();
 
         var pirate = new Pirate()
@@ -87,9 +100,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextEndsWith_IfNameNotEndsWith()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .EndsWith(_ => _.Name, "ro")
+            .And(b => b.EndsWith(_ => _.Name, "ro"))
             .Build();
 
         var pirate = new Pirate()
@@ -103,9 +116,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextNotEndsWith_IfNameEndsWith()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotEndsWith(_ => _.Name, "y")
+            .And(b => b.NotEndsWith(_ => _.Name, "y"))
             .Build();
 
         var pirate = new Pirate()
@@ -119,9 +132,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextNotEndsWith_IfNameNotEndsWith()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotEndsWith(_ => _.Name, "ro")
+            .And(b => b.NotEndsWith(_ => _.Name, "ro"))
             .Build();
 
         var pirate = new Pirate()
@@ -135,9 +148,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextContains_IfNameContains()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .Contains(_ => _.Name, "ff")
+            .And(b => b.Contains(_ => _.Name, "ff"))
             .Build();
 
         var pirate = new Pirate()
@@ -151,9 +164,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextContains_IfNameNotContains()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .Contains(_ => _.Name, "ro")
+            .And(b => b.Contains(_ => _.Name, "ro"))
             .Build();
 
         var pirate = new Pirate()
@@ -167,9 +180,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextNotContains_IfNameNotContains()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotContains(_ => _.Name, "ro")
+            .And(b => b.NotContains(_ => _.Name, "ro"))
             .Build();
 
         var pirate = new Pirate()
@@ -183,9 +196,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextNotContains_IfNameContains()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotContains(_ => _.Name, "u")
+            .And(b => b.NotContains(_ => _.Name, "u"))
             .Build();
 
         var pirate = new Pirate()
@@ -199,9 +212,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextEqual_IfNameEqual()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .Equal(_ => _.Name, "Luffy")
+            .And(b => b.Equal(_ => _.Name, "Luffy"))
             .Build();
 
         var pirate = new Pirate()
@@ -215,9 +228,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextEqual_IfNameNotEqual()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .Equal(_ => _.Name, "Zoro")
+            .And(b => b.Equal(_ => _.Name, "Zoro"))
             .Build();
 
         var pirate = new Pirate()
@@ -231,9 +244,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextNotEqual_IfNameNotEqual()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotEqual(_ => _.Name, "Zoro")
+            .And(b => b.NotEqual(_ => _.Name, "Zoro"))
             .Build();
 
         var pirate = new Pirate()
@@ -247,9 +260,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextNotEqual_IfNameEqual()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotEqual(_ => _.Name, "Luffy")
+            .And(b => b.NotEqual(_ => _.Name, "Luffy"))
             .Build();
 
         var pirate = new Pirate()
@@ -263,9 +276,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextIn_IfNameInList()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .In(_ => _.Name, new[] { "Luffy", "Zoro" })
+            .And(b => b.In(_ => _.Name, new[] { "Luffy", "Zoro" }))
             .Build();
 
         var pirate = new Pirate
@@ -279,9 +292,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextIn_IfNameNotInList()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .In(_ => _.Name, new[] { "Luffy", "Zoro" })
+            .And(b => b.In(_ => _.Name, new[] { "Luffy", "Zoro" }))
             .Build();
 
         var pirate = new Pirate
@@ -295,9 +308,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextNotIn_IfNameNotInList()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotIn(_ => _.Name, new[] { "Luffy", "Zoro" })
+            .And(b => b.NotIn(_ => _.Name, new[] { "Luffy", "Zoro" }))
             .Build();
 
         var pirate = new Pirate
@@ -311,9 +324,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextNotIn_IfNameInList()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotIn(_ => _.Name, new[] { "Luffy", "Zoro" })
+            .And(b => b.NotIn(_ => _.Name, new[] { "Luffy", "Zoro" }))
             .Build();
 
         var pirate = new Pirate
@@ -327,9 +340,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextEmpty_IfNameIsEmpty()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .Empty(_ => _.Name)
+            .And(b => b.Empty(_ => _.Name))
             .Build();
 
         var pirate = new Pirate
@@ -343,9 +356,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextEmpty_IfNameIsNotEmpty()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .Empty(_ => _.Name)
+            .And(b => b.Empty(_ => _.Name))
             .Build();
 
         var pirate = new Pirate
@@ -359,9 +372,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextNotEmpty_IfNameIsNotEmpty()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotEmpty(_ => _.Name)
+            .And(b => b.NotEmpty(_ => _.Name))
             .Build();
 
         var pirate = new Pirate
@@ -375,9 +388,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForTextNotEmpty_IfNameIsEmpty()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotEmpty(_ => _.Name)
+            .And(b => b.NotEmpty(_ => _.Name))
             .Build();
 
         var pirate = new Pirate
@@ -391,9 +404,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForNull_IfPropertyIsNull()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .Null(_ => _.Name)
+            .And(b => b.Null(_ => _.Name))
             .Build();
 
         var pirate = new Pirate
@@ -407,9 +420,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForNull_IfPropertyIsNotNull()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .Null(_ => _.Name)
+            .And(b => b.Null(_ => _.Name))
             .Build();
 
         var pirate = new Pirate
@@ -423,9 +436,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForNotNull_IfPropertyIsNotNull()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotNull(_ => _.Name)
+            .And(b => b.NotNull(_ => _.Name))
             .Build();
 
         var pirate = new Pirate
@@ -439,9 +452,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldNotFilterForNotNull_IfPropertyIsNull()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .NotNull(_ => _.Name)
+            .And(b => b.NotNull(_ => _.Name))
             .Build();
 
         var pirate = new Pirate
@@ -455,9 +468,9 @@ public partial class AdvancedFilterTest
     [Fact]
     public void AdvancedFilter_ShouldFilterForCombinedConditions()
     {
-        var filter = AdvancedFilter
+        var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .Equal(_ => _.Name, "Chopper")
+            .And(b => b.Equal(_ => _.Name, "Chopper"))
             .And(_ => _.StartsWith(p => p.Name, "Sanji"))
             .Or(_ => _.StartsWith(p => p.Name, "L"))
             .Build();
@@ -472,9 +485,60 @@ public partial class AdvancedFilterTest
         filter(luffy).Should().BeTrue();
         filter(zoro).Should().BeFalse();
     }
-    
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterPiratesByLastName()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .Or(_ => _.Equal(p => p.Name, "Luffy"))
+            .Or(p => p.StartsWith(p2 => p2.LastName, "R"))
+            .Build();
+
+        var pirates = _pirates.Where(filter).ToList();
+
+        pirates.Should().HaveCount(1);
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldCombineFiltersCorrectlyWithNames()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.Equal(p => p.Name, "Nami"))
+            .And(p => p.StartsWith(p2 => p2.LastName, "V"))
+            .Or(p => p.NotNull(p2 => p2.LastName));
+
+        var nami = _pirates[2]; // Nami
+        var sanji = _pirates[3]; // Sanji
+        var franky = _pirates[6]; // Franky
+
+        filter.Build()(nami).Should().BeTrue(); // Nami should match (Name is Nami)
+        filter.Build()(sanji).Should().BeTrue(); // Sanji should match (LastName is not null)
+        filter.Build()(franky).Should().BeTrue(); // Franky should match (LastName is not null)
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForEmptyAndNotEmptyLastName()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(builder => builder.NotEmpty(_ => _.Name))
+            .Or(p => p.NotEmpty(p => p.Name))
+            .Build();
+
+        var emptyLastNamePirate = new Pirate { Name = "Usopp", LastName = "" };
+        var nonEmptyNamePirate = new Pirate { Name = "Nami", LastName = "Swan" };
+        var emptyNamePirate = new Pirate { Name = "", LastName = "" };
+
+        filter(emptyLastNamePirate).Should().BeTrue();
+        filter(nonEmptyNamePirate).Should().BeTrue();
+        filter(emptyNamePirate).Should().BeFalse();
+    }
+
     private class Pirate
     {
         public string Name { get; set; }
+        public string LastName { get; set; }
     }
 }
