@@ -2,6 +2,7 @@
 
 public enum Operator
 {
+    Nested,
     StartsWith,
     NotStartsWith,
     EndsWith,
@@ -26,5 +27,5 @@ public enum Operator
     DateBefore,
     DateAfter,
     Between,
-    NotBetween
+    NotBetween,
 }

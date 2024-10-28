@@ -471,12 +471,12 @@ public partial class AdvancedFilterBuilderTest
         var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
             .And(b => b.Equal(_ => _.Name, "Chopper"))
-            .And(_ => _.StartsWith(p => p.Name, "Sanji"))
+            .And(_ => _.StartsWith(p => p.LastName, "V"))
             .Or(_ => _.StartsWith(p => p.Name, "L"))
             .Build();
 
         var chopper = new Pirate { Name = "Chopper" };
-        var sanji = new Pirate { Name = "Sanji" };
+        var sanji = new Pirate { Name = "Sanji", LastName = "Vinsmoke"};
         var luffy = new Pirate { Name = "Luffy" };
         var zoro = new Pirate { Name = "Zoro" };
 
@@ -533,6 +533,21 @@ public partial class AdvancedFilterBuilderTest
         filter(emptyLastNamePirate).Should().BeTrue();
         filter(nonEmptyNamePirate).Should().BeTrue();
         filter(emptyNamePirate).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterWithNested_WithOrConditions()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(builder => builder
+                .Equal(_ => _.Name, "Luffy")
+                .Or(orBuilder => orBuilder.Equal(z => z.Name, "Zoro")))
+            .Build();
+
+        var pirates = _pirates.Where(filter).ToList();
+
+        pirates.Should().HaveCount(2);
     }
 
     private class Pirate

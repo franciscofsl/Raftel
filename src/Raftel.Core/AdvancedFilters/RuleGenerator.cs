@@ -5,6 +5,8 @@ namespace Raftel.Core.AdvancedFilters;
 public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
 {
     private readonly List<Rule> _rules;
+    private readonly List<Rule> _andNestedRules = new();
+    private readonly List<Rule> _orNestedRules = new();
     private readonly Condition _currentCondition;
 
     public RuleGenerator(List<Rule> rules, Condition condition)
@@ -84,22 +86,57 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
     }
 
     public IFilterRuleBuilder<TModel> And(
-        Expression<Func<IAdvancedFilter<TModel>, IAdvancedFilter<TModel>>> filterExpression)
+        Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression)
     {
-        throw new NotImplementedException();
+        var nestedRules = new List<Rule>();
+        var nestedBuilder = new RuleGenerator<TModel>(nestedRules, Condition.And);
+        filterExpression.Compile().Invoke(nestedBuilder);
+        _andNestedRules.AddRange(nestedRules);
+        return this;
     }
 
+
     public IFilterRuleBuilder<TModel> Or(
-        Expression<Func<IAdvancedFilter<TModel>, IAdvancedFilter<TModel>>> filterExpression)
+        Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression)
     {
-        throw new NotImplementedException();
+        var nestedRules = new List<Rule>();
+        var nestedBuilder = new RuleGenerator<TModel>(nestedRules, Condition.Or);
+        filterExpression.Compile().Invoke(nestedBuilder);
+
+        _orNestedRules.AddRange(nestedRules);
+        return this;
+    }
+
+    public List<Rule> GetRulesWithCondition(Condition condition)
+    {
+        return _rules.Select(rule => rule with { Condition = condition }).ToList();
     }
 
     internal Expression CreateExpression(ParameterExpression parameter, Rule rule)
     {
+        if (rule.Nested != null && rule.Nested.Any())
+        {
+            // Genera la expresión para las reglas anidadas usando la condición especificada
+            Expression nestedExpression = null;
+            foreach (var nestedRule in rule.Nested)
+            {
+                var currentExpression = CreateExpression(parameter, nestedRule);
+
+                if (nestedExpression == null)
+                {
+                    nestedExpression = currentExpression;
+                }
+                else
+                {
+                    nestedExpression = CombineExpressions(nestedExpression, currentExpression, rule.Condition);
+                }
+            }
+            return nestedExpression;
+        }
+
+        // Si no hay reglas anidadas, genera una expresión normal
         var member = Expression.Property(parameter, rule.Field);
-        var constantValue = Expression.Constant(rule.Value?.ToString());
-        var constantEmptyString = Expression.Constant(string.Empty);
+        var constantValue = Expression.Constant(rule.Value);
 
         return rule.Operator switch
         {
@@ -132,9 +169,9 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
             Operator.NotIn => Expression.Not(Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains),
                 new[] { typeof(string) }, Expression.Constant(rule.Value), member)),
 
-            Operator.Empty => Expression.Equal(member, constantEmptyString),
+            Operator.Empty => Expression.Equal(member, Expression.Constant(string.Empty)),
 
-            Operator.NotEmpty => Expression.NotEqual(member, constantEmptyString),
+            Operator.NotEmpty => Expression.NotEqual(member, Expression.Constant(string.Empty)),
 
             Operator.Null => Expression.Equal(member, Expression.Constant(null)),
 
@@ -149,11 +186,6 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
         return condition == Condition.And
             ? Expression.AndAlso(left, right)
             : Expression.OrElse(left, right);
-    }
-
-    public List<Rule> GetRulesWithCondition(Condition condition)
-    {
-        return _rules.Select(rule => rule with { Condition = condition }).ToList();
     }
 
     private IFilterRuleBuilder<TModel> AddRule(Operator operatorType, Expression<Func<TModel, object>> expression,

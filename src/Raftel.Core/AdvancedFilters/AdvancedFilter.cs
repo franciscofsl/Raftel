@@ -17,16 +17,24 @@ public class AdvancedFilterBuilder<TModel> : IAdvancedFilterBuilder<TModel>
     public IAdvancedFilterBuilder<TModel> And(
         Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression)
     {
-        var subFilter = filterExpression.Compile()(new RuleGenerator<TModel>(_rules, Condition.And));
-        _rules.AddRange(subFilter.GetRulesWithCondition(Condition.And));
+        var nestedRules = new List<Rule>();
+        var nestedBuilder = new RuleGenerator<TModel>(nestedRules, Condition.And);
+
+        filterExpression.Compile().Invoke(nestedBuilder);
+        _rules.Add(new Rule(Operator.Nested, string.Empty, FieldType.Nested, null, Condition.And) { Nested = nestedRules });
+
         return this;
     }
 
     public IAdvancedFilterBuilder<TModel> Or(
         Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression)
     {
-        var subFilter = filterExpression.Compile()(new RuleGenerator<TModel>(_rules, Condition.Or));
-        _rules.AddRange(subFilter.GetRulesWithCondition(Condition.Or));
+        var nestedRules = new List<Rule>();
+        var nestedBuilder = new RuleGenerator<TModel>(nestedRules, Condition.Or);
+
+        filterExpression.Compile().Invoke(nestedBuilder);
+        _rules.Add(new Rule(Operator.Nested, string.Empty, FieldType.Nested, null, Condition.Or) { Nested = nestedRules });
+
         return this;
     }
 

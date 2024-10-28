@@ -20,10 +20,10 @@ public interface IFilterRuleBuilder<TModel>
     IFilterRuleBuilder<TModel> NotNull(Expression<Func<TModel, object>> expression);
 
     IFilterRuleBuilder<TModel> And(
-        Expression<Func<IAdvancedFilter<TModel>, IAdvancedFilter<TModel>>> filterExpression);
+        Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression);
 
     IFilterRuleBuilder<TModel> Or(
-        Expression<Func<IAdvancedFilter<TModel>, IAdvancedFilter<TModel>>> filterExpression);
+        Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression);
 
     List<Rule> GetRulesWithCondition(Condition condition);
 }
