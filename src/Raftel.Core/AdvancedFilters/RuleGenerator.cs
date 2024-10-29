@@ -4,14 +4,13 @@ namespace Raftel.Core.AdvancedFilters;
 
 public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
 {
-    private readonly List<Rule> _rules;
-    private readonly List<Rule> _andNestedRules = new();
-    private readonly List<Rule> _orNestedRules = new();
+    private readonly List<Rule> _rules = new();
+    private readonly List<RuleGenerator<TModel>> _andNestedRules = new();
+    private readonly List<RuleGenerator<TModel>> _orNestedRules = new();
     private readonly Condition _currentCondition;
 
-    public RuleGenerator(List<Rule> rules, Condition condition)
+    public RuleGenerator(Condition condition)
     {
-        _rules = rules;
         _currentCondition = condition;
     }
 
@@ -88,22 +87,18 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
     public IFilterRuleBuilder<TModel> And(
         Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression)
     {
-        var nestedRules = new List<Rule>();
-        var nestedBuilder = new RuleGenerator<TModel>(nestedRules, Condition.And);
-        filterExpression.Compile().Invoke(nestedBuilder);
-        _andNestedRules.AddRange(nestedRules);
+        var ruleGenerator = new RuleGenerator<TModel>(Condition.And);
+        filterExpression.Compile().Invoke(ruleGenerator);
+        _andNestedRules.Add(ruleGenerator);
         return this;
     }
-
 
     public IFilterRuleBuilder<TModel> Or(
         Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression)
     {
-        var nestedRules = new List<Rule>();
-        var nestedBuilder = new RuleGenerator<TModel>(nestedRules, Condition.Or);
-        filterExpression.Compile().Invoke(nestedBuilder);
-
-        _orNestedRules.AddRange(nestedRules);
+        var ruleGenerator = new RuleGenerator<TModel>(Condition.Or);
+        filterExpression.Compile().Invoke(ruleGenerator);
+        _orNestedRules.Add(ruleGenerator);
         return this;
     }
 
@@ -112,6 +107,25 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
         return _rules.Select(rule => rule with { Condition = condition }).ToList();
     }
 
+    internal Expression CreateExpression(ParameterExpression parameter)
+    {
+        Expression expression = null;
+        foreach (var rule in _rules)
+        {
+            var nested = CreateExpression(parameter, rule);
+
+            if (expression is null)
+            {
+                expression = nested;
+                continue;
+            }
+            
+            expression = CombineExpressions(expression, nested);
+        }
+
+        return expression ?? Expression.Constant(true);
+    }
+ 
     internal Expression CreateExpression(ParameterExpression parameter, Rule rule)
     {
         if (rule.Nested != null && rule.Nested.Any())
@@ -127,7 +141,7 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
                 }
                 else
                 {
-                    nestedExpression = CombineExpressions(nestedExpression, currentExpression, rule.Condition);
+                    nestedExpression = CombineExpressions(nestedExpression, currentExpression);
                 }
             }
 
@@ -210,9 +224,9 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
         };
     }
 
-    public Expression CombineExpressions(Expression left, Expression right, Condition condition)
+    public Expression CombineExpressions(Expression left, Expression right)
     {
-        return condition == Condition.And
+        return _currentCondition == Condition.And
             ? Expression.AndAlso(left, right)
             : Expression.OrElse(left, right);
     }

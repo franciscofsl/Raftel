@@ -7,14 +7,14 @@ public partial class AdvancedFilterBuilderTest
     private readonly List<Pirate> _pirates = new()
     {
         new Pirate { Name = "Luffy", LastName = "Monkey D." },
-        new Pirate { Name = "Zoro", LastName = "Luffy" },
+        new Pirate { Name = "Zoro", LastName = "Roronoa" },
         new Pirate { Name = "Nami", LastName = "Swan" },
         new Pirate { Name = "Sanji", LastName = "Vinsmoke" },
         new Pirate { Name = "Tony", LastName = "Tony Chopper" },
-        new Pirate { Name = "Nico", LastName = "Robin" },
-        new Pirate { Name = "Franky", LastName = "N" },
-        new Pirate { Name = "Brook", LastName = "N" },
-        new Pirate { Name = "Jinbe", LastName = "N" }
+        new Pirate { Name = "Robin", LastName = "Nico" },
+        new Pirate { Name = "Franky" },
+        new Pirate { Name = "Brook" },
+        new Pirate { Name = "Jinbe" }
     };
 
     [Fact]
@@ -492,12 +492,14 @@ public partial class AdvancedFilterBuilderTest
         var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
             .Or(_ => _.Equal(p => p.Name, "Luffy"))
-            .Or(p => p.StartsWith(p2 => p2.LastName, "R"))
+            .Or(p => p.StartsWith(p2 => p2.LastName, "N"))
             .Build();
 
         var pirates = _pirates.Where(filter).ToList();
 
-        pirates.Should().HaveCount(1);
+        pirates.Should().HaveCount(2);
+        pirates.Should().ContainSingle(_ => _.Name == "Luffy");
+        pirates.Should().ContainSingle(_ => _.LastName == "Nico");
     }
 
     [Fact]
@@ -567,6 +569,39 @@ public partial class AdvancedFilterBuilderTest
         pirates.Should().HaveCount(1);
     }
 
+    [Fact]
+    public void AdvancedFilter_ShouldFilterWithNestedAndInsideOrConditions()
+    {
+        var filter = AdvancedFilterBuilder
+                .ForModel<Pirate>()
+                .Or(builder => builder
+                    .Equal(_ => _.Name, "Luffy")
+                    .And(andBuilder => andBuilder
+                        .Equal(_ => _.Name, "Zoro")
+                        .Equal(_ => _.LastName, "Roronoa")))
+                .Build();
+
+        var pirates = _pirates.Where(filter).ToList();
+
+        pirates.Should().HaveCount(2);
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterWithMultipleNestedOrConditions()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .Or(builder => builder
+                .Equal(_ => _.Name, "Luffy")
+                .Or(orBuilder => orBuilder
+                    .Equal(_ => _.Name, "Zoro")
+                    .Equal(_ => _.Name, "Sanji")))
+            .Build();
+
+        var pirates = _pirates.Where(filter).ToList();
+
+        pirates.Should().HaveCount(3);
+    }
 
     private class Pirate
     {
