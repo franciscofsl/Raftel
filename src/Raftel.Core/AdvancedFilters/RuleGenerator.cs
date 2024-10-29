@@ -6,7 +6,7 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
 {
     private readonly List<Rule> _rules = new();
     private readonly List<RuleGenerator<TModel>> _andNestedRules = new();
-    private readonly List<RuleGenerator<TModel>> _orNestedRules = new();
+    private readonly List<RuleGenerator<TModel>> _orNestedGenerators = new();
     private readonly Condition _currentCondition;
 
     public RuleGenerator(Condition condition)
@@ -98,7 +98,7 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
     {
         var ruleGenerator = new RuleGenerator<TModel>(Condition.Or);
         filterExpression.Compile().Invoke(ruleGenerator);
-        _orNestedRules.Add(ruleGenerator);
+        _orNestedGenerators.Add(ruleGenerator);
         return this;
     }
 
@@ -119,35 +119,27 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
                 expression = nested;
                 continue;
             }
-            
+
             expression = CombineExpressions(expression, nested);
         }
 
+        var orNestedExpressions = CreateOrNestedExpressions(parameter);
+        if (orNestedExpressions is not null)
+        {
+            expression = CombineExpressions(expression, orNestedExpressions);
+        }
+        
+        var andNestedExpressions = CreateAndNestedExpressions(parameter);
+        if (andNestedExpressions is not null)
+        {
+            expression = CombineExpressions(expression, andNestedExpressions);
+        }
+        
         return expression ?? Expression.Constant(true);
     }
- 
-    internal Expression CreateExpression(ParameterExpression parameter, Rule rule)
+
+    private Expression CreateExpression(ParameterExpression parameter, Rule rule)
     {
-        if (rule.Nested != null && rule.Nested.Any())
-        {
-            Expression nestedExpression = null;
-            foreach (var nestedRule in rule.Nested)
-            {
-                var currentExpression = CreateExpression(parameter, nestedRule);
-
-                if (nestedExpression == null)
-                {
-                    nestedExpression = currentExpression;
-                }
-                else
-                {
-                    nestedExpression = CombineExpressions(nestedExpression, currentExpression);
-                }
-            }
-
-            return nestedExpression;
-        }
-
         var member = Expression.Property(parameter, rule.Field);
         var constantValue = Expression.Constant(rule.Value);
         var isNotNull = Expression.NotEqual(member, Expression.Constant(null));
@@ -222,6 +214,42 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
 
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
         };
+    }
+
+    private Expression CreateOrNestedExpressions(ParameterExpression parameter)
+    {
+        Expression orExpression = null;
+        foreach (var orNestedGenerator in _orNestedGenerators)
+        {
+            var nested = orNestedGenerator.CreateExpression(parameter);
+            if (orExpression is null)
+            {
+                orExpression = nested;
+                continue;
+            }
+
+            orExpression = CombineExpressions(orExpression, nested);
+        }
+
+        return orExpression;
+    }
+    
+    private Expression CreateAndNestedExpressions(ParameterExpression parameter)
+    {
+        Expression orExpression = null;
+        foreach (var orNestedGenerator in _andNestedRules)
+        {
+            var nested = orNestedGenerator.CreateExpression(parameter);
+            if (orExpression is null)
+            {
+                orExpression = nested;
+                continue;
+            }
+
+            orExpression = CombineExpressions(orExpression, nested);
+        }
+
+        return orExpression;
     }
 
     public Expression CombineExpressions(Expression left, Expression right)

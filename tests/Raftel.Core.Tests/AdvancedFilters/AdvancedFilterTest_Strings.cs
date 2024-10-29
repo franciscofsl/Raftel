@@ -514,9 +514,7 @@ public partial class AdvancedFilterBuilderTest
 
         var pirates = _pirates.Where(filter).ToList();
 
-        pirates.Should().Contain(_ => _.Name == "Nami");
-        pirates.Should().Contain(_ => _.Name == "Sanji");
-        pirates.Should().Contain(_ => _.Name == "Franky");
+        pirates.Should().HaveCount(6);
     }
 
     [Fact]
@@ -573,13 +571,13 @@ public partial class AdvancedFilterBuilderTest
     public void AdvancedFilter_ShouldFilterWithNestedAndInsideOrConditions()
     {
         var filter = AdvancedFilterBuilder
-                .ForModel<Pirate>()
-                .Or(builder => builder
-                    .Equal(_ => _.Name, "Luffy")
-                    .And(andBuilder => andBuilder
-                        .Equal(_ => _.Name, "Zoro")
-                        .Equal(_ => _.LastName, "Roronoa")))
-                .Build();
+            .ForModel<Pirate>()
+            .Or(builder => builder
+                .Equal(_ => _.Name, "Luffy")
+                .And(andBuilder => andBuilder
+                    .Equal(_ => _.Name, "Zoro")
+                    .Equal(_ => _.LastName, "Roronoa")))
+            .Build();
 
         var pirates = _pirates.Where(filter).ToList();
 
