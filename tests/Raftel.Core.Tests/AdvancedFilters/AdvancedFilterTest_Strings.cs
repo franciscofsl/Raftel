@@ -6,8 +6,8 @@ public partial class AdvancedFilterBuilderTest
 {
     private readonly List<Pirate> _pirates = new()
     {
-        new Pirate { Name = "Monkey", LastName = "D. Luffy" },
-        new Pirate { Name = "Roronoa", LastName = "Zoro" },
+        new Pirate { Name = "Luffy", LastName = "D. Monkey" },
+        new Pirate { Name = "Zoro", LastName = "Luffy" },
         new Pirate { Name = "Nami", LastName = "Swan" },
         new Pirate { Name = "Sanji", LastName = "Vinsmoke" },
         new Pirate { Name = "Tony", LastName = "Tony Chopper" },
@@ -470,17 +470,17 @@ public partial class AdvancedFilterBuilderTest
     {
         var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .And(b => b.Equal(_ => _.Name, "Chopper"))
+            .And(b => b.Equal(_ => _.Name, "Sanji"))
             .And(_ => _.StartsWith(p => p.LastName, "V"))
             .Or(_ => _.StartsWith(p => p.Name, "L"))
             .Build();
 
         var chopper = new Pirate { Name = "Chopper" };
-        var sanji = new Pirate { Name = "Sanji", LastName = "Vinsmoke"};
+        var sanji = new Pirate { Name = "Sanji", LastName = "Vinsmoke" };
         var luffy = new Pirate { Name = "Luffy" };
         var zoro = new Pirate { Name = "Zoro" };
 
-        filter(chopper).Should().BeTrue();
+        filter(chopper).Should().BeFalse();
         filter(sanji).Should().BeTrue();
         filter(luffy).Should().BeTrue();
         filter(zoro).Should().BeFalse();
@@ -540,9 +540,9 @@ public partial class AdvancedFilterBuilderTest
     {
         var filter = AdvancedFilterBuilder
             .ForModel<Pirate>()
-            .And(builder => builder
+            .Or(builder => builder
                 .Equal(_ => _.Name, "Luffy")
-                .Or(orBuilder => orBuilder.Equal(z => z.Name, "Zoro")))
+                .Equal(_ => _.Name, "Zoro"))
             .Build();
 
         var pirates = _pirates.Where(filter).ToList();

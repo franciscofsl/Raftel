@@ -116,7 +116,6 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
     {
         if (rule.Nested != null && rule.Nested.Any())
         {
-            // Genera la expresión para las reglas anidadas usando la condición especificada
             Expression nestedExpression = null;
             foreach (var nestedRule in rule.Nested)
             {
@@ -131,47 +130,77 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
                     nestedExpression = CombineExpressions(nestedExpression, currentExpression, rule.Condition);
                 }
             }
+
             return nestedExpression;
         }
 
-        // Si no hay reglas anidadas, genera una expresión normal
         var member = Expression.Property(parameter, rule.Field);
         var constantValue = Expression.Constant(rule.Value);
+        var isNotNull = Expression.NotEqual(member, Expression.Constant(null));
 
         return rule.Operator switch
         {
-            Operator.StartsWith => Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }), constantValue),
+            Operator.StartsWith => Expression.AndAlso(
+                isNotNull,
+                Expression.Call(member, typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }),
+                    constantValue)
+            ),
 
-            Operator.NotStartsWith => Expression.Not(Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }), constantValue)),
+            Operator.NotStartsWith => Expression.AndAlso(
+                isNotNull,
+                Expression.Not(Expression.Call(member,
+                    typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }), constantValue))
+            ),
 
-            Operator.EndsWith => Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }), constantValue),
+            Operator.EndsWith => Expression.AndAlso(
+                isNotNull,
+                Expression.Call(member, typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }),
+                    constantValue)
+            ),
 
-            Operator.NotEndsWith => Expression.Not(Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }), constantValue)),
+            Operator.NotEndsWith => Expression.AndAlso(
+                isNotNull,
+                Expression.Not(Expression.Call(member,
+                    typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }), constantValue))
+            ),
 
-            Operator.Contains => Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }), constantValue),
+            Operator.Contains => Expression.AndAlso(
+                isNotNull,
+                Expression.Call(member, typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }),
+                    constantValue)
+            ),
 
-            Operator.NotContains => Expression.Not(Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }), constantValue)),
+            Operator.NotContains => Expression.AndAlso(
+                isNotNull,
+                Expression.Not(Expression.Call(member,
+                    typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }), constantValue))
+            ),
 
             Operator.Equal => Expression.Equal(member, constantValue),
 
             Operator.NotEqual => Expression.Not(Expression.Equal(member, constantValue)),
 
-            Operator.In => Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains),
-                new[] { typeof(string) },
-                Expression.Constant(rule.Value), member),
+            Operator.In => Expression.AndAlso(
+                isNotNull,
+                Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains), new[] { typeof(string) },
+                    Expression.Constant(rule.Value), member)
+            ),
 
-            Operator.NotIn => Expression.Not(Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains),
-                new[] { typeof(string) }, Expression.Constant(rule.Value), member)),
+            Operator.NotIn => Expression.AndAlso(
+                isNotNull,
+                Expression.Not(Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains),
+                    new[] { typeof(string) }, Expression.Constant(rule.Value), member))
+            ),
 
-            Operator.Empty => Expression.Equal(member, Expression.Constant(string.Empty)),
+            Operator.Empty => Expression.AndAlso(
+                isNotNull,
+                Expression.Equal(member, Expression.Constant(string.Empty))
+            ),
 
-            Operator.NotEmpty => Expression.NotEqual(member, Expression.Constant(string.Empty)),
+            Operator.NotEmpty => Expression.AndAlso(
+                isNotNull,
+                Expression.NotEqual(member, Expression.Constant(string.Empty))
+            ),
 
             Operator.Null => Expression.Equal(member, Expression.Constant(null)),
 
