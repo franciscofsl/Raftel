@@ -6,7 +6,7 @@ public partial class AdvancedFilterBuilderTest
 {
     private readonly List<Pirate> _pirates = new()
     {
-        new Pirate { Name = "Luffy", LastName = "D. Monkey" },
+        new Pirate { Name = "Luffy", LastName = "Monkey D." },
         new Pirate { Name = "Zoro", LastName = "Luffy" },
         new Pirate { Name = "Nami", LastName = "Swan" },
         new Pirate { Name = "Sanji", LastName = "Vinsmoke" },
@@ -549,6 +549,24 @@ public partial class AdvancedFilterBuilderTest
 
         pirates.Should().HaveCount(2);
     }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterWithNestedOrInsideAndConditions()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(builder => builder
+                .Contains(_ => _.LastName, "Monkey D.")
+                .Or(orBuilder => orBuilder
+                    .Equal(_ => _.Name, "Luffy")
+                    .Equal(_ => _.Name, "Zoro")))
+            .Build();
+
+        var pirates = _pirates.Where(filter).ToList();
+
+        pirates.Should().HaveCount(1);
+    }
+
 
     private class Pirate
     {
