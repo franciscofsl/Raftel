@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq.Expressions;
+using System.Reflection;
 using Raftel.Shared.AdvancedFilters;
 using Raftel.Shared.Extensions;
 
@@ -42,10 +43,20 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
     {
         var member = Expression.Property(parameter, rule.Field);
         var constantValue = Expression.Constant(rule.Value);
- 
+
         var isNotNull = member.Type.IsValueType && Nullable.GetUnderlyingType(member.Type) == null
             ? null
             : Expression.NotEqual(member, Expression.Constant(null));
+        MethodInfo containsMethod = null;
+        if (rule.Value is not null)
+        {
+            var elementType = rule.Value.GetType().IsArray
+                ? rule.Value.GetType().GetElementType()
+                : rule.Value.GetType().GetGenericArguments().FirstOrDefault();
+            containsMethod = typeof(Enumerable).GetMethods()
+                .First(m => m.Name == "Contains" && m.GetParameters().Length == 2)
+                .MakeGenericMethod(elementType);
+        }
 
         return rule.Operator switch
         {
@@ -89,11 +100,9 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
 
             Operator.NotEqual => Expression.Not(Expression.Equal(member, constantValue)),
 
-            Operator.In => Expression.AndAlso(
-                isNotNull,
-                Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains), new[] { typeof(string) },
-                    Expression.Constant(rule.Value), member)
-            ),
+            Operator.In => isNotNull != null
+                ? Expression.AndAlso(isNotNull, Expression.Call(containsMethod, constantValue, member))
+                : Expression.Call(containsMethod, constantValue, member),
 
             Operator.NotIn => Expression.AndAlso(
                 isNotNull,

@@ -51,7 +51,7 @@ public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TMo
         return AddRule(Operator.NotEqual, expression, value);
     }
 
-    public IFilterRuleBuilder<TModel> In(Expression<Func<TModel, object>> expression, string[] values)
+    public IFilterRuleBuilder<TModel> In(Expression<Func<TModel, object>> expression, dynamic values)
     {
         return AddRule(Operator.In, expression, values);
     }
@@ -114,7 +114,6 @@ public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TMo
             ? unaryExpression.Operand as MemberExpression
             : expression.Body as MemberExpression;
 
-        // var body = expression.Body as MemberExpression;
         var propertyName = body.Member.Name;
         var propertyType = expression.Type;
 

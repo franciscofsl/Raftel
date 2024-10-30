@@ -4,14 +4,12 @@ namespace Raftel.Core.Tests.AdvancedFilters;
 
 public partial class AdvancedFilterBuilderTest
 {
-    // Not Equal
-    // Greater Than or equal
-    // Greater Than  
-    // Less Than or equal
-    // Less Than  
-    // Between
-    // Between
-    // Not Between
+    // Greater Than or equal - pending implement
+    // Greater Than  - pending implement
+    // Less Than or equal  - pending implement
+    // Less Than    - pending implement
+    // Between - pending implement
+    // Not Between - pending implement
     // In
     // Not In
     // Is Null
@@ -59,5 +57,43 @@ public partial class AdvancedFilterBuilderTest
             .Build();
 
         filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForIntIn_IfBountyIsInList()
+    {
+        var bounties = new int[]
+        {
+            Pirates.Mugiwaras.Luffy.Bounty,
+            Pirates.Mugiwaras.Zoro.Bounty,
+            Pirates.Mugiwaras.Nami.Bounty
+        };
+
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.In(_ => _.Bounty, bounties))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForIntIn_IfBountyIsNotInList()
+    {
+        var bounties = new List<int>
+        {
+            Pirates.Mugiwaras.Luffy.Bounty,
+            Pirates.Mugiwaras.Zoro.Bounty,
+            Pirates.Mugiwaras.Nami.Bounty
+        };
+
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.In(_ => _.Bounty, bounties))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
     }
 }
