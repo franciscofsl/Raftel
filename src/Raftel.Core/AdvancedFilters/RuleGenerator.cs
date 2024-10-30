@@ -101,12 +101,7 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
         filterExpression.Compile().Invoke(ruleGenerator);
         _orNestedGenerators.Add(ruleGenerator);
         return this;
-    }
-
-    public List<Rule> GetRulesWithCondition(Condition condition)
-    {
-        return _rules.Select(rule => rule with { Condition = condition }).ToList();
-    }
+    } 
 
     internal Expression CreateExpression(ParameterExpression parameter)
     {

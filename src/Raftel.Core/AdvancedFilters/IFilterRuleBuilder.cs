@@ -24,6 +24,4 @@ public interface IFilterRuleBuilder<TModel>
 
     IFilterRuleBuilder<TModel> Or(
         Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression);
-
-    List<Rule> GetRulesWithCondition(Condition condition);
 }
