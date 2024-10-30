@@ -1,20 +1,15 @@
 ﻿using System.Linq.Expressions;
 using Raftel.Shared.AdvancedFilters;
+using Raftel.Shared.Extensions;
 
 namespace Raftel.Core.AdvancedFilters;
 
-public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
+public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TModel>
 {
-    private readonly RuleCollection _rules;
+    private readonly RuleCollection _rules = new(condition);
     private readonly List<RuleGenerator<TModel>> _andNestedRules = new();
     private readonly List<RuleGenerator<TModel>> _orNestedGenerators = new();
-    private readonly Condition _currentCondition;
-
-    public RuleGenerator(Condition condition)
-    {
-        _currentCondition = condition;
-        _rules = new RuleCollection(condition);
-    }
+    internal readonly Condition Condition = condition;
 
     public IFilterRuleBuilder<TModel> StartsWith(Expression<Func<TModel, object>> expression, string value)
     {
@@ -102,7 +97,7 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
         filterExpression.Compile().Invoke(ruleGenerator);
         _orNestedGenerators.Add(ruleGenerator);
         return this;
-    } 
+    }
 
     internal Expression CreateExpression(ParameterExpression parameter)
     {
@@ -111,13 +106,13 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
         var orNestedExpressions = CreateOrNestedExpressions(parameter);
         if (orNestedExpressions is not null)
         {
-            expression = CombineExpressions(expression, orNestedExpressions);
+            expression = expression.Combine(orNestedExpressions, Condition);
         }
 
         var andNestedExpressions = CreateAndNestedExpressions(parameter);
         if (andNestedExpressions is not null)
         {
-            expression = CombineExpressions(expression, andNestedExpressions);
+            expression = expression.Combine(andNestedExpressions, Condition);
         }
 
         return expression ?? Expression.Constant(true);
@@ -135,7 +130,7 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
                 continue;
             }
 
-            orExpression = CombineExpressions(orExpression, nested);
+            orExpression = orExpression.Combine(nested, Condition);
         }
 
         return orExpression;
@@ -153,17 +148,10 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
                 continue;
             }
 
-            orExpression = CombineExpressions(orExpression, nested);
+            orExpression = orExpression.Combine(nested, Condition);
         }
 
         return orExpression;
-    }
-
-    public Expression CombineExpressions(Expression left, Expression right)
-    {
-        return _currentCondition == Condition.And
-            ? Expression.AndAlso(left, right)
-            : Expression.OrElse(left, right);
     }
 
     private IFilterRuleBuilder<TModel> AddRule(Operator operatorType, Expression<Func<TModel, object>> expression,
@@ -171,7 +159,7 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
     {
         var body = expression.Body as MemberExpression;
         var propertyName = body.Member.Name;
-        _rules.Add(new Rule(operatorType, propertyName, type, value, _currentCondition));
+        _rules.Add(new Rule(operatorType, propertyName, type, value, Condition));
         return this;
     }
 }

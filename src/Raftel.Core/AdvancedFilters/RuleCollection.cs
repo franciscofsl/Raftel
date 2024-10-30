@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq.Expressions;
 using Raftel.Shared.AdvancedFilters;
+using Raftel.Shared.Extensions;
 
 namespace Raftel.Core.AdvancedFilters;
 
@@ -31,17 +32,11 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
                 continue;
             }
 
-            expression = CombineExpressions(expression, nested);
+
+            expression = expression.Combine(nested, condition);
         }
 
         return expression;
-    }
-
-    private Expression CombineExpressions(Expression left, Expression right)
-    {
-        return condition is Condition.And
-            ? Expression.AndAlso(left, right)
-            : Expression.OrElse(left, right);
     }
 
     private Expression CreateExpression(ParameterExpression parameter, Rule rule)

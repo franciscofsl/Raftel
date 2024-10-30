@@ -1,4 +1,6 @@
 ﻿using System.Linq.Expressions;
+using Raftel.Shared.AdvancedFilters;
+using Raftel.Shared.Extensions;
 
 namespace Raftel.Core.AdvancedFilters;
 
@@ -45,7 +47,7 @@ public class AdvancedFilterBuilder<TModel> : IAdvancedFilterBuilder<TModel>
             }
             else
             {
-                finalExpression = generator.CombineExpressions(finalExpression, currentExpression);
+                finalExpression = finalExpression.Combine(currentExpression, generator.Condition);
             }
         }
 
