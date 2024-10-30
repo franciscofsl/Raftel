@@ -1,8 +1,7 @@
-﻿namespace Raftel.Core.AdvancedFilters;
+﻿namespace Raftel.Shared.AdvancedFilters;
 
 public enum Operator
 {
-    Nested,
     StartsWith,
     NotStartsWith,
     EndsWith,

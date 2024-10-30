@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Raftel.Shared.AdvancedFilters;
 
 namespace Raftel.Core.AdvancedFilters;
 
