@@ -46,7 +46,7 @@ public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TMo
         return AddRule(Operator.Equal, expression, value);
     }
 
-    public IFilterRuleBuilder<TModel> NotEqual(Expression<Func<TModel, object>> expression, string value)
+    public IFilterRuleBuilder<TModel> NotEqual(Expression<Func<TModel, object>> expression, object value)
     {
         return AddRule(Operator.NotEqual, expression, value);
     }
