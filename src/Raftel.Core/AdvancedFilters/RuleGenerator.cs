@@ -4,7 +4,7 @@ namespace Raftel.Core.AdvancedFilters;
 
 public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
 {
-    private readonly List<Rule> _rules = new();
+    private readonly RuleCollection _rules = new();
     private readonly List<RuleGenerator<TModel>> _andNestedRules = new();
     private readonly List<RuleGenerator<TModel>> _orNestedGenerators = new();
     private readonly Condition _currentCondition;
