@@ -39,7 +39,7 @@ public class AdvancedFilterBuilder<TModel> : IAdvancedFilterBuilder<TModel>
 
         foreach (var generator in _generators)
         {
-            var currentExpression = generator.CreateExpression(parameter);
+            var currentExpression = generator.ToExpression(parameter);
 
             if (finalExpression == null)
             {

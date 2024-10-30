@@ -7,8 +7,8 @@ namespace Raftel.Core.AdvancedFilters;
 public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TModel>
 {
     private readonly RuleCollection _rules = new(condition);
-    private readonly List<RuleGenerator<TModel>> _andNestedRules = new();
-    private readonly List<RuleGenerator<TModel>> _orNestedGenerators = new();
+    private readonly RuleGeneratorCollection<TModel> _andRuleGenerators = new(Condition.And);
+    private readonly RuleGeneratorCollection<TModel> _orRuleGenerators = new(Condition.Or);
     internal readonly Condition Condition = condition;
 
     public IFilterRuleBuilder<TModel> StartsWith(Expression<Func<TModel, object>> expression, string value)
@@ -86,7 +86,7 @@ public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TMo
     {
         var ruleGenerator = new RuleGenerator<TModel>(Condition.And);
         filterExpression.Compile().Invoke(ruleGenerator);
-        _andNestedRules.Add(ruleGenerator);
+        _andRuleGenerators.Add(ruleGenerator);
         return this;
     }
 
@@ -95,63 +95,27 @@ public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TMo
     {
         var ruleGenerator = new RuleGenerator<TModel>(Condition.Or);
         filterExpression.Compile().Invoke(ruleGenerator);
-        _orNestedGenerators.Add(ruleGenerator);
+        _orRuleGenerators.Add(ruleGenerator);
         return this;
     }
 
-    internal Expression CreateExpression(ParameterExpression parameter)
+    internal Expression ToExpression(ParameterExpression parameter)
     {
         var expression = _rules.ToExpression(parameter);
 
-        var orNestedExpressions = CreateOrNestedExpressions(parameter);
+        var orNestedExpressions = _orRuleGenerators.ToExpression(parameter);
         if (orNestedExpressions is not null)
         {
             expression = expression.Combine(orNestedExpressions, Condition);
         }
 
-        var andNestedExpressions = CreateAndNestedExpressions(parameter);
+        var andNestedExpressions = _andRuleGenerators.ToExpression(parameter);
         if (andNestedExpressions is not null)
         {
             expression = expression.Combine(andNestedExpressions, Condition);
         }
 
         return expression ?? Expression.Constant(true);
-    }
-
-    private Expression CreateOrNestedExpressions(ParameterExpression parameter)
-    {
-        Expression orExpression = null;
-        foreach (var orNestedGenerator in _orNestedGenerators)
-        {
-            var nested = orNestedGenerator.CreateExpression(parameter);
-            if (orExpression is null)
-            {
-                orExpression = nested;
-                continue;
-            }
-
-            orExpression = orExpression.Combine(nested, Condition);
-        }
-
-        return orExpression;
-    }
-
-    private Expression CreateAndNestedExpressions(ParameterExpression parameter)
-    {
-        Expression orExpression = null;
-        foreach (var orNestedGenerator in _andNestedRules)
-        {
-            var nested = orNestedGenerator.CreateExpression(parameter);
-            if (orExpression is null)
-            {
-                orExpression = nested;
-                continue;
-            }
-
-            orExpression = orExpression.Combine(nested, Condition);
-        }
-
-        return orExpression;
     }
 
     private IFilterRuleBuilder<TModel> AddRule(Operator operatorType, Expression<Func<TModel, object>> expression,
