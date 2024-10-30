@@ -1,51 +1,35 @@
 ﻿using System.Linq.Expressions;
+using Raftel.Shared.AdvancedFilters;
+using Raftel.Shared.Extensions;
 
 namespace Raftel.Core.AdvancedFilters;
 
-public class AdvancedFilter
+public class AdvancedFilterBuilder<TModel> : IAdvancedFilterBuilder<TModel>
 {
-    private AdvancedFilter()
+    private readonly List<RuleGenerator<TModel>> _generators = new();
+    private readonly Condition _currentCondition;
+
+    public AdvancedFilterBuilder(Condition condition = Condition.And)
     {
+        _currentCondition = condition;
     }
 
-    public static AdvancedFilter<TModel> ForModel<TModel>(Condition condition = Condition.And)
+    public IAdvancedFilterBuilder<TModel> And(
+        Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression)
     {
-        return new AdvancedFilter<TModel>(condition);
-    }
-}
-
-public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
-{
-    private List<Rule> _rules = new();
-
-    public AdvancedFilter<TModel> StartsWith(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
-    {
-        return AddRule(Operator.StartsWith, expression, FieldType.String, value, condition);
+        var nestedBuilder = new RuleGenerator<TModel>(Condition.And);
+        filterExpression.Compile().Invoke(nestedBuilder);
+        _generators.Add(nestedBuilder);
+        return this;
     }
 
-    public AdvancedFilter<TModel> EndsWith(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
+    public IAdvancedFilterBuilder<TModel> Or(
+        Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression)
     {
-        return AddRule(Operator.EndsWith, expression, FieldType.String, value, condition);
-    }
-
-    public AdvancedFilter<TModel> Contains(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
-    {
-        return AddRule(Operator.Contains, expression, FieldType.String, value, condition);
-    }
-
-    public AdvancedFilter<TModel> Equal(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
-    {
-        return AddRule(Operator.Equal, expression, FieldType.String, value, condition);
-    }
-
-    public AdvancedFilter<TModel> NotEqual(Expression<Func<TModel, object>> expression, string value,
-        Condition condition = Condition.And)
-    {
-        return AddRule(Operator.NotEqual, expression, FieldType.String, value, condition);
+        var nestedBuilder = new RuleGenerator<TModel>(Condition.Or);
+        filterExpression.Compile().Invoke(nestedBuilder);
+        _generators.Add(nestedBuilder);
+        return this;
     }
 
     public Func<TModel, bool> Build()
@@ -53,9 +37,9 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
         var parameter = Expression.Parameter(typeof(TModel), "model");
         Expression finalExpression = null;
 
-        foreach (var rule in _rules)
+        foreach (var generator in _generators)
         {
-            var currentExpression = CreateExpression(parameter, rule);
+            var currentExpression = generator.ToExpression(parameter);
 
             if (finalExpression == null)
             {
@@ -63,7 +47,7 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
             }
             else
             {
-                finalExpression = CombineExpressions(finalExpression, currentExpression, rule.Condition);
+                finalExpression = finalExpression.Combine(currentExpression, generator.Condition);
             }
         }
 
@@ -74,55 +58,5 @@ public class AdvancedFilter<TModel>(Condition Condition = Condition.And)
 
         var lambda = Expression.Lambda<Func<TModel, bool>>(finalExpression, parameter);
         return lambda.Compile();
-    }
-
-    private AdvancedFilter<TModel> AddRule(Operator operatorType, Expression<Func<TModel, object>> expression,
-        FieldType type, object value,
-        Condition condition = Condition.And)
-    {
-        var body = expression.Body as MemberExpression;
-        var propertyName = body.Member.Name;
-        _rules.Add(new Rule(operatorType, propertyName, type, value, condition));
-        return this;
-    }
-
-    private AdvancedFilter<TModel> AddRule(Operator operatorType, string field, FieldType type, object value,
-        Condition condition = Condition.And)
-    {
-        _rules.Add(new Rule(operatorType, field, type, value, condition));
-        return this;
-    }
-
-    private Expression CreateExpression(ParameterExpression parameter, Rule rule)
-    {
-        var member = Expression.Property(parameter, rule.Field);
-        var constantValue = Expression.Constant(rule.Value.ToString());
-
-        return rule.Operator switch
-        {
-            Operator.StartsWith => Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }), constantValue),
-            
-            Operator.EndsWith => Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }), constantValue),
-
-            Operator.Contains => Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }), constantValue),
-
-            Operator.Equal => Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.Equals), new[] { typeof(string) }), constantValue),
-
-            Operator.NotEqual => Expression.Not(Expression.Call(member,
-                typeof(string).GetMethod(nameof(string.Equals), new[] { typeof(string) }), constantValue)),
-
-            _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
-        };
-    }
-
-    private Expression CombineExpressions(Expression left, Expression right, Condition condition)
-    {
-        return condition == Condition.And
-            ? Expression.AndAlso(left, right)
-            : Expression.OrElse(left, right);
     }
 }

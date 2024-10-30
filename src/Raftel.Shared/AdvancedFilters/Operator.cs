@@ -1,12 +1,21 @@
-﻿namespace Raftel.Core.AdvancedFilters;
+﻿namespace Raftel.Shared.AdvancedFilters;
 
 public enum Operator
 {
     StartsWith,
+    NotStartsWith,
     EndsWith,
+    NotEndsWith,
     Contains,
+    NotContains,
     Equal,
     NotEqual,
+    In,
+    NotIn,
+    Empty,
+    NotEmpty,
+    Null,
+    NotNull,
     GreaterThan,
     LessThan,
     GreaterThanOrEqual,
@@ -15,5 +24,7 @@ public enum Operator
     IsFalse,
     DateEqual,
     DateBefore,
-    DateAfter
+    DateAfter,
+    Between,
+    NotBetween,
 }
