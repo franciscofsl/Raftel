@@ -42,7 +42,10 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
     {
         var member = Expression.Property(parameter, rule.Field);
         var constantValue = Expression.Constant(rule.Value);
-        var isNotNull = Expression.NotEqual(member, Expression.Constant(null));
+ 
+        var isNotNull = member.Type.IsValueType && Nullable.GetUnderlyingType(member.Type) == null
+            ? null
+            : Expression.NotEqual(member, Expression.Constant(null));
 
         return rule.Operator switch
         {

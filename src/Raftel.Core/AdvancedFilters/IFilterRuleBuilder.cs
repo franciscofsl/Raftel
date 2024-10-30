@@ -10,7 +10,7 @@ public interface IFilterRuleBuilder<TModel>
     IFilterRuleBuilder<TModel> NotEndsWith(Expression<Func<TModel, object>> expression, string value);
     IFilterRuleBuilder<TModel> Contains(Expression<Func<TModel, object>> expression, string value);
     IFilterRuleBuilder<TModel> NotContains(Expression<Func<TModel, object>> expression, string value);
-    IFilterRuleBuilder<TModel> Equal(Expression<Func<TModel, object>> expression, string value);
+    IFilterRuleBuilder<TModel> Equal(Expression<Func<TModel, object>> expression, object value);
     IFilterRuleBuilder<TModel> NotEqual(Expression<Func<TModel, object>> expression, string value);
     IFilterRuleBuilder<TModel> In(Expression<Func<TModel, object>> expression, string[] values);
     IFilterRuleBuilder<TModel> NotIn(Expression<Func<TModel, object>> expression, string[] values);
