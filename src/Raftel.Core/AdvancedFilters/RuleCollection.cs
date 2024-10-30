@@ -32,7 +32,6 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
                 continue;
             }
 
-
             expression = expression.Combine(nested, condition);
         }
 

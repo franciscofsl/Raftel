@@ -21,20 +21,20 @@ public class RuleGeneratorCollection<TModel>(Condition condition) : IEnumerable<
     
     internal Expression ToExpression(ParameterExpression parameter)
     {
-        Expression orExpression = null;
-        foreach (var orNestedGenerator in _ruleGenerators)
+        Expression expression = null;
+        foreach (var generator in _ruleGenerators)
         {
-            var nested = orNestedGenerator.ToExpression(parameter);
-            if (orExpression is null)
+            var nested = generator.ToExpression(parameter);
+            if (expression is null)
             {
-                orExpression = nested;
+                expression = nested;
                 continue;
             }
 
-            orExpression = orExpression.Combine(nested, condition);
+            expression = expression.Combine(nested, condition);
         }
 
-        return orExpression;
+        return expression;
     }
 
     IEnumerator IEnumerable.GetEnumerator()

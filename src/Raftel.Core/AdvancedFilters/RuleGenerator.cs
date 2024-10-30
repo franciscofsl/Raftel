@@ -102,19 +102,8 @@ public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TMo
     internal Expression ToExpression(ParameterExpression parameter)
     {
         var expression = _rules.ToExpression(parameter);
-
-        var orNestedExpressions = _orRuleGenerators.ToExpression(parameter);
-        if (orNestedExpressions is not null)
-        {
-            expression = expression.Combine(orNestedExpressions, Condition);
-        }
-
-        var andNestedExpressions = _andRuleGenerators.ToExpression(parameter);
-        if (andNestedExpressions is not null)
-        {
-            expression = expression.Combine(andNestedExpressions, Condition);
-        }
-
+        expression = AppendOrNestedExpressions(parameter, expression);
+        expression = AppendAndNestedExpressions(parameter, expression);
         return expression ?? Expression.Constant(true);
     }
 
@@ -125,5 +114,27 @@ public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TMo
         var propertyName = body.Member.Name;
         _rules.Add(new Rule(operatorType, propertyName, type, value, Condition));
         return this;
+    }
+
+    private Expression AppendOrNestedExpressions(ParameterExpression parameter, Expression expression)
+    {
+        var orNestedExpressions = _orRuleGenerators.ToExpression(parameter);
+        if (orNestedExpressions is not null)
+        {
+            expression = expression.Combine(orNestedExpressions, Condition);
+        }
+
+        return expression;
+    }
+
+    private Expression AppendAndNestedExpressions(ParameterExpression parameter, Expression expression)
+    {
+        var andNestedExpressions = _andRuleGenerators.ToExpression(parameter);
+        if (andNestedExpressions is not null)
+        {
+            expression = expression.Combine(andNestedExpressions, Condition);
+        }
+
+        return expression;
     }
 }
