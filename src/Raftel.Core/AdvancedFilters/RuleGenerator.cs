@@ -4,7 +4,7 @@ namespace Raftel.Core.AdvancedFilters;
 
 public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
 {
-    private readonly RuleCollection _rules = new();
+    private readonly RuleCollection _rules;
     private readonly List<RuleGenerator<TModel>> _andNestedRules = new();
     private readonly List<RuleGenerator<TModel>> _orNestedGenerators = new();
     private readonly Condition _currentCondition;
@@ -12,6 +12,7 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
     public RuleGenerator(Condition condition)
     {
         _currentCondition = condition;
+        _rules = new RuleCollection(condition);
     }
 
     public IFilterRuleBuilder<TModel> StartsWith(Expression<Func<TModel, object>> expression, string value)
@@ -109,111 +110,21 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
 
     internal Expression CreateExpression(ParameterExpression parameter)
     {
-        Expression expression = null;
-        foreach (var rule in _rules)
-        {
-            var nested = CreateExpression(parameter, rule);
-
-            if (expression is null)
-            {
-                expression = nested;
-                continue;
-            }
-
-            expression = CombineExpressions(expression, nested);
-        }
+        var expression = _rules.ToExpression(parameter);
 
         var orNestedExpressions = CreateOrNestedExpressions(parameter);
         if (orNestedExpressions is not null)
         {
             expression = CombineExpressions(expression, orNestedExpressions);
         }
-        
+
         var andNestedExpressions = CreateAndNestedExpressions(parameter);
         if (andNestedExpressions is not null)
         {
             expression = CombineExpressions(expression, andNestedExpressions);
         }
-        
+
         return expression ?? Expression.Constant(true);
-    }
-
-    private Expression CreateExpression(ParameterExpression parameter, Rule rule)
-    {
-        var member = Expression.Property(parameter, rule.Field);
-        var constantValue = Expression.Constant(rule.Value);
-        var isNotNull = Expression.NotEqual(member, Expression.Constant(null));
-
-        return rule.Operator switch
-        {
-            Operator.StartsWith => Expression.AndAlso(
-                isNotNull,
-                Expression.Call(member, typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }),
-                    constantValue)
-            ),
-
-            Operator.NotStartsWith => Expression.AndAlso(
-                isNotNull,
-                Expression.Not(Expression.Call(member,
-                    typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }), constantValue))
-            ),
-
-            Operator.EndsWith => Expression.AndAlso(
-                isNotNull,
-                Expression.Call(member, typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }),
-                    constantValue)
-            ),
-
-            Operator.NotEndsWith => Expression.AndAlso(
-                isNotNull,
-                Expression.Not(Expression.Call(member,
-                    typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }), constantValue))
-            ),
-
-            Operator.Contains => Expression.AndAlso(
-                isNotNull,
-                Expression.Call(member, typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }),
-                    constantValue)
-            ),
-
-            Operator.NotContains => Expression.AndAlso(
-                isNotNull,
-                Expression.Not(Expression.Call(member,
-                    typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }), constantValue))
-            ),
-
-            Operator.Equal => Expression.Equal(member, constantValue),
-
-            Operator.NotEqual => Expression.Not(Expression.Equal(member, constantValue)),
-
-            Operator.In => Expression.AndAlso(
-                isNotNull,
-                Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains), new[] { typeof(string) },
-                    Expression.Constant(rule.Value), member)
-            ),
-
-            Operator.NotIn => Expression.AndAlso(
-                isNotNull,
-                Expression.Not(Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains),
-                    new[] { typeof(string) }, Expression.Constant(rule.Value), member))
-            ),
-
-            Operator.Empty => Expression.AndAlso(
-                isNotNull,
-                Expression.Equal(member, Expression.Constant(string.Empty))
-            ),
-
-            Operator.NotEmpty => Expression.AndAlso(
-                isNotNull,
-                Expression.NotEqual(member, Expression.Constant(string.Empty))
-            ),
-
-            Operator.Null => Expression.Equal(member, Expression.Constant(null)),
-
-            Operator.NotNull => Expression.NotEqual(member, Expression.Constant(null)),
-
-            _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
-        };
     }
 
     private Expression CreateOrNestedExpressions(ParameterExpression parameter)
@@ -233,7 +144,7 @@ public class RuleGenerator<TModel> : IFilterRuleBuilder<TModel>
 
         return orExpression;
     }
-    
+
     private Expression CreateAndNestedExpressions(ParameterExpression parameter)
     {
         Expression orExpression = null;
