@@ -69,14 +69,9 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             Operator.NotEndsWith => GenerateNotEndsWithExpression(isNotNull, member, constantValue),
             Operator.Contains => GenerateContainsExpression(isNotNull, member, constantValue),
             Operator.NotContains => GenerateNotContainsExpression(isNotNull, member, constantValue),
-
             Operator.Equal => Expression.Equal(member, constantValue),
-
             Operator.NotEqual => Expression.Not(Expression.Equal(member, constantValue)),
-
-            Operator.In => isNotNull != null
-                ? Expression.AndAlso(isNotNull, Expression.Call(containsMethod, constantValue, member))
-                : Expression.Call(containsMethod, constantValue, member),
+            Operator.In => GenerateInExpression(isNotNull, containsMethod, constantValue, member),
 
             Operator.NotIn => isNotNull != null
                 ? Expression.AndAlso(isNotNull, Expression.Not(Expression.Call(containsMethod, constantValue, member)))
@@ -137,6 +132,14 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
         ConstantExpression constantValue)
     {
         return Expression.AndAlso(isNotNull, Expression.Call(member, nameof(Operator.Contains), null, constantValue));
+    }
+    
+    private static Expression GenerateInExpression(BinaryExpression isNotNull, MethodInfo containsMethod,
+        ConstantExpression constantValue, MemberExpression member)
+    {
+        return isNotNull != null
+            ? Expression.AndAlso(isNotNull, Expression.Call(containsMethod, constantValue, member))
+            : Expression.Call(containsMethod, constantValue, member);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
