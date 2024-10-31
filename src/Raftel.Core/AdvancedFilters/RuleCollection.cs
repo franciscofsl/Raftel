@@ -42,21 +42,20 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
     private Expression CreateExpression(ParameterExpression parameter, Rule rule)
     {
         var member = Expression.Property(parameter, rule.Field);
-        var constantValue = Expression.Constant(rule.Value);
+
+        var elementType = rule.Value.GetType().IsArray
+            ? rule.Value.GetType().GetElementType()
+            : rule.Value.GetType().GetGenericArguments().FirstOrDefault() ?? rule.Value.GetType();
+
+        var constantValue = CalculateConstantValueFromRule(rule, elementType);
 
         var isNotNull = member.Type.IsValueType && Nullable.GetUnderlyingType(member.Type) == null
             ? null
             : Expression.NotEqual(member, Expression.Constant(null));
-        MethodInfo containsMethod = null;
-        if (rule.Value is not null)
-        {
-            var elementType = rule.Value.GetType().IsArray
-                ? rule.Value.GetType().GetElementType()
-                : rule.Value.GetType().GetGenericArguments().FirstOrDefault();
-            containsMethod = typeof(Enumerable).GetMethods()
-                .First(m => m.Name == "Contains" && m.GetParameters().Length == 2)
-                .MakeGenericMethod(elementType);
-        }
+
+        var containsMethod = typeof(Enumerable).GetMethods()
+            .First(m => m.Name == "Contains" && m.GetParameters().Length == 2)
+            .MakeGenericMethod(elementType);
 
         return rule.Operator switch
         {
@@ -104,11 +103,9 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
                 ? Expression.AndAlso(isNotNull, Expression.Call(containsMethod, constantValue, member))
                 : Expression.Call(containsMethod, constantValue, member),
 
-            Operator.NotIn => Expression.AndAlso(
-                isNotNull,
-                Expression.Not(Expression.Call(typeof(Enumerable), nameof(Enumerable.Contains),
-                    new[] { typeof(string) }, Expression.Constant(rule.Value), member))
-            ),
+            Operator.NotIn => isNotNull != null
+                ? Expression.AndAlso(isNotNull, Expression.Not(Expression.Call(containsMethod, constantValue, member)))
+                : Expression.Not(Expression.Call(containsMethod, constantValue, member)),
 
             Operator.Empty => Expression.AndAlso(
                 isNotNull,
@@ -126,6 +123,22 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
 
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
         };
+    }
+
+    private static ConstantExpression CalculateConstantValueFromRule(Rule rule, Type elementType)
+    {
+        var constantValue = Expression.Constant(rule.Value);
+        if (rule.Value is IEnumerable collection)
+        {
+            constantValue = Expression.Constant(collection, typeof(IEnumerable<>).MakeGenericType(elementType));
+        }
+        else if (elementType.IsAssignableFrom(typeof(Enumerable)))
+        {
+            constantValue =
+                Expression.Constant(new[] { rule.Value }, typeof(IEnumerable<>).MakeGenericType(elementType));
+        }
+
+        return constantValue;
     }
 
     IEnumerator IEnumerable.GetEnumerator()

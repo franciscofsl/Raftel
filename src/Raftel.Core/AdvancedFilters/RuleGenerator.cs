@@ -56,7 +56,7 @@ public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TMo
         return AddRule(Operator.In, expression, values);
     }
 
-    public IFilterRuleBuilder<TModel> NotIn(Expression<Func<TModel, object>> expression, string[] values)
+    public IFilterRuleBuilder<TModel> NotIn(Expression<Func<TModel, object>> expression, dynamic values)
     {
         return AddRule(Operator.NotIn, expression, values);
     }

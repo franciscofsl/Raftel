@@ -96,4 +96,82 @@ public partial class AdvancedFilterBuilderTest
 
         filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
     }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForIntNotIn_IfBountyIsInList_UsingIntArray()
+    {
+        var bounties = new int[]
+        {
+            Pirates.Mugiwaras.Luffy.Bounty,
+            Pirates.Mugiwaras.Zoro.Bounty,
+            Pirates.Mugiwaras.Nami.Bounty
+        };
+
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.NotIn(_ => _.Bounty, bounties))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForIntNotIn_IfBountyIsInList_UsingIntList()
+    {
+        var bounties = new List<int>
+        {
+            Pirates.Mugiwaras.Luffy.Bounty,
+            Pirates.Mugiwaras.Zoro.Bounty,
+            Pirates.Mugiwaras.Nami.Bounty
+        };
+
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.NotIn(_ => _.Bounty, bounties))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForIntNotIn_IfBountyIsNotInList_UsingIntList()
+    {
+        var bounties = new List<int>
+        {
+            Pirates.Mugiwaras.Luffy.Bounty,
+            Pirates.Mugiwaras.Zoro.Bounty,
+            Pirates.Mugiwaras.Nami.Bounty
+        };
+
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.NotIn(_ => _.Bounty, bounties))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForIntNotIn_IfBountyIsNotInList_In_IntArray()
+    {
+        var bounties = new int[]
+        {
+            Pirates.Mugiwaras.Luffy.Bounty,
+            Pirates.Mugiwaras.Zoro.Bounty,
+            Pirates.Mugiwaras.Nami.Bounty
+        };
+
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.NotIn(_ => _.Bounty, bounties))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeTrue();
+    }
 }
