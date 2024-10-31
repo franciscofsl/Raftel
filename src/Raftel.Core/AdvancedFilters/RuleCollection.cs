@@ -64,12 +64,7 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
         return rule.Operator switch
         {
             Operator.StartsWith => GenerateStartsWithExpression(isNotNull, member, constantValue),
-
-            Operator.NotStartsWith => Expression.AndAlso(
-                isNotNull,
-                Expression.Not(Expression.Call(member,
-                    typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }), constantValue))
-            ),
+            Operator.NotStartsWith => GenerateNotStartsWithExpression(isNotNull, member, constantValue),
 
             Operator.EndsWith => Expression.AndAlso(
                 isNotNull,
@@ -125,10 +120,18 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
         };
     }
 
+
     private static Expression GenerateStartsWithExpression(Expression isNotNull, Expression member,
         ConstantExpression constantValue)
     {
         return Expression.AndAlso(isNotNull, Expression.Call(member, nameof(Operator.StartsWith), null, constantValue));
+    }
+
+    private static Expression GenerateNotStartsWithExpression(BinaryExpression isNotNull, MemberExpression member,
+        ConstantExpression constantValue)
+    {
+        var startsWithExpression = GenerateStartsWithExpression(isNotNull, member, constantValue);
+        return Expression.AndAlso(isNotNull, Expression.Not(startsWithExpression));
     }
 
     IEnumerator IEnumerable.GetEnumerator()
