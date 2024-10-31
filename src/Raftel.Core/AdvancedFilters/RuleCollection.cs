@@ -65,12 +65,7 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
         {
             Operator.StartsWith => GenerateStartsWithExpression(isNotNull, member, constantValue),
             Operator.NotStartsWith => GenerateNotStartsWithExpression(isNotNull, member, constantValue),
-
-            Operator.EndsWith => Expression.AndAlso(
-                isNotNull,
-                Expression.Call(member, typeof(string).GetMethod(nameof(string.EndsWith), new[] { typeof(string) }),
-                    constantValue)
-            ),
+            Operator.EndsWith => GenerateEndsWithExpression(isNotNull, member, constantValue),
 
             Operator.NotEndsWith => Expression.AndAlso(
                 isNotNull,
@@ -120,7 +115,6 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
         };
     }
 
-
     private static Expression GenerateStartsWithExpression(Expression isNotNull, Expression member,
         ConstantExpression constantValue)
     {
@@ -132,6 +126,12 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
     {
         var startsWithExpression = GenerateStartsWithExpression(isNotNull, member, constantValue);
         return Expression.AndAlso(isNotNull, Expression.Not(startsWithExpression));
+    }
+
+    private static BinaryExpression GenerateEndsWithExpression(BinaryExpression isNotNull, MemberExpression member,
+        ConstantExpression constantValue)
+    {
+        return Expression.AndAlso(isNotNull, Expression.Call(member, nameof(Operator.EndsWith), null, constantValue)); 
     }
 
     IEnumerator IEnumerable.GetEnumerator()
