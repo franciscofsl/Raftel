@@ -63,11 +63,7 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
 
         return rule.Operator switch
         {
-            Operator.StartsWith => Expression.AndAlso(
-                isNotNull,
-                Expression.Call(member, typeof(string).GetMethod(nameof(string.StartsWith), new[] { typeof(string) }),
-                    constantValue)
-            ),
+            Operator.StartsWith => GenerateStartsWithExpression(isNotNull, member, constantValue),
 
             Operator.NotStartsWith => Expression.AndAlso(
                 isNotNull,
@@ -127,6 +123,12 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
 
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
         };
+    }
+
+    private static Expression GenerateStartsWithExpression(Expression isNotNull, Expression member,
+        ConstantExpression constantValue)
+    {
+        return Expression.AndAlso(isNotNull, Expression.Call(member, nameof(Operator.StartsWith), null, constantValue));
     }
 
     IEnumerator IEnumerable.GetEnumerator()
