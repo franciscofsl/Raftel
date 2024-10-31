@@ -68,12 +68,7 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             Operator.EndsWith => GenerateEndsWithExpression(isNotNull, member, constantValue),
             Operator.NotEndsWith => GenerateNotEndsWithExpression(isNotNull, member, constantValue),
             Operator.Contains => GenerateContainsExpression(isNotNull, member, constantValue),
-
-            Operator.NotContains => Expression.AndAlso(
-                isNotNull,
-                Expression.Not(Expression.Call(member,
-                    typeof(string).GetMethod(nameof(string.Contains), new[] { typeof(string) }), constantValue))
-            ),
+            Operator.NotContains => GenerateNotContainsExpression(isNotNull, member, constantValue),
 
             Operator.Equal => Expression.Equal(member, constantValue),
 
@@ -103,6 +98,13 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
 
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
         };
+    }
+
+    private static BinaryExpression GenerateNotContainsExpression(BinaryExpression isNotNull, MemberExpression member,
+        ConstantExpression constantValue)
+    {
+        var containsExpression = GenerateContainsExpression(isNotNull, member, constantValue);
+        return Expression.AndAlso(isNotNull, Expression.Not(containsExpression));
     }
 
     private static Expression GenerateStartsWithExpression(Expression isNotNull, Expression member,
