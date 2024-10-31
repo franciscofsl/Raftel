@@ -73,21 +73,12 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             Operator.NotEqual => Expression.Not(Expression.Equal(member, constantValue)),
             Operator.In => GenerateInExpression(isNotNull, containsMethod, constantValue, member),
             Operator.NotIn => GenerateNotInExpression(isNotNull, containsMethod, constantValue, member),
-
-            Operator.Empty => Expression.AndAlso(
-                isNotNull,
-                Expression.Equal(member, Expression.Constant(string.Empty))
-            ),
-
-            Operator.NotEmpty => Expression.AndAlso(
-                isNotNull,
-                Expression.NotEqual(member, Expression.Constant(string.Empty))
-            ),
-
+            Operator.Empty => Expression.AndAlso(isNotNull,
+                Expression.Equal(member, Expression.Constant(string.Empty))),
+            Operator.NotEmpty => Expression.AndAlso(isNotNull,
+                Expression.NotEqual(member, Expression.Constant(string.Empty))),
             Operator.Null => Expression.Equal(member, Expression.Constant(null)),
-
             Operator.NotNull => Expression.NotEqual(member, Expression.Constant(null)),
-
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
         };
     }
