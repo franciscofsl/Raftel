@@ -81,6 +81,12 @@ public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TMo
         return AddRule(Operator.NotNull, expression, null);
     }
 
+    public IFilterRuleBuilder<TModel> Between<TRangeType>(Expression<Func<TModel, object>> expression,
+        Range<TRangeType> range) where TRangeType : struct, IComparable<TRangeType>
+    {
+        return AddRule(Operator.Between, expression, range);
+    }
+
     public IFilterRuleBuilder<TModel> And(
         Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression)
     {

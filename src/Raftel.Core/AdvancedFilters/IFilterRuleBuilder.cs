@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Raftel.Shared.Common;
 
 namespace Raftel.Core.AdvancedFilters;
 
@@ -19,6 +20,8 @@ public interface IFilterRuleBuilder<TModel>
     IFilterRuleBuilder<TModel> Null(Expression<Func<TModel, object>> expression);
     IFilterRuleBuilder<TModel> NotNull(Expression<Func<TModel, object>> expression);
 
+    IFilterRuleBuilder<TModel> Between<TRangeType>(Expression<Func<TModel, object>> expression, Range<TRangeType> range)
+        where TRangeType : struct, IComparable<TRangeType>;
     IFilterRuleBuilder<TModel> And(
         Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression);
 

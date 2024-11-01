@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using Raftel.Shared.AdvancedFilters;
+using Raftel.Shared.Common;
 using Raftel.Shared.Extensions;
 
 namespace Raftel.Core.AdvancedFilters;
@@ -62,6 +63,7 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             Operator.NotEmpty => GenerateNotEmptyExpression(isNotNull, member),
             Operator.Null => GenerateNullExpression(member),
             Operator.NotNull => GenerateNotNullExpression(member),
+            Operator.Between => GenerateBetweenExpression(isNotNull, member, rule.Value),
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
         };
     }
@@ -174,8 +176,34 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
         return Expression.NotEqual(member, Expression.Constant(null));
     }
 
+    private static Expression GenerateBetweenExpression(Expression isNotNull, MemberExpression member, object value)
+    {
+        var genericArgumentType = value.GetType().GetGenericArguments()[0];
+        var range = typeof(Range<>).MakeGenericType(genericArgumentType);
+
+        var startValue = Expression.Constant(range.GetProperty("Min").GetValue(value), genericArgumentType);
+        var endValue = Expression.Constant(range.GetProperty("Max").GetValue(value), genericArgumentType);
+
+        var unboxedMember = UnboxNullable(member);
+
+        var greaterThanOrEqual =
+            Expression.GreaterThanOrEqual(unboxedMember, Expression.Convert(startValue, unboxedMember.Type));
+        var lessThanOrEqual = Expression.LessThanOrEqual(unboxedMember, Expression.Convert(endValue, unboxedMember.Type));
+
+        return isNotNull != null
+            ? Expression.AndAlso(isNotNull, Expression.AndAlso(greaterThanOrEqual, lessThanOrEqual))
+            : Expression.AndAlso(greaterThanOrEqual, lessThanOrEqual);
+    }
+
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
+    }
+
+    private static Expression UnboxNullable(MemberExpression member)
+    {
+        return member.Type.IsGenericType && member.Type.GetGenericTypeDefinition() == typeof(Nullable<>)
+            ? Expression.Property(member, "Value")
+            : member;
     }
 }

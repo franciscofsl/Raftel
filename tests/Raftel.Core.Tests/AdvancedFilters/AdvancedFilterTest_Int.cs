@@ -226,4 +226,30 @@ public partial class AdvancedFilterBuilderTest
         
         filter(pirate).Should().BeFalse();
     }
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForBountyBetween_IfBountyIsInRange()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.Between(_ => _.Bounty, new Range<int>(66000000, 500000000)))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Usopp).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeBetween_IfAgeIsInRange()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.Between(_ => _.Age, new Range<int>(19, 30)))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Robin).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+    }
+
 }

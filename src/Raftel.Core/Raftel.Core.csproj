@@ -14,6 +14,10 @@
     <ItemGroup>
       <ProjectReference Include="..\Raftel.Shared\Raftel.Shared.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Common\ValueObjects\" />
+    </ItemGroup>
 
 
 
