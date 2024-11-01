@@ -54,16 +54,14 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             Operator.NotEndsWith => GenerateNotEndsWithExpression(isNotNull, member, constantValue),
             Operator.Contains => GenerateContainsExpression(isNotNull, member, constantValue),
             Operator.NotContains => GenerateNotContainsExpression(isNotNull, member, constantValue),
-            Operator.Equal => Expression.Equal(member, constantValue),
-            Operator.NotEqual => Expression.Not(Expression.Equal(member, constantValue)),
+            Operator.Equal => GenerateEqualExpression(member, constantValue),
+            Operator.NotEqual => GenerateNotEqualExpression(member, constantValue),
             Operator.In => GenerateInExpression(isNotNull, containsMethod, constantValue, member),
             Operator.NotIn => GenerateNotInExpression(isNotNull, containsMethod, constantValue, member),
-            Operator.Empty => Expression.AndAlso(isNotNull,
-                Expression.Equal(member, Expression.Constant(string.Empty))),
-            Operator.NotEmpty => Expression.AndAlso(isNotNull,
-                Expression.NotEqual(member, Expression.Constant(string.Empty))),
-            Operator.Null => Expression.Equal(member, Expression.Constant(null)),
-            Operator.NotNull => Expression.NotEqual(member, Expression.Constant(null)),
+            Operator.Empty => GenerateEmptyExpression(isNotNull, member),
+            Operator.NotEmpty => GenerateNotEmptyExpression(isNotNull, member),
+            Operator.Null => GenerateNullExpression(member),
+            Operator.NotNull => GenerateNotNullExpression(member),
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
         };
     }
@@ -91,11 +89,21 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             .MakeGenericMethod(elementType);
     }
 
-    private static BinaryExpression GenerateNotContainsExpression(Expression isNotNull, MemberExpression member,
+    private static Expression GenerateNotContainsExpression(Expression isNotNull, MemberExpression member,
         ConstantExpression constantValue)
     {
         var containsExpression = GenerateContainsExpression(isNotNull, member, constantValue);
         return Expression.AndAlso(isNotNull, Expression.Not(containsExpression));
+    }
+
+    private static Expression GenerateEqualExpression(MemberExpression member, ConstantExpression constantValue)
+    {
+        return Expression.Equal(member, constantValue);
+    }
+
+    private static Expression GenerateNotEqualExpression(MemberExpression member, ConstantExpression constantValue)
+    {
+        return Expression.Not(Expression.Equal(member, constantValue));
     }
 
     private static Expression GenerateStartsWithExpression(Expression isNotNull, Expression member,
@@ -144,6 +152,26 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
         return isNotNull != null
             ? Expression.AndAlso(isNotNull, Expression.Not(Expression.Call(containsMethod, constantValue, member)))
             : Expression.Not(Expression.Call(containsMethod, constantValue, member));
+    }
+
+    private static Expression GenerateEmptyExpression(Expression isNotNull, MemberExpression member)
+    {
+        return Expression.AndAlso(isNotNull, Expression.Equal(member, Expression.Constant(string.Empty)));
+    }
+
+    private static BinaryExpression GenerateNotEmptyExpression(Expression isNotNull, MemberExpression member)
+    {
+        return Expression.AndAlso(isNotNull, Expression.NotEqual(member, Expression.Constant(string.Empty)));
+    }
+
+    private static BinaryExpression GenerateNullExpression(MemberExpression member)
+    {
+        return Expression.Equal(member, Expression.Constant(null));
+    }
+
+    private static BinaryExpression GenerateNotNullExpression(MemberExpression member)
+    {
+        return Expression.NotEqual(member, Expression.Constant(null));
     }
 
     IEnumerator IEnumerable.GetEnumerator()
