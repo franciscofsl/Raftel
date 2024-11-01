@@ -22,6 +22,9 @@ public interface IFilterRuleBuilder<TModel>
 
     IFilterRuleBuilder<TModel> Between<TRangeType>(Expression<Func<TModel, object>> expression, Range<TRangeType> range)
         where TRangeType : struct, IComparable<TRangeType>;
+    IFilterRuleBuilder<TModel> NotBetween<TRangeType>(Expression<Func<TModel, object>> expression, Range<TRangeType> range)
+        where TRangeType : struct, IComparable<TRangeType>;
+ 
     IFilterRuleBuilder<TModel> And(
         Expression<Func<IFilterRuleBuilder<TModel>, IFilterRuleBuilder<TModel>>> filterExpression);
 

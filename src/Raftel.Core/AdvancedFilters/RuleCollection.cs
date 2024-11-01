@@ -195,6 +195,14 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             : Expression.AndAlso(greaterThanOrEqual, lessThanOrEqual);
     }
 
+    private static Expression GenerateNotBetweenExpression(Expression isNotNull, MemberExpression member, object value)
+    {
+        var betweenExpression = GenerateBetweenExpression(isNotNull, member, value);
+        return isNotNull != null
+            ? Expression.AndAlso(isNotNull, Expression.Not(betweenExpression))
+            : Expression.Not(betweenExpression);
+    }
+
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
