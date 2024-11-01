@@ -43,23 +43,8 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
     {
         var member = Expression.Property(parameter, rule.Field);
         var constantValue = Expression.Constant(rule.Value);
-
-        var isNotNull = member.Type.IsValueType && Nullable.GetUnderlyingType(member.Type) == null
-            ? null
-            : Expression.NotEqual(member, Expression.Constant(null));
-        MethodInfo containsMethod = null;
-        if (rule.Value is not null)
-        {
-            var elementType = rule.Value.GetType().IsArray
-                ? rule.Value.GetType().GetElementType()
-                : rule.Value.GetType().GetGenericArguments().FirstOrDefault();
-
-            elementType ??= rule.Value.GetType();
-
-            containsMethod = typeof(Enumerable).GetMethods()
-                .FirstOrDefault(m => m.Name == "Contains" && m.GetParameters().Length == 2)
-                .MakeGenericMethod(elementType);
-        }
+        var isNotNull = CreateNullCheckExpression(member);
+        var containsMethod = GetContainsMethod(rule.Value);
 
         return rule.Operator switch
         {
@@ -83,7 +68,30 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
         };
     }
 
-    private static BinaryExpression GenerateNotContainsExpression(BinaryExpression isNotNull, MemberExpression member,
+    private Expression CreateNullCheckExpression(MemberExpression member)
+    {
+        return member.Type.IsValueType && Nullable.GetUnderlyingType(member.Type) == null
+            ? null
+            : Expression.NotEqual(member, Expression.Constant(null));
+    }
+
+    private MethodInfo GetContainsMethod(object value)
+    {
+        if (value is null)
+        {
+            return null;
+        }
+
+        var elementType = value.GetType().IsArray
+            ? value.GetType().GetElementType()
+            : value.GetType().GetGenericArguments().FirstOrDefault() ?? value.GetType();
+
+        return typeof(Enumerable).GetMethods()
+            .FirstOrDefault(m => m.Name == "Contains" && m.GetParameters().Length == 2)?
+            .MakeGenericMethod(elementType);
+    }
+
+    private static BinaryExpression GenerateNotContainsExpression(Expression isNotNull, MemberExpression member,
         ConstantExpression constantValue)
     {
         var containsExpression = GenerateContainsExpression(isNotNull, member, constantValue);
@@ -96,33 +104,33 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
         return Expression.AndAlso(isNotNull, Expression.Call(member, nameof(Operator.StartsWith), null, constantValue));
     }
 
-    private static Expression GenerateNotStartsWithExpression(BinaryExpression isNotNull, MemberExpression member,
+    private static Expression GenerateNotStartsWithExpression(Expression isNotNull, MemberExpression member,
         ConstantExpression constantValue)
     {
         var startsWithExpression = GenerateStartsWithExpression(isNotNull, member, constantValue);
         return Expression.AndAlso(isNotNull, Expression.Not(startsWithExpression));
     }
 
-    private static BinaryExpression GenerateEndsWithExpression(BinaryExpression isNotNull, MemberExpression member,
+    private static Expression GenerateEndsWithExpression(Expression isNotNull, MemberExpression member,
         ConstantExpression constantValue)
     {
         return Expression.AndAlso(isNotNull, Expression.Call(member, nameof(Operator.EndsWith), null, constantValue));
     }
 
-    private static BinaryExpression GenerateNotEndsWithExpression(BinaryExpression isNotNull, MemberExpression member,
+    private static Expression GenerateNotEndsWithExpression(Expression isNotNull, MemberExpression member,
         ConstantExpression constantValue)
     {
         var endsWithExpression = GenerateEndsWithExpression(isNotNull, member, constantValue);
         return Expression.AndAlso(isNotNull, Expression.Not(endsWithExpression));
     }
 
-    private static BinaryExpression GenerateContainsExpression(BinaryExpression isNotNull, MemberExpression member,
+    private static Expression GenerateContainsExpression(Expression isNotNull, MemberExpression member,
         ConstantExpression constantValue)
     {
         return Expression.AndAlso(isNotNull, Expression.Call(member, nameof(Operator.Contains), null, constantValue));
     }
 
-    private static Expression GenerateInExpression(BinaryExpression isNotNull, MethodInfo containsMethod,
+    private static Expression GenerateInExpression(Expression isNotNull, MethodInfo containsMethod,
         ConstantExpression constantValue, MemberExpression member)
     {
         return isNotNull != null
@@ -130,7 +138,7 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             : Expression.Call(containsMethod, constantValue, member);
     }
 
-    private static Expression GenerateNotInExpression(BinaryExpression isNotNull, MethodInfo containsMethod,
+    private static Expression GenerateNotInExpression(Expression isNotNull, MethodInfo containsMethod,
         ConstantExpression constantValue, MemberExpression member)
     {
         return isNotNull != null
