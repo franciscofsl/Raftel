@@ -16,6 +16,7 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
         _rules.Add(rule);
     }
 
+    [ExcludeFromCodeCoverage]
     public IEnumerator<Rule> GetEnumerator()
     {
         return _rules.GetEnumerator();
@@ -257,6 +258,7 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             : Expression.Not(betweenExpression);
     }
 
+    [ExcludeFromCodeCoverage]
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
