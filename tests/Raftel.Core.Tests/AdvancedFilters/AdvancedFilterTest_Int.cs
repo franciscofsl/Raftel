@@ -10,8 +10,6 @@ public partial class AdvancedFilterBuilderTest
     // Less Than    - pending implement
     // Between - pending implement
     // Not Between - pending implement
-    // In
-    // Not In
     // Is Null
     // Not Null
 
@@ -173,5 +171,32 @@ public partial class AdvancedFilterBuilderTest
 
         filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
         filter(Pirates.Mugiwaras.Chopper).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForNullAge_IfAgeIsNull()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.Null(_ => _.Age))
+            .Build();
+
+        var pirate = new Pirate()
+        {
+            Age = null
+        };
+
+        filter(pirate).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForNullAge_IfAgeIsNotNull()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.Null(_ => _.Age))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 }
