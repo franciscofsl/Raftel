@@ -64,7 +64,9 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             Operator.Null => GenerateNullExpression(member),
             Operator.NotNull => GenerateNotNullExpression(member),
             Operator.GreaterThan => GenerateGreaterThanExpression(isNotNull, member, constantValue),
+            Operator.GreaterThanOrEqual => GenerateGreaterThanOrEqualExpression(isNotNull, member, constantValue),
             Operator.Between => GenerateBetweenExpression(isNotNull, member, rule.Value),
+            Operator.NotBetween => GenerateNotBetweenExpression(isNotNull, member, rule.Value),
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
         };
     }
@@ -182,7 +184,19 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
     {
         var unboxedMember = UnboxNullable(member);
         var convertedExpression = Expression.Convert(constantValue, unboxedMember.Type);
-        var greaterThanOrEqual = Expression.GreaterThan(unboxedMember, convertedExpression);
+        var greaterThan = Expression.GreaterThan(unboxedMember, convertedExpression);
+
+        return isNotNull != null
+            ? Expression.AndAlso(isNotNull, greaterThan)
+            : greaterThan;
+    }
+
+    private static Expression GenerateGreaterThanOrEqualExpression(Expression isNotNull, MemberExpression member,
+        ConstantExpression constantValue)
+    {
+        var unboxedMember = UnboxNullable(member);
+        var convertedExpression = Expression.Convert(constantValue, unboxedMember.Type);
+        var greaterThanOrEqual = Expression.GreaterThanOrEqual(unboxedMember, convertedExpression);
 
         return isNotNull != null
             ? Expression.AndAlso(isNotNull, greaterThanOrEqual)

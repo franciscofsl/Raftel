@@ -19,8 +19,8 @@ public interface IFilterRuleBuilder<TModel>
     IFilterRuleBuilder<TModel> NotEmpty(Expression<Func<TModel, object>> expression);
     IFilterRuleBuilder<TModel> Null(Expression<Func<TModel, object>> expression);
     IFilterRuleBuilder<TModel> NotNull(Expression<Func<TModel, object>> expression);
-
     IFilterRuleBuilder<TModel> GreaterThan(Expression<Func<TModel, object>> expression, dynamic value);
+    IFilterRuleBuilder<TModel> GreaterThanOrEqual(Expression<Func<TModel, object>> expression, dynamic value);
     IFilterRuleBuilder<TModel> Between<TRangeType>(Expression<Func<TModel, object>> expression, Range<TRangeType> range)
         where TRangeType : struct, IComparable<TRangeType>;
     IFilterRuleBuilder<TModel> NotBetween<TRangeType>(Expression<Func<TModel, object>> expression, Range<TRangeType> range)

@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Raftel.Shared.AdvancedFilters;
+using Raftel.Shared.Common;
 using Raftel.Shared.Extensions;
 
 namespace Raftel.Core.AdvancedFilters;
@@ -84,6 +85,11 @@ public class RuleGenerator<TModel>(Condition condition) : IFilterRuleBuilder<TMo
     public IFilterRuleBuilder<TModel> GreaterThan(Expression<Func<TModel, object>> expression, dynamic value)
     {
         return AddRule(Operator.GreaterThan, expression, value);
+    }
+
+    public IFilterRuleBuilder<TModel> GreaterThanOrEqual(Expression<Func<TModel, object>> expression, dynamic value)
+    {
+        return AddRule(Operator.GreaterThanOrEqual, expression, value);
     }
     public IFilterRuleBuilder<TModel> Between<TRangeType>(Expression<Func<TModel, object>> expression,
         Range<TRangeType> range) where TRangeType : struct, IComparable<TRangeType>
