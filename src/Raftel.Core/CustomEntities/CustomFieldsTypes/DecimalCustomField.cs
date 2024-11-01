@@ -1,4 +1,4 @@
-﻿using Raftel.Core.Common.ValueObjects;
+﻿using Raftel.Shared.Common;
 using Raftel.Shared.Results;
 
 namespace Raftel.Core.CustomEntities.CustomFieldsTypes;

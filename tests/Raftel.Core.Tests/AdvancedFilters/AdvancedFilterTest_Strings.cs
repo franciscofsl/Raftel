@@ -4,19 +4,6 @@ namespace Raftel.Core.Tests.AdvancedFilters;
 
 public partial class AdvancedFilterBuilderTest
 {
-    private readonly List<Pirate> _pirates = new()
-    {
-        new Pirate { Name = "Luffy", LastName = "Monkey D." },
-        new Pirate { Name = "Zoro", LastName = "Roronoa" },
-        new Pirate { Name = "Nami", LastName = "Swan" },
-        new Pirate { Name = "Sanji", LastName = "Vinsmoke" },
-        new Pirate { Name = "Tony", LastName = "Tony Chopper" },
-        new Pirate { Name = "Robin", LastName = "Nico" },
-        new Pirate { Name = "Franky" },
-        new Pirate { Name = "Brook" },
-        new Pirate { Name = "Jinbe" }
-    };
-
     [Fact]
     public void AdvancedFilter_ShouldFilterForTextStartsWith_IfNameStartsWith()
     {
@@ -41,12 +28,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.StartsWith(_ => _.Name, "Zo"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -57,12 +39,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotStartsWith(_ => _.Name, "Lu"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -73,12 +50,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotStartsWith(_ => _.Name, "Zo"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
     }
 
     [Fact]
@@ -89,12 +61,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.EndsWith(_ => _.Name, "y"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
     }
 
     [Fact]
@@ -105,12 +72,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.EndsWith(_ => _.Name, "ro"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -121,12 +83,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotEndsWith(_ => _.Name, "y"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -137,12 +94,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotEndsWith(_ => _.Name, "ro"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
     }
 
     [Fact]
@@ -153,12 +105,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.Contains(_ => _.Name, "ff"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
     }
 
     [Fact]
@@ -169,12 +116,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.Contains(_ => _.Name, "ro"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -185,12 +127,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotContains(_ => _.Name, "ro"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
     }
 
     [Fact]
@@ -201,12 +138,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotContains(_ => _.Name, "u"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -217,12 +149,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.Equal(_ => _.Name, "Luffy"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
     }
 
     [Fact]
@@ -233,12 +160,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.Equal(_ => _.Name, "Zoro"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -249,12 +171,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotEqual(_ => _.Name, "Zoro"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
     }
 
     [Fact]
@@ -265,12 +182,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotEqual(_ => _.Name, "Luffy"))
             .Build();
 
-        var pirate = new Pirate()
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -281,12 +193,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.In(_ => _.Name, new[] { "Luffy", "Zoro" }))
             .Build();
 
-        var pirate = new Pirate
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
     }
 
     [Fact]
@@ -297,12 +204,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.In(_ => _.Name, new[] { "Luffy", "Zoro" }))
             .Build();
 
-        var pirate = new Pirate
-        {
-            Name = "Sanji"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
     }
 
     [Fact]
@@ -313,12 +215,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotIn(_ => _.Name, new[] { "Luffy", "Zoro" }))
             .Build();
 
-        var pirate = new Pirate
-        {
-            Name = "Sanji"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
     }
 
     [Fact]
@@ -329,12 +226,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotIn(_ => _.Name, new[] { "Luffy", "Zoro" }))
             .Build();
 
-        var pirate = new Pirate
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -361,12 +253,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.Empty(_ => _.Name))
             .Build();
 
-        var pirate = new Pirate
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -377,12 +264,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotEmpty(_ => _.Name))
             .Build();
 
-        var pirate = new Pirate
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
     }
 
     [Fact]
@@ -425,12 +307,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.Null(_ => _.Name))
             .Build();
 
-        var pirate = new Pirate
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
 
     [Fact]
@@ -441,12 +318,7 @@ public partial class AdvancedFilterBuilderTest
             .And(b => b.NotNull(_ => _.Name))
             .Build();
 
-        var pirate = new Pirate
-        {
-            Name = "Luffy"
-        };
-
-        filter(pirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
     }
 
     [Fact]
@@ -475,15 +347,10 @@ public partial class AdvancedFilterBuilderTest
             .Or(_ => _.StartsWith(p => p.Name, "L"))
             .Build();
 
-        var chopper = new Pirate { Name = "Chopper" };
-        var sanji = new Pirate { Name = "Sanji", LastName = "Vinsmoke" };
-        var luffy = new Pirate { Name = "Luffy" };
-        var zoro = new Pirate { Name = "Zoro" };
-
-        filter(chopper).Should().BeFalse();
-        filter(sanji).Should().BeTrue();
-        filter(luffy).Should().BeTrue();
-        filter(zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
     }
 
     [Fact]
@@ -495,7 +362,7 @@ public partial class AdvancedFilterBuilderTest
             .Or(p => p.StartsWith(p2 => p2.LastName, "N"))
             .Build();
 
-        var pirates = _pirates.Where(filter).ToList();
+        var pirates = Pirates.Mugiwaras.All.Where(filter).ToList();
 
         pirates.Should().HaveCount(2);
         pirates.Should().ContainSingle(_ => _.Name == "Luffy");
@@ -512,7 +379,7 @@ public partial class AdvancedFilterBuilderTest
             .Or(p => p.NotNull(p2 => p2.LastName))
             .Build();
 
-        var pirates = _pirates.Where(filter).ToList();
+        var pirates = Pirates.Mugiwaras.All.Where(filter).ToList();
 
         pirates.Should().HaveCount(6);
     }
@@ -526,12 +393,10 @@ public partial class AdvancedFilterBuilderTest
             .Or(p => p.NotEmpty(p => p.Name))
             .Build();
 
-        var emptyLastNamePirate = new Pirate { Name = "Usopp", LastName = "" };
-        var nonEmptyNamePirate = new Pirate { Name = "Nami", LastName = "Swan" };
         var emptyNamePirate = new Pirate { Name = "", LastName = "" };
 
-        filter(emptyLastNamePirate).Should().BeTrue();
-        filter(nonEmptyNamePirate).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeTrue();
         filter(emptyNamePirate).Should().BeFalse();
     }
 
@@ -545,7 +410,7 @@ public partial class AdvancedFilterBuilderTest
                 .Equal(_ => _.Name, "Zoro"))
             .Build();
 
-        var pirates = _pirates.Where(filter).ToList();
+        var pirates = Pirates.Mugiwaras.All.Where(filter).ToList();
 
         pirates.Should().HaveCount(2);
     }
@@ -562,7 +427,7 @@ public partial class AdvancedFilterBuilderTest
                     .Equal(_ => _.Name, "Zoro")))
             .Build();
 
-        var pirates = _pirates.Where(filter).ToList();
+        var pirates = Pirates.Mugiwaras.All.Where(filter).ToList();
 
         pirates.Should().HaveCount(1);
     }
@@ -579,7 +444,7 @@ public partial class AdvancedFilterBuilderTest
                     .Equal(_ => _.LastName, "Roronoa")))
             .Build();
 
-        var pirates = _pirates.Where(filter).ToList();
+        var pirates = Pirates.Mugiwaras.All.Where(filter).ToList();
 
         pirates.Should().HaveCount(2);
     }
@@ -596,14 +461,8 @@ public partial class AdvancedFilterBuilderTest
                     .Equal(_ => _.Name, "Sanji")))
             .Build();
 
-        var pirates = _pirates.Where(filter).ToList();
+        var pirates = Pirates.Mugiwaras.All.Where(filter).ToList();
 
         pirates.Should().HaveCount(3);
-    }
-
-    private class Pirate
-    {
-        public string Name { get; set; }
-        public string LastName { get; set; }
     }
 }

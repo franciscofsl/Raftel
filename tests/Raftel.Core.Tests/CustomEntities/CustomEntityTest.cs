@@ -1,6 +1,6 @@
-﻿using Raftel.Core.Common.ValueObjects;
-using Raftel.Core.CustomEntities;
+﻿using Raftel.Core.CustomEntities;
 using Raftel.Core.CustomEntities.CustomFieldsTypes;
+using Raftel.Shared.Common;
 
 namespace Raftel.Core.Tests.CustomEntities;
 

@@ -2,9 +2,10 @@
 
 public enum FieldType
 {
-    Nested,
     String,
     Boolean,
-    Number,
+    Integer,
     Date,
+    Decimal,
+    DateTime,
 }
