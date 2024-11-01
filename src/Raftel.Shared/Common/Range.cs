@@ -1,4 +1,4 @@
-﻿namespace Raftel.Core.Common.ValueObjects;
+﻿namespace Raftel.Shared.Common;
 
 public readonly struct Range<T> where T : struct, IComparable<T>
 {
