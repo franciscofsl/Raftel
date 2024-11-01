@@ -65,6 +65,7 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             Operator.NotNull => GenerateNotNullExpression(member),
             Operator.GreaterThan => GenerateGreaterThanExpression(isNotNull, member, constantValue),
             Operator.GreaterThanOrEqual => GenerateGreaterThanOrEqualExpression(isNotNull, member, constantValue),
+            Operator.LessThan => GenerateLessThanExpression(isNotNull, member, constantValue),
             Operator.Between => GenerateBetweenExpression(isNotNull, member, rule.Value),
             Operator.NotBetween => GenerateNotBetweenExpression(isNotNull, member, rule.Value),
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
@@ -202,6 +203,18 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             ? Expression.AndAlso(isNotNull, greaterThanOrEqual)
             : greaterThanOrEqual;
     }
+
+    private static Expression GenerateLessThanExpression(Expression isNotNull, MemberExpression member,
+        ConstantExpression constantValue)
+    {
+        var unboxedMember = UnboxNullable(member);
+        var convertedExpression = Expression.Convert(constantValue, unboxedMember.Type);
+        var greaterThan = Expression.LessThan(unboxedMember, convertedExpression);
+
+        return isNotNull != null
+            ? Expression.AndAlso(isNotNull, greaterThan)
+            : greaterThan;
+    }
     private static Expression GenerateBetweenExpression(Expression isNotNull, MemberExpression member, object value)
     {
         var genericArgumentType = value.GetType().GetGenericArguments()[0];
@@ -214,7 +227,8 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
 
         var greaterThanOrEqual =
             Expression.GreaterThanOrEqual(unboxedMember, Expression.Convert(startValue, unboxedMember.Type));
-        var lessThanOrEqual = Expression.LessThanOrEqual(unboxedMember, Expression.Convert(endValue, unboxedMember.Type));
+        var lessThanOrEqual =
+            Expression.LessThanOrEqual(unboxedMember, Expression.Convert(endValue, unboxedMember.Type));
 
         return isNotNull != null
             ? Expression.AndAlso(isNotNull, Expression.AndAlso(greaterThanOrEqual, lessThanOrEqual))
