@@ -1,18 +1,10 @@
 ﻿using Raftel.Core.AdvancedFilters;
+using Raftel.Shared.Common;
 
 namespace Raftel.Core.Tests.AdvancedFilters;
 
 public partial class AdvancedFilterBuilderTest
 {
-    // Greater Than or equal - pending implement
-    // Greater Than  - pending implement
-    // Less Than or equal  - pending implement
-    // Less Than    - pending implement
-    // Between - pending implement
-    // Not Between - pending implement
-    // Is Null
-    // Not Null
-
     [Fact]
     public void AdvancedFilter_ShouldFilterForIntEqual_IfBountyEqual()
     {
@@ -218,13 +210,47 @@ public partial class AdvancedFilterBuilderTest
             .ForModel<Pirate>()
             .And(b => b.NotNull(_ => _.Age))
             .Build();
-        
+
         var pirate = new Pirate()
         {
             Age = null
         };
         
         filter(pirate).Should().BeFalse();
+    }
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForBountyGreaterThan_IfBountyIsGreater()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.GreaterThan(_ => _.Bounty, 66000000))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+    }
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeGreaterThan_IfAgeIsGreater()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.GreaterThan(_ => _.Age, 19))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeGreaterThan_IfBountyIsGreater()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.GreaterThan(_ => _.Bounty, Pirates.Mugiwaras.Chopper.Bounty + 1))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
     }
     [Fact]
     public void AdvancedFilter_ShouldFilterForBountyBetween_IfBountyIsInRange()
