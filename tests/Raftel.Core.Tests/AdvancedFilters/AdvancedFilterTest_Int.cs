@@ -199,4 +199,31 @@ public partial class AdvancedFilterBuilderTest
 
         filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
     }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForNotNullAge_IfAgeIsNotNull()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.NotNull(_ => _.Age))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldNotFilterForNotNullAge_IfAgeIsNull()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.NotNull(_ => _.Age))
+            .Build();
+        
+        var pirate = new Pirate()
+        {
+            Age = null
+        };
+        
+        filter(pirate).Should().BeFalse();
+    }
 }
