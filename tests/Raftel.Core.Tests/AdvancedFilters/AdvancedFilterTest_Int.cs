@@ -257,6 +257,7 @@ public partial class AdvancedFilterBuilderTest
         filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
         filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
     }
+
     [Fact]
     public void AdvancedFilter_ShouldFilterForAgeGreaterThan_IfAgeIsGreater()
     {
@@ -280,6 +281,33 @@ public partial class AdvancedFilterBuilderTest
         filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
         filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
     }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForBountyLessThanOrEqual_IfBountyIsLessOrEqual()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.LessThanOrEqual(_ => _.Bounty, 320000000))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeLessThanOrEqual_IfAgeIsLessOrEqual()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.LessThanOrEqual(_ => _.Age, 19))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Usopp).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+    }
+
     [Fact]
     public void AdvancedFilter_ShouldFilterForBountyLessThan_IfBountyIsLess()
     {

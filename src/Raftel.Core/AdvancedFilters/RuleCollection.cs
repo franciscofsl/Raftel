@@ -66,6 +66,7 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             Operator.GreaterThan => GenerateGreaterThanExpression(isNotNull, member, constantValue),
             Operator.GreaterThanOrEqual => GenerateGreaterThanOrEqualExpression(isNotNull, member, constantValue),
             Operator.LessThan => GenerateLessThanExpression(isNotNull, member, constantValue),
+            Operator.LessThanOrEqual => GenerateLessThanOrEqualExpression(isNotNull, member, constantValue),
             Operator.Between => GenerateBetweenExpression(isNotNull, member, rule.Value),
             Operator.NotBetween => GenerateNotBetweenExpression(isNotNull, member, rule.Value),
             _ => throw new NotImplementedException($"Operator {rule.Operator} is not implemented.")
@@ -215,6 +216,19 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
             ? Expression.AndAlso(isNotNull, greaterThan)
             : greaterThan;
     }
+
+    private static Expression GenerateLessThanOrEqualExpression(Expression isNotNull, MemberExpression member,
+        ConstantExpression constantValue)
+    {
+        var unboxedMember = UnboxNullable(member);
+        var convertedExpression = Expression.Convert(constantValue, unboxedMember.Type);
+        var greaterThanOrEqual = Expression.LessThanOrEqual(unboxedMember, convertedExpression);
+
+        return isNotNull != null
+            ? Expression.AndAlso(isNotNull, greaterThanOrEqual)
+            : greaterThanOrEqual;
+    }
+
     private static Expression GenerateBetweenExpression(Expression isNotNull, MemberExpression member, object value)
     {
         var genericArgumentType = value.GetType().GetGenericArguments()[0];
