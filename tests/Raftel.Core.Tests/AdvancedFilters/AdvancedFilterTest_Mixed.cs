@@ -1,4 +1,5 @@
 ﻿using Raftel.Core.AdvancedFilters;
+using Raftel.Shared.Common;
 
 namespace Raftel.Core.Tests.AdvancedFilters;
 
@@ -99,12 +100,34 @@ public partial class AdvancedFilterTest
         filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
         filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
         filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
-        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse(); 
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
         filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
         filter(Pirates.Mugiwaras.Chopper).Should().BeTrue();
         filter(Pirates.Mugiwaras.Robin).Should().BeTrue();
-        filter(Pirates.Mugiwaras.Franky).Should().BeTrue(); 
+        filter(Pirates.Mugiwaras.Franky).Should().BeTrue();
         filter(Pirates.Mugiwaras.Brook).Should().BeTrue();
         filter(Pirates.Mugiwaras.Jinbe).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForStringStartsWithAndBountyBetween_IfNameStartsWithAndBountyBetween()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b
+                .Between(_ => _.Bounty, new Range<int>(100000000, 500000000))
+                .StartsWith(_ => _.Name, "S"))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
     }
 }
