@@ -155,6 +155,29 @@ public partial class AdvancedFilterTest
     }
 
     [Fact]
+    public void
+        AdvancedFilter_ShouldFilterForStringContainsOrBountyLessThanOrEqual_IfNameContainsOrBountyLessThanOrEqual()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .Or(b => b
+                .LessThanOrEqual(_ => _.Bounty, 100000000)
+                .Contains(_ => _.Name, "Nami"))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Franky).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Brook).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
+    }
+
+    [Fact]
     public void AdvancedFilter_ShouldFilterForStringNotContainsAndBountyLessThan_IfNameNotContainsAndBountyLessThan()
     {
         var filter = AdvancedFilterBuilder
