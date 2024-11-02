@@ -18,4 +18,17 @@ public partial class AdvancedFilterTest
         filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
     }
 
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForStringNotEqualAndBountyEqual_IfNameNotEqualAndBountyEqual()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.Equal(_ => _.Bounty, Pirates.Mugiwaras.Zoro.Bounty).NotEqual(_ => _.Name, "Luffy"))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
+    }
 }
