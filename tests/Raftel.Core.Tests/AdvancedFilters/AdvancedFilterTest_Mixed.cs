@@ -242,6 +242,29 @@ public partial class AdvancedFilterTest
     }
 
     [Fact]
+    public void AdvancedFilter_ShouldFilterForStringStartsWithOrBountyBetween_IfNameStartsWithOrBountyBetween()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .Or(b => b
+                .Between(_ => _.Bounty, new Range<int>(100000000, 500000000))
+                .StartsWith(_ => _.Name, "S"))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeTrue();
+    }
+
+
+    [Fact]
     public void AdvancedFilter_ShouldFilterForStringEndsWithAndBountyNotBetween_IfNameEndsWithAndBountyNotBetween()
     {
         var filter = AdvancedFilterBuilder
