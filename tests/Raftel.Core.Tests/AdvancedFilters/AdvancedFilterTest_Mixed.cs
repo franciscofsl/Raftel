@@ -594,7 +594,7 @@ public partial class AdvancedFilterTest
             .And(b => b.NotEmpty(_ => _.Name))
             .Build();
 
-        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
         filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
         filter(Pirates.Mugiwaras.Nami).Should().BeTrue();
         filter(Pirates.Mugiwaras.Usopp).Should().BeTrue();
@@ -703,7 +703,7 @@ public partial class AdvancedFilterTest
         filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
         filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
         filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
-        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
         filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
         filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
         filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
@@ -923,5 +923,195 @@ public partial class AdvancedFilterTest
         filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
         filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
     }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeEqualAndBountyEqual_IfAgeEqualAndBountyEqual()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.Equal(_ => _.Age, 21))
+            .And(b => b.Equal(_ => _.Bounty, 320000000))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeNotEqualAndBountyNotEqual_IfAgeNotEqualAndBountyNotEqual()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.NotEqual(_ => _.Age, 20))
+            .And(b => b.NotEqual(_ => _.Bounty, 320000000))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Robin).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Franky).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Brook).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeGreaterThanAndBountyEqual_IfAgeGreaterThanAndBountyEqual()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.GreaterThan(_ => _.Age, 20))
+            .And(b => b.Equal(_ => _.Bounty, 320000000))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
+    }
+
+    [Fact]
+    public void
+        AdvancedFilter_ShouldFilterForAgeLessThanOrEqualAndBountyGreaterThan_IfAgeLessThanOrEqualAndBountyGreaterThan()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.LessThanOrEqual(_ => _.Age, 18))
+            .And(b => b.GreaterThan(_ => _.Bounty, 200000000))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeBetweenAndBountyLessThan_IfAgeBetweenAndBountyLessThan()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.Between(_ => _.Age, new Range<int>(18, 22)))
+            .And(b => b.LessThan(_ => _.Bounty, 400000000))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeNotBetweenAndBountyGreaterThan_IfAgeNotBetweenAndBountyGreaterThan()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.NotBetween(_ => _.Age, new Range<int>(20, 30)))
+            .And(b => b.GreaterThan(_ => _.Bounty, 300000000))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeTrue();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeEqualAndBountyIn_IfAgeEqualAndBountyIn()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.Equal(_ => _.Age, 19))
+            .And(b => b.In(_ => _.Bounty, new[] { 320000000, 400000000 }))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
+    }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForAgeNotEqualAndBountyNotIn_IfAgeNotEqualAndBountyNotIn()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.NotEqual(_ => _.Age, 22))
+            .And(b => b.NotIn(_ => _.Bounty, new[] { 320000000, 400000000 }))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Robin).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Franky).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Brook).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeTrue();
+    }
+
+    [Fact]
+    public void
+        AdvancedFilter_ShouldFilterForAgeGreaterThanOrEqualAndBountyLessThan_IfAgeGreaterThanOrEqualAndBountyLessThan()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.GreaterThanOrEqual(_ => _.Age, 18))
+            .And(b => b.LessThan(_ => _.Bounty, 200000000))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Franky).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Brook).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
     }
 }
