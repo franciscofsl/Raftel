@@ -562,4 +562,25 @@ public partial class AdvancedFilterTest
         filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
         filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
     }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForStringEmptyAndBountyGreaterThan_IfNameEmptyAndBountyGreaterThan()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.GreaterThan(_ => _.Bounty, 500000000))
+            .And(b => b.Empty(_ => _.Name))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
+    }
 }
