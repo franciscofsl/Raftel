@@ -689,6 +689,28 @@ public partial class AdvancedFilterTest
         filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
         filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
     }
+
+    [Fact]
+    public void AdvancedFilter_ShouldFilterForStringEndsWithAndBountyIn_IfNameEndsWithAndBountyIn()
+    {
+        var filter = AdvancedFilterBuilder
+            .ForModel<Pirate>()
+            .And(b => b.In(_ => _.Bounty, new[] { 320000000, 330000000 }))
+            .And(b => b.EndsWith(_ => _.Name, "o"))
+            .Build();
+
+        filter(Pirates.Mugiwaras.Luffy).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Zoro).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Nami).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Usopp).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Sanji).Should().BeTrue();
+        filter(Pirates.Mugiwaras.Chopper).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Robin).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Franky).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Brook).Should().BeFalse();
+        filter(Pirates.Mugiwaras.Jinbe).Should().BeFalse();
+    }
+
     [Fact]
     public void
         AdvancedFilter_ShouldFilterForStringNotStartsWithAndBountyNotEqual_IfNameNotStartsWithAndBountyNotEqual()
