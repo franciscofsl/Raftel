@@ -106,12 +106,31 @@ public class RuleCollection(Condition condition) : IEnumerable<Rule>
 
     private static Expression GenerateEqualExpression(MemberExpression member, ConstantExpression constantValue)
     {
-        return Expression.Equal(member, constantValue);
+        if (Nullable.GetUnderlyingType(member.Type) == null)
+        {
+            return Expression.Equal(member, constantValue);
+        }
+
+        var hasValueExpression = Expression.Property(member, "HasValue");
+        var valueExpression = Expression.Property(member, "Value");
+
+        var equalExpression = Expression.Equal(valueExpression, constantValue);
+
+        return Expression.AndAlso(hasValueExpression, equalExpression);
     }
 
     private static Expression GenerateNotEqualExpression(MemberExpression member, ConstantExpression constantValue)
     {
-        return Expression.Not(Expression.Equal(member, constantValue));
+        if (Nullable.GetUnderlyingType(member.Type) == null)
+        {
+            return Expression.NotEqual(member, constantValue);
+        }
+
+        var hasValueExpression = Expression.Property(member, "HasValue");
+        var valueExpression = Expression.Property(member, "Value");
+
+        var notEqualExpression = Expression.NotEqual(valueExpression, constantValue);
+        return Expression.AndAlso(hasValueExpression, notEqualExpression);
     }
 
     private static Expression GenerateStartsWithExpression(Expression isNotNull, Expression member,
