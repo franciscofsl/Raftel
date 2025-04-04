@@ -1,0 +1,42 @@
+version: "3.7"
+
+networks:
+  raftel-network:
+
+services:
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "SqlServer_Docker2023"
+      ACCEPT_EULA: "Y"
+    networks:
+      - raftel-network
+ 
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - 127.0.0.1:27017:27017
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: azurite
+    hostname: azurite
+    restart: always
+    command: "azurite-blob --blobHost 0.0.0.0 --blobPort 10000"
+    ports:
+      - "10000:10000"
+    volumes:
+      - azurite_data:/data
+
+volumes:
+  azurite_data:
+  mongo_data:
