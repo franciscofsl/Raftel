@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Raftel.Inkventory.Core\Raftel.Inkventory.Core.csproj" />
+      <ProjectReference Include="..\Raftel.Inkventory.Data\Raftel.Inkventory.Data.csproj" />
+    </ItemGroup>
+
+</Project>
