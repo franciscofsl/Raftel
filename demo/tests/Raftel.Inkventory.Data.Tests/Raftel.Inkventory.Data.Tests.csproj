@@ -14,8 +14,11 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Configuration" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="Shouldly" />
+        <PackageReference Include="Testcontainers" />
+        <PackageReference Include="Testcontainers.MsSql" />
         <PackageReference Include="xunit" />
         <PackageReference Include="xunit.runner.visualstudio">
           <PrivateAssets>all</PrivateAssets>
@@ -30,6 +33,10 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\backend\Raftel.Inkventory.Core\Raftel.Inkventory.Core.csproj" />
       <ProjectReference Include="..\..\src\backend\Raftel.Inkventory.Data\Raftel.Inkventory.Data.csproj" />
+      <ProjectReference Include="..\..\src\backend\Raftel.Inkventory.Infrastructure\Raftel.Inkventory.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+    </ItemGroup>
 </Project>
