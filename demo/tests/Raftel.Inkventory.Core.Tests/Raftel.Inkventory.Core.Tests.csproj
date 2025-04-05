@@ -31,4 +31,7 @@
       <ProjectReference Include="..\..\src\backend\Raftel.Inkventory.Core\Raftel.Inkventory.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+    </ItemGroup>
 </Project>

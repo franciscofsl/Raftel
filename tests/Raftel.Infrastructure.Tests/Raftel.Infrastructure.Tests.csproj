@@ -11,14 +11,26 @@
 
     <ItemGroup>
         <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="NSubstitute" />
         <PackageReference Include="xunit" />
         <PackageReference Include="xunit.runner.visualstudio" />
         <PackageReference Include="Shouldly" />
+        <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     </ItemGroup>
 
     <ItemGroup>
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Raftel.Application\Raftel.Application.csproj" />
+      <ProjectReference Include="..\..\src\Raftel.Core\Raftel.Core.csproj" />
+      <ProjectReference Include="..\..\src\Raftel.Infrastructure\Raftel.Infrastructure.csproj" />
+    </ItemGroup>
 </Project>
