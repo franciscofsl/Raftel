@@ -4,5 +4,5 @@ namespace Raftel.Application.Queries;
 
 public interface IQueryDispatcher
 {
-    Task<Result<TResponse>> DispatchAsync<TQuery, TResponse>(TQuery query) where TQuery : IQuery<TResponse>;
+    Task<Result<TResult>> DispatchAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery<TResult>;
 }

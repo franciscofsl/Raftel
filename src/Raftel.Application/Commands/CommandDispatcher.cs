@@ -1,12 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Raftel.Application.Abstractions;
+using Raftel.Domain.Abstractions;
 
 namespace Raftel.Application.Commands;
 
-public class CommandDispatcher(IServiceProvider serviceProvider) : ICommandDispatcher
+public class CommandDispatcher(IRequestDispatcher dispatcher) : ICommandDispatcher
 {
-    public async Task DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand
-    {
-        var handler = serviceProvider.GetRequiredService<ICommandHandler<TCommand>>();
-        await handler.HandleAsync(command);
-    }
+    public Task<Result> DispatchAsync<TCommand>(TCommand command)
+        where TCommand : ICommand
+        => dispatcher.DispatchAsync<TCommand, Result>(command);
 }

@@ -1,3 +1,6 @@
-﻿namespace Raftel.Application.Commands;
+﻿using Raftel.Application.Abstractions;
+using Raftel.Domain.Abstractions;
 
-public interface ICommand;
+namespace Raftel.Application.Commands;
+
+public interface ICommand : IRequest<Result> { }

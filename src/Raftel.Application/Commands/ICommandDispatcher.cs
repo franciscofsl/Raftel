@@ -1,6 +1,9 @@
-﻿namespace Raftel.Application.Commands;
+﻿using Raftel.Domain.Abstractions;
+
+namespace Raftel.Application.Commands;
 
 public interface ICommandDispatcher
 {
-    Task DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand;
+    Task<Result> DispatchAsync<TCommand>(TCommand command)
+        where TCommand : ICommand;
 }
