@@ -1,0 +1,254 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Application.Commands.ICommandDispatcher
+  commentId: T:Raftel.Application.Commands.ICommandDispatcher
+  id: ICommandDispatcher
+  parent: Raftel.Application.Commands
+  children:
+  - Raftel.Application.Commands.ICommandDispatcher.DispatchAsync``1(``0)
+  langs:
+  - csharp
+  - vb
+  name: ICommandDispatcher
+  nameWithType: ICommandDispatcher
+  fullName: Raftel.Application.Commands.ICommandDispatcher
+  type: Interface
+  source:
+    remote:
+      path: src/Raftel.Application/Commands/ICommandDispatcher.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: ICommandDispatcher
+    path: src/Raftel.Application/Commands/ICommandDispatcher.cs
+    startLine: 7
+  assemblies:
+  - Raftel.Application
+  namespace: Raftel.Application.Commands
+  summary: Dispatches a command to its corresponding handler.
+  example: []
+  syntax:
+    content: public interface ICommandDispatcher
+    content.vb: Public Interface ICommandDispatcher
+- uid: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync``1(``0)
+  commentId: M:Raftel.Application.Commands.ICommandDispatcher.DispatchAsync``1(``0)
+  id: DispatchAsync``1(``0)
+  parent: Raftel.Application.Commands.ICommandDispatcher
+  langs:
+  - csharp
+  - vb
+  name: DispatchAsync<TCommand>(TCommand)
+  nameWithType: ICommandDispatcher.DispatchAsync<TCommand>(TCommand)
+  fullName: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync<TCommand>(TCommand)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Application/Commands/ICommandDispatcher.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: DispatchAsync
+    path: src/Raftel.Application/Commands/ICommandDispatcher.cs
+    startLine: 15
+  assemblies:
+  - Raftel.Application
+  namespace: Raftel.Application.Commands
+  summary: Dispatches a command asynchronously.
+  example: []
+  syntax:
+    content: 'Task<Result> DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand'
+    parameters:
+    - id: command
+      type: '{TCommand}'
+      description: The command instance to process.
+    typeParameters:
+    - id: TCommand
+      description: The type of command to dispatch.
+    return:
+      type: System.Threading.Tasks.Task{Raftel.Domain.Abstractions.Result}
+      description: A <xref href="Raftel.Domain.Abstractions.Result" data-throw-if-not-resolved="false"></xref> representing the outcome of the command execution.
+    content.vb: Function DispatchAsync(Of TCommand As ICommand)(command As TCommand) As Task(Of Result)
+  overload: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync*
+  nameWithType.vb: ICommandDispatcher.DispatchAsync(Of TCommand)(TCommand)
+  fullName.vb: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync(Of TCommand)(TCommand)
+  name.vb: DispatchAsync(Of TCommand)(TCommand)
+references:
+- uid: Raftel.Application.Commands
+  commentId: N:Raftel.Application.Commands
+  href: Raftel.html
+  name: Raftel.Application.Commands
+  nameWithType: Raftel.Application.Commands
+  fullName: Raftel.Application.Commands
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Commands
+    name: Commands
+    href: Raftel.Application.Commands.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Commands
+    name: Commands
+    href: Raftel.Application.Commands.html
+- uid: Raftel.Domain.Abstractions.Result
+  commentId: T:Raftel.Domain.Abstractions.Result
+  parent: Raftel.Domain.Abstractions
+  href: Raftel.Domain.Abstractions.Result.html
+  name: Result
+  nameWithType: Result
+  fullName: Raftel.Domain.Abstractions.Result
+- uid: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync*
+  commentId: Overload:Raftel.Application.Commands.ICommandDispatcher.DispatchAsync
+  href: Raftel.Application.Commands.ICommandDispatcher.html#Raftel_Application_Commands_ICommandDispatcher_DispatchAsync__1___0_
+  name: DispatchAsync
+  nameWithType: ICommandDispatcher.DispatchAsync
+  fullName: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync
+- uid: '{TCommand}'
+  commentId: '!:TCommand'
+  definition: TCommand
+  name: TCommand
+  nameWithType: TCommand
+  fullName: TCommand
+- uid: System.Threading.Tasks.Task{Raftel.Domain.Abstractions.Result}
+  commentId: T:System.Threading.Tasks.Task{Raftel.Domain.Abstractions.Result}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<Result>
+  nameWithType: Task<Result>
+  fullName: System.Threading.Tasks.Task<Raftel.Domain.Abstractions.Result>
+  nameWithType.vb: Task(Of Result)
+  fullName.vb: System.Threading.Tasks.Task(Of Raftel.Domain.Abstractions.Result)
+  name.vb: Task(Of Result)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: Raftel.Domain.Abstractions.Result
+    name: Result
+    href: Raftel.Domain.Abstractions.Result.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Raftel.Domain.Abstractions.Result
+    name: Result
+    href: Raftel.Domain.Abstractions.Result.html
+  - name: )
+- uid: Raftel.Domain.Abstractions
+  commentId: N:Raftel.Domain.Abstractions
+  href: Raftel.html
+  name: Raftel.Domain.Abstractions
+  nameWithType: Raftel.Domain.Abstractions
+  fullName: Raftel.Domain.Abstractions
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.Abstractions
+    name: Abstractions
+    href: Raftel.Domain.Abstractions.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.Abstractions
+    name: Abstractions
+    href: Raftel.Domain.Abstractions.html
+- uid: TCommand
+  name: TCommand
+  nameWithType: TCommand
+  fullName: TCommand
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

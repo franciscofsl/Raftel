@@ -1,0 +1,67 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Application.Abstractions.IRequest`1
+  commentId: T:Raftel.Application.Abstractions.IRequest`1
+  id: IRequest`1
+  parent: Raftel.Application.Abstractions
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: IRequest<TResponse>
+  nameWithType: IRequest<TResponse>
+  fullName: Raftel.Application.Abstractions.IRequest<TResponse>
+  type: Interface
+  source:
+    remote:
+      path: src/Raftel.Application/Abstractions/IRequest.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: IRequest
+    path: src/Raftel.Application/Abstractions/IRequest.cs
+    startLine: 6
+  assemblies:
+  - Raftel.Application
+  namespace: Raftel.Application.Abstractions
+  summary: Represents a request that produces a response of type <code class="typeparamref">TResponse</code>.
+  example: []
+  syntax:
+    content: public interface IRequest<TResponse>
+    typeParameters:
+    - id: TResponse
+      description: The type of response expected from the request.
+    content.vb: Public Interface IRequest(Of TResponse)
+  nameWithType.vb: IRequest(Of TResponse)
+  fullName.vb: Raftel.Application.Abstractions.IRequest(Of TResponse)
+  name.vb: IRequest(Of TResponse)
+references:
+- uid: Raftel.Application.Abstractions
+  commentId: N:Raftel.Application.Abstractions
+  href: Raftel.html
+  name: Raftel.Application.Abstractions
+  nameWithType: Raftel.Application.Abstractions
+  fullName: Raftel.Application.Abstractions
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Abstractions
+    name: Abstractions
+    href: Raftel.Application.Abstractions.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Abstractions
+    name: Abstractions
+    href: Raftel.Application.Abstractions.html

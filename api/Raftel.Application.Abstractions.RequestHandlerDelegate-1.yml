@@ -1,0 +1,164 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+  commentId: T:Raftel.Application.Abstractions.RequestHandlerDelegate`1
+  id: RequestHandlerDelegate`1
+  parent: Raftel.Application.Abstractions
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: RequestHandlerDelegate<TResponse>
+  nameWithType: RequestHandlerDelegate<TResponse>
+  fullName: Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>
+  type: Delegate
+  source:
+    remote:
+      path: src/Raftel.Application/Abstractions/RequestHandlerDelegate.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: RequestHandlerDelegate
+    path: src/Raftel.Application/Abstractions/RequestHandlerDelegate.cs
+    startLine: 7
+  assemblies:
+  - Raftel.Application
+  namespace: Raftel.Application.Abstractions
+  summary: Delegate that represents the next handler or middleware in the request processing pipeline.
+  example: []
+  syntax:
+    content: public delegate Task<TResponse> RequestHandlerDelegate<TResponse>()
+    typeParameters:
+    - id: TResponse
+      description: The type of response expected.
+    return:
+      type: System.Threading.Tasks.Task{{TResponse}}
+      description: The asynchronous result of the request pipeline execution.
+    content.vb: Public Delegate Function RequestHandlerDelegate(Of TResponse)() As Task(Of TResponse)
+  nameWithType.vb: RequestHandlerDelegate(Of TResponse)
+  fullName.vb: Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse)
+  name.vb: RequestHandlerDelegate(Of TResponse)
+references:
+- uid: Raftel.Application.Abstractions
+  commentId: N:Raftel.Application.Abstractions
+  href: Raftel.html
+  name: Raftel.Application.Abstractions
+  nameWithType: Raftel.Application.Abstractions
+  fullName: Raftel.Application.Abstractions
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Abstractions
+    name: Abstractions
+    href: Raftel.Application.Abstractions.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Abstractions
+    name: Abstractions
+    href: Raftel.Application.Abstractions.html
+- uid: System.Threading.Tasks.Task{{TResponse}}
+  commentId: T:System.Threading.Tasks.Task{``1}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResponse>
+  nameWithType: Task<TResponse>
+  fullName: System.Threading.Tasks.Task<TResponse>
+  nameWithType.vb: Task(Of TResponse)
+  fullName.vb: System.Threading.Tasks.Task(Of TResponse)
+  name.vb: Task(Of TResponse)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResponse
+  - name: )
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
