@@ -1,3 +1,10 @@
-﻿namespace Raftel.Application.Queries;
+﻿using Raftel.Application.Abstractions;
+using Raftel.Domain.Abstractions;
 
-public interface IQuery<TResult>;
+namespace Raftel.Application.Queries;
+
+/// <summary>
+/// Represents a query that returns a result of type <typeparamref name="TResult"/>.
+/// </summary>
+/// <typeparam name="TResult">The type of the result produced by the query.</typeparam>
+public interface IQuery<TResult> : IRequest<Result<TResult>>;

@@ -1,43 +1,49 @@
 ﻿using NSubstitute;
+using Raftel.Application.Abstractions;
 using Raftel.Application.Commands;
+using Raftel.Domain.Abstractions;
 using Shouldly;
+using Xunit;
 
 namespace Raftel.Application.Tests.Commands;
 
 public class CommandDispatcherTests
 {
-    // ReSharper disable once MemberCanBePrivate.Global
     public record TestCommand(string Message) : ICommand;
 
     [Fact]
-    public async Task DispatchAsync_Should_Invoke_Handler()
+    public async Task DispatchAsync_Should_Delegate_To_RequestDispatcher()
     {
         var command = new TestCommand("Raftel");
 
-        var handler = Substitute.For<ICommandHandler<TestCommand>>();
-        var serviceProvider = Substitute.For<IServiceProvider>();
-        serviceProvider.GetService(typeof(ICommandHandler<TestCommand>)).Returns(handler);
+        var requestDispatcher = Substitute.For<IRequestDispatcher>();
+        requestDispatcher
+            .DispatchAsync<TestCommand, Result>(command)
+            .Returns(Result.Success());
 
-        var dispatcher = new CommandDispatcher(serviceProvider);
+        var dispatcher = new CommandDispatcher(requestDispatcher);
 
-        await dispatcher.DispatchAsync(command);
+        var result = await dispatcher.DispatchAsync(command);
 
-        await handler.Received(1).HandleAsync(command);
+        result.IsSuccess.ShouldBeTrue();
+        await requestDispatcher.Received(1).DispatchAsync<TestCommand, Result>(command);
     }
 
     [Fact]
-    public async Task DispatchAsync_Should_Throw_When_Handler_Not_Registered()
+    public async Task DispatchAsync_Should_Propagate_Exception_From_RequestDispatcher()
     {
-        var command = new TestCommand("Command without handler");
+        var command = new TestCommand("Invalid");
 
-        var serviceProvider = Substitute.For<IServiceProvider>();
-        serviceProvider.GetService(typeof(ICommandHandler<TestCommand>)).Returns(null);
+        var requestDispatcher = Substitute.For<IRequestDispatcher>();
+        requestDispatcher
+            .DispatchAsync<TestCommand, Result>(command)
+            .Returns<Task<Result>>(x => throw new InvalidOperationException("No handler"));
 
-        var dispatcher = new CommandDispatcher(serviceProvider);
+        var dispatcher = new CommandDispatcher(requestDispatcher);
 
-        var exception = await Should.ThrowAsync<InvalidOperationException>(() =>
+        var ex = await Should.ThrowAsync<InvalidOperationException>(() =>
             dispatcher.DispatchAsync(command));
 
-        exception.Message.ShouldContain("No service for type");
+        ex.Message.ShouldBe("No handler");
     }
 }
