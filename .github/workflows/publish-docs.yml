@@ -4,11 +4,6 @@ on:
   pull_request:
     branches: [main]
     types: [closed]
-    paths:
-      - 'src/**'
-      - 'docfx.json'
-      - '**.cs'
-      - '**.md'
 
 jobs:
   build-and-deploy:
