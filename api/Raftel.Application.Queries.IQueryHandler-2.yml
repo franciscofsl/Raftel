@@ -1,0 +1,226 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Application.Queries.IQueryHandler`2
+  commentId: T:Raftel.Application.Queries.IQueryHandler`2
+  id: IQueryHandler`2
+  parent: Raftel.Application.Queries
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: IQueryHandler<TQuery, TResult>
+  nameWithType: IQueryHandler<TQuery, TResult>
+  fullName: Raftel.Application.Queries.IQueryHandler<TQuery, TResult>
+  type: Interface
+  source:
+    remote:
+      path: src/Raftel.Application/Queries/IQueryHandler.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: IQueryHandler
+    path: src/Raftel.Application/Queries/IQueryHandler.cs
+    startLine: 11
+  assemblies:
+  - Raftel.Application
+  namespace: Raftel.Application.Queries
+  summary: >-
+    Defines a handler for processing a query of type <code class="typeparamref">TQuery</code>
+
+    that returns a result of type <code class="typeparamref">TResult</code>.
+  example: []
+  syntax:
+    content: 'public interface IQueryHandler<TQuery, TResult> : IRequestHandler<TQuery, Result<TResult>> where TQuery : IQuery<TResult>'
+    typeParameters:
+    - id: TQuery
+      description: The type of the query to handle.
+    - id: TResult
+      description: The type of the result produced by the query.
+    content.vb: Public Interface IQueryHandler(Of TQuery As IQuery(Of TResult), TResult) Inherits IRequestHandler(Of TQuery, Result(Of TResult))
+  inheritedMembers:
+  - Raftel.Application.Abstractions.IRequestHandler{{TQuery},Raftel.Domain.Abstractions.Result{{TResult}}}.HandleAsync({TQuery})
+  nameWithType.vb: IQueryHandler(Of TQuery, TResult)
+  fullName.vb: Raftel.Application.Queries.IQueryHandler(Of TQuery, TResult)
+  name.vb: IQueryHandler(Of TQuery, TResult)
+references:
+- uid: Raftel.Application.Queries
+  commentId: N:Raftel.Application.Queries
+  href: Raftel.html
+  name: Raftel.Application.Queries
+  nameWithType: Raftel.Application.Queries
+  fullName: Raftel.Application.Queries
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Queries
+    name: Queries
+    href: Raftel.Application.Queries.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Queries
+    name: Queries
+    href: Raftel.Application.Queries.html
+- uid: Raftel.Application.Abstractions.IRequestHandler{{TQuery},Raftel.Domain.Abstractions.Result{{TResult}}}.HandleAsync({TQuery})
+  commentId: M:Raftel.Application.Abstractions.IRequestHandler{`0,Raftel.Domain.Abstractions.Result{`1}}.HandleAsync(`0)
+  parent: Raftel.Application.Abstractions.IRequestHandler{{TQuery},Raftel.Domain.Abstractions.Result{{TResult}}}
+  definition: Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0)
+  href: Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync__0_
+  name: HandleAsync(TQuery)
+  nameWithType: IRequestHandler<TQuery, Result<TResult>>.HandleAsync(TQuery)
+  fullName: Raftel.Application.Abstractions.IRequestHandler<TQuery, Raftel.Domain.Abstractions.Result<TResult>>.HandleAsync(TQuery)
+  nameWithType.vb: IRequestHandler(Of TQuery, Result(Of TResult)).HandleAsync(TQuery)
+  fullName.vb: Raftel.Application.Abstractions.IRequestHandler(Of TQuery, Raftel.Domain.Abstractions.Result(Of TResult)).HandleAsync(TQuery)
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.IRequestHandler{`0,Raftel.Domain.Abstractions.Result{`1}}.HandleAsync(`0)
+    name: HandleAsync
+    href: Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync__0_
+  - name: (
+  - name: TQuery
+  - name: )
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.IRequestHandler{`0,Raftel.Domain.Abstractions.Result{`1}}.HandleAsync(`0)
+    name: HandleAsync
+    href: Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync__0_
+  - name: (
+  - name: TQuery
+  - name: )
+- uid: Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0)
+  commentId: M:Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0)
+  href: Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync__0_
+  name: HandleAsync(TRequest)
+  nameWithType: IRequestHandler<TRequest, TResponse>.HandleAsync(TRequest)
+  fullName: Raftel.Application.Abstractions.IRequestHandler<TRequest, TResponse>.HandleAsync(TRequest)
+  nameWithType.vb: IRequestHandler(Of TRequest, TResponse).HandleAsync(TRequest)
+  fullName.vb: Raftel.Application.Abstractions.IRequestHandler(Of TRequest, TResponse).HandleAsync(TRequest)
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0)
+    name: HandleAsync
+    href: Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync__0_
+  - name: (
+  - name: TRequest
+  - name: )
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0)
+    name: HandleAsync
+    href: Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync__0_
+  - name: (
+  - name: TRequest
+  - name: )
+- uid: Raftel.Application.Abstractions.IRequestHandler{{TQuery},Raftel.Domain.Abstractions.Result{{TResult}}}
+  commentId: T:Raftel.Application.Abstractions.IRequestHandler{`0,Raftel.Domain.Abstractions.Result{`1}}
+  parent: Raftel.Application.Abstractions
+  definition: Raftel.Application.Abstractions.IRequestHandler`2
+  href: Raftel.Application.Abstractions.IRequestHandler-2.html
+  name: IRequestHandler<TQuery, Result<TResult>>
+  nameWithType: IRequestHandler<TQuery, Result<TResult>>
+  fullName: Raftel.Application.Abstractions.IRequestHandler<TQuery, Raftel.Domain.Abstractions.Result<TResult>>
+  nameWithType.vb: IRequestHandler(Of TQuery, Result(Of TResult))
+  fullName.vb: Raftel.Application.Abstractions.IRequestHandler(Of TQuery, Raftel.Domain.Abstractions.Result(Of TResult))
+  name.vb: IRequestHandler(Of TQuery, Result(Of TResult))
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.IRequestHandler`2
+    name: IRequestHandler
+    href: Raftel.Application.Abstractions.IRequestHandler-2.html
+  - name: <
+  - name: TQuery
+  - name: ','
+  - name: " "
+  - uid: Raftel.Domain.Abstractions.Result`1
+    name: Result
+    href: Raftel.Domain.Abstractions.Result-1.html
+  - name: <
+  - name: TResult
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.IRequestHandler`2
+    name: IRequestHandler
+    href: Raftel.Application.Abstractions.IRequestHandler-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TQuery
+  - name: ','
+  - name: " "
+  - uid: Raftel.Domain.Abstractions.Result`1
+    name: Result
+    href: Raftel.Domain.Abstractions.Result-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+  - name: )
+- uid: Raftel.Application.Abstractions.IRequestHandler`2
+  commentId: T:Raftel.Application.Abstractions.IRequestHandler`2
+  href: Raftel.Application.Abstractions.IRequestHandler-2.html
+  name: IRequestHandler<TRequest, TResponse>
+  nameWithType: IRequestHandler<TRequest, TResponse>
+  fullName: Raftel.Application.Abstractions.IRequestHandler<TRequest, TResponse>
+  nameWithType.vb: IRequestHandler(Of TRequest, TResponse)
+  fullName.vb: Raftel.Application.Abstractions.IRequestHandler(Of TRequest, TResponse)
+  name.vb: IRequestHandler(Of TRequest, TResponse)
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.IRequestHandler`2
+    name: IRequestHandler
+    href: Raftel.Application.Abstractions.IRequestHandler-2.html
+  - name: <
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.IRequestHandler`2
+    name: IRequestHandler
+    href: Raftel.Application.Abstractions.IRequestHandler-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: )
+- uid: Raftel.Application.Abstractions
+  commentId: N:Raftel.Application.Abstractions
+  href: Raftel.html
+  name: Raftel.Application.Abstractions
+  nameWithType: Raftel.Application.Abstractions
+  fullName: Raftel.Application.Abstractions
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Abstractions
+    name: Abstractions
+    href: Raftel.Application.Abstractions.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Abstractions
+    name: Abstractions
+    href: Raftel.Application.Abstractions.html

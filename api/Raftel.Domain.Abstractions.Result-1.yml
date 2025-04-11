@@ -1,0 +1,816 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Domain.Abstractions.Result`1
+  commentId: T:Raftel.Domain.Abstractions.Result`1
+  id: Result`1
+  parent: Raftel.Domain.Abstractions
+  children:
+  - Raftel.Domain.Abstractions.Result`1.#ctor(`0,System.Boolean,Raftel.Domain.Abstractions.Error)
+  - Raftel.Domain.Abstractions.Result`1.Failure(Raftel.Domain.Abstractions.Error)
+  - Raftel.Domain.Abstractions.Result`1.Success(`0)
+  - Raftel.Domain.Abstractions.Result`1.Value
+  - Raftel.Domain.Abstractions.Result`1.op_Implicit(`0)~Raftel.Domain.Abstractions.Result{`0}
+  langs:
+  - csharp
+  - vb
+  name: Result<TValue>
+  nameWithType: Result<TValue>
+  fullName: Raftel.Domain.Abstractions.Result<TValue>
+  type: Class
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/Result.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: Result
+    path: src/Raftel.Domain/Abstractions/Result.cs
+    startLine: 38
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  syntax:
+    content: 'public class Result<TValue> : Result'
+    typeParameters:
+    - id: TValue
+    content.vb: Public Class Result(Of TValue) Inherits Result
+  inheritance:
+  - System.Object
+  - Raftel.Domain.Abstractions.Result
+  inheritedMembers:
+  - Raftel.Domain.Abstractions.Result.IsSuccess
+  - Raftel.Domain.Abstractions.Result.IsFailure
+  - Raftel.Domain.Abstractions.Result.Error
+  - Raftel.Domain.Abstractions.Result.Success
+  - Raftel.Domain.Abstractions.Result.Success``1({TValue})
+  - Raftel.Domain.Abstractions.Result.Failure``1(Raftel.Domain.Abstractions.Error)
+  - Raftel.Domain.Abstractions.Result.Create``1({TValue})
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  nameWithType.vb: Result(Of TValue)
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue)
+  name.vb: Result(Of TValue)
+- uid: Raftel.Domain.Abstractions.Result`1.#ctor(`0,System.Boolean,Raftel.Domain.Abstractions.Error)
+  commentId: M:Raftel.Domain.Abstractions.Result`1.#ctor(`0,System.Boolean,Raftel.Domain.Abstractions.Error)
+  id: '#ctor(`0,System.Boolean,Raftel.Domain.Abstractions.Error)'
+  parent: Raftel.Domain.Abstractions.Result`1
+  langs:
+  - csharp
+  - vb
+  name: Result(TValue, bool, Error)
+  nameWithType: Result<TValue>.Result(TValue, bool, Error)
+  fullName: Raftel.Domain.Abstractions.Result<TValue>.Result(TValue, bool, Raftel.Domain.Abstractions.Error)
+  type: Constructor
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/Result.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: .ctor
+    path: src/Raftel.Domain/Abstractions/Result.cs
+    startLine: 48
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  summary: Initializes a new instance of the <xref href="Raftel.Domain.Abstractions.Result%601" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: protected Result(TValue value, bool isSuccess, Error error)
+    parameters:
+    - id: value
+      type: '{TValue}'
+      description: The value returned by the operation.
+    - id: isSuccess
+      type: System.Boolean
+      description: Indicates whether the operation was successful.
+    - id: error
+      type: Raftel.Domain.Abstractions.Error
+      description: The error associated with the operation.
+    content.vb: Protected Sub New(value As TValue, isSuccess As Boolean, [error] As [Error])
+  overload: Raftel.Domain.Abstractions.Result`1.#ctor*
+  nameWithType.vb: Result(Of TValue).New(TValue, Boolean, Error)
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).New(TValue, Boolean, Raftel.Domain.Abstractions.Error)
+  name.vb: New(TValue, Boolean, Error)
+- uid: Raftel.Domain.Abstractions.Result`1.Value
+  commentId: P:Raftel.Domain.Abstractions.Result`1.Value
+  id: Value
+  parent: Raftel.Domain.Abstractions.Result`1
+  langs:
+  - csharp
+  - vb
+  name: Value
+  nameWithType: Result<TValue>.Value
+  fullName: Raftel.Domain.Abstractions.Result<TValue>.Value
+  type: Property
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/Result.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: Value
+    path: src/Raftel.Domain/Abstractions/Result.cs
+    startLine: 57
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  summary: Gets the value returned by the operation, if successful.
+  example: []
+  syntax:
+    content: public TValue Value { get; }
+    parameters: []
+    return:
+      type: '{TValue}'
+    content.vb: Public ReadOnly Property Value As TValue
+  overload: Raftel.Domain.Abstractions.Result`1.Value*
+  nameWithType.vb: Result(Of TValue).Value
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).Value
+- uid: Raftel.Domain.Abstractions.Result`1.Success(`0)
+  commentId: M:Raftel.Domain.Abstractions.Result`1.Success(`0)
+  id: Success(`0)
+  parent: Raftel.Domain.Abstractions.Result`1
+  langs:
+  - csharp
+  - vb
+  name: Success(TValue)
+  nameWithType: Result<TValue>.Success(TValue)
+  fullName: Raftel.Domain.Abstractions.Result<TValue>.Success(TValue)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/Result.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: Success
+    path: src/Raftel.Domain/Abstractions/Result.cs
+    startLine: 67
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  summary: Creates a successful result with the specified value.
+  example: []
+  syntax:
+    content: public static Result<TValue> Success(TValue value)
+    parameters:
+    - id: value
+      type: '{TValue}'
+      description: The value returned by the operation.
+    return:
+      type: Raftel.Domain.Abstractions.Result`1
+      description: A successful result containing the value.
+    content.vb: Public Shared Function Success(value As TValue) As Result(Of TValue)
+  overload: Raftel.Domain.Abstractions.Result`1.Success*
+  nameWithType.vb: Result(Of TValue).Success(TValue)
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).Success(TValue)
+- uid: Raftel.Domain.Abstractions.Result`1.Failure(Raftel.Domain.Abstractions.Error)
+  commentId: M:Raftel.Domain.Abstractions.Result`1.Failure(Raftel.Domain.Abstractions.Error)
+  id: Failure(Raftel.Domain.Abstractions.Error)
+  parent: Raftel.Domain.Abstractions.Result`1
+  langs:
+  - csharp
+  - vb
+  name: Failure(Error)
+  nameWithType: Result<TValue>.Failure(Error)
+  fullName: Raftel.Domain.Abstractions.Result<TValue>.Failure(Raftel.Domain.Abstractions.Error)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/Result.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: Failure
+    path: src/Raftel.Domain/Abstractions/Result.cs
+    startLine: 74
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  summary: Creates a failed result with the specified error.
+  example: []
+  syntax:
+    content: public static Result<TValue> Failure(Error error)
+    parameters:
+    - id: error
+      type: Raftel.Domain.Abstractions.Error
+      description: The error associated with the failure.
+    return:
+      type: Raftel.Domain.Abstractions.Result`1
+      description: A failed result.
+    content.vb: Public Shared Function Failure([error] As [Error]) As Result(Of TValue)
+  overload: Raftel.Domain.Abstractions.Result`1.Failure*
+  nameWithType.vb: Result(Of TValue).Failure(Error)
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).Failure(Raftel.Domain.Abstractions.Error)
+- uid: Raftel.Domain.Abstractions.Result`1.op_Implicit(`0)~Raftel.Domain.Abstractions.Result{`0}
+  commentId: M:Raftel.Domain.Abstractions.Result`1.op_Implicit(`0)~Raftel.Domain.Abstractions.Result{`0}
+  id: op_Implicit(`0)~Raftel.Domain.Abstractions.Result{`0}
+  parent: Raftel.Domain.Abstractions.Result`1
+  langs:
+  - csharp
+  - vb
+  name: implicit operator Result<TValue>(TValue)
+  nameWithType: Result<TValue>.implicit operator Result<TValue>(TValue)
+  fullName: Raftel.Domain.Abstractions.Result<TValue>.implicit operator Raftel.Domain.Abstractions.Result<TValue>(TValue)
+  type: Operator
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/Result.cs
+      branch: documentation
+      repo: https://github.com/franciscofsl/Raftel
+    id: op_Implicit
+    path: src/Raftel.Domain/Abstractions/Result.cs
+    startLine: 76
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  syntax:
+    content: public static implicit operator Result<TValue>(TValue value)
+    parameters:
+    - id: value
+      type: '{TValue}'
+    return:
+      type: Raftel.Domain.Abstractions.Result`1
+    content.vb: Public Shared Widening Operator CType(value As TValue) As Result(Of TValue)
+  overload: Raftel.Domain.Abstractions.Result`1.op_Implicit*
+  nameWithType.vb: Result(Of TValue).CType(TValue)
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).CType(TValue)
+  name.vb: CType(TValue)
+references:
+- uid: Raftel.Domain.Abstractions
+  commentId: N:Raftel.Domain.Abstractions
+  href: Raftel.html
+  name: Raftel.Domain.Abstractions
+  nameWithType: Raftel.Domain.Abstractions
+  fullName: Raftel.Domain.Abstractions
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.Abstractions
+    name: Abstractions
+    href: Raftel.Domain.Abstractions.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.Abstractions
+    name: Abstractions
+    href: Raftel.Domain.Abstractions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Raftel.Domain.Abstractions.Result
+  commentId: T:Raftel.Domain.Abstractions.Result
+  parent: Raftel.Domain.Abstractions
+  href: Raftel.Domain.Abstractions.Result.html
+  name: Result
+  nameWithType: Result
+  fullName: Raftel.Domain.Abstractions.Result
+- uid: Raftel.Domain.Abstractions.Result.IsSuccess
+  commentId: P:Raftel.Domain.Abstractions.Result.IsSuccess
+  parent: Raftel.Domain.Abstractions.Result
+  href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_IsSuccess
+  name: IsSuccess
+  nameWithType: Result.IsSuccess
+  fullName: Raftel.Domain.Abstractions.Result.IsSuccess
+- uid: Raftel.Domain.Abstractions.Result.IsFailure
+  commentId: P:Raftel.Domain.Abstractions.Result.IsFailure
+  parent: Raftel.Domain.Abstractions.Result
+  href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_IsFailure
+  name: IsFailure
+  nameWithType: Result.IsFailure
+  fullName: Raftel.Domain.Abstractions.Result.IsFailure
+- uid: Raftel.Domain.Abstractions.Result.Error
+  commentId: P:Raftel.Domain.Abstractions.Result.Error
+  parent: Raftel.Domain.Abstractions.Result
+  href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Error
+  name: Error
+  nameWithType: Result.Error
+  fullName: Raftel.Domain.Abstractions.Result.Error
+- uid: Raftel.Domain.Abstractions.Result.Success
+  commentId: M:Raftel.Domain.Abstractions.Result.Success
+  parent: Raftel.Domain.Abstractions.Result
+  href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success
+  name: Success()
+  nameWithType: Result.Success()
+  fullName: Raftel.Domain.Abstractions.Result.Success()
+  spec.csharp:
+  - uid: Raftel.Domain.Abstractions.Result.Success
+    name: Success
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Raftel.Domain.Abstractions.Result.Success
+    name: Success
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success
+  - name: (
+  - name: )
+- uid: Raftel.Domain.Abstractions.Result.Success``1({TValue})
+  commentId: M:Raftel.Domain.Abstractions.Result.Success``1(``0)
+  parent: Raftel.Domain.Abstractions.Result
+  definition: Raftel.Domain.Abstractions.Result.Success``1(``0)
+  href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success__1___0_
+  name: Success<TValue>(TValue)
+  nameWithType: Result.Success<TValue>(TValue)
+  fullName: Raftel.Domain.Abstractions.Result.Success<TValue>(TValue)
+  nameWithType.vb: Result.Success(Of TValue)(TValue)
+  fullName.vb: Raftel.Domain.Abstractions.Result.Success(Of TValue)(TValue)
+  name.vb: Success(Of TValue)(TValue)
+  spec.csharp:
+  - uid: Raftel.Domain.Abstractions.Result.Success``1(``0)
+    name: Success
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success__1___0_
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: (
+  - name: TValue
+  - name: )
+  spec.vb:
+  - uid: Raftel.Domain.Abstractions.Result.Success``1(``0)
+    name: Success
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: (
+  - name: TValue
+  - name: )
+- uid: Raftel.Domain.Abstractions.Result.Failure``1(Raftel.Domain.Abstractions.Error)
+  commentId: M:Raftel.Domain.Abstractions.Result.Failure``1(Raftel.Domain.Abstractions.Error)
+  parent: Raftel.Domain.Abstractions.Result
+  href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Failure__1_Raftel_Domain_Abstractions_Error_
+  name: Failure<TValue>(Error)
+  nameWithType: Result.Failure<TValue>(Error)
+  fullName: Raftel.Domain.Abstractions.Result.Failure<TValue>(Raftel.Domain.Abstractions.Error)
+  nameWithType.vb: Result.Failure(Of TValue)(Error)
+  fullName.vb: Raftel.Domain.Abstractions.Result.Failure(Of TValue)(Raftel.Domain.Abstractions.Error)
+  name.vb: Failure(Of TValue)(Error)
+  spec.csharp:
+  - uid: Raftel.Domain.Abstractions.Result.Failure``1(Raftel.Domain.Abstractions.Error)
+    name: Failure
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Failure__1_Raftel_Domain_Abstractions_Error_
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: (
+  - uid: Raftel.Domain.Abstractions.Error
+    name: Error
+    href: Raftel.Domain.Abstractions.Error.html
+  - name: )
+  spec.vb:
+  - uid: Raftel.Domain.Abstractions.Result.Failure``1(Raftel.Domain.Abstractions.Error)
+    name: Failure
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Failure__1_Raftel_Domain_Abstractions_Error_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: (
+  - uid: Raftel.Domain.Abstractions.Error
+    name: Error
+    href: Raftel.Domain.Abstractions.Error.html
+  - name: )
+- uid: Raftel.Domain.Abstractions.Result.Create``1({TValue})
+  commentId: M:Raftel.Domain.Abstractions.Result.Create``1(``0)
+  parent: Raftel.Domain.Abstractions.Result
+  definition: Raftel.Domain.Abstractions.Result.Create``1(``0)
+  href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Create__1___0_
+  name: Create<TValue>(TValue)
+  nameWithType: Result.Create<TValue>(TValue)
+  fullName: Raftel.Domain.Abstractions.Result.Create<TValue>(TValue)
+  nameWithType.vb: Result.Create(Of TValue)(TValue)
+  fullName.vb: Raftel.Domain.Abstractions.Result.Create(Of TValue)(TValue)
+  name.vb: Create(Of TValue)(TValue)
+  spec.csharp:
+  - uid: Raftel.Domain.Abstractions.Result.Create``1(``0)
+    name: Create
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Create__1___0_
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: (
+  - name: TValue
+  - name: )
+  spec.vb:
+  - uid: Raftel.Domain.Abstractions.Result.Create``1(``0)
+    name: Create
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Create__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: (
+  - name: TValue
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Raftel.Domain.Abstractions.Result.Success``1(``0)
+  commentId: M:Raftel.Domain.Abstractions.Result.Success``1(``0)
+  href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success__1___0_
+  name: Success<TValue>(TValue)
+  nameWithType: Result.Success<TValue>(TValue)
+  fullName: Raftel.Domain.Abstractions.Result.Success<TValue>(TValue)
+  nameWithType.vb: Result.Success(Of TValue)(TValue)
+  fullName.vb: Raftel.Domain.Abstractions.Result.Success(Of TValue)(TValue)
+  name.vb: Success(Of TValue)(TValue)
+  spec.csharp:
+  - uid: Raftel.Domain.Abstractions.Result.Success``1(``0)
+    name: Success
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success__1___0_
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: (
+  - name: TValue
+  - name: )
+  spec.vb:
+  - uid: Raftel.Domain.Abstractions.Result.Success``1(``0)
+    name: Success
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: (
+  - name: TValue
+  - name: )
+- uid: Raftel.Domain.Abstractions.Result.Create``1(``0)
+  commentId: M:Raftel.Domain.Abstractions.Result.Create``1(``0)
+  href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Create__1___0_
+  name: Create<TValue>(TValue)
+  nameWithType: Result.Create<TValue>(TValue)
+  fullName: Raftel.Domain.Abstractions.Result.Create<TValue>(TValue)
+  nameWithType.vb: Result.Create(Of TValue)(TValue)
+  fullName.vb: Raftel.Domain.Abstractions.Result.Create(Of TValue)(TValue)
+  name.vb: Create(Of TValue)(TValue)
+  spec.csharp:
+  - uid: Raftel.Domain.Abstractions.Result.Create``1(``0)
+    name: Create
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Create__1___0_
+  - name: <
+  - name: TValue
+  - name: '>'
+  - name: (
+  - name: TValue
+  - name: )
+  spec.vb:
+  - uid: Raftel.Domain.Abstractions.Result.Create``1(``0)
+    name: Create
+    href: Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Create__1___0_
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+  - name: (
+  - name: TValue
+  - name: )
+- uid: Raftel.Domain.Abstractions.Result`1
+  commentId: T:Raftel.Domain.Abstractions.Result`1
+  parent: Raftel.Domain.Abstractions
+  href: Raftel.Domain.Abstractions.Result-1.html
+  name: Result<TValue>
+  nameWithType: Result<TValue>
+  fullName: Raftel.Domain.Abstractions.Result<TValue>
+  nameWithType.vb: Result(Of TValue)
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue)
+  name.vb: Result(Of TValue)
+  spec.csharp:
+  - uid: Raftel.Domain.Abstractions.Result`1
+    name: Result
+    href: Raftel.Domain.Abstractions.Result-1.html
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Domain.Abstractions.Result`1
+    name: Result
+    href: Raftel.Domain.Abstractions.Result-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: Raftel.Domain.Abstractions.Result`1.#ctor*
+  commentId: Overload:Raftel.Domain.Abstractions.Result`1.#ctor
+  href: Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1__ctor__0_System_Boolean_Raftel_Domain_Abstractions_Error_
+  name: Result
+  nameWithType: Result<TValue>.Result
+  fullName: Raftel.Domain.Abstractions.Result<TValue>.Result
+  nameWithType.vb: Result(Of TValue).New
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).New
+  name.vb: New
+- uid: '{TValue}'
+  commentId: '!:TValue'
+  definition: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Raftel.Domain.Abstractions.Error
+  commentId: T:Raftel.Domain.Abstractions.Error
+  parent: Raftel.Domain.Abstractions
+  href: Raftel.Domain.Abstractions.Error.html
+  name: Error
+  nameWithType: Error
+  fullName: Raftel.Domain.Abstractions.Error
+- uid: TValue
+  name: TValue
+  nameWithType: TValue
+  fullName: TValue
+- uid: Raftel.Domain.Abstractions.Result`1.Value*
+  commentId: Overload:Raftel.Domain.Abstractions.Result`1.Value
+  href: Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_Value
+  name: Value
+  nameWithType: Result<TValue>.Value
+  fullName: Raftel.Domain.Abstractions.Result<TValue>.Value
+  nameWithType.vb: Result(Of TValue).Value
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).Value
+- uid: Raftel.Domain.Abstractions.Result`1.Success*
+  commentId: Overload:Raftel.Domain.Abstractions.Result`1.Success
+  href: Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_Success__0_
+  name: Success
+  nameWithType: Result<TValue>.Success
+  fullName: Raftel.Domain.Abstractions.Result<TValue>.Success
+  nameWithType.vb: Result(Of TValue).Success
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).Success
+- uid: Raftel.Domain.Abstractions.Result`1.Failure*
+  commentId: Overload:Raftel.Domain.Abstractions.Result`1.Failure
+  href: Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_Failure_Raftel_Domain_Abstractions_Error_
+  name: Failure
+  nameWithType: Result<TValue>.Failure
+  fullName: Raftel.Domain.Abstractions.Result<TValue>.Failure
+  nameWithType.vb: Result(Of TValue).Failure
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).Failure
+- uid: Raftel.Domain.Abstractions.Result`1.op_Implicit*
+  commentId: Overload:Raftel.Domain.Abstractions.Result`1.op_Implicit
+  name: implicit operator
+  nameWithType: Result<TValue>.implicit operator
+  fullName: Raftel.Domain.Abstractions.Result<TValue>.implicit operator
+  nameWithType.vb: Result(Of TValue).CType
+  fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).CType
+  name.vb: CType
+  spec.csharp:
+  - name: implicit
+  - name: " "
+  - name: operator
