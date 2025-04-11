@@ -1,0 +1,127 @@
+{
+  "README.html": {
+    "href": "README.html",
+    "title": "Raftel | Raftel",
+    "summary": "Raftel"
+  },
+  "api/Raftel.Application.Abstractions.IRequest-1.html": {
+    "href": "api/Raftel.Application.Abstractions.IRequest-1.html",
+    "title": "Interface IRequest<TResponse> | Raftel",
+    "summary": "Interface IRequest<TResponse> Namespace Raftel.Application.Abstractions Assembly Raftel.Application.dll Represents a request that produces a response of type TResponse. public interface IRequest<TResponse> Type Parameters TResponse The type of response expected from the request."
+  },
+  "api/Raftel.Application.Abstractions.IRequestDispatcher.html": {
+    "href": "api/Raftel.Application.Abstractions.IRequestDispatcher.html",
+    "title": "Interface IRequestDispatcher | Raftel",
+    "summary": "Interface IRequestDispatcher Namespace Raftel.Application.Abstractions Assembly Raftel.Application.dll Dispatches requests through the pipeline and to their associated handler. public interface IRequestDispatcher Methods DispatchAsync<TRequest, TResponse>(TRequest) Dispatches the given request and returns the result asynchronously. Task<TResponse> DispatchAsync<TRequest, TResponse>(TRequest request) where TRequest : IRequest<TResponse> Parameters request TRequest The request to dispatch. Returns Task<TResponse> The result returned from the request handler or middleware. Type Parameters TRequest The type of the request. TResponse The type of the response."
+  },
+  "api/Raftel.Application.Abstractions.IRequestHandler-2.html": {
+    "href": "api/Raftel.Application.Abstractions.IRequestHandler-2.html",
+    "title": "Interface IRequestHandler<TRequest, TResponse> | Raftel",
+    "summary": "Interface IRequestHandler<TRequest, TResponse> Namespace Raftel.Application.Abstractions Assembly Raftel.Application.dll Defines a handler that processes a request of type TRequest and returns a response of type TResponse. public interface IRequestHandler<TRequest, TResponse> where TRequest : IRequest<TResponse> Type Parameters TRequest The type of the request. TResponse The type of the response. Methods HandleAsync(TRequest) Handles the given request asynchronously. Task<TResponse> HandleAsync(TRequest request) Parameters request TRequest The request to process. Returns Task<TResponse> A task representing the asynchronous operation, containing the response."
+  },
+  "api/Raftel.Application.Abstractions.IRequestMiddleware-2.html": {
+    "href": "api/Raftel.Application.Abstractions.IRequestMiddleware-2.html",
+    "title": "Interface IRequestMiddleware<TRequest, TResponse> | Raftel",
+    "summary": "Interface IRequestMiddleware<TRequest, TResponse> Namespace Raftel.Application.Abstractions Assembly Raftel.Application.dll Represents a middleware component in the request pipeline that can intercept and modify the processing of a request before and/or after the next component is invoked. public interface IRequestMiddleware<TRequest, TResponse> where TRequest : IRequest<TResponse> Type Parameters TRequest The type of the request. TResponse The type of the response. Methods HandleAsync(TRequest, RequestHandlerDelegate<TResponse>) Processes the request and optionally calls the next delegate in the pipeline. Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next) Parameters request TRequest The request instance. next RequestHandlerDelegate<TResponse> The next handler in the pipeline. Returns Task<TResponse> A task containing the result of the request."
+  },
+  "api/Raftel.Application.Abstractions.RequestDispatcher.html": {
+    "href": "api/Raftel.Application.Abstractions.RequestDispatcher.html",
+    "title": "Class RequestDispatcher | Raftel",
+    "summary": "Class RequestDispatcher Namespace Raftel.Application.Abstractions Assembly Raftel.Application.dll Default implementation of IRequestDispatcher that resolves the request handler and middleware pipeline from the dependency injection container. public class RequestDispatcher : IRequestDispatcher Inheritance object RequestDispatcher Implements IRequestDispatcher Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors RequestDispatcher(IServiceProvider) Creates a new instance of the RequestDispatcher class. public RequestDispatcher(IServiceProvider serviceProvider) Parameters serviceProvider IServiceProvider The dependency injection service provider. Methods DispatchAsync<TRequest, TResponse>(TRequest) Dispatches the given request and returns the result asynchronously. public Task<TResponse> DispatchAsync<TRequest, TResponse>(TRequest request) where TRequest : IRequest<TResponse> Parameters request TRequest The request to dispatch. Returns Task<TResponse> The result returned from the request handler or middleware. Type Parameters TRequest The type of the request. TResponse The type of the response."
+  },
+  "api/Raftel.Application.Abstractions.RequestHandlerDelegate-1.html": {
+    "href": "api/Raftel.Application.Abstractions.RequestHandlerDelegate-1.html",
+    "title": "Delegate RequestHandlerDelegate<TResponse> | Raftel",
+    "summary": "Delegate RequestHandlerDelegate<TResponse> Namespace Raftel.Application.Abstractions Assembly Raftel.Application.dll Delegate that represents the next handler or middleware in the request processing pipeline. public delegate Task<TResponse> RequestHandlerDelegate<TResponse>() Returns Task<TResponse> The asynchronous result of the request pipeline execution. Type Parameters TResponse The type of response expected."
+  },
+  "api/Raftel.Application.Abstractions.html": {
+    "href": "api/Raftel.Application.Abstractions.html",
+    "title": "Namespace Raftel.Application.Abstractions | Raftel",
+    "summary": "Namespace Raftel.Application.Abstractions Classes RequestDispatcher Default implementation of IRequestDispatcher that resolves the request handler and middleware pipeline from the dependency injection container. Interfaces IRequestDispatcher Dispatches requests through the pipeline and to their associated handler. IRequestHandler<TRequest, TResponse> Defines a handler that processes a request of type TRequest and returns a response of type TResponse. IRequestMiddleware<TRequest, TResponse> Represents a middleware component in the request pipeline that can intercept and modify the processing of a request before and/or after the next component is invoked. IRequest<TResponse> Represents a request that produces a response of type TResponse. Delegates RequestHandlerDelegate<TResponse> Delegate that represents the next handler or middleware in the request processing pipeline."
+  },
+  "api/Raftel.Application.Commands.CommandDispatcher.html": {
+    "href": "api/Raftel.Application.Commands.CommandDispatcher.html",
+    "title": "Class CommandDispatcher | Raftel",
+    "summary": "Class CommandDispatcher Namespace Raftel.Application.Commands Assembly Raftel.Application.dll Default implementation of ICommandDispatcher that delegates command execution to the IRequestDispatcher infrastructure. public class CommandDispatcher : ICommandDispatcher Inheritance object CommandDispatcher Implements ICommandDispatcher Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors CommandDispatcher(IRequestDispatcher) Initializes a new instance of the CommandDispatcher class. public CommandDispatcher(IRequestDispatcher dispatcher) Parameters dispatcher IRequestDispatcher The internal dispatcher used to route commands. Methods DispatchAsync<TCommand>(TCommand) Dispatches a command asynchronously. public Task<Result> DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand Parameters command TCommand The command instance to process. Returns Task<Result> A Result representing the outcome of the command execution. Type Parameters TCommand The type of command to dispatch."
+  },
+  "api/Raftel.Application.Commands.ICommand.html": {
+    "href": "api/Raftel.Application.Commands.ICommand.html",
+    "title": "Interface ICommand | Raftel",
+    "summary": "Interface ICommand Namespace Raftel.Application.Commands Assembly Raftel.Application.dll Represents a command that does not return a value other than a Result. public interface ICommand : IRequest<Result>"
+  },
+  "api/Raftel.Application.Commands.ICommandDispatcher.html": {
+    "href": "api/Raftel.Application.Commands.ICommandDispatcher.html",
+    "title": "Interface ICommandDispatcher | Raftel",
+    "summary": "Interface ICommandDispatcher Namespace Raftel.Application.Commands Assembly Raftel.Application.dll Dispatches a command to its corresponding handler. public interface ICommandDispatcher Methods DispatchAsync<TCommand>(TCommand) Dispatches a command asynchronously. Task<Result> DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand Parameters command TCommand The command instance to process. Returns Task<Result> A Result representing the outcome of the command execution. Type Parameters TCommand The type of command to dispatch."
+  },
+  "api/Raftel.Application.Commands.ICommandHandler-1.html": {
+    "href": "api/Raftel.Application.Commands.ICommandHandler-1.html",
+    "title": "Interface ICommandHandler<TCommand> | Raftel",
+    "summary": "Interface ICommandHandler<TCommand> Namespace Raftel.Application.Commands Assembly Raftel.Application.dll Defines a handler for processing a command of type TCommand. public interface ICommandHandler<TCommand> : IRequestHandler<TCommand, Result> where TCommand : ICommand Type Parameters TCommand The type of command to handle. Inherited Members IRequestHandler<TCommand, Result>.HandleAsync(TCommand)"
+  },
+  "api/Raftel.Application.Commands.html": {
+    "href": "api/Raftel.Application.Commands.html",
+    "title": "Namespace Raftel.Application.Commands | Raftel",
+    "summary": "Namespace Raftel.Application.Commands Classes CommandDispatcher Default implementation of ICommandDispatcher that delegates command execution to the IRequestDispatcher infrastructure. Interfaces ICommand Represents a command that does not return a value other than a Result. ICommandDispatcher Dispatches a command to its corresponding handler. ICommandHandler<TCommand> Defines a handler for processing a command of type TCommand."
+  },
+  "api/Raftel.Application.Queries.IQuery-1.html": {
+    "href": "api/Raftel.Application.Queries.IQuery-1.html",
+    "title": "Interface IQuery<TResult> | Raftel",
+    "summary": "Interface IQuery<TResult> Namespace Raftel.Application.Queries Assembly Raftel.Application.dll Represents a query that returns a result of type TResult. public interface IQuery<TResult> : IRequest<Result<TResult>> Type Parameters TResult The type of the result produced by the query."
+  },
+  "api/Raftel.Application.Queries.IQueryDispatcher.html": {
+    "href": "api/Raftel.Application.Queries.IQueryDispatcher.html",
+    "title": "Interface IQueryDispatcher | Raftel",
+    "summary": "Interface IQueryDispatcher Namespace Raftel.Application.Queries Assembly Raftel.Application.dll Dispatches a query to its corresponding handler and returns the result. public interface IQueryDispatcher Methods DispatchAsync<TQuery, TResult>(TQuery) Dispatches a query asynchronously and retrieves the result. Task<Result<TResult>> DispatchAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery<TResult> Parameters query TQuery The query instance to process. Returns Task<Result<TResult>> A Result<TValue> representing the outcome of the query execution. Type Parameters TQuery The type of the query to dispatch. TResult The type of the result expected from the query."
+  },
+  "api/Raftel.Application.Queries.IQueryHandler-2.html": {
+    "href": "api/Raftel.Application.Queries.IQueryHandler-2.html",
+    "title": "Interface IQueryHandler<TQuery, TResult> | Raftel",
+    "summary": "Interface IQueryHandler<TQuery, TResult> Namespace Raftel.Application.Queries Assembly Raftel.Application.dll Defines a handler for processing a query of type TQuery that returns a result of type TResult. public interface IQueryHandler<TQuery, TResult> : IRequestHandler<TQuery, Result<TResult>> where TQuery : IQuery<TResult> Type Parameters TQuery The type of the query to handle. TResult The type of the result produced by the query. Inherited Members IRequestHandler<TQuery, Result<TResult>>.HandleAsync(TQuery)"
+  },
+  "api/Raftel.Application.Queries.QueryDispatcher.html": {
+    "href": "api/Raftel.Application.Queries.QueryDispatcher.html",
+    "title": "Class QueryDispatcher | Raftel",
+    "summary": "Class QueryDispatcher Namespace Raftel.Application.Queries Assembly Raftel.Application.dll Default implementation of IQueryDispatcher that delegates query execution to the IRequestDispatcher infrastructure. public class QueryDispatcher : IQueryDispatcher Inheritance object QueryDispatcher Implements IQueryDispatcher Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors QueryDispatcher(IRequestDispatcher) Initializes a new instance of the QueryDispatcher class. public QueryDispatcher(IRequestDispatcher dispatcher) Parameters dispatcher IRequestDispatcher The internal dispatcher used to route queries. Methods DispatchAsync<TQuery, TResult>(TQuery) Dispatches a query asynchronously and retrieves the result. public Task<Result<TResult>> DispatchAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery<TResult> Parameters query TQuery The query instance to process. Returns Task<Result<TResult>> A Result<TValue> representing the outcome of the query execution. Type Parameters TQuery The type of the query to dispatch. TResult The type of the result expected from the query."
+  },
+  "api/Raftel.Application.Queries.html": {
+    "href": "api/Raftel.Application.Queries.html",
+    "title": "Namespace Raftel.Application.Queries | Raftel",
+    "summary": "Namespace Raftel.Application.Queries Classes QueryDispatcher Default implementation of IQueryDispatcher that delegates query execution to the IRequestDispatcher infrastructure. Interfaces IQueryDispatcher Dispatches a query to its corresponding handler and returns the result. IQueryHandler<TQuery, TResult> Defines a handler for processing a query of type TQuery that returns a result of type TResult. IQuery<TResult> Represents a query that returns a result of type TResult."
+  },
+  "api/Raftel.Domain.Abstractions.Error.html": {
+    "href": "api/Raftel.Domain.Abstractions.Error.html",
+    "title": "Class Error | Raftel",
+    "summary": "Class Error Namespace Raftel.Domain.Abstractions Assembly Raftel.Domain.dll public record Error : IEquatable<Error> Inheritance object Error Implements IEquatable<Error> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Error(string, string) public Error(string Code, string Message) Parameters Code string Message string Fields None public static Error None Field Value Error NullValue public static Error NullValue Field Value Error Properties Code public string Code { get; init; } Property Value string Message public string Message { get; init; } Property Value string"
+  },
+  "api/Raftel.Domain.Abstractions.Result-1.html": {
+    "href": "api/Raftel.Domain.Abstractions.Result-1.html",
+    "title": "Class Result<TValue> | Raftel",
+    "summary": "Class Result<TValue> Namespace Raftel.Domain.Abstractions Assembly Raftel.Domain.dll public class Result<TValue> : Result Type Parameters TValue Inheritance object Result Result<TValue> Inherited Members Result.IsSuccess Result.IsFailure Result.Error Result.Success() Result.Success<TValue>(TValue) Result.Failure<TValue>(Error) Result.Create<TValue>(TValue) object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Result(TValue, bool, Error) Initializes a new instance of the Result<TValue> class. protected Result(TValue value, bool isSuccess, Error error) Parameters value TValue The value returned by the operation. isSuccess bool Indicates whether the operation was successful. error Error The error associated with the operation. Properties Value Gets the value returned by the operation, if successful. public TValue Value { get; } Property Value TValue Methods Failure(Error) Creates a failed result with the specified error. public static Result<TValue> Failure(Error error) Parameters error Error The error associated with the failure. Returns Result<TValue> A failed result. Success(TValue) Creates a successful result with the specified value. public static Result<TValue> Success(TValue value) Parameters value TValue The value returned by the operation. Returns Result<TValue> A successful result containing the value. Operators implicit operator Result<TValue>(TValue) public static implicit operator Result<TValue>(TValue value) Parameters value TValue Returns Result<TValue>"
+  },
+  "api/Raftel.Domain.Abstractions.Result.html": {
+    "href": "api/Raftel.Domain.Abstractions.Result.html",
+    "title": "Class Result | Raftel",
+    "summary": "Class Result Namespace Raftel.Domain.Abstractions Assembly Raftel.Domain.dll public class Result Inheritance object Result Derived Result<TValue> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors Result(bool, Error) protected Result(bool isSuccess, Error error) Parameters isSuccess bool error Error Properties Error public Error Error { get; } Property Value Error IsFailure public bool IsFailure { get; } Property Value bool IsSuccess public bool IsSuccess { get; } Property Value bool Methods Create<TValue>(TValue?) public static Result<TValue> Create<TValue>(TValue? value) Parameters value TValue Returns Result<TValue> Type Parameters TValue Failure(Error) public static Result Failure(Error error) Parameters error Error Returns Result Failure<TValue>(Error) public static Result<TValue> Failure<TValue>(Error error) Parameters error Error Returns Result<TValue> Type Parameters TValue Success() public static Result Success() Returns Result Success<TValue>(TValue) public static Result<TValue> Success<TValue>(TValue value) Parameters value TValue Returns Result<TValue> Type Parameters TValue"
+  },
+  "api/Raftel.Domain.Abstractions.html": {
+    "href": "api/Raftel.Domain.Abstractions.html",
+    "title": "Namespace Raftel.Domain.Abstractions | Raftel",
+    "summary": "Namespace Raftel.Domain.Abstractions Classes Error Result Result<TValue>"
+  },
+  "docs/getting-started.html": {
+    "href": "docs/getting-started.html",
+    "title": "Getting Started | Raftel",
+    "summary": "Getting Started"
+  },
+  "docs/introduction.html": {
+    "href": "docs/introduction.html",
+    "title": "Introduction | Raftel",
+    "summary": "Introduction"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "This is the HOMEPAGE. | Raftel",
+    "summary": "This is the HOMEPAGE. Refer to Markdown for how to write markdown files. Quick Start Notes: Add images to the images folder if the file is referencing an image."
+  }
+}
