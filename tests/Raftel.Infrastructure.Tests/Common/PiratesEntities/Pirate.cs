@@ -16,7 +16,7 @@ public class Pirate : AggregateRoot<PirateId>
     }
 
     public Name Name { get; private set; }
-    public Bounty Bounty { get; private set; }
+    public Bounty Bounty { get;  set; }
 
     public static Pirate Create(Name name, Bounty bounty)
     {

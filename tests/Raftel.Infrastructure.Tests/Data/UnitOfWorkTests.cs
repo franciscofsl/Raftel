@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
-using Raftel.Infrastructure.Tests.Common;
 using Raftel.Infrastructure.Tests.Common.PiratesEntities;
 using Raftel.Infrastructure.Tests.Common.PiratesEntities.ValueObjects;
 using Raftel.Infrastructure.Tests.Data.Common;
@@ -22,7 +21,6 @@ public class UnitOfWorkTests : DataTestBase
             var dbContext = sp.GetRequiredService<TestingRaftelDbContext>();
 
             dbContext.Add(pirate);
-
             await unitOfWork.CommitAsync();
 
             var loaded = await dbContext
@@ -35,4 +33,24 @@ public class UnitOfWorkTests : DataTestBase
         });
     }
 
+    [Fact]
+    public async Task CommitAsync_ShouldPersistData_UsingRepositories()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var pirate = Pirate.Create("Luffy", 150_000_000);
+
+            var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
+            var repository = sp.GetRequiredService<IPirateRepository>();
+
+            await repository.AddAsync(pirate);
+            await unitOfWork.CommitAsync();
+
+            var loaded = await repository.GetByIdAsync(pirate.Id);
+
+            loaded.ShouldNotBeNull();
+            loaded.Bounty.ShouldBe(new Bounty(150_000_000));
+            pirate.ShouldBe(loaded);
+        });
+    }
 }

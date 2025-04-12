@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Raftel.Application;
 
 namespace Raftel.Infrastructure.Tests.Data.Common;
 
@@ -33,15 +32,24 @@ public abstract class DataTestBase : IAsyncLifetime
     public async Task DisposeAsync()
     {
         if (ServiceProvider is IDisposable disposable)
+        {
             disposable.Dispose();
+        }
 
         await _fixture.DisposeAsync();
     }
 
     protected virtual void ConfigureServices(IServiceCollection services)
     {
-        services.AddDbContext<TestingRaftelDbContext>(options => options.UseSqlServer(_fixture.ConnectionString));
-        services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TestingRaftelDbContext>());
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                ["ConnectionStrings:TestConnection"] = _fixture.ConnectionString
+            })
+            .Build();
+        services.AddRaftelData<TestingRaftelDbContext>(configuration, "TestConnection");
+
+        services.AddScoped(typeof(IPirateRepository), typeof(PirateRepository));
     }
 
     protected TService GetService<TService>() where TService : notnull
