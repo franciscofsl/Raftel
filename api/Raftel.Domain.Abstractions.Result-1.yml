@@ -20,7 +20,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Result.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: Result
     path: src/Raftel.Domain/Abstractions/Result.cs
@@ -68,7 +68,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Result.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: .ctor
     path: src/Raftel.Domain/Abstractions/Result.cs
@@ -109,7 +109,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Result.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: Value
     path: src/Raftel.Domain/Abstractions/Result.cs
@@ -142,7 +142,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Result.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: Success
     path: src/Raftel.Domain/Abstractions/Result.cs
@@ -179,7 +179,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Result.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: Failure
     path: src/Raftel.Domain/Abstractions/Result.cs
@@ -216,7 +216,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Result.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: op_Implicit
     path: src/Raftel.Domain/Abstractions/Result.cs

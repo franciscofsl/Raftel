@@ -17,7 +17,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Abstractions/RequestDispatcher.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: RequestDispatcher
     path: src/Raftel.Application/Abstractions/RequestDispatcher.cs
@@ -59,7 +59,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Abstractions/RequestDispatcher.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: .ctor
     path: src/Raftel.Application/Abstractions/RequestDispatcher.cs
@@ -94,7 +94,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Abstractions/RequestDispatcher.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: DispatchAsync
     path: src/Raftel.Application/Abstractions/RequestDispatcher.cs

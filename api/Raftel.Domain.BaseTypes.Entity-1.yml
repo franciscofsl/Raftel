@@ -1,0 +1,549 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Domain.BaseTypes.Entity`1
+  commentId: T:Raftel.Domain.BaseTypes.Entity`1
+  id: Entity`1
+  parent: Raftel.Domain.BaseTypes
+  children:
+  - Raftel.Domain.BaseTypes.Entity`1.#ctor(`0)
+  - Raftel.Domain.BaseTypes.Entity`1.Equals(System.Object)
+  - Raftel.Domain.BaseTypes.Entity`1.GetHashCode
+  - Raftel.Domain.BaseTypes.Entity`1.Id
+  langs:
+  - csharp
+  - vb
+  name: Entity<TId>
+  nameWithType: Entity<TId>
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>
+  type: Class
+  source:
+    remote:
+      path: src/Raftel.Domain/BaseTypes/Entity.cs
+      branch: feature/base-types
+      repo: https://github.com/franciscofsl/Raftel
+    id: Entity
+    path: src/Raftel.Domain/BaseTypes/Entity.cs
+    startLine: 6
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.BaseTypes
+  summary: Base class for all domain entities with a strongly-typed ID.
+  example: []
+  syntax:
+    content: 'public abstract class Entity<TId> where TId : TypedId<Guid>'
+    typeParameters:
+    - id: TId
+      description: The type of the entity's identifier.
+    content.vb: Public MustInherit Class Entity(Of TId As TypedId(Of Guid))
+  inheritance:
+  - System.Object
+  derivedClasses:
+  - Raftel.Domain.BaseTypes.AggregateRoot`1
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  nameWithType.vb: Entity(Of TId)
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId)
+  name.vb: Entity(Of TId)
+- uid: Raftel.Domain.BaseTypes.Entity`1.Id
+  commentId: P:Raftel.Domain.BaseTypes.Entity`1.Id
+  id: Id
+  parent: Raftel.Domain.BaseTypes.Entity`1
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: Entity<TId>.Id
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Id
+  type: Property
+  source:
+    remote:
+      path: src/Raftel.Domain/BaseTypes/Entity.cs
+      branch: feature/base-types
+      repo: https://github.com/franciscofsl/Raftel
+    id: Id
+    path: src/Raftel.Domain/BaseTypes/Entity.cs
+    startLine: 11
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.BaseTypes
+  summary: Gets the unique identifier of the entity.
+  example: []
+  syntax:
+    content: public TId Id { get; protected set; }
+    parameters: []
+    return:
+      type: '{TId}'
+    content.vb: Public Property Id As TId
+  overload: Raftel.Domain.BaseTypes.Entity`1.Id*
+  nameWithType.vb: Entity(Of TId).Id
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).Id
+- uid: Raftel.Domain.BaseTypes.Entity`1.#ctor(`0)
+  commentId: M:Raftel.Domain.BaseTypes.Entity`1.#ctor(`0)
+  id: '#ctor(`0)'
+  parent: Raftel.Domain.BaseTypes.Entity`1
+  langs:
+  - csharp
+  - vb
+  name: Entity(TId)
+  nameWithType: Entity<TId>.Entity(TId)
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Entity(TId)
+  type: Constructor
+  source:
+    remote:
+      path: src/Raftel.Domain/BaseTypes/Entity.cs
+      branch: feature/base-types
+      repo: https://github.com/franciscofsl/Raftel
+    id: .ctor
+    path: src/Raftel.Domain/BaseTypes/Entity.cs
+    startLine: 17
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.BaseTypes
+  summary: Initializes a new instance of the <xref href="Raftel.Domain.BaseTypes.Entity%601" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: protected Entity(TId id)
+    parameters:
+    - id: id
+      type: '{TId}'
+      description: The identifier of the entity.
+    content.vb: Protected Sub New(id As TId)
+  overload: Raftel.Domain.BaseTypes.Entity`1.#ctor*
+  nameWithType.vb: Entity(Of TId).New(TId)
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).New(TId)
+  name.vb: New(TId)
+- uid: Raftel.Domain.BaseTypes.Entity`1.Equals(System.Object)
+  commentId: M:Raftel.Domain.BaseTypes.Entity`1.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: Raftel.Domain.BaseTypes.Entity`1
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: Entity<TId>.Equals(object?)
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Domain/BaseTypes/Entity.cs
+      branch: feature/base-types
+      repo: https://github.com/franciscofsl/Raftel
+    id: Equals
+    path: src/Raftel.Domain/BaseTypes/Entity.cs
+    startLine: 23
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.BaseTypes
+  summary: Determines whether the specified object is equal to the current object.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current object.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the specified object  is equal to the current object; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.Object.Equals(System.Object)
+  overload: Raftel.Domain.BaseTypes.Entity`1.Equals*
+  nameWithType.vb: Entity(Of TId).Equals(Object)
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).Equals(Object)
+  name.vb: Equals(Object)
+- uid: Raftel.Domain.BaseTypes.Entity`1.GetHashCode
+  commentId: M:Raftel.Domain.BaseTypes.Entity`1.GetHashCode
+  id: GetHashCode
+  parent: Raftel.Domain.BaseTypes.Entity`1
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: Entity<TId>.GetHashCode()
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Domain/BaseTypes/Entity.cs
+      branch: feature/base-types
+      repo: https://github.com/franciscofsl/Raftel
+    id: GetHashCode
+    path: src/Raftel.Domain/BaseTypes/Entity.cs
+    startLine: 31
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.BaseTypes
+  summary: Serves as the default hash function.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A hash code for the current object.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.Object.GetHashCode
+  overload: Raftel.Domain.BaseTypes.Entity`1.GetHashCode*
+  nameWithType.vb: Entity(Of TId).GetHashCode()
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).GetHashCode()
+references:
+- uid: Raftel.Domain.BaseTypes
+  commentId: N:Raftel.Domain.BaseTypes
+  href: Raftel.html
+  name: Raftel.Domain.BaseTypes
+  nameWithType: Raftel.Domain.BaseTypes
+  fullName: Raftel.Domain.BaseTypes
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.BaseTypes
+    name: BaseTypes
+    href: Raftel.Domain.BaseTypes.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.BaseTypes
+    name: BaseTypes
+    href: Raftel.Domain.BaseTypes.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Raftel.Domain.BaseTypes.Entity`1.Id*
+  commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.Id
+  href: Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id
+  name: Id
+  nameWithType: Entity<TId>.Id
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Id
+  nameWithType.vb: Entity(Of TId).Id
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).Id
+- uid: '{TId}'
+  commentId: '!:TId'
+  definition: TId
+  name: TId
+  nameWithType: TId
+  fullName: TId
+- uid: TId
+  name: TId
+  nameWithType: TId
+  fullName: TId
+- uid: Raftel.Domain.BaseTypes.Entity`1
+  commentId: T:Raftel.Domain.BaseTypes.Entity`1
+  href: Raftel.Domain.BaseTypes.Entity-1.html
+  name: Entity<TId>
+  nameWithType: Entity<TId>
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>
+  nameWithType.vb: Entity(Of TId)
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId)
+  name.vb: Entity(Of TId)
+  spec.csharp:
+  - uid: Raftel.Domain.BaseTypes.Entity`1
+    name: Entity
+    href: Raftel.Domain.BaseTypes.Entity-1.html
+  - name: <
+  - name: TId
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Domain.BaseTypes.Entity`1
+    name: Entity
+    href: Raftel.Domain.BaseTypes.Entity-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TId
+  - name: )
+- uid: Raftel.Domain.BaseTypes.Entity`1.#ctor*
+  commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.#ctor
+  href: Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1__ctor__0_
+  name: Entity
+  nameWithType: Entity<TId>.Entity
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Entity
+  nameWithType.vb: Entity(Of TId).New
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).New
+  name.vb: New
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: Raftel.Domain.BaseTypes.Entity`1.Equals*
+  commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.Equals
+  href: Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Equals_System_Object_
+  name: Equals
+  nameWithType: Entity<TId>.Equals
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Equals
+  nameWithType.vb: Entity(Of TId).Equals
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: Raftel.Domain.BaseTypes.Entity`1.GetHashCode*
+  commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.GetHashCode
+  href: Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_GetHashCode
+  name: GetHashCode
+  nameWithType: Entity<TId>.GetHashCode
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.GetHashCode
+  nameWithType.vb: Entity(Of TId).GetHashCode
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer

@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Queries/IQueryHandler.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: IQueryHandler
     path: src/Raftel.Application/Queries/IQueryHandler.cs

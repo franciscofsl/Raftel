@@ -49,5 +49,22 @@
   "Raftel.Domain.Abstractions.Result`1.Failure(Raftel.Domain.Abstractions.Error)": "Raftel.Domain.Abstractions.Result-1.yml",
   "Raftel.Domain.Abstractions.Result`1.Success(`0)": "Raftel.Domain.Abstractions.Result-1.yml",
   "Raftel.Domain.Abstractions.Result`1.Value": "Raftel.Domain.Abstractions.Result-1.yml",
-  "Raftel.Domain.Abstractions.Result`1.op_Implicit(`0)~Raftel.Domain.Abstractions.Result{`0}": "Raftel.Domain.Abstractions.Result-1.yml"
+  "Raftel.Domain.Abstractions.Result`1.op_Implicit(`0)~Raftel.Domain.Abstractions.Result{`0}": "Raftel.Domain.Abstractions.Result-1.yml",
+  "Raftel.Domain.BaseTypes": "Raftel.Domain.BaseTypes.yml",
+  "Raftel.Domain.BaseTypes.AggregateRoot`1": "Raftel.Domain.BaseTypes.AggregateRoot-1.yml",
+  "Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor(`0)": "Raftel.Domain.BaseTypes.AggregateRoot-1.yml",
+  "Raftel.Domain.BaseTypes.Entity`1": "Raftel.Domain.BaseTypes.Entity-1.yml",
+  "Raftel.Domain.BaseTypes.Entity`1.#ctor(`0)": "Raftel.Domain.BaseTypes.Entity-1.yml",
+  "Raftel.Domain.BaseTypes.Entity`1.Equals(System.Object)": "Raftel.Domain.BaseTypes.Entity-1.yml",
+  "Raftel.Domain.BaseTypes.Entity`1.GetHashCode": "Raftel.Domain.BaseTypes.Entity-1.yml",
+  "Raftel.Domain.BaseTypes.Entity`1.Id": "Raftel.Domain.BaseTypes.Entity-1.yml",
+  "Raftel.Domain.BaseTypes.TypedGuidId": "Raftel.Domain.BaseTypes.TypedGuidId.yml",
+  "Raftel.Domain.BaseTypes.TypedGuidId.#ctor(System.Guid)": "Raftel.Domain.BaseTypes.TypedGuidId.yml",
+  "Raftel.Domain.BaseTypes.TypedGuidId.NewGuid": "Raftel.Domain.BaseTypes.TypedGuidId.yml",
+  "Raftel.Domain.BaseTypes.TypedId`1": "Raftel.Domain.BaseTypes.TypedId-1.yml",
+  "Raftel.Domain.BaseTypes.TypedId`1.#ctor(`0)": "Raftel.Domain.BaseTypes.TypedId-1.yml",
+  "Raftel.Domain.BaseTypes.TypedId`1.Equals(Raftel.Domain.BaseTypes.TypedId{`0})": "Raftel.Domain.BaseTypes.TypedId-1.yml",
+  "Raftel.Domain.BaseTypes.TypedId`1.GetHashCode": "Raftel.Domain.BaseTypes.TypedId-1.yml",
+  "Raftel.Domain.BaseTypes.TypedId`1.ToString": "Raftel.Domain.BaseTypes.TypedId-1.yml",
+  "Raftel.Domain.BaseTypes.TypedId`1.op_Implicit(Raftel.Domain.BaseTypes.TypedId{`0})~`0": "Raftel.Domain.BaseTypes.TypedId-1.yml"
 }

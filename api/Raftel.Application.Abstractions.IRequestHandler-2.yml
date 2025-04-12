@@ -16,7 +16,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Abstractions/IRequestHandler.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: IRequestHandler
     path: src/Raftel.Application/Abstractions/IRequestHandler.cs
@@ -54,7 +54,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Abstractions/IRequestHandler.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: HandleAsync
     path: src/Raftel.Application/Abstractions/IRequestHandler.cs
