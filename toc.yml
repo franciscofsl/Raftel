@@ -2,9 +2,3 @@
   href: docs/
 - name: API
   href: api/
-- name: Raftel.Application
-  uid: Raftel.Application
-- name: Raftel.Domain
-  uid: Raftel.Domain
-- name: Raftel.Infrastructure
-  uid: Raftel.Infrastructure
