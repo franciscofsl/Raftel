@@ -3,26 +3,26 @@ sorted: true
 references:
 - uid: Raftel.Application.Abstractions
   name: Raftel.Application.Abstractions
-  href: api/Raftel.Application.Abstractions.html
+  href: api/Raftel.Application.Abstractions.yml
   commentId: N:Raftel.Application.Abstractions
   fullName: Raftel.Application.Abstractions
   nameWithType: Raftel.Application.Abstractions
 - uid: Raftel.Application.Abstractions.IRequestDispatcher
   name: IRequestDispatcher
-  href: api/Raftel.Application.Abstractions.IRequestDispatcher.html
+  href: api/Raftel.Application.Abstractions.IRequestDispatcher.yml
   commentId: T:Raftel.Application.Abstractions.IRequestDispatcher
   fullName: Raftel.Application.Abstractions.IRequestDispatcher
   nameWithType: IRequestDispatcher
 - uid: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync*
   name: DispatchAsync
-  href: api/Raftel.Application.Abstractions.IRequestDispatcher.html#Raftel_Application_Abstractions_IRequestDispatcher_DispatchAsync_
+  href: api/Raftel.Application.Abstractions.IRequestDispatcher.yml
   commentId: Overload:Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync
   nameWithType: IRequestDispatcher.DispatchAsync
 - uid: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync``2(``0)
   name: DispatchAsync<TRequest, TResponse>(TRequest)
-  href: api/Raftel.Application.Abstractions.IRequestDispatcher.html#Raftel_Application_Abstractions_IRequestDispatcher_DispatchAsync__2___0_
+  href: api/Raftel.Application.Abstractions.IRequestDispatcher.yml
   commentId: M:Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync``2(``0)
   name.vb: DispatchAsync(Of TRequest, TResponse)(TRequest)
   fullName: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest)
@@ -31,7 +31,7 @@ references:
   nameWithType.vb: IRequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest)
 - uid: Raftel.Application.Abstractions.IRequestHandler`2
   name: IRequestHandler<TRequest, TResponse>
-  href: api/Raftel.Application.Abstractions.IRequestHandler-2.html
+  href: api/Raftel.Application.Abstractions.IRequestHandler-2.yml
   commentId: T:Raftel.Application.Abstractions.IRequestHandler`2
   name.vb: IRequestHandler(Of TRequest, TResponse)
   fullName: Raftel.Application.Abstractions.IRequestHandler<TRequest, TResponse>
@@ -40,7 +40,7 @@ references:
   nameWithType.vb: IRequestHandler(Of TRequest, TResponse)
 - uid: Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0)
   name: HandleAsync(TRequest)
-  href: api/Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync__0_
+  href: api/Raftel.Application.Abstractions.IRequestHandler-2.yml
   commentId: M:Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0)
   fullName: Raftel.Application.Abstractions.IRequestHandler<TRequest, TResponse>.HandleAsync(TRequest)
   fullName.vb: Raftel.Application.Abstractions.IRequestHandler(Of TRequest, TResponse).HandleAsync(TRequest)
@@ -48,7 +48,7 @@ references:
   nameWithType.vb: IRequestHandler(Of TRequest, TResponse).HandleAsync(TRequest)
 - uid: Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync*
   name: HandleAsync
-  href: api/Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync_
+  href: api/Raftel.Application.Abstractions.IRequestHandler-2.yml
   commentId: Overload:Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.IRequestHandler<TRequest, TResponse>.HandleAsync
@@ -57,7 +57,7 @@ references:
   nameWithType.vb: IRequestHandler(Of TRequest, TResponse).HandleAsync
 - uid: Raftel.Application.Abstractions.IRequestMiddleware`2
   name: IRequestMiddleware<TRequest, TResponse>
-  href: api/Raftel.Application.Abstractions.IRequestMiddleware-2.html
+  href: api/Raftel.Application.Abstractions.IRequestMiddleware-2.yml
   commentId: T:Raftel.Application.Abstractions.IRequestMiddleware`2
   name.vb: IRequestMiddleware(Of TRequest, TResponse)
   fullName: Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>
@@ -66,7 +66,7 @@ references:
   nameWithType.vb: IRequestMiddleware(Of TRequest, TResponse)
 - uid: Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
   name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  href: api/Raftel.Application.Abstractions.IRequestMiddleware-2.html#Raftel_Application_Abstractions_IRequestMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  href: api/Raftel.Application.Abstractions.IRequestMiddleware-2.yml
   commentId: M:Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
   name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
   fullName: Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
@@ -75,7 +75,7 @@ references:
   nameWithType.vb: IRequestMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
 - uid: Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync*
   name: HandleAsync
-  href: api/Raftel.Application.Abstractions.IRequestMiddleware-2.html#Raftel_Application_Abstractions_IRequestMiddleware_2_HandleAsync_
+  href: api/Raftel.Application.Abstractions.IRequestMiddleware-2.yml
   commentId: Overload:Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>.HandleAsync
@@ -84,7 +84,7 @@ references:
   nameWithType.vb: IRequestMiddleware(Of TRequest, TResponse).HandleAsync
 - uid: Raftel.Application.Abstractions.IRequest`1
   name: IRequest<TResponse>
-  href: api/Raftel.Application.Abstractions.IRequest-1.html
+  href: api/Raftel.Application.Abstractions.IRequest-1.yml
   commentId: T:Raftel.Application.Abstractions.IRequest`1
   name.vb: IRequest(Of TResponse)
   fullName: Raftel.Application.Abstractions.IRequest<TResponse>
@@ -93,13 +93,13 @@ references:
   nameWithType.vb: IRequest(Of TResponse)
 - uid: Raftel.Application.Abstractions.RequestDispatcher
   name: RequestDispatcher
-  href: api/Raftel.Application.Abstractions.RequestDispatcher.html
+  href: api/Raftel.Application.Abstractions.RequestDispatcher.yml
   commentId: T:Raftel.Application.Abstractions.RequestDispatcher
   fullName: Raftel.Application.Abstractions.RequestDispatcher
   nameWithType: RequestDispatcher
 - uid: Raftel.Application.Abstractions.RequestDispatcher.#ctor(System.IServiceProvider)
   name: RequestDispatcher(IServiceProvider)
-  href: api/Raftel.Application.Abstractions.RequestDispatcher.html#Raftel_Application_Abstractions_RequestDispatcher__ctor_System_IServiceProvider_
+  href: api/Raftel.Application.Abstractions.RequestDispatcher.yml
   commentId: M:Raftel.Application.Abstractions.RequestDispatcher.#ctor(System.IServiceProvider)
   name.vb: New(IServiceProvider)
   fullName: Raftel.Application.Abstractions.RequestDispatcher.RequestDispatcher(System.IServiceProvider)
@@ -108,7 +108,7 @@ references:
   nameWithType.vb: RequestDispatcher.New(IServiceProvider)
 - uid: Raftel.Application.Abstractions.RequestDispatcher.#ctor*
   name: RequestDispatcher
-  href: api/Raftel.Application.Abstractions.RequestDispatcher.html#Raftel_Application_Abstractions_RequestDispatcher__ctor_
+  href: api/Raftel.Application.Abstractions.RequestDispatcher.yml
   commentId: Overload:Raftel.Application.Abstractions.RequestDispatcher.#ctor
   isSpec: "True"
   name.vb: New
@@ -118,14 +118,14 @@ references:
   nameWithType.vb: RequestDispatcher.New
 - uid: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync*
   name: DispatchAsync
-  href: api/Raftel.Application.Abstractions.RequestDispatcher.html#Raftel_Application_Abstractions_RequestDispatcher_DispatchAsync_
+  href: api/Raftel.Application.Abstractions.RequestDispatcher.yml
   commentId: Overload:Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync
   nameWithType: RequestDispatcher.DispatchAsync
 - uid: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync``2(``0)
   name: DispatchAsync<TRequest, TResponse>(TRequest)
-  href: api/Raftel.Application.Abstractions.RequestDispatcher.html#Raftel_Application_Abstractions_RequestDispatcher_DispatchAsync__2___0_
+  href: api/Raftel.Application.Abstractions.RequestDispatcher.yml
   commentId: M:Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync``2(``0)
   name.vb: DispatchAsync(Of TRequest, TResponse)(TRequest)
   fullName: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest)
@@ -134,7 +134,7 @@ references:
   nameWithType.vb: RequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest)
 - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
   name: RequestHandlerDelegate<TResponse>
-  href: api/Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  href: api/Raftel.Application.Abstractions.RequestHandlerDelegate-1.yml
   commentId: T:Raftel.Application.Abstractions.RequestHandlerDelegate`1
   name.vb: RequestHandlerDelegate(Of TResponse)
   fullName: Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>
@@ -143,19 +143,19 @@ references:
   nameWithType.vb: RequestHandlerDelegate(Of TResponse)
 - uid: Raftel.Application.Commands
   name: Raftel.Application.Commands
-  href: api/Raftel.Application.Commands.html
+  href: api/Raftel.Application.Commands.yml
   commentId: N:Raftel.Application.Commands
   fullName: Raftel.Application.Commands
   nameWithType: Raftel.Application.Commands
 - uid: Raftel.Application.Commands.CommandDispatcher
   name: CommandDispatcher
-  href: api/Raftel.Application.Commands.CommandDispatcher.html
+  href: api/Raftel.Application.Commands.CommandDispatcher.yml
   commentId: T:Raftel.Application.Commands.CommandDispatcher
   fullName: Raftel.Application.Commands.CommandDispatcher
   nameWithType: CommandDispatcher
 - uid: Raftel.Application.Commands.CommandDispatcher.#ctor(Raftel.Application.Abstractions.IRequestDispatcher)
   name: CommandDispatcher(IRequestDispatcher)
-  href: api/Raftel.Application.Commands.CommandDispatcher.html#Raftel_Application_Commands_CommandDispatcher__ctor_Raftel_Application_Abstractions_IRequestDispatcher_
+  href: api/Raftel.Application.Commands.CommandDispatcher.yml
   commentId: M:Raftel.Application.Commands.CommandDispatcher.#ctor(Raftel.Application.Abstractions.IRequestDispatcher)
   name.vb: New(IRequestDispatcher)
   fullName: Raftel.Application.Commands.CommandDispatcher.CommandDispatcher(Raftel.Application.Abstractions.IRequestDispatcher)
@@ -164,7 +164,7 @@ references:
   nameWithType.vb: CommandDispatcher.New(IRequestDispatcher)
 - uid: Raftel.Application.Commands.CommandDispatcher.#ctor*
   name: CommandDispatcher
-  href: api/Raftel.Application.Commands.CommandDispatcher.html#Raftel_Application_Commands_CommandDispatcher__ctor_
+  href: api/Raftel.Application.Commands.CommandDispatcher.yml
   commentId: Overload:Raftel.Application.Commands.CommandDispatcher.#ctor
   isSpec: "True"
   name.vb: New
@@ -174,14 +174,14 @@ references:
   nameWithType.vb: CommandDispatcher.New
 - uid: Raftel.Application.Commands.CommandDispatcher.DispatchAsync*
   name: DispatchAsync
-  href: api/Raftel.Application.Commands.CommandDispatcher.html#Raftel_Application_Commands_CommandDispatcher_DispatchAsync_
+  href: api/Raftel.Application.Commands.CommandDispatcher.yml
   commentId: Overload:Raftel.Application.Commands.CommandDispatcher.DispatchAsync
   isSpec: "True"
   fullName: Raftel.Application.Commands.CommandDispatcher.DispatchAsync
   nameWithType: CommandDispatcher.DispatchAsync
 - uid: Raftel.Application.Commands.CommandDispatcher.DispatchAsync``1(``0)
   name: DispatchAsync<TCommand>(TCommand)
-  href: api/Raftel.Application.Commands.CommandDispatcher.html#Raftel_Application_Commands_CommandDispatcher_DispatchAsync__1___0_
+  href: api/Raftel.Application.Commands.CommandDispatcher.yml
   commentId: M:Raftel.Application.Commands.CommandDispatcher.DispatchAsync``1(``0)
   name.vb: DispatchAsync(Of TCommand)(TCommand)
   fullName: Raftel.Application.Commands.CommandDispatcher.DispatchAsync<TCommand>(TCommand)
@@ -190,26 +190,26 @@ references:
   nameWithType.vb: CommandDispatcher.DispatchAsync(Of TCommand)(TCommand)
 - uid: Raftel.Application.Commands.ICommand
   name: ICommand
-  href: api/Raftel.Application.Commands.ICommand.html
+  href: api/Raftel.Application.Commands.ICommand.yml
   commentId: T:Raftel.Application.Commands.ICommand
   fullName: Raftel.Application.Commands.ICommand
   nameWithType: ICommand
 - uid: Raftel.Application.Commands.ICommandDispatcher
   name: ICommandDispatcher
-  href: api/Raftel.Application.Commands.ICommandDispatcher.html
+  href: api/Raftel.Application.Commands.ICommandDispatcher.yml
   commentId: T:Raftel.Application.Commands.ICommandDispatcher
   fullName: Raftel.Application.Commands.ICommandDispatcher
   nameWithType: ICommandDispatcher
 - uid: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync*
   name: DispatchAsync
-  href: api/Raftel.Application.Commands.ICommandDispatcher.html#Raftel_Application_Commands_ICommandDispatcher_DispatchAsync_
+  href: api/Raftel.Application.Commands.ICommandDispatcher.yml
   commentId: Overload:Raftel.Application.Commands.ICommandDispatcher.DispatchAsync
   isSpec: "True"
   fullName: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync
   nameWithType: ICommandDispatcher.DispatchAsync
 - uid: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync``1(``0)
   name: DispatchAsync<TCommand>(TCommand)
-  href: api/Raftel.Application.Commands.ICommandDispatcher.html#Raftel_Application_Commands_ICommandDispatcher_DispatchAsync__1___0_
+  href: api/Raftel.Application.Commands.ICommandDispatcher.yml
   commentId: M:Raftel.Application.Commands.ICommandDispatcher.DispatchAsync``1(``0)
   name.vb: DispatchAsync(Of TCommand)(TCommand)
   fullName: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync<TCommand>(TCommand)
@@ -218,7 +218,7 @@ references:
   nameWithType.vb: ICommandDispatcher.DispatchAsync(Of TCommand)(TCommand)
 - uid: Raftel.Application.Commands.ICommandHandler`1
   name: ICommandHandler<TCommand>
-  href: api/Raftel.Application.Commands.ICommandHandler-1.html
+  href: api/Raftel.Application.Commands.ICommandHandler-1.yml
   commentId: T:Raftel.Application.Commands.ICommandHandler`1
   name.vb: ICommandHandler(Of TCommand)
   fullName: Raftel.Application.Commands.ICommandHandler<TCommand>
@@ -227,26 +227,26 @@ references:
   nameWithType.vb: ICommandHandler(Of TCommand)
 - uid: Raftel.Application.Queries
   name: Raftel.Application.Queries
-  href: api/Raftel.Application.Queries.html
+  href: api/Raftel.Application.Queries.yml
   commentId: N:Raftel.Application.Queries
   fullName: Raftel.Application.Queries
   nameWithType: Raftel.Application.Queries
 - uid: Raftel.Application.Queries.IQueryDispatcher
   name: IQueryDispatcher
-  href: api/Raftel.Application.Queries.IQueryDispatcher.html
+  href: api/Raftel.Application.Queries.IQueryDispatcher.yml
   commentId: T:Raftel.Application.Queries.IQueryDispatcher
   fullName: Raftel.Application.Queries.IQueryDispatcher
   nameWithType: IQueryDispatcher
 - uid: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync*
   name: DispatchAsync
-  href: api/Raftel.Application.Queries.IQueryDispatcher.html#Raftel_Application_Queries_IQueryDispatcher_DispatchAsync_
+  href: api/Raftel.Application.Queries.IQueryDispatcher.yml
   commentId: Overload:Raftel.Application.Queries.IQueryDispatcher.DispatchAsync
   isSpec: "True"
   fullName: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync
   nameWithType: IQueryDispatcher.DispatchAsync
 - uid: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync``2(``0)
   name: DispatchAsync<TQuery, TResult>(TQuery)
-  href: api/Raftel.Application.Queries.IQueryDispatcher.html#Raftel_Application_Queries_IQueryDispatcher_DispatchAsync__2___0_
+  href: api/Raftel.Application.Queries.IQueryDispatcher.yml
   commentId: M:Raftel.Application.Queries.IQueryDispatcher.DispatchAsync``2(``0)
   name.vb: DispatchAsync(Of TQuery, TResult)(TQuery)
   fullName: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery)
@@ -255,7 +255,7 @@ references:
   nameWithType.vb: IQueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery)
 - uid: Raftel.Application.Queries.IQueryHandler`2
   name: IQueryHandler<TQuery, TResult>
-  href: api/Raftel.Application.Queries.IQueryHandler-2.html
+  href: api/Raftel.Application.Queries.IQueryHandler-2.yml
   commentId: T:Raftel.Application.Queries.IQueryHandler`2
   name.vb: IQueryHandler(Of TQuery, TResult)
   fullName: Raftel.Application.Queries.IQueryHandler<TQuery, TResult>
@@ -264,7 +264,7 @@ references:
   nameWithType.vb: IQueryHandler(Of TQuery, TResult)
 - uid: Raftel.Application.Queries.IQuery`1
   name: IQuery<TResult>
-  href: api/Raftel.Application.Queries.IQuery-1.html
+  href: api/Raftel.Application.Queries.IQuery-1.yml
   commentId: T:Raftel.Application.Queries.IQuery`1
   name.vb: IQuery(Of TResult)
   fullName: Raftel.Application.Queries.IQuery<TResult>
@@ -273,13 +273,13 @@ references:
   nameWithType.vb: IQuery(Of TResult)
 - uid: Raftel.Application.Queries.QueryDispatcher
   name: QueryDispatcher
-  href: api/Raftel.Application.Queries.QueryDispatcher.html
+  href: api/Raftel.Application.Queries.QueryDispatcher.yml
   commentId: T:Raftel.Application.Queries.QueryDispatcher
   fullName: Raftel.Application.Queries.QueryDispatcher
   nameWithType: QueryDispatcher
 - uid: Raftel.Application.Queries.QueryDispatcher.#ctor(Raftel.Application.Abstractions.IRequestDispatcher)
   name: QueryDispatcher(IRequestDispatcher)
-  href: api/Raftel.Application.Queries.QueryDispatcher.html#Raftel_Application_Queries_QueryDispatcher__ctor_Raftel_Application_Abstractions_IRequestDispatcher_
+  href: api/Raftel.Application.Queries.QueryDispatcher.yml
   commentId: M:Raftel.Application.Queries.QueryDispatcher.#ctor(Raftel.Application.Abstractions.IRequestDispatcher)
   name.vb: New(IRequestDispatcher)
   fullName: Raftel.Application.Queries.QueryDispatcher.QueryDispatcher(Raftel.Application.Abstractions.IRequestDispatcher)
@@ -288,7 +288,7 @@ references:
   nameWithType.vb: QueryDispatcher.New(IRequestDispatcher)
 - uid: Raftel.Application.Queries.QueryDispatcher.#ctor*
   name: QueryDispatcher
-  href: api/Raftel.Application.Queries.QueryDispatcher.html#Raftel_Application_Queries_QueryDispatcher__ctor_
+  href: api/Raftel.Application.Queries.QueryDispatcher.yml
   commentId: Overload:Raftel.Application.Queries.QueryDispatcher.#ctor
   isSpec: "True"
   name.vb: New
@@ -298,14 +298,14 @@ references:
   nameWithType.vb: QueryDispatcher.New
 - uid: Raftel.Application.Queries.QueryDispatcher.DispatchAsync*
   name: DispatchAsync
-  href: api/Raftel.Application.Queries.QueryDispatcher.html#Raftel_Application_Queries_QueryDispatcher_DispatchAsync_
+  href: api/Raftel.Application.Queries.QueryDispatcher.yml
   commentId: Overload:Raftel.Application.Queries.QueryDispatcher.DispatchAsync
   isSpec: "True"
   fullName: Raftel.Application.Queries.QueryDispatcher.DispatchAsync
   nameWithType: QueryDispatcher.DispatchAsync
 - uid: Raftel.Application.Queries.QueryDispatcher.DispatchAsync``2(``0)
   name: DispatchAsync<TQuery, TResult>(TQuery)
-  href: api/Raftel.Application.Queries.QueryDispatcher.html#Raftel_Application_Queries_QueryDispatcher_DispatchAsync__2___0_
+  href: api/Raftel.Application.Queries.QueryDispatcher.yml
   commentId: M:Raftel.Application.Queries.QueryDispatcher.DispatchAsync``2(``0)
   name.vb: DispatchAsync(Of TQuery, TResult)(TQuery)
   fullName: Raftel.Application.Queries.QueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery)
@@ -314,19 +314,19 @@ references:
   nameWithType.vb: QueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery)
 - uid: Raftel.Domain.Abstractions
   name: Raftel.Domain.Abstractions
-  href: api/Raftel.Domain.Abstractions.html
+  href: api/Raftel.Domain.Abstractions.yml
   commentId: N:Raftel.Domain.Abstractions
   fullName: Raftel.Domain.Abstractions
   nameWithType: Raftel.Domain.Abstractions
 - uid: Raftel.Domain.Abstractions.Error
   name: Error
-  href: api/Raftel.Domain.Abstractions.Error.html
+  href: api/Raftel.Domain.Abstractions.Error.yml
   commentId: T:Raftel.Domain.Abstractions.Error
   fullName: Raftel.Domain.Abstractions.Error
   nameWithType: Error
 - uid: Raftel.Domain.Abstractions.Error.#ctor(System.String,System.String)
   name: Error(string, string)
-  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error__ctor_System_String_System_String_
+  href: api/Raftel.Domain.Abstractions.Error.yml
   commentId: M:Raftel.Domain.Abstractions.Error.#ctor(System.String,System.String)
   name.vb: New(String, String)
   fullName: Raftel.Domain.Abstractions.Error.Error(string, string)
@@ -335,7 +335,7 @@ references:
   nameWithType.vb: Error.New(String, String)
 - uid: Raftel.Domain.Abstractions.Error.#ctor*
   name: Error
-  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error__ctor_
+  href: api/Raftel.Domain.Abstractions.Error.yml
   commentId: Overload:Raftel.Domain.Abstractions.Error.#ctor
   isSpec: "True"
   name.vb: New
@@ -345,51 +345,51 @@ references:
   nameWithType.vb: Error.New
 - uid: Raftel.Domain.Abstractions.Error.Code
   name: Code
-  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Code
+  href: api/Raftel.Domain.Abstractions.Error.yml
   commentId: P:Raftel.Domain.Abstractions.Error.Code
   fullName: Raftel.Domain.Abstractions.Error.Code
   nameWithType: Error.Code
 - uid: Raftel.Domain.Abstractions.Error.Code*
   name: Code
-  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Code_
+  href: api/Raftel.Domain.Abstractions.Error.yml
   commentId: Overload:Raftel.Domain.Abstractions.Error.Code
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Error.Code
   nameWithType: Error.Code
 - uid: Raftel.Domain.Abstractions.Error.Message
   name: Message
-  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Message
+  href: api/Raftel.Domain.Abstractions.Error.yml
   commentId: P:Raftel.Domain.Abstractions.Error.Message
   fullName: Raftel.Domain.Abstractions.Error.Message
   nameWithType: Error.Message
 - uid: Raftel.Domain.Abstractions.Error.Message*
   name: Message
-  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Message_
+  href: api/Raftel.Domain.Abstractions.Error.yml
   commentId: Overload:Raftel.Domain.Abstractions.Error.Message
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Error.Message
   nameWithType: Error.Message
 - uid: Raftel.Domain.Abstractions.Error.None
   name: None
-  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_None
+  href: api/Raftel.Domain.Abstractions.Error.yml
   commentId: F:Raftel.Domain.Abstractions.Error.None
   fullName: Raftel.Domain.Abstractions.Error.None
   nameWithType: Error.None
 - uid: Raftel.Domain.Abstractions.Error.NullValue
   name: NullValue
-  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_NullValue
+  href: api/Raftel.Domain.Abstractions.Error.yml
   commentId: F:Raftel.Domain.Abstractions.Error.NullValue
   fullName: Raftel.Domain.Abstractions.Error.NullValue
   nameWithType: Error.NullValue
 - uid: Raftel.Domain.Abstractions.Result
   name: Result
-  href: api/Raftel.Domain.Abstractions.Result.html
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: T:Raftel.Domain.Abstractions.Result
   fullName: Raftel.Domain.Abstractions.Result
   nameWithType: Result
 - uid: Raftel.Domain.Abstractions.Result.#ctor(System.Boolean,Raftel.Domain.Abstractions.Error)
   name: Result(bool, Error)
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result__ctor_System_Boolean_Raftel_Domain_Abstractions_Error_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: M:Raftel.Domain.Abstractions.Result.#ctor(System.Boolean,Raftel.Domain.Abstractions.Error)
   name.vb: New(Boolean, Error)
   fullName: Raftel.Domain.Abstractions.Result.Result(bool, Raftel.Domain.Abstractions.Error)
@@ -398,7 +398,7 @@ references:
   nameWithType.vb: Result.New(Boolean, Error)
 - uid: Raftel.Domain.Abstractions.Result.#ctor*
   name: Result
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result__ctor_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result.#ctor
   isSpec: "True"
   name.vb: New
@@ -408,14 +408,14 @@ references:
   nameWithType.vb: Result.New
 - uid: Raftel.Domain.Abstractions.Result.Create*
   name: Create
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Create_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result.Create
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Result.Create
   nameWithType: Result.Create
 - uid: Raftel.Domain.Abstractions.Result.Create``1(``0)
   name: Create<TValue>(TValue?)
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Create__1___0_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: M:Raftel.Domain.Abstractions.Result.Create``1(``0)
   name.vb: Create(Of TValue)(TValue)
   fullName: Raftel.Domain.Abstractions.Result.Create<TValue>(TValue?)
@@ -424,33 +424,33 @@ references:
   nameWithType.vb: Result.Create(Of TValue)(TValue)
 - uid: Raftel.Domain.Abstractions.Result.Error
   name: Error
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Error
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: P:Raftel.Domain.Abstractions.Result.Error
   fullName: Raftel.Domain.Abstractions.Result.Error
   nameWithType: Result.Error
 - uid: Raftel.Domain.Abstractions.Result.Error*
   name: Error
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Error_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result.Error
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Result.Error
   nameWithType: Result.Error
 - uid: Raftel.Domain.Abstractions.Result.Failure(Raftel.Domain.Abstractions.Error)
   name: Failure(Error)
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Failure_Raftel_Domain_Abstractions_Error_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: M:Raftel.Domain.Abstractions.Result.Failure(Raftel.Domain.Abstractions.Error)
   fullName: Raftel.Domain.Abstractions.Result.Failure(Raftel.Domain.Abstractions.Error)
   nameWithType: Result.Failure(Error)
 - uid: Raftel.Domain.Abstractions.Result.Failure*
   name: Failure
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Failure_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result.Failure
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Result.Failure
   nameWithType: Result.Failure
 - uid: Raftel.Domain.Abstractions.Result.Failure``1(Raftel.Domain.Abstractions.Error)
   name: Failure<TValue>(Error)
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Failure__1_Raftel_Domain_Abstractions_Error_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: M:Raftel.Domain.Abstractions.Result.Failure``1(Raftel.Domain.Abstractions.Error)
   name.vb: Failure(Of TValue)(Error)
   fullName: Raftel.Domain.Abstractions.Result.Failure<TValue>(Raftel.Domain.Abstractions.Error)
@@ -459,46 +459,46 @@ references:
   nameWithType.vb: Result.Failure(Of TValue)(Error)
 - uid: Raftel.Domain.Abstractions.Result.IsFailure
   name: IsFailure
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_IsFailure
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: P:Raftel.Domain.Abstractions.Result.IsFailure
   fullName: Raftel.Domain.Abstractions.Result.IsFailure
   nameWithType: Result.IsFailure
 - uid: Raftel.Domain.Abstractions.Result.IsFailure*
   name: IsFailure
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_IsFailure_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result.IsFailure
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Result.IsFailure
   nameWithType: Result.IsFailure
 - uid: Raftel.Domain.Abstractions.Result.IsSuccess
   name: IsSuccess
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_IsSuccess
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: P:Raftel.Domain.Abstractions.Result.IsSuccess
   fullName: Raftel.Domain.Abstractions.Result.IsSuccess
   nameWithType: Result.IsSuccess
 - uid: Raftel.Domain.Abstractions.Result.IsSuccess*
   name: IsSuccess
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_IsSuccess_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result.IsSuccess
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Result.IsSuccess
   nameWithType: Result.IsSuccess
 - uid: Raftel.Domain.Abstractions.Result.Success
   name: Success()
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: M:Raftel.Domain.Abstractions.Result.Success
   fullName: Raftel.Domain.Abstractions.Result.Success()
   nameWithType: Result.Success()
 - uid: Raftel.Domain.Abstractions.Result.Success*
   name: Success
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result.Success
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Result.Success
   nameWithType: Result.Success
 - uid: Raftel.Domain.Abstractions.Result.Success``1(``0)
   name: Success<TValue>(TValue)
-  href: api/Raftel.Domain.Abstractions.Result.html#Raftel_Domain_Abstractions_Result_Success__1___0_
+  href: api/Raftel.Domain.Abstractions.Result.yml
   commentId: M:Raftel.Domain.Abstractions.Result.Success``1(``0)
   name.vb: Success(Of TValue)(TValue)
   fullName: Raftel.Domain.Abstractions.Result.Success<TValue>(TValue)
@@ -507,7 +507,7 @@ references:
   nameWithType.vb: Result.Success(Of TValue)(TValue)
 - uid: Raftel.Domain.Abstractions.Result`1
   name: Result<TValue>
-  href: api/Raftel.Domain.Abstractions.Result-1.html
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: T:Raftel.Domain.Abstractions.Result`1
   name.vb: Result(Of TValue)
   fullName: Raftel.Domain.Abstractions.Result<TValue>
@@ -516,7 +516,7 @@ references:
   nameWithType.vb: Result(Of TValue)
 - uid: Raftel.Domain.Abstractions.Result`1.#ctor(`0,System.Boolean,Raftel.Domain.Abstractions.Error)
   name: Result(TValue, bool, Error)
-  href: api/Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1__ctor__0_System_Boolean_Raftel_Domain_Abstractions_Error_
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: M:Raftel.Domain.Abstractions.Result`1.#ctor(`0,System.Boolean,Raftel.Domain.Abstractions.Error)
   name.vb: New(TValue, Boolean, Error)
   fullName: Raftel.Domain.Abstractions.Result<TValue>.Result(TValue, bool, Raftel.Domain.Abstractions.Error)
@@ -525,7 +525,7 @@ references:
   nameWithType.vb: Result(Of TValue).New(TValue, Boolean, Error)
 - uid: Raftel.Domain.Abstractions.Result`1.#ctor*
   name: Result
-  href: api/Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1__ctor_
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result`1.#ctor
   isSpec: "True"
   name.vb: New
@@ -535,7 +535,7 @@ references:
   nameWithType.vb: Result(Of TValue).New
 - uid: Raftel.Domain.Abstractions.Result`1.Failure(Raftel.Domain.Abstractions.Error)
   name: Failure(Error)
-  href: api/Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_Failure_Raftel_Domain_Abstractions_Error_
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: M:Raftel.Domain.Abstractions.Result`1.Failure(Raftel.Domain.Abstractions.Error)
   fullName: Raftel.Domain.Abstractions.Result<TValue>.Failure(Raftel.Domain.Abstractions.Error)
   fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).Failure(Raftel.Domain.Abstractions.Error)
@@ -543,7 +543,7 @@ references:
   nameWithType.vb: Result(Of TValue).Failure(Error)
 - uid: Raftel.Domain.Abstractions.Result`1.Failure*
   name: Failure
-  href: api/Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_Failure_
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result`1.Failure
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Result<TValue>.Failure
@@ -552,7 +552,7 @@ references:
   nameWithType.vb: Result(Of TValue).Failure
 - uid: Raftel.Domain.Abstractions.Result`1.Success(`0)
   name: Success(TValue)
-  href: api/Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_Success__0_
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: M:Raftel.Domain.Abstractions.Result`1.Success(`0)
   fullName: Raftel.Domain.Abstractions.Result<TValue>.Success(TValue)
   fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).Success(TValue)
@@ -560,7 +560,7 @@ references:
   nameWithType.vb: Result(Of TValue).Success(TValue)
 - uid: Raftel.Domain.Abstractions.Result`1.Success*
   name: Success
-  href: api/Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_Success_
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result`1.Success
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Result<TValue>.Success
@@ -569,7 +569,7 @@ references:
   nameWithType.vb: Result(Of TValue).Success
 - uid: Raftel.Domain.Abstractions.Result`1.Value
   name: Value
-  href: api/Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_Value
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: P:Raftel.Domain.Abstractions.Result`1.Value
   fullName: Raftel.Domain.Abstractions.Result<TValue>.Value
   fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).Value
@@ -577,7 +577,7 @@ references:
   nameWithType.vb: Result(Of TValue).Value
 - uid: Raftel.Domain.Abstractions.Result`1.Value*
   name: Value
-  href: api/Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_Value_
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result`1.Value
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Result<TValue>.Value
@@ -586,7 +586,7 @@ references:
   nameWithType.vb: Result(Of TValue).Value
 - uid: Raftel.Domain.Abstractions.Result`1.op_Implicit(`0)~Raftel.Domain.Abstractions.Result{`0}
   name: implicit operator Result<TValue>(TValue)
-  href: api/Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_op_Implicit__0__Raftel_Domain_Abstractions_Result__0_
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: M:Raftel.Domain.Abstractions.Result`1.op_Implicit(`0)~Raftel.Domain.Abstractions.Result{`0}
   name.vb: CType(TValue)
   fullName: Raftel.Domain.Abstractions.Result<TValue>.implicit operator Raftel.Domain.Abstractions.Result<TValue>(TValue)
@@ -595,7 +595,7 @@ references:
   nameWithType.vb: Result(Of TValue).CType(TValue)
 - uid: Raftel.Domain.Abstractions.Result`1.op_Implicit*
   name: implicit operator
-  href: api/Raftel.Domain.Abstractions.Result-1.html#Raftel_Domain_Abstractions_Result_1_op_Implicit_
+  href: api/Raftel.Domain.Abstractions.Result-1.yml
   commentId: Overload:Raftel.Domain.Abstractions.Result`1.op_Implicit
   isSpec: "True"
   name.vb: CType
@@ -605,13 +605,13 @@ references:
   nameWithType.vb: Result(Of TValue).CType
 - uid: Raftel.Domain.BaseTypes
   name: Raftel.Domain.BaseTypes
-  href: api/Raftel.Domain.BaseTypes.html
+  href: api/Raftel.Domain.BaseTypes.yml
   commentId: N:Raftel.Domain.BaseTypes
   fullName: Raftel.Domain.BaseTypes
   nameWithType: Raftel.Domain.BaseTypes
 - uid: Raftel.Domain.BaseTypes.AggregateRoot`1
   name: AggregateRoot<TId>
-  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.yml
   commentId: T:Raftel.Domain.BaseTypes.AggregateRoot`1
   name.vb: AggregateRoot(Of TId)
   fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>
@@ -620,7 +620,7 @@ references:
   nameWithType.vb: AggregateRoot(Of TId)
 - uid: Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor(`0)
   name: AggregateRoot(TId)
-  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1__ctor__0_
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.yml
   commentId: M:Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor(`0)
   name.vb: New(TId)
   fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>.AggregateRoot(TId)
@@ -629,7 +629,7 @@ references:
   nameWithType.vb: AggregateRoot(Of TId).New(TId)
 - uid: Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor*
   name: AggregateRoot
-  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1__ctor_
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.yml
   commentId: Overload:Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor
   isSpec: "True"
   name.vb: New
@@ -639,7 +639,7 @@ references:
   nameWithType.vb: AggregateRoot(Of TId).New
 - uid: Raftel.Domain.BaseTypes.Entity`1
   name: Entity<TId>
-  href: api/Raftel.Domain.BaseTypes.Entity-1.html
+  href: api/Raftel.Domain.BaseTypes.Entity-1.yml
   commentId: T:Raftel.Domain.BaseTypes.Entity`1
   name.vb: Entity(Of TId)
   fullName: Raftel.Domain.BaseTypes.Entity<TId>
@@ -648,7 +648,7 @@ references:
   nameWithType.vb: Entity(Of TId)
 - uid: Raftel.Domain.BaseTypes.Entity`1.#ctor(`0)
   name: Entity(TId)
-  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1__ctor__0_
+  href: api/Raftel.Domain.BaseTypes.Entity-1.yml
   commentId: M:Raftel.Domain.BaseTypes.Entity`1.#ctor(`0)
   name.vb: New(TId)
   fullName: Raftel.Domain.BaseTypes.Entity<TId>.Entity(TId)
@@ -657,7 +657,7 @@ references:
   nameWithType.vb: Entity(Of TId).New(TId)
 - uid: Raftel.Domain.BaseTypes.Entity`1.#ctor*
   name: Entity
-  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1__ctor_
+  href: api/Raftel.Domain.BaseTypes.Entity-1.yml
   commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.#ctor
   isSpec: "True"
   name.vb: New
@@ -667,7 +667,7 @@ references:
   nameWithType.vb: Entity(Of TId).New
 - uid: Raftel.Domain.BaseTypes.Entity`1.Equals(System.Object)
   name: Equals(object?)
-  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Equals_System_Object_
+  href: api/Raftel.Domain.BaseTypes.Entity-1.yml
   commentId: M:Raftel.Domain.BaseTypes.Entity`1.Equals(System.Object)
   name.vb: Equals(Object)
   fullName: Raftel.Domain.BaseTypes.Entity<TId>.Equals(object?)
@@ -676,7 +676,7 @@ references:
   nameWithType.vb: Entity(Of TId).Equals(Object)
 - uid: Raftel.Domain.BaseTypes.Entity`1.Equals*
   name: Equals
-  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Equals_
+  href: api/Raftel.Domain.BaseTypes.Entity-1.yml
   commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.Equals
   isSpec: "True"
   fullName: Raftel.Domain.BaseTypes.Entity<TId>.Equals
@@ -685,7 +685,7 @@ references:
   nameWithType.vb: Entity(Of TId).Equals
 - uid: Raftel.Domain.BaseTypes.Entity`1.GetHashCode
   name: GetHashCode()
-  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_GetHashCode
+  href: api/Raftel.Domain.BaseTypes.Entity-1.yml
   commentId: M:Raftel.Domain.BaseTypes.Entity`1.GetHashCode
   fullName: Raftel.Domain.BaseTypes.Entity<TId>.GetHashCode()
   fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).GetHashCode()
@@ -693,7 +693,7 @@ references:
   nameWithType.vb: Entity(Of TId).GetHashCode()
 - uid: Raftel.Domain.BaseTypes.Entity`1.GetHashCode*
   name: GetHashCode
-  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_GetHashCode_
+  href: api/Raftel.Domain.BaseTypes.Entity-1.yml
   commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.GetHashCode
   isSpec: "True"
   fullName: Raftel.Domain.BaseTypes.Entity<TId>.GetHashCode
@@ -702,7 +702,7 @@ references:
   nameWithType.vb: Entity(Of TId).GetHashCode
 - uid: Raftel.Domain.BaseTypes.Entity`1.Id
   name: Id
-  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id
+  href: api/Raftel.Domain.BaseTypes.Entity-1.yml
   commentId: P:Raftel.Domain.BaseTypes.Entity`1.Id
   fullName: Raftel.Domain.BaseTypes.Entity<TId>.Id
   fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).Id
@@ -710,7 +710,7 @@ references:
   nameWithType.vb: Entity(Of TId).Id
 - uid: Raftel.Domain.BaseTypes.Entity`1.Id*
   name: Id
-  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id_
+  href: api/Raftel.Domain.BaseTypes.Entity-1.yml
   commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.Id
   isSpec: "True"
   fullName: Raftel.Domain.BaseTypes.Entity<TId>.Id
@@ -719,13 +719,13 @@ references:
   nameWithType.vb: Entity(Of TId).Id
 - uid: Raftel.Domain.BaseTypes.TypedGuidId
   name: TypedGuidId
-  href: api/Raftel.Domain.BaseTypes.TypedGuidId.html
+  href: api/Raftel.Domain.BaseTypes.TypedGuidId.yml
   commentId: T:Raftel.Domain.BaseTypes.TypedGuidId
   fullName: Raftel.Domain.BaseTypes.TypedGuidId
   nameWithType: TypedGuidId
 - uid: Raftel.Domain.BaseTypes.TypedGuidId.#ctor(System.Guid)
   name: TypedGuidId(Guid)
-  href: api/Raftel.Domain.BaseTypes.TypedGuidId.html#Raftel_Domain_BaseTypes_TypedGuidId__ctor_System_Guid_
+  href: api/Raftel.Domain.BaseTypes.TypedGuidId.yml
   commentId: M:Raftel.Domain.BaseTypes.TypedGuidId.#ctor(System.Guid)
   name.vb: New(Guid)
   fullName: Raftel.Domain.BaseTypes.TypedGuidId.TypedGuidId(System.Guid)
@@ -734,7 +734,7 @@ references:
   nameWithType.vb: TypedGuidId.New(Guid)
 - uid: Raftel.Domain.BaseTypes.TypedGuidId.#ctor*
   name: TypedGuidId
-  href: api/Raftel.Domain.BaseTypes.TypedGuidId.html#Raftel_Domain_BaseTypes_TypedGuidId__ctor_
+  href: api/Raftel.Domain.BaseTypes.TypedGuidId.yml
   commentId: Overload:Raftel.Domain.BaseTypes.TypedGuidId.#ctor
   isSpec: "True"
   name.vb: New
@@ -744,20 +744,20 @@ references:
   nameWithType.vb: TypedGuidId.New
 - uid: Raftel.Domain.BaseTypes.TypedGuidId.NewGuid
   name: NewGuid()
-  href: api/Raftel.Domain.BaseTypes.TypedGuidId.html#Raftel_Domain_BaseTypes_TypedGuidId_NewGuid
+  href: api/Raftel.Domain.BaseTypes.TypedGuidId.yml
   commentId: M:Raftel.Domain.BaseTypes.TypedGuidId.NewGuid
   fullName: Raftel.Domain.BaseTypes.TypedGuidId.NewGuid()
   nameWithType: TypedGuidId.NewGuid()
 - uid: Raftel.Domain.BaseTypes.TypedGuidId.NewGuid*
   name: NewGuid
-  href: api/Raftel.Domain.BaseTypes.TypedGuidId.html#Raftel_Domain_BaseTypes_TypedGuidId_NewGuid_
+  href: api/Raftel.Domain.BaseTypes.TypedGuidId.yml
   commentId: Overload:Raftel.Domain.BaseTypes.TypedGuidId.NewGuid
   isSpec: "True"
   fullName: Raftel.Domain.BaseTypes.TypedGuidId.NewGuid
   nameWithType: TypedGuidId.NewGuid
 - uid: Raftel.Domain.BaseTypes.TypedId`1
   name: TypedId<T>
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: T:Raftel.Domain.BaseTypes.TypedId`1
   name.vb: TypedId(Of T)
   fullName: Raftel.Domain.BaseTypes.TypedId<T>
@@ -766,7 +766,7 @@ references:
   nameWithType.vb: TypedId(Of T)
 - uid: Raftel.Domain.BaseTypes.TypedId`1.#ctor(`0)
   name: TypedId(T)
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1__ctor__0_
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: M:Raftel.Domain.BaseTypes.TypedId`1.#ctor(`0)
   name.vb: New(T)
   fullName: Raftel.Domain.BaseTypes.TypedId<T>.TypedId(T)
@@ -775,7 +775,7 @@ references:
   nameWithType.vb: TypedId(Of T).New(T)
 - uid: Raftel.Domain.BaseTypes.TypedId`1.#ctor*
   name: TypedId
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1__ctor_
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: Overload:Raftel.Domain.BaseTypes.TypedId`1.#ctor
   isSpec: "True"
   name.vb: New
@@ -785,7 +785,7 @@ references:
   nameWithType.vb: TypedId(Of T).New
 - uid: Raftel.Domain.BaseTypes.TypedId`1.Equals(Raftel.Domain.BaseTypes.TypedId{`0})
   name: Equals(TypedId<T>?)
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_Equals_Raftel_Domain_BaseTypes_TypedId__0__
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: M:Raftel.Domain.BaseTypes.TypedId`1.Equals(Raftel.Domain.BaseTypes.TypedId{`0})
   name.vb: Equals(TypedId(Of T))
   fullName: Raftel.Domain.BaseTypes.TypedId<T>.Equals(Raftel.Domain.BaseTypes.TypedId<T>?)
@@ -794,7 +794,7 @@ references:
   nameWithType.vb: TypedId(Of T).Equals(TypedId(Of T))
 - uid: Raftel.Domain.BaseTypes.TypedId`1.Equals*
   name: Equals
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_Equals_
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: Overload:Raftel.Domain.BaseTypes.TypedId`1.Equals
   isSpec: "True"
   fullName: Raftel.Domain.BaseTypes.TypedId<T>.Equals
@@ -803,7 +803,7 @@ references:
   nameWithType.vb: TypedId(Of T).Equals
 - uid: Raftel.Domain.BaseTypes.TypedId`1.GetHashCode
   name: GetHashCode()
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_GetHashCode
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: M:Raftel.Domain.BaseTypes.TypedId`1.GetHashCode
   fullName: Raftel.Domain.BaseTypes.TypedId<T>.GetHashCode()
   fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).GetHashCode()
@@ -811,7 +811,7 @@ references:
   nameWithType.vb: TypedId(Of T).GetHashCode()
 - uid: Raftel.Domain.BaseTypes.TypedId`1.GetHashCode*
   name: GetHashCode
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_GetHashCode_
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: Overload:Raftel.Domain.BaseTypes.TypedId`1.GetHashCode
   isSpec: "True"
   fullName: Raftel.Domain.BaseTypes.TypedId<T>.GetHashCode
@@ -820,7 +820,7 @@ references:
   nameWithType.vb: TypedId(Of T).GetHashCode
 - uid: Raftel.Domain.BaseTypes.TypedId`1.ToString
   name: ToString()
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_ToString
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: M:Raftel.Domain.BaseTypes.TypedId`1.ToString
   fullName: Raftel.Domain.BaseTypes.TypedId<T>.ToString()
   fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).ToString()
@@ -828,7 +828,7 @@ references:
   nameWithType.vb: TypedId(Of T).ToString()
 - uid: Raftel.Domain.BaseTypes.TypedId`1.ToString*
   name: ToString
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_ToString_
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: Overload:Raftel.Domain.BaseTypes.TypedId`1.ToString
   isSpec: "True"
   fullName: Raftel.Domain.BaseTypes.TypedId<T>.ToString
@@ -837,7 +837,7 @@ references:
   nameWithType.vb: TypedId(Of T).ToString
 - uid: Raftel.Domain.BaseTypes.TypedId`1.op_Implicit(Raftel.Domain.BaseTypes.TypedId{`0})~`0
   name: implicit operator T(TypedId<T>)
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_op_Implicit_Raftel_Domain_BaseTypes_TypedId__0____0
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: M:Raftel.Domain.BaseTypes.TypedId`1.op_Implicit(Raftel.Domain.BaseTypes.TypedId{`0})~`0
   name.vb: CType(TypedId(Of T))
   fullName: Raftel.Domain.BaseTypes.TypedId<T>.implicit operator T(Raftel.Domain.BaseTypes.TypedId<T>)
@@ -846,7 +846,7 @@ references:
   nameWithType.vb: TypedId(Of T).CType(TypedId(Of T))
 - uid: Raftel.Domain.BaseTypes.TypedId`1.op_Implicit*
   name: implicit operator
-  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_op_Implicit_
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.yml
   commentId: Overload:Raftel.Domain.BaseTypes.TypedId`1.op_Implicit
   isSpec: "True"
   name.vb: CType

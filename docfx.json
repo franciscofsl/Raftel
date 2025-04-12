@@ -33,10 +33,7 @@
     ],
     "output": "_site",
     "pdf": true,
-    "template": [
-      "default",
-      "modern"
-    ],
+    "template": ["material/material"],
     "globalMetadata": {
       "_appName": "Raftel",
       "_appTitle": "Raftel",
