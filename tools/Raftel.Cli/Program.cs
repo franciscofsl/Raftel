@@ -1,12 +1,14 @@
-﻿using Spectre.Console.Cli;
+﻿using Raftel.Cli.Commands;
+using Spectre.Console.Cli;
 
 var app = new CommandApp();
 
 app.Configure(config =>
 {
-    config.SetApplicationName("raftel-tools");
-    config.AddCommand<GenerateTocCommand>("docfx generate-toc")
-        .WithDescription("Genera un toc.yml agrupado por ensamblado desde los archivos .yml generados por DocFX");
+    config.SetApplicationName("raftel");
+    config.AddCommand<CleanBuildFoldersCommand>("clean")
+        .WithDescription("Removes bin and obj folders from the current directory recursively");
+
 });
 
 return app.Run(args);
