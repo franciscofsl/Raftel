@@ -4,7 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
     </PropertyGroup>
@@ -16,6 +16,8 @@
         </PackageReference>
         <PackageReference Include="Microsoft.NET.Test.Sdk"/>
         <PackageReference Include="Shouldly"/>
+        <PackageReference Include="Testcontainers"/>
+        <PackageReference Include="Testcontainers.MsSql"/>
         <PackageReference Include="xunit"/>
         <PackageReference Include="xunit.runner.visualstudio">
             <PrivateAssets>all</PrivateAssets>
@@ -30,7 +32,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\src\Raftel.Infrastructure\Raftel.Infrastructure.csproj"/>
     </ItemGroup>
-    
+
     <ItemGroup>
         <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute"/>
     </ItemGroup>
