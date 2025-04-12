@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Commands/ICommand.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: ICommand
     path: src/Raftel.Application/Commands/ICommand.cs

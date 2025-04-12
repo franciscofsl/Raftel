@@ -67,4 +67,20 @@ items:
   - uid: Raftel.Domain.Abstractions.Result`1
     name: Result<TValue>
     type: Class
+- uid: Raftel.Domain.BaseTypes
+  name: Raftel.Domain.BaseTypes
+  type: Namespace
+  items:
+  - uid: Raftel.Domain.BaseTypes.AggregateRoot`1
+    name: AggregateRoot<TId>
+    type: Class
+  - uid: Raftel.Domain.BaseTypes.Entity`1
+    name: Entity<TId>
+    type: Class
+  - uid: Raftel.Domain.BaseTypes.TypedGuidId
+    name: TypedGuidId
+    type: Class
+  - uid: Raftel.Domain.BaseTypes.TypedId`1
+    name: TypedId<T>
+    type: Class
 memberLayout: SamePage

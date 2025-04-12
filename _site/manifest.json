@@ -315,6 +315,76 @@
       "Summary": null
     },
     {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.BaseTypes.AggregateRoot-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.BaseTypes.AggregateRoot-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.BaseTypes.AggregateRoot<TId>",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.BaseTypes.AggregateRoot-1.yml\" sourcestartlinenumber=\"1\">Represents the root of an aggregate in the domain model.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.BaseTypes.Entity-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.BaseTypes.Entity-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.BaseTypes.Entity<TId>",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.BaseTypes.Entity-1.yml\" sourcestartlinenumber=\"1\">Base class for all domain entities with a strongly-typed ID.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.BaseTypes.TypedGuidId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.BaseTypes.TypedGuidId.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.BaseTypes.TypedGuidId",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.BaseTypes.TypedGuidId.yml\" sourcestartlinenumber=\"1\">Base class for identifiers that use <xref href=\"System.Guid\" data-throw-if-not-resolved=\"false\"></xref> as the backing type.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.BaseTypes.TypedId-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.BaseTypes.TypedId-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.BaseTypes.TypedId<T>",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.BaseTypes.TypedId-1.yml\" sourcestartlinenumber=\"1\">Represents a strongly-typed identifier based on a primitive type.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.BaseTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.BaseTypes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.BaseTypes",
+      "Summary": null
+    },
+    {
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {

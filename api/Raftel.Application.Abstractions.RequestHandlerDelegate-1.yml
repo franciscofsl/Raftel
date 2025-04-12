@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Abstractions/RequestHandlerDelegate.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: RequestHandlerDelegate
     path: src/Raftel.Application/Abstractions/RequestHandlerDelegate.cs

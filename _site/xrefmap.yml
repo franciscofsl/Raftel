@@ -603,3 +603,254 @@ references:
   fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).CType
   nameWithType: Result<TValue>.implicit operator
   nameWithType.vb: Result(Of TValue).CType
+- uid: Raftel.Domain.BaseTypes
+  name: Raftel.Domain.BaseTypes
+  href: api/Raftel.Domain.BaseTypes.html
+  commentId: N:Raftel.Domain.BaseTypes
+  fullName: Raftel.Domain.BaseTypes
+  nameWithType: Raftel.Domain.BaseTypes
+- uid: Raftel.Domain.BaseTypes.AggregateRoot`1
+  name: AggregateRoot<TId>
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html
+  commentId: T:Raftel.Domain.BaseTypes.AggregateRoot`1
+  name.vb: AggregateRoot(Of TId)
+  fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>
+  fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId)
+  nameWithType: AggregateRoot<TId>
+  nameWithType.vb: AggregateRoot(Of TId)
+- uid: Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor(`0)
+  name: AggregateRoot(TId)
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1__ctor__0_
+  commentId: M:Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor(`0)
+  name.vb: New(TId)
+  fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>.AggregateRoot(TId)
+  fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId).New(TId)
+  nameWithType: AggregateRoot<TId>.AggregateRoot(TId)
+  nameWithType.vb: AggregateRoot(Of TId).New(TId)
+- uid: Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor*
+  name: AggregateRoot
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1__ctor_
+  commentId: Overload:Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>.AggregateRoot
+  fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId).New
+  nameWithType: AggregateRoot<TId>.AggregateRoot
+  nameWithType.vb: AggregateRoot(Of TId).New
+- uid: Raftel.Domain.BaseTypes.Entity`1
+  name: Entity<TId>
+  href: api/Raftel.Domain.BaseTypes.Entity-1.html
+  commentId: T:Raftel.Domain.BaseTypes.Entity`1
+  name.vb: Entity(Of TId)
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId)
+  nameWithType: Entity<TId>
+  nameWithType.vb: Entity(Of TId)
+- uid: Raftel.Domain.BaseTypes.Entity`1.#ctor(`0)
+  name: Entity(TId)
+  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1__ctor__0_
+  commentId: M:Raftel.Domain.BaseTypes.Entity`1.#ctor(`0)
+  name.vb: New(TId)
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Entity(TId)
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).New(TId)
+  nameWithType: Entity<TId>.Entity(TId)
+  nameWithType.vb: Entity(Of TId).New(TId)
+- uid: Raftel.Domain.BaseTypes.Entity`1.#ctor*
+  name: Entity
+  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1__ctor_
+  commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Entity
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).New
+  nameWithType: Entity<TId>.Entity
+  nameWithType.vb: Entity(Of TId).New
+- uid: Raftel.Domain.BaseTypes.Entity`1.Equals(System.Object)
+  name: Equals(object?)
+  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Equals_System_Object_
+  commentId: M:Raftel.Domain.BaseTypes.Entity`1.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Equals(object?)
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).Equals(Object)
+  nameWithType: Entity<TId>.Equals(object?)
+  nameWithType.vb: Entity(Of TId).Equals(Object)
+- uid: Raftel.Domain.BaseTypes.Entity`1.Equals*
+  name: Equals
+  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Equals_
+  commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.Equals
+  isSpec: "True"
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Equals
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).Equals
+  nameWithType: Entity<TId>.Equals
+  nameWithType.vb: Entity(Of TId).Equals
+- uid: Raftel.Domain.BaseTypes.Entity`1.GetHashCode
+  name: GetHashCode()
+  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_GetHashCode
+  commentId: M:Raftel.Domain.BaseTypes.Entity`1.GetHashCode
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.GetHashCode()
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).GetHashCode()
+  nameWithType: Entity<TId>.GetHashCode()
+  nameWithType.vb: Entity(Of TId).GetHashCode()
+- uid: Raftel.Domain.BaseTypes.Entity`1.GetHashCode*
+  name: GetHashCode
+  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_GetHashCode_
+  commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.GetHashCode
+  isSpec: "True"
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.GetHashCode
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).GetHashCode
+  nameWithType: Entity<TId>.GetHashCode
+  nameWithType.vb: Entity(Of TId).GetHashCode
+- uid: Raftel.Domain.BaseTypes.Entity`1.Id
+  name: Id
+  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id
+  commentId: P:Raftel.Domain.BaseTypes.Entity`1.Id
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Id
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).Id
+  nameWithType: Entity<TId>.Id
+  nameWithType.vb: Entity(Of TId).Id
+- uid: Raftel.Domain.BaseTypes.Entity`1.Id*
+  name: Id
+  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id_
+  commentId: Overload:Raftel.Domain.BaseTypes.Entity`1.Id
+  isSpec: "True"
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Id
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).Id
+  nameWithType: Entity<TId>.Id
+  nameWithType.vb: Entity(Of TId).Id
+- uid: Raftel.Domain.BaseTypes.TypedGuidId
+  name: TypedGuidId
+  href: api/Raftel.Domain.BaseTypes.TypedGuidId.html
+  commentId: T:Raftel.Domain.BaseTypes.TypedGuidId
+  fullName: Raftel.Domain.BaseTypes.TypedGuidId
+  nameWithType: TypedGuidId
+- uid: Raftel.Domain.BaseTypes.TypedGuidId.#ctor(System.Guid)
+  name: TypedGuidId(Guid)
+  href: api/Raftel.Domain.BaseTypes.TypedGuidId.html#Raftel_Domain_BaseTypes_TypedGuidId__ctor_System_Guid_
+  commentId: M:Raftel.Domain.BaseTypes.TypedGuidId.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: Raftel.Domain.BaseTypes.TypedGuidId.TypedGuidId(System.Guid)
+  fullName.vb: Raftel.Domain.BaseTypes.TypedGuidId.New(System.Guid)
+  nameWithType: TypedGuidId.TypedGuidId(Guid)
+  nameWithType.vb: TypedGuidId.New(Guid)
+- uid: Raftel.Domain.BaseTypes.TypedGuidId.#ctor*
+  name: TypedGuidId
+  href: api/Raftel.Domain.BaseTypes.TypedGuidId.html#Raftel_Domain_BaseTypes_TypedGuidId__ctor_
+  commentId: Overload:Raftel.Domain.BaseTypes.TypedGuidId.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.BaseTypes.TypedGuidId.TypedGuidId
+  fullName.vb: Raftel.Domain.BaseTypes.TypedGuidId.New
+  nameWithType: TypedGuidId.TypedGuidId
+  nameWithType.vb: TypedGuidId.New
+- uid: Raftel.Domain.BaseTypes.TypedGuidId.NewGuid
+  name: NewGuid()
+  href: api/Raftel.Domain.BaseTypes.TypedGuidId.html#Raftel_Domain_BaseTypes_TypedGuidId_NewGuid
+  commentId: M:Raftel.Domain.BaseTypes.TypedGuidId.NewGuid
+  fullName: Raftel.Domain.BaseTypes.TypedGuidId.NewGuid()
+  nameWithType: TypedGuidId.NewGuid()
+- uid: Raftel.Domain.BaseTypes.TypedGuidId.NewGuid*
+  name: NewGuid
+  href: api/Raftel.Domain.BaseTypes.TypedGuidId.html#Raftel_Domain_BaseTypes_TypedGuidId_NewGuid_
+  commentId: Overload:Raftel.Domain.BaseTypes.TypedGuidId.NewGuid
+  isSpec: "True"
+  fullName: Raftel.Domain.BaseTypes.TypedGuidId.NewGuid
+  nameWithType: TypedGuidId.NewGuid
+- uid: Raftel.Domain.BaseTypes.TypedId`1
+  name: TypedId<T>
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html
+  commentId: T:Raftel.Domain.BaseTypes.TypedId`1
+  name.vb: TypedId(Of T)
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T)
+  nameWithType: TypedId<T>
+  nameWithType.vb: TypedId(Of T)
+- uid: Raftel.Domain.BaseTypes.TypedId`1.#ctor(`0)
+  name: TypedId(T)
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1__ctor__0_
+  commentId: M:Raftel.Domain.BaseTypes.TypedId`1.#ctor(`0)
+  name.vb: New(T)
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.TypedId(T)
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).New(T)
+  nameWithType: TypedId<T>.TypedId(T)
+  nameWithType.vb: TypedId(Of T).New(T)
+- uid: Raftel.Domain.BaseTypes.TypedId`1.#ctor*
+  name: TypedId
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1__ctor_
+  commentId: Overload:Raftel.Domain.BaseTypes.TypedId`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.TypedId
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).New
+  nameWithType: TypedId<T>.TypedId
+  nameWithType.vb: TypedId(Of T).New
+- uid: Raftel.Domain.BaseTypes.TypedId`1.Equals(Raftel.Domain.BaseTypes.TypedId{`0})
+  name: Equals(TypedId<T>?)
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_Equals_Raftel_Domain_BaseTypes_TypedId__0__
+  commentId: M:Raftel.Domain.BaseTypes.TypedId`1.Equals(Raftel.Domain.BaseTypes.TypedId{`0})
+  name.vb: Equals(TypedId(Of T))
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.Equals(Raftel.Domain.BaseTypes.TypedId<T>?)
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).Equals(Raftel.Domain.BaseTypes.TypedId(Of T))
+  nameWithType: TypedId<T>.Equals(TypedId<T>?)
+  nameWithType.vb: TypedId(Of T).Equals(TypedId(Of T))
+- uid: Raftel.Domain.BaseTypes.TypedId`1.Equals*
+  name: Equals
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_Equals_
+  commentId: Overload:Raftel.Domain.BaseTypes.TypedId`1.Equals
+  isSpec: "True"
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.Equals
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).Equals
+  nameWithType: TypedId<T>.Equals
+  nameWithType.vb: TypedId(Of T).Equals
+- uid: Raftel.Domain.BaseTypes.TypedId`1.GetHashCode
+  name: GetHashCode()
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_GetHashCode
+  commentId: M:Raftel.Domain.BaseTypes.TypedId`1.GetHashCode
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.GetHashCode()
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).GetHashCode()
+  nameWithType: TypedId<T>.GetHashCode()
+  nameWithType.vb: TypedId(Of T).GetHashCode()
+- uid: Raftel.Domain.BaseTypes.TypedId`1.GetHashCode*
+  name: GetHashCode
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_GetHashCode_
+  commentId: Overload:Raftel.Domain.BaseTypes.TypedId`1.GetHashCode
+  isSpec: "True"
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.GetHashCode
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).GetHashCode
+  nameWithType: TypedId<T>.GetHashCode
+  nameWithType.vb: TypedId(Of T).GetHashCode
+- uid: Raftel.Domain.BaseTypes.TypedId`1.ToString
+  name: ToString()
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_ToString
+  commentId: M:Raftel.Domain.BaseTypes.TypedId`1.ToString
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.ToString()
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).ToString()
+  nameWithType: TypedId<T>.ToString()
+  nameWithType.vb: TypedId(Of T).ToString()
+- uid: Raftel.Domain.BaseTypes.TypedId`1.ToString*
+  name: ToString
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_ToString_
+  commentId: Overload:Raftel.Domain.BaseTypes.TypedId`1.ToString
+  isSpec: "True"
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.ToString
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).ToString
+  nameWithType: TypedId<T>.ToString
+  nameWithType.vb: TypedId(Of T).ToString
+- uid: Raftel.Domain.BaseTypes.TypedId`1.op_Implicit(Raftel.Domain.BaseTypes.TypedId{`0})~`0
+  name: implicit operator T(TypedId<T>)
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_op_Implicit_Raftel_Domain_BaseTypes_TypedId__0____0
+  commentId: M:Raftel.Domain.BaseTypes.TypedId`1.op_Implicit(Raftel.Domain.BaseTypes.TypedId{`0})~`0
+  name.vb: CType(TypedId(Of T))
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.implicit operator T(Raftel.Domain.BaseTypes.TypedId<T>)
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).CType(Raftel.Domain.BaseTypes.TypedId(Of T))
+  nameWithType: TypedId<T>.implicit operator T(TypedId<T>)
+  nameWithType.vb: TypedId(Of T).CType(TypedId(Of T))
+- uid: Raftel.Domain.BaseTypes.TypedId`1.op_Implicit*
+  name: implicit operator
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_op_Implicit_
+  commentId: Overload:Raftel.Domain.BaseTypes.TypedId`1.op_Implicit
+  isSpec: "True"
+  name.vb: CType
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.implicit operator
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).CType
+  nameWithType: TypedId<T>.implicit operator
+  nameWithType.vb: TypedId(Of T).CType

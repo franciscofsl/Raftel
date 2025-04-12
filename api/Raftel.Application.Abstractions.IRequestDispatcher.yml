@@ -16,7 +16,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Abstractions/IRequestDispatcher.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: IRequestDispatcher
     path: src/Raftel.Application/Abstractions/IRequestDispatcher.cs
@@ -43,7 +43,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Abstractions/IRequestDispatcher.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: DispatchAsync
     path: src/Raftel.Application/Abstractions/IRequestDispatcher.cs

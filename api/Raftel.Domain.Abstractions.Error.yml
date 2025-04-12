@@ -20,7 +20,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Error.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: Error
     path: src/Raftel.Domain/Abstractions/Error.cs
@@ -57,7 +57,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Error.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: .ctor
     path: src/Raftel.Domain/Abstractions/Error.cs
@@ -91,7 +91,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Error.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: Code
     path: src/Raftel.Domain/Abstractions/Error.cs
@@ -120,7 +120,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Error.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: Message
     path: src/Raftel.Domain/Abstractions/Error.cs
@@ -149,7 +149,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Error.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: None
     path: src/Raftel.Domain/Abstractions/Error.cs
@@ -176,7 +176,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/Abstractions/Error.cs
-      branch: documentation
+      branch: feature/base-types
       repo: https://github.com/franciscofsl/Raftel
     id: NullValue
     path: src/Raftel.Domain/Abstractions/Error.cs

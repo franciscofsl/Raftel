@@ -32,6 +32,7 @@
       }
     ],
     "output": "_site",
+    "pdf": true,
     "template": [
       "default",
       "modern"
@@ -40,7 +41,7 @@
       "_appName": "Raftel",
       "_appTitle": "Raftel",
       "_enableSearch": true,
-      "pdf": false
+      "pdf": true
     }
   }
 }
