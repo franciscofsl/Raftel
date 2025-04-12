@@ -5,11 +5,13 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackAsTool>true</PackAsTool>
+        <ToolCommandName>raftel</ToolCommandName>
+        <PackageId>Raftel.Cli</PackageId>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="Spectre.Console.Cli" />
-      <PackageReference Include="YamlDotNet" />
     </ItemGroup>
 
     <ItemGroup>
