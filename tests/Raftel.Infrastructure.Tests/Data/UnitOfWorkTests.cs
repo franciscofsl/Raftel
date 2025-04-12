@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
+using Raftel.Application.Commands;
+using Raftel.Infrastructure.Tests.Common.Application;
 using Raftel.Infrastructure.Tests.Common.PiratesEntities;
 using Raftel.Infrastructure.Tests.Common.PiratesEntities.ValueObjects;
 using Raftel.Infrastructure.Tests.Data.Common;
@@ -51,6 +53,25 @@ public class UnitOfWorkTests : DataTestBase
             loaded.ShouldNotBeNull();
             loaded.Bounty.ShouldBe(new Bounty(150_000_000));
             pirate.ShouldBe(loaded);
+        });
+    }
+
+    [Fact]
+    public async Task CommitAsync_ShouldPersistData_UsingMiddleware()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var commandDispatcher = sp.GetService<ICommandDispatcher>();
+
+            var command = new CreatePirateCommand("Ace", 9514361);
+            var result = await commandDispatcher.DispatchAsync(command);
+            result.IsSuccess.ShouldBeTrue();
+
+            var repository = sp.GetRequiredService<IPirateRepository>();
+
+            var loaded = await repository.ListAllAsync();
+            loaded.ShouldHaveSingleItem();
+            loaded.ShouldContain(_ => _.Name == command.Name && _.Bounty == command.Bounty);
         });
     }
 }
