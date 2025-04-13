@@ -149,6 +149,52 @@ references:
   fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse).HandleAsync
   nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>.HandleAsync
   nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse).HandleAsync
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  name: ValidationMiddleware<TRequest, TResponse>
+  href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml
+  commentId: T:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  name.vb: ValidationMiddleware(Of TRequest, TResponse)
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse)
+  nameWithType: ValidationMiddleware<TRequest, TResponse>
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse)
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{`0}})
+  name: ValidationMiddleware(IEnumerable<Validator<TRequest>>)
+  href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml
+  commentId: M:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{`0}})
+  name.vb: New(IEnumerable(Of Validator(Of TRequest)))
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware(System.Collections.Generic.IEnumerable<Raftel.Domain.Validators.Validator<TRequest>>)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).New(System.Collections.Generic.IEnumerable(Of Raftel.Domain.Validators.Validator(Of TRequest)))
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware(IEnumerable<Validator<TRequest>>)
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).New(IEnumerable(Of Validator(Of TRequest)))
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor*
+  name: ValidationMiddleware
+  href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml
+  commentId: Overload:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).New
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).New
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml
+  commentId: M:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml
+  commentId: Overload:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.HandleAsync
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).HandleAsync
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.HandleAsync
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).HandleAsync
 - uid: Raftel.Application.Abstractions.RequestDispatcher
   name: RequestDispatcher
   href: api/Raftel.Application.Abstractions.RequestDispatcher.yml
@@ -302,6 +348,63 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.DependencyInjection.AddRaftelApplication
   nameWithType: DependencyInjection.AddRaftelApplication
+- uid: Raftel.Application.Exceptions
+  name: Raftel.Application.Exceptions
+  href: api/Raftel.Application.Exceptions.yml
+  commentId: N:Raftel.Application.Exceptions
+  fullName: Raftel.Application.Exceptions
+  nameWithType: Raftel.Application.Exceptions
+- uid: Raftel.Application.Exceptions.ValidationException
+  name: ValidationException
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: T:Raftel.Application.Exceptions.ValidationException
+  fullName: Raftel.Application.Exceptions.ValidationException
+  nameWithType: ValidationException
+- uid: Raftel.Application.Exceptions.ValidationException.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
+  name: ValidationException(IEnumerable<Error>)
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: M:Raftel.Application.Exceptions.ValidationException.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
+  name.vb: New(IEnumerable(Of Error))
+  fullName: Raftel.Application.Exceptions.ValidationException.ValidationException(System.Collections.Generic.IEnumerable<Raftel.Domain.Abstractions.Error>)
+  fullName.vb: Raftel.Application.Exceptions.ValidationException.New(System.Collections.Generic.IEnumerable(Of Raftel.Domain.Abstractions.Error))
+  nameWithType: ValidationException.ValidationException(IEnumerable<Error>)
+  nameWithType.vb: ValidationException.New(IEnumerable(Of Error))
+- uid: Raftel.Application.Exceptions.ValidationException.#ctor*
+  name: ValidationException
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: Overload:Raftel.Application.Exceptions.ValidationException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Exceptions.ValidationException.ValidationException
+  fullName.vb: Raftel.Application.Exceptions.ValidationException.New
+  nameWithType: ValidationException.ValidationException
+  nameWithType.vb: ValidationException.New
+- uid: Raftel.Application.Exceptions.ValidationException.Errors
+  name: Errors
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: P:Raftel.Application.Exceptions.ValidationException.Errors
+  fullName: Raftel.Application.Exceptions.ValidationException.Errors
+  nameWithType: ValidationException.Errors
+- uid: Raftel.Application.Exceptions.ValidationException.Errors*
+  name: Errors
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: Overload:Raftel.Application.Exceptions.ValidationException.Errors
+  isSpec: "True"
+  fullName: Raftel.Application.Exceptions.ValidationException.Errors
+  nameWithType: ValidationException.Errors
+- uid: Raftel.Application.Exceptions.ValidationException.ToString
+  name: ToString()
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: M:Raftel.Application.Exceptions.ValidationException.ToString
+  fullName: Raftel.Application.Exceptions.ValidationException.ToString()
+  nameWithType: ValidationException.ToString()
+- uid: Raftel.Application.Exceptions.ValidationException.ToString*
+  name: ToString
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: Overload:Raftel.Application.Exceptions.ValidationException.ToString
+  isSpec: "True"
+  fullName: Raftel.Application.Exceptions.ValidationException.ToString
+  nameWithType: ValidationException.ToString
 - uid: Raftel.Application.IUnitOfWork
   name: IUnitOfWork
   href: api/Raftel.Application.IUnitOfWork.yml
@@ -1044,6 +1147,117 @@ references:
   fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).CType
   nameWithType: TypedId<T>.implicit operator
   nameWithType.vb: TypedId(Of T).CType
+- uid: Raftel.Domain.Validators
+  name: Raftel.Domain.Validators
+  href: api/Raftel.Domain.Validators.yml
+  commentId: N:Raftel.Domain.Validators
+  fullName: Raftel.Domain.Validators
+  nameWithType: Raftel.Domain.Validators
+- uid: Raftel.Domain.Validators.ValidationResult
+  name: ValidationResult
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: T:Raftel.Domain.Validators.ValidationResult
+  fullName: Raftel.Domain.Validators.ValidationResult
+  nameWithType: ValidationResult
+- uid: Raftel.Domain.Validators.ValidationResult.Errors
+  name: Errors
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: P:Raftel.Domain.Validators.ValidationResult.Errors
+  fullName: Raftel.Domain.Validators.ValidationResult.Errors
+  nameWithType: ValidationResult.Errors
+- uid: Raftel.Domain.Validators.ValidationResult.Errors*
+  name: Errors
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: Overload:Raftel.Domain.Validators.ValidationResult.Errors
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.ValidationResult.Errors
+  nameWithType: ValidationResult.Errors
+- uid: Raftel.Domain.Validators.ValidationResult.Failure(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
+  name: Failure(IEnumerable<Error>)
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: M:Raftel.Domain.Validators.ValidationResult.Failure(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
+  name.vb: Failure(IEnumerable(Of Error))
+  fullName: Raftel.Domain.Validators.ValidationResult.Failure(System.Collections.Generic.IEnumerable<Raftel.Domain.Abstractions.Error>)
+  fullName.vb: Raftel.Domain.Validators.ValidationResult.Failure(System.Collections.Generic.IEnumerable(Of Raftel.Domain.Abstractions.Error))
+  nameWithType: ValidationResult.Failure(IEnumerable<Error>)
+  nameWithType.vb: ValidationResult.Failure(IEnumerable(Of Error))
+- uid: Raftel.Domain.Validators.ValidationResult.Failure*
+  name: Failure
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: Overload:Raftel.Domain.Validators.ValidationResult.Failure
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.ValidationResult.Failure
+  nameWithType: ValidationResult.Failure
+- uid: Raftel.Domain.Validators.ValidationResult.IsValid
+  name: IsValid
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: P:Raftel.Domain.Validators.ValidationResult.IsValid
+  fullName: Raftel.Domain.Validators.ValidationResult.IsValid
+  nameWithType: ValidationResult.IsValid
+- uid: Raftel.Domain.Validators.ValidationResult.IsValid*
+  name: IsValid
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: Overload:Raftel.Domain.Validators.ValidationResult.IsValid
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.ValidationResult.IsValid
+  nameWithType: ValidationResult.IsValid
+- uid: Raftel.Domain.Validators.ValidationResult.Success
+  name: Success()
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: M:Raftel.Domain.Validators.ValidationResult.Success
+  fullName: Raftel.Domain.Validators.ValidationResult.Success()
+  nameWithType: ValidationResult.Success()
+- uid: Raftel.Domain.Validators.ValidationResult.Success*
+  name: Success
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: Overload:Raftel.Domain.Validators.ValidationResult.Success
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.ValidationResult.Success
+  nameWithType: ValidationResult.Success
+- uid: Raftel.Domain.Validators.Validator`1
+  name: Validator<TModel>
+  href: api/Raftel.Domain.Validators.Validator-1.yml
+  commentId: T:Raftel.Domain.Validators.Validator`1
+  name.vb: Validator(Of TModel)
+  fullName: Raftel.Domain.Validators.Validator<TModel>
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel)
+  nameWithType: Validator<TModel>
+  nameWithType.vb: Validator(Of TModel)
+- uid: Raftel.Domain.Validators.Validator`1.EnsureThat(System.Func{`0,System.Boolean},Raftel.Domain.Abstractions.Error)
+  name: EnsureThat(Func<TModel, bool>, Error)
+  href: api/Raftel.Domain.Validators.Validator-1.yml
+  commentId: M:Raftel.Domain.Validators.Validator`1.EnsureThat(System.Func{`0,System.Boolean},Raftel.Domain.Abstractions.Error)
+  name.vb: EnsureThat(Func(Of TModel, Boolean), Error)
+  fullName: Raftel.Domain.Validators.Validator<TModel>.EnsureThat(System.Func<TModel, bool>, Raftel.Domain.Abstractions.Error)
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel).EnsureThat(System.Func(Of TModel, Boolean), Raftel.Domain.Abstractions.Error)
+  nameWithType: Validator<TModel>.EnsureThat(Func<TModel, bool>, Error)
+  nameWithType.vb: Validator(Of TModel).EnsureThat(Func(Of TModel, Boolean), Error)
+- uid: Raftel.Domain.Validators.Validator`1.EnsureThat*
+  name: EnsureThat
+  href: api/Raftel.Domain.Validators.Validator-1.yml
+  commentId: Overload:Raftel.Domain.Validators.Validator`1.EnsureThat
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.Validator<TModel>.EnsureThat
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel).EnsureThat
+  nameWithType: Validator<TModel>.EnsureThat
+  nameWithType.vb: Validator(Of TModel).EnsureThat
+- uid: Raftel.Domain.Validators.Validator`1.Validate(`0)
+  name: Validate(TModel)
+  href: api/Raftel.Domain.Validators.Validator-1.yml
+  commentId: M:Raftel.Domain.Validators.Validator`1.Validate(`0)
+  fullName: Raftel.Domain.Validators.Validator<TModel>.Validate(TModel)
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel).Validate(TModel)
+  nameWithType: Validator<TModel>.Validate(TModel)
+  nameWithType.vb: Validator(Of TModel).Validate(TModel)
+- uid: Raftel.Domain.Validators.Validator`1.Validate*
+  name: Validate
+  href: api/Raftel.Domain.Validators.Validator-1.yml
+  commentId: Overload:Raftel.Domain.Validators.Validator`1.Validate
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.Validator<TModel>.Validate
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel).Validate
+  nameWithType: Validator<TModel>.Validate
+  nameWithType.vb: Validator(Of TModel).Validate
 - uid: Raftel.Infrastructure
   name: Raftel.Infrastructure
   href: api/Raftel.Infrastructure.yml
