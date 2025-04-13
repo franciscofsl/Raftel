@@ -4,7 +4,7 @@
 
 ![Coverage](https://codecov.io/gh/franciscofsl/Raftel/branch/main/graph/badge.svg)
 
-
+ 
 ## 🎯 Project Goals
 
 - Serve as a learning environment to apply software development best practices.
