@@ -6,7 +6,7 @@ using Shouldly;
 
 namespace Raftel.Application.Tests.Abstractions;
 
-public class MiddlewareIntegrationTests
+public class MiddlewareTests
 {
     public record TestCommand(string Input) : ICommand;
 
