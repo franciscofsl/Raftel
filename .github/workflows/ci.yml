@@ -49,15 +49,21 @@ jobs:
           dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage"
         working-directory: ${{env.working-directory}}
 
+      - name: Locate coverage report
+        run: |
+          mkdir -p coverage
+          cp $(find . -path '*coverage.cobertura.xml' | head -n 1) coverage/coverage.cobertura.xml
+        working-directory: ${{env.working-directory}}
+
       - name: Generate coverage report
         run: |
-          reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:Html
+          reportgenerator -reports:coverage/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:Html
         working-directory: ${{env.working-directory}}
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./tests/**/coverage.cobertura.xml
+          files: coverage/coverage.cobertura.xml
           flags: unittests
           name: codecov-umbrella
