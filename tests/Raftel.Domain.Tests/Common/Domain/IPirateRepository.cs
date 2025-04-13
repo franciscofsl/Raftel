@@ -1,7 +1,6 @@
 ﻿using Raftel.Domain.Abstractions;
-using Raftel.Domain.Tests.Common.Domain;
 
-namespace Raftel.Infrastructure.Tests.Data.Common;
+namespace Raftel.Domain.Tests.Common.Domain;
 
 public interface IPirateRepository : IRepository<Pirate, PirateId>
 {

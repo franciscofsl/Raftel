@@ -14,7 +14,7 @@ public class CreatePirateCommandMiddlewareTests
         var validator = new CreatePirateCommandValidator();
         var middleware = new ValidationMiddleware<CreatePirateCommand, Result>([validator]);
 
-        var invalidCommand = new CreatePirateCommand(string.Empty, true);
+        var invalidCommand = new CreatePirateCommand(string.Empty, 1, true);
 
         var exception = await Should.ThrowAsync<ValidationException>(() =>
             middleware.HandleAsync(invalidCommand, () => Task.FromResult(Result.Success())));
@@ -29,7 +29,7 @@ public class CreatePirateCommandMiddlewareTests
         var validator = new CreatePirateCommandValidator();
         var middleware = new ValidationMiddleware<CreatePirateCommand, Result>([validator]);
 
-        var validCommand = new CreatePirateCommand("Luffy", true);
+        var validCommand = new CreatePirateCommand("Luffy", 56, true);
 
         var result = await middleware.HandleAsync(validCommand, () => Task.FromResult(Result.Success()));
 

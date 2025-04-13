@@ -15,5 +15,6 @@ public static class DependencyInjection
         services.AddScoped<IQueryDispatcher, QueryDispatcher>();
 
         services.AddScoped(typeof(IRequestMiddleware<,>), typeof(UnitOfWorkMiddleware<,>));
+        services.AddScoped(typeof(IRequestMiddleware<,>), typeof(ValidationMiddleware<,>));
     }
 }

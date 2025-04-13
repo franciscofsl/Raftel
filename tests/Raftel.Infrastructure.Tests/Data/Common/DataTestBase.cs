@@ -3,8 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
 using Raftel.Application.Abstractions;
 using Raftel.Application.Commands;
+using Raftel.Application.Tests.Common;
 using Raftel.Domain.Abstractions;
-using Raftel.Infrastructure.Tests.Common.Application;
+using Raftel.Domain.Tests.Common.Domain;
+using Raftel.Domain.Validators; 
 
 namespace Raftel.Infrastructure.Tests.Data.Common;
 
@@ -57,6 +59,8 @@ public abstract class DataTestBase : IAsyncLifetime
 
         services.AddScoped(typeof(IPirateRepository), typeof(PirateRepository));
         services.AddScoped<IRequestHandler<CreatePirateCommand, Result>, CreatePirateCommandHandler>();
+        services.AddScoped<Validator<CreatePirateCommand>, CreatePirateCommandValidator>(); 
+
     }
 
     protected TService GetService<TService>() where TService : notnull
