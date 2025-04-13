@@ -55,10 +55,19 @@ jobs:
           cp $(find . -path '*coverage.cobertura.xml' | head -n 1) coverage/coverage.cobertura.xml
         working-directory: ${{env.working-directory}}
 
-      - name: Generate coverage report
+      - name: Generate HTML coverage report
         run: |
           reportgenerator -reports:coverage/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:Html
         working-directory: ${{env.working-directory}}
+
+      - name: Deploy HTML coverage to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./coveragereport
+          destination_dir: coverage
+          publish_branch: gh-pages
+          keep_files: true
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
