@@ -9,30 +9,55 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      working-directory: ./
+      working-directory: ./ 
     steps:
       - name: Check out code
         uses: actions/checkout@v2
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v1.7.2
         with:
           dotnet-version: 9.0.x
+
       - name: Install required workloads
         run: |
           dotnet workload install aspire
+
+      - name: Install reportgenerator
+        run: |
+          dotnet tool install -g dotnet-reportgenerator-globaltool
+
       - name: Start dependencies (docker-compose)
         run: |
           docker compose -f ./docker-compose.yml up -d
         working-directory: ${{env.working-directory}}
+
       - name: Wait for SQL Server container
         run: sleep 30s
         shell: bash
+
       - name: Restore dependencies
         run: dotnet restore
         working-directory: ${{env.working-directory}}
+
       - name: Build
         run: dotnet build --no-restore
         working-directory: ${{env.working-directory}}
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
+
+      - name: Test with coverage
+        run: |
+          dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage"
         working-directory: ${{env.working-directory}}
+
+      - name: Generate coverage report
+        run: |
+          reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:Html
+        working-directory: ${{env.working-directory}}
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./tests/**/coverage.cobertura.xml
+          flags: unittests
+          name: codecov-umbrella
