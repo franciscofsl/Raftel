@@ -1,6 +1,6 @@
 ﻿using Raftel.Application.Commands;
 using Raftel.Domain.Abstractions;
-using Raftel.Infrastructure.Tests.Common.PiratesEntities;
+using Raftel.Domain.Tests.Common.Domain;
 using Raftel.Infrastructure.Tests.Data.Common;
 
 namespace Raftel.Infrastructure.Tests.Common.Application;

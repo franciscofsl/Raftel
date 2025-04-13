@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
-using Raftel.Infrastructure.Tests.Common.PiratesEntities;
-using Raftel.Infrastructure.Tests.Common.PiratesEntities.ValueObjects;
+using Raftel.Domain.Tests.Common.Domain;
+using Raftel.Domain.Tests.Common.Domain.ValueObjects;
 using Raftel.Infrastructure.Tests.Data.Common;
 using Shouldly;
 

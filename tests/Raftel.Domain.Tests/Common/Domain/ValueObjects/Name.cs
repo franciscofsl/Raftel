@@ -1,4 +1,4 @@
-﻿namespace Raftel.Infrastructure.Tests.Common.PiratesEntities.ValueObjects;
+﻿namespace Raftel.Domain.Tests.Common.Domain.ValueObjects;
 
 public readonly record struct Name
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Raftel.Domain.Tests.Common.Domain;
 using Raftel.Infrastructure.Data;
-using Raftel.Infrastructure.Tests.Common.PiratesEntities;
 using Raftel.Infrastructure.Tests.Data.Common.Configuration;
 
 namespace Raftel.Infrastructure.Tests.Data.Common;
