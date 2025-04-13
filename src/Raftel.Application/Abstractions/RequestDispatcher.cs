@@ -33,6 +33,8 @@ public class RequestDispatcher : IRequestDispatcher
             .Aggregate(handlerDelegate,
                 (next, behavior) => () => behavior.HandleAsync(request, next));
 
-        return await pipeline();
+        var aa = await pipeline();
+
+        return aa;
     }
 }
