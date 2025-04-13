@@ -2,6 +2,9 @@
 
 **Raftel** is a training project. It's a small framework for building .NET Core applications, intended to be reused as a base for developing solutions that follow clean architecture and apply good coding practices.
 
+![Coverage](https://codecov.io/gh/franciscofsl/Raftel/branch/main/graph/badge.svg)
+
+
 ## 🎯 Project Goals
 
 - Serve as a learning environment to apply software development best practices.
