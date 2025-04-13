@@ -31,6 +31,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\Raftel.Application\Raftel.Application.csproj"/>
+        <ProjectReference Include="..\Raftel.Domain.Tests\Raftel.Domain.Tests.csproj" />
     </ItemGroup>
 
     <ItemGroup>

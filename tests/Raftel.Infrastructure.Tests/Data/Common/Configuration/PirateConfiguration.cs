@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Raftel.Infrastructure.Tests.Common.PiratesEntities;
-using Raftel.Infrastructure.Tests.Common.PiratesEntities.ValueObjects;
+using Raftel.Domain.Tests.Common.Domain;
+using Raftel.Domain.Tests.Common.Domain.ValueObjects;
 
 namespace Raftel.Infrastructure.Tests.Data.Common.Configuration;
 

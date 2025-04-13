@@ -1,10 +1,10 @@
-﻿using Raftel.Infrastructure.Tests.Common.PiratesEntities.ValueObjects;
+﻿using Raftel.Domain.Tests.Common.Domain.ValueObjects;
 
-namespace Raftel.Infrastructure.Tests.Common.PiratesEntities;
+namespace Raftel.Domain.Tests.Common.Domain;
 
 public static class Mugiwara
 {
-    public static readonly Pirate Luffy = Pirate.Create(new Name("Monkey D. Luffy"), new Bounty(300000000));
+    public static readonly Pirate Luffy = Pirate.Create(new Name("Monkey D. Luffy"), new Bounty(300000000), true);
     public static readonly Pirate Zoro = Pirate.Create(new Name("Roronoa Zoro"), new Bounty(120000000));
     public static readonly Pirate Nami = Pirate.Create(new Name("Nami"), new Bounty(16000000));
     public static readonly Pirate Usopp = Pirate.Create(new Name("Usopp"), new Bounty(30000000));

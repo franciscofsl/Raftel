@@ -1,5 +1,5 @@
-﻿using Raftel.Infrastructure.Data;
-using Raftel.Infrastructure.Tests.Common.PiratesEntities;
+﻿using Raftel.Domain.Tests.Common.Domain;
+using Raftel.Infrastructure.Data;
 
 namespace Raftel.Infrastructure.Tests.Data.Common;
 
