@@ -33,7 +33,7 @@ public abstract class Specification<TModel>
     /// <returns>A new specification that represents the logical AND.</returns>
     public Specification<TModel> And(Specification<TModel> other)
     {
-        return new AndIsKingSpecification<TModel>(this, other);
+        return new AndSpecification<TModel>(this, other);
     }
 
     /// <summary>
@@ -43,6 +43,6 @@ public abstract class Specification<TModel>
     /// <returns>A new specification that represents the logical OR.</returns>
     public Specification<TModel> Or(Specification<TModel> other)
     {
-        return new OrIsKingSpecification<TModel>(this, other);
+        return new OrSpecification<TModel>(this, other);
     }
 }
