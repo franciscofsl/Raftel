@@ -1,40 +1,34 @@
 ### YamlMime:ManagedReference
 items:
-- uid: Raftel.Domain.Abstractions.Error
-  commentId: T:Raftel.Domain.Abstractions.Error
-  id: Error
-  parent: Raftel.Domain.Abstractions
+- uid: Raftel.Infrastructure.DependencyInjection
+  commentId: T:Raftel.Infrastructure.DependencyInjection
+  id: DependencyInjection
+  parent: Raftel.Infrastructure
   children:
-  - Raftel.Domain.Abstractions.Error.#ctor(System.String,System.String)
-  - Raftel.Domain.Abstractions.Error.Code
-  - Raftel.Domain.Abstractions.Error.Message
-  - Raftel.Domain.Abstractions.Error.None
-  - Raftel.Domain.Abstractions.Error.NullValue
+  - Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)
   langs:
   - csharp
   - vb
-  name: Error
-  nameWithType: Error
-  fullName: Raftel.Domain.Abstractions.Error
+  name: DependencyInjection
+  nameWithType: DependencyInjection
+  fullName: Raftel.Infrastructure.DependencyInjection
   type: Class
   source:
     remote:
-      path: src/Raftel.Domain/Abstractions/Error.cs
+      path: src/Raftel.Infrastructure/DependencyInjection.cs
       branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
-    id: Error
-    path: src/Raftel.Domain/Abstractions/Error.cs
-    startLine: 2
+    id: DependencyInjection
+    path: src/Raftel.Infrastructure/DependencyInjection.cs
+    startLine: 8
   assemblies:
-  - Raftel.Domain
-  namespace: Raftel.Domain.Abstractions
+  - Raftel.Infrastructure
+  namespace: Raftel.Infrastructure
   syntax:
-    content: 'public record Error : IEquatable<Error>'
-    content.vb: Public Class [Error] Implements IEquatable(Of Error)
+    content: public static class DependencyInjection
+    content.vb: Public Module DependencyInjection
   inheritance:
   - System.Object
-  implements:
-  - System.IEquatable{Raftel.Domain.Abstractions.Error}
   inheritedMembers:
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -43,183 +37,70 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: Raftel.Domain.Abstractions.Error.#ctor(System.String,System.String)
-  commentId: M:Raftel.Domain.Abstractions.Error.#ctor(System.String,System.String)
-  id: '#ctor(System.String,System.String)'
-  parent: Raftel.Domain.Abstractions.Error
+- uid: Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)
+  commentId: M:Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)
+  id: AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)
+  isExtensionMethod: true
+  parent: Raftel.Infrastructure.DependencyInjection
   langs:
   - csharp
   - vb
-  name: Error(string, string)
-  nameWithType: Error.Error(string, string)
-  fullName: Raftel.Domain.Abstractions.Error.Error(string, string)
-  type: Constructor
+  name: AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string)
+  nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string)
+  fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData<TDbContext>(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, string)
+  type: Method
   source:
     remote:
-      path: src/Raftel.Domain/Abstractions/Error.cs
+      path: src/Raftel.Infrastructure/DependencyInjection.cs
       branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
-    id: .ctor
-    path: src/Raftel.Domain/Abstractions/Error.cs
-    startLine: 2
+    id: AddRaftelData
+    path: src/Raftel.Infrastructure/DependencyInjection.cs
+    startLine: 10
   assemblies:
-  - Raftel.Domain
-  namespace: Raftel.Domain.Abstractions
+  - Raftel.Infrastructure
+  namespace: Raftel.Infrastructure
   syntax:
-    content: public Error(string Code, string Message)
+    content: 'public static IServiceCollection AddRaftelData<TDbContext>(this IServiceCollection services, IConfiguration configuration, string connectionStringName = "DefaultConnection") where TDbContext : RaftelDbContext<TDbContext>'
     parameters:
-    - id: Code
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+    - id: configuration
+      type: Microsoft.Extensions.Configuration.IConfiguration
+    - id: connectionStringName
       type: System.String
-    - id: Message
-      type: System.String
-    content.vb: Public Sub New(Code As String, Message As String)
-  overload: Raftel.Domain.Abstractions.Error.#ctor*
-  nameWithType.vb: Error.New(String, String)
-  fullName.vb: Raftel.Domain.Abstractions.Error.New(String, String)
-  name.vb: New(String, String)
-- uid: Raftel.Domain.Abstractions.Error.Code
-  commentId: P:Raftel.Domain.Abstractions.Error.Code
-  id: Code
-  parent: Raftel.Domain.Abstractions.Error
-  langs:
-  - csharp
-  - vb
-  name: Code
-  nameWithType: Error.Code
-  fullName: Raftel.Domain.Abstractions.Error.Code
-  type: Property
-  source:
-    remote:
-      path: src/Raftel.Domain/Abstractions/Error.cs
-      branch: feature/docs
-      repo: https://github.com/franciscofsl/Raftel
-    id: Code
-    path: src/Raftel.Domain/Abstractions/Error.cs
-    startLine: 2
-  assemblies:
-  - Raftel.Domain
-  namespace: Raftel.Domain.Abstractions
-  syntax:
-    content: public string Code { get; init; }
-    parameters: []
+    typeParameters:
+    - id: TDbContext
     return:
-      type: System.String
-    content.vb: Public Property Code As String
-  overload: Raftel.Domain.Abstractions.Error.Code*
-- uid: Raftel.Domain.Abstractions.Error.Message
-  commentId: P:Raftel.Domain.Abstractions.Error.Message
-  id: Message
-  parent: Raftel.Domain.Abstractions.Error
-  langs:
-  - csharp
-  - vb
-  name: Message
-  nameWithType: Error.Message
-  fullName: Raftel.Domain.Abstractions.Error.Message
-  type: Property
-  source:
-    remote:
-      path: src/Raftel.Domain/Abstractions/Error.cs
-      branch: feature/docs
-      repo: https://github.com/franciscofsl/Raftel
-    id: Message
-    path: src/Raftel.Domain/Abstractions/Error.cs
-    startLine: 2
-  assemblies:
-  - Raftel.Domain
-  namespace: Raftel.Domain.Abstractions
-  syntax:
-    content: public string Message { get; init; }
-    parameters: []
-    return:
-      type: System.String
-    content.vb: Public Property Message As String
-  overload: Raftel.Domain.Abstractions.Error.Message*
-- uid: Raftel.Domain.Abstractions.Error.None
-  commentId: F:Raftel.Domain.Abstractions.Error.None
-  id: None
-  parent: Raftel.Domain.Abstractions.Error
-  langs:
-  - csharp
-  - vb
-  name: None
-  nameWithType: Error.None
-  fullName: Raftel.Domain.Abstractions.Error.None
-  type: Field
-  source:
-    remote:
-      path: src/Raftel.Domain/Abstractions/Error.cs
-      branch: feature/docs
-      repo: https://github.com/franciscofsl/Raftel
-    id: None
-    path: src/Raftel.Domain/Abstractions/Error.cs
-    startLine: 4
-  assemblies:
-  - Raftel.Domain
-  namespace: Raftel.Domain.Abstractions
-  syntax:
-    content: public static Error None
-    return:
-      type: Raftel.Domain.Abstractions.Error
-    content.vb: Public Shared None As [Error]
-- uid: Raftel.Domain.Abstractions.Error.NullValue
-  commentId: F:Raftel.Domain.Abstractions.Error.NullValue
-  id: NullValue
-  parent: Raftel.Domain.Abstractions.Error
-  langs:
-  - csharp
-  - vb
-  name: NullValue
-  nameWithType: Error.NullValue
-  fullName: Raftel.Domain.Abstractions.Error.NullValue
-  type: Field
-  source:
-    remote:
-      path: src/Raftel.Domain/Abstractions/Error.cs
-      branch: feature/docs
-      repo: https://github.com/franciscofsl/Raftel
-    id: NullValue
-    path: src/Raftel.Domain/Abstractions/Error.cs
-    startLine: 5
-  assemblies:
-  - Raftel.Domain
-  namespace: Raftel.Domain.Abstractions
-  syntax:
-    content: public static Error NullValue
-    return:
-      type: Raftel.Domain.Abstractions.Error
-    content.vb: Public Shared NullValue As [Error]
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+    content.vb: Public Shared Function AddRaftelData(Of TDbContext As RaftelDbContext(Of TDbContext))(services As IServiceCollection, configuration As IConfiguration, connectionStringName As String = "DefaultConnection") As IServiceCollection
+  overload: Raftel.Infrastructure.DependencyInjection.AddRaftelData*
+  nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String)
+  fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String)
+  name.vb: AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String)
 references:
-- uid: Raftel.Domain.Abstractions
-  commentId: N:Raftel.Domain.Abstractions
+- uid: Raftel.Infrastructure
+  commentId: N:Raftel.Infrastructure
   href: Raftel.html
-  name: Raftel.Domain.Abstractions
-  nameWithType: Raftel.Domain.Abstractions
-  fullName: Raftel.Domain.Abstractions
+  name: Raftel.Infrastructure
+  nameWithType: Raftel.Infrastructure
+  fullName: Raftel.Infrastructure
   spec.csharp:
   - uid: Raftel
     name: Raftel
     href: Raftel.html
   - name: .
-  - uid: Raftel.Domain
-    name: Domain
-    href: Raftel.Domain.html
-  - name: .
-  - uid: Raftel.Domain.Abstractions
-    name: Abstractions
-    href: Raftel.Domain.Abstractions.html
+  - uid: Raftel.Infrastructure
+    name: Infrastructure
+    href: Raftel.Infrastructure.html
   spec.vb:
   - uid: Raftel
     name: Raftel
     href: Raftel.html
   - name: .
-  - uid: Raftel.Domain
-    name: Domain
-    href: Raftel.Domain.html
-  - name: .
-  - uid: Raftel.Domain.Abstractions
-    name: Abstractions
-    href: Raftel.Domain.Abstractions.html
+  - uid: Raftel.Infrastructure
+    name: Infrastructure
+    href: Raftel.Infrastructure.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -231,39 +112,6 @@ references:
   nameWithType.vb: Object
   fullName.vb: Object
   name.vb: Object
-- uid: System.IEquatable{Raftel.Domain.Abstractions.Error}
-  commentId: T:System.IEquatable{Raftel.Domain.Abstractions.Error}
-  parent: System
-  definition: System.IEquatable`1
-  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
-  name: IEquatable<Error>
-  nameWithType: IEquatable<Error>
-  fullName: System.IEquatable<Raftel.Domain.Abstractions.Error>
-  nameWithType.vb: IEquatable(Of Error)
-  fullName.vb: System.IEquatable(Of Raftel.Domain.Abstractions.Error)
-  name.vb: IEquatable(Of Error)
-  spec.csharp:
-  - uid: System.IEquatable`1
-    name: IEquatable
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
-  - name: <
-  - uid: Raftel.Domain.Abstractions.Error
-    name: Error
-    href: Raftel.Domain.Abstractions.Error.html
-  - name: '>'
-  spec.vb:
-  - uid: System.IEquatable`1
-    name: IEquatable
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
-  - name: (
-  - name: Of
-  - name: " "
-  - uid: Raftel.Domain.Abstractions.Error
-    name: Error
-    href: Raftel.Domain.Abstractions.Error.html
-  - name: )
 - uid: System.Object.Equals(System.Object)
   commentId: M:System.Object.Equals(System.Object)
   parent: System.Object
@@ -490,43 +338,28 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: System.IEquatable`1
-  commentId: T:System.IEquatable`1
+- uid: Raftel.Infrastructure.DependencyInjection.AddRaftelData*
+  commentId: Overload:Raftel.Infrastructure.DependencyInjection.AddRaftelData
+  href: Raftel.Infrastructure.DependencyInjection.html#Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_
+  name: AddRaftelData
+  nameWithType: DependencyInjection.AddRaftelData
+  fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData
+- uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
+  commentId: T:Microsoft.Extensions.DependencyInjection.IServiceCollection
+  parent: Microsoft.Extensions.DependencyInjection
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
-  name: IEquatable<T>
-  nameWithType: IEquatable<T>
-  fullName: System.IEquatable<T>
-  nameWithType.vb: IEquatable(Of T)
-  fullName.vb: System.IEquatable(Of T)
-  name.vb: IEquatable(Of T)
-  spec.csharp:
-  - uid: System.IEquatable`1
-    name: IEquatable
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
-  - name: <
-  - name: T
-  - name: '>'
-  spec.vb:
-  - uid: System.IEquatable`1
-    name: IEquatable
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
-  - name: (
-  - name: Of
-  - name: " "
-  - name: T
-  - name: )
-- uid: Raftel.Domain.Abstractions.Error.#ctor*
-  commentId: Overload:Raftel.Domain.Abstractions.Error.#ctor
-  href: Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error__ctor_System_String_System_String_
-  name: Error
-  nameWithType: Error.Error
-  fullName: Raftel.Domain.Abstractions.Error.Error
-  nameWithType.vb: Error.New
-  fullName.vb: Raftel.Domain.Abstractions.Error.New
-  name.vb: New
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection
+  name: IServiceCollection
+  nameWithType: IServiceCollection
+  fullName: Microsoft.Extensions.DependencyInjection.IServiceCollection
+- uid: Microsoft.Extensions.Configuration.IConfiguration
+  commentId: T:Microsoft.Extensions.Configuration.IConfiguration
+  parent: Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration
+  name: IConfiguration
+  nameWithType: IConfiguration
+  fullName: Microsoft.Extensions.Configuration.IConfiguration
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -538,22 +371,77 @@ references:
   nameWithType.vb: String
   fullName.vb: String
   name.vb: String
-- uid: Raftel.Domain.Abstractions.Error.Code*
-  commentId: Overload:Raftel.Domain.Abstractions.Error.Code
-  href: Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Code
-  name: Code
-  nameWithType: Error.Code
-  fullName: Raftel.Domain.Abstractions.Error.Code
-- uid: Raftel.Domain.Abstractions.Error.Message*
-  commentId: Overload:Raftel.Domain.Abstractions.Error.Message
-  href: Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Message
-  name: Message
-  nameWithType: Error.Message
-  fullName: Raftel.Domain.Abstractions.Error.Message
-- uid: Raftel.Domain.Abstractions.Error
-  commentId: T:Raftel.Domain.Abstractions.Error
-  parent: Raftel.Domain.Abstractions
-  href: Raftel.Domain.Abstractions.Error.html
-  name: Error
-  nameWithType: Error
-  fullName: Raftel.Domain.Abstractions.Error
+- uid: Microsoft.Extensions.DependencyInjection
+  commentId: N:Microsoft.Extensions.DependencyInjection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.DependencyInjection
+  nameWithType: Microsoft.Extensions.DependencyInjection
+  fullName: Microsoft.Extensions.DependencyInjection
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.DependencyInjection
+    name: DependencyInjection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.DependencyInjection
+    name: DependencyInjection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection
+- uid: Microsoft.Extensions.Configuration
+  commentId: N:Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.Configuration
+  nameWithType: Microsoft.Extensions.Configuration
+  fullName: Microsoft.Extensions.Configuration
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Configuration
+    name: Configuration
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Configuration
+    name: Configuration
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration

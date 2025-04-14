@@ -1,6 +1,12 @@
 ### YamlMime:XRefMap
 sorted: true
 references:
+- uid: Raftel.Application
+  name: Raftel.Application
+  href: api/Raftel.Application.yml
+  commentId: N:Raftel.Application
+  fullName: Raftel.Application
+  nameWithType: Raftel.Application
 - uid: Raftel.Application.Abstractions
   name: Raftel.Application.Abstractions
   href: api/Raftel.Application.Abstractions.yml
@@ -91,6 +97,104 @@ references:
   fullName.vb: Raftel.Application.Abstractions.IRequest(Of TResponse)
   nameWithType: IRequest<TResponse>
   nameWithType.vb: IRequest(Of TResponse)
+- uid: Raftel.Application.Abstractions.Middlewares
+  name: Raftel.Application.Abstractions.Middlewares
+  href: api/Raftel.Application.Abstractions.Middlewares.yml
+  commentId: N:Raftel.Application.Abstractions.Middlewares
+  fullName: Raftel.Application.Abstractions.Middlewares
+  nameWithType: Raftel.Application.Abstractions.Middlewares
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
+  name: UnitOfWorkMiddleware<TRequest, TResponse>
+  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.yml
+  commentId: T:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
+  name.vb: UnitOfWorkMiddleware(Of TRequest, TResponse)
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse)
+  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse)
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.#ctor(Raftel.Application.IUnitOfWork)
+  name: UnitOfWorkMiddleware(IUnitOfWork)
+  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.yml
+  commentId: M:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.#ctor(Raftel.Application.IUnitOfWork)
+  name.vb: New(IUnitOfWork)
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>.UnitOfWorkMiddleware(Raftel.Application.IUnitOfWork)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse).New(Raftel.Application.IUnitOfWork)
+  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>.UnitOfWorkMiddleware(IUnitOfWork)
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse).New(IUnitOfWork)
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.#ctor*
+  name: UnitOfWorkMiddleware
+  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.yml
+  commentId: Overload:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>.UnitOfWorkMiddleware
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse).New
+  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>.UnitOfWorkMiddleware
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse).New
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.yml
+  commentId: M:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
+  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.yml
+  commentId: Overload:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>.HandleAsync
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse).HandleAsync
+  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>.HandleAsync
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse).HandleAsync
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  name: ValidationMiddleware<TRequest, TResponse>
+  href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml
+  commentId: T:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  name.vb: ValidationMiddleware(Of TRequest, TResponse)
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse)
+  nameWithType: ValidationMiddleware<TRequest, TResponse>
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse)
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{`0}})
+  name: ValidationMiddleware(IEnumerable<Validator<TRequest>>)
+  href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml
+  commentId: M:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{`0}})
+  name.vb: New(IEnumerable(Of Validator(Of TRequest)))
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware(System.Collections.Generic.IEnumerable<Raftel.Domain.Validators.Validator<TRequest>>)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).New(System.Collections.Generic.IEnumerable(Of Raftel.Domain.Validators.Validator(Of TRequest)))
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware(IEnumerable<Validator<TRequest>>)
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).New(IEnumerable(Of Validator(Of TRequest)))
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor*
+  name: ValidationMiddleware
+  href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml
+  commentId: Overload:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).New
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).New
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml
+  commentId: M:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml
+  commentId: Overload:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.HandleAsync
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).HandleAsync
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.HandleAsync
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).HandleAsync
 - uid: Raftel.Application.Abstractions.RequestDispatcher
   name: RequestDispatcher
   href: api/Raftel.Application.Abstractions.RequestDispatcher.yml
@@ -225,6 +329,101 @@ references:
   fullName.vb: Raftel.Application.Commands.ICommandHandler(Of TCommand)
   nameWithType: ICommandHandler<TCommand>
   nameWithType.vb: ICommandHandler(Of TCommand)
+- uid: Raftel.Application.DependencyInjection
+  name: DependencyInjection
+  href: api/Raftel.Application.DependencyInjection.yml
+  commentId: T:Raftel.Application.DependencyInjection
+  fullName: Raftel.Application.DependencyInjection
+  nameWithType: DependencyInjection
+- uid: Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  name: AddRaftelApplication(IServiceCollection)
+  href: api/Raftel.Application.DependencyInjection.yml
+  commentId: M:Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  fullName: Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  nameWithType: DependencyInjection.AddRaftelApplication(IServiceCollection)
+- uid: Raftel.Application.DependencyInjection.AddRaftelApplication*
+  name: AddRaftelApplication
+  href: api/Raftel.Application.DependencyInjection.yml
+  commentId: Overload:Raftel.Application.DependencyInjection.AddRaftelApplication
+  isSpec: "True"
+  fullName: Raftel.Application.DependencyInjection.AddRaftelApplication
+  nameWithType: DependencyInjection.AddRaftelApplication
+- uid: Raftel.Application.Exceptions
+  name: Raftel.Application.Exceptions
+  href: api/Raftel.Application.Exceptions.yml
+  commentId: N:Raftel.Application.Exceptions
+  fullName: Raftel.Application.Exceptions
+  nameWithType: Raftel.Application.Exceptions
+- uid: Raftel.Application.Exceptions.ValidationException
+  name: ValidationException
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: T:Raftel.Application.Exceptions.ValidationException
+  fullName: Raftel.Application.Exceptions.ValidationException
+  nameWithType: ValidationException
+- uid: Raftel.Application.Exceptions.ValidationException.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
+  name: ValidationException(IEnumerable<Error>)
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: M:Raftel.Application.Exceptions.ValidationException.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
+  name.vb: New(IEnumerable(Of Error))
+  fullName: Raftel.Application.Exceptions.ValidationException.ValidationException(System.Collections.Generic.IEnumerable<Raftel.Domain.Abstractions.Error>)
+  fullName.vb: Raftel.Application.Exceptions.ValidationException.New(System.Collections.Generic.IEnumerable(Of Raftel.Domain.Abstractions.Error))
+  nameWithType: ValidationException.ValidationException(IEnumerable<Error>)
+  nameWithType.vb: ValidationException.New(IEnumerable(Of Error))
+- uid: Raftel.Application.Exceptions.ValidationException.#ctor*
+  name: ValidationException
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: Overload:Raftel.Application.Exceptions.ValidationException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Exceptions.ValidationException.ValidationException
+  fullName.vb: Raftel.Application.Exceptions.ValidationException.New
+  nameWithType: ValidationException.ValidationException
+  nameWithType.vb: ValidationException.New
+- uid: Raftel.Application.Exceptions.ValidationException.Errors
+  name: Errors
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: P:Raftel.Application.Exceptions.ValidationException.Errors
+  fullName: Raftel.Application.Exceptions.ValidationException.Errors
+  nameWithType: ValidationException.Errors
+- uid: Raftel.Application.Exceptions.ValidationException.Errors*
+  name: Errors
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: Overload:Raftel.Application.Exceptions.ValidationException.Errors
+  isSpec: "True"
+  fullName: Raftel.Application.Exceptions.ValidationException.Errors
+  nameWithType: ValidationException.Errors
+- uid: Raftel.Application.Exceptions.ValidationException.ToString
+  name: ToString()
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: M:Raftel.Application.Exceptions.ValidationException.ToString
+  fullName: Raftel.Application.Exceptions.ValidationException.ToString()
+  nameWithType: ValidationException.ToString()
+- uid: Raftel.Application.Exceptions.ValidationException.ToString*
+  name: ToString
+  href: api/Raftel.Application.Exceptions.ValidationException.yml
+  commentId: Overload:Raftel.Application.Exceptions.ValidationException.ToString
+  isSpec: "True"
+  fullName: Raftel.Application.Exceptions.ValidationException.ToString
+  nameWithType: ValidationException.ToString
+- uid: Raftel.Application.IUnitOfWork
+  name: IUnitOfWork
+  href: api/Raftel.Application.IUnitOfWork.yml
+  commentId: T:Raftel.Application.IUnitOfWork
+  fullName: Raftel.Application.IUnitOfWork
+  nameWithType: IUnitOfWork
+- uid: Raftel.Application.IUnitOfWork.CommitAsync(System.Threading.CancellationToken)
+  name: CommitAsync(CancellationToken)
+  href: api/Raftel.Application.IUnitOfWork.yml
+  commentId: M:Raftel.Application.IUnitOfWork.CommitAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Application.IUnitOfWork.CommitAsync(System.Threading.CancellationToken)
+  nameWithType: IUnitOfWork.CommitAsync(CancellationToken)
+- uid: Raftel.Application.IUnitOfWork.CommitAsync*
+  name: CommitAsync
+  href: api/Raftel.Application.IUnitOfWork.yml
+  commentId: Overload:Raftel.Application.IUnitOfWork.CommitAsync
+  isSpec: "True"
+  fullName: Raftel.Application.IUnitOfWork.CommitAsync
+  nameWithType: IUnitOfWork.CommitAsync
 - uid: Raftel.Application.Queries
   name: Raftel.Application.Queries
   href: api/Raftel.Application.Queries.yml
@@ -381,6 +580,100 @@ references:
   commentId: F:Raftel.Domain.Abstractions.Error.NullValue
   fullName: Raftel.Domain.Abstractions.Error.NullValue
   nameWithType: Error.NullValue
+- uid: Raftel.Domain.Abstractions.IRepository`2
+  name: IRepository<TEntity, TId>
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: T:Raftel.Domain.Abstractions.IRepository`2
+  name.vb: IRepository(Of TEntity, TId)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId)
+  nameWithType: IRepository<TEntity, TId>
+  nameWithType.vb: IRepository(Of TEntity, TId)
+- uid: Raftel.Domain.Abstractions.IRepository`2.AddAsync(`0,System.Threading.CancellationToken)
+  name: AddAsync(TEntity, CancellationToken)
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.AddAsync(`0,System.Threading.CancellationToken)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.AddAsync(TEntity, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).AddAsync(TEntity, System.Threading.CancellationToken)
+  nameWithType: IRepository<TEntity, TId>.AddAsync(TEntity, CancellationToken)
+  nameWithType.vb: IRepository(Of TEntity, TId).AddAsync(TEntity, CancellationToken)
+- uid: Raftel.Domain.Abstractions.IRepository`2.AddAsync*
+  name: AddAsync
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.AddAsync
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.AddAsync
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).AddAsync
+  nameWithType: IRepository<TEntity, TId>.AddAsync
+  nameWithType.vb: IRepository(Of TEntity, TId).AddAsync
+- uid: Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync(`1,System.Threading.CancellationToken)
+  name: GetByIdAsync(TId, CancellationToken)
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync(`1,System.Threading.CancellationToken)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.GetByIdAsync(TId, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).GetByIdAsync(TId, System.Threading.CancellationToken)
+  nameWithType: IRepository<TEntity, TId>.GetByIdAsync(TId, CancellationToken)
+  nameWithType.vb: IRepository(Of TEntity, TId).GetByIdAsync(TId, CancellationToken)
+- uid: Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.GetByIdAsync
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).GetByIdAsync
+  nameWithType: IRepository<TEntity, TId>.GetByIdAsync
+  nameWithType.vb: IRepository(Of TEntity, TId).GetByIdAsync
+- uid: Raftel.Domain.Abstractions.IRepository`2.ListAllAsync(System.Threading.CancellationToken)
+  name: ListAllAsync(CancellationToken)
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.ListAllAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.ListAllAsync(System.Threading.CancellationToken)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).ListAllAsync(System.Threading.CancellationToken)
+  nameWithType: IRepository<TEntity, TId>.ListAllAsync(CancellationToken)
+  nameWithType.vb: IRepository(Of TEntity, TId).ListAllAsync(CancellationToken)
+- uid: Raftel.Domain.Abstractions.IRepository`2.ListAllAsync*
+  name: ListAllAsync
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.ListAllAsync
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.ListAllAsync
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).ListAllAsync
+  nameWithType: IRepository<TEntity, TId>.ListAllAsync
+  nameWithType.vb: IRepository(Of TEntity, TId).ListAllAsync
+- uid: Raftel.Domain.Abstractions.IRepository`2.Remove(`0)
+  name: Remove(TEntity)
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.Remove(`0)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.Remove(TEntity)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).Remove(TEntity)
+  nameWithType: IRepository<TEntity, TId>.Remove(TEntity)
+  nameWithType.vb: IRepository(Of TEntity, TId).Remove(TEntity)
+- uid: Raftel.Domain.Abstractions.IRepository`2.Remove*
+  name: Remove
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.Remove
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.Remove
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).Remove
+  nameWithType: IRepository<TEntity, TId>.Remove
+  nameWithType.vb: IRepository(Of TEntity, TId).Remove
+- uid: Raftel.Domain.Abstractions.IRepository`2.Update(`0)
+  name: Update(TEntity)
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.Update(`0)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.Update(TEntity)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).Update(TEntity)
+  nameWithType: IRepository<TEntity, TId>.Update(TEntity)
+  nameWithType.vb: IRepository(Of TEntity, TId).Update(TEntity)
+- uid: Raftel.Domain.Abstractions.IRepository`2.Update*
+  name: Update
+  href: api/Raftel.Domain.Abstractions.IRepository-2.yml
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.Update
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.Update
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).Update
+  nameWithType: IRepository<TEntity, TId>.Update
+  nameWithType.vb: IRepository(Of TEntity, TId).Update
 - uid: Raftel.Domain.Abstractions.Result
   name: Result
   href: api/Raftel.Domain.Abstractions.Result.yml
@@ -854,3 +1147,306 @@ references:
   fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).CType
   nameWithType: TypedId<T>.implicit operator
   nameWithType.vb: TypedId(Of T).CType
+- uid: Raftel.Domain.Validators
+  name: Raftel.Domain.Validators
+  href: api/Raftel.Domain.Validators.yml
+  commentId: N:Raftel.Domain.Validators
+  fullName: Raftel.Domain.Validators
+  nameWithType: Raftel.Domain.Validators
+- uid: Raftel.Domain.Validators.ValidationResult
+  name: ValidationResult
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: T:Raftel.Domain.Validators.ValidationResult
+  fullName: Raftel.Domain.Validators.ValidationResult
+  nameWithType: ValidationResult
+- uid: Raftel.Domain.Validators.ValidationResult.Errors
+  name: Errors
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: P:Raftel.Domain.Validators.ValidationResult.Errors
+  fullName: Raftel.Domain.Validators.ValidationResult.Errors
+  nameWithType: ValidationResult.Errors
+- uid: Raftel.Domain.Validators.ValidationResult.Errors*
+  name: Errors
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: Overload:Raftel.Domain.Validators.ValidationResult.Errors
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.ValidationResult.Errors
+  nameWithType: ValidationResult.Errors
+- uid: Raftel.Domain.Validators.ValidationResult.Failure(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
+  name: Failure(IEnumerable<Error>)
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: M:Raftel.Domain.Validators.ValidationResult.Failure(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
+  name.vb: Failure(IEnumerable(Of Error))
+  fullName: Raftel.Domain.Validators.ValidationResult.Failure(System.Collections.Generic.IEnumerable<Raftel.Domain.Abstractions.Error>)
+  fullName.vb: Raftel.Domain.Validators.ValidationResult.Failure(System.Collections.Generic.IEnumerable(Of Raftel.Domain.Abstractions.Error))
+  nameWithType: ValidationResult.Failure(IEnumerable<Error>)
+  nameWithType.vb: ValidationResult.Failure(IEnumerable(Of Error))
+- uid: Raftel.Domain.Validators.ValidationResult.Failure*
+  name: Failure
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: Overload:Raftel.Domain.Validators.ValidationResult.Failure
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.ValidationResult.Failure
+  nameWithType: ValidationResult.Failure
+- uid: Raftel.Domain.Validators.ValidationResult.IsValid
+  name: IsValid
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: P:Raftel.Domain.Validators.ValidationResult.IsValid
+  fullName: Raftel.Domain.Validators.ValidationResult.IsValid
+  nameWithType: ValidationResult.IsValid
+- uid: Raftel.Domain.Validators.ValidationResult.IsValid*
+  name: IsValid
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: Overload:Raftel.Domain.Validators.ValidationResult.IsValid
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.ValidationResult.IsValid
+  nameWithType: ValidationResult.IsValid
+- uid: Raftel.Domain.Validators.ValidationResult.Success
+  name: Success()
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: M:Raftel.Domain.Validators.ValidationResult.Success
+  fullName: Raftel.Domain.Validators.ValidationResult.Success()
+  nameWithType: ValidationResult.Success()
+- uid: Raftel.Domain.Validators.ValidationResult.Success*
+  name: Success
+  href: api/Raftel.Domain.Validators.ValidationResult.yml
+  commentId: Overload:Raftel.Domain.Validators.ValidationResult.Success
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.ValidationResult.Success
+  nameWithType: ValidationResult.Success
+- uid: Raftel.Domain.Validators.Validator`1
+  name: Validator<TModel>
+  href: api/Raftel.Domain.Validators.Validator-1.yml
+  commentId: T:Raftel.Domain.Validators.Validator`1
+  name.vb: Validator(Of TModel)
+  fullName: Raftel.Domain.Validators.Validator<TModel>
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel)
+  nameWithType: Validator<TModel>
+  nameWithType.vb: Validator(Of TModel)
+- uid: Raftel.Domain.Validators.Validator`1.EnsureThat(System.Func{`0,System.Boolean},Raftel.Domain.Abstractions.Error)
+  name: EnsureThat(Func<TModel, bool>, Error)
+  href: api/Raftel.Domain.Validators.Validator-1.yml
+  commentId: M:Raftel.Domain.Validators.Validator`1.EnsureThat(System.Func{`0,System.Boolean},Raftel.Domain.Abstractions.Error)
+  name.vb: EnsureThat(Func(Of TModel, Boolean), Error)
+  fullName: Raftel.Domain.Validators.Validator<TModel>.EnsureThat(System.Func<TModel, bool>, Raftel.Domain.Abstractions.Error)
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel).EnsureThat(System.Func(Of TModel, Boolean), Raftel.Domain.Abstractions.Error)
+  nameWithType: Validator<TModel>.EnsureThat(Func<TModel, bool>, Error)
+  nameWithType.vb: Validator(Of TModel).EnsureThat(Func(Of TModel, Boolean), Error)
+- uid: Raftel.Domain.Validators.Validator`1.EnsureThat*
+  name: EnsureThat
+  href: api/Raftel.Domain.Validators.Validator-1.yml
+  commentId: Overload:Raftel.Domain.Validators.Validator`1.EnsureThat
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.Validator<TModel>.EnsureThat
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel).EnsureThat
+  nameWithType: Validator<TModel>.EnsureThat
+  nameWithType.vb: Validator(Of TModel).EnsureThat
+- uid: Raftel.Domain.Validators.Validator`1.Validate(`0)
+  name: Validate(TModel)
+  href: api/Raftel.Domain.Validators.Validator-1.yml
+  commentId: M:Raftel.Domain.Validators.Validator`1.Validate(`0)
+  fullName: Raftel.Domain.Validators.Validator<TModel>.Validate(TModel)
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel).Validate(TModel)
+  nameWithType: Validator<TModel>.Validate(TModel)
+  nameWithType.vb: Validator(Of TModel).Validate(TModel)
+- uid: Raftel.Domain.Validators.Validator`1.Validate*
+  name: Validate
+  href: api/Raftel.Domain.Validators.Validator-1.yml
+  commentId: Overload:Raftel.Domain.Validators.Validator`1.Validate
+  isSpec: "True"
+  fullName: Raftel.Domain.Validators.Validator<TModel>.Validate
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel).Validate
+  nameWithType: Validator<TModel>.Validate
+  nameWithType.vb: Validator(Of TModel).Validate
+- uid: Raftel.Infrastructure
+  name: Raftel.Infrastructure
+  href: api/Raftel.Infrastructure.yml
+  commentId: N:Raftel.Infrastructure
+  fullName: Raftel.Infrastructure
+  nameWithType: Raftel.Infrastructure
+- uid: Raftel.Infrastructure.Data
+  name: Raftel.Infrastructure.Data
+  href: api/Raftel.Infrastructure.Data.yml
+  commentId: N:Raftel.Infrastructure.Data
+  fullName: Raftel.Infrastructure.Data
+  nameWithType: Raftel.Infrastructure.Data
+- uid: Raftel.Infrastructure.Data.EfRepository`3
+  name: EfRepository<TDbContext, TEntity, TId>
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: T:Raftel.Infrastructure.Data.EfRepository`3
+  name.vb: EfRepository(Of TDbContext, TEntity, TId)
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId)
+  nameWithType: EfRepository<TDbContext, TEntity, TId>
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId)
+- uid: Raftel.Infrastructure.Data.EfRepository`3.#ctor(`0)
+  name: EfRepository(TDbContext)
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: M:Raftel.Infrastructure.Data.EfRepository`3.#ctor(`0)
+  name.vb: New(TDbContext)
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.EfRepository(TDbContext)
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).New(TDbContext)
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.EfRepository(TDbContext)
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).New(TDbContext)
+- uid: Raftel.Infrastructure.Data.EfRepository`3.#ctor*
+  name: EfRepository
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: Overload:Raftel.Infrastructure.Data.EfRepository`3.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.EfRepository
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).New
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.EfRepository
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).New
+- uid: Raftel.Infrastructure.Data.EfRepository`3.AddAsync(`1,System.Threading.CancellationToken)
+  name: AddAsync(TEntity, CancellationToken)
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: M:Raftel.Infrastructure.Data.EfRepository`3.AddAsync(`1,System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.AddAsync(TEntity, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).AddAsync(TEntity, System.Threading.CancellationToken)
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.AddAsync(TEntity, CancellationToken)
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).AddAsync(TEntity, CancellationToken)
+- uid: Raftel.Infrastructure.Data.EfRepository`3.AddAsync*
+  name: AddAsync
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: Overload:Raftel.Infrastructure.Data.EfRepository`3.AddAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.AddAsync
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).AddAsync
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.AddAsync
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).AddAsync
+- uid: Raftel.Infrastructure.Data.EfRepository`3.GetByIdAsync(`2,System.Threading.CancellationToken)
+  name: GetByIdAsync(TId, CancellationToken)
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: M:Raftel.Infrastructure.Data.EfRepository`3.GetByIdAsync(`2,System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.GetByIdAsync(TId, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).GetByIdAsync(TId, System.Threading.CancellationToken)
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.GetByIdAsync(TId, CancellationToken)
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).GetByIdAsync(TId, CancellationToken)
+- uid: Raftel.Infrastructure.Data.EfRepository`3.GetByIdAsync*
+  name: GetByIdAsync
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: Overload:Raftel.Infrastructure.Data.EfRepository`3.GetByIdAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.GetByIdAsync
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).GetByIdAsync
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.GetByIdAsync
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).GetByIdAsync
+- uid: Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync(System.Threading.CancellationToken)
+  name: ListAllAsync(CancellationToken)
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: M:Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.ListAllAsync(System.Threading.CancellationToken)
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).ListAllAsync(System.Threading.CancellationToken)
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.ListAllAsync(CancellationToken)
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).ListAllAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync*
+  name: ListAllAsync
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: Overload:Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.ListAllAsync
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).ListAllAsync
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.ListAllAsync
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).ListAllAsync
+- uid: Raftel.Infrastructure.Data.EfRepository`3.Remove(`1)
+  name: Remove(TEntity)
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: M:Raftel.Infrastructure.Data.EfRepository`3.Remove(`1)
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.Remove(TEntity)
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).Remove(TEntity)
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.Remove(TEntity)
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).Remove(TEntity)
+- uid: Raftel.Infrastructure.Data.EfRepository`3.Remove*
+  name: Remove
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: Overload:Raftel.Infrastructure.Data.EfRepository`3.Remove
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.Remove
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).Remove
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.Remove
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).Remove
+- uid: Raftel.Infrastructure.Data.EfRepository`3.Update(`1)
+  name: Update(TEntity)
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: M:Raftel.Infrastructure.Data.EfRepository`3.Update(`1)
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.Update(TEntity)
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).Update(TEntity)
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.Update(TEntity)
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).Update(TEntity)
+- uid: Raftel.Infrastructure.Data.EfRepository`3.Update*
+  name: Update
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.yml
+  commentId: Overload:Raftel.Infrastructure.Data.EfRepository`3.Update
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.Update
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).Update
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.Update
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).Update
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1
+  name: RaftelDbContext<TDbContext>
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.yml
+  commentId: T:Raftel.Infrastructure.Data.RaftelDbContext`1
+  name.vb: RaftelDbContext(Of TDbContext)
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext)
+  nameWithType: RaftelDbContext<TDbContext>
+  nameWithType.vb: RaftelDbContext(Of TDbContext)
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0})
+  name: RaftelDbContext(DbContextOptions<TDbContext>)
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.yml
+  commentId: M:Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0})
+  name.vb: New(DbContextOptions(Of TDbContext))
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.RaftelDbContext(Microsoft.EntityFrameworkCore.DbContextOptions<TDbContext>)
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New(Microsoft.EntityFrameworkCore.DbContextOptions(Of TDbContext))
+  nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext(DbContextOptions<TDbContext>)
+  nameWithType.vb: RaftelDbContext(Of TDbContext).New(DbContextOptions(Of TDbContext))
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor*
+  name: RaftelDbContext
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.yml
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.RaftelDbContext
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New
+  nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext
+  nameWithType.vb: RaftelDbContext(Of TDbContext).New
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.CommitAsync(System.Threading.CancellationToken)
+  name: CommitAsync(CancellationToken)
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.yml
+  commentId: M:Raftel.Infrastructure.Data.RaftelDbContext`1.CommitAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.CommitAsync(System.Threading.CancellationToken)
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).CommitAsync(System.Threading.CancellationToken)
+  nameWithType: RaftelDbContext<TDbContext>.CommitAsync(CancellationToken)
+  nameWithType.vb: RaftelDbContext(Of TDbContext).CommitAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.CommitAsync*
+  name: CommitAsync
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.yml
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.CommitAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.CommitAsync
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).CommitAsync
+  nameWithType: RaftelDbContext<TDbContext>.CommitAsync
+  nameWithType.vb: RaftelDbContext(Of TDbContext).CommitAsync
+- uid: Raftel.Infrastructure.DependencyInjection
+  name: DependencyInjection
+  href: api/Raftel.Infrastructure.DependencyInjection.yml
+  commentId: T:Raftel.Infrastructure.DependencyInjection
+  fullName: Raftel.Infrastructure.DependencyInjection
+  nameWithType: DependencyInjection
+- uid: Raftel.Infrastructure.DependencyInjection.AddRaftelData*
+  name: AddRaftelData
+  href: api/Raftel.Infrastructure.DependencyInjection.yml
+  commentId: Overload:Raftel.Infrastructure.DependencyInjection.AddRaftelData
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData
+  nameWithType: DependencyInjection.AddRaftelData
+- uid: Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)
+  name: AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string)
+  href: api/Raftel.Infrastructure.DependencyInjection.yml
+  commentId: M:Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)
+  name.vb: AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String)
+  fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData<TDbContext>(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, string)
+  fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String)
+  nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string)
+  nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String)

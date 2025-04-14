@@ -1,5 +1,15 @@
 ### YamlMime:TableOfContent
 items:
+- uid: Raftel.Application
+  name: Raftel.Application
+  type: Namespace
+  items:
+  - uid: Raftel.Application.DependencyInjection
+    name: DependencyInjection
+    type: Class
+  - uid: Raftel.Application.IUnitOfWork
+    name: IUnitOfWork
+    type: Interface
 - uid: Raftel.Application.Abstractions
   name: Raftel.Application.Abstractions
   type: Namespace
@@ -22,6 +32,16 @@ items:
   - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
     name: RequestHandlerDelegate<TResponse>
     type: Delegate
+- uid: Raftel.Application.Abstractions.Middlewares
+  name: Raftel.Application.Abstractions.Middlewares
+  type: Namespace
+  items:
+  - uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
+    name: UnitOfWorkMiddleware<TRequest, TResponse>
+    type: Class
+  - uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+    name: ValidationMiddleware<TRequest, TResponse>
+    type: Class
 - uid: Raftel.Application.Commands
   name: Raftel.Application.Commands
   type: Namespace
@@ -38,6 +58,13 @@ items:
   - uid: Raftel.Application.Commands.ICommandHandler`1
     name: ICommandHandler<TCommand>
     type: Interface
+- uid: Raftel.Application.Exceptions
+  name: Raftel.Application.Exceptions
+  type: Namespace
+  items:
+  - uid: Raftel.Application.Exceptions.ValidationException
+    name: ValidationException
+    type: Class
 - uid: Raftel.Application.Queries
   name: Raftel.Application.Queries
   type: Namespace
@@ -61,6 +88,9 @@ items:
   - uid: Raftel.Domain.Abstractions.Error
     name: Error
     type: Class
+  - uid: Raftel.Domain.Abstractions.IRepository`2
+    name: IRepository<TEntity, TId>
+    type: Interface
   - uid: Raftel.Domain.Abstractions.Result
     name: Result
     type: Class
@@ -82,5 +112,32 @@ items:
     type: Class
   - uid: Raftel.Domain.BaseTypes.TypedId`1
     name: TypedId<T>
+    type: Class
+- uid: Raftel.Domain.Validators
+  name: Raftel.Domain.Validators
+  type: Namespace
+  items:
+  - uid: Raftel.Domain.Validators.ValidationResult
+    name: ValidationResult
+    type: Class
+  - uid: Raftel.Domain.Validators.Validator`1
+    name: Validator<TModel>
+    type: Class
+- uid: Raftel.Infrastructure
+  name: Raftel.Infrastructure
+  type: Namespace
+  items:
+  - uid: Raftel.Infrastructure.DependencyInjection
+    name: DependencyInjection
+    type: Class
+- uid: Raftel.Infrastructure.Data
+  name: Raftel.Infrastructure.Data
+  type: Namespace
+  items:
+  - uid: Raftel.Infrastructure.Data.EfRepository`3
+    name: EfRepository<TDbContext, TEntity, TId>
+    type: Class
+  - uid: Raftel.Infrastructure.Data.RaftelDbContext`1
+    name: RaftelDbContext<TDbContext>
     type: Class
 memberLayout: SamePage

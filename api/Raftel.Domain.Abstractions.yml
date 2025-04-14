@@ -5,6 +5,7 @@ items:
   id: Raftel.Domain.Abstractions
   children:
   - Raftel.Domain.Abstractions.Error
+  - Raftel.Domain.Abstractions.IRepository`2
   - Raftel.Domain.Abstractions.Result
   - Raftel.Domain.Abstractions.Result`1
   langs:
@@ -24,6 +25,37 @@ references:
   name: Error
   nameWithType: Error
   fullName: Raftel.Domain.Abstractions.Error
+- uid: Raftel.Domain.Abstractions.IRepository`2
+  commentId: T:Raftel.Domain.Abstractions.IRepository`2
+  href: Raftel.Domain.Abstractions.IRepository-2.html
+  name: IRepository<TEntity, TId>
+  nameWithType: IRepository<TEntity, TId>
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>
+  nameWithType.vb: IRepository(Of TEntity, TId)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId)
+  name.vb: IRepository(Of TEntity, TId)
+  spec.csharp:
+  - uid: Raftel.Domain.Abstractions.IRepository`2
+    name: IRepository
+    href: Raftel.Domain.Abstractions.IRepository-2.html
+  - name: <
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TId
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Domain.Abstractions.IRepository`2
+    name: IRepository
+    href: Raftel.Domain.Abstractions.IRepository-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEntity
+  - name: ','
+  - name: " "
+  - name: TId
+  - name: )
 - uid: Raftel.Domain.Abstractions.Result
   commentId: T:Raftel.Domain.Abstractions.Result
   parent: Raftel.Domain.Abstractions

@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Infrastructure
+  commentId: N:Raftel.Infrastructure
+  id: Raftel.Infrastructure
+  children:
+  - Raftel.Infrastructure.DependencyInjection
+  langs:
+  - csharp
+  - vb
+  name: Raftel.Infrastructure
+  nameWithType: Raftel.Infrastructure
+  fullName: Raftel.Infrastructure
+  type: Namespace
+  assemblies:
+  - Raftel.Infrastructure
+references:
+- uid: Raftel.Infrastructure.DependencyInjection
+  commentId: T:Raftel.Infrastructure.DependencyInjection
+  href: Raftel.Infrastructure.DependencyInjection.html
+  name: DependencyInjection
+  nameWithType: DependencyInjection
+  fullName: Raftel.Infrastructure.DependencyInjection

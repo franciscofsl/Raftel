@@ -16,7 +16,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/AggregateRoot.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: AggregateRoot
     path: src/Raftel.Domain/BaseTypes/AggregateRoot.cs
@@ -61,7 +61,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/AggregateRoot.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: .ctor
     path: src/Raftel.Domain/BaseTypes/AggregateRoot.cs

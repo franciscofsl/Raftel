@@ -16,7 +16,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Commands/ICommandDispatcher.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: ICommandDispatcher
     path: src/Raftel.Application/Commands/ICommandDispatcher.cs
@@ -43,7 +43,7 @@ items:
   source:
     remote:
       path: src/Raftel.Application/Commands/ICommandDispatcher.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: DispatchAsync
     path: src/Raftel.Application/Commands/ICommandDispatcher.cs

@@ -1,0 +1,80 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Application.Abstractions.Middlewares
+  commentId: N:Raftel.Application.Abstractions.Middlewares
+  id: Raftel.Application.Abstractions.Middlewares
+  children:
+  - Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
+  - Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  langs:
+  - csharp
+  - vb
+  name: Raftel.Application.Abstractions.Middlewares
+  nameWithType: Raftel.Application.Abstractions.Middlewares
+  fullName: Raftel.Application.Abstractions.Middlewares
+  type: Namespace
+  assemblies:
+  - Raftel.Application
+references:
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
+  commentId: T:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
+  href: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.html
+  name: UnitOfWorkMiddleware<TRequest, TResponse>
+  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse)
+  name.vb: UnitOfWorkMiddleware(Of TRequest, TResponse)
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
+    name: UnitOfWorkMiddleware
+    href: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.html
+  - name: <
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
+    name: UnitOfWorkMiddleware
+    href: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: )
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  commentId: T:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  href: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.html
+  name: ValidationMiddleware<TRequest, TResponse>
+  nameWithType: ValidationMiddleware<TRequest, TResponse>
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse)
+  name.vb: ValidationMiddleware(Of TRequest, TResponse)
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+    name: ValidationMiddleware
+    href: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.html
+  - name: <
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+    name: ValidationMiddleware
+    href: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: )

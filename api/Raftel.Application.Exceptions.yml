@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Application.Exceptions
+  commentId: N:Raftel.Application.Exceptions
+  id: Raftel.Application.Exceptions
+  children:
+  - Raftel.Application.Exceptions.ValidationException
+  langs:
+  - csharp
+  - vb
+  name: Raftel.Application.Exceptions
+  nameWithType: Raftel.Application.Exceptions
+  fullName: Raftel.Application.Exceptions
+  type: Namespace
+  assemblies:
+  - Raftel.Application
+references:
+- uid: Raftel.Application.Exceptions.ValidationException
+  commentId: T:Raftel.Application.Exceptions.ValidationException
+  href: Raftel.Application.Exceptions.ValidationException.html
+  name: ValidationException
+  nameWithType: ValidationException
+  fullName: Raftel.Application.Exceptions.ValidationException
