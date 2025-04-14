@@ -23,11 +23,14 @@ jobs:
     - name: Install DocFX
       run: dotnet tool install -g docfx
 
-    - name: Build solution (opcional si no hace falta)
-      run: dotnet build
+    - name: Build solution
+      run: dotnet build --configuration Release
+
+    - name: Generate metadata
+      run: docfx metadata docfx.json
 
     - name: Generate documentation
-      run: docfx docfx.json
+      run: docfx build docfx.json
 
     - name: Publish to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
