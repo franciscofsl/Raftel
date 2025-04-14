@@ -1,0 +1,169 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Application.IUnitOfWork
+  commentId: T:Raftel.Application.IUnitOfWork
+  id: IUnitOfWork
+  parent: Raftel.Application
+  children:
+  - Raftel.Application.IUnitOfWork.CommitAsync(System.Threading.CancellationToken)
+  langs:
+  - csharp
+  - vb
+  name: IUnitOfWork
+  nameWithType: IUnitOfWork
+  fullName: Raftel.Application.IUnitOfWork
+  type: Interface
+  source:
+    remote:
+      path: src/Raftel.Application/IUnitOfWork.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: IUnitOfWork
+    path: src/Raftel.Application/IUnitOfWork.cs
+    startLine: 2
+  assemblies:
+  - Raftel.Application
+  namespace: Raftel.Application
+  syntax:
+    content: public interface IUnitOfWork
+    content.vb: Public Interface IUnitOfWork
+- uid: Raftel.Application.IUnitOfWork.CommitAsync(System.Threading.CancellationToken)
+  commentId: M:Raftel.Application.IUnitOfWork.CommitAsync(System.Threading.CancellationToken)
+  id: CommitAsync(System.Threading.CancellationToken)
+  parent: Raftel.Application.IUnitOfWork
+  langs:
+  - csharp
+  - vb
+  name: CommitAsync(CancellationToken)
+  nameWithType: IUnitOfWork.CommitAsync(CancellationToken)
+  fullName: Raftel.Application.IUnitOfWork.CommitAsync(System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Application/IUnitOfWork.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: CommitAsync
+    path: src/Raftel.Application/IUnitOfWork.cs
+    startLine: 4
+  assemblies:
+  - Raftel.Application
+  namespace: Raftel.Application
+  syntax:
+    content: Task CommitAsync(CancellationToken cancellationToken = default)
+    parameters:
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Function CommitAsync(cancellationToken As CancellationToken = Nothing) As Task
+  overload: Raftel.Application.IUnitOfWork.CommitAsync*
+references:
+- uid: Raftel.Application
+  commentId: N:Raftel.Application
+  href: Raftel.html
+  name: Raftel.Application
+  nameWithType: Raftel.Application
+  fullName: Raftel.Application
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+- uid: Raftel.Application.IUnitOfWork.CommitAsync*
+  commentId: Overload:Raftel.Application.IUnitOfWork.CommitAsync
+  href: Raftel.Application.IUnitOfWork.html#Raftel_Application_IUnitOfWork_CommitAsync_System_Threading_CancellationToken_
+  name: CommitAsync
+  nameWithType: IUnitOfWork.CommitAsync
+  fullName: Raftel.Application.IUnitOfWork.CommitAsync
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

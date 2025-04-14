@@ -1,0 +1,475 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Domain.Abstractions.IRepository`2
+  commentId: T:Raftel.Domain.Abstractions.IRepository`2
+  id: IRepository`2
+  parent: Raftel.Domain.Abstractions
+  children:
+  - Raftel.Domain.Abstractions.IRepository`2.AddAsync(`0,System.Threading.CancellationToken)
+  - Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync(`1,System.Threading.CancellationToken)
+  - Raftel.Domain.Abstractions.IRepository`2.ListAllAsync(System.Threading.CancellationToken)
+  - Raftel.Domain.Abstractions.IRepository`2.Remove(`0)
+  - Raftel.Domain.Abstractions.IRepository`2.Update(`0)
+  langs:
+  - csharp
+  - vb
+  name: IRepository<TEntity, TId>
+  nameWithType: IRepository<TEntity, TId>
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>
+  type: Interface
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/IRepository.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: IRepository
+    path: src/Raftel.Domain/Abstractions/IRepository.cs
+    startLine: 4
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  syntax:
+    content: 'public interface IRepository<TEntity, in TId> where TEntity : AggregateRoot<in TId> where TId : TypedId<Guid>'
+    typeParameters:
+    - id: TEntity
+    - id: TId
+    content.vb: Public Interface IRepository(Of TEntity As AggregateRoot(Of In TId), In TId As TypedId(Of Guid))
+  nameWithType.vb: IRepository(Of TEntity, TId)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId)
+  name.vb: IRepository(Of TEntity, TId)
+- uid: Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync(`1,System.Threading.CancellationToken)
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync(`1,System.Threading.CancellationToken)
+  id: GetByIdAsync(`1,System.Threading.CancellationToken)
+  parent: Raftel.Domain.Abstractions.IRepository`2
+  langs:
+  - csharp
+  - vb
+  name: GetByIdAsync(TId, CancellationToken)
+  nameWithType: IRepository<TEntity, TId>.GetByIdAsync(TId, CancellationToken)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.GetByIdAsync(TId, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/IRepository.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: GetByIdAsync
+    path: src/Raftel.Domain/Abstractions/IRepository.cs
+    startLine: 7
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  syntax:
+    content: Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default)
+    parameters:
+    - id: id
+      type: '{TId}'
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    return:
+      type: System.Threading.Tasks.Task{{TEntity}}
+    content.vb: Function GetByIdAsync(id As TId, cancellationToken As CancellationToken = Nothing) As Task(Of TEntity)
+  overload: Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync*
+  nameWithType.vb: IRepository(Of TEntity, TId).GetByIdAsync(TId, CancellationToken)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).GetByIdAsync(TId, System.Threading.CancellationToken)
+- uid: Raftel.Domain.Abstractions.IRepository`2.ListAllAsync(System.Threading.CancellationToken)
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.ListAllAsync(System.Threading.CancellationToken)
+  id: ListAllAsync(System.Threading.CancellationToken)
+  parent: Raftel.Domain.Abstractions.IRepository`2
+  langs:
+  - csharp
+  - vb
+  name: ListAllAsync(CancellationToken)
+  nameWithType: IRepository<TEntity, TId>.ListAllAsync(CancellationToken)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.ListAllAsync(System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/IRepository.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: ListAllAsync
+    path: src/Raftel.Domain/Abstractions/IRepository.cs
+    startLine: 8
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  syntax:
+    content: Task<List<TEntity>> ListAllAsync(CancellationToken cancellationToken = default)
+    parameters:
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.List{{TEntity}}}
+    content.vb: Function ListAllAsync(cancellationToken As CancellationToken = Nothing) As Task(Of List(Of TEntity))
+  overload: Raftel.Domain.Abstractions.IRepository`2.ListAllAsync*
+  nameWithType.vb: IRepository(Of TEntity, TId).ListAllAsync(CancellationToken)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).ListAllAsync(System.Threading.CancellationToken)
+- uid: Raftel.Domain.Abstractions.IRepository`2.AddAsync(`0,System.Threading.CancellationToken)
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.AddAsync(`0,System.Threading.CancellationToken)
+  id: AddAsync(`0,System.Threading.CancellationToken)
+  parent: Raftel.Domain.Abstractions.IRepository`2
+  langs:
+  - csharp
+  - vb
+  name: AddAsync(TEntity, CancellationToken)
+  nameWithType: IRepository<TEntity, TId>.AddAsync(TEntity, CancellationToken)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.AddAsync(TEntity, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/IRepository.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: AddAsync
+    path: src/Raftel.Domain/Abstractions/IRepository.cs
+    startLine: 9
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  syntax:
+    content: Task AddAsync(TEntity entity, CancellationToken cancellationToken = default)
+    parameters:
+    - id: entity
+      type: '{TEntity}'
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Function AddAsync(entity As TEntity, cancellationToken As CancellationToken = Nothing) As Task
+  overload: Raftel.Domain.Abstractions.IRepository`2.AddAsync*
+  nameWithType.vb: IRepository(Of TEntity, TId).AddAsync(TEntity, CancellationToken)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).AddAsync(TEntity, System.Threading.CancellationToken)
+- uid: Raftel.Domain.Abstractions.IRepository`2.Update(`0)
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.Update(`0)
+  id: Update(`0)
+  parent: Raftel.Domain.Abstractions.IRepository`2
+  langs:
+  - csharp
+  - vb
+  name: Update(TEntity)
+  nameWithType: IRepository<TEntity, TId>.Update(TEntity)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.Update(TEntity)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/IRepository.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: Update
+    path: src/Raftel.Domain/Abstractions/IRepository.cs
+    startLine: 10
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  syntax:
+    content: void Update(TEntity entity)
+    parameters:
+    - id: entity
+      type: '{TEntity}'
+    content.vb: Sub Update(entity As TEntity)
+  overload: Raftel.Domain.Abstractions.IRepository`2.Update*
+  nameWithType.vb: IRepository(Of TEntity, TId).Update(TEntity)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).Update(TEntity)
+- uid: Raftel.Domain.Abstractions.IRepository`2.Remove(`0)
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.Remove(`0)
+  id: Remove(`0)
+  parent: Raftel.Domain.Abstractions.IRepository`2
+  langs:
+  - csharp
+  - vb
+  name: Remove(TEntity)
+  nameWithType: IRepository<TEntity, TId>.Remove(TEntity)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.Remove(TEntity)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Domain/Abstractions/IRepository.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: Remove
+    path: src/Raftel.Domain/Abstractions/IRepository.cs
+    startLine: 11
+  assemblies:
+  - Raftel.Domain
+  namespace: Raftel.Domain.Abstractions
+  syntax:
+    content: void Remove(TEntity entity)
+    parameters:
+    - id: entity
+      type: '{TEntity}'
+    content.vb: Sub Remove(entity As TEntity)
+  overload: Raftel.Domain.Abstractions.IRepository`2.Remove*
+  nameWithType.vb: IRepository(Of TEntity, TId).Remove(TEntity)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).Remove(TEntity)
+references:
+- uid: Raftel.Domain.Abstractions
+  commentId: N:Raftel.Domain.Abstractions
+  href: Raftel.html
+  name: Raftel.Domain.Abstractions
+  nameWithType: Raftel.Domain.Abstractions
+  fullName: Raftel.Domain.Abstractions
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.Abstractions
+    name: Abstractions
+    href: Raftel.Domain.Abstractions.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.Abstractions
+    name: Abstractions
+    href: Raftel.Domain.Abstractions.html
+- uid: Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync*
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync
+  href: Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_GetByIdAsync__1_System_Threading_CancellationToken_
+  name: GetByIdAsync
+  nameWithType: IRepository<TEntity, TId>.GetByIdAsync
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.GetByIdAsync
+  nameWithType.vb: IRepository(Of TEntity, TId).GetByIdAsync
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).GetByIdAsync
+- uid: '{TId}'
+  commentId: '!:TId'
+  definition: TId
+  name: TId
+  nameWithType: TId
+  fullName: TId
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Threading.Tasks.Task{{TEntity}}
+  commentId: T:System.Threading.Tasks.Task{`0}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TEntity>
+  nameWithType: Task<TEntity>
+  fullName: System.Threading.Tasks.Task<TEntity>
+  nameWithType.vb: Task(Of TEntity)
+  fullName.vb: System.Threading.Tasks.Task(Of TEntity)
+  name.vb: Task(Of TEntity)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TEntity
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEntity
+  - name: )
+- uid: TId
+  name: TId
+  nameWithType: TId
+  fullName: TId
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: Raftel.Domain.Abstractions.IRepository`2.ListAllAsync*
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.ListAllAsync
+  href: Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_System_Threading_CancellationToken_
+  name: ListAllAsync
+  nameWithType: IRepository<TEntity, TId>.ListAllAsync
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.ListAllAsync
+  nameWithType.vb: IRepository(Of TEntity, TId).ListAllAsync
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).ListAllAsync
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.List{{TEntity}}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.List{`0}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<List<TEntity>>
+  nameWithType: Task<List<TEntity>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.List<TEntity>>
+  nameWithType.vb: Task(Of List(Of TEntity))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.List(Of TEntity))
+  name.vb: Task(Of List(Of TEntity))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: TEntity
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TEntity
+  - name: )
+  - name: )
+- uid: Raftel.Domain.Abstractions.IRepository`2.AddAsync*
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.AddAsync
+  href: Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_AddAsync__0_System_Threading_CancellationToken_
+  name: AddAsync
+  nameWithType: IRepository<TEntity, TId>.AddAsync
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.AddAsync
+  nameWithType.vb: IRepository(Of TEntity, TId).AddAsync
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).AddAsync
+- uid: '{TEntity}'
+  commentId: '!:TEntity'
+  definition: TEntity
+  name: TEntity
+  nameWithType: TEntity
+  fullName: TEntity
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: TEntity
+  name: TEntity
+  nameWithType: TEntity
+  fullName: TEntity
+- uid: Raftel.Domain.Abstractions.IRepository`2.Update*
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.Update
+  href: Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Update__0_
+  name: Update
+  nameWithType: IRepository<TEntity, TId>.Update
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.Update
+  nameWithType.vb: IRepository(Of TEntity, TId).Update
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).Update
+- uid: Raftel.Domain.Abstractions.IRepository`2.Remove*
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.Remove
+  href: Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Remove__0_
+  name: Remove
+  nameWithType: IRepository<TEntity, TId>.Remove
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.Remove
+  nameWithType.vb: IRepository(Of TEntity, TId).Remove
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).Remove

@@ -17,7 +17,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/TypedGuidId.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: TypedGuidId
     path: src/Raftel.Domain/BaseTypes/TypedGuidId.cs
@@ -59,7 +59,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/TypedGuidId.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: .ctor
     path: src/Raftel.Domain/BaseTypes/TypedGuidId.cs
@@ -94,7 +94,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/TypedGuidId.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: NewGuid
     path: src/Raftel.Domain/BaseTypes/TypedGuidId.cs

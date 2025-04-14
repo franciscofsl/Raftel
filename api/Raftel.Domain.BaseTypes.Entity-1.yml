@@ -19,7 +19,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/Entity.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: Entity
     path: src/Raftel.Domain/BaseTypes/Entity.cs
@@ -62,7 +62,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/Entity.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: Id
     path: src/Raftel.Domain/BaseTypes/Entity.cs
@@ -95,7 +95,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/Entity.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: .ctor
     path: src/Raftel.Domain/BaseTypes/Entity.cs
@@ -130,7 +130,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/Entity.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: Equals
     path: src/Raftel.Domain/BaseTypes/Entity.cs
@@ -169,7 +169,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/Entity.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: GetHashCode
     path: src/Raftel.Domain/BaseTypes/Entity.cs

@@ -1,0 +1,909 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  commentId: T:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  id: ValidationMiddleware`2
+  parent: Raftel.Application.Abstractions.Middlewares
+  children:
+  - Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{`0}})
+  - Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  langs:
+  - csharp
+  - vb
+  name: ValidationMiddleware<TRequest, TResponse>
+  nameWithType: ValidationMiddleware<TRequest, TResponse>
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>
+  type: Class
+  source:
+    remote:
+      path: src/Raftel.Application/Abstractions/Middlewares/ValidationMiddleware.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: ValidationMiddleware
+    path: src/Raftel.Application/Abstractions/Middlewares/ValidationMiddleware.cs
+    startLine: 13
+  assemblies:
+  - Raftel.Application
+  namespace: Raftel.Application.Abstractions.Middlewares
+  summary: >-
+    Middleware that performs validation on the incoming request using all registered <xref href="Raftel.Domain.Validators.Validator%601" data-throw-if-not-resolved="false"></xref> instances.
+
+    If any validation rule fails, a <xref href="Raftel.Application.Exceptions.ValidationException" data-throw-if-not-resolved="false"></xref> is thrown and the request pipeline is halted.
+  example: []
+  syntax:
+    content: 'public class ValidationMiddleware<TRequest, TResponse> : IRequestMiddleware<TRequest, TResponse> where TRequest : IRequest<TResponse>'
+    typeParameters:
+    - id: TRequest
+      description: The type of the request being validated.
+    - id: TResponse
+      description: The type of the expected response.
+    content.vb: Public Class ValidationMiddleware(Of TRequest As IRequest(Of TResponse), TResponse) Implements IRequestMiddleware(Of TRequest, TResponse)
+  inheritance:
+  - System.Object
+  implements:
+  - Raftel.Application.Abstractions.IRequestMiddleware{{TRequest},{TResponse}}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse)
+  name.vb: ValidationMiddleware(Of TRequest, TResponse)
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{`0}})
+  commentId: M:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{`0}})
+  id: '#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{`0}})'
+  parent: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  langs:
+  - csharp
+  - vb
+  name: ValidationMiddleware(IEnumerable<Validator<TRequest>>)
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware(IEnumerable<Validator<TRequest>>)
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware(System.Collections.Generic.IEnumerable<Raftel.Domain.Validators.Validator<TRequest>>)
+  type: Constructor
+  source:
+    remote:
+      path: src/Raftel.Application/Abstractions/Middlewares/ValidationMiddleware.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: .ctor
+    path: src/Raftel.Application/Abstractions/Middlewares/ValidationMiddleware.cs
+    startLine: 13
+  assemblies:
+  - Raftel.Application
+  namespace: Raftel.Application.Abstractions.Middlewares
+  summary: >-
+    Middleware that performs validation on the incoming request using all registered <xref href="Raftel.Domain.Validators.Validator%601" data-throw-if-not-resolved="false"></xref> instances.
+
+    If any validation rule fails, a <xref href="Raftel.Application.Exceptions.ValidationException" data-throw-if-not-resolved="false"></xref> is thrown and the request pipeline is halted.
+  example: []
+  syntax:
+    content: public ValidationMiddleware(IEnumerable<Validator<TRequest>> validators)
+    parameters:
+    - id: validators
+      type: System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{{TRequest}}}
+      description: A collection of validators for the given <code class="typeparamref">TRequest</code>.
+    content.vb: Public Sub New(validators As IEnumerable(Of Validator(Of TRequest)))
+  overload: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor*
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).New(IEnumerable(Of Validator(Of TRequest)))
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).New(System.Collections.Generic.IEnumerable(Of Raftel.Domain.Validators.Validator(Of TRequest)))
+  name.vb: New(IEnumerable(Of Validator(Of TRequest)))
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  commentId: M:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  id: HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  parent: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
+  langs:
+  - csharp
+  - vb
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
+  type: Method
+  source:
+    remote:
+      path: src/Raftel.Application/Abstractions/Middlewares/ValidationMiddleware.cs
+      branch: feature/docs
+      repo: https://github.com/franciscofsl/Raftel
+    id: HandleAsync
+    path: src/Raftel.Application/Abstractions/Middlewares/ValidationMiddleware.cs
+    startLine: 26
+  assemblies:
+  - Raftel.Application
+  namespace: Raftel.Application.Abstractions.Middlewares
+  summary: >-
+    Handles the request by validating it before invoking the next delegate in the pipeline.
+
+    If validation passes, the request continues to the next handler.
+
+    If validation fails, a <xref href="Raftel.Application.Exceptions.ValidationException" data-throw-if-not-resolved="false"></xref> is thrown containing all errors.
+  example: []
+  syntax:
+    content: public Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next)
+    parameters:
+    - id: request
+      type: '{TRequest}'
+      description: The request to validate.
+    - id: next
+      type: Raftel.Application.Abstractions.RequestHandlerDelegate{{TResponse}}
+      description: The delegate representing the next middleware or handler in the pipeline.
+    return:
+      type: System.Threading.Tasks.Task{{TResponse}}
+      description: The response returned by the next handler, if validation succeeds.
+    content.vb: Public Function HandleAsync(request As TRequest, [next] As RequestHandlerDelegate(Of TResponse)) As Task(Of TResponse)
+  overload: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync*
+  exceptions:
+  - type: Raftel.Application.Exceptions.ValidationException
+    commentId: T:Raftel.Application.Exceptions.ValidationException
+    description: Thrown when one or more validation rules fail.
+  implements:
+  - Raftel.Application.Abstractions.IRequestMiddleware{{TRequest},{TResponse}}.HandleAsync({TRequest},Raftel.Application.Abstractions.RequestHandlerDelegate{{TResponse}})
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+references:
+- uid: Raftel.Domain.Validators.Validator`1
+  commentId: T:Raftel.Domain.Validators.Validator`1
+  href: Raftel.Domain.Validators.Validator-1.html
+  name: Validator<TModel>
+  nameWithType: Validator<TModel>
+  fullName: Raftel.Domain.Validators.Validator<TModel>
+  nameWithType.vb: Validator(Of TModel)
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel)
+  name.vb: Validator(Of TModel)
+  spec.csharp:
+  - uid: Raftel.Domain.Validators.Validator`1
+    name: Validator
+    href: Raftel.Domain.Validators.Validator-1.html
+  - name: <
+  - name: TModel
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Domain.Validators.Validator`1
+    name: Validator
+    href: Raftel.Domain.Validators.Validator-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TModel
+  - name: )
+- uid: Raftel.Application.Exceptions.ValidationException
+  commentId: T:Raftel.Application.Exceptions.ValidationException
+  href: Raftel.Application.Exceptions.ValidationException.html
+  name: ValidationException
+  nameWithType: ValidationException
+  fullName: Raftel.Application.Exceptions.ValidationException
+- uid: Raftel.Application.Abstractions.Middlewares
+  commentId: N:Raftel.Application.Abstractions.Middlewares
+  href: Raftel.html
+  name: Raftel.Application.Abstractions.Middlewares
+  nameWithType: Raftel.Application.Abstractions.Middlewares
+  fullName: Raftel.Application.Abstractions.Middlewares
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Abstractions
+    name: Abstractions
+    href: Raftel.Application.Abstractions.html
+  - name: .
+  - uid: Raftel.Application.Abstractions.Middlewares
+    name: Middlewares
+    href: Raftel.Application.Abstractions.Middlewares.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Abstractions
+    name: Abstractions
+    href: Raftel.Application.Abstractions.html
+  - name: .
+  - uid: Raftel.Application.Abstractions.Middlewares
+    name: Middlewares
+    href: Raftel.Application.Abstractions.Middlewares.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Raftel.Application.Abstractions.IRequestMiddleware{{TRequest},{TResponse}}
+  commentId: T:Raftel.Application.Abstractions.IRequestMiddleware{`0,`1}
+  parent: Raftel.Application.Abstractions
+  definition: Raftel.Application.Abstractions.IRequestMiddleware`2
+  href: Raftel.Application.Abstractions.IRequestMiddleware-2.html
+  name: IRequestMiddleware<TRequest, TResponse>
+  nameWithType: IRequestMiddleware<TRequest, TResponse>
+  fullName: Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>
+  nameWithType.vb: IRequestMiddleware(Of TRequest, TResponse)
+  fullName.vb: Raftel.Application.Abstractions.IRequestMiddleware(Of TRequest, TResponse)
+  name.vb: IRequestMiddleware(Of TRequest, TResponse)
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.IRequestMiddleware`2
+    name: IRequestMiddleware
+    href: Raftel.Application.Abstractions.IRequestMiddleware-2.html
+  - name: <
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.IRequestMiddleware`2
+    name: IRequestMiddleware
+    href: Raftel.Application.Abstractions.IRequestMiddleware-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Raftel.Application.Abstractions.IRequestMiddleware`2
+  commentId: T:Raftel.Application.Abstractions.IRequestMiddleware`2
+  href: Raftel.Application.Abstractions.IRequestMiddleware-2.html
+  name: IRequestMiddleware<TRequest, TResponse>
+  nameWithType: IRequestMiddleware<TRequest, TResponse>
+  fullName: Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>
+  nameWithType.vb: IRequestMiddleware(Of TRequest, TResponse)
+  fullName.vb: Raftel.Application.Abstractions.IRequestMiddleware(Of TRequest, TResponse)
+  name.vb: IRequestMiddleware(Of TRequest, TResponse)
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.IRequestMiddleware`2
+    name: IRequestMiddleware
+    href: Raftel.Application.Abstractions.IRequestMiddleware-2.html
+  - name: <
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.IRequestMiddleware`2
+    name: IRequestMiddleware
+    href: Raftel.Application.Abstractions.IRequestMiddleware-2.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - name: TResponse
+  - name: )
+- uid: Raftel.Application.Abstractions
+  commentId: N:Raftel.Application.Abstractions
+  href: Raftel.html
+  name: Raftel.Application.Abstractions
+  nameWithType: Raftel.Application.Abstractions
+  fullName: Raftel.Application.Abstractions
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Abstractions
+    name: Abstractions
+    href: Raftel.Application.Abstractions.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Application
+    name: Application
+    href: Raftel.Application.html
+  - name: .
+  - uid: Raftel.Application.Abstractions
+    name: Abstractions
+    href: Raftel.Application.Abstractions.html
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor*
+  commentId: Overload:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor
+  href: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.html#Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2__ctor_System_Collections_Generic_IEnumerable_Raftel_Domain_Validators_Validator__0___
+  name: ValidationMiddleware
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).New
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).New
+  name.vb: New
+- uid: System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{{TRequest}}}
+  commentId: T:System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{`0}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<Validator<TRequest>>
+  nameWithType: IEnumerable<Validator<TRequest>>
+  fullName: System.Collections.Generic.IEnumerable<Raftel.Domain.Validators.Validator<TRequest>>
+  nameWithType.vb: IEnumerable(Of Validator(Of TRequest))
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Raftel.Domain.Validators.Validator(Of TRequest))
+  name.vb: IEnumerable(Of Validator(Of TRequest))
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: Raftel.Domain.Validators.Validator`1
+    name: Validator
+    href: Raftel.Domain.Validators.Validator-1.html
+  - name: <
+  - name: TRequest
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Raftel.Domain.Validators.Validator`1
+    name: Validator
+    href: Raftel.Domain.Validators.Validator-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TRequest
+  - name: )
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync*
+  commentId: Overload:Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync
+  href: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.html#Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  name: HandleAsync
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.HandleAsync
+  fullName: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>.HandleAsync
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).HandleAsync
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware(Of TRequest, TResponse).HandleAsync
+- uid: Raftel.Application.Abstractions.IRequestMiddleware{{TRequest},{TResponse}}.HandleAsync({TRequest},Raftel.Application.Abstractions.RequestHandlerDelegate{{TResponse}})
+  commentId: M:Raftel.Application.Abstractions.IRequestMiddleware{`0,`1}.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  parent: Raftel.Application.Abstractions.IRequestMiddleware{{TRequest},{TResponse}}
+  definition: Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  href: Raftel.Application.Abstractions.IRequestMiddleware-2.html#Raftel_Application_Abstractions_IRequestMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  nameWithType: IRequestMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  fullName: Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
+  nameWithType.vb: IRequestMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  fullName.vb: Raftel.Application.Abstractions.IRequestMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.IRequestMiddleware{`0,`1}.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+    name: HandleAsync
+    href: Raftel.Application.Abstractions.IRequestMiddleware-2.html#Raftel_Application_Abstractions_IRequestMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  - name: (
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+    name: RequestHandlerDelegate
+    href: Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  - name: <
+  - name: TResponse
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.IRequestMiddleware{`0,`1}.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+    name: HandleAsync
+    href: Raftel.Application.Abstractions.IRequestMiddleware-2.html#Raftel_Application_Abstractions_IRequestMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  - name: (
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+    name: RequestHandlerDelegate
+    href: Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResponse
+  - name: )
+  - name: )
+- uid: '{TRequest}'
+  commentId: '!:TRequest'
+  definition: TRequest
+  name: TRequest
+  nameWithType: TRequest
+  fullName: TRequest
+- uid: Raftel.Application.Abstractions.RequestHandlerDelegate{{TResponse}}
+  commentId: T:Raftel.Application.Abstractions.RequestHandlerDelegate{`1}
+  parent: Raftel.Application.Abstractions
+  definition: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+  href: Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  name: RequestHandlerDelegate<TResponse>
+  nameWithType: RequestHandlerDelegate<TResponse>
+  fullName: Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>
+  nameWithType.vb: RequestHandlerDelegate(Of TResponse)
+  fullName.vb: Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse)
+  name.vb: RequestHandlerDelegate(Of TResponse)
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+    name: RequestHandlerDelegate
+    href: Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  - name: <
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+    name: RequestHandlerDelegate
+    href: Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResponse
+  - name: )
+- uid: System.Threading.Tasks.Task{{TResponse}}
+  commentId: T:System.Threading.Tasks.Task{``1}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResponse>
+  nameWithType: Task<TResponse>
+  fullName: System.Threading.Tasks.Task<TResponse>
+  nameWithType.vb: Task(Of TResponse)
+  fullName.vb: System.Threading.Tasks.Task(Of TResponse)
+  name.vb: Task(Of TResponse)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResponse
+  - name: )
+- uid: Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  commentId: M:Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  href: Raftel.Application.Abstractions.IRequestMiddleware-2.html#Raftel_Application_Abstractions_IRequestMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  nameWithType: IRequestMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  fullName: Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
+  nameWithType.vb: IRequestMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  fullName.vb: Raftel.Application.Abstractions.IRequestMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+    name: HandleAsync
+    href: Raftel.Application.Abstractions.IRequestMiddleware-2.html#Raftel_Application_Abstractions_IRequestMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  - name: (
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+    name: RequestHandlerDelegate
+    href: Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  - name: <
+  - name: TResponse
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+    name: HandleAsync
+    href: Raftel.Application.Abstractions.IRequestMiddleware-2.html#Raftel_Application_Abstractions_IRequestMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  - name: (
+  - name: TRequest
+  - name: ','
+  - name: " "
+  - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+    name: RequestHandlerDelegate
+    href: Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResponse
+  - name: )
+  - name: )
+- uid: TRequest
+  name: TRequest
+  nameWithType: TRequest
+  fullName: TRequest
+- uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+  commentId: T:Raftel.Application.Abstractions.RequestHandlerDelegate`1
+  href: Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  name: RequestHandlerDelegate<TResponse>
+  nameWithType: RequestHandlerDelegate<TResponse>
+  fullName: Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>
+  nameWithType.vb: RequestHandlerDelegate(Of TResponse)
+  fullName.vb: Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse)
+  name.vb: RequestHandlerDelegate(Of TResponse)
+  spec.csharp:
+  - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+    name: RequestHandlerDelegate
+    href: Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  - name: <
+  - name: TResponse
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
+    name: RequestHandlerDelegate
+    href: Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResponse
+  - name: )
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

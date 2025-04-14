@@ -1,0 +1,80 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Domain.Validators
+  commentId: N:Raftel.Domain.Validators
+  id: Raftel.Domain.Validators
+  children:
+  - Raftel.Domain.Validators.ValidationResult
+  - Raftel.Domain.Validators.Validator`1
+  langs:
+  - csharp
+  - vb
+  name: Raftel.Domain.Validators
+  nameWithType: Raftel.Domain.Validators
+  fullName: Raftel.Domain.Validators
+  type: Namespace
+  assemblies:
+  - Raftel.Domain
+references:
+- uid: Raftel.Domain.Validators.ValidationResult
+  commentId: T:Raftel.Domain.Validators.ValidationResult
+  parent: Raftel.Domain.Validators
+  href: Raftel.Domain.Validators.ValidationResult.html
+  name: ValidationResult
+  nameWithType: ValidationResult
+  fullName: Raftel.Domain.Validators.ValidationResult
+- uid: Raftel.Domain.Validators.Validator`1
+  commentId: T:Raftel.Domain.Validators.Validator`1
+  href: Raftel.Domain.Validators.Validator-1.html
+  name: Validator<TModel>
+  nameWithType: Validator<TModel>
+  fullName: Raftel.Domain.Validators.Validator<TModel>
+  nameWithType.vb: Validator(Of TModel)
+  fullName.vb: Raftel.Domain.Validators.Validator(Of TModel)
+  name.vb: Validator(Of TModel)
+  spec.csharp:
+  - uid: Raftel.Domain.Validators.Validator`1
+    name: Validator
+    href: Raftel.Domain.Validators.Validator-1.html
+  - name: <
+  - name: TModel
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Domain.Validators.Validator`1
+    name: Validator
+    href: Raftel.Domain.Validators.Validator-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TModel
+  - name: )
+- uid: Raftel.Domain.Validators
+  commentId: N:Raftel.Domain.Validators
+  href: Raftel.html
+  name: Raftel.Domain.Validators
+  nameWithType: Raftel.Domain.Validators
+  fullName: Raftel.Domain.Validators
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.Validators
+    name: Validators
+    href: Raftel.Domain.Validators.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.Validators
+    name: Validators
+    href: Raftel.Domain.Validators.html

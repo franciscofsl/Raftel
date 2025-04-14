@@ -20,7 +20,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/TypedId.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: TypedId
     path: src/Raftel.Domain/BaseTypes/TypedId.cs
@@ -65,7 +65,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/TypedId.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: .ctor
     path: src/Raftel.Domain/BaseTypes/TypedId.cs
@@ -107,7 +107,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/TypedId.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: ToString
     path: src/Raftel.Domain/BaseTypes/TypedId.cs
@@ -141,7 +141,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/TypedId.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: op_Implicit
     path: src/Raftel.Domain/BaseTypes/TypedId.cs
@@ -177,7 +177,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/TypedId.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: Equals
     path: src/Raftel.Domain/BaseTypes/TypedId.cs
@@ -217,7 +217,7 @@ items:
   source:
     remote:
       path: src/Raftel.Domain/BaseTypes/TypedId.cs
-      branch: feature/base-types
+      branch: feature/docs
       repo: https://github.com/franciscofsl/Raftel
     id: GetHashCode
     path: src/Raftel.Domain/BaseTypes/TypedId.cs
