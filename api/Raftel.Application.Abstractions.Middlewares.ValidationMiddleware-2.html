@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class ValidationMiddleware&lt;TRequest, TResponse&gt; | Raftel </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class ValidationMiddleware&lt;TRequest, TResponse&gt; | Raftel ">
+    
+    <meta name="description" content="Middleware that performs validation on the incoming request using all registered  instances. If any validation rule fails, a  is thrown and the request pipeline is halted.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="Raftel">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2">
+
+
+
+  <h1 id="Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2" data-uid="Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2" class="text-break">Class ValidationMiddleware&lt;TRequest, TResponse&gt;</h1>
+  <div class="markdown level0 summary"><p>Middleware that performs validation on the incoming request using all registered <a class="xref" href="Raftel.Domain.Validators.Validator-1.html">Validator&lt;TModel&gt;</a> instances.
+If any validation rule fails, a <a class="xref" href="Raftel.Application.Exceptions.ValidationException.html">ValidationException</a> is thrown and the request pipeline is halted.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">ValidationMiddleware&lt;TRequest, TResponse&gt;</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Raftel.Application.Abstractions.IRequestMiddleware-2.html">IRequestMiddleware</a>&lt;TRequest, TResponse&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Application.html">Application</a>.<a class="xref" href="Raftel.Application.Abstractions.html">Abstractions</a>.<a class="xref" href="Raftel.Application.Abstractions.Middlewares.html">Middlewares</a></h6>
+  <h6><strong>Assembly</strong>: Raftel.Application.dll</h6>
+  <h5 id="Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ValidationMiddleware&lt;TRequest, TResponse&gt; : IRequestMiddleware&lt;TRequest, TResponse&gt; where TRequest : IRequest&lt;TResponse&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TRequest</span></td>
+        <td><p>The type of the request being validated.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResponse</span></td>
+        <td><p>The type of the expected response.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2__ctor_System_Collections_Generic_IEnumerable_Raftel_Domain_Validators_Validator__0___.md&amp;value=---%0Auid%3A%20Raftel.Application.Abstractions.Middlewares.ValidationMiddleware%602.%23ctor(System.Collections.Generic.IEnumerable%7BRaftel.Domain.Validators.Validator%7B%600%7D%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Middlewares/ValidationMiddleware.cs/#L14">View Source</a>
+  </span>
+  <a id="Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2__ctor_" data-uid="Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor*"></a>
+  <h4 id="Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2__ctor_System_Collections_Generic_IEnumerable_Raftel_Domain_Validators_Validator__0___" data-uid="Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Validators.Validator{`0}})">ValidationMiddleware(IEnumerable&lt;Validator&lt;TRequest&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Middleware that performs validation on the incoming request using all registered <a class="xref" href="Raftel.Domain.Validators.Validator-1.html">Validator&lt;TModel&gt;</a> instances.
+If any validation rule fails, a <a class="xref" href="Raftel.Application.Exceptions.ValidationException.html">ValidationException</a> is thrown and the request pipeline is halted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ValidationMiddleware(IEnumerable&lt;Validator&lt;TRequest&gt;&gt; validators)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Raftel.Domain.Validators.Validator-1.html">Validator</a>&lt;TRequest&gt;&gt;</td>
+        <td><span class="parametername">validators</span></td>
+        <td><p>A collection of validators for the given <code class="typeparamref">TRequest</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__.md&amp;value=---%0Auid%3A%20Raftel.Application.Abstractions.Middlewares.ValidationMiddleware%602.HandleAsync(%600%2CRaftel.Application.Abstractions.RequestHandlerDelegate%7B%601%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Middlewares/ValidationMiddleware.cs/#L27">View Source</a>
+  </span>
+  <a id="Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2_HandleAsync_" data-uid="Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync*"></a>
+  <h4 id="Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__" data-uid="Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})">HandleAsync(TRequest, RequestHandlerDelegate&lt;TResponse&gt;)</h4>
+  <div class="markdown level1 summary"><p>Handles the request by validating it before invoking the next delegate in the pipeline.
+If validation passes, the request continues to the next handler.
+If validation fails, a <a class="xref" href="Raftel.Application.Exceptions.ValidationException.html">ValidationException</a> is thrown containing all errors.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;TResponse&gt; HandleAsync(TRequest request, RequestHandlerDelegate&lt;TResponse&gt; next)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TRequest</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request to validate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Raftel.Application.Abstractions.RequestHandlerDelegate-1.html">RequestHandlerDelegate</a>&lt;TResponse&gt;</td>
+        <td><span class="parametername">next</span></td>
+        <td><p>The delegate representing the next middleware or handler in the pipeline.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TResponse&gt;</td>
+        <td><p>The response returned by the next handler, if validation succeeds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Raftel.Application.Exceptions.ValidationException.html">ValidationException</a></td>
+        <td><p>Thrown when one or more validation rules fail.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Raftel.Application.Abstractions.IRequestMiddleware-2.html">IRequestMiddleware&lt;TRequest, TResponse&gt;</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2.md&amp;value=---%0Auid%3A%20Raftel.Application.Abstractions.Middlewares.ValidationMiddleware%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Middlewares/ValidationMiddleware.cs/#L14" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
