@@ -72,7 +72,7 @@ public class Result<TValue> : Result
     /// </summary>
     /// <param name="error">The error associated with the failure.</param>
     /// <returns>A failed result.</returns>
-    public static Result<TValue> Failure(Error error) => new Result<TValue>(default, false, error);
+    public new static Result<TValue> Failure(Error error) => new Result<TValue>(default, false, error);
 
     public static implicit operator Result<TValue>(TValue value) => Create(value);
 }
