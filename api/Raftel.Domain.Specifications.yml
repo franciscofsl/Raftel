@@ -1,0 +1,125 @@
+### YamlMime:ManagedReference
+items:
+- uid: Raftel.Domain.Specifications
+  commentId: N:Raftel.Domain.Specifications
+  id: Raftel.Domain.Specifications
+  children:
+  - Raftel.Domain.Specifications.AndSpecification`1
+  - Raftel.Domain.Specifications.OrSpecification`1
+  - Raftel.Domain.Specifications.Specification`1
+  langs:
+  - csharp
+  - vb
+  name: Raftel.Domain.Specifications
+  nameWithType: Raftel.Domain.Specifications
+  fullName: Raftel.Domain.Specifications
+  type: Namespace
+  assemblies:
+  - Raftel.Domain
+references:
+- uid: Raftel.Domain.Specifications.AndSpecification`1
+  commentId: T:Raftel.Domain.Specifications.AndSpecification`1
+  href: Raftel.Domain.Specifications.AndSpecification-1.html
+  name: AndSpecification<TModel>
+  nameWithType: AndSpecification<TModel>
+  fullName: Raftel.Domain.Specifications.AndSpecification<TModel>
+  nameWithType.vb: AndSpecification(Of TModel)
+  fullName.vb: Raftel.Domain.Specifications.AndSpecification(Of TModel)
+  name.vb: AndSpecification(Of TModel)
+  spec.csharp:
+  - uid: Raftel.Domain.Specifications.AndSpecification`1
+    name: AndSpecification
+    href: Raftel.Domain.Specifications.AndSpecification-1.html
+  - name: <
+  - name: TModel
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Domain.Specifications.AndSpecification`1
+    name: AndSpecification
+    href: Raftel.Domain.Specifications.AndSpecification-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TModel
+  - name: )
+- uid: Raftel.Domain.Specifications.OrSpecification`1
+  commentId: T:Raftel.Domain.Specifications.OrSpecification`1
+  href: Raftel.Domain.Specifications.OrSpecification-1.html
+  name: OrSpecification<TModel>
+  nameWithType: OrSpecification<TModel>
+  fullName: Raftel.Domain.Specifications.OrSpecification<TModel>
+  nameWithType.vb: OrSpecification(Of TModel)
+  fullName.vb: Raftel.Domain.Specifications.OrSpecification(Of TModel)
+  name.vb: OrSpecification(Of TModel)
+  spec.csharp:
+  - uid: Raftel.Domain.Specifications.OrSpecification`1
+    name: OrSpecification
+    href: Raftel.Domain.Specifications.OrSpecification-1.html
+  - name: <
+  - name: TModel
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Domain.Specifications.OrSpecification`1
+    name: OrSpecification
+    href: Raftel.Domain.Specifications.OrSpecification-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TModel
+  - name: )
+- uid: Raftel.Domain.Specifications.Specification`1
+  commentId: T:Raftel.Domain.Specifications.Specification`1
+  parent: Raftel.Domain.Specifications
+  href: Raftel.Domain.Specifications.Specification-1.html
+  name: Specification<TModel>
+  nameWithType: Specification<TModel>
+  fullName: Raftel.Domain.Specifications.Specification<TModel>
+  nameWithType.vb: Specification(Of TModel)
+  fullName.vb: Raftel.Domain.Specifications.Specification(Of TModel)
+  name.vb: Specification(Of TModel)
+  spec.csharp:
+  - uid: Raftel.Domain.Specifications.Specification`1
+    name: Specification
+    href: Raftel.Domain.Specifications.Specification-1.html
+  - name: <
+  - name: TModel
+  - name: '>'
+  spec.vb:
+  - uid: Raftel.Domain.Specifications.Specification`1
+    name: Specification
+    href: Raftel.Domain.Specifications.Specification-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TModel
+  - name: )
+- uid: Raftel.Domain.Specifications
+  commentId: N:Raftel.Domain.Specifications
+  href: Raftel.html
+  name: Raftel.Domain.Specifications
+  nameWithType: Raftel.Domain.Specifications
+  fullName: Raftel.Domain.Specifications
+  spec.csharp:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.Specifications
+    name: Specifications
+    href: Raftel.Domain.Specifications.html
+  spec.vb:
+  - uid: Raftel
+    name: Raftel
+    href: Raftel.html
+  - name: .
+  - uid: Raftel.Domain
+    name: Domain
+    href: Raftel.Domain.html
+  - name: .
+  - uid: Raftel.Domain.Specifications
+    name: Specifications
+    href: Raftel.Domain.Specifications.html

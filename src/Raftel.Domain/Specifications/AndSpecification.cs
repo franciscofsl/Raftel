@@ -11,7 +11,7 @@ public class AndSpecification<TModel>(Specification<TModel> left, Specification<
     /// <summary>
     /// Converts the specification to an expression.
     /// </summary>
-    /// <returns>A <see cref="Expression{Func{TModel, bool}}"/> that represents the logical AND between the two specifications.</returns>
+    /// <returns>A <c>Expression{Func{TModel, bool}}</c> that represents the logical AND between the two specifications.</returns>
     public override Expression<Func<TModel, bool>> ToExpression()
     {
         var leftExpr = left.ToExpression();

@@ -1147,6 +1147,181 @@ references:
   fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).CType
   nameWithType: TypedId<T>.implicit operator
   nameWithType.vb: TypedId(Of T).CType
+- uid: Raftel.Domain.Specifications
+  name: Raftel.Domain.Specifications
+  href: api/Raftel.Domain.Specifications.yml
+  commentId: N:Raftel.Domain.Specifications
+  fullName: Raftel.Domain.Specifications
+  nameWithType: Raftel.Domain.Specifications
+- uid: Raftel.Domain.Specifications.AndSpecification`1
+  name: AndSpecification<TModel>
+  href: api/Raftel.Domain.Specifications.AndSpecification-1.yml
+  commentId: T:Raftel.Domain.Specifications.AndSpecification`1
+  name.vb: AndSpecification(Of TModel)
+  fullName: Raftel.Domain.Specifications.AndSpecification<TModel>
+  fullName.vb: Raftel.Domain.Specifications.AndSpecification(Of TModel)
+  nameWithType: AndSpecification<TModel>
+  nameWithType.vb: AndSpecification(Of TModel)
+- uid: Raftel.Domain.Specifications.AndSpecification`1.#ctor(Raftel.Domain.Specifications.Specification{`0},Raftel.Domain.Specifications.Specification{`0})
+  name: AndSpecification(Specification<TModel>, Specification<TModel>)
+  href: api/Raftel.Domain.Specifications.AndSpecification-1.yml
+  commentId: M:Raftel.Domain.Specifications.AndSpecification`1.#ctor(Raftel.Domain.Specifications.Specification{`0},Raftel.Domain.Specifications.Specification{`0})
+  name.vb: New(Specification(Of TModel), Specification(Of TModel))
+  fullName: Raftel.Domain.Specifications.AndSpecification<TModel>.AndSpecification(Raftel.Domain.Specifications.Specification<TModel>, Raftel.Domain.Specifications.Specification<TModel>)
+  fullName.vb: Raftel.Domain.Specifications.AndSpecification(Of TModel).New(Raftel.Domain.Specifications.Specification(Of TModel), Raftel.Domain.Specifications.Specification(Of TModel))
+  nameWithType: AndSpecification<TModel>.AndSpecification(Specification<TModel>, Specification<TModel>)
+  nameWithType.vb: AndSpecification(Of TModel).New(Specification(Of TModel), Specification(Of TModel))
+- uid: Raftel.Domain.Specifications.AndSpecification`1.#ctor*
+  name: AndSpecification
+  href: api/Raftel.Domain.Specifications.AndSpecification-1.yml
+  commentId: Overload:Raftel.Domain.Specifications.AndSpecification`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Specifications.AndSpecification<TModel>.AndSpecification
+  fullName.vb: Raftel.Domain.Specifications.AndSpecification(Of TModel).New
+  nameWithType: AndSpecification<TModel>.AndSpecification
+  nameWithType.vb: AndSpecification(Of TModel).New
+- uid: Raftel.Domain.Specifications.AndSpecification`1.ToExpression
+  name: ToExpression()
+  href: api/Raftel.Domain.Specifications.AndSpecification-1.yml
+  commentId: M:Raftel.Domain.Specifications.AndSpecification`1.ToExpression
+  fullName: Raftel.Domain.Specifications.AndSpecification<TModel>.ToExpression()
+  fullName.vb: Raftel.Domain.Specifications.AndSpecification(Of TModel).ToExpression()
+  nameWithType: AndSpecification<TModel>.ToExpression()
+  nameWithType.vb: AndSpecification(Of TModel).ToExpression()
+- uid: Raftel.Domain.Specifications.AndSpecification`1.ToExpression*
+  name: ToExpression
+  href: api/Raftel.Domain.Specifications.AndSpecification-1.yml
+  commentId: Overload:Raftel.Domain.Specifications.AndSpecification`1.ToExpression
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.AndSpecification<TModel>.ToExpression
+  fullName.vb: Raftel.Domain.Specifications.AndSpecification(Of TModel).ToExpression
+  nameWithType: AndSpecification<TModel>.ToExpression
+  nameWithType.vb: AndSpecification(Of TModel).ToExpression
+- uid: Raftel.Domain.Specifications.OrSpecification`1
+  name: OrSpecification<TModel>
+  href: api/Raftel.Domain.Specifications.OrSpecification-1.yml
+  commentId: T:Raftel.Domain.Specifications.OrSpecification`1
+  name.vb: OrSpecification(Of TModel)
+  fullName: Raftel.Domain.Specifications.OrSpecification<TModel>
+  fullName.vb: Raftel.Domain.Specifications.OrSpecification(Of TModel)
+  nameWithType: OrSpecification<TModel>
+  nameWithType.vb: OrSpecification(Of TModel)
+- uid: Raftel.Domain.Specifications.OrSpecification`1.#ctor(Raftel.Domain.Specifications.Specification{`0},Raftel.Domain.Specifications.Specification{`0})
+  name: OrSpecification(Specification<TModel>, Specification<TModel>)
+  href: api/Raftel.Domain.Specifications.OrSpecification-1.yml
+  commentId: M:Raftel.Domain.Specifications.OrSpecification`1.#ctor(Raftel.Domain.Specifications.Specification{`0},Raftel.Domain.Specifications.Specification{`0})
+  name.vb: New(Specification(Of TModel), Specification(Of TModel))
+  fullName: Raftel.Domain.Specifications.OrSpecification<TModel>.OrSpecification(Raftel.Domain.Specifications.Specification<TModel>, Raftel.Domain.Specifications.Specification<TModel>)
+  fullName.vb: Raftel.Domain.Specifications.OrSpecification(Of TModel).New(Raftel.Domain.Specifications.Specification(Of TModel), Raftel.Domain.Specifications.Specification(Of TModel))
+  nameWithType: OrSpecification<TModel>.OrSpecification(Specification<TModel>, Specification<TModel>)
+  nameWithType.vb: OrSpecification(Of TModel).New(Specification(Of TModel), Specification(Of TModel))
+- uid: Raftel.Domain.Specifications.OrSpecification`1.#ctor*
+  name: OrSpecification
+  href: api/Raftel.Domain.Specifications.OrSpecification-1.yml
+  commentId: Overload:Raftel.Domain.Specifications.OrSpecification`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Specifications.OrSpecification<TModel>.OrSpecification
+  fullName.vb: Raftel.Domain.Specifications.OrSpecification(Of TModel).New
+  nameWithType: OrSpecification<TModel>.OrSpecification
+  nameWithType.vb: OrSpecification(Of TModel).New
+- uid: Raftel.Domain.Specifications.OrSpecification`1.ToExpression
+  name: ToExpression()
+  href: api/Raftel.Domain.Specifications.OrSpecification-1.yml
+  commentId: M:Raftel.Domain.Specifications.OrSpecification`1.ToExpression
+  fullName: Raftel.Domain.Specifications.OrSpecification<TModel>.ToExpression()
+  fullName.vb: Raftel.Domain.Specifications.OrSpecification(Of TModel).ToExpression()
+  nameWithType: OrSpecification<TModel>.ToExpression()
+  nameWithType.vb: OrSpecification(Of TModel).ToExpression()
+- uid: Raftel.Domain.Specifications.OrSpecification`1.ToExpression*
+  name: ToExpression
+  href: api/Raftel.Domain.Specifications.OrSpecification-1.yml
+  commentId: Overload:Raftel.Domain.Specifications.OrSpecification`1.ToExpression
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.OrSpecification<TModel>.ToExpression
+  fullName.vb: Raftel.Domain.Specifications.OrSpecification(Of TModel).ToExpression
+  nameWithType: OrSpecification<TModel>.ToExpression
+  nameWithType.vb: OrSpecification(Of TModel).ToExpression
+- uid: Raftel.Domain.Specifications.Specification`1
+  name: Specification<TModel>
+  href: api/Raftel.Domain.Specifications.Specification-1.yml
+  commentId: T:Raftel.Domain.Specifications.Specification`1
+  name.vb: Specification(Of TModel)
+  fullName: Raftel.Domain.Specifications.Specification<TModel>
+  fullName.vb: Raftel.Domain.Specifications.Specification(Of TModel)
+  nameWithType: Specification<TModel>
+  nameWithType.vb: Specification(Of TModel)
+- uid: Raftel.Domain.Specifications.Specification`1.And(Raftel.Domain.Specifications.Specification{`0})
+  name: And(Specification<TModel>)
+  href: api/Raftel.Domain.Specifications.Specification-1.yml
+  commentId: M:Raftel.Domain.Specifications.Specification`1.And(Raftel.Domain.Specifications.Specification{`0})
+  name.vb: And(Specification(Of TModel))
+  fullName: Raftel.Domain.Specifications.Specification<TModel>.And(Raftel.Domain.Specifications.Specification<TModel>)
+  fullName.vb: Raftel.Domain.Specifications.Specification(Of TModel).And(Raftel.Domain.Specifications.Specification(Of TModel))
+  nameWithType: Specification<TModel>.And(Specification<TModel>)
+  nameWithType.vb: Specification(Of TModel).And(Specification(Of TModel))
+- uid: Raftel.Domain.Specifications.Specification`1.And*
+  name: And
+  href: api/Raftel.Domain.Specifications.Specification-1.yml
+  commentId: Overload:Raftel.Domain.Specifications.Specification`1.And
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.Specification<TModel>.And
+  fullName.vb: Raftel.Domain.Specifications.Specification(Of TModel).And
+  nameWithType: Specification<TModel>.And
+  nameWithType.vb: Specification(Of TModel).And
+- uid: Raftel.Domain.Specifications.Specification`1.IsSatisfiedBy(`0)
+  name: IsSatisfiedBy(TModel)
+  href: api/Raftel.Domain.Specifications.Specification-1.yml
+  commentId: M:Raftel.Domain.Specifications.Specification`1.IsSatisfiedBy(`0)
+  fullName: Raftel.Domain.Specifications.Specification<TModel>.IsSatisfiedBy(TModel)
+  fullName.vb: Raftel.Domain.Specifications.Specification(Of TModel).IsSatisfiedBy(TModel)
+  nameWithType: Specification<TModel>.IsSatisfiedBy(TModel)
+  nameWithType.vb: Specification(Of TModel).IsSatisfiedBy(TModel)
+- uid: Raftel.Domain.Specifications.Specification`1.IsSatisfiedBy*
+  name: IsSatisfiedBy
+  href: api/Raftel.Domain.Specifications.Specification-1.yml
+  commentId: Overload:Raftel.Domain.Specifications.Specification`1.IsSatisfiedBy
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.Specification<TModel>.IsSatisfiedBy
+  fullName.vb: Raftel.Domain.Specifications.Specification(Of TModel).IsSatisfiedBy
+  nameWithType: Specification<TModel>.IsSatisfiedBy
+  nameWithType.vb: Specification(Of TModel).IsSatisfiedBy
+- uid: Raftel.Domain.Specifications.Specification`1.Or(Raftel.Domain.Specifications.Specification{`0})
+  name: Or(Specification<TModel>)
+  href: api/Raftel.Domain.Specifications.Specification-1.yml
+  commentId: M:Raftel.Domain.Specifications.Specification`1.Or(Raftel.Domain.Specifications.Specification{`0})
+  name.vb: Or(Specification(Of TModel))
+  fullName: Raftel.Domain.Specifications.Specification<TModel>.Or(Raftel.Domain.Specifications.Specification<TModel>)
+  fullName.vb: Raftel.Domain.Specifications.Specification(Of TModel).Or(Raftel.Domain.Specifications.Specification(Of TModel))
+  nameWithType: Specification<TModel>.Or(Specification<TModel>)
+  nameWithType.vb: Specification(Of TModel).Or(Specification(Of TModel))
+- uid: Raftel.Domain.Specifications.Specification`1.Or*
+  name: Or
+  href: api/Raftel.Domain.Specifications.Specification-1.yml
+  commentId: Overload:Raftel.Domain.Specifications.Specification`1.Or
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.Specification<TModel>.Or
+  fullName.vb: Raftel.Domain.Specifications.Specification(Of TModel).Or
+  nameWithType: Specification<TModel>.Or
+  nameWithType.vb: Specification(Of TModel).Or
+- uid: Raftel.Domain.Specifications.Specification`1.ToExpression
+  name: ToExpression()
+  href: api/Raftel.Domain.Specifications.Specification-1.yml
+  commentId: M:Raftel.Domain.Specifications.Specification`1.ToExpression
+  fullName: Raftel.Domain.Specifications.Specification<TModel>.ToExpression()
+  fullName.vb: Raftel.Domain.Specifications.Specification(Of TModel).ToExpression()
+  nameWithType: Specification<TModel>.ToExpression()
+  nameWithType.vb: Specification(Of TModel).ToExpression()
+- uid: Raftel.Domain.Specifications.Specification`1.ToExpression*
+  name: ToExpression
+  href: api/Raftel.Domain.Specifications.Specification-1.yml
+  commentId: Overload:Raftel.Domain.Specifications.Specification`1.ToExpression
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.Specification<TModel>.ToExpression
+  fullName.vb: Raftel.Domain.Specifications.Specification(Of TModel).ToExpression
+  nameWithType: Specification<TModel>.ToExpression
+  nameWithType.vb: Specification(Of TModel).ToExpression
 - uid: Raftel.Domain.Validators
   name: Raftel.Domain.Validators
   href: api/Raftel.Domain.Validators.yml

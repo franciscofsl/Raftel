@@ -113,6 +113,19 @@ items:
   - uid: Raftel.Domain.BaseTypes.TypedId`1
     name: TypedId<T>
     type: Class
+- uid: Raftel.Domain.Specifications
+  name: Raftel.Domain.Specifications
+  type: Namespace
+  items:
+  - uid: Raftel.Domain.Specifications.AndSpecification`1
+    name: AndSpecification<TModel>
+    type: Class
+  - uid: Raftel.Domain.Specifications.OrSpecification`1
+    name: OrSpecification<TModel>
+    type: Class
+  - uid: Raftel.Domain.Specifications.Specification`1
+    name: Specification<TModel>
+    type: Class
 - uid: Raftel.Domain.Validators
   name: Raftel.Domain.Validators
   type: Namespace
