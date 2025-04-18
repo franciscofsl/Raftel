@@ -14,6 +14,8 @@ app.Configure(config =>
     {
         add.AddCommand<AddCommandCommand>("command")
             .WithDescription("Generates a command with handler and validator"); 
+        add.AddCommand<AddQueryCommand>("query")
+            .WithDescription("Generates a query with handler and response"); 
     });
 });
 
