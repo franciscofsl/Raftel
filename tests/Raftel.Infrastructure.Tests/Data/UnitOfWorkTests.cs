@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
 using Raftel.Application.Commands;
 using Raftel.Application.Tests.Common;
+using Raftel.Application.Tests.Common.CreatePirate;
 using Raftel.Domain.Tests.Common.Domain;
 using Raftel.Domain.Tests.Common.Domain.ValueObjects;
 using Raftel.Infrastructure.Tests.Data.Common;

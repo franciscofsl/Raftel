@@ -2,7 +2,7 @@
 using Raftel.Domain.Abstractions;
 using Raftel.Domain.Tests.Common.Domain;
 
-namespace Raftel.Application.Tests.Common;
+namespace Raftel.Application.Tests.Common.CreatePirate;
 
 public sealed class CreatePirateCommandHandler(IPirateRepository repository) : ICommandHandler<CreatePirateCommand>
 {
