@@ -1,8 +1,4 @@
-﻿using Raftel.Application.Commands;
-using Raftel.Application.Queries;
-using Raftel.Domain.Abstractions;
-
-namespace Raftel.Application.Abstractions;
+﻿namespace Raftel.Application.Abstractions;
 
 /// <summary>
 /// Represents a middleware component in the request pipeline that can intercept and
@@ -20,14 +16,4 @@ public interface IGlobalMiddleware<TRequest, TResponse>
     /// <param name="next">The next handler in the pipeline.</param>
     /// <returns>A task containing the result of the request.</returns>
     Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next);
-}
-
-public interface ICommandMiddleware<TRequest> : IGlobalMiddleware<TRequest, Result>
-    where TRequest : ICommand
-{
-}
-
-public interface IQueryMiddleware<TRequest, TResponse> : IGlobalMiddleware<TRequest, Result<TResponse>>
-    where TRequest : IQuery<TResponse>
-{
 }
