@@ -30,22 +30,12 @@ public class RequestDispatcher : IRequestDispatcher
 
         var allMiddlewares = new List<IGlobalMiddleware<TRequest, TResponse>>();
 
-        // 1. Global middlewares
-        allMiddlewares.AddRange(_serviceProvider
-            .GetServices<IGlobalMiddleware<TRequest, TResponse>>());
+        allMiddlewares.AddRange(_serviceProvider.GetServices<IGlobalMiddleware<TRequest, TResponse>>());
+        allMiddlewares.AddRange(GetCommandMiddlewares<TRequest, TResponse>(request));
 
-        // 2. Command-specific middlewares
-        if (request is ICommand && typeof(TResponse) == typeof(Result))
-        {
-            var commandMiddlewares = _serviceProvider
-                .GetServices(typeof(ICommandMiddleware<>).MakeGenericType(typeof(TRequest)))
-                .Cast<IGlobalMiddleware<TRequest, TResponse>>();
 
-            allMiddlewares.AddRange(commandMiddlewares);
-        }
-
-       
-        if (request.GetType().GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQuery<>)))
+        if (request.GetType().GetInterfaces()
+            .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQuery<>)))
         {
             var middlewares = GetQueryMiddlewares(_serviceProvider, request.GetType());
 
@@ -57,7 +47,6 @@ public class RequestDispatcher : IRequestDispatcher
                 }
             }
         }
-        // allMiddlewares.AddRange(middlewares);
 
         var handlerDelegate = new RequestHandlerDelegate<TResponse>(() => handler.HandleAsync(request));
 
@@ -68,31 +57,38 @@ public class RequestDispatcher : IRequestDispatcher
         return await pipeline();
     }
 
-    private static bool ImplementsIQueryOfTResponse(Type requestType, Type responseType)
+    private IGlobalMiddleware<TRequest, TResponse>[] GetCommandMiddlewares<TRequest, TResponse>(TRequest request)
+        where TRequest : IRequest<TResponse>
     {
-        return requestType.GetInterfaces().Any(i =>
-            i.IsGenericType &&
-            i.GetGenericTypeDefinition() == typeof(IQuery<>) &&
-            i.GenericTypeArguments[0] == responseType);
-    } 
+        if (request is not ICommand || typeof(TResponse) != typeof(Result))
+        {
+            return [];
+        }
+
+        return _serviceProvider
+            .GetServices(typeof(ICommandMiddleware<>).MakeGenericType(typeof(TRequest)))
+            .Cast<IGlobalMiddleware<TRequest, TResponse>>()
+            .ToArray();
+    }
+ 
 
     private static IEnumerable<object> GetQueryMiddlewares(IServiceProvider serviceProvider, Type requestType)
     {
         var queryInterface = requestType
             .GetInterfaces()
             .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQuery<>));
-    
+
         if (queryInterface == null)
         {
             throw new InvalidOperationException($"El tipo {requestType.Name} no implementa IQuery<T>.");
         }
-    
+
         var responseType = queryInterface.GetGenericArguments()[0];
-    
+
         var middlewareInterface = typeof(IQueryMiddleware<,>).MakeGenericType(requestType, responseType);
-    
+
         var middlewares = serviceProvider.GetServices(middlewareInterface);
-    
+
         return middlewares;
     }
 }
