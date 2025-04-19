@@ -131,11 +131,12 @@ to the <a class="xref" href="Raftel.Application.Abstractions.IRequestDispatcher.
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Commands_CommandDispatcher__ctor_Raftel_Application_Abstractions_IRequestDispatcher_.md&amp;value=---%0Auid%3A%20Raftel.Application.Commands.CommandDispatcher.%23ctor(Raftel.Application.Abstractions.IRequestDispatcher)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Commands/CommandDispatcher.cs/#L18">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Commands/CommandDispatcher.cs/#L10">View Source</a>
   </span>
   <a id="Raftel_Application_Commands_CommandDispatcher__ctor_" data-uid="Raftel.Application.Commands.CommandDispatcher.#ctor*"></a>
   <h4 id="Raftel_Application_Commands_CommandDispatcher__ctor_Raftel_Application_Abstractions_IRequestDispatcher_" data-uid="Raftel.Application.Commands.CommandDispatcher.#ctor(Raftel.Application.Abstractions.IRequestDispatcher)">CommandDispatcher(IRequestDispatcher)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Raftel.Application.Commands.CommandDispatcher.html">CommandDispatcher</a> class.</p>
+  <div class="markdown level1 summary"><p>Default implementation of <a class="xref" href="Raftel.Application.Commands.ICommandDispatcher.html">ICommandDispatcher</a> that delegates command execution
+to the <a class="xref" href="Raftel.Application.Abstractions.IRequestDispatcher.html">IRequestDispatcher</a> infrastructure.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
@@ -155,8 +156,7 @@ to the <a class="xref" href="Raftel.Application.Abstractions.IRequestDispatcher.
       <tr>
         <td><a class="xref" href="Raftel.Application.Abstractions.IRequestDispatcher.html">IRequestDispatcher</a></td>
         <td><span class="parametername">dispatcher</span></td>
-        <td><p>The internal dispatcher used to route commands.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -167,7 +167,7 @@ to the <a class="xref" href="Raftel.Application.Abstractions.IRequestDispatcher.
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Commands_CommandDispatcher_DispatchAsync__1___0_.md&amp;value=---%0Auid%3A%20Raftel.Application.Commands.CommandDispatcher.DispatchAsync%60%601(%60%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Commands/CommandDispatcher.cs/#L24">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Commands/CommandDispatcher.cs/#L13">View Source</a>
   </span>
   <a id="Raftel_Application_Commands_CommandDispatcher_DispatchAsync_" data-uid="Raftel.Application.Commands.CommandDispatcher.DispatchAsync*"></a>
   <h4 id="Raftel_Application_Commands_CommandDispatcher_DispatchAsync__1___0_" data-uid="Raftel.Application.Commands.CommandDispatcher.DispatchAsync``1(``0)">DispatchAsync&lt;TCommand&gt;(TCommand)</h4>

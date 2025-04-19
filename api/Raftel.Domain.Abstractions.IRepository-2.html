@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Interface IRepository&lt;TEntity, TId&gt; | Raftel ">
     
-    
+    <meta name="description" content="Defines a generic repository interface for managing aggregate root entities.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,8 @@
 
 
   <h1 id="Raftel_Domain_Abstractions_IRepository_2" data-uid="Raftel.Domain.Abstractions.IRepository`2" class="text-break">Interface IRepository&lt;TEntity, TId&gt;</h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Defines a generic repository interface for managing aggregate root entities.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Domain.html">Domain</a>.<a class="xref" href="Raftel.Domain.Abstractions.html">Abstractions</a></h6>
   <h6><strong>Assembly</strong>: Raftel.Domain.dll</h6>
@@ -100,11 +101,13 @@
     <tbody>
       <tr>
         <td><span class="parametername">TEntity</span></td>
-        <td></td>
+        <td><p>The type of the aggregate root entity.</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TId</span></td>
-        <td></td>
+        <td><p>The type of the identifier for the aggregate root entity.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -115,11 +118,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_IRepository_2_AddAsync__0_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.IRepository%602.AddAsync(%600%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L10">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L34">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_IRepository_2_AddAsync_" data-uid="Raftel.Domain.Abstractions.IRepository`2.AddAsync*"></a>
   <h4 id="Raftel_Domain_Abstractions_IRepository_2_AddAsync__0_System_Threading_CancellationToken_" data-uid="Raftel.Domain.Abstractions.IRepository`2.AddAsync(`0,System.Threading.CancellationToken)">AddAsync(TEntity, CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Adds a new entity to the repository asynchronously.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -138,12 +142,14 @@
       <tr>
         <td><span class="xref">TEntity</span></td>
         <td><span class="parametername">entity</span></td>
-        <td></td>
+        <td><p>The entity to add.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
+        <td><p>A token to monitor for cancellation requests.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -158,7 +164,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></td>
-        <td></td>
+        <td><p>A task that represents the asynchronous operation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -167,11 +174,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_IRepository_2_GetByIdAsync__1_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.IRepository%602.GetByIdAsync(%601%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L8">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L19">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_IRepository_2_GetByIdAsync_" data-uid="Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync*"></a>
   <h4 id="Raftel_Domain_Abstractions_IRepository_2_GetByIdAsync__1_System_Threading_CancellationToken_" data-uid="Raftel.Domain.Abstractions.IRepository`2.GetByIdAsync(`1,System.Threading.CancellationToken)">GetByIdAsync(TId, CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves an entity by its identifier asynchronously.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -190,12 +198,14 @@
       <tr>
         <td><span class="xref">TId</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the entity to retrieve.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
+        <td><p>A token to monitor for cancellation requests.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -210,7 +220,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TEntity&gt;</td>
-        <td></td>
+        <td><p>A task that represents the asynchronous operation. The task result contains the entity if found, or null otherwise.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -219,11 +230,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.IRepository%602.ListAllAsync(System.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L9">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L26">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_" data-uid="Raftel.Domain.Abstractions.IRepository`2.ListAllAsync*"></a>
   <h4 id="Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_System_Threading_CancellationToken_" data-uid="Raftel.Domain.Abstractions.IRepository`2.ListAllAsync(System.Threading.CancellationToken)">ListAllAsync(CancellationToken)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Retrieves all entities asynchronously.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -242,7 +254,8 @@
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
         <td><span class="parametername">cancellationToken</span></td>
-        <td></td>
+        <td><p>A token to monitor for cancellation requests.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -257,7 +270,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;TEntity&gt;&gt;</td>
-        <td></td>
+        <td><p>A task that represents the asynchronous operation. The task result contains a list of all entities.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -266,11 +280,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_IRepository_2_Remove__0_.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.IRepository%602.Remove(%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L12">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L46">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_IRepository_2_Remove_" data-uid="Raftel.Domain.Abstractions.IRepository`2.Remove*"></a>
   <h4 id="Raftel_Domain_Abstractions_IRepository_2_Remove__0_" data-uid="Raftel.Domain.Abstractions.IRepository`2.Remove(`0)">Remove(TEntity)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes an entity from the repository.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -289,7 +304,8 @@
       <tr>
         <td><span class="xref">TEntity</span></td>
         <td><span class="parametername">entity</span></td>
-        <td></td>
+        <td><p>The entity to remove.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -298,11 +314,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_IRepository_2_Update__0_.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.IRepository%602.Update(%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L11">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L40">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_IRepository_2_Update_" data-uid="Raftel.Domain.Abstractions.IRepository`2.Update*"></a>
   <h4 id="Raftel_Domain_Abstractions_IRepository_2_Update__0_" data-uid="Raftel.Domain.Abstractions.IRepository`2.Update(`0)">Update(TEntity)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates an existing entity in the repository.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -321,7 +338,8 @@
       <tr>
         <td><span class="xref">TEntity</span></td>
         <td><span class="parametername">entity</span></td>
-        <td></td>
+        <td><p>The entity to update.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -337,7 +355,7 @@
                     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_IRepository_2.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.IRepository%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L5" class="contribution-link">View Source</a>
+                    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IRepository.cs/#L10" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

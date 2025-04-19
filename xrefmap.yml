@@ -13,6 +13,51 @@ references:
   commentId: N:Raftel.Application.Abstractions
   fullName: Raftel.Application.Abstractions
   nameWithType: Raftel.Application.Abstractions
+- uid: Raftel.Application.Abstractions.ICommandMiddleware`1
+  name: ICommandMiddleware<TRequest>
+  href: api/Raftel.Application.Abstractions.ICommandMiddleware-1.html
+  commentId: T:Raftel.Application.Abstractions.ICommandMiddleware`1
+  name.vb: ICommandMiddleware(Of TRequest)
+  fullName: Raftel.Application.Abstractions.ICommandMiddleware<TRequest>
+  fullName.vb: Raftel.Application.Abstractions.ICommandMiddleware(Of TRequest)
+  nameWithType: ICommandMiddleware<TRequest>
+  nameWithType.vb: ICommandMiddleware(Of TRequest)
+- uid: Raftel.Application.Abstractions.IGlobalMiddleware`2
+  name: IGlobalMiddleware<TRequest, TResponse>
+  href: api/Raftel.Application.Abstractions.IGlobalMiddleware-2.html
+  commentId: T:Raftel.Application.Abstractions.IGlobalMiddleware`2
+  name.vb: IGlobalMiddleware(Of TRequest, TResponse)
+  fullName: Raftel.Application.Abstractions.IGlobalMiddleware<TRequest, TResponse>
+  fullName.vb: Raftel.Application.Abstractions.IGlobalMiddleware(Of TRequest, TResponse)
+  nameWithType: IGlobalMiddleware<TRequest, TResponse>
+  nameWithType.vb: IGlobalMiddleware(Of TRequest, TResponse)
+- uid: Raftel.Application.Abstractions.IGlobalMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  href: api/Raftel.Application.Abstractions.IGlobalMiddleware-2.html#Raftel_Application_Abstractions_IGlobalMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  commentId: M:Raftel.Application.Abstractions.IGlobalMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  fullName: Raftel.Application.Abstractions.IGlobalMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
+  fullName.vb: Raftel.Application.Abstractions.IGlobalMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
+  nameWithType: IGlobalMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  nameWithType.vb: IGlobalMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+- uid: Raftel.Application.Abstractions.IGlobalMiddleware`2.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Abstractions.IGlobalMiddleware-2.html#Raftel_Application_Abstractions_IGlobalMiddleware_2_HandleAsync_
+  commentId: Overload:Raftel.Application.Abstractions.IGlobalMiddleware`2.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.IGlobalMiddleware<TRequest, TResponse>.HandleAsync
+  fullName.vb: Raftel.Application.Abstractions.IGlobalMiddleware(Of TRequest, TResponse).HandleAsync
+  nameWithType: IGlobalMiddleware<TRequest, TResponse>.HandleAsync
+  nameWithType.vb: IGlobalMiddleware(Of TRequest, TResponse).HandleAsync
+- uid: Raftel.Application.Abstractions.IQueryMiddleware`2
+  name: IQueryMiddleware<TRequest, TResponse>
+  href: api/Raftel.Application.Abstractions.IQueryMiddleware-2.html
+  commentId: T:Raftel.Application.Abstractions.IQueryMiddleware`2
+  name.vb: IQueryMiddleware(Of TRequest, TResponse)
+  fullName: Raftel.Application.Abstractions.IQueryMiddleware<TRequest, TResponse>
+  fullName.vb: Raftel.Application.Abstractions.IQueryMiddleware(Of TRequest, TResponse)
+  nameWithType: IQueryMiddleware<TRequest, TResponse>
+  nameWithType.vb: IQueryMiddleware(Of TRequest, TResponse)
 - uid: Raftel.Application.Abstractions.IRequestDispatcher
   name: IRequestDispatcher
   href: api/Raftel.Application.Abstractions.IRequestDispatcher.html
@@ -103,6 +148,52 @@ references:
   commentId: N:Raftel.Application.Abstractions.Middlewares
   fullName: Raftel.Application.Abstractions.Middlewares
   nameWithType: Raftel.Application.Abstractions.Middlewares
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`1
+  name: UnitOfWorkMiddleware<TRequest>
+  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.html
+  commentId: T:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`1
+  name.vb: UnitOfWorkMiddleware(Of TRequest)
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest>
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest)
+  nameWithType: UnitOfWorkMiddleware<TRequest>
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest)
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`1.#ctor(Raftel.Application.IUnitOfWork)
+  name: UnitOfWorkMiddleware(IUnitOfWork)
+  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.html#Raftel_Application_Abstractions_Middlewares_UnitOfWorkMiddleware_1__ctor_Raftel_Application_IUnitOfWork_
+  commentId: M:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`1.#ctor(Raftel.Application.IUnitOfWork)
+  name.vb: New(IUnitOfWork)
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest>.UnitOfWorkMiddleware(Raftel.Application.IUnitOfWork)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest).New(Raftel.Application.IUnitOfWork)
+  nameWithType: UnitOfWorkMiddleware<TRequest>.UnitOfWorkMiddleware(IUnitOfWork)
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest).New(IUnitOfWork)
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`1.#ctor*
+  name: UnitOfWorkMiddleware
+  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.html#Raftel_Application_Abstractions_Middlewares_UnitOfWorkMiddleware_1__ctor_
+  commentId: Overload:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest>.UnitOfWorkMiddleware
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest).New
+  nameWithType: UnitOfWorkMiddleware<TRequest>.UnitOfWorkMiddleware
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest).New
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result})
+  name: HandleAsync(TRequest, RequestHandlerDelegate<Result>)
+  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.html#Raftel_Application_Abstractions_Middlewares_UnitOfWorkMiddleware_1_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate_Raftel_Domain_Abstractions_Result__
+  commentId: M:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result})
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of Result))
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<Raftel.Domain.Abstractions.Result>)
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of Raftel.Domain.Abstractions.Result))
+  nameWithType: UnitOfWorkMiddleware<TRequest>.HandleAsync(TRequest, RequestHandlerDelegate<Result>)
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest).HandleAsync(TRequest, RequestHandlerDelegate(Of Result))
+- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`1.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.html#Raftel_Application_Abstractions_Middlewares_UnitOfWorkMiddleware_1_HandleAsync_
+  commentId: Overload:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`1.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest>.HandleAsync
+  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest).HandleAsync
+  nameWithType: UnitOfWorkMiddleware<TRequest>.HandleAsync
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest).HandleAsync
 - uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
   name: UnitOfWorkMiddleware<TRequest, TResponse>
   href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.html
@@ -335,12 +426,15 @@ references:
   commentId: T:Raftel.Application.DependencyInjection
   fullName: Raftel.Application.DependencyInjection
   nameWithType: DependencyInjection
-- uid: Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  name: AddRaftelApplication(IServiceCollection)
-  href: api/Raftel.Application.DependencyInjection.html#Raftel_Application_DependencyInjection_AddRaftelApplication_Microsoft_Extensions_DependencyInjection_IServiceCollection_
-  commentId: M:Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  fullName: Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  nameWithType: DependencyInjection.AddRaftelApplication(IServiceCollection)
+- uid: Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Raftel.Application.IRaftelApplicationBuilder})
+  name: AddRaftelApplication(IServiceCollection, Action<IRaftelApplicationBuilder>)
+  href: api/Raftel.Application.DependencyInjection.html#Raftel_Application_DependencyInjection_AddRaftelApplication_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Raftel_Application_IRaftelApplicationBuilder__
+  commentId: M:Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Raftel.Application.IRaftelApplicationBuilder})
+  name.vb: AddRaftelApplication(IServiceCollection, Action(Of IRaftelApplicationBuilder))
+  fullName: Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Raftel.Application.IRaftelApplicationBuilder>)
+  fullName.vb: Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Raftel.Application.IRaftelApplicationBuilder))
+  nameWithType: DependencyInjection.AddRaftelApplication(IServiceCollection, Action<IRaftelApplicationBuilder>)
+  nameWithType.vb: DependencyInjection.AddRaftelApplication(IServiceCollection, Action(Of IRaftelApplicationBuilder))
 - uid: Raftel.Application.DependencyInjection.AddRaftelApplication*
   name: AddRaftelApplication
   href: api/Raftel.Application.DependencyInjection.html#Raftel_Application_DependencyInjection_AddRaftelApplication_
@@ -405,6 +499,64 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Exceptions.ValidationException.ToString
   nameWithType: ValidationException.ToString
+- uid: Raftel.Application.IRaftelApplicationBuilder
+  name: IRaftelApplicationBuilder
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html
+  commentId: T:Raftel.Application.IRaftelApplicationBuilder
+  fullName: Raftel.Application.IRaftelApplicationBuilder
+  nameWithType: IRaftelApplicationBuilder
+- uid: Raftel.Application.IRaftelApplicationBuilder.AddCommandMiddleware(System.Type)
+  name: AddCommandMiddleware(Type)
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_AddCommandMiddleware_System_Type_
+  commentId: M:Raftel.Application.IRaftelApplicationBuilder.AddCommandMiddleware(System.Type)
+  fullName: Raftel.Application.IRaftelApplicationBuilder.AddCommandMiddleware(System.Type)
+  nameWithType: IRaftelApplicationBuilder.AddCommandMiddleware(Type)
+- uid: Raftel.Application.IRaftelApplicationBuilder.AddCommandMiddleware*
+  name: AddCommandMiddleware
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_AddCommandMiddleware_
+  commentId: Overload:Raftel.Application.IRaftelApplicationBuilder.AddCommandMiddleware
+  isSpec: "True"
+  fullName: Raftel.Application.IRaftelApplicationBuilder.AddCommandMiddleware
+  nameWithType: IRaftelApplicationBuilder.AddCommandMiddleware
+- uid: Raftel.Application.IRaftelApplicationBuilder.AddGlobalMiddleware(System.Type)
+  name: AddGlobalMiddleware(Type)
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_AddGlobalMiddleware_System_Type_
+  commentId: M:Raftel.Application.IRaftelApplicationBuilder.AddGlobalMiddleware(System.Type)
+  fullName: Raftel.Application.IRaftelApplicationBuilder.AddGlobalMiddleware(System.Type)
+  nameWithType: IRaftelApplicationBuilder.AddGlobalMiddleware(Type)
+- uid: Raftel.Application.IRaftelApplicationBuilder.AddGlobalMiddleware*
+  name: AddGlobalMiddleware
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_AddGlobalMiddleware_
+  commentId: Overload:Raftel.Application.IRaftelApplicationBuilder.AddGlobalMiddleware
+  isSpec: "True"
+  fullName: Raftel.Application.IRaftelApplicationBuilder.AddGlobalMiddleware
+  nameWithType: IRaftelApplicationBuilder.AddGlobalMiddleware
+- uid: Raftel.Application.IRaftelApplicationBuilder.AddQueryMiddleware(System.Type)
+  name: AddQueryMiddleware(Type)
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_AddQueryMiddleware_System_Type_
+  commentId: M:Raftel.Application.IRaftelApplicationBuilder.AddQueryMiddleware(System.Type)
+  fullName: Raftel.Application.IRaftelApplicationBuilder.AddQueryMiddleware(System.Type)
+  nameWithType: IRaftelApplicationBuilder.AddQueryMiddleware(Type)
+- uid: Raftel.Application.IRaftelApplicationBuilder.AddQueryMiddleware*
+  name: AddQueryMiddleware
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_AddQueryMiddleware_
+  commentId: Overload:Raftel.Application.IRaftelApplicationBuilder.AddQueryMiddleware
+  isSpec: "True"
+  fullName: Raftel.Application.IRaftelApplicationBuilder.AddQueryMiddleware
+  nameWithType: IRaftelApplicationBuilder.AddQueryMiddleware
+- uid: Raftel.Application.IRaftelApplicationBuilder.RegisterServicesFromAssembly(System.Reflection.Assembly)
+  name: RegisterServicesFromAssembly(Assembly)
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_RegisterServicesFromAssembly_System_Reflection_Assembly_
+  commentId: M:Raftel.Application.IRaftelApplicationBuilder.RegisterServicesFromAssembly(System.Reflection.Assembly)
+  fullName: Raftel.Application.IRaftelApplicationBuilder.RegisterServicesFromAssembly(System.Reflection.Assembly)
+  nameWithType: IRaftelApplicationBuilder.RegisterServicesFromAssembly(Assembly)
+- uid: Raftel.Application.IRaftelApplicationBuilder.RegisterServicesFromAssembly*
+  name: RegisterServicesFromAssembly
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_RegisterServicesFromAssembly_
+  commentId: Overload:Raftel.Application.IRaftelApplicationBuilder.RegisterServicesFromAssembly
+  isSpec: "True"
+  fullName: Raftel.Application.IRaftelApplicationBuilder.RegisterServicesFromAssembly
+  nameWithType: IRaftelApplicationBuilder.RegisterServicesFromAssembly
 - uid: Raftel.Application.IUnitOfWork
   name: IUnitOfWork
   href: api/Raftel.Application.IUnitOfWork.html
@@ -511,6 +663,116 @@ references:
   fullName.vb: Raftel.Application.Queries.QueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery)
   nameWithType: QueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery)
   nameWithType.vb: QueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery)
+- uid: Raftel.Application.RaftelApplicationBuilder
+  name: RaftelApplicationBuilder
+  href: api/Raftel.Application.RaftelApplicationBuilder.html
+  commentId: T:Raftel.Application.RaftelApplicationBuilder
+  fullName: Raftel.Application.RaftelApplicationBuilder
+  nameWithType: RaftelApplicationBuilder
+- uid: Raftel.Application.RaftelApplicationBuilder.AddCommandMiddleware(System.Type)
+  name: AddCommandMiddleware(Type)
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_AddCommandMiddleware_System_Type_
+  commentId: M:Raftel.Application.RaftelApplicationBuilder.AddCommandMiddleware(System.Type)
+  fullName: Raftel.Application.RaftelApplicationBuilder.AddCommandMiddleware(System.Type)
+  nameWithType: RaftelApplicationBuilder.AddCommandMiddleware(Type)
+- uid: Raftel.Application.RaftelApplicationBuilder.AddCommandMiddleware*
+  name: AddCommandMiddleware
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_AddCommandMiddleware_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.AddCommandMiddleware
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.AddCommandMiddleware
+  nameWithType: RaftelApplicationBuilder.AddCommandMiddleware
+- uid: Raftel.Application.RaftelApplicationBuilder.AddGlobalMiddleware(System.Type)
+  name: AddGlobalMiddleware(Type)
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_AddGlobalMiddleware_System_Type_
+  commentId: M:Raftel.Application.RaftelApplicationBuilder.AddGlobalMiddleware(System.Type)
+  fullName: Raftel.Application.RaftelApplicationBuilder.AddGlobalMiddleware(System.Type)
+  nameWithType: RaftelApplicationBuilder.AddGlobalMiddleware(Type)
+- uid: Raftel.Application.RaftelApplicationBuilder.AddGlobalMiddleware*
+  name: AddGlobalMiddleware
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_AddGlobalMiddleware_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.AddGlobalMiddleware
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.AddGlobalMiddleware
+  nameWithType: RaftelApplicationBuilder.AddGlobalMiddleware
+- uid: Raftel.Application.RaftelApplicationBuilder.AddQueryMiddleware(System.Type)
+  name: AddQueryMiddleware(Type)
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_AddQueryMiddleware_System_Type_
+  commentId: M:Raftel.Application.RaftelApplicationBuilder.AddQueryMiddleware(System.Type)
+  fullName: Raftel.Application.RaftelApplicationBuilder.AddQueryMiddleware(System.Type)
+  nameWithType: RaftelApplicationBuilder.AddQueryMiddleware(Type)
+- uid: Raftel.Application.RaftelApplicationBuilder.AddQueryMiddleware*
+  name: AddQueryMiddleware
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_AddQueryMiddleware_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.AddQueryMiddleware
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.AddQueryMiddleware
+  nameWithType: RaftelApplicationBuilder.AddQueryMiddleware
+- uid: Raftel.Application.RaftelApplicationBuilder.Assemblies
+  name: Assemblies
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_Assemblies
+  commentId: P:Raftel.Application.RaftelApplicationBuilder.Assemblies
+  fullName: Raftel.Application.RaftelApplicationBuilder.Assemblies
+  nameWithType: RaftelApplicationBuilder.Assemblies
+- uid: Raftel.Application.RaftelApplicationBuilder.Assemblies*
+  name: Assemblies
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_Assemblies_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.Assemblies
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.Assemblies
+  nameWithType: RaftelApplicationBuilder.Assemblies
+- uid: Raftel.Application.RaftelApplicationBuilder.CommandMiddlewares
+  name: CommandMiddlewares
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_CommandMiddlewares
+  commentId: P:Raftel.Application.RaftelApplicationBuilder.CommandMiddlewares
+  fullName: Raftel.Application.RaftelApplicationBuilder.CommandMiddlewares
+  nameWithType: RaftelApplicationBuilder.CommandMiddlewares
+- uid: Raftel.Application.RaftelApplicationBuilder.CommandMiddlewares*
+  name: CommandMiddlewares
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_CommandMiddlewares_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.CommandMiddlewares
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.CommandMiddlewares
+  nameWithType: RaftelApplicationBuilder.CommandMiddlewares
+- uid: Raftel.Application.RaftelApplicationBuilder.GlobalMiddlewares
+  name: GlobalMiddlewares
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_GlobalMiddlewares
+  commentId: P:Raftel.Application.RaftelApplicationBuilder.GlobalMiddlewares
+  fullName: Raftel.Application.RaftelApplicationBuilder.GlobalMiddlewares
+  nameWithType: RaftelApplicationBuilder.GlobalMiddlewares
+- uid: Raftel.Application.RaftelApplicationBuilder.GlobalMiddlewares*
+  name: GlobalMiddlewares
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_GlobalMiddlewares_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.GlobalMiddlewares
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.GlobalMiddlewares
+  nameWithType: RaftelApplicationBuilder.GlobalMiddlewares
+- uid: Raftel.Application.RaftelApplicationBuilder.QueryMiddlewares
+  name: QueryMiddlewares
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_QueryMiddlewares
+  commentId: P:Raftel.Application.RaftelApplicationBuilder.QueryMiddlewares
+  fullName: Raftel.Application.RaftelApplicationBuilder.QueryMiddlewares
+  nameWithType: RaftelApplicationBuilder.QueryMiddlewares
+- uid: Raftel.Application.RaftelApplicationBuilder.QueryMiddlewares*
+  name: QueryMiddlewares
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_QueryMiddlewares_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.QueryMiddlewares
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.QueryMiddlewares
+  nameWithType: RaftelApplicationBuilder.QueryMiddlewares
+- uid: Raftel.Application.RaftelApplicationBuilder.RegisterServicesFromAssembly(System.Reflection.Assembly)
+  name: RegisterServicesFromAssembly(Assembly)
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_RegisterServicesFromAssembly_System_Reflection_Assembly_
+  commentId: M:Raftel.Application.RaftelApplicationBuilder.RegisterServicesFromAssembly(System.Reflection.Assembly)
+  fullName: Raftel.Application.RaftelApplicationBuilder.RegisterServicesFromAssembly(System.Reflection.Assembly)
+  nameWithType: RaftelApplicationBuilder.RegisterServicesFromAssembly(Assembly)
+- uid: Raftel.Application.RaftelApplicationBuilder.RegisterServicesFromAssembly*
+  name: RegisterServicesFromAssembly
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_RegisterServicesFromAssembly_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.RegisterServicesFromAssembly
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.RegisterServicesFromAssembly
+  nameWithType: RaftelApplicationBuilder.RegisterServicesFromAssembly
 - uid: Raftel.Domain.Abstractions
   name: Raftel.Domain.Abstractions
   href: api/Raftel.Domain.Abstractions.html

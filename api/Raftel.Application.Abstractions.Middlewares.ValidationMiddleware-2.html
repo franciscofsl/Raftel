@@ -92,7 +92,7 @@ If any validation rule fails, a <a class="xref" href="Raftel.Application.Excepti
   </div>
   <div class="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="Raftel.Application.Abstractions.IRequestMiddleware-2.html">IRequestMiddleware</a>&lt;TRequest, TResponse&gt;</div>
+    <div><a class="xref" href="Raftel.Application.Abstractions.IGlobalMiddleware-2.html">IGlobalMiddleware</a>&lt;TRequest, TResponse&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -122,7 +122,7 @@ If any validation rule fails, a <a class="xref" href="Raftel.Application.Excepti
   <h6><strong>Assembly</strong>: Raftel.Application.dll</h6>
   <h5 id="Raftel_Application_Abstractions_Middlewares_ValidationMiddleware_2_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ValidationMiddleware&lt;TRequest, TResponse&gt; : IRequestMiddleware&lt;TRequest, TResponse&gt; where TRequest : IRequest&lt;TResponse&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class ValidationMiddleware&lt;TRequest, TResponse&gt; : IGlobalMiddleware&lt;TRequest, TResponse&gt; where TRequest : IRequest&lt;TResponse&gt;</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -260,7 +260,7 @@ If validation fails, a <a class="xref" href="Raftel.Application.Exceptions.Valid
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="Raftel.Application.Abstractions.IRequestMiddleware-2.html">IRequestMiddleware&lt;TRequest, TResponse&gt;</a>
+      <a class="xref" href="Raftel.Application.Abstractions.IGlobalMiddleware-2.html">IGlobalMiddleware&lt;TRequest, TResponse&gt;</a>
   </div>
 
 </article>

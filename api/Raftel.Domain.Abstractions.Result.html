@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width">
       <meta name="title" content="Class Result | Raftel ">
     
-    
+    <meta name="description" content="Represents the result of an operation, encapsulating success or failure information.">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -81,7 +81,8 @@
 
 
   <h1 id="Raftel_Domain_Abstractions_Result" data-uid="Raftel.Domain.Abstractions.Result" class="text-break">Class Result</h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Represents the result of an operation, encapsulating success or failure information.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -126,11 +127,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_Result__ctor_System_Boolean_Raftel_Domain_Abstractions_Error_.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.Result.%23ctor(System.Boolean%2CRaftel.Domain.Abstractions.Error)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L7">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L18">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_Result__ctor_" data-uid="Raftel.Domain.Abstractions.Result.#ctor*"></a>
   <h4 id="Raftel_Domain_Abstractions_Result__ctor_System_Boolean_Raftel_Domain_Abstractions_Error_" data-uid="Raftel.Domain.Abstractions.Result.#ctor(System.Boolean,Raftel.Domain.Abstractions.Error)">Result(bool, Error)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -149,12 +151,30 @@
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
         <td><span class="parametername">isSuccess</span></td>
-        <td></td>
+        <td><p>Indicates whether the operation was successful.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Raftel.Domain.Abstractions.Error.html">Error</a></td>
         <td><span class="parametername">error</span></td>
-        <td></td>
+        <td><p>The error associated with the operation, if any.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
+        <td><p>Thrown if the success state and error state are inconsistent.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -165,11 +185,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_Result_Error.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.Result.Error%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L25">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L47">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_Result_Error_" data-uid="Raftel.Domain.Abstractions.Result.Error*"></a>
   <h4 id="Raftel_Domain_Abstractions_Result_Error" data-uid="Raftel.Domain.Abstractions.Result.Error">Error</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the error associated with the operation, if any.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -195,11 +216,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_Result_IsFailure.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.Result.IsFailure%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L24">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L42">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_Result_IsFailure_" data-uid="Raftel.Domain.Abstractions.Result.IsFailure*"></a>
   <h4 id="Raftel_Domain_Abstractions_Result_IsFailure" data-uid="Raftel.Domain.Abstractions.Result.IsFailure">IsFailure</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the operation failed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -225,11 +247,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_Result_IsSuccess.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.Result.IsSuccess%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L23">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L37">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_Result_IsSuccess_" data-uid="Raftel.Domain.Abstractions.Result.IsSuccess*"></a>
   <h4 id="Raftel_Domain_Abstractions_Result_IsSuccess" data-uid="Raftel.Domain.Abstractions.Result.IsSuccess">IsSuccess</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the operation was successful.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -257,11 +280,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_Result_Create__1___0_.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.Result.Create%60%601(%60%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L35">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L86">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_Result_Create_" data-uid="Raftel.Domain.Abstractions.Result.Create*"></a>
   <h4 id="Raftel_Domain_Abstractions_Result_Create__1___0_" data-uid="Raftel.Domain.Abstractions.Result.Create``1(``0)">Create&lt;TValue&gt;(TValue?)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a result based on the provided value.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -280,7 +304,8 @@
       <tr>
         <td><span class="xref">TValue</span></td>
         <td><span class="parametername">value</span></td>
-        <td></td>
+        <td><p>The value to evaluate.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -295,7 +320,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result</a>&lt;TValue&gt;</td>
-        <td></td>
+        <td><p>A successful result if the value is not null; otherwise, a failed result with a null value error.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -310,7 +336,8 @@
     <tbody>
       <tr>
         <td><span class="parametername">TValue</span></td>
-        <td></td>
+        <td><p>The type of the value.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -319,11 +346,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_Result_Failure_Raftel_Domain_Abstractions_Error_.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.Result.Failure(Raftel.Domain.Abstractions.Error)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L28">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L60">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_Result_Failure_" data-uid="Raftel.Domain.Abstractions.Result.Failure*"></a>
   <h4 id="Raftel_Domain_Abstractions_Result_Failure_Raftel_Domain_Abstractions_Error_" data-uid="Raftel.Domain.Abstractions.Result.Failure(Raftel.Domain.Abstractions.Error)">Failure(Error)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a failed result with the specified error.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -342,7 +370,8 @@
       <tr>
         <td><a class="xref" href="Raftel.Domain.Abstractions.Error.html">Error</a></td>
         <td><span class="parametername">error</span></td>
-        <td></td>
+        <td><p>The error associated with the failure.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -357,7 +386,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a></td>
-        <td></td>
+        <td><p>A failed result.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -366,11 +396,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_Result_Failure__1_Raftel_Domain_Abstractions_Error_.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.Result.Failure%60%601(Raftel.Domain.Abstractions.Error)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L33">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L76">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_Result_Failure_" data-uid="Raftel.Domain.Abstractions.Result.Failure*"></a>
   <h4 id="Raftel_Domain_Abstractions_Result_Failure__1_Raftel_Domain_Abstractions_Error_" data-uid="Raftel.Domain.Abstractions.Result.Failure``1(Raftel.Domain.Abstractions.Error)">Failure&lt;TValue&gt;(Error)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a failed result with the specified error.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -389,7 +420,8 @@
       <tr>
         <td><a class="xref" href="Raftel.Domain.Abstractions.Error.html">Error</a></td>
         <td><span class="parametername">error</span></td>
-        <td></td>
+        <td><p>The error associated with the failure.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -404,7 +436,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result</a>&lt;TValue&gt;</td>
-        <td></td>
+        <td><p>A failed result.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -419,7 +452,8 @@
     <tbody>
       <tr>
         <td><span class="parametername">TValue</span></td>
-        <td></td>
+        <td><p>The type of the value.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -428,11 +462,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_Result_Success.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.Result.Success%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L27">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L53">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_Result_Success_" data-uid="Raftel.Domain.Abstractions.Result.Success*"></a>
   <h4 id="Raftel_Domain_Abstractions_Result_Success" data-uid="Raftel.Domain.Abstractions.Result.Success">Success()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a successful result.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -449,7 +484,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a></td>
-        <td></td>
+        <td><p>A successful result.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -458,11 +494,12 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_Result_Success__1___0_.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.Result.Success%60%601(%60%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L31">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L68">View Source</a>
   </span>
   <a id="Raftel_Domain_Abstractions_Result_Success_" data-uid="Raftel.Domain.Abstractions.Result.Success*"></a>
   <h4 id="Raftel_Domain_Abstractions_Result_Success__1___0_" data-uid="Raftel.Domain.Abstractions.Result.Success``1(``0)">Success&lt;TValue&gt;(TValue)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a successful result with a value.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
@@ -481,7 +518,8 @@
       <tr>
         <td><span class="xref">TValue</span></td>
         <td><span class="parametername">value</span></td>
-        <td></td>
+        <td><p>The value returned by the operation.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -496,7 +534,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result</a>&lt;TValue&gt;</td>
-        <td></td>
+        <td><p>A successful result containing the value.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -511,7 +550,8 @@
     <tbody>
       <tr>
         <td><span class="parametername">TValue</span></td>
-        <td></td>
+        <td><p>The type of the value.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -527,7 +567,7 @@
                     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_Result.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.Result%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L5" class="contribution-link">View Source</a>
+                    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/Result.cs/#L8" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

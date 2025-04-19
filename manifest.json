@@ -22,6 +22,48 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.ICommandMiddleware-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.ICommandMiddleware-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.ICommandMiddleware<TRequest>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.ICommandMiddleware-1.yml\" sourcestartlinenumber=\"1\">Represents a middleware specific to command handling in the request pipeline.\nInherits from <xref href=\"Raftel.Application.Abstractions.IGlobalMiddleware%602\" data-throw-if-not-resolved=\"false\"></xref> with a fixed response type of <xref href=\"Raftel.Domain.Abstractions.Result\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.IGlobalMiddleware-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.IGlobalMiddleware-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.IGlobalMiddleware<TRequest, TResponse>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.IGlobalMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware component in the request pipeline that can intercept and\nmodify the processing of a request before and/or after the next component is invoked.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.IQueryMiddleware-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.IQueryMiddleware-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.IQueryMiddleware<TRequest, TResponse>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.IQueryMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware specific to query handling in the request pipeline.\nInherits from <xref href=\"Raftel.Application.Abstractions.IGlobalMiddleware%602\" data-throw-if-not-resolved=\"false\"></xref> with a response type of <xref href=\"Raftel.Domain.Abstractions.Result%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Abstractions.IRequest-1.yml",
       "output": {
         ".html": {
@@ -75,6 +117,20 @@
       "IsMRef": true,
       "Title": "Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>",
       "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.IRequestMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware component in the request pipeline that can intercept and\nmodify the processing of a request before and/or after the next component is invoked.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest>",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -274,6 +330,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.IRaftelApplicationBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.IRaftelApplicationBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.IRaftelApplicationBuilder",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.IRaftelApplicationBuilder.yml\" sourcestartlinenumber=\"1\">Defines the contract for building and configuring the application by registering services\nand middleware components.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.IUnitOfWork.yml",
       "output": {
         ".html": {
@@ -284,7 +354,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Application.IUnitOfWork",
-      "Summary": null
+      "Summary": "<p sourcefile=\"api/Raftel.Application.IUnitOfWork.yml\" sourcestartlinenumber=\"1\">Represents a unit of work that encapsulates a series of operations\nto be committed as a single transaction.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -358,6 +428,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.RaftelApplicationBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.RaftelApplicationBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.RaftelApplicationBuilder",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.RaftelApplicationBuilder.yml\" sourcestartlinenumber=\"1\">Builder class for configuring and registering application services, middlewares, and assemblies.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.yml",
       "output": {
         ".html": {
@@ -382,7 +466,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Domain.Abstractions.Error",
-      "Summary": null
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.Error.yml\" sourcestartlinenumber=\"1\">Represents an error with a specific code and message.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -396,7 +480,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Domain.Abstractions.IRepository<TEntity, TId>",
-      "Summary": null
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.IRepository-2.yml\" sourcestartlinenumber=\"1\">Defines a generic repository interface for managing aggregate root entities.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -410,7 +494,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Domain.Abstractions.Result<TValue>",
-      "Summary": null
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.Result-1.yml\" sourcestartlinenumber=\"1\">Represents the result of an operation with a value.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -424,7 +508,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Domain.Abstractions.Result",
-      "Summary": null
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.Result.yml\" sourcestartlinenumber=\"1\">Represents the result of an operation, encapsulating success or failure information.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -620,7 +704,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>",
-      "Summary": null
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.EfRepository-3.yml\" sourcestartlinenumber=\"1\">Represents a base implementation of a repository using Entity Framework.</p>\n"
     },
     {
       "type": "ManagedReference",

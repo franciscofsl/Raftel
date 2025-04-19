@@ -92,16 +92,24 @@ the request handler and middleware pipeline from the dependency injection contai
     <h3 id="interfaces">
 Interfaces
 </h3>
+      <h4><a class="xref" href="Raftel.Application.Abstractions.ICommandMiddleware-1.html">ICommandMiddleware&lt;TRequest&gt;</a></h4>
+      <section><p>Represents a middleware specific to command handling in the request pipeline.
+Inherits from <a class="xref" href="Raftel.Application.Abstractions.IGlobalMiddleware-2.html">IGlobalMiddleware&lt;TRequest, TResponse&gt;</a> with a fixed response type of <a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a>.</p>
+</section>
+      <h4><a class="xref" href="Raftel.Application.Abstractions.IGlobalMiddleware-2.html">IGlobalMiddleware&lt;TRequest, TResponse&gt;</a></h4>
+      <section><p>Represents a middleware component in the request pipeline that can intercept and
+modify the processing of a request before and/or after the next component is invoked.</p>
+</section>
+      <h4><a class="xref" href="Raftel.Application.Abstractions.IQueryMiddleware-2.html">IQueryMiddleware&lt;TRequest, TResponse&gt;</a></h4>
+      <section><p>Represents a middleware specific to query handling in the request pipeline.
+Inherits from <a class="xref" href="Raftel.Application.Abstractions.IGlobalMiddleware-2.html">IGlobalMiddleware&lt;TRequest, TResponse&gt;</a> with a response type of <a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result&lt;TValue&gt;</a>.</p>
+</section>
       <h4><a class="xref" href="Raftel.Application.Abstractions.IRequestDispatcher.html">IRequestDispatcher</a></h4>
       <section><p>Dispatches requests through the pipeline and to their associated handler.</p>
 </section>
       <h4><a class="xref" href="Raftel.Application.Abstractions.IRequestHandler-2.html">IRequestHandler&lt;TRequest, TResponse&gt;</a></h4>
       <section><p>Defines a handler that processes a request of type <code class="typeparamref">TRequest</code>
 and returns a response of type <code class="typeparamref">TResponse</code>.</p>
-</section>
-      <h4><a class="xref" href="Raftel.Application.Abstractions.IRequestMiddleware-2.html">IRequestMiddleware&lt;TRequest, TResponse&gt;</a></h4>
-      <section><p>Represents a middleware component in the request pipeline that can intercept and
-modify the processing of a request before and/or after the next component is invoked.</p>
 </section>
       <h4><a class="xref" href="Raftel.Application.Abstractions.IRequest-1.html">IRequest&lt;TResponse&gt;</a></h4>
       <section><p>Represents a request that produces a response of type <code class="typeparamref">TResponse</code>.</p>
