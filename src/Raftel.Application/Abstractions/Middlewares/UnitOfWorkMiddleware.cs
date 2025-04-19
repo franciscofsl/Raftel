@@ -1,24 +1,18 @@
-﻿using Raftel.Domain.Abstractions;
+﻿using Raftel.Application.Commands;
+using Raftel.Domain.Abstractions;
 
 namespace Raftel.Application.Abstractions.Middlewares;
 
-public class UnitOfWorkMiddleware<TRequest, TResponse> : IRequestMiddleware<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>
+public class UnitOfWorkMiddleware<TRequest>(IUnitOfWork unitOfWork) : ICommandMiddleware<TRequest>
+    where TRequest : ICommand
 {
-    private readonly IUnitOfWork _unitOfWork;
-
-    public UnitOfWorkMiddleware(IUnitOfWork unitOfWork)
-    {
-        _unitOfWork = unitOfWork;
-    }
-
-    public async Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next)
+    public async Task<Result> HandleAsync(TRequest request, RequestHandlerDelegate<Result> next)
     {
         var response = await next();
 
-        if (response is Result { IsSuccess: true })
+        if (response is { IsSuccess: true })
         {
-            await _unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync();
         }
 
         return response;

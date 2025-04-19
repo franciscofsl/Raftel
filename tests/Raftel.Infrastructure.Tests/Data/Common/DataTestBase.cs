@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
 using Raftel.Application.Abstractions;
+using Raftel.Application.Abstractions.Middlewares;
 using Raftel.Application.Commands;
 using Raftel.Application.Tests.Common;
 using Raftel.Application.Tests.Common.CreatePirate;
@@ -57,9 +58,11 @@ public abstract class DataTestBase : IAsyncLifetime
             .Build();
         services.AddRaftelData<TestingRaftelDbContext>(configuration, "TestConnection");
 
-        services.AddRaftelApplication(configuration =>
+        services.AddRaftelApplication(cfg =>
         {
-            configuration.RegisterServicesFromAssembly(typeof(CreatePirateCommandHandler).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommandHandler).Assembly);
+            cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
+            cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
         });
 
         services.AddScoped(typeof(IPirateRepository), typeof(PirateRepository));
