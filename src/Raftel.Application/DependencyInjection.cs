@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Abstractions;
-using Raftel.Application.Abstractions.Middlewares;
 using Raftel.Application.Commands;
 using Raftel.Application.Queries;
 using Raftel.Domain.Validators;
@@ -20,23 +19,7 @@ public static class DependencyInjection
         configure(builder);
 
         RegisterHandlers(services, assemblies: builder.Assemblies);
-
-        var middlewareRegistry = new MiddlewareRegistry(builder.GlobalMiddlewares, builder.CommandMiddlewares,
-            builder.QueryMiddlewares);
-        services.AddSingleton(middlewareRegistry);
-
-        foreach (var type in builder.GlobalMiddlewares)
-        {
-            services.AddScoped(typeof(IGlobalMiddleware<,>), type);
-        }
-        foreach (var type in builder.CommandMiddlewares)
-        {
-            services.AddScoped(typeof(ICommandMiddleware<>), type);
-        }
-        foreach (var type in builder.QueryMiddlewares)
-        {
-            services.AddScoped(typeof(IQueryMiddleware<,>), type);
-        }
+        RegisterMiddlewares(services, builder);
 
         services.AddScoped<IRequestDispatcher, RequestDispatcher>();
         services.AddScoped<ICommandDispatcher, CommandDispatcher>();
@@ -93,6 +76,28 @@ public static class DependencyInjection
         if (genericDefinition == validatorBase)
         {
             services.AddScoped(baseType, type);
+        }
+    }
+
+    private static void RegisterMiddlewares(IServiceCollection services, RaftelApplicationBuilder builder)
+    {
+        var middlewareRegistry = new MiddlewareRegistry(builder.GlobalMiddlewares, builder.CommandMiddlewares,
+            builder.QueryMiddlewares);
+        services.AddSingleton(middlewareRegistry);
+
+        foreach (var type in builder.GlobalMiddlewares)
+        {
+            services.AddScoped(typeof(IGlobalMiddleware<,>), type);
+        }
+
+        foreach (var type in builder.CommandMiddlewares)
+        {
+            services.AddScoped(typeof(ICommandMiddleware<>), type);
+        }
+
+        foreach (var type in builder.QueryMiddlewares)
+        {
+            services.AddScoped(typeof(IQueryMiddleware<,>), type);
         }
     }
 }
