@@ -12,7 +12,7 @@ namespace Raftel.Application.Abstractions.Middlewares;
 /// <typeparam name="TResponse">The type of the expected response.</typeparam>
 /// <param name="validators">A collection of validators for the given <typeparamref name="TRequest"/>.</param>
 public class ValidationMiddleware<TRequest, TResponse>(IEnumerable<Validator<TRequest>> validators)
-    : IRequestMiddleware<TRequest, TResponse>
+    : IGlobalMiddleware<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
     /// <summary>

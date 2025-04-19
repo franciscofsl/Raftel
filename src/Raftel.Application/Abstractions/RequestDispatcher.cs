@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Raftel.Application.Commands;
+using Raftel.Application.Queries;
+using Raftel.Domain.Abstractions;
 
 namespace Raftel.Application.Abstractions;
 
@@ -6,35 +9,67 @@ namespace Raftel.Application.Abstractions;
 /// Default implementation of <see cref="IRequestDispatcher"/> that resolves
 /// the request handler and middleware pipeline from the dependency injection container.
 /// </summary>
-public class RequestDispatcher : IRequestDispatcher
+public class RequestDispatcher(IServiceProvider serviceProvider) : IRequestDispatcher
 {
-    private readonly IServiceProvider _serviceProvider;
-
-    /// <summary>
-    /// Creates a new instance of the <see cref="RequestDispatcher"/> class.
-    /// </summary>
-    /// <param name="serviceProvider">The dependency injection service provider.</param>
-    public RequestDispatcher(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-
     /// <inheritdoc />
     public async Task<TResponse> DispatchAsync<TRequest, TResponse>(TRequest request)
         where TRequest : IRequest<TResponse>
     {
-        var handler = _serviceProvider.GetRequiredService<IRequestHandler<TRequest, TResponse>>();
-        var behaviors = _serviceProvider.GetServices<IRequestMiddleware<TRequest, TResponse>>().ToList();
+        var handler = serviceProvider.GetRequiredService<IRequestHandler<TRequest, TResponse>>();
 
-        RequestHandlerDelegate<TResponse> handlerDelegate = () => handler.HandleAsync(request);
+        var allMiddlewares = new List<IGlobalMiddleware<TRequest, TResponse>>();
+        allMiddlewares.AddRange(serviceProvider.GetServices<IGlobalMiddleware<TRequest, TResponse>>());
+        allMiddlewares.AddRange(GetCommandMiddlewares<TRequest, TResponse>(request));
+        allMiddlewares.AddRange(GetQueriesMiddlewares<TRequest, TResponse>(request));
 
-        var pipeline = behaviors
-            .Reverse<IRequestMiddleware<TRequest, TResponse>>()
-            .Aggregate(handlerDelegate,
-                (next, behavior) => () => behavior.HandleAsync(request, next));
+        var handlerDelegate = new RequestHandlerDelegate<TResponse>(() => handler.HandleAsync(request));
 
-        var aa = await pipeline();
+        var pipeline = allMiddlewares
+            .Reverse<IGlobalMiddleware<TRequest, TResponse>>()
+            .Aggregate(handlerDelegate, (next, middleware) => () => middleware.HandleAsync(request, next));
 
-        return aa;
+        return await pipeline();
+    }
+
+    private IGlobalMiddleware<TRequest, TResponse>[] GetCommandMiddlewares<TRequest, TResponse>(TRequest request)
+        where TRequest : IRequest<TResponse>
+    {
+        if (request is not ICommand || typeof(TResponse) != typeof(Result))
+        {
+            return [];
+        }
+
+        return serviceProvider
+            .GetServices(typeof(ICommandMiddleware<>).MakeGenericType(typeof(TRequest)))
+            .Cast<IGlobalMiddleware<TRequest, TResponse>>()
+            .ToArray();
+    }
+
+    private IGlobalMiddleware<TRequest, TResponse>[] GetQueriesMiddlewares<TRequest, TResponse>(
+        TRequest request) where TRequest : IRequest<TResponse>
+    {
+        var requestType = request.GetType();
+        if (!requestType.GetInterfaces()
+                .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQuery<>)))
+        {
+            return [];
+        }
+
+        var queryInterface = requestType
+            .GetInterfaces()
+            .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IQuery<>));
+
+        if (queryInterface == null)
+        {
+            return [];
+        }
+
+        var responseType = queryInterface.GetGenericArguments()[0];
+        var middlewareInterface = typeof(IQueryMiddleware<,>).MakeGenericType(requestType, responseType);
+
+        return serviceProvider
+            .GetServices(middlewareInterface)
+            .Cast<IGlobalMiddleware<TRequest, TResponse>>()
+            .ToArray();
     }
 }
