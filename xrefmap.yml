@@ -89,14 +89,14 @@ references:
   fullName.vb: Raftel.Application.Abstractions.IRequestHandler(Of TRequest, TResponse)
   nameWithType: IRequestHandler<TRequest, TResponse>
   nameWithType.vb: IRequestHandler(Of TRequest, TResponse)
-- uid: Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0)
-  name: HandleAsync(TRequest)
-  href: api/Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync__0_
-  commentId: M:Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0)
-  fullName: Raftel.Application.Abstractions.IRequestHandler<TRequest, TResponse>.HandleAsync(TRequest)
-  fullName.vb: Raftel.Application.Abstractions.IRequestHandler(Of TRequest, TResponse).HandleAsync(TRequest)
-  nameWithType: IRequestHandler<TRequest, TResponse>.HandleAsync(TRequest)
-  nameWithType.vb: IRequestHandler(Of TRequest, TResponse).HandleAsync(TRequest)
+- uid: Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0,System.Threading.CancellationToken)
+  name: HandleAsync(TRequest, CancellationToken)
+  href: api/Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync__0_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0,System.Threading.CancellationToken)
+  fullName: Raftel.Application.Abstractions.IRequestHandler<TRequest, TResponse>.HandleAsync(TRequest, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Abstractions.IRequestHandler(Of TRequest, TResponse).HandleAsync(TRequest, System.Threading.CancellationToken)
+  nameWithType: IRequestHandler<TRequest, TResponse>.HandleAsync(TRequest, CancellationToken)
+  nameWithType.vb: IRequestHandler(Of TRequest, TResponse).HandleAsync(TRequest, CancellationToken)
 - uid: Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync*
   name: HandleAsync
   href: api/Raftel.Application.Abstractions.IRequestHandler-2.html#Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync_
@@ -106,33 +106,6 @@ references:
   fullName.vb: Raftel.Application.Abstractions.IRequestHandler(Of TRequest, TResponse).HandleAsync
   nameWithType: IRequestHandler<TRequest, TResponse>.HandleAsync
   nameWithType.vb: IRequestHandler(Of TRequest, TResponse).HandleAsync
-- uid: Raftel.Application.Abstractions.IRequestMiddleware`2
-  name: IRequestMiddleware<TRequest, TResponse>
-  href: api/Raftel.Application.Abstractions.IRequestMiddleware-2.html
-  commentId: T:Raftel.Application.Abstractions.IRequestMiddleware`2
-  name.vb: IRequestMiddleware(Of TRequest, TResponse)
-  fullName: Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>
-  fullName.vb: Raftel.Application.Abstractions.IRequestMiddleware(Of TRequest, TResponse)
-  nameWithType: IRequestMiddleware<TRequest, TResponse>
-  nameWithType.vb: IRequestMiddleware(Of TRequest, TResponse)
-- uid: Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  href: api/Raftel.Application.Abstractions.IRequestMiddleware-2.html#Raftel_Application_Abstractions_IRequestMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
-  commentId: M:Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
-  fullName: Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
-  fullName.vb: Raftel.Application.Abstractions.IRequestMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
-  nameWithType: IRequestMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  nameWithType.vb: IRequestMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
-- uid: Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync*
-  name: HandleAsync
-  href: api/Raftel.Application.Abstractions.IRequestMiddleware-2.html#Raftel_Application_Abstractions_IRequestMiddleware_2_HandleAsync_
-  commentId: Overload:Raftel.Application.Abstractions.IRequestMiddleware`2.HandleAsync
-  isSpec: "True"
-  fullName: Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>.HandleAsync
-  fullName.vb: Raftel.Application.Abstractions.IRequestMiddleware(Of TRequest, TResponse).HandleAsync
-  nameWithType: IRequestMiddleware<TRequest, TResponse>.HandleAsync
-  nameWithType.vb: IRequestMiddleware(Of TRequest, TResponse).HandleAsync
 - uid: Raftel.Application.Abstractions.IRequest`1
   name: IRequest<TResponse>
   href: api/Raftel.Application.Abstractions.IRequest-1.html
@@ -194,52 +167,6 @@ references:
   fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest).HandleAsync
   nameWithType: UnitOfWorkMiddleware<TRequest>.HandleAsync
   nameWithType.vb: UnitOfWorkMiddleware(Of TRequest).HandleAsync
-- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
-  name: UnitOfWorkMiddleware<TRequest, TResponse>
-  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.html
-  commentId: T:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2
-  name.vb: UnitOfWorkMiddleware(Of TRequest, TResponse)
-  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>
-  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse)
-  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>
-  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse)
-- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.#ctor(Raftel.Application.IUnitOfWork)
-  name: UnitOfWorkMiddleware(IUnitOfWork)
-  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.html#Raftel_Application_Abstractions_Middlewares_UnitOfWorkMiddleware_2__ctor_Raftel_Application_IUnitOfWork_
-  commentId: M:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.#ctor(Raftel.Application.IUnitOfWork)
-  name.vb: New(IUnitOfWork)
-  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>.UnitOfWorkMiddleware(Raftel.Application.IUnitOfWork)
-  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse).New(Raftel.Application.IUnitOfWork)
-  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>.UnitOfWorkMiddleware(IUnitOfWork)
-  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse).New(IUnitOfWork)
-- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.#ctor*
-  name: UnitOfWorkMiddleware
-  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.html#Raftel_Application_Abstractions_Middlewares_UnitOfWorkMiddleware_2__ctor_
-  commentId: Overload:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>.UnitOfWorkMiddleware
-  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse).New
-  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>.UnitOfWorkMiddleware
-  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse).New
-- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.html#Raftel_Application_Abstractions_Middlewares_UnitOfWorkMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
-  commentId: M:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
-  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
-  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
-  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
-- uid: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.HandleAsync*
-  name: HandleAsync
-  href: api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.html#Raftel_Application_Abstractions_Middlewares_UnitOfWorkMiddleware_2_HandleAsync_
-  commentId: Overload:Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware`2.HandleAsync
-  isSpec: "True"
-  fullName: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>.HandleAsync
-  fullName.vb: Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResponse).HandleAsync
-  nameWithType: UnitOfWorkMiddleware<TRequest, TResponse>.HandleAsync
-  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResponse).HandleAsync
 - uid: Raftel.Application.Abstractions.Middlewares.ValidationMiddleware`2
   name: ValidationMiddleware<TRequest, TResponse>
   href: api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.html
@@ -374,15 +301,15 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Commands.CommandDispatcher.DispatchAsync
   nameWithType: CommandDispatcher.DispatchAsync
-- uid: Raftel.Application.Commands.CommandDispatcher.DispatchAsync``1(``0)
-  name: DispatchAsync<TCommand>(TCommand)
-  href: api/Raftel.Application.Commands.CommandDispatcher.html#Raftel_Application_Commands_CommandDispatcher_DispatchAsync__1___0_
-  commentId: M:Raftel.Application.Commands.CommandDispatcher.DispatchAsync``1(``0)
-  name.vb: DispatchAsync(Of TCommand)(TCommand)
-  fullName: Raftel.Application.Commands.CommandDispatcher.DispatchAsync<TCommand>(TCommand)
-  fullName.vb: Raftel.Application.Commands.CommandDispatcher.DispatchAsync(Of TCommand)(TCommand)
-  nameWithType: CommandDispatcher.DispatchAsync<TCommand>(TCommand)
-  nameWithType.vb: CommandDispatcher.DispatchAsync(Of TCommand)(TCommand)
+- uid: Raftel.Application.Commands.CommandDispatcher.DispatchAsync``1(``0,System.Threading.CancellationToken)
+  name: DispatchAsync<TCommand>(TCommand, CancellationToken)
+  href: api/Raftel.Application.Commands.CommandDispatcher.html#Raftel_Application_Commands_CommandDispatcher_DispatchAsync__1___0_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Commands.CommandDispatcher.DispatchAsync``1(``0,System.Threading.CancellationToken)
+  name.vb: DispatchAsync(Of TCommand)(TCommand, CancellationToken)
+  fullName: Raftel.Application.Commands.CommandDispatcher.DispatchAsync<TCommand>(TCommand, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Commands.CommandDispatcher.DispatchAsync(Of TCommand)(TCommand, System.Threading.CancellationToken)
+  nameWithType: CommandDispatcher.DispatchAsync<TCommand>(TCommand, CancellationToken)
+  nameWithType.vb: CommandDispatcher.DispatchAsync(Of TCommand)(TCommand, CancellationToken)
 - uid: Raftel.Application.Commands.ICommand
   name: ICommand
   href: api/Raftel.Application.Commands.ICommand.html
@@ -402,15 +329,15 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync
   nameWithType: ICommandDispatcher.DispatchAsync
-- uid: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync``1(``0)
-  name: DispatchAsync<TCommand>(TCommand)
-  href: api/Raftel.Application.Commands.ICommandDispatcher.html#Raftel_Application_Commands_ICommandDispatcher_DispatchAsync__1___0_
-  commentId: M:Raftel.Application.Commands.ICommandDispatcher.DispatchAsync``1(``0)
-  name.vb: DispatchAsync(Of TCommand)(TCommand)
-  fullName: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync<TCommand>(TCommand)
-  fullName.vb: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync(Of TCommand)(TCommand)
-  nameWithType: ICommandDispatcher.DispatchAsync<TCommand>(TCommand)
-  nameWithType.vb: ICommandDispatcher.DispatchAsync(Of TCommand)(TCommand)
+- uid: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync``1(``0,System.Threading.CancellationToken)
+  name: DispatchAsync<TCommand>(TCommand, CancellationToken)
+  href: api/Raftel.Application.Commands.ICommandDispatcher.html#Raftel_Application_Commands_ICommandDispatcher_DispatchAsync__1___0_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Commands.ICommandDispatcher.DispatchAsync``1(``0,System.Threading.CancellationToken)
+  name.vb: DispatchAsync(Of TCommand)(TCommand, CancellationToken)
+  fullName: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync<TCommand>(TCommand, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Commands.ICommandDispatcher.DispatchAsync(Of TCommand)(TCommand, System.Threading.CancellationToken)
+  nameWithType: ICommandDispatcher.DispatchAsync<TCommand>(TCommand, CancellationToken)
+  nameWithType.vb: ICommandDispatcher.DispatchAsync(Of TCommand)(TCommand, CancellationToken)
 - uid: Raftel.Application.Commands.ICommandHandler`1
   name: ICommandHandler<TCommand>
   href: api/Raftel.Application.Commands.ICommandHandler-1.html
@@ -1173,6 +1100,15 @@ references:
   fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId)
   nameWithType: AggregateRoot<TId>
   nameWithType.vb: AggregateRoot(Of TId)
+- uid: Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor
+  name: AggregateRoot()
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1__ctor
+  commentId: M:Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor
+  name.vb: New()
+  fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>.AggregateRoot()
+  fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId).New()
+  nameWithType: AggregateRoot<TId>.AggregateRoot()
+  nameWithType.vb: AggregateRoot(Of TId).New()
 - uid: Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor(`0)
   name: AggregateRoot(TId)
   href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1__ctor__0_
@@ -1201,6 +1137,15 @@ references:
   fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId)
   nameWithType: Entity<TId>
   nameWithType.vb: Entity(Of TId)
+- uid: Raftel.Domain.BaseTypes.Entity`1.#ctor
+  name: Entity()
+  href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1__ctor
+  commentId: M:Raftel.Domain.BaseTypes.Entity`1.#ctor
+  name.vb: New()
+  fullName: Raftel.Domain.BaseTypes.Entity<TId>.Entity()
+  fullName.vb: Raftel.Domain.BaseTypes.Entity(Of TId).New()
+  nameWithType: Entity<TId>.Entity()
+  nameWithType.vb: Entity(Of TId).New()
 - uid: Raftel.Domain.BaseTypes.Entity`1.#ctor(`0)
   name: Entity(TId)
   href: api/Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1__ctor__0_
@@ -1829,6 +1774,15 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext)
   nameWithType: RaftelDbContext<TDbContext>
   nameWithType.vb: RaftelDbContext(Of TDbContext)
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor
+  name: RaftelDbContext()
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor
+  commentId: M:Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor
+  name.vb: New()
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.RaftelDbContext()
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New()
+  nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext()
+  nameWithType.vb: RaftelDbContext(Of TDbContext).New()
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0})
   name: RaftelDbContext(DbContextOptions<TDbContext>)
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__

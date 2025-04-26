@@ -106,20 +106,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Abstractions.IRequestMiddleware-2.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Abstractions.IRequestMiddleware-2.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Abstractions.IRequestMiddleware<TRequest, TResponse>",
-      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.IRequestMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware component in the request pipeline that can intercept and\nmodify the processing of a request before and/or after the next component is invoked.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.yml",
       "output": {
         ".html": {
@@ -130,20 +116,6 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest>",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-2.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest, TResponse>",
       "Summary": null
     },
     {
@@ -766,44 +738,11 @@
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "api/toc.json"
-        },
         ".html": {
           "relative_path": "api/toc.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/getting-started.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/getting-started.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "docs/introduction.md",
-      "output": {
-        ".html": {
-          "relative_path": "docs/introduction.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "docs/toc.yml",
-      "output": {
-        ".json": {
-          "relative_path": "docs/toc.json"
         },
-        ".html": {
-          "relative_path": "docs/toc.html"
+        ".json": {
+          "relative_path": "api/toc.json"
         }
       },
       "version": ""
@@ -822,11 +761,11 @@
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "toc.json"
-        },
         ".html": {
           "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
         }
       },
       "version": ""
