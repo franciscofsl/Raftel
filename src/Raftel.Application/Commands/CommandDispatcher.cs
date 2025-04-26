@@ -10,7 +10,7 @@ namespace Raftel.Application.Commands;
 public class CommandDispatcher(IRequestDispatcher dispatcher) : ICommandDispatcher
 {
     /// <inheritdoc />
-    public Task<Result> DispatchAsync<TCommand>(TCommand command)
+    public Task<Result> DispatchAsync<TCommand>(TCommand command, CancellationToken token = default)
         where TCommand : ICommand
         => dispatcher.DispatchAsync<TCommand, Result>(command);
 }

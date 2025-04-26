@@ -12,7 +12,8 @@ public interface ICommandDispatcher
     /// </summary>
     /// <typeparam name="TCommand">The type of command to dispatch.</typeparam>
     /// <param name="command">The command instance to process.</param>
+    /// <param name="token"></param>
     /// <returns>A <see cref="Result"/> representing the outcome of the command execution.</returns>
-    Task<Result> DispatchAsync<TCommand>(TCommand command)
+    Task<Result> DispatchAsync<TCommand>(TCommand command, CancellationToken token = default)
         where TCommand : ICommand;
 }

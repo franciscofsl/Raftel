@@ -6,11 +6,10 @@ networks:
 services:
   sqlserver:
     image: "mcr.microsoft.com/mssql/server"
-    container_name: sqlserver
     ports:
       - "1433:1433"
     environment:
-      SA_PASSWORD: "SqlServer_Docker2023"
+      SA_PASSWORD: "SqlServer_Docker2024"
       ACCEPT_EULA: "Y"
     networks:
       - raftel-network

@@ -3,8 +3,13 @@ using Raftel.Application;
 
 namespace Raftel.Infrastructure.Data;
 
-public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork where TDbContext : RaftelDbContext<TDbContext>
+public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork
+    where TDbContext : RaftelDbContext<TDbContext>
 {
+    protected RaftelDbContext()
+    {
+    }
+
     protected RaftelDbContext(DbContextOptions<TDbContext> options) : base(options)
     {
     }
