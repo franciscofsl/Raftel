@@ -7,7 +7,7 @@ public sealed record TestQuery() : IQuery<string>;
 
 public sealed class TestQueryHandler(ISpy spy) : IQueryHandler<TestQuery, string>
 {
-    public Task<Result<string>> HandleAsync(TestQuery request)
+    public Task<Result<string>> HandleAsync(TestQuery request, CancellationToken token = default)
     {
         spy.Intercept("Query");
         return Task.FromResult<Result<string>>("Query");

@@ -11,4 +11,9 @@ public abstract class AggregateRoot<TId> : Entity<TId> where TId : TypedId<Guid>
     /// </summary>
     /// <param name="id">The identifier of the aggregate root.</param>
     protected AggregateRoot(TId id) : base(id) { }
+
+    protected AggregateRoot()
+    {
+        
+    }
 }

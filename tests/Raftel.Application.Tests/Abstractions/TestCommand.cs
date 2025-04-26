@@ -7,7 +7,7 @@ public sealed record TestCommand() : ICommand;
 
 public class TestCommandHandler(ISpy spy) : ICommandHandler<TestCommand>
 {
-    public Task<Result> HandleAsync(TestCommand request)
+    public Task<Result> HandleAsync(TestCommand request, CancellationToken token = default)
     {
         spy.Intercept("Handler");
         return Task.FromResult(Result.Success());

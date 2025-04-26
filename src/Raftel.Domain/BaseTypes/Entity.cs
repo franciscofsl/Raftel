@@ -20,6 +20,11 @@ public abstract class Entity<TId> where TId : TypedId<Guid>
         Id = id ?? throw new ArgumentNullException(nameof(id));
     }
 
+    protected Entity()
+    {
+        
+    }
+
     /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
