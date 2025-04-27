@@ -44,5 +44,6 @@ public class ExternalApiIntegrationTests : IClassFixture<ExternalApiTestFactory>
         getMethod.Parameters.ShouldContain(p => p.Name == "id" && p.In == "path");
         getMethod.Parameters.ShouldContain(p => p.Name == "id" && p.In == "path");
         getMethod.Parameters.ShouldContain(p => p.Name == "name" && p.In == "query" && p.Schema.Type == "string");
+        getMethod.Parameters.ShouldContain(p => p.Name == "maxBounty" && p.In == "query" && p.Schema.Type == "integer");
     }
 }
