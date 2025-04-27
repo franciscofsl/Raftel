@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Raftel.Api\Raftel.Api.csproj" />
+      <ProjectReference Include="..\..\src\Raftel.Api.Server\Raftel.Api.Server.csproj" />
       <ProjectReference Include="..\..\src\Raftel.Application\Raftel.Application.csproj" />
       <ProjectReference Include="..\Raftel.Tests.Common\Raftel.Tests.Common.csproj" />
     </ItemGroup>

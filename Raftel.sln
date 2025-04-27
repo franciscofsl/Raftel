@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{2628C66E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Cli", "tools\Raftel.Cli\Raftel.Cli.csproj", "{9CD06F2C-90DD-4017-8D7A-C9DB63200F06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Api", "src\Raftel.Api\Raftel.Api.csproj", "{1A6CB3E5-2CC7-451D-8DE7-D9E6C1C1661D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Api.Server", "src\Raftel.Api.Server\Raftel.Api.Server.csproj", "{1A6CB3E5-2CC7-451D-8DE7-D9E6C1C1661D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Api.Integration.Tests", "tests\Raftel.Api.Integration.Tests\Raftel.Api.Integration.Tests.csproj", "{DEF38B61-773C-4281-8A74-D1C9845D76F3}"
 EndProject
@@ -31,6 +31,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Shared", "src\Raftel.Shared\Raftel.Shared.csproj", "{BCC6B3AA-82CA-4099-8264-780742A04525}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Shared.Tests", "tests\Raftel.Shared.Tests\Raftel.Shared.Tests.csproj", "{749BF784-35C8-456F-A69D-7E8991FC17F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Api.Client", "src\Raftel.Api.Client\Raftel.Api.Client.csproj", "{DD2DB4E4-C5FA-425F-A3C0-3EFDDBA78CF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raftel.Api.Client.Tests", "tests\Raftel.Api.Client.Tests\Raftel.Api.Client.Tests.csproj", "{A018F9FB-E01D-44CE-98C5-51EF922C06FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,8 @@ Global
 		{D77D9265-F8D6-442C-9B96-FE0040A42658} = {BB519B61-3B65-4069-A09F-01001DC650B9}
 		{BCC6B3AA-82CA-4099-8264-780742A04525} = {37FB5593-6445-48AD-9D92-52167A3B526D}
 		{749BF784-35C8-456F-A69D-7E8991FC17F9} = {BB519B61-3B65-4069-A09F-01001DC650B9}
+		{DD2DB4E4-C5FA-425F-A3C0-3EFDDBA78CF1} = {37FB5593-6445-48AD-9D92-52167A3B526D}
+		{A018F9FB-E01D-44CE-98C5-51EF922C06FB} = {BB519B61-3B65-4069-A09F-01001DC650B9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2EFFCFF4-3D9B-4681-9B4F-64E9F59545BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -105,5 +111,13 @@ Global
 		{749BF784-35C8-456F-A69D-7E8991FC17F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{749BF784-35C8-456F-A69D-7E8991FC17F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{749BF784-35C8-456F-A69D-7E8991FC17F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD2DB4E4-C5FA-425F-A3C0-3EFDDBA78CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD2DB4E4-C5FA-425F-A3C0-3EFDDBA78CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD2DB4E4-C5FA-425F-A3C0-3EFDDBA78CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD2DB4E4-C5FA-425F-A3C0-3EFDDBA78CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A018F9FB-E01D-44CE-98C5-51EF922C06FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A018F9FB-E01D-44CE-98C5-51EF922C06FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A018F9FB-E01D-44CE-98C5-51EF922C06FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A018F9FB-E01D-44CE-98C5-51EF922C06FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
