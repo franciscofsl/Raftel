@@ -2,7 +2,7 @@ using Shouldly;
 
 namespace Raftel.Api.Client.Tests;
 
-public class QueryFilterTest
+public class QueryFilterTests
 {
     private class TestQuery
     {
@@ -11,20 +11,39 @@ public class QueryFilterTest
         public int? Bounty { get; set; }
         public DateTime? BirthDate { get; set; }
         public string EmptyString { get; set; }
+        public Status? Status { get; set; }
+        public List<string> CrewMembers { get; set; }
+        public Name EncapsulatedName { get; set; }
+    }
+
+    private enum Status
+    {
+        Active,
+        Inactive
+    }
+
+    private class Name
+    {
+        public string Value { get; }
+
+        public Name(string value)
+        {
+            Value = value;
+        }
     }
 
     [Fact]
-    public void Build_ObjectWithAllPropertiesNull_ReturnsEmptyString()
+    public void ToString_WhenAllPropertiesAreNull_ShouldReturnEmptyString()
     {
         var query = new TestQuery();
 
-        var result = QueryFilter.FromObject(query).Build();
+        var filter = QueryFilter.FromObject(query).ToString();
 
-        result.ShouldBe(string.Empty);
+        filter.ShouldBe(string.Empty);
     }
 
     [Fact]
-    public void Build_ObjectWithSomePropertiesSet_ReturnsCorrectQueryString()
+    public void ToString_WhenSomePropertiesAreSet_ShouldReturnQueryStringWithThoseProperties()
     {
         var query = new TestQuery
         {
@@ -32,34 +51,33 @@ public class QueryFilterTest
             Bounty = 1500000000
         };
 
-        var result = QueryFilter.FromObject(query).Build();
+        var filter = QueryFilter.FromObject(query).ToString();
 
-        result.ShouldBe("?bounty=1500000000&name=Luffy");
+        filter.ShouldBe("?bounty=1500000000&name=Luffy");
     }
 
     [Fact]
-    public void Build_ObjectWithEmptyStringProperty_IncludesEmptyValue()
+    public void ToString_WhenEmptyStringPropertyIsSet_ShouldIncludePropertyWithEmptyValue()
     {
         var query = new TestQuery
         {
             EmptyString = string.Empty
         };
+        var filter = QueryFilter.FromObject(query).ToString();
 
-        var result = QueryFilter.FromObject(query).Build();
-
-        result.ShouldBe("?emptyString=");
+        filter.ShouldBe("?emptyString=");
     }
 
     [Fact]
-    public void Build_ObjectIsNull_ReturnsEmptyString()
+    public void ToString_WhenObjectIsNull_ShouldReturnEmptyString()
     {
-        var result = QueryFilter.FromObject(null).Build();
+        var filter = QueryFilter.FromObject(null).ToString();
 
-        result.ShouldBe(string.Empty);
+        filter.ShouldBe(string.Empty);
     }
 
     [Fact]
-    public void Build_ObjectWithDateTimeProperty_ReturnsCorrectFormattedQueryString()
+    public void ToString_WhenDateTimePropertyIsSet_ShouldReturnFormattedQueryString()
     {
         var birthDate = new DateTime(1999, 5, 5);
         var query = new TestQuery
@@ -67,8 +85,48 @@ public class QueryFilterTest
             BirthDate = birthDate
         };
 
-        var result = QueryFilter.FromObject(query).Build();
+        var filter = QueryFilter.FromObject(query).ToString();
 
-        result.ShouldContain($"birthDate={Uri.EscapeDataString(birthDate.ToString("o"))}");
+        var expectedFormattedDate = Uri.EscapeDataString(birthDate.ToString("o"));
+        filter.ShouldContain($"birthDate={expectedFormattedDate}");
+    }
+
+    [Fact]
+    public void ToString_WhenEnumPropertyIsSet_ShouldReturnEnumAsString()
+    {
+        var query = new TestQuery
+        {
+            Status = Status.Active
+        };
+
+        var filter = QueryFilter.FromObject(query).ToString();
+
+        filter.ShouldContain("status=Active");
+    }
+
+    [Fact]
+    public void ToString_WhenCollectionPropertyIsSet_ShouldReturnCommaSeparatedValues()
+    {
+        var query = new TestQuery
+        {
+            CrewMembers = new List<string> { "Luffy", "Zoro", "Nami" }
+        };
+
+        var filter = QueryFilter.FromObject(query).ToString();
+
+        filter.ShouldContain("?crewMembers=Luffy%2cZoro%2cNami");
+    }
+
+    [Fact]
+    public void ToString_WhenEncapsulatedPropertyIsSet_ShouldExtractInnerValue()
+    {
+        var query = new TestQuery
+        {
+            EncapsulatedName = new Name("Zoro")
+        };
+
+        var filter = QueryFilter.FromObject(query).ToString();
+
+        filter.ShouldContain("encapsulatedName=Zoro");
     }
 }

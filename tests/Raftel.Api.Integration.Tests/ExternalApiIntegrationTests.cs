@@ -54,7 +54,7 @@ public class ExternalApiIntegrationTests : IClassFixture<ExternalApiTestFactory>
         var filter = new GetPirateByFilterQuery("a", 150000000);
 
         var response = await _client
-            .GetFromJsonAsync<GetPirateByFilterResponse>($"/api/pirates/{QueryFilter.FromObject(filter).Build()}");
+            .GetFromJsonAsync<GetPirateByFilterResponse>($"/api/pirates/{QueryFilter.FromObject(filter)}");
 
         response.Pirates.Count.ShouldBe(4);
     }
