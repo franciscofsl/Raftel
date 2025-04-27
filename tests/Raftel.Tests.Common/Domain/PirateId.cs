@@ -1,6 +1,6 @@
 using Raftel.Domain.BaseTypes;
 
-namespace Raftel.Domain.Tests.Common.Domain;
+namespace Raftel.Tests.Common.Domain;
 
 public sealed record PirateId : TypedGuidId
 {
@@ -8,5 +8,5 @@ public sealed record PirateId : TypedGuidId
     {
     }
 
-    public static PirateId New() => new(Guid.NewGuid());
+    public static PirateId New() => new(NewGuid());
 }

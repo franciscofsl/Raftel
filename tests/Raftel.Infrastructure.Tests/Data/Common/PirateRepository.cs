@@ -1,5 +1,5 @@
-﻿using Raftel.Domain.Tests.Common.Domain;
-using Raftel.Infrastructure.Data;
+﻿using Raftel.Infrastructure.Data;
+using Raftel.Tests.Common.Domain;
 
 namespace Raftel.Infrastructure.Tests.Data.Common;
 

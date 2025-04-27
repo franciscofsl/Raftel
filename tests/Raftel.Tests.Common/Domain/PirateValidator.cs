@@ -1,6 +1,6 @@
 ﻿using Raftel.Domain.Validators;
 
-namespace Raftel.Domain.Tests.Common.Domain;
+namespace Raftel.Tests.Common.Domain;
 
 public sealed class PirateValidator : Validator<Pirate>
 {

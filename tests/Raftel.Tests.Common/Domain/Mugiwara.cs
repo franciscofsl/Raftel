@@ -1,6 +1,6 @@
-﻿using Raftel.Domain.Tests.Common.Domain.ValueObjects;
+﻿using Raftel.Tests.Common.Domain.ValueObjects;
 
-namespace Raftel.Domain.Tests.Common.Domain;
+namespace Raftel.Tests.Common.Domain;
 
 public static class Mugiwara
 {

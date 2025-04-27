@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+        <PackageReference Include="Swashbuckle.AspNetCore"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\Pirates\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Raftel.Api\Raftel.Api.csproj" />
+      <ProjectReference Include="..\..\src\Raftel.Application\Raftel.Application.csproj" />
+      <ProjectReference Include="..\Raftel.Tests.Common\Raftel.Tests.Common.csproj" />
+    </ItemGroup>
+
+</Project>

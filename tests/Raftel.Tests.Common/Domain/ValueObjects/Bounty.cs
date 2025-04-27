@@ -1,4 +1,4 @@
-namespace Raftel.Domain.Tests.Common.Domain.ValueObjects;
+namespace Raftel.Tests.Common.Domain.ValueObjects;
 
 public readonly record struct Bounty
 {

@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Raftel.Domain.Specifications;
 
-namespace Raftel.Domain.Tests.Common.Domain.Specifications;
+namespace Raftel.Tests.Common.Domain.Specifications;
 
 public class BountyOverSpecification(int threshold) : Specification<Pirate>
 {
