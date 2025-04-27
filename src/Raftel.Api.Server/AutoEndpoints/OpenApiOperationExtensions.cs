@@ -5,7 +5,7 @@ using Raftel.Shared.Extensions;
 
 namespace Raftel.Api.Server.AutoEndpoints;
 
-public static class ApiParametersBuilder
+internal static class ApiParametersBuilder
 {
     public static IList<OpenApiParameter> Calculate<TRequest>(string route)
     {
