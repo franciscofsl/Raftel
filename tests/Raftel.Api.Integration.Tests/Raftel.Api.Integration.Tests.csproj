@@ -24,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\Raftel.Api.Client\Raftel.Api.Client.csproj" />
       <ProjectReference Include="..\..\src\Raftel.Api.Server\Raftel.Api.Server.csproj" />
       <ProjectReference Include="..\Raftel.Api.Integration.Tests.Api\Raftel.Api.Integration.Tests.Api.csproj" />
       <ProjectReference Include="..\Raftel.Tests.Common\Raftel.Tests.Common.csproj" />

@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Raftel.Api.Integration.Tests.Api;
 
 namespace Raftel.Api.Integration.Tests;
 
-public sealed class ExternalApiTestFactory : WebApplicationFactory<Program>
+public sealed class ExternalApiTestFactory : WebApplicationFactory<Api.Program>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseSetting("https_port", "5128"); // O el puerto que uses
+        builder.UseSetting("https_port", "5128");
     }
 }

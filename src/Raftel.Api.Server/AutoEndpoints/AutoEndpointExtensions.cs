@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Raftel.Application.Abstractions;
 using Raftel.Domain.Abstractions;
 using Raftel.Shared.Extensions;
 
-namespace Raftel.Api.AutoEndpoints;
+namespace Raftel.Api.Server.AutoEndpoints;
 
 public static class AutoEndpointExtensions
 {
@@ -21,7 +22,7 @@ public static class AutoEndpointExtensions
             var m when m == HttpMethod.Post => app.MapPost(route, Handler),
             _ => throw new NotSupportedException($"HTTP method {method} not supported")
         };
- 
+
         endpoint
             .WithName($"{method.Method}_{typeof(TRequest).Name}")
             .WithOpenApi(operation =>
@@ -43,48 +44,41 @@ public static class AutoEndpointExtensions
                 : Results.BadRequest(result.Error);
         }
     }
- 
+
     private static TRequest BuildRequestFromRouteAndQuery<TRequest>(HttpContext context)
     {
-        var requestType = typeof(TRequest);
-        var constructor = requestType.GetConstructors().FirstOrDefault();
-        if (constructor == null)
-        {
-            throw new InvalidOperationException($"No public constructor found for {requestType.Name}");
-        }
+        var constructor = typeof(TRequest).GetConstructors().FirstOrDefault()
+                          ?? throw new InvalidOperationException(
+                              $"No public constructor found for {typeof(TRequest).Name}");
 
-        var parameters = constructor.GetParameters();
-
-        var args = new object?[parameters.Length];
-        for (var i = 0; i < parameters.Length; i++)
-        {
-            var param = parameters[i];
-            var name = param.Name!;
-
-            object? value = null;
-
-            if (context.Request.RouteValues.TryGetValue(name, out var routeValue) && routeValue != null)
-            {
-                value = ConvertSimpleType(routeValue, param.ParameterType);
-            }
-            else if (context.Request.Query.TryGetValue(name, out var queryValue) &&
-                     !string.IsNullOrWhiteSpace(queryValue))
-            {
-                value = ConvertSimpleType(queryValue.ToString(), param.ParameterType);
-            }
-            else if (param.ParameterType.IsNullable())
-            {
-                value = null;
-            }
-            else
-            {
-                throw new InvalidOperationException($"Missing required parameter '{name}'");
-            }
-
-            args[i] = value;
-        }
+        var args = constructor
+            .GetParameters()
+            .Select(param => ApiParamValueToObject(context, param))
+            .ToArray();
 
         return (TRequest)constructor.Invoke(args);
+    }
+
+    private static object? ApiParamValueToObject(HttpContext context, ParameterInfo param)
+    {
+        var name = param.Name!;
+        if (context.Request.RouteValues.TryGetValue(name, out var routeValue) && routeValue != null)
+        {
+            return ConvertSimpleType(routeValue, param.ParameterType);
+        }
+
+        if (context.Request.Query.TryGetValue(name, out var queryValue) &&
+            !string.IsNullOrWhiteSpace(queryValue))
+        {
+            return ConvertSimpleType(queryValue.ToString(), param.ParameterType);
+        }
+
+        if (param.ParameterType.IsNullable())
+        {
+            return null;
+        }
+
+        throw new InvalidOperationException($"Missing required parameter '{name}'");
     }
 
     private static object? ConvertSimpleType(object value, Type targetType)

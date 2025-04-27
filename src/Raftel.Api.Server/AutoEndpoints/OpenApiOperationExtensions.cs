@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using Microsoft.OpenApi.Models;
 using Raftel.Shared.Extensions;
 
-namespace Raftel.Api.AutoEndpoints;
+namespace Raftel.Api.Server.AutoEndpoints;
 
 public static class ApiParametersBuilder
 {

@@ -1,8 +1,7 @@
-using Raftel.Api;
-using Raftel.Api.AutoEndpoints;
 using Raftel.Api.Integration.Tests.Api;
-using Raftel.Api.Integration.Tests.Api.Application.Pirates.CreatePirate;
+using Raftel.Api.Integration.Tests.Api.Application.Pirates.GetPirateByFilter;
 using Raftel.Api.Integration.Tests.Api.Application.Pirates.GetPirateById;
+using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Application;
 using Raftel.Application.Abstractions.Middlewares;
 
@@ -39,6 +38,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.AddQueryEndpoint<GetPirateByIdQuery, GetPirateByIdResponse>("/api/pirates/{id}", HttpMethod.Get);
+app.AddQueryEndpoint<GetPirateByFilterQuery, GetPirateByFilterResponse>("/api/pirates/", HttpMethod.Get);
 
 app.Run();
 

@@ -1,7 +1,8 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Raftel.Api.Client;
+using Raftel.Api.Integration.Tests.Api.Application.Pirates.GetPirateByFilter;
 using Raftel.Api.Integration.Tests.Api.Application.Pirates.GetPirateById;
-using Raftel.Domain.Abstractions;
 using Raftel.Tests.Common.Domain;
 using Shouldly;
 
@@ -45,5 +46,16 @@ public class ExternalApiIntegrationTests : IClassFixture<ExternalApiTestFactory>
         getMethod.Parameters.ShouldContain(p => p.Name == "id" && p.In == "path");
         getMethod.Parameters.ShouldContain(p => p.Name == "name" && p.In == "query" && p.Schema.Type == "string");
         getMethod.Parameters.ShouldContain(p => p.Name == "maxBounty" && p.In == "query" && p.Schema.Type == "integer");
+    }
+
+    [Fact]
+    public async Task Request_ShouldReturn_FilteredData()
+    {
+        var filter = new GetPirateByFilterQuery("a", 150000000);
+
+        var response = await _client
+            .GetFromJsonAsync<GetPirateByFilterResponse>($"/api/pirates/{QueryFilter.FromObject(filter).Build()}");
+
+        response.Pirates.Count.ShouldBe(4);
     }
 }

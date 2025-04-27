@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
 using System.Web;
+using Raftel.Shared.Extensions;
 
 namespace Raftel.Api.Client;
 
@@ -71,7 +72,7 @@ public sealed class QueryFilter
 
         var formattedValue = FormatValue(value);
 
-        var newFilters = _filters.SetItem(name, formattedValue);
+        var newFilters = _filters.SetItem(name.ToCamelCase(), formattedValue);
 
         return new QueryFilter(newFilters);
     }

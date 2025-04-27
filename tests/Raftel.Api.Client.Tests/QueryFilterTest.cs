@@ -34,7 +34,7 @@ public class QueryFilterTest
 
         var result = QueryFilter.FromObject(query).Build();
 
-        result.ShouldBe("?Name=Luffy&Bounty=1500000000");
+        result.ShouldBe("?bounty=1500000000&name=Luffy");
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class QueryFilterTest
 
         var result = QueryFilter.FromObject(query).Build();
 
-        result.ShouldBe("?EmptyString=");
+        result.ShouldBe("?emptyString=");
     }
 
     [Fact]
@@ -69,6 +69,6 @@ public class QueryFilterTest
 
         var result = QueryFilter.FromObject(query).Build();
 
-        result.ShouldContain($"BirthDate={Uri.EscapeDataString(birthDate.ToString("o"))}");
+        result.ShouldContain($"birthDate={Uri.EscapeDataString(birthDate.ToString("o"))}");
     }
 }

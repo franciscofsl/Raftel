@@ -6,4 +6,8 @@
         <Nullable>disable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Raftel.Shared\Raftel.Shared.csproj" />
+    </ItemGroup>
+
 </Project>
