@@ -7,8 +7,8 @@ using Raftel.Application.Commands;
 using Raftel.Application.Tests.Common;
 using Raftel.Application.Tests.Common.CreatePirate;
 using Raftel.Domain.Abstractions;
-using Raftel.Domain.Tests.Common.Domain;
 using Raftel.Domain.Validators;
+using Raftel.Tests.Common.Domain;
 
 namespace Raftel.Infrastructure.Tests.Data.Common;
 

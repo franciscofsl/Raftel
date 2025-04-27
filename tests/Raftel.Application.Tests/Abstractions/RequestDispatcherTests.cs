@@ -62,21 +62,3 @@ public sealed class RequestDispatcherTests
         });
     }
 }
-
-public interface ISpy
-{
-    void Intercept(string message);
-    string[] InterceptedMessages();
-}
-
-public class Spy : ISpy
-{
-    private readonly List<string> _interceptedMessages = new();
-
-    public void Intercept(string message)
-    {
-        _interceptedMessages.Add(message);
-    }
-
-    public string[] InterceptedMessages() => _interceptedMessages.ToArray();
-}

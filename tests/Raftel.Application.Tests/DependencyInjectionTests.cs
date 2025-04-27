@@ -6,8 +6,8 @@ using Raftel.Application.Queries;
 using Raftel.Application.Tests.Common;
 using Raftel.Application.Tests.Common.CreatePirate;
 using Raftel.Application.Tests.Common.GetPirateById;
-using Raftel.Domain.Tests.Common.Domain;
 using Raftel.Domain.Validators;
+using Raftel.Tests.Common.Domain;
 using Shouldly;
 
 namespace Raftel.Application.Tests;
