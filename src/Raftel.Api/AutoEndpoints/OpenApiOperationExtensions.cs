@@ -20,25 +20,32 @@ public static class ApiParametersBuilder
 
         foreach (var (name, paramType) in properties)
         {
-            var (type, format) = MapToOpenApiType(paramType);
-            var parameterLocation = routeParameters.Contains(name, StringComparer.OrdinalIgnoreCase)
-                ? ParameterLocation.Path
-                : ParameterLocation.Query;
-
-            parameters.Add(new OpenApiParameter
-            {
-                Name = name.ToCamelCase(),
-                In = parameterLocation,
-                Required = parameterLocation is ParameterLocation.Path,
-                Schema = new OpenApiSchema
-                {
-                    Type = type,
-                    Format = format
-                }
-            });
+            var parameter = RequestParameterToOpenApiParameter(paramType, routeParameters, name);
+            parameters.Add(parameter);
         }
 
         return parameters;
+    }
+
+    private static OpenApiParameter RequestParameterToOpenApiParameter(Type paramType,
+        string[] routeParameters,
+        string name)
+    {
+        var (type, format) = MapToOpenApiType(paramType);
+        var parameterLocation = routeParameters.Contains(name, StringComparer.OrdinalIgnoreCase)
+            ? ParameterLocation.Path
+            : ParameterLocation.Query;
+        return new OpenApiParameter
+        {
+            Name = name.ToCamelCase(),
+            In = parameterLocation,
+            Required = parameterLocation is ParameterLocation.Path,
+            Schema = new OpenApiSchema
+            {
+                Type = type,
+                Format = format
+            }
+        };
     }
 
     private static (string Type, string? Format) MapToOpenApiType(Type type)

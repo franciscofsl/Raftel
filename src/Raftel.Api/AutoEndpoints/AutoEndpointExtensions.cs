@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Raftel.Application.Abstractions;
 using Raftel.Domain.Abstractions;
+using Raftel.Shared.Extensions;
 
 namespace Raftel.Api.AutoEndpoints;
 
@@ -48,7 +49,9 @@ public static class AutoEndpointExtensions
         var requestType = typeof(TRequest);
         var constructor = requestType.GetConstructors().FirstOrDefault();
         if (constructor == null)
+        {
             throw new InvalidOperationException($"No public constructor found for {requestType.Name}");
+        }
 
         var parameters = constructor.GetParameters();
 
@@ -69,7 +72,7 @@ public static class AutoEndpointExtensions
             {
                 value = ConvertSimpleType(queryValue.ToString(), param.ParameterType);
             }
-            else if (IsNullable(param.ParameterType))
+            else if (param.ParameterType.IsNullable())
             {
                 value = null;
             }
@@ -81,8 +84,7 @@ public static class AutoEndpointExtensions
             args[i] = value;
         }
 
-        var instance = (TRequest)constructor.Invoke(args);
-        return instance;
+        return (TRequest)constructor.Invoke(args);
     }
 
     private static object? ConvertSimpleType(object value, Type targetType)
@@ -99,9 +101,4 @@ public static class AutoEndpointExtensions
 
         return Convert.ChangeType(value, Nullable.GetUnderlyingType(targetType) ?? targetType);
     }
-
-    private static bool IsNullable(Type type)
-    {
-        return !type.IsValueType || Nullable.GetUnderlyingType(type) != null;
-    } 
 }

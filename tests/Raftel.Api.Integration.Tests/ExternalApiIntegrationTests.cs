@@ -22,9 +22,9 @@ public class ExternalApiIntegrationTests : IClassFixture<ExternalApiTestFactory>
     [Fact]
     public async Task Request_ShouldReturn_ExpectedData()
     {
-        Guid algo = Mugiwara.Luffy.Id;
+        Guid luffyId = Mugiwara.Luffy.Id;
         var response = await _client
-            .GetFromJsonAsync<GetPirateByIdResponse>($"/api/pirates/{algo}");
+            .GetFromJsonAsync<GetPirateByIdResponse>($"/api/pirates/{luffyId}");
 
         response.Id.ShouldBe(Mugiwara.Luffy.Id);
         response.Name.ShouldBe(Mugiwara.Luffy.Name);
@@ -43,6 +43,6 @@ public class ExternalApiIntegrationTests : IClassFixture<ExternalApiTestFactory>
 
         getMethod.Parameters.ShouldContain(p => p.Name == "id" && p.In == "path");
         getMethod.Parameters.ShouldContain(p => p.Name == "id" && p.In == "path");
-        getMethod.Parameters.ShouldContain(p => p.Name == "Name" && p.In == "query" && p.Schema.Type == "string");
+        getMethod.Parameters.ShouldContain(p => p.Name == "name" && p.In == "query" && p.Schema.Type == "string");
     }
 }
