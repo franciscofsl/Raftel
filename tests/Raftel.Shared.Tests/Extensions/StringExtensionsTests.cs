@@ -3,7 +3,7 @@ using Shouldly;
 
 namespace Raftel.Shared.Tests.Extensions;
 
-public class StringExtensionsTests
+public class StringExtensionsTest
 {
     [Theory]
     [InlineData(null, null)]
