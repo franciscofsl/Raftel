@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Text.RegularExpressions;
 using Microsoft.OpenApi.Models;
 using Raftel.Shared.Extensions;
 
@@ -10,9 +9,7 @@ internal static class ApiParametersBuilder
     public static IList<OpenApiParameter> Calculate<TRequest>(string route)
     {
         var parameters = new List<OpenApiParameter>();
-        var routeParameters = Regex.Matches(route, "{(.*?)}")
-            .Select(m => m.Groups[1].Value)
-            .ToArray();
+        var routeParameters = RouteParameters.FromRoute(route);
 
         var properties = typeof(TRequest)
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -28,41 +25,17 @@ internal static class ApiParametersBuilder
     }
 
     private static OpenApiParameter RequestParameterToOpenApiParameter(Type paramType,
-        string[] routeParameters,
+        RouteParameters routeParameters,
         string name)
     {
-        var (type, format) = MapToOpenApiType(paramType);
-        var parameterLocation = routeParameters.Contains(name, StringComparer.OrdinalIgnoreCase)
-            ? ParameterLocation.Path
-            : ParameterLocation.Query;
+        var openApiType = OpenApiType.FromType(paramType);
+        var parameterLocation = routeParameters.CalculateLocation(name);
         return new OpenApiParameter
         {
             Name = name.ToCamelCase(),
             In = parameterLocation,
             Required = parameterLocation is ParameterLocation.Path,
-            Schema = new OpenApiSchema
-            {
-                Type = type,
-                Format = format
-            }
+            Schema = openApiType.ToSchema()
         };
-    }
-
-    private static (string Type, string? Format) MapToOpenApiType(Type type)
-    {
-        type = Nullable.GetUnderlyingType(type) ?? type;
-
-        if (type == typeof(Guid))
-            return ("string", "uuid");
-        if (type == typeof(DateTime))
-            return ("string", "date-time");
-        if (type == typeof(int) || type == typeof(long))
-            return ("integer", null);
-        if (type == typeof(float) || type == typeof(double) || type == typeof(decimal))
-            return ("number", "double");
-        if (type == typeof(bool))
-            return ("boolean", null);
-
-        return ("string", null);
     }
 }

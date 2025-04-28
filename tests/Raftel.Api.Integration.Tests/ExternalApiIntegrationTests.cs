@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Raftel.Api.Client;
 using Raftel.Api.Integration.Tests.Api.Application.Pirates.GetPirateByFilter;
 using Raftel.Api.Integration.Tests.Api.Application.Pirates.GetPirateById;
+using Raftel.Api.Integration.Tests.ApiDefinition;
 using Raftel.Tests.Common.Domain;
 using Shouldly;
 
