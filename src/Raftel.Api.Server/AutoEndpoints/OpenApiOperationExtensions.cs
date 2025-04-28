@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Text.RegularExpressions;
 using Microsoft.OpenApi.Models;
 using Raftel.Shared.Extensions;
 
@@ -10,9 +9,7 @@ internal static class ApiParametersBuilder
     public static IList<OpenApiParameter> Calculate<TRequest>(string route)
     {
         var parameters = new List<OpenApiParameter>();
-        var routeParameters = Regex.Matches(route, "{(.*?)}")
-            .Select(m => m.Groups[1].Value)
-            .ToArray();
+        var routeParameters = RouteParameters.FromRoute(route);
 
         var properties = typeof(TRequest)
             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -28,13 +25,11 @@ internal static class ApiParametersBuilder
     }
 
     private static OpenApiParameter RequestParameterToOpenApiParameter(Type paramType,
-        string[] routeParameters,
+        RouteParameters routeParameters,
         string name)
     {
         var (type, format) = MapToOpenApiType(paramType);
-        var parameterLocation = routeParameters.Contains(name, StringComparer.OrdinalIgnoreCase)
-            ? ParameterLocation.Path
-            : ParameterLocation.Query;
+        var parameterLocation = routeParameters.CalculateLocation(name);
         return new OpenApiParameter
         {
             Name = name.ToCamelCase(),
