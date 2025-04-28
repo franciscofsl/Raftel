@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Raftel.Api.Integration.Tests;
+namespace Raftel.Api.Integration.Tests.ApiDefinition;
 
 public class SwaggerContent
 {
