@@ -1,5 +1,5 @@
 ﻿using Raftel.Application.Commands;
 
-namespace Raftel.Application.UnitTests.Common.CreatePirate;
+namespace Raftel.Tests.Common.Application.Pirates.CreatePirate;
 
 public record CreatePirateCommand(string Name, int Bounty, bool IsKing = false) : ICommand ;

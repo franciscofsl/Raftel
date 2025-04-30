@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Raftel.Infrastructure.Data;
-using Raftel.Infrastructure.Tests.Data.Common.Configuration;
 using Raftel.Tests.Common.Domain;
+using Raftel.Tests.Common.Infrastructure.Data.Configuration;
 
-namespace Raftel.Infrastructure.Tests.Data.Common;
+namespace Raftel.Tests.Common.Infrastructure.Data;
 
 public class TestingRaftelDbContext : RaftelDbContext<TestingRaftelDbContext>
 {

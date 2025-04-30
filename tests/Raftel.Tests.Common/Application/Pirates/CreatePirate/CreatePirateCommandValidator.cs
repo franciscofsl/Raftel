@@ -1,6 +1,6 @@
 ﻿using Raftel.Domain.Validators;
 
-namespace Raftel.Application.UnitTests.Common.CreatePirate;
+namespace Raftel.Tests.Common.Application.Pirates.CreatePirate;
 
 public class CreatePirateCommandValidator : Validator<CreatePirateCommand>
 {

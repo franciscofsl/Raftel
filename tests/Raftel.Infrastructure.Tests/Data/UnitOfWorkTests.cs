@@ -2,15 +2,16 @@
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
 using Raftel.Application.Commands;
-using Raftel.Application.UnitTests.Common.CreatePirate;
-using Raftel.Infrastructure.Tests.Data.Common;
+using Raftel.Tests.Common.Application.Pirates.CreatePirate;
 using Raftel.Tests.Common.Domain;
 using Raftel.Tests.Common.Domain.ValueObjects;
+using Raftel.Tests.Common.Infrastructure;
+using Raftel.Tests.Common.Infrastructure.Data;
 using Shouldly;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
-public class UnitOfWorkTests : DataTestBase
+public class UnitOfWorkTests : IntegrationTestBase
 {
     [Fact]
     public async Task CommitAsync_ShouldPersistData()

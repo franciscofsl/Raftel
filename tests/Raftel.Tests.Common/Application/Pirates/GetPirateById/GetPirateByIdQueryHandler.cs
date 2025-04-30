@@ -1,12 +1,13 @@
+using Raftel.Application.Queries;
 using Raftel.Domain.Abstractions;
 using Raftel.Tests.Common.Domain;
 
-namespace Raftel.Api.FunctionalTests.DemoApi.Application.Pirates.GetPirateById;
+namespace Raftel.Tests.Common.Application.Pirates.GetPirateById;
 
 internal sealed class GetPirateByIdQueryHandler : IQueryHandler<GetPirateByIdQuery, GetPirateByIdResponse>
 {
     public async Task<Result<GetPirateByIdResponse>> HandleAsync(GetPirateByIdQuery request,
-        CancellationToken cancellationToken = default)
+        CancellationToken token = default)
     {
         var mugiwara = Mugiwara.All.FirstOrDefault(_ => _.Id == request.Id);
 

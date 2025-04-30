@@ -1,24 +1,22 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
-using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.Middlewares;
-using Raftel.Application.Commands;
-using Raftel.Application.UnitTests.Common;
-using Raftel.Application.UnitTests.Common.CreatePirate;
-using Raftel.Domain.Abstractions;
-using Raftel.Domain.Validators;
+using Raftel.Infrastructure;
+using Raftel.Tests.Common.Application.Pirates.CreatePirate;
 using Raftel.Tests.Common.Domain;
+using Raftel.Tests.Common.Infrastructure.Data;
+using Xunit;
 
-namespace Raftel.Infrastructure.Tests.Data.Common;
+namespace Raftel.Tests.Common.Infrastructure;
 
-public abstract class DataTestBase : IAsyncLifetime
+public abstract class IntegrationTestBase : IAsyncLifetime
 {
     private readonly SqlServerTestContainerFixture _fixture;
 
     protected IServiceProvider ServiceProvider { get; private set; } = default!;
 
-    protected DataTestBase()
+    protected IntegrationTestBase()
     {
         _fixture = new SqlServerTestContainerFixture();
     }
@@ -50,14 +48,6 @@ public abstract class DataTestBase : IAsyncLifetime
 
     protected virtual void ConfigureServices(IServiceCollection services)
     {
-        var configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                ["ConnectionStrings:TestConnection"] = _fixture.ConnectionString
-            })
-            .Build();
-        services.AddRaftelData<TestingRaftelDbContext>(configuration, "TestConnection");
-
         services.AddRaftelApplication(cfg =>
         {
             cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommandHandler).Assembly);
@@ -65,7 +55,7 @@ public abstract class DataTestBase : IAsyncLifetime
             cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
         });
 
-        services.AddScoped(typeof(IPirateRepository), typeof(PirateRepository));
+        services.AddSampleInfrastructure(_fixture.ConnectionString);
     }
 
     protected TService GetService<TService>() where TService : notnull

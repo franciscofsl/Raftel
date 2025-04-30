@@ -3,10 +3,9 @@ using NSubstitute;
 using Raftel.Application.Abstractions.Middlewares;
 using Raftel.Application.Commands;
 using Raftel.Application.Queries;
-using Raftel.Application.UnitTests.Common;
-using Raftel.Application.UnitTests.Common.CreatePirate;
-using Raftel.Application.UnitTests.Common.GetPirateById;
 using Raftel.Domain.Validators;
+using Raftel.Tests.Common.Application.Pirates.CreatePirate;
+using Raftel.Tests.Common.Application.Pirates.GetPirateById;
 using Raftel.Tests.Common.Domain;
 using Shouldly;
 

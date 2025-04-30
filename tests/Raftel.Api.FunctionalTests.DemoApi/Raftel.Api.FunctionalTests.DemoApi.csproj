@@ -12,10 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\Pirates\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\src\Raftel.Api.Server\Raftel.Api.Server.csproj" />
       <ProjectReference Include="..\..\src\Raftel.Application\Raftel.Application.csproj" />
       <ProjectReference Include="..\Raftel.Tests.Common\Raftel.Tests.Common.csproj" />

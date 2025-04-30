@@ -1,4 +1,4 @@
-namespace Raftel.Api.FunctionalTests.DemoApi.Application.Pirates.GetPirateById;
+namespace Raftel.Tests.Common.Application.Pirates.GetPirateById;
 
 public sealed class GetPirateByIdResponse
 {
@@ -7,4 +7,4 @@ public sealed class GetPirateByIdResponse
     public string Name { get; set; }
     
     public int Bounty { get; set; }
-}
+} 

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Raftel.Api.FunctionalTests;
 
-public sealed class ExternalApiTestFactory : WebApplicationFactory<FunctionalTests.DemoApi.Program>
+public sealed class ExternalApiTestFactory : WebApplicationFactory<DemoApi.Program>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {

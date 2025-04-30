@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Raftel.Tests.Common.Domain;
 using Raftel.Tests.Common.Domain.ValueObjects;
 
-namespace Raftel.Infrastructure.Tests.Data.Common.Configuration;
+namespace Raftel.Tests.Common.Infrastructure.Data.Configuration;
 
 public class PirateConfiguration : IEntityTypeConfiguration<Pirate>
 {

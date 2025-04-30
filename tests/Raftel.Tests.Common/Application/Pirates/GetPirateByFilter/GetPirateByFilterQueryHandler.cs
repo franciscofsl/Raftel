@@ -1,8 +1,9 @@
+using Raftel.Application.Queries;
 using Raftel.Domain.Abstractions;
 using Raftel.Shared.Extensions;
 using Raftel.Tests.Common.Domain;
 
-namespace Raftel.Api.FunctionalTests.DemoApi.Application.Pirates.GetPirateByFilter;
+namespace Raftel.Tests.Common.Application.Pirates.GetPirateByFilter;
 
 internal sealed class GetPirateByFilterQueryHandler : IQueryHandler<GetPirateByFilterQuery, GetPirateByFilterResponse>
 {

@@ -1,9 +1,11 @@
 using Raftel.Api.FunctionalTests.DemoApi;
-using Raftel.Api.FunctionalTests.DemoApi.Application.Pirates.GetPirateByFilter;
-using Raftel.Api.FunctionalTests.DemoApi.Application.Pirates.GetPirateById;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Application;
 using Raftel.Application.Abstractions.Middlewares;
+using Raftel.Tests.Common.Application.Pirates.GetPirateByFilter;
+using Raftel.Tests.Common.Application.Pirates.GetPirateById;
+using Raftel.Tests.Common.Domain;
+using Raftel.Tests.Common.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,12 +15,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddRaftelApplication(cfg =>
 {
-    cfg.RegisterServicesFromAssembly(typeof(WeatherForecast).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(Pirate).Assembly);
     cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
     // cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
 });
 
-// builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddSampleInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection")!);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

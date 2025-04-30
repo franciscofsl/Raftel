@@ -1,6 +1,6 @@
 ﻿using Raftel.Domain.Abstractions;
 
-namespace Raftel.Application.UnitTests.Common;
+namespace Raftel.Tests.Common.Application;
 
 public static class CreatePirateErrors
 {

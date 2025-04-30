@@ -1,7 +1,8 @@
 using Microsoft.Data.SqlClient;
 using Testcontainers.MsSql;
+using Xunit;
 
-namespace Raftel.Infrastructure.Tests.Data.Common;
+namespace Raftel.Tests.Common.Infrastructure.Data;
 
 public class SqlServerTestContainerFixture : IAsyncLifetime
 {
@@ -26,8 +27,8 @@ public class SqlServerTestContainerFixture : IAsyncLifetime
 
     private async Task WaitForDatabaseReady()
     {
-        using var connection = new SqlConnection(ConnectionString);
-        for (int i = 0; i < 10; i++)
+        await using var connection = new SqlConnection(ConnectionString);
+        for (var i = 0; i < 3; i++)
         {
             try
             {
