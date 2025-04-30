@@ -1,7 +1,7 @@
-﻿using Raftel.Application.Abstractions.Middlewares;
-using Raftel.Application.Exceptions;
-using Raftel.Application.UnitTests.Common;
-using Raftel.Application.UnitTests.Common.CreatePirate;
+﻿using Raftel.Application.Exceptions;
+using Raftel.Application.Middlewares;
+using Raftel.Demo.Application.Pirates;
+using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Domain.Abstractions;
 using Shouldly;
 

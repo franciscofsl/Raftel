@@ -1,13 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
-using Raftel.Infrastructure.Tests.Data.Common;
-using Raftel.Tests.Common.Domain;
-using Raftel.Tests.Common.Domain.ValueObjects;
+using Raftel.Demo.Domain.Pirates;
+using Raftel.Demo.Domain.Pirates.ValueObjects;
 using Shouldly;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
-public class EfRepositoryTests : DataTestBase
+public class EfRepositoryTests : InfrastructureTestBase
 {
     [Fact]
     public async Task GetByIdAsync_ShouldRetrieveExpectedData()

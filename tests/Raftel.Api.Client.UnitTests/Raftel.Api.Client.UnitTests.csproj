@@ -25,4 +25,7 @@
       <ProjectReference Include="..\..\src\Raftel.Api.Client\Raftel.Api.Client.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute"/>
+    </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿using Raftel.Tests.Common.Domain;
+﻿using Raftel.Demo.Domain.Pirates;
 using Shouldly;
 
 namespace Raftel.Domain.Tests.Validators;

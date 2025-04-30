@@ -1,10 +1,10 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Raftel.Api.Client;
-using Raftel.Api.FunctionalTests.DemoApi.Application.Pirates.GetPirateByFilter;
-using Raftel.Api.FunctionalTests.DemoApi.Application.Pirates.GetPirateById;
 using Raftel.Api.FunctionalTests.ApiDefinition;
-using Raftel.Tests.Common.Domain;
+using Raftel.Demo.Application.Pirates.GetPirateByFilter;
+using Raftel.Demo.Application.Pirates.GetPirateById;
+using Raftel.Demo.Domain.Pirates;
 using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;
@@ -43,7 +43,6 @@ public class ExternalApiIntegrationTests : IClassFixture<ExternalApiTestFactory>
 
         var getMethod = swaggerJson.Paths["/api/pirates/{id}"]["get"];
 
-        getMethod.Parameters.ShouldContain(p => p.Name == "id" && p.In == "path");
         getMethod.Parameters.ShouldContain(p => p.Name == "id" && p.In == "path");
         getMethod.Parameters.ShouldContain(p => p.Name == "name" && p.In == "query" && p.Schema.Type == "string");
         getMethod.Parameters.ShouldContain(p => p.Name == "maxBounty" && p.In == "query" && p.Schema.Type == "integer");

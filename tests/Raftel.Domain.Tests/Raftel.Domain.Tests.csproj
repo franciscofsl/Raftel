@@ -28,16 +28,12 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\demo\Raftel.Demo.Domain\Raftel.Demo.Domain.csproj" />
         <ProjectReference Include="..\..\src\Raftel.Domain\Raftel.Domain.csproj"/>
-        <ProjectReference Include="..\Raftel.Tests.Common\Raftel.Tests.Common.csproj" />
     </ItemGroup>
     
     <ItemGroup>
         <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute"/>
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Common\" />
     </ItemGroup>
 
 </Project>

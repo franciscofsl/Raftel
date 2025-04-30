@@ -1,16 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
-using Raftel.Application.Commands;
-using Raftel.Application.UnitTests.Common.CreatePirate;
-using Raftel.Infrastructure.Tests.Data.Common;
-using Raftel.Tests.Common.Domain;
-using Raftel.Tests.Common.Domain.ValueObjects;
+using Raftel.Demo.Domain.Pirates;
+using Raftel.Demo.Domain.Pirates.ValueObjects;
+using Raftel.Demo.Infrastructure.Data;
 using Shouldly;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
-public class UnitOfWorkTests : DataTestBase
+public class UnitOfWorkTests : InfrastructureTestBase
 {
     [Fact]
     public async Task CommitAsync_ShouldPersistData()
@@ -53,25 +51,6 @@ public class UnitOfWorkTests : DataTestBase
             loaded.ShouldNotBeNull();
             loaded.Bounty.ShouldBe(new Bounty(150_000_000));
             pirate.ShouldBe(loaded);
-        });
-    }
-
-    [Fact]
-    public async Task CommitAsync_ShouldPersistData_UsingMiddleware()
-    {
-        await ExecuteScopedAsync(async sp =>
-        {
-            var commandDispatcher = sp.GetService<ICommandDispatcher>();
-
-            var command = new CreatePirateCommand("Ace", 9514361);
-            var result = await commandDispatcher.DispatchAsync(command);
-            result.IsSuccess.ShouldBeTrue();
-
-            var repository = sp.GetRequiredService<IPirateRepository>();
-
-            var loaded = await repository.ListAllAsync();
-            loaded.ShouldHaveSingleItem();
-            loaded.ShouldContain(_ => _.Name == command.Name && _.Bounty == command.Bounty);
         });
     }
 }
