@@ -1,6 +1,88 @@
 ### YamlMime:XRefMap
 sorted: true
 references:
+- uid: Raftel.Api.Client
+  name: Raftel.Api.Client
+  href: api/Raftel.Api.Client.html
+  commentId: N:Raftel.Api.Client
+  fullName: Raftel.Api.Client
+  nameWithType: Raftel.Api.Client
+- uid: Raftel.Api.Client.QueryFilter
+  name: QueryFilter
+  href: api/Raftel.Api.Client.QueryFilter.html
+  commentId: T:Raftel.Api.Client.QueryFilter
+  fullName: Raftel.Api.Client.QueryFilter
+  nameWithType: QueryFilter
+- uid: Raftel.Api.Client.QueryFilter.Empty
+  name: Empty()
+  href: api/Raftel.Api.Client.QueryFilter.html#Raftel_Api_Client_QueryFilter_Empty
+  commentId: M:Raftel.Api.Client.QueryFilter.Empty
+  fullName: Raftel.Api.Client.QueryFilter.Empty()
+  nameWithType: QueryFilter.Empty()
+- uid: Raftel.Api.Client.QueryFilter.Empty*
+  name: Empty
+  href: api/Raftel.Api.Client.QueryFilter.html#Raftel_Api_Client_QueryFilter_Empty_
+  commentId: Overload:Raftel.Api.Client.QueryFilter.Empty
+  isSpec: "True"
+  fullName: Raftel.Api.Client.QueryFilter.Empty
+  nameWithType: QueryFilter.Empty
+- uid: Raftel.Api.Client.QueryFilter.FromObject(System.Object)
+  name: FromObject(object?)
+  href: api/Raftel.Api.Client.QueryFilter.html#Raftel_Api_Client_QueryFilter_FromObject_System_Object_
+  commentId: M:Raftel.Api.Client.QueryFilter.FromObject(System.Object)
+  name.vb: FromObject(Object)
+  fullName: Raftel.Api.Client.QueryFilter.FromObject(object?)
+  fullName.vb: Raftel.Api.Client.QueryFilter.FromObject(Object)
+  nameWithType: QueryFilter.FromObject(object?)
+  nameWithType.vb: QueryFilter.FromObject(Object)
+- uid: Raftel.Api.Client.QueryFilter.FromObject*
+  name: FromObject
+  href: api/Raftel.Api.Client.QueryFilter.html#Raftel_Api_Client_QueryFilter_FromObject_
+  commentId: Overload:Raftel.Api.Client.QueryFilter.FromObject
+  isSpec: "True"
+  fullName: Raftel.Api.Client.QueryFilter.FromObject
+  nameWithType: QueryFilter.FromObject
+- uid: Raftel.Api.Client.QueryFilter.ToString
+  name: ToString()
+  href: api/Raftel.Api.Client.QueryFilter.html#Raftel_Api_Client_QueryFilter_ToString
+  commentId: M:Raftel.Api.Client.QueryFilter.ToString
+  fullName: Raftel.Api.Client.QueryFilter.ToString()
+  nameWithType: QueryFilter.ToString()
+- uid: Raftel.Api.Client.QueryFilter.ToString*
+  name: ToString
+  href: api/Raftel.Api.Client.QueryFilter.html#Raftel_Api_Client_QueryFilter_ToString_
+  commentId: Overload:Raftel.Api.Client.QueryFilter.ToString
+  isSpec: "True"
+  fullName: Raftel.Api.Client.QueryFilter.ToString
+  nameWithType: QueryFilter.ToString
+- uid: Raftel.Api.Server.AutoEndpoints
+  name: Raftel.Api.Server.AutoEndpoints
+  href: api/Raftel.Api.Server.AutoEndpoints.html
+  commentId: N:Raftel.Api.Server.AutoEndpoints
+  fullName: Raftel.Api.Server.AutoEndpoints
+  nameWithType: Raftel.Api.Server.AutoEndpoints
+- uid: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions
+  name: AutoEndpointExtensions
+  href: api/Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.html
+  commentId: T:Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions
+  fullName: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions
+  nameWithType: AutoEndpointExtensions
+- uid: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint*
+  name: AddQueryEndpoint
+  href: api/Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.html#Raftel_Api_Server_AutoEndpoints_AutoEndpointExtensions_AddQueryEndpoint_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint
+  nameWithType: AutoEndpointExtensions.AddQueryEndpoint
+- uid: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint``2(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String,System.Net.Http.HttpMethod)
+  name: AddQueryEndpoint<TRequest, TResult>(IEndpointRouteBuilder, string, HttpMethod)
+  href: api/Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.html#Raftel_Api_Server_AutoEndpoints_AutoEndpointExtensions_AddQueryEndpoint__2_Microsoft_AspNetCore_Routing_IEndpointRouteBuilder_System_String_System_Net_Http_HttpMethod_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint``2(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String,System.Net.Http.HttpMethod)
+  name.vb: AddQueryEndpoint(Of TRequest, TResult)(IEndpointRouteBuilder, String, HttpMethod)
+  fullName: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint<TRequest, TResult>(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder, string, System.Net.Http.HttpMethod)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint(Of TRequest, TResult)(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder, String, System.Net.Http.HttpMethod)
+  nameWithType: AutoEndpointExtensions.AddQueryEndpoint<TRequest, TResult>(IEndpointRouteBuilder, string, HttpMethod)
+  nameWithType.vb: AutoEndpointExtensions.AddQueryEndpoint(Of TRequest, TResult)(IEndpointRouteBuilder, String, HttpMethod)
 - uid: Raftel.Application
   name: Raftel.Application
   href: api/Raftel.Application.html
@@ -1841,3 +1923,72 @@ references:
   fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String)
   nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string)
   nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String)
+- uid: Raftel.Shared.Extensions
+  name: Raftel.Shared.Extensions
+  href: api/Raftel.Shared.Extensions.html
+  commentId: N:Raftel.Shared.Extensions
+  fullName: Raftel.Shared.Extensions
+  nameWithType: Raftel.Shared.Extensions
+- uid: Raftel.Shared.Extensions.EnumerableExtensions
+  name: EnumerableExtensions
+  href: api/Raftel.Shared.Extensions.EnumerableExtensions.html
+  commentId: T:Raftel.Shared.Extensions.EnumerableExtensions
+  fullName: Raftel.Shared.Extensions.EnumerableExtensions
+  nameWithType: EnumerableExtensions
+- uid: Raftel.Shared.Extensions.EnumerableExtensions.WhereIf*
+  name: WhereIf
+  href: api/Raftel.Shared.Extensions.EnumerableExtensions.html#Raftel_Shared_Extensions_EnumerableExtensions_WhereIf_
+  commentId: Overload:Raftel.Shared.Extensions.EnumerableExtensions.WhereIf
+  isSpec: "True"
+  fullName: Raftel.Shared.Extensions.EnumerableExtensions.WhereIf
+  nameWithType: EnumerableExtensions.WhereIf
+- uid: Raftel.Shared.Extensions.EnumerableExtensions.WhereIf``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Func{``0,System.Boolean})
+  name: WhereIf<T>(IEnumerable<T>, bool, Func<T, bool>)
+  href: api/Raftel.Shared.Extensions.EnumerableExtensions.html#Raftel_Shared_Extensions_EnumerableExtensions_WhereIf__1_System_Collections_Generic_IEnumerable___0__System_Boolean_System_Func___0_System_Boolean__
+  commentId: M:Raftel.Shared.Extensions.EnumerableExtensions.WhereIf``1(System.Collections.Generic.IEnumerable{``0},System.Boolean,System.Func{``0,System.Boolean})
+  name.vb: WhereIf(Of T)(IEnumerable(Of T), Boolean, Func(Of T, Boolean))
+  fullName: Raftel.Shared.Extensions.EnumerableExtensions.WhereIf<T>(System.Collections.Generic.IEnumerable<T>, bool, System.Func<T, bool>)
+  fullName.vb: Raftel.Shared.Extensions.EnumerableExtensions.WhereIf(Of T)(System.Collections.Generic.IEnumerable(Of T), Boolean, System.Func(Of T, Boolean))
+  nameWithType: EnumerableExtensions.WhereIf<T>(IEnumerable<T>, bool, Func<T, bool>)
+  nameWithType.vb: EnumerableExtensions.WhereIf(Of T)(IEnumerable(Of T), Boolean, Func(Of T, Boolean))
+- uid: Raftel.Shared.Extensions.StringExtensions
+  name: StringExtensions
+  href: api/Raftel.Shared.Extensions.StringExtensions.html
+  commentId: T:Raftel.Shared.Extensions.StringExtensions
+  fullName: Raftel.Shared.Extensions.StringExtensions
+  nameWithType: StringExtensions
+- uid: Raftel.Shared.Extensions.StringExtensions.ToCamelCase(System.String)
+  name: ToCamelCase(string)
+  href: api/Raftel.Shared.Extensions.StringExtensions.html#Raftel_Shared_Extensions_StringExtensions_ToCamelCase_System_String_
+  commentId: M:Raftel.Shared.Extensions.StringExtensions.ToCamelCase(System.String)
+  name.vb: ToCamelCase(String)
+  fullName: Raftel.Shared.Extensions.StringExtensions.ToCamelCase(string)
+  fullName.vb: Raftel.Shared.Extensions.StringExtensions.ToCamelCase(String)
+  nameWithType: StringExtensions.ToCamelCase(string)
+  nameWithType.vb: StringExtensions.ToCamelCase(String)
+- uid: Raftel.Shared.Extensions.StringExtensions.ToCamelCase*
+  name: ToCamelCase
+  href: api/Raftel.Shared.Extensions.StringExtensions.html#Raftel_Shared_Extensions_StringExtensions_ToCamelCase_
+  commentId: Overload:Raftel.Shared.Extensions.StringExtensions.ToCamelCase
+  isSpec: "True"
+  fullName: Raftel.Shared.Extensions.StringExtensions.ToCamelCase
+  nameWithType: StringExtensions.ToCamelCase
+- uid: Raftel.Shared.Extensions.TypeExtensions
+  name: TypeExtensions
+  href: api/Raftel.Shared.Extensions.TypeExtensions.html
+  commentId: T:Raftel.Shared.Extensions.TypeExtensions
+  fullName: Raftel.Shared.Extensions.TypeExtensions
+  nameWithType: TypeExtensions
+- uid: Raftel.Shared.Extensions.TypeExtensions.IsNullable(System.Type)
+  name: IsNullable(Type)
+  href: api/Raftel.Shared.Extensions.TypeExtensions.html#Raftel_Shared_Extensions_TypeExtensions_IsNullable_System_Type_
+  commentId: M:Raftel.Shared.Extensions.TypeExtensions.IsNullable(System.Type)
+  fullName: Raftel.Shared.Extensions.TypeExtensions.IsNullable(System.Type)
+  nameWithType: TypeExtensions.IsNullable(Type)
+- uid: Raftel.Shared.Extensions.TypeExtensions.IsNullable*
+  name: IsNullable
+  href: api/Raftel.Shared.Extensions.TypeExtensions.html#Raftel_Shared_Extensions_TypeExtensions_IsNullable_
+  commentId: Overload:Raftel.Shared.Extensions.TypeExtensions.IsNullable
+  isSpec: "True"
+  fullName: Raftel.Shared.Extensions.TypeExtensions.IsNullable
+  nameWithType: TypeExtensions.IsNullable

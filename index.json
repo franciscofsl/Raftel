@@ -4,6 +4,26 @@
     "title": "Raftel | Raftel",
     "summary": "Raftel Raftel is a training project. It's a small framework for building .NET Core applications, intended to be reused as a base for developing solutions that follow clean architecture and apply good coding practices. \uD83C\uDFAF Project Goals Serve as a learning environment to apply software development best practices. Practice methodologies and principles such as TDD, DDD, Object Calisthenics, and patterns like CQRS and Unit of Work. Provide an initial structure that facilitates scalability and code clarity. Avoid external library dependencies, favoring pure .NET solutions. ✨ Features Reusable foundation: designed to be the starting point for multiple .NET Core applications. Simple and extensible structure: clear project organization (cli/, src/, tests/) to support growth. Integrated testing: with code coverage and continuous integration from the start. Docker-ready development environment: quickly spin up dependencies like databases with a single command. No external dependencies: all code is built purely on the .NET platform, without additional frameworks. ⚙️ Requirements .NET SDK 9.0 or higher Docker (optional, but recommended for full development experience) \uD83D\uDCDA Documentation You can find the project documentation at: \uD83D\uDC49 franciscofsl.github.io/Raftel"
   },
+  "api/Raftel.Api.Client.QueryFilter.html": {
+    "href": "api/Raftel.Api.Client.QueryFilter.html",
+    "title": "Class QueryFilter | Raftel",
+    "summary": "Class QueryFilter Inheritance object QueryFilter Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) Namespace: Raftel.Api.Client Assembly: Raftel.Api.Client.dll Syntax public sealed class QueryFilter Methods | Edit this page View Source Empty() Declaration public static QueryFilter Empty() Returns Type Description QueryFilter | Edit this page View Source FromObject(object?) Declaration public static QueryFilter FromObject(object? parameters) Parameters Type Name Description object parameters Returns Type Description QueryFilter | Edit this page View Source ToString() Returns a string that represents the current object. Declaration public override string ToString() Returns Type Description string A string that represents the current object. Overrides object.ToString()"
+  },
+  "api/Raftel.Api.Client.html": {
+    "href": "api/Raftel.Api.Client.html",
+    "title": "Namespace Raftel.Api.Client | Raftel",
+    "summary": "Namespace Raftel.Api.Client Classes QueryFilter"
+  },
+  "api/Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.html": {
+    "href": "api/Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.html",
+    "title": "Class AutoEndpointExtensions | Raftel",
+    "summary": "Class AutoEndpointExtensions Inheritance object AutoEndpointExtensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Raftel.Api.Server.AutoEndpoints Assembly: Raftel.Api.Server.dll Syntax public static class AutoEndpointExtensions Methods | Edit this page View Source AddQueryEndpoint<TRequest, TResult>(IEndpointRouteBuilder, string, HttpMethod) Declaration public static IEndpointRouteBuilder AddQueryEndpoint<TRequest, TResult>(this IEndpointRouteBuilder app, string route, HttpMethod method) where TRequest : IRequest<Result<TResult>> Parameters Type Name Description IEndpointRouteBuilder app string route HttpMethod method Returns Type Description IEndpointRouteBuilder Type Parameters Name Description TRequest TResult"
+  },
+  "api/Raftel.Api.Server.AutoEndpoints.html": {
+    "href": "api/Raftel.Api.Server.AutoEndpoints.html",
+    "title": "Namespace Raftel.Api.Server.AutoEndpoints | Raftel",
+    "summary": "Namespace Raftel.Api.Server.AutoEndpoints Classes AutoEndpointExtensions"
+  },
   "api/Raftel.Application.Abstractions.ICommandMiddleware-1.html": {
     "href": "api/Raftel.Application.Abstractions.ICommandMiddleware-1.html",
     "title": "Interface ICommandMiddleware<TRequest> | Raftel",
@@ -258,6 +278,26 @@
     "href": "api/Raftel.Infrastructure.html",
     "title": "Namespace Raftel.Infrastructure | Raftel",
     "summary": "Namespace Raftel.Infrastructure Classes DependencyInjection"
+  },
+  "api/Raftel.Shared.Extensions.EnumerableExtensions.html": {
+    "href": "api/Raftel.Shared.Extensions.EnumerableExtensions.html",
+    "title": "Class EnumerableExtensions | Raftel",
+    "summary": "Class EnumerableExtensions Inheritance object EnumerableExtensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Raftel.Shared.Extensions Assembly: Raftel.Shared.dll Syntax public static class EnumerableExtensions Methods | Edit this page View Source WhereIf<T>(IEnumerable<T>, bool, Func<T, bool>) Declaration public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> source, bool condition, Func<T, bool> predicate) Parameters Type Name Description IEnumerable<T> source bool condition Func<T, bool> predicate Returns Type Description IEnumerable<T> Type Parameters Name Description T"
+  },
+  "api/Raftel.Shared.Extensions.StringExtensions.html": {
+    "href": "api/Raftel.Shared.Extensions.StringExtensions.html",
+    "title": "Class StringExtensions | Raftel",
+    "summary": "Class StringExtensions Inheritance object StringExtensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Raftel.Shared.Extensions Assembly: Raftel.Shared.dll Syntax public static class StringExtensions Methods | Edit this page View Source ToCamelCase(string) Declaration public static string ToCamelCase(this string input) Parameters Type Name Description string input Returns Type Description string"
+  },
+  "api/Raftel.Shared.Extensions.TypeExtensions.html": {
+    "href": "api/Raftel.Shared.Extensions.TypeExtensions.html",
+    "title": "Class TypeExtensions | Raftel",
+    "summary": "Class TypeExtensions Inheritance object TypeExtensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: Raftel.Shared.Extensions Assembly: Raftel.Shared.dll Syntax public static class TypeExtensions Methods | Edit this page View Source IsNullable(Type) Declaration public static bool IsNullable(this Type type) Parameters Type Name Description Type type Returns Type Description bool"
+  },
+  "api/Raftel.Shared.Extensions.html": {
+    "href": "api/Raftel.Shared.Extensions.html",
+    "title": "Namespace Raftel.Shared.Extensions | Raftel",
+    "summary": "Namespace Raftel.Shared.Extensions Classes EnumerableExtensions StringExtensions TypeExtensions"
   },
   "index.html": {
     "href": "index.html",

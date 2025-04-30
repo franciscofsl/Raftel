@@ -22,6 +22,62 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Client.QueryFilter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Client.QueryFilter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Client.QueryFilter",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Client.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Client.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Client",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.AutoEndpoints.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.AutoEndpoints.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.AutoEndpoints",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Abstractions.ICommandMiddleware-1.yml",
       "output": {
         ".html": {
@@ -732,6 +788,62 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Infrastructure",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Shared.Extensions.EnumerableExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Shared.Extensions.EnumerableExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Shared.Extensions.EnumerableExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Shared.Extensions.StringExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Shared.Extensions.StringExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Shared.Extensions.StringExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Shared.Extensions.TypeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Shared.Extensions.TypeExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Shared.Extensions.TypeExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Shared.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Shared.Extensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Shared.Extensions",
       "Summary": null
     },
     {
