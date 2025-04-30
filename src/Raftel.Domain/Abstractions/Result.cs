@@ -123,7 +123,7 @@ public class Result<TValue> : Result
     /// </summary>
     /// <param name="value">The value returned by the operation.</param>
     /// <returns>A successful result containing the value.</returns>
-    public static Result<TValue> Success(TValue value) => new Result<TValue>(value, true, null);
+    public static Result<TValue> Success(TValue value) => new Result<TValue>(value, true, Error.None);
 
     /// <summary>
     /// Creates a failed result with the specified error.

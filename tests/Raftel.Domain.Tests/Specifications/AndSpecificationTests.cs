@@ -1,5 +1,5 @@
-﻿using Raftel.Domain.Tests.Common.Domain;
-using Raftel.Domain.Tests.Common.Domain.Specifications;
+﻿using Raftel.Tests.Common.Domain;
+using Raftel.Tests.Common.Domain.Specifications;
 using Shouldly;
 
 namespace Raftel.Domain.Tests.Specifications;

@@ -6,7 +6,7 @@ using Raftel.Application.Commands;
 using Raftel.Application.Queries;
 using Raftel.Domain.Validators;
 
-[assembly: InternalsVisibleTo("Raftel.Application.Tests")]
+[assembly: InternalsVisibleTo("Raftel.Application.UnitTests")]
 
 namespace Raftel.Application;
 

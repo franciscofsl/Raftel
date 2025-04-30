@@ -4,11 +4,11 @@ using Raftel.Application;
 using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.Middlewares;
 using Raftel.Application.Commands;
-using Raftel.Application.Tests.Common;
-using Raftel.Application.Tests.Common.CreatePirate;
+using Raftel.Application.UnitTests.Common;
+using Raftel.Application.UnitTests.Common.CreatePirate;
 using Raftel.Domain.Abstractions;
-using Raftel.Domain.Tests.Common.Domain;
 using Raftel.Domain.Validators;
+using Raftel.Tests.Common.Domain;
 
 namespace Raftel.Infrastructure.Tests.Data.Common;
 
