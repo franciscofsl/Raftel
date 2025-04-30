@@ -5,11 +5,11 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Namespace Raftel.Application.Abstractions.Middlewares | Raftel </title>
+      <title>Interface ICommandMiddleware&lt;TRequest&gt; | Raftel </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Namespace Raftel.Application.Abstractions.Middlewares | Raftel ">
+      <meta name="title" content="Interface ICommandMiddleware&lt;TRequest&gt; | Raftel ">
     
-    
+    <meta name="description" content="Represents a middleware specific to command handling in the request pipeline. Inherits from  with a fixed response type of .">
       <link rel="shortcut icon" href="../favicon.ico">
       <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
       <link rel="stylesheet" href="../styles/docfx.css">
@@ -76,22 +76,43 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Raftel.Application.Abstractions.Middlewares">
+            <article class="content wrap" id="_content" data-uid="Raftel.Application.Middlewares.ICommandMiddleware`1">
 
-  <h1 id="Raftel_Application_Abstractions_Middlewares" data-uid="Raftel.Application.Abstractions.Middlewares" class="text-break">Namespace Raftel.Application.Abstractions.Middlewares</h1>
-  <div class="markdown level0 summary"></div>
+
+
+  <h1 id="Raftel_Application_Middlewares_ICommandMiddleware_1" data-uid="Raftel.Application.Middlewares.ICommandMiddleware`1" class="text-break">Interface ICommandMiddleware&lt;TRequest&gt;</h1>
+  <div class="markdown level0 summary"><p>Represents a middleware specific to command handling in the request pipeline.
+Inherits from <a class="xref" href="Raftel.Application.Middlewares.IGlobalMiddleware-2.html">IGlobalMiddleware&lt;TRequest, TResponse&gt;</a> with a fixed response type of <a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a>.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
-    <h3 id="classes">
-Classes
-</h3>
-      <h4><a class="xref" href="Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.html">UnitOfWorkMiddleware&lt;TRequest&gt;</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.html">ValidationMiddleware&lt;TRequest, TResponse&gt;</a></h4>
-      <section><p>Middleware that performs validation on the incoming request using all registered <a class="xref" href="Raftel.Domain.Validators.Validator-1.html">Validator&lt;TModel&gt;</a> instances.
-If any validation rule fails, a <a class="xref" href="Raftel.Application.Exceptions.ValidationException.html">ValidationException</a> is thrown and the request pipeline is halted.</p>
-</section>
-
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Raftel.Application.Middlewares.IGlobalMiddleware-2.html#Raftel_Application_Middlewares_IGlobalMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__">IGlobalMiddleware&lt;TRequest, Result&gt;.HandleAsync(TRequest, RequestHandlerDelegate&lt;Result&gt;)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Application.html">Application</a>.<a class="xref" href="Raftel.Application.Middlewares.html">Middlewares</a></h6>
+  <h6><strong>Assembly</strong>: Raftel.Application.dll</h6>
+  <h5 id="Raftel_Application_Middlewares_ICommandMiddleware_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface ICommandMiddleware&lt;TRequest&gt; : IGlobalMiddleware&lt;TRequest, Result&gt; where TRequest : ICommand</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TRequest</span></td>
+        <td><p>The type of the command request.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 
 </article>
           </div>
@@ -100,6 +121,12 @@ If any validation rule fails, a <a class="xref" href="Raftel.Application.Excepti
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
+                  <li>
+                    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Middlewares_ICommandMiddleware_1.md&amp;value=---%0Auid%3A%20Raftel.Application.Middlewares.ICommandMiddleware%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/ICommandMiddleware.cs/#L11" class="contribution-link">View Source</a>
+                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

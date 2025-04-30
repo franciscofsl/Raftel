@@ -78,48 +78,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Abstractions.ICommandMiddleware-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Abstractions.ICommandMiddleware-1.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Abstractions.ICommandMiddleware<TRequest>",
-      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.ICommandMiddleware-1.yml\" sourcestartlinenumber=\"1\">Represents a middleware specific to command handling in the request pipeline.\nInherits from <xref href=\"Raftel.Application.Abstractions.IGlobalMiddleware%602\" data-throw-if-not-resolved=\"false\"></xref> with a fixed response type of <xref href=\"Raftel.Domain.Abstractions.Result\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Abstractions.IGlobalMiddleware-2.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Abstractions.IGlobalMiddleware-2.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Abstractions.IGlobalMiddleware<TRequest, TResponse>",
-      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.IGlobalMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware component in the request pipeline that can intercept and\nmodify the processing of a request before and/or after the next component is invoked.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Abstractions.IQueryMiddleware-2.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Abstractions.IQueryMiddleware-2.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Abstractions.IQueryMiddleware<TRequest, TResponse>",
-      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.IQueryMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware specific to query handling in the request pipeline.\nInherits from <xref href=\"Raftel.Application.Abstractions.IGlobalMiddleware%602\" data-throw-if-not-resolved=\"false\"></xref> with a response type of <xref href=\"Raftel.Domain.Abstractions.Result%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Abstractions.IRequest-1.yml",
       "output": {
         ".html": {
@@ -159,48 +117,6 @@
       "IsMRef": true,
       "Title": "Raftel.Application.Abstractions.IRequestHandler<TRequest, TResponse>",
       "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.IRequestHandler-2.yml\" sourcestartlinenumber=\"1\">Defines a handler that processes a request of type <code class=\"typeparamref\">TRequest</code>\nand returns a response of type <code class=\"typeparamref\">TResponse</code>.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware-1.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Abstractions.Middlewares.UnitOfWorkMiddleware<TRequest>",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Abstractions.Middlewares.ValidationMiddleware<TRequest, TResponse>",
-      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.Middlewares.ValidationMiddleware-2.yml\" sourcestartlinenumber=\"1\">Middleware that performs validation on the incoming request using all registered <xref href=\"Raftel.Domain.Validators.Validator%601\" data-throw-if-not-resolved=\"false\"></xref> instances.\nIf any validation rule fails, a <xref href=\"Raftel.Application.Exceptions.ValidationException\" data-throw-if-not-resolved=\"false\"></xref> is thrown and the request pipeline is halted.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Abstractions.Middlewares.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Abstractions.Middlewares.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Abstractions.Middlewares",
-      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -383,6 +299,90 @@
       "IsMRef": true,
       "Title": "Raftel.Application.IUnitOfWork",
       "Summary": "<p sourcefile=\"api/Raftel.Application.IUnitOfWork.yml\" sourcestartlinenumber=\"1\">Represents a unit of work that encapsulates a series of operations\nto be committed as a single transaction.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.ICommandMiddleware-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.ICommandMiddleware-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares.ICommandMiddleware<TRequest>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.ICommandMiddleware-1.yml\" sourcestartlinenumber=\"1\">Represents a middleware specific to command handling in the request pipeline.\nInherits from <xref href=\"Raftel.Application.Middlewares.IGlobalMiddleware%602\" data-throw-if-not-resolved=\"false\"></xref> with a fixed response type of <xref href=\"Raftel.Domain.Abstractions.Result\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.IGlobalMiddleware-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.IGlobalMiddleware-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares.IGlobalMiddleware<TRequest, TResponse>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.IGlobalMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware component in the request pipeline that can intercept and\nmodify the processing of a request before and/or after the next component is invoked.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.IQueryMiddleware-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.IQueryMiddleware-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares.IQueryMiddleware<TRequest, TResponse>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.IQueryMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware specific to query handling in the request pipeline.\nInherits from <xref href=\"Raftel.Application.Middlewares.IGlobalMiddleware%602\" data-throw-if-not-resolved=\"false\"></xref> with a response type of <xref href=\"Raftel.Domain.Abstractions.Result%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares.UnitOfWorkMiddleware<TRequest>",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.ValidationMiddleware-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.ValidationMiddleware-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares.ValidationMiddleware<TRequest, TResponse>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.ValidationMiddleware-2.yml\" sourcestartlinenumber=\"1\">Middleware that performs validation on the incoming request using all registered <xref href=\"Raftel.Domain.Validators.Validator%601\" data-throw-if-not-resolved=\"false\"></xref> instances.\nIf any validation rule fails, a <xref href=\"Raftel.Application.Exceptions.ValidationException\" data-throw-if-not-resolved=\"false\"></xref> is thrown and the request pipeline is halted.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
