@@ -1,14 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Raftel.Application;
-using Raftel.Application.Abstractions.Middlewares;
-using Raftel.Infrastructure;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Raftel.Application.Middlewares;
 using Raftel.Tests.Common.Application.Pirates.CreatePirate;
-using Raftel.Tests.Common.Domain;
+using Raftel.Tests.Common.Infrastructure;
 using Raftel.Tests.Common.Infrastructure.Data;
-using Xunit;
 
-namespace Raftel.Tests.Common.Infrastructure;
+namespace Raftel.Application.IntegrationTests;
 
 public abstract class IntegrationTestBase : IAsyncLifetime
 {

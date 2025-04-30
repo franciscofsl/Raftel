@@ -2,7 +2,6 @@
 using Raftel.Application.Commands;
 using Raftel.Tests.Common.Application.Pirates.CreatePirate;
 using Raftel.Tests.Common.Domain;
-using Raftel.Tests.Common.Infrastructure;
 using Shouldly;
 
 namespace Raftel.Application.IntegrationTests.Middlewares;

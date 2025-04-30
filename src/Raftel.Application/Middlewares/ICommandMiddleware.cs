@@ -1,7 +1,7 @@
 ﻿using Raftel.Application.Commands;
 using Raftel.Domain.Abstractions;
 
-namespace Raftel.Application.Abstractions;
+namespace Raftel.Application.Middlewares;
 
 /// <summary>
 /// Represents a middleware specific to command handling in the request pipeline.

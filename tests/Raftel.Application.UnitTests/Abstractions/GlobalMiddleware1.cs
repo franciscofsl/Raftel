@@ -1,4 +1,5 @@
 ﻿using Raftel.Application.Abstractions;
+using Raftel.Application.Middlewares;
 
 namespace Raftel.Application.UnitTests.Abstractions;
 

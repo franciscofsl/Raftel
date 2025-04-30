@@ -1,8 +1,8 @@
-﻿using Raftel.Application.Exceptions;
-using Raftel.Domain.Abstractions;
+﻿using Raftel.Application.Abstractions;
+using Raftel.Application.Exceptions;
 using Raftel.Domain.Validators;
 
-namespace Raftel.Application.Abstractions.Middlewares;
+namespace Raftel.Application.Middlewares;
 
 /// <summary>
 /// Middleware that performs validation on the incoming request using all registered <see cref="Validator{TRequest}"/> instances.

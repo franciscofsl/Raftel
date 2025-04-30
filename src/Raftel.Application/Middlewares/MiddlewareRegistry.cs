@@ -1,4 +1,4 @@
-﻿namespace Raftel.Application.Abstractions;
+﻿namespace Raftel.Application.Middlewares;
 
 internal record MiddlewareRegistry(
     List<Type> GlobalMiddlewares,

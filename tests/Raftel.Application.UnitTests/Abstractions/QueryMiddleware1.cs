@@ -1,4 +1,5 @@
 ﻿using Raftel.Application.Abstractions;
+using Raftel.Application.Middlewares;
 using Raftel.Application.Queries;
 using Raftel.Domain.Abstractions;
 

@@ -1,7 +1,8 @@
-﻿using Raftel.Application.Commands;
+﻿using Raftel.Application.Abstractions;
+using Raftel.Application.Commands;
 using Raftel.Domain.Abstractions;
 
-namespace Raftel.Application.Abstractions.Middlewares;
+namespace Raftel.Application.Middlewares;
 
 public class UnitOfWorkMiddleware<TRequest>(IUnitOfWork unitOfWork) : ICommandMiddleware<TRequest>
     where TRequest : ICommand

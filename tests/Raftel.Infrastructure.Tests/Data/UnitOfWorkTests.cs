@@ -11,7 +11,7 @@ using Shouldly;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
-public class UnitOfWorkTests : IntegrationTestBase
+public class UnitOfWorkTests : InfrastructureTestBase
 {
     [Fact]
     public async Task CommitAsync_ShouldPersistData()

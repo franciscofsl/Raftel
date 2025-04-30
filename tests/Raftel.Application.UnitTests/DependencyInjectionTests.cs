@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
-using Raftel.Application.Abstractions.Middlewares;
 using Raftel.Application.Commands;
+using Raftel.Application.Middlewares;
 using Raftel.Application.Queries;
 using Raftel.Domain.Validators;
 using Raftel.Tests.Common.Application.Pirates.CreatePirate;

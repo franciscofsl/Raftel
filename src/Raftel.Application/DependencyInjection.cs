@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Abstractions;
 using Raftel.Application.Commands;
+using Raftel.Application.Middlewares;
 using Raftel.Application.Queries;
 using Raftel.Domain.Validators;
 

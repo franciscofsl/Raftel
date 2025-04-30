@@ -1,4 +1,6 @@
-﻿namespace Raftel.Application.Abstractions;
+﻿using Raftel.Application.Abstractions;
+
+namespace Raftel.Application.Middlewares;
 
 /// <summary>
 /// Represents a middleware component in the request pipeline that can intercept and

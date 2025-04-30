@@ -1,7 +1,7 @@
 using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Application;
-using Raftel.Application.Abstractions.Middlewares;
+using Raftel.Application.Middlewares;
 using Raftel.Tests.Common.Application.Pirates.GetPirateByFilter;
 using Raftel.Tests.Common.Application.Pirates.GetPirateById;
 using Raftel.Tests.Common.Domain;

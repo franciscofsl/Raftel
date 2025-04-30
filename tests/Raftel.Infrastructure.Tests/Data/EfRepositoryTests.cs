@@ -7,7 +7,7 @@ using Shouldly;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
-public class EfRepositoryTests : IntegrationTestBase
+public class EfRepositoryTests : InfrastructureTestBase
 {
     [Fact]
     public async Task GetByIdAsync_ShouldRetrieveExpectedData()
