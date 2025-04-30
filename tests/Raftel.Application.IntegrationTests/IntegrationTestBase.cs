@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Middlewares;
-using Raftel.Tests.Common.Application.Pirates.CreatePirate;
-using Raftel.Tests.Common.Infrastructure;
-using Raftel.Tests.Common.Infrastructure.Data;
+using Raftel.Demo.Application.Pirates.CreatePirate;
+using Raftel.Demo.Infrastructure;
+using Raftel.Demo.Infrastructure.Data;
+using Raftel.Infrastructure.Tests;
 
 namespace Raftel.Application.IntegrationTests;
 

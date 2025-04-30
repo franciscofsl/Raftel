@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using Raftel.Api.Client;
 using Raftel.Api.FunctionalTests.ApiDefinition;
-using Raftel.Tests.Common.Application.Pirates.GetPirateByFilter;
-using Raftel.Tests.Common.Application.Pirates.GetPirateById;
-using Raftel.Tests.Common.Domain;
+using Raftel.Demo.Application.Pirates.GetPirateByFilter;
+using Raftel.Demo.Application.Pirates.GetPirateById;
+using Raftel.Demo.Domain.Pirates;
 using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;

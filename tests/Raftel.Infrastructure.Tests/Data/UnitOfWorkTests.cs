@@ -1,12 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
-using Raftel.Application.Commands;
-using Raftel.Tests.Common.Application.Pirates.CreatePirate;
-using Raftel.Tests.Common.Domain;
-using Raftel.Tests.Common.Domain.ValueObjects;
-using Raftel.Tests.Common.Infrastructure;
-using Raftel.Tests.Common.Infrastructure.Data;
+using Raftel.Demo.Domain.Pirates;
+using Raftel.Demo.Domain.Pirates.ValueObjects;
+using Raftel.Demo.Infrastructure.Data;
 using Shouldly;
 
 namespace Raftel.Infrastructure.Tests.Data;

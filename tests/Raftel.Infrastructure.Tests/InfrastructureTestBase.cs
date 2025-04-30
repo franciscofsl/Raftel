@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Raftel.Tests.Common.Infrastructure;
-using Raftel.Tests.Common.Infrastructure.Data;
+using Raftel.Demo.Infrastructure;
+using Raftel.Demo.Infrastructure.Data;
 
 namespace Raftel.Infrastructure.Tests;
 
@@ -42,13 +42,6 @@ public abstract class InfrastructureTestBase : IAsyncLifetime
 
     protected virtual void ConfigureServices(IServiceCollection services)
     {
-        // services.AddRaftelApplication(cfg =>
-        // {
-        //     cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommandHandler).Assembly);
-        //     cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
-        //     cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
-        // });
-
         services.AddSampleInfrastructure(_fixture.ConnectionString);
     }
 

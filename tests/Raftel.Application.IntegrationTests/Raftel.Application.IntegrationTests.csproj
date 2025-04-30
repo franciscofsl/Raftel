@@ -29,7 +29,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Raftel.Tests.Common\Raftel.Tests.Common.csproj" />
+      <ProjectReference Include="..\..\demo\Raftel.Demo.Application\Raftel.Demo.Application.csproj" />
+      <ProjectReference Include="..\Raftel.Infrastructure.Tests\Raftel.Infrastructure.Tests.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute"/>
+    </ItemGroup>
 </Project>

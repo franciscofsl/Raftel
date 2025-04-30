@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Commands;
-using Raftel.Tests.Common.Application.Pirates.CreatePirate;
-using Raftel.Tests.Common.Domain;
+using Raftel.Demo.Application.Pirates.CreatePirate;
+using Raftel.Demo.Domain.Pirates;
 using Shouldly;
 
 namespace Raftel.Application.IntegrationTests.Middlewares;
