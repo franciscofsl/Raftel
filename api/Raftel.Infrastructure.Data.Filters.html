@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Namespace Raftel.Infrastructure.Data | Raftel </title>
+      <title>Namespace Raftel.Infrastructure.Data.Filters | Raftel </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Namespace Raftel.Infrastructure.Data | Raftel ">
+      <meta name="title" content="Namespace Raftel.Infrastructure.Data.Filters | Raftel ">
     
     
       <link rel="shortcut icon" href="../favicon.ico">
@@ -76,26 +76,22 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Raftel.Infrastructure.Data">
+            <article class="content wrap" id="_content" data-uid="Raftel.Infrastructure.Data.Filters">
 
-  <h1 id="Raftel_Infrastructure_Data" data-uid="Raftel.Infrastructure.Data" class="text-break">Namespace Raftel.Infrastructure.Data</h1>
+  <h1 id="Raftel_Infrastructure_Data_Filters" data-uid="Raftel.Infrastructure.Data.Filters" class="text-break">Namespace Raftel.Infrastructure.Data.Filters</h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
-    <h3 id="classes">
-Classes
+    <h3 id="interfaces">
+Interfaces
 </h3>
-      <h4><a class="xref" href="Raftel.Infrastructure.Data.EfRepository-3.html">EfRepository&lt;TDbContext, TEntity, TId&gt;</a></h4>
-      <section><p>Represents a base implementation of a repository using Entity Framework.</p>
+      <h4><a class="xref" href="Raftel.Infrastructure.Data.Filters.IDataFilter.html">IDataFilter</a></h4>
+      <section><p>Provides a mechanism to enable or disable data-level filters dynamically at runtime,
+such as soft delete or multi-tenancy filters. Filters are typically evaluated during
+query execution to include or exclude entities based on application-specific rules.</p>
 </section>
-      <h4><a class="xref" href="Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html">IEntityTypeConfigurationExtensions</a></h4>
-      <section><p>Provides extension methods for configuring entity types in Entity Framework Core.</p>
-</section>
-      <h4><a class="xref" href="Raftel.Infrastructure.Data.RaftelDbContext-1.html">RaftelDbContext&lt;TDbContext&gt;</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Raftel.Infrastructure.Data.ShadowPropertyNames.html">ShadowPropertyNames</a></h4>
-      <section><p>Provides the names of shadow properties used in the application.
-Shadow properties are properties that are not part of the entity class but are defined in the model.</p>
+      <h4><a class="xref" href="Raftel.Infrastructure.Data.Filters.ISoftDeleteFilter.html">ISoftDeleteFilter</a></h4>
+      <section><p>Marker interface used to identify the soft delete filter in the data filtering system.</p>
 </section>
 
 

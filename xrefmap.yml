@@ -1847,6 +1847,78 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).Update
   nameWithType: EfRepository<TDbContext, TEntity, TId>.Update
   nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).Update
+- uid: Raftel.Infrastructure.Data.Filters
+  name: Raftel.Infrastructure.Data.Filters
+  href: api/Raftel.Infrastructure.Data.Filters.html
+  commentId: N:Raftel.Infrastructure.Data.Filters
+  fullName: Raftel.Infrastructure.Data.Filters
+  nameWithType: Raftel.Infrastructure.Data.Filters
+- uid: Raftel.Infrastructure.Data.Filters.IDataFilter
+  name: IDataFilter
+  href: api/Raftel.Infrastructure.Data.Filters.IDataFilter.html
+  commentId: T:Raftel.Infrastructure.Data.Filters.IDataFilter
+  fullName: Raftel.Infrastructure.Data.Filters.IDataFilter
+  nameWithType: IDataFilter
+- uid: Raftel.Infrastructure.Data.Filters.IDataFilter.Disable*
+  name: Disable
+  href: api/Raftel.Infrastructure.Data.Filters.IDataFilter.html#Raftel_Infrastructure_Data_Filters_IDataFilter_Disable_
+  commentId: Overload:Raftel.Infrastructure.Data.Filters.IDataFilter.Disable
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Filters.IDataFilter.Disable
+  nameWithType: IDataFilter.Disable
+- uid: Raftel.Infrastructure.Data.Filters.IDataFilter.Disable``1
+  name: Disable<TFilter>()
+  href: api/Raftel.Infrastructure.Data.Filters.IDataFilter.html#Raftel_Infrastructure_Data_Filters_IDataFilter_Disable__1
+  commentId: M:Raftel.Infrastructure.Data.Filters.IDataFilter.Disable``1
+  name.vb: Disable(Of TFilter)()
+  fullName: Raftel.Infrastructure.Data.Filters.IDataFilter.Disable<TFilter>()
+  fullName.vb: Raftel.Infrastructure.Data.Filters.IDataFilter.Disable(Of TFilter)()
+  nameWithType: IDataFilter.Disable<TFilter>()
+  nameWithType.vb: IDataFilter.Disable(Of TFilter)()
+- uid: Raftel.Infrastructure.Data.Filters.IDataFilter.IsEnabled*
+  name: IsEnabled
+  href: api/Raftel.Infrastructure.Data.Filters.IDataFilter.html#Raftel_Infrastructure_Data_Filters_IDataFilter_IsEnabled_
+  commentId: Overload:Raftel.Infrastructure.Data.Filters.IDataFilter.IsEnabled
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Filters.IDataFilter.IsEnabled
+  nameWithType: IDataFilter.IsEnabled
+- uid: Raftel.Infrastructure.Data.Filters.IDataFilter.IsEnabled``1
+  name: IsEnabled<TFilter>()
+  href: api/Raftel.Infrastructure.Data.Filters.IDataFilter.html#Raftel_Infrastructure_Data_Filters_IDataFilter_IsEnabled__1
+  commentId: M:Raftel.Infrastructure.Data.Filters.IDataFilter.IsEnabled``1
+  name.vb: IsEnabled(Of TFilter)()
+  fullName: Raftel.Infrastructure.Data.Filters.IDataFilter.IsEnabled<TFilter>()
+  fullName.vb: Raftel.Infrastructure.Data.Filters.IDataFilter.IsEnabled(Of TFilter)()
+  nameWithType: IDataFilter.IsEnabled<TFilter>()
+  nameWithType.vb: IDataFilter.IsEnabled(Of TFilter)()
+- uid: Raftel.Infrastructure.Data.Filters.ISoftDeleteFilter
+  name: ISoftDeleteFilter
+  href: api/Raftel.Infrastructure.Data.Filters.ISoftDeleteFilter.html
+  commentId: T:Raftel.Infrastructure.Data.Filters.ISoftDeleteFilter
+  fullName: Raftel.Infrastructure.Data.Filters.ISoftDeleteFilter
+  nameWithType: ISoftDeleteFilter
+- uid: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions
+  name: IEntityTypeConfigurationExtensions
+  href: api/Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html
+  commentId: T:Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions
+  fullName: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions
+  nameWithType: IEntityTypeConfigurationExtensions
+- uid: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasSoftDelete*
+  name: HasSoftDelete
+  href: api/Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html#Raftel_Infrastructure_Data_IEntityTypeConfigurationExtensions_HasSoftDelete_
+  commentId: Overload:Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasSoftDelete
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasSoftDelete
+  nameWithType: IEntityTypeConfigurationExtensions.HasSoftDelete
+- uid: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasSoftDelete``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0})
+  name: HasSoftDelete<TEntity>(EntityTypeBuilder<TEntity>)
+  href: api/Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html#Raftel_Infrastructure_Data_IEntityTypeConfigurationExtensions_HasSoftDelete__1_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder___0__
+  commentId: M:Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasSoftDelete``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0})
+  name.vb: HasSoftDelete(Of TEntity)(EntityTypeBuilder(Of TEntity))
+  fullName: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasSoftDelete<TEntity>(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<TEntity>)
+  fullName.vb: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasSoftDelete(Of TEntity)(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of TEntity))
+  nameWithType: IEntityTypeConfigurationExtensions.HasSoftDelete<TEntity>(EntityTypeBuilder<TEntity>)
+  nameWithType.vb: IEntityTypeConfigurationExtensions.HasSoftDelete(Of TEntity)(EntityTypeBuilder(Of TEntity))
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1
   name: RaftelDbContext<TDbContext>
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html
@@ -1865,15 +1937,15 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New()
   nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext()
   nameWithType.vb: RaftelDbContext(Of TDbContext).New()
-- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0})
-  name: RaftelDbContext(DbContextOptions<TDbContext>)
-  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__
-  commentId: M:Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0})
-  name.vb: New(DbContextOptions(Of TDbContext))
-  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.RaftelDbContext(Microsoft.EntityFrameworkCore.DbContextOptions<TDbContext>)
-  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New(Microsoft.EntityFrameworkCore.DbContextOptions(Of TDbContext))
-  nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext(DbContextOptions<TDbContext>)
-  nameWithType.vb: RaftelDbContext(Of TDbContext).New(DbContextOptions(Of TDbContext))
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0},Raftel.Infrastructure.Data.Filters.IDataFilter)
+  name: RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter)
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__Raftel_Infrastructure_Data_Filters_IDataFilter_
+  commentId: M:Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0},Raftel.Infrastructure.Data.Filters.IDataFilter)
+  name.vb: New(DbContextOptions(Of TDbContext), IDataFilter)
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.RaftelDbContext(Microsoft.EntityFrameworkCore.DbContextOptions<TDbContext>, Raftel.Infrastructure.Data.Filters.IDataFilter)
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New(Microsoft.EntityFrameworkCore.DbContextOptions(Of TDbContext), Raftel.Infrastructure.Data.Filters.IDataFilter)
+  nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter)
+  nameWithType.vb: RaftelDbContext(Of TDbContext).New(DbContextOptions(Of TDbContext), IDataFilter)
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor*
   name: RaftelDbContext
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_
@@ -1901,6 +1973,52 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).CommitAsync
   nameWithType: RaftelDbContext<TDbContext>.CommitAsync
   nameWithType.vb: RaftelDbContext(Of TDbContext).CommitAsync
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.IsSoftDeleteFilterEnabled
+  name: IsSoftDeleteFilterEnabled
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_IsSoftDeleteFilterEnabled
+  commentId: P:Raftel.Infrastructure.Data.RaftelDbContext`1.IsSoftDeleteFilterEnabled
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.IsSoftDeleteFilterEnabled
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).IsSoftDeleteFilterEnabled
+  nameWithType: RaftelDbContext<TDbContext>.IsSoftDeleteFilterEnabled
+  nameWithType.vb: RaftelDbContext(Of TDbContext).IsSoftDeleteFilterEnabled
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.IsSoftDeleteFilterEnabled*
+  name: IsSoftDeleteFilterEnabled
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_IsSoftDeleteFilterEnabled_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.IsSoftDeleteFilterEnabled
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.IsSoftDeleteFilterEnabled
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).IsSoftDeleteFilterEnabled
+  nameWithType: RaftelDbContext<TDbContext>.IsSoftDeleteFilterEnabled
+  nameWithType.vb: RaftelDbContext(Of TDbContext).IsSoftDeleteFilterEnabled
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)
+  name: OnModelCreating(ModelBuilder)
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_OnModelCreating_Microsoft_EntityFrameworkCore_ModelBuilder_
+  commentId: M:Raftel.Infrastructure.Data.RaftelDbContext`1.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)
+  nameWithType: RaftelDbContext<TDbContext>.OnModelCreating(ModelBuilder)
+  nameWithType.vb: RaftelDbContext(Of TDbContext).OnModelCreating(ModelBuilder)
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.OnModelCreating*
+  name: OnModelCreating
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_OnModelCreating_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.OnModelCreating
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.OnModelCreating
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).OnModelCreating
+  nameWithType: RaftelDbContext<TDbContext>.OnModelCreating
+  nameWithType.vb: RaftelDbContext(Of TDbContext).OnModelCreating
+- uid: Raftel.Infrastructure.Data.ShadowPropertyNames
+  name: ShadowPropertyNames
+  href: api/Raftel.Infrastructure.Data.ShadowPropertyNames.html
+  commentId: T:Raftel.Infrastructure.Data.ShadowPropertyNames
+  fullName: Raftel.Infrastructure.Data.ShadowPropertyNames
+  nameWithType: ShadowPropertyNames
+- uid: Raftel.Infrastructure.Data.ShadowPropertyNames.IsDeleted
+  name: IsDeleted
+  href: api/Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_IsDeleted
+  commentId: F:Raftel.Infrastructure.Data.ShadowPropertyNames.IsDeleted
+  fullName: Raftel.Infrastructure.Data.ShadowPropertyNames.IsDeleted
+  nameWithType: ShadowPropertyNames.IsDeleted
 - uid: Raftel.Infrastructure.DependencyInjection
   name: DependencyInjection
   href: api/Raftel.Infrastructure.DependencyInjection.html
@@ -1923,6 +2041,62 @@ references:
   fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String)
   nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string)
   nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String)
+- uid: Raftel.Shared
+  name: Raftel.Shared
+  href: api/Raftel.Shared.html
+  commentId: N:Raftel.Shared
+  fullName: Raftel.Shared
+  nameWithType: Raftel.Shared
+- uid: Raftel.Shared.Attributes
+  name: Raftel.Shared.Attributes
+  href: api/Raftel.Shared.Attributes.html
+  commentId: N:Raftel.Shared.Attributes
+  fullName: Raftel.Shared.Attributes
+  nameWithType: Raftel.Shared.Attributes
+- uid: Raftel.Shared.Attributes.MarkerAttribute
+  name: MarkerAttribute
+  href: api/Raftel.Shared.Attributes.MarkerAttribute.html
+  commentId: T:Raftel.Shared.Attributes.MarkerAttribute
+  fullName: Raftel.Shared.Attributes.MarkerAttribute
+  nameWithType: MarkerAttribute
+- uid: Raftel.Shared.DisposeAction
+  name: DisposeAction
+  href: api/Raftel.Shared.DisposeAction.html
+  commentId: T:Raftel.Shared.DisposeAction
+  fullName: Raftel.Shared.DisposeAction
+  nameWithType: DisposeAction
+- uid: Raftel.Shared.DisposeAction.#ctor(System.Action)
+  name: DisposeAction(Action)
+  href: api/Raftel.Shared.DisposeAction.html#Raftel_Shared_DisposeAction__ctor_System_Action_
+  commentId: M:Raftel.Shared.DisposeAction.#ctor(System.Action)
+  name.vb: New(Action)
+  fullName: Raftel.Shared.DisposeAction.DisposeAction(System.Action)
+  fullName.vb: Raftel.Shared.DisposeAction.New(System.Action)
+  nameWithType: DisposeAction.DisposeAction(Action)
+  nameWithType.vb: DisposeAction.New(Action)
+- uid: Raftel.Shared.DisposeAction.#ctor*
+  name: DisposeAction
+  href: api/Raftel.Shared.DisposeAction.html#Raftel_Shared_DisposeAction__ctor_
+  commentId: Overload:Raftel.Shared.DisposeAction.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Shared.DisposeAction.DisposeAction
+  fullName.vb: Raftel.Shared.DisposeAction.New
+  nameWithType: DisposeAction.DisposeAction
+  nameWithType.vb: DisposeAction.New
+- uid: Raftel.Shared.DisposeAction.Dispose
+  name: Dispose()
+  href: api/Raftel.Shared.DisposeAction.html#Raftel_Shared_DisposeAction_Dispose
+  commentId: M:Raftel.Shared.DisposeAction.Dispose
+  fullName: Raftel.Shared.DisposeAction.Dispose()
+  nameWithType: DisposeAction.Dispose()
+- uid: Raftel.Shared.DisposeAction.Dispose*
+  name: Dispose
+  href: api/Raftel.Shared.DisposeAction.html#Raftel_Shared_DisposeAction_Dispose_
+  commentId: Overload:Raftel.Shared.DisposeAction.Dispose
+  isSpec: "True"
+  fullName: Raftel.Shared.DisposeAction.Dispose
+  nameWithType: DisposeAction.Dispose
 - uid: Raftel.Shared.Extensions
   name: Raftel.Shared.Extensions
   href: api/Raftel.Shared.Extensions.html

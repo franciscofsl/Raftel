@@ -115,9 +115,6 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.configureconventions">DbContext.ConfigureConventions(ModelConfigurationBuilder)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating">DbContext.OnModelCreating(ModelBuilder)</a>
-    </div>
-    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechanges#microsoft-entityframeworkcore-dbcontext-savechanges">DbContext.SaveChanges()</a>
     </div>
     <div>
@@ -293,7 +290,7 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_Data_RaftelDbContext_1__ctor.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.Data.RaftelDbContext%601.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L9">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L15">View Source</a>
   </span>
   <a id="Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor*"></a>
   <h4 id="Raftel_Infrastructure_Data_RaftelDbContext_1__ctor" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor">RaftelDbContext()</h4>
@@ -305,18 +302,18 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.Data.RaftelDbContext%601.%23ctor(Microsoft.EntityFrameworkCore.DbContextOptions%7B%600%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__Raftel_Infrastructure_Data_Filters_IDataFilter_.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.Data.RaftelDbContext%601.%23ctor(Microsoft.EntityFrameworkCore.DbContextOptions%7B%600%7D%2CRaftel.Infrastructure.Data.Filters.IDataFilter)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L13">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L19">View Source</a>
   </span>
   <a id="Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor*"></a>
-  <h4 id="Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0})">RaftelDbContext(DbContextOptions&lt;TDbContext&gt;)</h4>
+  <h4 id="Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__Raftel_Infrastructure_Data_Filters_IDataFilter_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0},Raftel.Infrastructure.Data.Filters.IDataFilter)">RaftelDbContext(DbContextOptions&lt;TDbContext&gt;, IDataFilter)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected RaftelDbContext(DbContextOptions&lt;TDbContext&gt; options)</code></pre>
+    <pre><code class="lang-csharp hljs">protected RaftelDbContext(DbContextOptions&lt;TDbContext&gt; options, IDataFilter dataFilter)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -333,6 +330,43 @@
         <td><span class="parametername">options</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><a class="xref" href="Raftel.Infrastructure.Data.Filters.IDataFilter.html">IDataFilter</a></td>
+        <td><span class="parametername">dataFilter</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_Data_RaftelDbContext_1_IsSoftDeleteFilterEnabled.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.Data.RaftelDbContext%601.IsSoftDeleteFilterEnabled%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L24">View Source</a>
+  </span>
+  <a id="Raftel_Infrastructure_Data_RaftelDbContext_1_IsSoftDeleteFilterEnabled_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.IsSoftDeleteFilterEnabled*"></a>
+  <h4 id="Raftel_Infrastructure_Data_RaftelDbContext_1_IsSoftDeleteFilterEnabled" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.IsSoftDeleteFilterEnabled">IsSoftDeleteFilterEnabled</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool IsSoftDeleteFilterEnabled { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <h3 id="methods">Methods
@@ -342,7 +376,7 @@
     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_Data_RaftelDbContext_1_CommitAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.Data.RaftelDbContext%601.CommitAsync(System.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L17">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L26">View Source</a>
   </span>
   <a id="Raftel_Infrastructure_Data_RaftelDbContext_1_CommitAsync_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.CommitAsync*"></a>
   <h4 id="Raftel_Infrastructure_Data_RaftelDbContext_1_CommitAsync_System_Threading_CancellationToken_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.CommitAsync(System.Threading.CancellationToken)">CommitAsync(CancellationToken)</h4>
@@ -388,6 +422,56 @@ Defaults to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_Data_RaftelDbContext_1_OnModelCreating_Microsoft_EntityFrameworkCore_ModelBuilder_.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.Data.RaftelDbContext%601.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L31">View Source</a>
+  </span>
+  <a id="Raftel_Infrastructure_Data_RaftelDbContext_1_OnModelCreating_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.OnModelCreating*"></a>
+  <h4 id="Raftel_Infrastructure_Data_RaftelDbContext_1_OnModelCreating_Microsoft_EntityFrameworkCore_ModelBuilder_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">OnModelCreating(ModelBuilder)</h4>
+  <div class="markdown level1 summary"><p>Override this method to further configure the model that was discovered by convention from the entity types
+exposed in <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbset-1">DbSet&lt;TEntity&gt;</a> properties on your derived context. The resulting model may be cached
+and re-used for subsequent instances of your derived context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnModelCreating(ModelBuilder modelBuilder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.modelbuilder">ModelBuilder</a></td>
+        <td><span class="parametername">modelBuilder</span></td>
+        <td><p>The builder being used to construct the model for this context. Databases (and other extensions) typically
+define extension methods on this object that allow you to configure aspects of the model that are specific
+to a given database.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating">DbContext.OnModelCreating(ModelBuilder)</a></div>
+  <h5 id="Raftel_Infrastructure_Data_RaftelDbContext_1_OnModelCreating_Microsoft_EntityFrameworkCore_ModelBuilder__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If a model is explicitly set on the options for this context (via <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder.usemodel">UseModel(IModel)</a>)
+    then this method will not be run. However, it will still run when creating a compiled model.
+</p>
+<p>
+    See <a href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</a> for more information and
+    examples.
+</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.infrastructure.iinfrastructure-1">IInfrastructure&lt;T&gt;</a>
@@ -425,7 +509,7 @@ Defaults to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.
                     <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_Data_RaftelDbContext_1.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.Data.RaftelDbContext%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L6" class="contribution-link">View Source</a>
+                    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L10" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

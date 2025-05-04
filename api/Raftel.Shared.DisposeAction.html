@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-      <title>Class DependencyInjection | Raftel </title>
+      <title>Class DisposeAction | Raftel </title>
       <meta name="viewport" content="width=device-width">
-      <meta name="title" content="Class DependencyInjection | Raftel ">
+      <meta name="title" content="Class DisposeAction | Raftel ">
     
     
       <link rel="shortcut icon" href="../favicon.ico">
@@ -76,17 +76,21 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Raftel.Infrastructure.DependencyInjection">
+            <article class="content wrap" id="_content" data-uid="Raftel.Shared.DisposeAction">
 
 
 
-  <h1 id="Raftel_Infrastructure_DependencyInjection" data-uid="Raftel.Infrastructure.DependencyInjection" class="text-break">Class DependencyInjection</h1>
+  <h1 id="Raftel_Shared_DisposeAction" data-uid="Raftel.Shared.DisposeAction" class="text-break">Class DisposeAction</h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-    <div class="level1"><span class="xref">DependencyInjection</span></div>
+    <div class="level1"><span class="xref">DisposeAction</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -112,28 +116,28 @@
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
   </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Infrastructure.html">Infrastructure</a></h6>
-  <h6><strong>Assembly</strong>: Raftel.Infrastructure.dll</h6>
-  <h5 id="Raftel_Infrastructure_DependencyInjection_syntax">Syntax</h5>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Shared.html">Shared</a></h6>
+  <h6><strong>Assembly</strong>: Raftel.Shared.dll</h6>
+  <h5 id="Raftel_Shared_DisposeAction_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class DependencyInjection</code></pre>
+    <pre><code class="lang-csharp hljs">public class DisposeAction : IDisposable</code></pre>
   </div>
-  <h3 id="methods">Methods
+  <h3 id="constructors">Constructors
 </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.DependencyInjection.AddRaftelData%60%601(Microsoft.Extensions.DependencyInjection.IServiceCollection%2CMicrosoft.Extensions.Configuration.IConfiguration%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Shared_DisposeAction__ctor_System_Action_.md&amp;value=---%0Auid%3A%20Raftel.Shared.DisposeAction.%23ctor(System.Action)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L13">View Source</a>
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Shared/DisposeAction.cs/#L6">View Source</a>
   </span>
-  <a id="Raftel_Infrastructure_DependencyInjection_AddRaftelData_" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData*"></a>
-  <h4 id="Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">AddRaftelData&lt;TDbContext&gt;(IServiceCollection, IConfiguration, string)</h4>
+  <a id="Raftel_Shared_DisposeAction__ctor_" data-uid="Raftel.Shared.DisposeAction.#ctor*"></a>
+  <h4 id="Raftel_Shared_DisposeAction__ctor_System_Action_" data-uid="Raftel.Shared.DisposeAction.#ctor(System.Action)">DisposeAction(Action)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="declaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IServiceCollection AddRaftelData&lt;TDbContext&gt;(this IServiceCollection services, IConfiguration configuration, string connectionStringName = &quot;DefaultConnection&quot;) where TDbContext : RaftelDbContext&lt;TDbContext&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public DisposeAction(Action onDispose)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-condensed">
@@ -146,52 +150,34 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a></td>
-        <td><span class="parametername">services</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration">IConfiguration</a></td>
-        <td><span class="parametername">configuration</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
-        <td><span class="parametername">connectionStringName</span></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></td>
+        <td><span class="parametername">onDispose</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TDbContext</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Shared_DisposeAction_Dispose.md&amp;value=---%0Auid%3A%20Raftel.Shared.DisposeAction.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Shared/DisposeAction.cs/#L8">View Source</a>
+  </span>
+  <a id="Raftel_Shared_DisposeAction_Dispose_" data-uid="Raftel.Shared.DisposeAction.Dispose*"></a>
+  <h4 id="Raftel_Shared_DisposeAction_Dispose" data-uid="Raftel.Shared.DisposeAction.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
 
 </article>
           </div>
@@ -201,10 +187,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_DependencyInjection.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.DependencyInjection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                    <a href="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Shared_DisposeAction.md&amp;value=---%0Auid%3A%20Raftel.Shared.DisposeAction%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
                   </li>
                   <li>
-                    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L11" class="contribution-link">View Source</a>
+                    <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Shared/DisposeAction.cs/#L3" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
