@@ -21,6 +21,8 @@ public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork
         _dataFilter = dataFilter;
     }
 
+    protected bool IsSoftDeleteFilterEnabled => _dataFilter?.IsEnabled<ISoftDeleteFilter>() ?? false;
+    
     public Task CommitAsync(CancellationToken cancellationToken = default)
     {
         return base.SaveChangesAsync(cancellationToken);
@@ -60,7 +62,7 @@ public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork
     {
         if (entityType.FindProperty(ShadowPropertyNames.IsDeleted)?.ClrType == typeof(bool))
         {
-            return expression => !_dataFilter.IsEnabled<ISoftDeleteFilter>() ||
+            return expression => !IsSoftDeleteFilterEnabled ||
                                  !EF.Property<bool>(expression, ShadowPropertyNames.IsDeleted);
         }
 
