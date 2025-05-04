@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Raftel.Demo.Domain.Pirates;
 using Raftel.Demo.Infrastructure.Data;
 using Raftel.Infrastructure;
+using Raftel.Infrastructure.Data;
 
 [assembly: InternalsVisibleTo("Raftel.Application.UnitTests")]
 
@@ -22,5 +23,6 @@ public static class DependencyInjection
             .Build();
         services.AddRaftelData<TestingRaftelDbContext>(configuration, "TestConnection");
         services.AddScoped(typeof(IPirateRepository), typeof(PirateRepository));
+        services.AddScoped(typeof(IShipRepository), typeof(ShipRepository));
     }
 }
