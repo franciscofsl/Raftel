@@ -19,7 +19,7 @@ internal static class QueryFilterExtensions
         return builder.HasQueryFilter(newFilter);
     }
 
-    public static Expression<Func<T, bool>> AndAlso<T>(
+    private static Expression<Func<T, bool>> AndAlso<T>(
         this Expression<Func<T, bool>> left,
         Expression<Func<T, bool>> right)
     {
