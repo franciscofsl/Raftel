@@ -14,6 +14,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Raftel.Application\Raftel.Application.csproj" />
       <ProjectReference Include="..\Raftel.Domain\Raftel.Domain.csproj" />
+      <ProjectReference Include="..\Raftel.Shared\Raftel.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>

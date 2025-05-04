@@ -7,7 +7,7 @@ public static class IEntityTypeConfigurationExtensions
 {
     public static void HasSoftDelete<TEntity>(this EntityTypeBuilder<TEntity> builder) where TEntity : class
     {
-        builder.Property<bool>("IsDeleted")
+        builder.Property<bool>(ShadowPropertyNames.IsDeleted)
             .HasDefaultValue(false)
             .IsRequired();
     }

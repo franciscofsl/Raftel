@@ -33,7 +33,7 @@ internal sealed class SoftDeleteInterceptor : SaveChangesInterceptor
         {
             var entityType = entry.Metadata;
 
-            var isDeletedProperty = entityType.FindProperty("IsDeleted");
+            var isDeletedProperty = entityType.FindProperty(ShadowPropertyNames.IsDeleted);
 
             if (isDeletedProperty is null)
             {
@@ -41,7 +41,7 @@ internal sealed class SoftDeleteInterceptor : SaveChangesInterceptor
             }
 
             entry.State = EntityState.Modified;
-            entry.Property("IsDeleted").CurrentValue = true;
+            entry.Property(ShadowPropertyNames.IsDeleted).CurrentValue = true;
         }
     }
 }

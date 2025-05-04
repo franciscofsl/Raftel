@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application;
-using Raftel.Demo.Infrastructure.Data.Interceptors;
 using Raftel.Infrastructure.Data;
+using Raftel.Infrastructure.Data.Interceptors;
 
 namespace Raftel.Infrastructure;
 

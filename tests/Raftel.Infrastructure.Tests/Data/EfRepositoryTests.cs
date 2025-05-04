@@ -135,7 +135,7 @@ public class EfRepositoryTests : InfrastructureTestBase
             await unitOfWork.CommitAsync();
 
             var entry = dbContext.Entry(ship);
-            entry.Property("IsDeleted").CurrentValue.ShouldBe(true);
+            entry.Property(ShadowPropertyNames.IsDeleted).CurrentValue.ShouldBe(true);
         });
     }
 }
