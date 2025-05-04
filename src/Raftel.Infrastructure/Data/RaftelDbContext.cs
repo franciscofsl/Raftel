@@ -45,18 +45,19 @@ public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork
         if (entityType.BaseType != null) return;
 
         var filter = BuildGlobalFilterExpression<TEntity>(entityType);
-        if (filter != null)
+        if (filter is not null)
         {
             modelBuilder.Entity<TEntity>().CombineQueryFilter(filter);
         }
     }
 
-    private Expression<Func<TEntity, bool>>? BuildGlobalFilterExpression<TEntity>(IMutableEntityType entityType)
+    private Expression<Func<TEntity, bool>> BuildGlobalFilterExpression<TEntity>(IMutableEntityType entityType)
         where TEntity : class
     {
         if (entityType.FindProperty(ShadowPropertyNames.IsDeleted)?.ClrType == typeof(bool))
         {
-            return expression => !_dataFilter.IsEnabled<ISoftDeleteFilter>() || !EF.Property<bool>(expression, ShadowPropertyNames.IsDeleted);
+            return expression => !_dataFilter.IsEnabled<ISoftDeleteFilter>() ||
+                                 !EF.Property<bool>(expression, ShadowPropertyNames.IsDeleted);
         }
 
         return null;
