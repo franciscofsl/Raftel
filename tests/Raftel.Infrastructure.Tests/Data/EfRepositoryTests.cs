@@ -5,6 +5,7 @@ using Raftel.Demo.Domain.Pirates.ValueObjects;
 using Raftel.Demo.Domain.Ships;
 using Raftel.Demo.Infrastructure.Data;
 using Raftel.Infrastructure.Data;
+using Raftel.Infrastructure.Data.Filters;
 using Shouldly;
 using Xunit.Sdk;
 

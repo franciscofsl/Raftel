@@ -1,4 +1,6 @@
-﻿namespace Raftel.Infrastructure.Data;
+﻿using Raftel.Shared;
+
+namespace Raftel.Infrastructure.Data.Filters;
 
 internal class DataFilter : IDataFilter
 {
@@ -15,12 +17,5 @@ internal class DataFilter : IDataFilter
         var set = DisabledFilters.Value ??= new HashSet<Type>();
         set.Add(typeof(TFilter));
         return new DisposeAction(() => set.Remove(typeof(TFilter)));
-    }
-
-    private class DisposeAction : IDisposable
-    {
-        private readonly Action _onDispose;
-        public DisposeAction(Action onDispose) => _onDispose = onDispose;
-        public void Dispose() => _onDispose();
     }
 }

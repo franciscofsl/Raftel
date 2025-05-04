@@ -3,6 +3,7 @@ using Raftel.Demo.Domain.Pirates;
 using Raftel.Demo.Domain.Ships;
 using Raftel.Demo.Infrastructure.Data.Configuration;
 using Raftel.Infrastructure.Data;
+using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Demo.Infrastructure.Data;
 

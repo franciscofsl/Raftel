@@ -3,6 +3,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Raftel.Application;
+using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Data;
 
@@ -42,7 +43,10 @@ public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork
     private void ConfigureEntityFilters<TEntity>(ModelBuilder modelBuilder, IMutableEntityType entityType)
         where TEntity : class
     {
-        if (entityType.BaseType != null) return;
+        if (entityType.BaseType is not null)
+        {
+            return;
+        }
 
         var filter = BuildGlobalFilterExpression<TEntity>(entityType);
         if (filter is not null)

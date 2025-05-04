@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Raftel.Infrastructure.Data;
+namespace Raftel.Infrastructure.Data.Filters;
 
 internal static class QueryFilterExtensions
 {
