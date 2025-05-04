@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Raftel.Demo.Infrastructure.Data.Interceptors;
+namespace Raftel.Infrastructure.Data.Interceptors;
 
-public class SoftDeleteInterceptor : SaveChangesInterceptor
+internal sealed class SoftDeleteInterceptor : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(
         DbContextEventData eventData,
@@ -24,7 +24,10 @@ public class SoftDeleteInterceptor : SaveChangesInterceptor
 
     private void ApplySoftDelete(DbContext? context)
     {
-        if (context == null) return;
+        if (context == null)
+        {
+            return;
+        }
 
         foreach (var entry in context.ChangeTracker.Entries().Where(e => e.State == EntityState.Deleted))
         {
@@ -32,14 +35,13 @@ public class SoftDeleteInterceptor : SaveChangesInterceptor
 
             var isDeletedProperty = entityType.FindProperty("IsDeleted");
 
-            if (isDeletedProperty != null && isDeletedProperty.ClrType == typeof(bool))
+            if (isDeletedProperty is null)
             {
-                // Establece IsDeleted = true (aunque sea shadow property)
-                entry.Property("IsDeleted").CurrentValue = true;
-
-                // Cambia el estado a Modified
-                entry.State = EntityState.Modified;
+                continue;
             }
+
+            entry.State = EntityState.Modified;
+            entry.Property("IsDeleted").CurrentValue = true;
         }
     }
 }
