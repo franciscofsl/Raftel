@@ -6,18 +6,12 @@ using Raftel.Infrastructure.Data;
 
 namespace Raftel.Demo.Infrastructure.Data;
 
-public class TestingRaftelDbContext : RaftelDbContext<TestingRaftelDbContext>
+public class TestingRaftelDbContext(DbContextOptions<TestingRaftelDbContext> options, IDataFilter dataFilter)
+    : RaftelDbContext<TestingRaftelDbContext>(options, dataFilter)
 {
     public DbSet<Pirate> Pirates { get; set; }
 
     public DbSet<Ship> Ships { get; set; }
-
-
-    public TestingRaftelDbContext(DbContextOptions<TestingRaftelDbContext> options,
-        IDataFilter dataFilter)
-        : base(options, dataFilter)
-    {
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
