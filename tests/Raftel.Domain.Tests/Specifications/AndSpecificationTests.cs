@@ -11,14 +11,14 @@ public class AndSpecificationTests
     {
         var andSpecification = new BountyOverAndKingAndSpecification(50000000);
         
-        var luffy = Mugiwara.Luffy();
+        var luffy = MugiwaraCrew.Luffy();
         luffy.FoundOnePiece();
         
         andSpecification.IsSatisfiedBy(luffy).ShouldBeTrue();
-        andSpecification.IsSatisfiedBy(Mugiwara.Zoro()).ShouldBeFalse();
-        andSpecification.IsSatisfiedBy(Mugiwara.Sanji()).ShouldBeFalse();
-        andSpecification.IsSatisfiedBy(Mugiwara.Chopper()).ShouldBeFalse();
-        andSpecification.IsSatisfiedBy(Mugiwara.Nami()).ShouldBeFalse();
+        andSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        andSpecification.IsSatisfiedBy(MugiwaraCrew.Sanji()).ShouldBeFalse();
+        andSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
+        andSpecification.IsSatisfiedBy(MugiwaraCrew.Nami()).ShouldBeFalse();
     }
 
     [Fact]
@@ -26,12 +26,12 @@ public class AndSpecificationTests
     {
         var andSpecification = new BountyOverAndKingAndSpecification(100000000);
         
-        var luffy = Mugiwara.Luffy();
+        var luffy = MugiwaraCrew.Luffy();
         luffy.FoundOnePiece();
 
         andSpecification.IsSatisfiedBy(luffy).ShouldBeTrue();
-        andSpecification.IsSatisfiedBy(Mugiwara.Zoro()).ShouldBeFalse();
-        andSpecification.IsSatisfiedBy(Mugiwara.Chopper()).ShouldBeFalse();
+        andSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        andSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
     }
 
     [Fact]
@@ -39,8 +39,8 @@ public class AndSpecificationTests
     {
         var andSpecification = new BountyOverAndKingAndSpecification(500000000);
 
-        andSpecification.IsSatisfiedBy(Mugiwara.Zoro()).ShouldBeFalse();
-        andSpecification.IsSatisfiedBy(Mugiwara.Chopper()).ShouldBeFalse();
-        andSpecification.IsSatisfiedBy(Mugiwara.Nami()).ShouldBeFalse();
+        andSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        andSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
+        andSpecification.IsSatisfiedBy(MugiwaraCrew.Nami()).ShouldBeFalse();
     }
 }

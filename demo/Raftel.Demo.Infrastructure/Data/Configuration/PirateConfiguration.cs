@@ -29,7 +29,7 @@ public class PirateConfiguration : IEntityTypeConfiguration<Pirate>
 
         builder.Property(p => p.Bounty)
             .HasConversion(
-                bounty => (int)bounty,
+                bounty => (uint)bounty,
                 value => (Bounty)value
             )
             .HasColumnName("Bounty")

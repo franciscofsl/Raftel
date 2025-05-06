@@ -9,7 +9,7 @@ internal sealed class GetPirateByIdQueryHandler : IQueryHandler<GetPirateByIdQue
     public async Task<Result<GetPirateByIdResponse>> HandleAsync(GetPirateByIdQuery request,
         CancellationToken token = default)
     {
-        var mugiwara = Mugiwara.All.FirstOrDefault(_ => _.Id == request.Id);
+        var mugiwara = MugiwaraCrew.All.FirstOrDefault(_ => _.Id == request.Id);
 
         if (mugiwara is null)
         {

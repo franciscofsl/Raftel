@@ -2,5 +2,6 @@
 
 public enum BodyType
 {
-    Normal
+    Normal,
+    Special
 }

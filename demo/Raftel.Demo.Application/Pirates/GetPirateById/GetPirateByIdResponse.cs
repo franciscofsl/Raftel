@@ -6,5 +6,5 @@ public sealed class GetPirateByIdResponse
 
     public string Name { get; set; }
     
-    public int Bounty { get; set; }
+    public uint Bounty { get; set; }
 } 

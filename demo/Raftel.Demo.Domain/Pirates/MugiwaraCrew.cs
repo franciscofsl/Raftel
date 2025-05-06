@@ -3,7 +3,7 @@ using Raftel.Demo.Domain.Pirates.ValueObjects;
 
 namespace Raftel.Demo.Domain.Pirates;
 
-public static class Mugiwara
+public static class MugiwaraCrew
 {
     public static Pirate Luffy() => Pirate.Normal(new Name("Monkey D. Luffy"), new Bounty(300000000));
     public static Pirate Zoro() => Pirate.Normal(new Name("Roronoa Zoro"), new Bounty(120000000));

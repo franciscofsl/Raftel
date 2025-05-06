@@ -25,13 +25,13 @@ public class ExternalApiIntegrationTests : IClassFixture<ExternalApiTestFactory>
     // [Fact] 
     // public async Task Request_ShouldReturn_ExpectedData()
     // {
-    //     Guid luffyId = Mugiwara.Luffy().Id;
+    //     Guid luffyId = MugiwaraCrew.Luffy().Id;
     //     var response = await _client
     //         .GetFromJsonAsync<GetPirateByIdResponse>($"/api/pirates/{luffyId}");
     //
     //     response.Id.ShouldBe(luffyId);
-    //     response.Name.ShouldBe(Mugiwara.Luffy().Name);
-    //     response.Bounty.ShouldBe((int)Mugiwara.Luffy().Bounty);
+    //     response.Name.ShouldBe(MugiwaraCrew.Luffy().Name);
+    //     response.Bounty.ShouldBe((int)MugiwaraCrew.Luffy().Bounty);
     // }
 
     [Fact]

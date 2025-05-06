@@ -35,8 +35,8 @@ public class EfRepositoryTests : InfrastructureTestBase
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var repository = sp.GetRequiredService<IPirateRepository>();
 
-            var brook = Mugiwara.Brook();
-            var nami = Mugiwara.Nami();
+            var brook = MugiwaraCrew.Brook();
+            var nami = MugiwaraCrew.Nami();
             await repository.AddAsync(brook);
             await repository.AddAsync(nami);
             await unitOfWork.CommitAsync();
@@ -146,7 +146,7 @@ public class EfRepositoryTests : InfrastructureTestBase
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var repository = sp.GetRequiredService<IPirateRepository>();
 
-            var createdLuffy = Mugiwara.Luffy();
+            var createdLuffy = MugiwaraCrew.Luffy();
             var gomuGomu = KnownDevilFruits.GomuGomu();
             createdLuffy.EatFruit(gomuGomu);
 

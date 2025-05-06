@@ -10,7 +10,7 @@ public class ValidatorTest
     {
         var validator = new PirateValidator();
 
-        var validationResult = validator.Validate(Mugiwara.Usopp());
+        var validationResult = validator.Validate(MugiwaraCrew.Usopp());
         validationResult.IsValid.ShouldBeFalse();
         validationResult.Errors.ShouldContain(PirateErrors.LuffyShouldBeThePirateKing);
     }
@@ -20,7 +20,7 @@ public class ValidatorTest
     {
         var validator = new PirateValidator();
         
-        var luffy = Mugiwara.Luffy();
+        var luffy = MugiwaraCrew.Luffy();
         luffy.FoundOnePiece();
         
         var validationResult = validator.Validate(luffy);

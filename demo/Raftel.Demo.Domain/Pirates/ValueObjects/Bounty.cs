@@ -2,9 +2,9 @@ namespace Raftel.Demo.Domain.Pirates.ValueObjects;
 
 public readonly record struct Bounty
 {
-    private readonly int _value;
+    private readonly uint _value;
 
-    public Bounty(int value)
+    public Bounty(uint value)
     {
         if (value < 0)
             throw new ArgumentException("Bounty cannot be negative.", nameof(value));
@@ -14,6 +14,6 @@ public readonly record struct Bounty
 
     public override string ToString() => $"{_value:N0} berries";
 
-    public static implicit operator int(Bounty bounty) => bounty._value;
-    public static implicit operator Bounty(int value) => new(value);
+    public static implicit operator uint(Bounty bounty) => bounty._value;
+    public static implicit operator Bounty(uint value) => new(value);
 }
