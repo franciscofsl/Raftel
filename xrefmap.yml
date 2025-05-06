@@ -1937,6 +1937,15 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New()
   nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext()
   nameWithType.vb: RaftelDbContext(Of TDbContext).New()
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0})
+  name: RaftelDbContext(DbContextOptions<TDbContext>)
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__
+  commentId: M:Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0})
+  name.vb: New(DbContextOptions(Of TDbContext))
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.RaftelDbContext(Microsoft.EntityFrameworkCore.DbContextOptions<TDbContext>)
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New(Microsoft.EntityFrameworkCore.DbContextOptions(Of TDbContext))
+  nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext(DbContextOptions<TDbContext>)
+  nameWithType.vb: RaftelDbContext(Of TDbContext).New(DbContextOptions(Of TDbContext))
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0},Raftel.Infrastructure.Data.Filters.IDataFilter)
   name: RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter)
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__Raftel_Infrastructure_Data_Filters_IDataFilter_
