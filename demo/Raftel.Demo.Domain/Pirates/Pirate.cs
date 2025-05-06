@@ -5,13 +5,16 @@ namespace Raftel.Demo.Domain.Pirates;
 
 public class Pirate : AggregateRoot<PirateId>
 {
-    private Pirate(PirateId id, Name name, Bounty bounty) : base(id)
+    private BodyType _bodyType;
+
+    private Pirate(Name name, Bounty bounty, BodyType bodyType) : this()
     {
         Name = name;
         Bounty = bounty;
+        _bodyType = bodyType;
     }
 
-    private Pirate() : base(new PirateId(Guid.Empty))
+    private Pirate() : base(PirateId.New())
     {
     }
 
@@ -19,9 +22,9 @@ public class Pirate : AggregateRoot<PirateId>
     public Bounty Bounty { get; set; }
     public bool IsKing { get; private set; }
 
-    public static Pirate Create(Name name, Bounty bounty)
+    public static Pirate Normal(Name name, Bounty bounty)
     {
-        return new Pirate(PirateId.New(), name, bounty);
+        return new(name, bounty, BodyType.Normal);
     }
 
     public void FoundOnePiece()

@@ -18,7 +18,7 @@ public class EfRepositoryTests : InfrastructureTestBase
     {
         await ExecuteScopedAsync(async sp =>
         {
-            var pirate = Pirate.Create("Luffy", 150_000_000);
+            var pirate = Pirate.Normal("Luffy", 150_000_000);
 
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var repository = sp.GetRequiredService<IPirateRepository>();
@@ -58,7 +58,7 @@ public class EfRepositoryTests : InfrastructureTestBase
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var repository = sp.GetRequiredService<IPirateRepository>();
 
-            var pirate = Pirate.Create("Sanji", 77_000_000);
+            var pirate = Pirate.Normal("Sanji", 77_000_000);
             await repository.AddAsync(pirate);
             await unitOfWork.CommitAsync();
 
@@ -80,7 +80,7 @@ public class EfRepositoryTests : InfrastructureTestBase
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var repository = sp.GetRequiredService<IPirateRepository>();
 
-            var pirate = Pirate.Create("Robin", 79_000_000);
+            var pirate = Pirate.Normal("Robin", 79_000_000);
             await repository.AddAsync(pirate);
             await unitOfWork.CommitAsync();
 
