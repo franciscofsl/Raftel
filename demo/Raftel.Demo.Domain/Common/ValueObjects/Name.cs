@@ -1,4 +1,4 @@
-﻿namespace Raftel.Demo.Domain.Pirates.ValueObjects;
+﻿namespace Raftel.Demo.Domain.Common.ValueObjects;
 
 public readonly record struct Name
 {

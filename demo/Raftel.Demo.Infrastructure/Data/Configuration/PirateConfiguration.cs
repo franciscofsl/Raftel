@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Raftel.Demo.Domain.Common.ValueObjects;
 using Raftel.Demo.Domain.Pirates;
+using Raftel.Demo.Domain.Pirates.DevilFruits;
 using Raftel.Demo.Domain.Pirates.ValueObjects;
 
 namespace Raftel.Demo.Infrastructure.Data.Configuration;
@@ -32,5 +34,26 @@ public class PirateConfiguration : IEntityTypeConfiguration<Pirate>
             )
             .HasColumnName("Bounty")
             .IsRequired();
+         
+        builder.Property(typeof(BodyType), "_bodyType")
+            .HasField("_bodyType")
+            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .HasColumnName("BodyType")
+            .IsRequired(); 
+        
+        builder
+            .HasMany<DevilFruit>()
+            .WithMany()
+            .UsingEntity<Dictionary<string, object>>(
+                "EatenDevilFruitsByPirates",
+                right => right.HasOne<DevilFruit>()
+                    .WithMany()
+                    .HasForeignKey("DevilFruitId")
+                    .IsRequired(),
+                left => left.HasOne<Pirate>()
+                    .WithMany()
+                    .HasForeignKey("PirateId")
+                    .IsRequired()
+            );
     }
 }

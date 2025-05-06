@@ -1,6 +1,6 @@
 using Raftel.Domain.BaseTypes;
 
-namespace Raftel.Demo.Domain.Pirates;
+namespace Raftel.Demo.Domain.Pirates.ValueObjects;
 
 public sealed record PirateId : TypedGuidId
 {

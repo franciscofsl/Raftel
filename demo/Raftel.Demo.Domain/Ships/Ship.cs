@@ -1,4 +1,5 @@
-﻿using Raftel.Demo.Domain.Pirates.ValueObjects;
+﻿using Raftel.Demo.Domain.Common.ValueObjects;
+using Raftel.Demo.Domain.Pirates.ValueObjects;
 using Raftel.Domain.BaseTypes;
 
 namespace Raftel.Demo.Domain.Ships;
