@@ -8,14 +8,28 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Demo.Infrastructure.Data;
 
-public class TestingRaftelDbContext(DbContextOptions<TestingRaftelDbContext> options, IDataFilter dataFilter)
-    : RaftelDbContext<TestingRaftelDbContext>(options, dataFilter)
+public class TestingRaftelDbContext
+    : RaftelDbContext<TestingRaftelDbContext>
 {
     public DbSet<Pirate> Pirates { get; set; }
 
     public DbSet<Ship> Ships { get; set; }
-    
+
     public DbSet<DevilFruit> DevilFruits { get; set; }
+
+    public TestingRaftelDbContext()
+    {
+    }
+
+    public TestingRaftelDbContext(DbContextOptions<TestingRaftelDbContext> options)
+        : base(options)
+    {
+    }
+    
+    public TestingRaftelDbContext(DbContextOptions<TestingRaftelDbContext> options, IDataFilter dataFilter)
+        : base(options, dataFilter)
+    {
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

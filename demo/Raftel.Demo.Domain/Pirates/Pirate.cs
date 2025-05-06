@@ -8,44 +8,36 @@ namespace Raftel.Demo.Domain.Pirates;
 
 public class Pirate : AggregateRoot<PirateId>
 {
-    private BodyType _bodyType;
-    private readonly List<DevilFruit> _eatenDevilFruits = new();
+    private readonly DevilFruitCollection _eatenDevilFruits;
+    private readonly BodyType _bodyType;
 
     private Pirate(Name name, Bounty bounty, BodyType bodyType) : this()
     {
         Name = name;
         Bounty = bounty;
         _bodyType = bodyType;
+        _eatenDevilFruits = new DevilFruitCollection();
     }
 
     private Pirate() : base(PirateId.New())
     {
     }
 
-    public Name Name { get; private set; }
+    public Name Name { get; }
     public Bounty Bounty { get; set; }
     public bool IsKing { get; private set; }
 
     public IReadOnlyCollection<DevilFruit> EatenDevilFruits => _eatenDevilFruits.AsReadOnly();
 
-    public static Pirate Normal(Name name, Bounty bounty)
-    {
-        return new(name, bounty, BodyType.Normal);
-    }
-    
-    public static Pirate Special(Name name, Bounty bounty)
-    {
-        return new(name, bounty, BodyType.Special);
-    }
+    public static Pirate Normal(Name name, Bounty bounty) => new(name, bounty, BodyType.Normal);
 
-    public void FoundOnePiece()
-    {
-        IsKing = true;
-    }
+    public static Pirate Special(Name name, Bounty bounty) => new(name, bounty, BodyType.Special);
+
+    public void FoundOnePiece() => IsKing = true;
 
     public Result EatFruit(DevilFruit fruit)
     {
-        if (_bodyType is BodyType.Normal && _eatenDevilFruits.Any())
+        if (!CanEatFruit())
         {
             return Result.Failure(PirateErrors.CannotEatMoreThanOneDevilFruit);
         }
@@ -53,4 +45,6 @@ public class Pirate : AggregateRoot<PirateId>
         _eatenDevilFruits.Add(fruit);
         return Result.Success();
     }
+
+    private bool CanEatFruit() => _bodyType != BodyType.Normal || !_eatenDevilFruits.HasAny();
 }

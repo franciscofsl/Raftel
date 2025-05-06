@@ -24,9 +24,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\demo\Raftel.Api.FunctionalTests.DemoApi\Raftel.Api.FunctionalTests.DemoApi.csproj" />
       <ProjectReference Include="..\..\src\Raftel.Api.Client\Raftel.Api.Client.csproj" />
       <ProjectReference Include="..\..\src\Raftel.Api.Server\Raftel.Api.Server.csproj" />
-      <ProjectReference Include="..\Raftel.Api.FunctionalTests.DemoApi\Raftel.Api.FunctionalTests.DemoApi.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -13,7 +13,7 @@ public static class DependencyInjection
     public static IServiceCollection AddRaftelData<TDbContext>(
         this IServiceCollection services,
         IConfiguration configuration,
-        string connectionStringName = "DefaultConnection")
+        string connectionStringName = "Default")
         where TDbContext : RaftelDbContext<TDbContext>
     {
         var connectionString = configuration.GetConnectionString(connectionStringName)
