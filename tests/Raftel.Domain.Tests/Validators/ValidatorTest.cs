@@ -19,7 +19,9 @@ public class ValidatorTest
     public void Validator_ShouldRetrieveSuccess_IfNotFails()
     {
         var validator = new PirateValidator();
-
+        
+        Mugiwara.Luffy.FoundOnePiece();
+        
         var validationResult = validator.Validate(Mugiwara.Luffy);
         validationResult.IsValid.ShouldBeTrue();
         validationResult.Errors.ShouldBeEmpty();

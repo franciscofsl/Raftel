@@ -10,7 +10,9 @@ public class AndSpecificationTests
     public void AndSpecification_ShouldSatisfyKingOrBountyCondition()
     {
         var andSpecification = new BountyOverAndKingAndSpecification(50000000);
-
+        
+        Mugiwara.Luffy.FoundOnePiece();
+        
         andSpecification.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
         andSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
         andSpecification.IsSatisfiedBy(Mugiwara.Sanji).ShouldBeFalse();
@@ -22,6 +24,8 @@ public class AndSpecificationTests
     public void AndSpecification_ShouldSatisfyWhenOneConditionIsTrue()
     {
         var andSpecification = new BountyOverAndKingAndSpecification(100000000);
+        
+        Mugiwara.Luffy.FoundOnePiece();
 
         andSpecification.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
         andSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();

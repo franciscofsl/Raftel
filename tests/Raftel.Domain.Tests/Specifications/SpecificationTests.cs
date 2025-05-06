@@ -10,6 +10,8 @@ public class SpecificationTests
     public void IsKingSpecification_ShouldSatisfyKingCondition()
     {
         var isKingSpec = new IsKingSpecification();
+        
+        Mugiwara.Luffy.FoundOnePiece();
 
         isKingSpec.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
         isKingSpec.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
@@ -73,6 +75,8 @@ public class SpecificationTests
         var bountyOver50M = new BountyOverSpecification(50000000);
 
         var orSpecification = isKingSpec.And(bountyOver50M);
+        
+        Mugiwara.Luffy.FoundOnePiece();
 
         orSpecification.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
         orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
@@ -88,6 +92,8 @@ public class SpecificationTests
         var bountyOver100M = new BountyOverSpecification(100000000);
 
         var orSpecification = isKingSpec.And(bountyOver100M);
+        
+        Mugiwara.Luffy.FoundOnePiece();
 
         orSpecification.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
         orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
