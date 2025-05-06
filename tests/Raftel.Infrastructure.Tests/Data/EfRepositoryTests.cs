@@ -1,13 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Raftel.Application;
-using Raftel.Demo.Domain.Pirates;
+﻿using Raftel.Demo.Domain.Pirates;
 using Raftel.Demo.Domain.Pirates.ValueObjects;
 using Raftel.Demo.Domain.Ships;
 using Raftel.Demo.Infrastructure.Data;
 using Raftel.Infrastructure.Data;
 using Raftel.Infrastructure.Data.Filters;
-using Shouldly;
-using Xunit.Sdk;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
@@ -18,7 +14,7 @@ public class EfRepositoryTests : InfrastructureTestBase
     {
         await ExecuteScopedAsync(async sp =>
         {
-            var pirate = Pirate.Create("Luffy", 150_000_000);
+            var pirate = Pirate.Normal("Luffy", 150_000_000);
 
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var repository = sp.GetRequiredService<IPirateRepository>();
@@ -39,14 +35,16 @@ public class EfRepositoryTests : InfrastructureTestBase
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var repository = sp.GetRequiredService<IPirateRepository>();
 
-            await repository.AddAsync(Mugiwara.Brook);
-            await repository.AddAsync(Mugiwara.Nami);
+            var brook = MugiwaraCrew.Brook();
+            var nami = MugiwaraCrew.Nami();
+            await repository.AddAsync(brook);
+            await repository.AddAsync(nami);
             await unitOfWork.CommitAsync();
 
             var pirates = await repository.ListAllAsync();
             pirates.Count.ShouldBe(2);
-            pirates.ShouldContain(Mugiwara.Brook);
-            pirates.ShouldContain(Mugiwara.Nami);
+            pirates.ShouldContain(brook);
+            pirates.ShouldContain(nami);
         });
     }
 
@@ -58,7 +56,7 @@ public class EfRepositoryTests : InfrastructureTestBase
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var repository = sp.GetRequiredService<IPirateRepository>();
 
-            var pirate = Pirate.Create("Sanji", 77_000_000);
+            var pirate = Pirate.Normal("Sanji", 77_000_000);
             await repository.AddAsync(pirate);
             await unitOfWork.CommitAsync();
 
@@ -80,7 +78,7 @@ public class EfRepositoryTests : InfrastructureTestBase
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var repository = sp.GetRequiredService<IPirateRepository>();
 
-            var pirate = Pirate.Create("Robin", 79_000_000);
+            var pirate = Pirate.Normal("Robin", 79_000_000);
             await repository.AddAsync(pirate);
             await unitOfWork.CommitAsync();
 
@@ -137,6 +135,26 @@ public class EfRepositoryTests : InfrastructureTestBase
 
             var entry = dbContext.Entry(ship);
             entry.Property(ShadowPropertyNames.IsDeleted).CurrentValue.ShouldBe(true);
+        });
+    }
+
+    [Fact]
+    public async Task GetByIdAsync_ShouldReturnAggregateWithChildEntities()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
+            var repository = sp.GetRequiredService<IPirateRepository>();
+
+            var createdLuffy = MugiwaraCrew.Luffy();
+            var gomuGomu = KnownDevilFruits.GomuGomu();
+            createdLuffy.EatFruit(gomuGomu);
+
+            await repository.AddAsync(createdLuffy);
+            await unitOfWork.CommitAsync();
+
+            var luffy = await repository.GetByIdAsync(createdLuffy.Id);
+            luffy!.EatenDevilFruits.ShouldContain(gomuGomu);
         });
     }
 }

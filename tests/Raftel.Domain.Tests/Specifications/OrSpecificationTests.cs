@@ -11,11 +11,11 @@ public class OrSpecificationTests
     {
         var orSpecification = new BountyOverAndKingOrSpecification(50000000);
 
-        orSpecification.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Sanji).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Nami).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Luffy()).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Sanji()).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Nami()).ShouldBeFalse();
     }
 
     [Fact]
@@ -23,9 +23,9 @@ public class OrSpecificationTests
     {
         var orSpecification = new BountyOverAndKingOrSpecification(100000000);
 
-        orSpecification.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Luffy()).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
     }
 
     [Fact]
@@ -33,8 +33,8 @@ public class OrSpecificationTests
     {
         var orSpecification = new BountyOverAndKingOrSpecification(500000000);
 
-        orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Nami).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Nami()).ShouldBeFalse();
     }
 }

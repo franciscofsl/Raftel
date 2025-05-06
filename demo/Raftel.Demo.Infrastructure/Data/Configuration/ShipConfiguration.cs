@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Raftel.Demo.Domain.Common.ValueObjects;
 using Raftel.Demo.Domain.Pirates.ValueObjects;
 using Raftel.Demo.Domain.Ships;
 using Raftel.Infrastructure.Data;

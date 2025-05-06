@@ -10,10 +10,13 @@ public class SpecificationTests
     public void IsKingSpecification_ShouldSatisfyKingCondition()
     {
         var isKingSpec = new IsKingSpecification();
+        
+        var luffy = MugiwaraCrew.Luffy();
+        luffy.FoundOnePiece();
 
-        isKingSpec.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
-        isKingSpec.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
-        isKingSpec.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
+        isKingSpec.IsSatisfiedBy(luffy).ShouldBeTrue();
+        isKingSpec.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        isKingSpec.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
     }
 
     [Fact]
@@ -21,8 +24,8 @@ public class SpecificationTests
     {
         var isKingSpec = new IsKingSpecification();
 
-        isKingSpec.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
-        isKingSpec.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
+        isKingSpec.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        isKingSpec.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
     }
 
     [Fact]
@@ -33,11 +36,11 @@ public class SpecificationTests
 
         var orSpecification = isKingSpec.Or(bountyOver50M);
 
-        orSpecification.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Sanji).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Nami).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Luffy()).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Sanji()).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Nami()).ShouldBeFalse();
     }
 
     [Fact]
@@ -48,9 +51,9 @@ public class SpecificationTests
 
         var orSpecification = isKingSpec.Or(bountyOver100M);
 
-        orSpecification.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Luffy()).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
     }
 
     [Fact]
@@ -61,9 +64,9 @@ public class SpecificationTests
 
         var orSpecification = isKingSpec.Or(bountyOver500M);
 
-        orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Nami).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Nami()).ShouldBeFalse();
     }
 
     [Fact]
@@ -73,12 +76,15 @@ public class SpecificationTests
         var bountyOver50M = new BountyOverSpecification(50000000);
 
         var orSpecification = isKingSpec.And(bountyOver50M);
+        
+        var luffy = MugiwaraCrew.Luffy();
+        luffy.FoundOnePiece();
 
-        orSpecification.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Sanji).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Nami).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(luffy).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Sanji()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Nami()).ShouldBeFalse();
     }
 
     [Fact]
@@ -88,10 +94,13 @@ public class SpecificationTests
         var bountyOver100M = new BountyOverSpecification(100000000);
 
         var orSpecification = isKingSpec.And(bountyOver100M);
+        
+        var luffy = MugiwaraCrew.Luffy();
+        luffy.FoundOnePiece();
 
-        orSpecification.IsSatisfiedBy(Mugiwara.Luffy).ShouldBeTrue();
-        orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(luffy).ShouldBeTrue();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
     }
 
     [Fact]
@@ -102,8 +111,8 @@ public class SpecificationTests
 
         var orSpecification = isKingSpec.And(bountyOver500M);
 
-        orSpecification.IsSatisfiedBy(Mugiwara.Zoro).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Chopper).ShouldBeFalse();
-        orSpecification.IsSatisfiedBy(Mugiwara.Nami).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
+        orSpecification.IsSatisfiedBy(MugiwaraCrew.Nami()).ShouldBeFalse();
     }
 }

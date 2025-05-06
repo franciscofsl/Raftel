@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Raftel.Application;
 using Raftel.Demo.Domain.Pirates;
 using Raftel.Demo.Domain.Pirates.ValueObjects;
 using Raftel.Demo.Infrastructure.Data;
-using Shouldly;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
@@ -15,7 +12,7 @@ public class UnitOfWorkTests : InfrastructureTestBase
     {
         await ExecuteScopedAsync(async sp =>
         {
-            var pirate = Pirate.Create("Luffy", 150_000_000);
+            var pirate = Pirate.Normal("Luffy", 150_000_000);
 
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var dbContext = sp.GetRequiredService<TestingRaftelDbContext>();
@@ -38,7 +35,7 @@ public class UnitOfWorkTests : InfrastructureTestBase
     {
         await ExecuteScopedAsync(async sp =>
         {
-            var pirate = Pirate.Create("Luffy", 150_000_000);
+            var pirate = Pirate.Normal("Luffy", 150_000_000);
 
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
             var repository = sp.GetRequiredService<IPirateRepository>();

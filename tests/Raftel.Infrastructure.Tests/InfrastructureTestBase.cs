@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Raftel.Demo.Infrastructure;
+﻿using Raftel.Demo.Infrastructure;
 using Raftel.Demo.Infrastructure.Data;
 
 namespace Raftel.Infrastructure.Tests;

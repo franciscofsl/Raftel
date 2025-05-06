@@ -8,7 +8,7 @@ public sealed class CreatePirateCommandHandler(IPirateRepository repository) : I
 {
     public async Task<Result> HandleAsync(CreatePirateCommand request, CancellationToken token = default)
     {
-        await repository.AddAsync(Pirate.Create(request.Name, request.Bounty));
+        await repository.AddAsync(Pirate.Normal(request.Name, request.Bounty), token);
         return Result.Success();
     }
 }

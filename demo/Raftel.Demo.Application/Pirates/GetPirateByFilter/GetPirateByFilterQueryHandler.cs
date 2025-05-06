@@ -10,7 +10,7 @@ internal sealed class GetPirateByFilterQueryHandler : IQueryHandler<GetPirateByF
     public async Task<Result<GetPirateByFilterResponse>> HandleAsync(GetPirateByFilterQuery request,
         CancellationToken token = default)
     {
-        var pirates = Mugiwara.All
+        var pirates = MugiwaraCrew.All
             .WhereIf(!string.IsNullOrEmpty(request.Name),
                 _ => ((string)_.Name).Contains(request.Name, StringComparison.OrdinalIgnoreCase))
             .WhereIf(request.MaxBounty.HasValue, _ => _.Bounty <= request.MaxBounty)

@@ -16,6 +16,10 @@ public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork
     {
     }
 
+    protected RaftelDbContext(DbContextOptions<TDbContext> options) : base(options)
+    {
+    }
+
     protected RaftelDbContext(DbContextOptions<TDbContext> options, IDataFilter dataFilter) : base(options)
     {
         _dataFilter = dataFilter;
