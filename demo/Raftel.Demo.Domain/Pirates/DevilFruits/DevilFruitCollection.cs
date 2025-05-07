@@ -1,4 +1,6 @@
-﻿namespace Raftel.Demo.Domain.Pirates.DevilFruits;
+﻿using System.Collections;
+
+namespace Raftel.Demo.Domain.Pirates.DevilFruits;
 
 internal class DevilFruitCollection
 {
@@ -8,5 +10,8 @@ internal class DevilFruitCollection
 
     internal bool HasAny() => _fruits.Any();
 
-    internal IReadOnlyCollection<DevilFruit> AsReadOnly() => _fruits.AsReadOnly();
+    internal bool Has(DevilFruit fruit)
+    {
+        return _fruits.Contains(fruit);
+    }
 }
