@@ -7,6 +7,11 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Data;
 
+/// <summary>
+/// Abstract base class for the Raftel database context, providing common functionality
+/// such as global query filters and unit of work implementation.
+/// </summary>
+/// <typeparam name="TDbContext">The type of the derived DbContext.</typeparam>
 public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork
     where TDbContext : RaftelDbContext<TDbContext>
 {
