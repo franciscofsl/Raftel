@@ -154,7 +154,7 @@ public class EfRepositoryTests : InfrastructureTestBase
             await unitOfWork.CommitAsync();
 
             var luffy = await repository.GetByIdAsync(createdLuffy.Id);
-            luffy!.EatenDevilFruits.ShouldContain(gomuGomu);
+            luffy!.HasEaten(gomuGomu).ShouldBeTrue();
         });
     }
 }

@@ -13,7 +13,7 @@ public class PirateTest
 
         pirate.EatFruit(fruit);
 
-        pirate.EatenDevilFruits.ShouldContain(fruit);
+        pirate.HasEaten(fruit).ShouldBeTrue();
     }
 
     [Fact]
@@ -25,10 +25,9 @@ public class PirateTest
 
         teach.EatFruit(yami);
         teach.EatFruit(gura);
-
-        teach.EatenDevilFruits.ShouldContain(yami);
-        teach.EatenDevilFruits.ShouldContain(gura);
-        teach.EatenDevilFruits.Count.ShouldBe(2);
+ 
+        teach.HasEaten(yami).ShouldBeTrue();
+        teach.HasEaten(gura).ShouldBeTrue();
     }
 
     [Fact]
@@ -41,7 +40,8 @@ public class PirateTest
         pirate.EatFruit(fruit1);
         var result = pirate.EatFruit(fruit2);
         result.Error.ShouldBe(PirateErrors.CannotEatMoreThanOneDevilFruit);
-
-        pirate.EatenDevilFruits.Count.ShouldBe(1);
+ 
+        pirate.HasEaten(fruit1).ShouldBeTrue();
+        pirate.HasEaten(fruit2).ShouldBeFalse();
     }
 }

@@ -27,8 +27,6 @@ public class Pirate : AggregateRoot<PirateId>
     public Bounty Bounty { get; set; }
     public bool IsKing { get; private set; }
 
-    public IReadOnlyCollection<DevilFruit> EatenDevilFruits => _eatenDevilFruits.AsReadOnly();
-
     public static Pirate Normal(Name name, Bounty bounty) => new(name, bounty, BodyType.Normal);
 
     public static Pirate Special(Name name, Bounty bounty) => new(name, bounty, BodyType.Special);
@@ -44,6 +42,11 @@ public class Pirate : AggregateRoot<PirateId>
 
         _eatenDevilFruits.Add(fruit);
         return Result.Success();
+    }
+
+    public bool HasEaten(DevilFruit gomuGomu)
+    {
+        return _eatenDevilFruits.Has(gomuGomu);
     }
 
     private bool CanEatFruit() => _bodyType != BodyType.Normal || !_eatenDevilFruits.HasAny();
