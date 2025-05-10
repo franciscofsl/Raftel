@@ -1,3 +1,4 @@
+using MiApiConOpenIddict.Data;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Application;
 using Raftel.Application.Middlewares;
@@ -30,16 +31,22 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+} 
 
 app.UseHttpsRedirection();
+app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers(); 
 
 app.AddQueryEndpoint<GetPirateByIdQuery, GetPirateByIdResponse>("/api/pirates/{id}", HttpMethod.Get);
 app.AddQueryEndpoint<GetPirateByFilterQuery, GetPirateByFilterResponse>("/api/pirates/", HttpMethod.Get);
+
+using var scope = app.Services.CreateScope();
+await SeedData.InitializeAsync(scope.ServiceProvider);
+// await SeedData.InitializeAsync(app.Services);
 
 app.Run();
 

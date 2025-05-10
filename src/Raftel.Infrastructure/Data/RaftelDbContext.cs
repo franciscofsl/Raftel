@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Raftel.Application;
@@ -12,7 +13,7 @@ namespace Raftel.Infrastructure.Data;
 /// such as global query filters and unit of work implementation.
 /// </summary>
 /// <typeparam name="TDbContext">The type of the derived DbContext.</typeparam>
-public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork
+public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWork
     where TDbContext : RaftelDbContext<TDbContext>
 {
     private readonly IDataFilter _dataFilter;
@@ -31,7 +32,7 @@ public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork
     }
 
     protected bool IsSoftDeleteFilterEnabled => _dataFilter?.IsEnabled<ISoftDeleteFilter>() ?? false;
-    
+
     public Task CommitAsync(CancellationToken cancellationToken = default)
     {
         return base.SaveChangesAsync(cancellationToken);
@@ -40,6 +41,7 @@ public abstract class RaftelDbContext<TDbContext> : DbContext, IUnitOfWork
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        modelBuilder.UseOpenIddict();
 
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
