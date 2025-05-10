@@ -13,29 +13,29 @@ public class AuthController : ControllerBase
     public AuthController(UserManager<IdentityUser> userManager)
         => _userManager = userManager;
 
-    // POST: api/auth/register
     [HttpPost("register")]
     [AllowAnonymous]
     public async Task<IActionResult> Register([FromBody] RegisterDto dto)
     {
         if (!ModelState.IsValid)
+        {
             return BadRequest(ModelState);
+        }
 
-        // 1. Verificar si existe
         if (await _userManager.FindByEmailAsync(dto.Email) != null)
-            return Conflict(new { message = "El email ya está registrado." });
+        {
+            return Conflict(new { message = "Duplicated email!" });
+        }
 
-        // 2. Crear usuario
         var user = new IdentityUser { UserName = dto.Email, Email = dto.Email };
         var result = await _userManager.CreateAsync(user, dto.Password);
 
-        if (!result.Succeeded)
+        if (result.Succeeded)
         {
-            var errors = result.Errors.Select(e => e.Description);
-            return BadRequest(new { message = "No se pudo registrar.", details = errors });
+            return Ok(new { message = "User successfully registered" });
         }
 
-        // 3. Registro exitoso
-        return Ok(new { message = "Usuario registrado exitosamente." });
+        var errors = result.Errors.Select(e => e.Description);
+        return BadRequest(new { message = "Cant register.", details = errors });
     }
 }

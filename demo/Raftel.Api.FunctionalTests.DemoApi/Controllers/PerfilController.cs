@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Raftel.Api.FunctionalTests.DemoApi.Controllers;
 
-using OpenIddict.Validation.AspNetCore;
-
 [ApiController]
-[Route("api/[controller]")] 
+[Route("api/[controller]")]
 [Authorize]
 public class PerfilController : ControllerBase
 {
     [HttpGet]
-    public IActionResult Get() =>
-        Ok(new { Message = "Usuario autenticado", User = User.Identity?.Name });
+    public IActionResult Get()
+    {
+        return Ok(new { Message = "Usuario autenticado", User = User.Identity?.Name });
+    }
 }

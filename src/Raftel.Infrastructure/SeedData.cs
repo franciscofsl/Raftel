@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OpenIddict.Abstractions;
-using System;
-using System.Threading.Tasks;
 
-namespace MiApiConOpenIddict.Data
+namespace Raftel.Infrastructure
 {
     public static class SeedData
     {

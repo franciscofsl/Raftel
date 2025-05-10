@@ -1,4 +1,3 @@
-using MiApiConOpenIddict.Data;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Application;
 using Raftel.Application.Middlewares;
@@ -6,6 +5,7 @@ using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Raftel.Demo.Application.Pirates.GetPirateById;
 using Raftel.Demo.Infrastructure;
+using Raftel.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
