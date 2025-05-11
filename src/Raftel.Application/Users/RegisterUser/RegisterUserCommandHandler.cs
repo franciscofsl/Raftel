@@ -3,13 +3,13 @@ using Raftel.Application.Commands;
 using Raftel.Domain.Abstractions;
 using Raftel.Domain.Users;
 
-namespace Raftel.Application.Users.CreateUser;
+namespace Raftel.Application.Users.RegisterUser;
 
-internal sealed class CreateUserCommandHandler(
+internal sealed class RegisterUserCommandHandler(
     IAuthenticationService authenticationService,
-    IUsersRepository usersRepository) : ICommandHandler<CreateUserCommand>
+    IUsersRepository usersRepository) : ICommandHandler<RegisterUserCommand>
 {
-    public async Task<Result> HandleAsync(CreateUserCommand request, CancellationToken token = default)
+    public async Task<Result> HandleAsync(RegisterUserCommand request, CancellationToken token = default)
     {
         var user = User.Create(request.Email, request.Name, request.Surname);
 

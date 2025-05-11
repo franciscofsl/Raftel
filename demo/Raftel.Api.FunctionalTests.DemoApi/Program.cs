@@ -2,6 +2,7 @@ using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Application;
 using Raftel.Application.Middlewares;
+using Raftel.Application.Users.RegisterUser;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Raftel.Demo.Application.Pirates.GetPirateById;
@@ -17,8 +18,9 @@ builder.Services.AddControllers();
 builder.Services.AddRaftelApplication(cfg =>
 {
     cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommand).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
     cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
-    // cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
+    cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
 });
 
 builder.Services.AddSampleInfrastructure(builder.Configuration.GetConnectionString("Default")!);

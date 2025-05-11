@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Raftel.Application;
+using Raftel.Domain.Users;
 using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Data;
@@ -31,7 +32,10 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
         _dataFilter = dataFilter;
     }
 
+    public DbSet<User> User { get; set; }
+    
     protected bool IsSoftDeleteFilterEnabled => _dataFilter?.IsEnabled<ISoftDeleteFilter>() ?? false;
+
 
     public Task CommitAsync(CancellationToken cancellationToken = default)
     {
@@ -42,6 +46,7 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.UseOpenIddict();
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(RaftelDbContext<TDbContext>).Assembly);
 
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {

@@ -9,6 +9,6 @@ internal sealed class UsersRepository<TDbContext>(TDbContext dbContext)
 {
     public Task<bool> EmailIsUniqueAsync(string email, CancellationToken token)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(true);
     }
 }

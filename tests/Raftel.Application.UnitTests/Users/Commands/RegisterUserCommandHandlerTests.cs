@@ -1,26 +1,26 @@
 ﻿using Raftel.Application.Abstractions.Authentication;
-using Raftel.Application.Users.CreateUser;
+using Raftel.Application.Users.RegisterUser;
 using Raftel.Domain.Abstractions;
 using Raftel.Domain.Users;
 using Shouldly;
 
 namespace Raftel.Application.UnitTests.Users.Commands;
 
-public sealed class CreateUserCommandHandlerTests
+public sealed class RegisterUserCommandHandlerTests
 {
     private readonly IAuthenticationService _authenticationService = Substitute.For<IAuthenticationService>();
     private readonly IUsersRepository _usersRepository = Substitute.For<IUsersRepository>();
-    private readonly CreateUserCommandHandler _handler;
+    private readonly RegisterUserCommandHandler _handler;
 
-    public CreateUserCommandHandlerTests()
+    public RegisterUserCommandHandlerTests()
     {
-        _handler = new CreateUserCommandHandler(_authenticationService, _usersRepository);
+        _handler = new RegisterUserCommandHandler(_authenticationService, _usersRepository);
     }
 
     [Fact]
     public async Task HandleAsync_Should_ReturnFailure_WhenEmailIsNotUnique()
     {
-        var command = new CreateUserCommand("Monkey", "D. Luffy", "luffy@onepiece.com", "GomuGomuNoMi");
+        var command = new RegisterUserCommand("Monkey", "D. Luffy", "luffy@onepiece.com", "GomuGomuNoMi");
         _usersRepository.EmailIsUniqueAsync(command.Email, Arg.Any<CancellationToken>())
             .Returns(false);
 
@@ -35,7 +35,7 @@ public sealed class CreateUserCommandHandlerTests
     [Fact]
     public async Task HandleAsync_Should_ReturnFailure_WhenRegistrationFails()
     {
-        var command = new CreateUserCommand("Roronoa", "Zoro", "zoro@onepiece.com", "Santoryu");
+        var command = new RegisterUserCommand("Roronoa", "Zoro", "zoro@onepiece.com", "Santoryu");
         _usersRepository.EmailIsUniqueAsync(command.Email, Arg.Any<CancellationToken>())
             .Returns(true);
 
@@ -51,7 +51,7 @@ public sealed class CreateUserCommandHandlerTests
     [Fact]
     public async Task HandleAsync_Should_ReturnSuccess_And_AddUser_WhenRegistrationSucceeds()
     {
-        var command = new CreateUserCommand("Nami", "Bellmere", "nami@onepiece.com", "Navigation123");
+        var command = new RegisterUserCommand("Nami", "Bellmere", "nami@onepiece.com", "Navigation123");
         _usersRepository.EmailIsUniqueAsync(command.Email, Arg.Any<CancellationToken>())
             .Returns(true);
 
