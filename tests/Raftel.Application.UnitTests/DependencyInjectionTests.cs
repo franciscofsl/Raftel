@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using NSubstitute;
 using Raftel.Application.Commands;
 using Raftel.Application.Middlewares;
 using Raftel.Application.Queries;
