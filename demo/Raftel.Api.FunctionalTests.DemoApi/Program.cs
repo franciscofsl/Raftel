@@ -1,3 +1,4 @@
+using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Application;
 using Raftel.Application.Middlewares;
@@ -45,8 +46,7 @@ app.AddQueryEndpoint<GetPirateByIdQuery, GetPirateByIdResponse>("/api/pirates/{i
 app.AddQueryEndpoint<GetPirateByFilterQuery, GetPirateByFilterResponse>("/api/pirates/", HttpMethod.Get);
 
 using var scope = app.Services.CreateScope();
-await SeedData.InitializeAsync(scope.ServiceProvider);
-// await SeedData.InitializeAsync(app.Services);
+await SeedData.InitializeAsync(scope.ServiceProvider); 
 
 app.Run();
 

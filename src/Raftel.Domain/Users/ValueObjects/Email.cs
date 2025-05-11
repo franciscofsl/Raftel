@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Raftel.Domain.Abstractions;
 
-namespace Raftel.Domain.Users;
+namespace Raftel.Domain.Users.ValueObjects;
 
 public sealed record Email
 {

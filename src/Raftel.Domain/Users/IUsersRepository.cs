@@ -1,4 +1,5 @@
 ﻿using Raftel.Domain.Abstractions;
+using Raftel.Domain.Users.ValueObjects;
 
 namespace Raftel.Domain.Users;
 

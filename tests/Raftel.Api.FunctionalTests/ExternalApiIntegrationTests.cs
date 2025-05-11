@@ -9,11 +9,11 @@ using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;
 
-public class ExternalApiIntegrationTests : IClassFixture<ExternalApiTestFactory>
+public class ExternalApiIntegrationTests : IClassFixture<ApiTestFactory>
 {
     private readonly HttpClient _client;
 
-    public ExternalApiIntegrationTests(ExternalApiTestFactory factory)
+    public ExternalApiIntegrationTests(ApiTestFactory factory)
     {
         _client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {

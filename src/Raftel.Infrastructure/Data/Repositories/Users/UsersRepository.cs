@@ -1,4 +1,5 @@
 ﻿using Raftel.Domain.Users;
+using Raftel.Domain.Users.ValueObjects;
 
 namespace Raftel.Infrastructure.Data.Repositories.Users;
 

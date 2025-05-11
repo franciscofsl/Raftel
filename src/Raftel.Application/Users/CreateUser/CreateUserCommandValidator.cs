@@ -1,4 +1,5 @@
 using Raftel.Domain.Users;
+using Raftel.Domain.Users.ValueObjects;
 using Raftel.Domain.Validators;
 
 namespace Raftel.Application.Users.CreateUser;

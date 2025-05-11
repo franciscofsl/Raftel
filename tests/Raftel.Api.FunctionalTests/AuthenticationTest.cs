@@ -6,11 +6,11 @@ using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;
 
-public class AuthenticationTest : IClassFixture<ExternalApiTestFactory>
+public class AuthenticationTest : IClassFixture<ApiTestFactory>
 {
     private readonly HttpClient _client;
 
-    public AuthenticationTest(ExternalApiTestFactory factory)
+    public AuthenticationTest(ApiTestFactory factory)
     {
         _client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {

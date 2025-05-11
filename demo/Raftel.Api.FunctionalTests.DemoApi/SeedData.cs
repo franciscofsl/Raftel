@@ -1,12 +1,15 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using OpenIddict.Abstractions;
+﻿using OpenIddict.Abstractions;
+using Raftel.Demo.Infrastructure.Data;
 
-namespace Raftel.Infrastructure
+namespace Raftel.Api.FunctionalTests.DemoApi
 {
     public static class SeedData
     {
         public static async Task InitializeAsync(IServiceProvider services)
         {
+            var dbContext = services.GetRequiredService<TestingRaftelDbContext>();
+            await dbContext.Database.EnsureCreatedAsync();
+            
             var mgr = services.GetRequiredService<IOpenIddictApplicationManager>();
            
             if (await mgr.FindByClientIdAsync("web-app") is null)
