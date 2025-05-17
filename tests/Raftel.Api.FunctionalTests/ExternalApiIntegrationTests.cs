@@ -35,7 +35,7 @@ public class ExternalApiIntegrationTests : IClassFixture<ApiTestFactory>
     // }
 
     [Fact]
-    public async Task Swagger_Should_Define_PiratesEndpoint_WithExpectedParameters()
+    public async Task ApiShouldHave_QueriesEndpoints_WithExpectedParameters()
     {
         var swaggerJson = await _client.GetFromJsonAsync<SwaggerDocument>("/swagger/v1/swagger.json");
 
@@ -47,6 +47,18 @@ public class ExternalApiIntegrationTests : IClassFixture<ApiTestFactory>
         getMethod.Parameters.ShouldContain(p => p.Name == "id" && p.In == "path");
         getMethod.Parameters.ShouldContain(p => p.Name == "name" && p.In == "query" && p.Schema.Type == "string");
         getMethod.Parameters.ShouldContain(p => p.Name == "maxBounty" && p.In == "query" && p.Schema.Type == "integer");
+    }
+
+    [Fact]
+    public async Task ApiShouldHave_CommandsEndpoints_WithExpectedParameters()
+    {
+        var swaggerJson = await _client.GetFromJsonAsync<SwaggerDocument>("/swagger/v1/swagger.json");
+
+        var piratesPath = swaggerJson.Paths["/api/pirates"]; 
+        
+        piratesPath.Count.ShouldBe(2);
+        piratesPath.ShouldContainKey("post");
+        piratesPath.ShouldContainKey("get"); 
     }
 
     [Fact]

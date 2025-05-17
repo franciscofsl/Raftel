@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Raftel.Application.Abstractions;
+using Raftel.Application.Queries;
 using Raftel.Domain.Abstractions;
 using Raftel.Shared.Extensions;
 
@@ -14,7 +15,7 @@ public static class QueryEndpointMapper
         RouteGroupBuilder group,
         string route,
         HttpMethod method)
-        where TRequest : IRequest<Result<TResult>>
+        where TRequest : IQuery<TResult>
     {
         var endpoint = method switch
         {

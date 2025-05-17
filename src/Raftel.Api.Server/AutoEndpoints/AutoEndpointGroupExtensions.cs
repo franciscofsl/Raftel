@@ -30,6 +30,15 @@ public static class AutoEndpointGroupExtensions
             method.Invoke(null, new object[] { group, query.Route, query.Method });
         }
 
+        foreach (var command in options.Commands)
+        {
+            var method = typeof(CommandEndpointMapper)
+                .GetMethod(nameof(CommandEndpointMapper.MapCommandEndpoint))!
+                .MakeGenericMethod(command.Request);
+
+            method.Invoke(null, new object[] { group, command.Route, command.Method });
+        }
+
         return app;
     }
 }
