@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Interface IRequestHandler&lt;TRequest, TResponse&gt; | Raftel </title>
+      <title>Interface IUsersRepository | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Interface IRequestHandler&lt;TRequest, TResponse&gt; | Raftel ">
+      <meta name="title" content="Interface IUsersRepository | Raftel ">
       
-      <meta name="description" content="Defines a handler that processes a request of type TRequest and returns a response of type TResponse.">
+      
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Abstractions_IRequestHandler_2.md&amp;value=---%0Auid%3A%20Raftel.Application.Abstractions.IRequestHandler%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Features_Users_IUsersRepository.md&amp;value=---%0Auid%3A%20Raftel.Domain.Features.Users.IUsersRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,43 +84,51 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Application.Abstractions.IRequestHandler`2">
+        <article data-uid="Raftel.Domain.Features.Users.IUsersRepository">
 
 
 
-  <h1 id="Raftel_Application_Abstractions_IRequestHandler_2" data-uid="Raftel.Application.Abstractions.IRequestHandler`2" class="text-break">
-Interface IRequestHandler&lt;TRequest, TResponse&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/IRequestHandler.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Domain_Features_Users_IUsersRepository" data-uid="Raftel.Domain.Features.Users.IUsersRepository" class="text-break">
+Interface IUsersRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Users/IUsersRepository.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Application.html">Application</a>.<a class="xref" href="Raftel.Application.Abstractions.html">Abstractions</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>Raftel.Application.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Domain.html">Domain</a>.<a class="xref" href="Raftel.Domain.Features.html">Features</a>.<a class="xref" href="Raftel.Domain.Features.Users.html">Users</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Raftel.Domain.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Defines a handler that processes a request of type <code class="typeparamref">TRequest</code>
-and returns a response of type <code class="typeparamref">TResponse</code>.</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IRequestHandler&lt;TRequest, TResponse&gt; where TRequest : IRequest&lt;TResponse&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IUsersRepository : IRepository&lt;User, UserId&gt;</code></pre>
   </div>
 
 
 
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TRequest</code></dt>
-    <dd><p>The type of the request.</p>
-</dd>
-    <dt><code>TResponse</code></dt>
-    <dd><p>The type of the response.</p>
-</dd>
-  </dl>
 
 
 
 
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_GetByIdAsync__1_System_Threading_CancellationToken_">IRepository&lt;User, UserId&gt;.GetByIdAsync(UserId, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_System_Threading_CancellationToken_">IRepository&lt;User, UserId&gt;.ListAllAsync(CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_AddAsync__0_System_Threading_CancellationToken_">IRepository&lt;User, UserId&gt;.AddAsync(User, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Update__0_">IRepository&lt;User, UserId&gt;.Update(User)</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Remove__0_">IRepository&lt;User, UserId&gt;.Remove(User)</a>
+    </div>
+  </dd></dl>
 
 
 
@@ -131,35 +139,32 @@ and returns a response of type <code class="typeparamref">TResponse</code>.</p>
 </h2>
 
 
-  <a id="Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync_" data-uid="Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync*"></a>
+  <a id="Raftel_Domain_Features_Users_IUsersRepository_EmailIsUniqueAsync_" data-uid="Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync*"></a>
 
-  <h3 id="Raftel_Application_Abstractions_IRequestHandler_2_HandleAsync__0_System_Threading_CancellationToken_" data-uid="Raftel.Application.Abstractions.IRequestHandler`2.HandleAsync(`0,System.Threading.CancellationToken)">
-  HandleAsync(TRequest, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/IRequestHandler.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Domain_Features_Users_IUsersRepository_EmailIsUniqueAsync_System_String_System_Threading_CancellationToken_" data-uid="Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync(System.String,System.Threading.CancellationToken)">
+  EmailIsUniqueAsync(string, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Users/IUsersRepository.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Handles the given request asynchronously.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;TResponse&gt; HandleAsync(TRequest request, CancellationToken token = default)</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; EmailIsUniqueAsync(string email, CancellationToken token)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>request</code> <span class="xref">TRequest</span></dt>
-    <dd><p>The request to process.</p>
-</dd>
+    <dt><code>email</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
     <dt><code>token</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
     <dd></dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;TResponse&gt;</dt>
-    <dd><p>A task representing the asynchronous operation, containing the response.</p>
-</dd>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd></dd>
   </dl>
 
 
@@ -176,7 +181,7 @@ and returns a response of type <code class="typeparamref">TResponse</code>.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/IRequestHandler.cs/#L9" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Users/IUsersRepository.cs/#L6" class="edit-link">Edit this page</a>
         </div>
 
 

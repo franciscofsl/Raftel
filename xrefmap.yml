@@ -61,28 +61,315 @@ references:
   commentId: N:Raftel.Api.Server.AutoEndpoints
   fullName: Raftel.Api.Server.AutoEndpoints
   nameWithType: Raftel.Api.Server.AutoEndpoints
-- uid: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions
-  name: AutoEndpointExtensions
-  href: api/Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.html
-  commentId: T:Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions
-  fullName: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions
-  nameWithType: AutoEndpointExtensions
-- uid: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint*
-  name: AddQueryEndpoint
-  href: api/Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.html#Raftel_Api_Server_AutoEndpoints_AutoEndpointExtensions_AddQueryEndpoint_
-  commentId: Overload:Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint
+- uid: Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions
+  name: AutoEndpointGroupExtensions
+  href: api/Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions.html
+  commentId: T:Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions
+  fullName: Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions
+  nameWithType: AutoEndpointGroupExtensions
+- uid: Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions.AddEndpointGroup(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.Action{Raftel.Api.Server.AutoEndpoints.RouteOptions})
+  name: AddEndpointGroup(IEndpointRouteBuilder, Action<RouteOptions>)
+  href: api/Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions.html#Raftel_Api_Server_AutoEndpoints_AutoEndpointGroupExtensions_AddEndpointGroup_Microsoft_AspNetCore_Routing_IEndpointRouteBuilder_System_Action_Raftel_Api_Server_AutoEndpoints_RouteOptions__
+  commentId: M:Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions.AddEndpointGroup(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.Action{Raftel.Api.Server.AutoEndpoints.RouteOptions})
+  name.vb: AddEndpointGroup(IEndpointRouteBuilder, Action(Of RouteOptions))
+  fullName: Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions.AddEndpointGroup(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder, System.Action<Raftel.Api.Server.AutoEndpoints.RouteOptions>)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions.AddEndpointGroup(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder, System.Action(Of Raftel.Api.Server.AutoEndpoints.RouteOptions))
+  nameWithType: AutoEndpointGroupExtensions.AddEndpointGroup(IEndpointRouteBuilder, Action<RouteOptions>)
+  nameWithType.vb: AutoEndpointGroupExtensions.AddEndpointGroup(IEndpointRouteBuilder, Action(Of RouteOptions))
+- uid: Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions.AddEndpointGroup*
+  name: AddEndpointGroup
+  href: api/Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions.html#Raftel_Api_Server_AutoEndpoints_AutoEndpointGroupExtensions_AddEndpointGroup_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions.AddEndpointGroup
   isSpec: "True"
-  fullName: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint
-  nameWithType: AutoEndpointExtensions.AddQueryEndpoint
-- uid: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint``2(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String,System.Net.Http.HttpMethod)
-  name: AddQueryEndpoint<TRequest, TResult>(IEndpointRouteBuilder, string, HttpMethod)
-  href: api/Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.html#Raftel_Api_Server_AutoEndpoints_AutoEndpointExtensions_AddQueryEndpoint__2_Microsoft_AspNetCore_Routing_IEndpointRouteBuilder_System_String_System_Net_Http_HttpMethod_
-  commentId: M:Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint``2(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String,System.Net.Http.HttpMethod)
-  name.vb: AddQueryEndpoint(Of TRequest, TResult)(IEndpointRouteBuilder, String, HttpMethod)
-  fullName: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint<TRequest, TResult>(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder, string, System.Net.Http.HttpMethod)
-  fullName.vb: Raftel.Api.Server.AutoEndpoints.AutoEndpointExtensions.AddQueryEndpoint(Of TRequest, TResult)(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder, String, System.Net.Http.HttpMethod)
-  nameWithType: AutoEndpointExtensions.AddQueryEndpoint<TRequest, TResult>(IEndpointRouteBuilder, string, HttpMethod)
-  nameWithType.vb: AutoEndpointExtensions.AddQueryEndpoint(Of TRequest, TResult)(IEndpointRouteBuilder, String, HttpMethod)
+  fullName: Raftel.Api.Server.AutoEndpoints.AutoEndpointGroupExtensions.AddEndpointGroup
+  nameWithType: AutoEndpointGroupExtensions.AddEndpointGroup
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition
+  name: CommandDefinition
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html
+  commentId: T:Raftel.Api.Server.AutoEndpoints.CommandDefinition
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition
+  nameWithType: CommandDefinition
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor(System.Type,System.String,System.Net.Http.HttpMethod)
+  name: CommandDefinition(Type, string, HttpMethod)
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition__ctor_System_Type_System_String_System_Net_Http_HttpMethod_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor(System.Type,System.String,System.Net.Http.HttpMethod)
+  name.vb: New(Type, String, HttpMethod)
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.CommandDefinition(System.Type, string, System.Net.Http.HttpMethod)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.CommandDefinition.New(System.Type, String, System.Net.Http.HttpMethod)
+  nameWithType: CommandDefinition.CommandDefinition(Type, string, HttpMethod)
+  nameWithType.vb: CommandDefinition.New(Type, String, HttpMethod)
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor*
+  name: CommandDefinition
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition__ctor_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.CommandDefinition
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.CommandDefinition.New
+  nameWithType: CommandDefinition.CommandDefinition
+  nameWithType.vb: CommandDefinition.New
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous
+  name: AllowAnonymous()
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_AllowAnonymous
+  commentId: M:Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous()
+  nameWithType: CommandDefinition.AllowAnonymous()
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous*
+  name: AllowAnonymous
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_AllowAnonymous_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous
+  nameWithType: CommandDefinition.AllowAnonymous
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Method
+  name: Method
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_Method
+  commentId: P:Raftel.Api.Server.AutoEndpoints.CommandDefinition.Method
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Method
+  nameWithType: CommandDefinition.Method
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Method*
+  name: Method
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_Method_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.CommandDefinition.Method
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Method
+  nameWithType: CommandDefinition.Method
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Request
+  name: Request
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_Request
+  commentId: P:Raftel.Api.Server.AutoEndpoints.CommandDefinition.Request
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Request
+  nameWithType: CommandDefinition.Request
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Request*
+  name: Request
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_Request_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.CommandDefinition.Request
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Request
+  nameWithType: CommandDefinition.Request
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Route
+  name: Route
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_Route
+  commentId: P:Raftel.Api.Server.AutoEndpoints.CommandDefinition.Route
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Route
+  nameWithType: CommandDefinition.Route
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Route*
+  name: Route
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_Route_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.CommandDefinition.Route
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Route
+  nameWithType: CommandDefinition.Route
+- uid: Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper
+  name: CommandEndpointMapper
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.html
+  commentId: T:Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper
+  nameWithType: CommandEndpointMapper
+- uid: Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint*
+  name: MapCommandEndpoint
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.html#Raftel_Api_Server_AutoEndpoints_CommandEndpointMapper_MapCommandEndpoint_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint
+  nameWithType: CommandEndpointMapper.MapCommandEndpoint
+- uid: Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint``1(Microsoft.AspNetCore.Routing.RouteGroupBuilder,Raftel.Api.Server.AutoEndpoints.CommandDefinition)
+  name: MapCommandEndpoint<TCommand>(RouteGroupBuilder, CommandDefinition)
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.html#Raftel_Api_Server_AutoEndpoints_CommandEndpointMapper_MapCommandEndpoint__1_Microsoft_AspNetCore_Routing_RouteGroupBuilder_Raftel_Api_Server_AutoEndpoints_CommandDefinition_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint``1(Microsoft.AspNetCore.Routing.RouteGroupBuilder,Raftel.Api.Server.AutoEndpoints.CommandDefinition)
+  name.vb: MapCommandEndpoint(Of TCommand)(RouteGroupBuilder, CommandDefinition)
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint<TCommand>(Microsoft.AspNetCore.Routing.RouteGroupBuilder, Raftel.Api.Server.AutoEndpoints.CommandDefinition)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint(Of TCommand)(Microsoft.AspNetCore.Routing.RouteGroupBuilder, Raftel.Api.Server.AutoEndpoints.CommandDefinition)
+  nameWithType: CommandEndpointMapper.MapCommandEndpoint<TCommand>(RouteGroupBuilder, CommandDefinition)
+  nameWithType.vb: CommandEndpointMapper.MapCommandEndpoint(Of TCommand)(RouteGroupBuilder, CommandDefinition)
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition
+  name: QueryDefinition
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html
+  commentId: T:Raftel.Api.Server.AutoEndpoints.QueryDefinition
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition
+  nameWithType: QueryDefinition
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition.#ctor(System.Type,System.Type,System.String,System.Net.Http.HttpMethod)
+  name: QueryDefinition(Type, Type, string, HttpMethod)
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html#Raftel_Api_Server_AutoEndpoints_QueryDefinition__ctor_System_Type_System_Type_System_String_System_Net_Http_HttpMethod_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.QueryDefinition.#ctor(System.Type,System.Type,System.String,System.Net.Http.HttpMethod)
+  name.vb: New(Type, Type, String, HttpMethod)
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition.QueryDefinition(System.Type, System.Type, string, System.Net.Http.HttpMethod)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.QueryDefinition.New(System.Type, System.Type, String, System.Net.Http.HttpMethod)
+  nameWithType: QueryDefinition.QueryDefinition(Type, Type, string, HttpMethod)
+  nameWithType.vb: QueryDefinition.New(Type, Type, String, HttpMethod)
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition.#ctor*
+  name: QueryDefinition
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html#Raftel_Api_Server_AutoEndpoints_QueryDefinition__ctor_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.QueryDefinition.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition.QueryDefinition
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.QueryDefinition.New
+  nameWithType: QueryDefinition.QueryDefinition
+  nameWithType.vb: QueryDefinition.New
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Method
+  name: Method
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html#Raftel_Api_Server_AutoEndpoints_QueryDefinition_Method
+  commentId: P:Raftel.Api.Server.AutoEndpoints.QueryDefinition.Method
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Method
+  nameWithType: QueryDefinition.Method
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Method*
+  name: Method
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html#Raftel_Api_Server_AutoEndpoints_QueryDefinition_Method_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.QueryDefinition.Method
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Method
+  nameWithType: QueryDefinition.Method
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Request
+  name: Request
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html#Raftel_Api_Server_AutoEndpoints_QueryDefinition_Request
+  commentId: P:Raftel.Api.Server.AutoEndpoints.QueryDefinition.Request
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Request
+  nameWithType: QueryDefinition.Request
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Request*
+  name: Request
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html#Raftel_Api_Server_AutoEndpoints_QueryDefinition_Request_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.QueryDefinition.Request
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Request
+  nameWithType: QueryDefinition.Request
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Result
+  name: Result
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html#Raftel_Api_Server_AutoEndpoints_QueryDefinition_Result
+  commentId: P:Raftel.Api.Server.AutoEndpoints.QueryDefinition.Result
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Result
+  nameWithType: QueryDefinition.Result
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Result*
+  name: Result
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html#Raftel_Api_Server_AutoEndpoints_QueryDefinition_Result_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.QueryDefinition.Result
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Result
+  nameWithType: QueryDefinition.Result
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Route
+  name: Route
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html#Raftel_Api_Server_AutoEndpoints_QueryDefinition_Route
+  commentId: P:Raftel.Api.Server.AutoEndpoints.QueryDefinition.Route
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Route
+  nameWithType: QueryDefinition.Route
+- uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Route*
+  name: Route
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html#Raftel_Api_Server_AutoEndpoints_QueryDefinition_Route_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.QueryDefinition.Route
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryDefinition.Route
+  nameWithType: QueryDefinition.Route
+- uid: Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper
+  name: QueryEndpointMapper
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper.html
+  commentId: T:Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper
+  nameWithType: QueryEndpointMapper
+- uid: Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper.MapQueryEndpoint*
+  name: MapQueryEndpoint
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper.html#Raftel_Api_Server_AutoEndpoints_QueryEndpointMapper_MapQueryEndpoint_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper.MapQueryEndpoint
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper.MapQueryEndpoint
+  nameWithType: QueryEndpointMapper.MapQueryEndpoint
+- uid: Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper.MapQueryEndpoint``2(Microsoft.AspNetCore.Routing.RouteGroupBuilder,System.String,System.Net.Http.HttpMethod)
+  name: MapQueryEndpoint<TRequest, TResult>(RouteGroupBuilder, string, HttpMethod)
+  href: api/Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper.html#Raftel_Api_Server_AutoEndpoints_QueryEndpointMapper_MapQueryEndpoint__2_Microsoft_AspNetCore_Routing_RouteGroupBuilder_System_String_System_Net_Http_HttpMethod_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper.MapQueryEndpoint``2(Microsoft.AspNetCore.Routing.RouteGroupBuilder,System.String,System.Net.Http.HttpMethod)
+  name.vb: MapQueryEndpoint(Of TRequest, TResult)(RouteGroupBuilder, String, HttpMethod)
+  fullName: Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper.MapQueryEndpoint<TRequest, TResult>(Microsoft.AspNetCore.Routing.RouteGroupBuilder, string, System.Net.Http.HttpMethod)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.QueryEndpointMapper.MapQueryEndpoint(Of TRequest, TResult)(Microsoft.AspNetCore.Routing.RouteGroupBuilder, String, System.Net.Http.HttpMethod)
+  nameWithType: QueryEndpointMapper.MapQueryEndpoint<TRequest, TResult>(RouteGroupBuilder, string, HttpMethod)
+  nameWithType.vb: QueryEndpointMapper.MapQueryEndpoint(Of TRequest, TResult)(RouteGroupBuilder, String, HttpMethod)
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions
+  name: RouteOptions
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html
+  commentId: T:Raftel.Api.Server.AutoEndpoints.RouteOptions
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions
+  nameWithType: RouteOptions
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand*
+  name: AddCommand
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand
+  nameWithType: RouteOptions.AddCommand
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``1(System.String,System.Net.Http.HttpMethod)
+  name: AddCommand<TRequest>(string, HttpMethod)
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__1_System_String_System_Net_Http_HttpMethod_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``1(System.String,System.Net.Http.HttpMethod)
+  name.vb: AddCommand(Of TRequest)(String, HttpMethod)
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand<TRequest>(string, System.Net.Http.HttpMethod)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand(Of TRequest)(String, System.Net.Http.HttpMethod)
+  nameWithType: RouteOptions.AddCommand<TRequest>(string, HttpMethod)
+  nameWithType.vb: RouteOptions.AddCommand(Of TRequest)(String, HttpMethod)
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddQuery*
+  name: AddQuery
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddQuery_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.RouteOptions.AddQuery
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddQuery
+  nameWithType: RouteOptions.AddQuery
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddQuery``2(System.String,System.Net.Http.HttpMethod)
+  name: AddQuery<TRequest, TResult>(string, HttpMethod)
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddQuery__2_System_String_System_Net_Http_HttpMethod_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.RouteOptions.AddQuery``2(System.String,System.Net.Http.HttpMethod)
+  name.vb: AddQuery(Of TRequest, TResult)(String, HttpMethod)
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddQuery<TRequest, TResult>(string, System.Net.Http.HttpMethod)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddQuery(Of TRequest, TResult)(String, System.Net.Http.HttpMethod)
+  nameWithType: RouteOptions.AddQuery<TRequest, TResult>(string, HttpMethod)
+  nameWithType.vb: RouteOptions.AddQuery(Of TRequest, TResult)(String, HttpMethod)
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.BaseUri
+  name: BaseUri
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_BaseUri
+  commentId: P:Raftel.Api.Server.AutoEndpoints.RouteOptions.BaseUri
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.BaseUri
+  nameWithType: RouteOptions.BaseUri
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.BaseUri*
+  name: BaseUri
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_BaseUri_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.RouteOptions.BaseUri
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.BaseUri
+  nameWithType: RouteOptions.BaseUri
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.Name
+  name: Name
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_Name
+  commentId: P:Raftel.Api.Server.AutoEndpoints.RouteOptions.Name
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.Name
+  nameWithType: RouteOptions.Name
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.Name*
+  name: Name
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_Name_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.RouteOptions.Name
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.Name
+  nameWithType: RouteOptions.Name
+- uid: Raftel.Api.Server.Features.Users
+  name: Raftel.Api.Server.Features.Users
+  href: api/Raftel.Api.Server.Features.Users.html
+  commentId: N:Raftel.Api.Server.Features.Users
+  fullName: Raftel.Api.Server.Features.Users
+  nameWithType: Raftel.Api.Server.Features.Users
+- uid: Raftel.Api.Server.Features.Users.UsersDependencyInjection
+  name: UsersDependencyInjection
+  href: api/Raftel.Api.Server.Features.Users.UsersDependencyInjection.html
+  commentId: T:Raftel.Api.Server.Features.Users.UsersDependencyInjection
+  fullName: Raftel.Api.Server.Features.Users.UsersDependencyInjection
+  nameWithType: UsersDependencyInjection
+- uid: Raftel.Api.Server.Features.Users.UsersDependencyInjection.AddRaftelUsers(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)
+  name: AddRaftelUsers(IEndpointRouteBuilder)
+  href: api/Raftel.Api.Server.Features.Users.UsersDependencyInjection.html#Raftel_Api_Server_Features_Users_UsersDependencyInjection_AddRaftelUsers_Microsoft_AspNetCore_Routing_IEndpointRouteBuilder_
+  commentId: M:Raftel.Api.Server.Features.Users.UsersDependencyInjection.AddRaftelUsers(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)
+  fullName: Raftel.Api.Server.Features.Users.UsersDependencyInjection.AddRaftelUsers(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)
+  nameWithType: UsersDependencyInjection.AddRaftelUsers(IEndpointRouteBuilder)
+- uid: Raftel.Api.Server.Features.Users.UsersDependencyInjection.AddRaftelUsers*
+  name: AddRaftelUsers
+  href: api/Raftel.Api.Server.Features.Users.UsersDependencyInjection.html#Raftel_Api_Server_Features_Users_UsersDependencyInjection_AddRaftelUsers_
+  commentId: Overload:Raftel.Api.Server.Features.Users.UsersDependencyInjection.AddRaftelUsers
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Features.Users.UsersDependencyInjection.AddRaftelUsers
+  nameWithType: UsersDependencyInjection.AddRaftelUsers
 - uid: Raftel.Application
   name: Raftel.Application
   href: api/Raftel.Application.html
@@ -95,6 +382,34 @@ references:
   commentId: N:Raftel.Application.Abstractions
   fullName: Raftel.Application.Abstractions
   nameWithType: Raftel.Application.Abstractions
+- uid: Raftel.Application.Abstractions.Authentication
+  name: Raftel.Application.Abstractions.Authentication
+  href: api/Raftel.Application.Abstractions.Authentication.html
+  commentId: N:Raftel.Application.Abstractions.Authentication
+  fullName: Raftel.Application.Abstractions.Authentication
+  nameWithType: Raftel.Application.Abstractions.Authentication
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService
+  name: IAuthenticationService
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html
+  commentId: T:Raftel.Application.Abstractions.Authentication.IAuthenticationService
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService
+  nameWithType: IAuthenticationService
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync(Raftel.Domain.Features.Users.User,System.String,System.Threading.CancellationToken)
+  name: RegisterAsync(User, string, CancellationToken)
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_RegisterAsync_Raftel_Domain_Features_Users_User_System_String_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync(Raftel.Domain.Features.Users.User,System.String,System.Threading.CancellationToken)
+  name.vb: RegisterAsync(User, String, CancellationToken)
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync(Raftel.Domain.Features.Users.User, string, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync(Raftel.Domain.Features.Users.User, String, System.Threading.CancellationToken)
+  nameWithType: IAuthenticationService.RegisterAsync(User, string, CancellationToken)
+  nameWithType.vb: IAuthenticationService.RegisterAsync(User, String, CancellationToken)
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync*
+  name: RegisterAsync
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_RegisterAsync_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync
+  nameWithType: IAuthenticationService.RegisterAsync
 - uid: Raftel.Application.Abstractions.IRequestDispatcher
   name: IRequestDispatcher
   href: api/Raftel.Application.Abstractions.IRequestDispatcher.html
@@ -365,6 +680,88 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Exceptions.ValidationException.ToString
   nameWithType: ValidationException.ToString
+- uid: Raftel.Application.Features.Users.RegisterUser
+  name: Raftel.Application.Features.Users.RegisterUser
+  href: api/Raftel.Application.Features.Users.RegisterUser.html
+  commentId: N:Raftel.Application.Features.Users.RegisterUser
+  fullName: Raftel.Application.Features.Users.RegisterUser
+  nameWithType: Raftel.Application.Features.Users.RegisterUser
+- uid: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand
+  name: RegisterUserCommand
+  href: api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.html
+  commentId: T:Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand
+  fullName: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand
+  nameWithType: RegisterUserCommand
+- uid: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.#ctor(System.String,System.String)
+  name: RegisterUserCommand(string, string)
+  href: api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.html#Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand__ctor_System_String_System_String_
+  commentId: M:Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.#ctor(System.String,System.String)
+  name.vb: New(String, String)
+  fullName: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.RegisterUserCommand(string, string)
+  fullName.vb: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.New(String, String)
+  nameWithType: RegisterUserCommand.RegisterUserCommand(string, string)
+  nameWithType.vb: RegisterUserCommand.New(String, String)
+- uid: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.#ctor*
+  name: RegisterUserCommand
+  href: api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.html#Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.RegisterUserCommand
+  fullName.vb: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.New
+  nameWithType: RegisterUserCommand.RegisterUserCommand
+  nameWithType.vb: RegisterUserCommand.New
+- uid: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Email
+  name: Email
+  href: api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.html#Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand_Email
+  commentId: P:Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Email
+  fullName: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Email
+  nameWithType: RegisterUserCommand.Email
+- uid: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Email*
+  name: Email
+  href: api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.html#Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand_Email_
+  commentId: Overload:Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Email
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Email
+  nameWithType: RegisterUserCommand.Email
+- uid: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Password
+  name: Password
+  href: api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.html#Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand_Password
+  commentId: P:Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Password
+  fullName: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Password
+  nameWithType: RegisterUserCommand.Password
+- uid: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Password*
+  name: Password
+  href: api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.html#Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand_Password_
+  commentId: Overload:Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Password
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Password
+  nameWithType: RegisterUserCommand.Password
+- uid: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator
+  name: RegisterUserCommandValidator
+  href: api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.html
+  commentId: T:Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator
+  fullName: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator
+  nameWithType: RegisterUserCommandValidator
+- uid: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.#ctor
+  name: RegisterUserCommandValidator()
+  href: api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.html#Raftel_Application_Features_Users_RegisterUser_RegisterUserCommandValidator__ctor
+  commentId: M:Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.#ctor
+  name.vb: New()
+  fullName: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.RegisterUserCommandValidator()
+  fullName.vb: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.New()
+  nameWithType: RegisterUserCommandValidator.RegisterUserCommandValidator()
+  nameWithType.vb: RegisterUserCommandValidator.New()
+- uid: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.#ctor*
+  name: RegisterUserCommandValidator
+  href: api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.html#Raftel_Application_Features_Users_RegisterUser_RegisterUserCommandValidator__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.RegisterUserCommandValidator
+  fullName.vb: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.New
+  nameWithType: RegisterUserCommandValidator.RegisterUserCommandValidator
+  nameWithType.vb: RegisterUserCommandValidator.New
 - uid: Raftel.Application.IRaftelApplicationBuilder
   name: IRaftelApplicationBuilder
   href: api/Raftel.Application.IRaftelApplicationBuilder.html
@@ -1436,6 +1833,234 @@ references:
   fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).CType
   nameWithType: TypedId<T>.implicit operator
   nameWithType.vb: TypedId(Of T).CType
+- uid: Raftel.Domain.Features.Users
+  name: Raftel.Domain.Features.Users
+  href: api/Raftel.Domain.Features.Users.html
+  commentId: N:Raftel.Domain.Features.Users
+  fullName: Raftel.Domain.Features.Users
+  nameWithType: Raftel.Domain.Features.Users
+- uid: Raftel.Domain.Features.Users.IUsersRepository
+  name: IUsersRepository
+  href: api/Raftel.Domain.Features.Users.IUsersRepository.html
+  commentId: T:Raftel.Domain.Features.Users.IUsersRepository
+  fullName: Raftel.Domain.Features.Users.IUsersRepository
+  nameWithType: IUsersRepository
+- uid: Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync(System.String,System.Threading.CancellationToken)
+  name: EmailIsUniqueAsync(string, CancellationToken)
+  href: api/Raftel.Domain.Features.Users.IUsersRepository.html#Raftel_Domain_Features_Users_IUsersRepository_EmailIsUniqueAsync_System_String_System_Threading_CancellationToken_
+  commentId: M:Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync(System.String,System.Threading.CancellationToken)
+  name.vb: EmailIsUniqueAsync(String, CancellationToken)
+  fullName: Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync(string, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync(String, System.Threading.CancellationToken)
+  nameWithType: IUsersRepository.EmailIsUniqueAsync(string, CancellationToken)
+  nameWithType.vb: IUsersRepository.EmailIsUniqueAsync(String, CancellationToken)
+- uid: Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync*
+  name: EmailIsUniqueAsync
+  href: api/Raftel.Domain.Features.Users.IUsersRepository.html#Raftel_Domain_Features_Users_IUsersRepository_EmailIsUniqueAsync_
+  commentId: Overload:Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync
+  nameWithType: IUsersRepository.EmailIsUniqueAsync
+- uid: Raftel.Domain.Features.Users.User
+  name: User
+  href: api/Raftel.Domain.Features.Users.User.html
+  commentId: T:Raftel.Domain.Features.Users.User
+  fullName: Raftel.Domain.Features.Users.User
+  nameWithType: User
+- uid: Raftel.Domain.Features.Users.User.Create(Raftel.Domain.Features.Users.ValueObjects.Email,System.String,System.String)
+  name: Create(Email, string, string)
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Create_Raftel_Domain_Features_Users_ValueObjects_Email_System_String_System_String_
+  commentId: M:Raftel.Domain.Features.Users.User.Create(Raftel.Domain.Features.Users.ValueObjects.Email,System.String,System.String)
+  name.vb: Create(Email, String, String)
+  fullName: Raftel.Domain.Features.Users.User.Create(Raftel.Domain.Features.Users.ValueObjects.Email, string, string)
+  fullName.vb: Raftel.Domain.Features.Users.User.Create(Raftel.Domain.Features.Users.ValueObjects.Email, String, String)
+  nameWithType: User.Create(Email, string, string)
+  nameWithType.vb: User.Create(Email, String, String)
+- uid: Raftel.Domain.Features.Users.User.Create*
+  name: Create
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Create_
+  commentId: Overload:Raftel.Domain.Features.Users.User.Create
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.User.Create
+  nameWithType: User.Create
+- uid: Raftel.Domain.Features.Users.User.Email
+  name: Email
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Email
+  commentId: P:Raftel.Domain.Features.Users.User.Email
+  fullName: Raftel.Domain.Features.Users.User.Email
+  nameWithType: User.Email
+- uid: Raftel.Domain.Features.Users.User.Email*
+  name: Email
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Email_
+  commentId: Overload:Raftel.Domain.Features.Users.User.Email
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.User.Email
+  nameWithType: User.Email
+- uid: Raftel.Domain.Features.Users.User.Name
+  name: Name
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Name
+  commentId: P:Raftel.Domain.Features.Users.User.Name
+  fullName: Raftel.Domain.Features.Users.User.Name
+  nameWithType: User.Name
+- uid: Raftel.Domain.Features.Users.User.Name*
+  name: Name
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Name_
+  commentId: Overload:Raftel.Domain.Features.Users.User.Name
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.User.Name
+  nameWithType: User.Name
+- uid: Raftel.Domain.Features.Users.User.Surname
+  name: Surname
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Surname
+  commentId: P:Raftel.Domain.Features.Users.User.Surname
+  fullName: Raftel.Domain.Features.Users.User.Surname
+  nameWithType: User.Surname
+- uid: Raftel.Domain.Features.Users.User.Surname*
+  name: Surname
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Surname_
+  commentId: Overload:Raftel.Domain.Features.Users.User.Surname
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.User.Surname
+  nameWithType: User.Surname
+- uid: Raftel.Domain.Features.Users.UserErrors
+  name: UserErrors
+  href: api/Raftel.Domain.Features.Users.UserErrors.html
+  commentId: T:Raftel.Domain.Features.Users.UserErrors
+  fullName: Raftel.Domain.Features.Users.UserErrors
+  nameWithType: UserErrors
+- uid: Raftel.Domain.Features.Users.UserErrors.DuplicatedEmail
+  name: DuplicatedEmail
+  href: api/Raftel.Domain.Features.Users.UserErrors.html#Raftel_Domain_Features_Users_UserErrors_DuplicatedEmail
+  commentId: P:Raftel.Domain.Features.Users.UserErrors.DuplicatedEmail
+  fullName: Raftel.Domain.Features.Users.UserErrors.DuplicatedEmail
+  nameWithType: UserErrors.DuplicatedEmail
+- uid: Raftel.Domain.Features.Users.UserErrors.DuplicatedEmail*
+  name: DuplicatedEmail
+  href: api/Raftel.Domain.Features.Users.UserErrors.html#Raftel_Domain_Features_Users_UserErrors_DuplicatedEmail_
+  commentId: Overload:Raftel.Domain.Features.Users.UserErrors.DuplicatedEmail
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.UserErrors.DuplicatedEmail
+  nameWithType: UserErrors.DuplicatedEmail
+- uid: Raftel.Domain.Features.Users.ValueObjects
+  name: Raftel.Domain.Features.Users.ValueObjects
+  href: api/Raftel.Domain.Features.Users.ValueObjects.html
+  commentId: N:Raftel.Domain.Features.Users.ValueObjects
+  fullName: Raftel.Domain.Features.Users.ValueObjects
+  nameWithType: Raftel.Domain.Features.Users.ValueObjects
+- uid: Raftel.Domain.Features.Users.ValueObjects.Email
+  name: Email
+  href: api/Raftel.Domain.Features.Users.ValueObjects.Email.html
+  commentId: T:Raftel.Domain.Features.Users.ValueObjects.Email
+  fullName: Raftel.Domain.Features.Users.ValueObjects.Email
+  nameWithType: Email
+- uid: Raftel.Domain.Features.Users.ValueObjects.Email.InvalidFormatError
+  name: InvalidFormatError
+  href: api/Raftel.Domain.Features.Users.ValueObjects.Email.html#Raftel_Domain_Features_Users_ValueObjects_Email_InvalidFormatError
+  commentId: P:Raftel.Domain.Features.Users.ValueObjects.Email.InvalidFormatError
+  fullName: Raftel.Domain.Features.Users.ValueObjects.Email.InvalidFormatError
+  nameWithType: Email.InvalidFormatError
+- uid: Raftel.Domain.Features.Users.ValueObjects.Email.InvalidFormatError*
+  name: InvalidFormatError
+  href: api/Raftel.Domain.Features.Users.ValueObjects.Email.html#Raftel_Domain_Features_Users_ValueObjects_Email_InvalidFormatError_
+  commentId: Overload:Raftel.Domain.Features.Users.ValueObjects.Email.InvalidFormatError
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.ValueObjects.Email.InvalidFormatError
+  nameWithType: Email.InvalidFormatError
+- uid: Raftel.Domain.Features.Users.ValueObjects.Email.IsEmail(System.String)
+  name: IsEmail(string)
+  href: api/Raftel.Domain.Features.Users.ValueObjects.Email.html#Raftel_Domain_Features_Users_ValueObjects_Email_IsEmail_System_String_
+  commentId: M:Raftel.Domain.Features.Users.ValueObjects.Email.IsEmail(System.String)
+  name.vb: IsEmail(String)
+  fullName: Raftel.Domain.Features.Users.ValueObjects.Email.IsEmail(string)
+  fullName.vb: Raftel.Domain.Features.Users.ValueObjects.Email.IsEmail(String)
+  nameWithType: Email.IsEmail(string)
+  nameWithType.vb: Email.IsEmail(String)
+- uid: Raftel.Domain.Features.Users.ValueObjects.Email.IsEmail*
+  name: IsEmail
+  href: api/Raftel.Domain.Features.Users.ValueObjects.Email.html#Raftel_Domain_Features_Users_ValueObjects_Email_IsEmail_
+  commentId: Overload:Raftel.Domain.Features.Users.ValueObjects.Email.IsEmail
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.ValueObjects.Email.IsEmail
+  nameWithType: Email.IsEmail
+- uid: Raftel.Domain.Features.Users.ValueObjects.Email.ToString
+  name: ToString()
+  href: api/Raftel.Domain.Features.Users.ValueObjects.Email.html#Raftel_Domain_Features_Users_ValueObjects_Email_ToString
+  commentId: M:Raftel.Domain.Features.Users.ValueObjects.Email.ToString
+  fullName: Raftel.Domain.Features.Users.ValueObjects.Email.ToString()
+  nameWithType: Email.ToString()
+- uid: Raftel.Domain.Features.Users.ValueObjects.Email.ToString*
+  name: ToString
+  href: api/Raftel.Domain.Features.Users.ValueObjects.Email.html#Raftel_Domain_Features_Users_ValueObjects_Email_ToString_
+  commentId: Overload:Raftel.Domain.Features.Users.ValueObjects.Email.ToString
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.ValueObjects.Email.ToString
+  nameWithType: Email.ToString
+- uid: Raftel.Domain.Features.Users.ValueObjects.Email.op_Implicit(Raftel.Domain.Features.Users.ValueObjects.Email)~System.String
+  name: implicit operator string(Email)
+  href: api/Raftel.Domain.Features.Users.ValueObjects.Email.html#Raftel_Domain_Features_Users_ValueObjects_Email_op_Implicit_Raftel_Domain_Features_Users_ValueObjects_Email__System_String
+  commentId: M:Raftel.Domain.Features.Users.ValueObjects.Email.op_Implicit(Raftel.Domain.Features.Users.ValueObjects.Email)~System.String
+  name.vb: CType(Email)
+  fullName: Raftel.Domain.Features.Users.ValueObjects.Email.implicit operator string(Raftel.Domain.Features.Users.ValueObjects.Email)
+  fullName.vb: Raftel.Domain.Features.Users.ValueObjects.Email.CType(Raftel.Domain.Features.Users.ValueObjects.Email)
+  nameWithType: Email.implicit operator string(Email)
+  nameWithType.vb: Email.CType(Email)
+- uid: Raftel.Domain.Features.Users.ValueObjects.Email.op_Implicit(System.String)~Raftel.Domain.Features.Users.ValueObjects.Email
+  name: implicit operator Email(string)
+  href: api/Raftel.Domain.Features.Users.ValueObjects.Email.html#Raftel_Domain_Features_Users_ValueObjects_Email_op_Implicit_System_String__Raftel_Domain_Features_Users_ValueObjects_Email
+  commentId: M:Raftel.Domain.Features.Users.ValueObjects.Email.op_Implicit(System.String)~Raftel.Domain.Features.Users.ValueObjects.Email
+  name.vb: CType(String)
+  fullName: Raftel.Domain.Features.Users.ValueObjects.Email.implicit operator Raftel.Domain.Features.Users.ValueObjects.Email(string)
+  fullName.vb: Raftel.Domain.Features.Users.ValueObjects.Email.CType(String)
+  nameWithType: Email.implicit operator Email(string)
+  nameWithType.vb: Email.CType(String)
+- uid: Raftel.Domain.Features.Users.ValueObjects.Email.op_Implicit*
+  name: implicit operator
+  href: api/Raftel.Domain.Features.Users.ValueObjects.Email.html#Raftel_Domain_Features_Users_ValueObjects_Email_op_Implicit_
+  commentId: Overload:Raftel.Domain.Features.Users.ValueObjects.Email.op_Implicit
+  isSpec: "True"
+  name.vb: CType
+  fullName: Raftel.Domain.Features.Users.ValueObjects.Email.implicit operator
+  fullName.vb: Raftel.Domain.Features.Users.ValueObjects.Email.CType
+  nameWithType: Email.implicit operator
+  nameWithType.vb: Email.CType
+- uid: Raftel.Domain.Features.Users.ValueObjects.UserId
+  name: UserId
+  href: api/Raftel.Domain.Features.Users.ValueObjects.UserId.html
+  commentId: T:Raftel.Domain.Features.Users.ValueObjects.UserId
+  fullName: Raftel.Domain.Features.Users.ValueObjects.UserId
+  nameWithType: UserId
+- uid: Raftel.Domain.Features.Users.ValueObjects.UserId.#ctor(System.Guid)
+  name: UserId(Guid)
+  href: api/Raftel.Domain.Features.Users.ValueObjects.UserId.html#Raftel_Domain_Features_Users_ValueObjects_UserId__ctor_System_Guid_
+  commentId: M:Raftel.Domain.Features.Users.ValueObjects.UserId.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: Raftel.Domain.Features.Users.ValueObjects.UserId.UserId(System.Guid)
+  fullName.vb: Raftel.Domain.Features.Users.ValueObjects.UserId.New(System.Guid)
+  nameWithType: UserId.UserId(Guid)
+  nameWithType.vb: UserId.New(Guid)
+- uid: Raftel.Domain.Features.Users.ValueObjects.UserId.#ctor*
+  name: UserId
+  href: api/Raftel.Domain.Features.Users.ValueObjects.UserId.html#Raftel_Domain_Features_Users_ValueObjects_UserId__ctor_
+  commentId: Overload:Raftel.Domain.Features.Users.ValueObjects.UserId.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Features.Users.ValueObjects.UserId.UserId
+  fullName.vb: Raftel.Domain.Features.Users.ValueObjects.UserId.New
+  nameWithType: UserId.UserId
+  nameWithType.vb: UserId.New
+- uid: Raftel.Domain.Features.Users.ValueObjects.UserId.New
+  name: New()
+  href: api/Raftel.Domain.Features.Users.ValueObjects.UserId.html#Raftel_Domain_Features_Users_ValueObjects_UserId_New
+  commentId: M:Raftel.Domain.Features.Users.ValueObjects.UserId.New
+  fullName: Raftel.Domain.Features.Users.ValueObjects.UserId.New()
+  nameWithType: UserId.New()
+- uid: Raftel.Domain.Features.Users.ValueObjects.UserId.New*
+  name: New
+  href: api/Raftel.Domain.Features.Users.ValueObjects.UserId.html#Raftel_Domain_Features_Users_ValueObjects_UserId_New_
+  commentId: Overload:Raftel.Domain.Features.Users.ValueObjects.UserId.New
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.ValueObjects.UserId.New
+  nameWithType: UserId.New
 - uid: Raftel.Domain.Specifications
   name: Raftel.Domain.Specifications
   href: api/Raftel.Domain.Specifications.html
@@ -1734,6 +2359,34 @@ references:
   commentId: N:Raftel.Infrastructure.Data
   fullName: Raftel.Infrastructure.Data
   nameWithType: Raftel.Infrastructure.Data
+- uid: Raftel.Infrastructure.Data.Configuration
+  name: Raftel.Infrastructure.Data.Configuration
+  href: api/Raftel.Infrastructure.Data.Configuration.html
+  commentId: N:Raftel.Infrastructure.Data.Configuration
+  fullName: Raftel.Infrastructure.Data.Configuration
+  nameWithType: Raftel.Infrastructure.Data.Configuration
+- uid: Raftel.Infrastructure.Data.Configuration.UserConfiguration
+  name: UserConfiguration
+  href: api/Raftel.Infrastructure.Data.Configuration.UserConfiguration.html
+  commentId: T:Raftel.Infrastructure.Data.Configuration.UserConfiguration
+  fullName: Raftel.Infrastructure.Data.Configuration.UserConfiguration
+  nameWithType: UserConfiguration
+- uid: Raftel.Infrastructure.Data.Configuration.UserConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Features.Users.User})
+  name: Configure(EntityTypeBuilder<User>)
+  href: api/Raftel.Infrastructure.Data.Configuration.UserConfiguration.html#Raftel_Infrastructure_Data_Configuration_UserConfiguration_Configure_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder_Raftel_Domain_Features_Users_User__
+  commentId: M:Raftel.Infrastructure.Data.Configuration.UserConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Features.Users.User})
+  name.vb: Configure(EntityTypeBuilder(Of User))
+  fullName: Raftel.Infrastructure.Data.Configuration.UserConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Raftel.Domain.Features.Users.User>)
+  fullName.vb: Raftel.Infrastructure.Data.Configuration.UserConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of Raftel.Domain.Features.Users.User))
+  nameWithType: UserConfiguration.Configure(EntityTypeBuilder<User>)
+  nameWithType.vb: UserConfiguration.Configure(EntityTypeBuilder(Of User))
+- uid: Raftel.Infrastructure.Data.Configuration.UserConfiguration.Configure*
+  name: Configure
+  href: api/Raftel.Infrastructure.Data.Configuration.UserConfiguration.html#Raftel_Infrastructure_Data_Configuration_UserConfiguration_Configure_
+  commentId: Overload:Raftel.Infrastructure.Data.Configuration.UserConfiguration.Configure
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Configuration.UserConfiguration.Configure
+  nameWithType: UserConfiguration.Configure
 - uid: Raftel.Infrastructure.Data.EfRepository`3
   name: EfRepository<TDbContext, TEntity, TId>
   href: api/Raftel.Infrastructure.Data.EfRepository-3.html
@@ -2016,6 +2669,23 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).OnModelCreating
   nameWithType: RaftelDbContext<TDbContext>.OnModelCreating
   nameWithType.vb: RaftelDbContext(Of TDbContext).OnModelCreating
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.User
+  name: User
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_User
+  commentId: P:Raftel.Infrastructure.Data.RaftelDbContext`1.User
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.User
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).User
+  nameWithType: RaftelDbContext<TDbContext>.User
+  nameWithType.vb: RaftelDbContext(Of TDbContext).User
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.User*
+  name: User
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_User_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.User
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.User
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).User
+  nameWithType: RaftelDbContext<TDbContext>.User
+  nameWithType.vb: RaftelDbContext(Of TDbContext).User
 - uid: Raftel.Infrastructure.Data.ShadowPropertyNames
   name: ShadowPropertyNames
   href: api/Raftel.Infrastructure.Data.ShadowPropertyNames.html

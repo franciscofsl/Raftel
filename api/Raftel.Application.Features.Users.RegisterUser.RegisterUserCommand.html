@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class DependencyInjection | Raftel </title>
+      <title>Class RegisterUserCommand | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class DependencyInjection | Raftel ">
+      <meta name="title" content="Class RegisterUserCommand | Raftel ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_DependencyInjection.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.DependencyInjection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand.md&amp;value=---%0Auid%3A%20Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,24 +84,24 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Infrastructure.DependencyInjection">
+        <article data-uid="Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand">
 
 
 
-  <h1 id="Raftel_Infrastructure_DependencyInjection" data-uid="Raftel.Infrastructure.DependencyInjection" class="text-break">
-Class DependencyInjection  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand" data-uid="Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand" class="text-break">
+Class RegisterUserCommand  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/RegisterUser/RegisterUserCommand.cs/#L4"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Infrastructure.html">Infrastructure</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>Raftel.Infrastructure.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Application.html">Application</a>.<a class="xref" href="Raftel.Application.Features.html">Features</a>.<a class="xref" href="Raftel.Application.Features.Users.html">Users</a>.<a class="xref" href="Raftel.Application.Features.Users.RegisterUser.html">RegisterUser</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Raftel.Application.dll</dd></dl>
   </div>
 
   <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class DependencyInjection</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed record RegisterUserCommand : ICommand, IRequest&lt;Result&gt;, IEquatable&lt;RegisterUserCommand&gt;</code></pre>
   </div>
 
 
@@ -111,10 +111,18 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">DependencyInjection</span></div>
+      <div><span class="xref">RegisterUserCommand</span></div>
     </dd>
   </dl>
 
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="Raftel.Application.Commands.ICommand.html">ICommand</a></div>
+      <div><a class="xref" href="Raftel.Application.Abstractions.IRequest-1.html">IRequest</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.html">RegisterUserCommand</a>&gt;</div>
+    </dd>
+  </dl>
 
 
   <dl class="typelist inheritedMembers">
@@ -133,9 +141,6 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
-    </div>
-    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
@@ -148,47 +153,101 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
 
 
 
-  <h2 class="section" id="methods">Methods
+  <h2 class="section" id="constructors">Constructors
 </h2>
 
 
-  <a id="Raftel_Infrastructure_DependencyInjection_AddRaftelData_" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData*"></a>
+  <a id="Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand__ctor_" data-uid="Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.#ctor*"></a>
 
-  <h3 id="Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-  AddRaftelData&lt;TDbContext&gt;(IServiceCollection, IConfiguration, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand__ctor_System_String_System_String_" data-uid="Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.#ctor(System.String,System.String)">
+  RegisterUserCommand(string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/RegisterUser/RegisterUserCommand.cs/#L4"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IServiceCollection AddRaftelData&lt;TDbContext&gt;(this IServiceCollection services, IConfiguration configuration, string connectionStringName = &quot;Default&quot;) where TDbContext : RaftelDbContext&lt;TDbContext&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public RegisterUserCommand(string Email, string Password)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>services</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a></dt>
+    <dt><code>Email</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
-    <dt><code>configuration</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration">IConfiguration</a></dt>
-    <dd></dd>
-    <dt><code>connectionStringName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dt><code>Password</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
   </dl>
 
-  <h4 class="section">Returns</h4>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand_Email_" data-uid="Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Email*"></a>
+
+  <h3 id="Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand_Email" data-uid="Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Email">
+  Email
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/RegisterUser/RegisterUserCommand.cs/#L4"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Email { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
   </dl>
 
-  <h4 class="section">Type Parameters</h4>
+
+
+
+
+
+
+
+  <a id="Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand_Password_" data-uid="Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Password*"></a>
+
+  <h3 id="Raftel_Application_Features_Users_RegisterUser_RegisterUserCommand_Password" data-uid="Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.Password">
+  Password
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/RegisterUser/RegisterUserCommand.cs/#L4"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Password { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><code>TDbContext</code></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
   </dl>
-
-
 
 
 
@@ -201,7 +260,7 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L19" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/RegisterUser/RegisterUserCommand.cs/#L4" class="edit-link">Edit this page</a>
         </div>
 
 

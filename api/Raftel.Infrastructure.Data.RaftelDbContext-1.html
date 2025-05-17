@@ -89,7 +89,7 @@
 
 
   <h1 id="Raftel_Infrastructure_Data_RaftelDbContext_1" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1" class="text-break">
-Class RaftelDbContext&lt;TDbContext&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L15"><i class="bi bi-code-slash"></i></a>
+Class RaftelDbContext&lt;TDbContext&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L17"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -103,7 +103,7 @@ such as global query filters and unit of work implementation.</p>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class RaftelDbContext&lt;TDbContext&gt; : DbContext, IInfrastructure&lt;IServiceProvider&gt;, IDbContextDependencies, IDbSetCache, IDbContextPoolable, IResettableService, IDisposable, IAsyncDisposable, IUnitOfWork where TDbContext : RaftelDbContext&lt;TDbContext&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class RaftelDbContext&lt;TDbContext&gt; : IdentityDbContext, IInfrastructure&lt;IServiceProvider&gt;, IDbContextDependencies, IDbSetCache, IDbContextPoolable, IResettableService, IDisposable, IAsyncDisposable, IUnitOfWork where TDbContext : RaftelDbContext&lt;TDbContext&gt;</code></pre>
   </div>
 
 
@@ -120,6 +120,10 @@ such as global query filters and unit of work implementation.</p>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext">DbContext</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityusercontext-5">IdentityUserContext</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser">IdentityUser</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuserclaim-1">IdentityUserClaim</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuserlogin-1">IdentityUserLogin</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1">IdentityUserToken</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identitydbcontext-8">IdentityDbContext</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser">IdentityUser</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityrole">IdentityRole</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuserclaim-1">IdentityUserClaim</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuserrole-1">IdentityUserRole</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuserlogin-1">IdentityUserLogin</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1">IdentityRoleClaim</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;, <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1">IdentityUserToken</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identitydbcontext-3">IdentityDbContext</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser">IdentityUser</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityrole">IdentityRole</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identitydbcontext">IdentityDbContext</a></div>
       <div><span class="xref">RaftelDbContext&lt;TDbContext&gt;</span></div>
     </dd>
   </dl>
@@ -142,6 +146,36 @@ such as global query filters and unit of work implementation.</p>
   <dl class="typelist inheritedMembers">
     <dt>Inherited Members</dt>
     <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identitydbcontext-8.onmodelcreating">IdentityDbContext&lt;IdentityUser, IdentityRole, string, IdentityUserClaim&lt;string&gt;, IdentityUserRole&lt;string&gt;, IdentityUserLogin&lt;string&gt;, IdentityRoleClaim&lt;string&gt;, IdentityUserToken&lt;string&gt;&gt;.OnModelCreating(ModelBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identitydbcontext-8.userroles">IdentityDbContext&lt;IdentityUser, IdentityRole, string, IdentityUserClaim&lt;string&gt;, IdentityUserRole&lt;string&gt;, IdentityUserLogin&lt;string&gt;, IdentityRoleClaim&lt;string&gt;, IdentityUserToken&lt;string&gt;&gt;.UserRoles</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identitydbcontext-8.roles">IdentityDbContext&lt;IdentityUser, IdentityRole, string, IdentityUserClaim&lt;string&gt;, IdentityUserRole&lt;string&gt;, IdentityUserLogin&lt;string&gt;, IdentityRoleClaim&lt;string&gt;, IdentityUserToken&lt;string&gt;&gt;.Roles</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identitydbcontext-8.roleclaims">IdentityDbContext&lt;IdentityUser, IdentityRole, string, IdentityUserClaim&lt;string&gt;, IdentityUserRole&lt;string&gt;, IdentityUserLogin&lt;string&gt;, IdentityRoleClaim&lt;string&gt;, IdentityUserToken&lt;string&gt;&gt;.RoleClaims</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityusercontext-5.onmodelcreating">IdentityUserContext&lt;IdentityUser, string, IdentityUserClaim&lt;string&gt;, IdentityUserLogin&lt;string&gt;, IdentityUserToken&lt;string&gt;&gt;.OnModelCreating(ModelBuilder)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityusercontext-5.users">IdentityUserContext&lt;IdentityUser, string, IdentityUserClaim&lt;string&gt;, IdentityUserLogin&lt;string&gt;, IdentityUserToken&lt;string&gt;&gt;.Users</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityusercontext-5.userclaims">IdentityUserContext&lt;IdentityUser, string, IdentityUserClaim&lt;string&gt;, IdentityUserLogin&lt;string&gt;, IdentityUserToken&lt;string&gt;&gt;.UserClaims</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityusercontext-5.userlogins">IdentityUserContext&lt;IdentityUser, string, IdentityUserClaim&lt;string&gt;, IdentityUserLogin&lt;string&gt;, IdentityUserToken&lt;string&gt;&gt;.UserLogins</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityusercontext-5.usertokens">IdentityUserContext&lt;IdentityUser, string, IdentityUserClaim&lt;string&gt;, IdentityUserLogin&lt;string&gt;, IdentityUserToken&lt;string&gt;&gt;.UserTokens</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.entityframeworkcore.identityusercontext-5.schemaversion">IdentityUserContext&lt;IdentityUser, string, IdentityUserClaim&lt;string&gt;, IdentityUserLogin&lt;string&gt;, IdentityUserToken&lt;string&gt;&gt;.SchemaVersion</a>
+    </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontext.set#microsoft-entityframeworkcore-dbcontext-set-1">DbContext.Set&lt;TEntity&gt;()</a>
     </div>
@@ -316,7 +350,7 @@ such as global query filters and unit of work implementation.</p>
 
   <h3 id="Raftel_Infrastructure_Data_RaftelDbContext_1__ctor" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor">
   RaftelDbContext()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -342,7 +376,7 @@ such as global query filters and unit of work implementation.</p>
 
   <h3 id="Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0})">
   RaftelDbContext(DbContextOptions&lt;TDbContext&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L26"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -373,7 +407,7 @@ such as global query filters and unit of work implementation.</p>
 
   <h3 id="Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__Raftel_Infrastructure_Data_Filters_IDataFilter_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0},Raftel.Infrastructure.Data.Filters.IDataFilter)">
   RaftelDbContext(DbContextOptions&lt;TDbContext&gt;, IDataFilter)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L30"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -410,7 +444,7 @@ such as global query filters and unit of work implementation.</p>
 
   <h3 id="Raftel_Infrastructure_Data_RaftelDbContext_1_IsSoftDeleteFilterEnabled" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.IsSoftDeleteFilterEnabled">
   IsSoftDeleteFilterEnabled
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L37"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -437,6 +471,37 @@ such as global query filters and unit of work implementation.</p>
 
 
 
+  <a id="Raftel_Infrastructure_Data_RaftelDbContext_1_User_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.User*"></a>
+
+  <h3 id="Raftel_Infrastructure_Data_RaftelDbContext_1_User" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.User">
+  User
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DbSet&lt;User&gt; User { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbset-1">DbSet</a>&lt;<a class="xref" href="Raftel.Domain.Features.Users.User.html">User</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <h2 class="section" id="methods">Methods
 </h2>
 
@@ -445,7 +510,7 @@ such as global query filters and unit of work implementation.</p>
 
   <h3 id="Raftel_Infrastructure_Data_RaftelDbContext_1_CommitAsync_System_Threading_CancellationToken_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.CommitAsync(System.Threading.CancellationToken)">
   CommitAsync(CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L40"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Commits all changes made within the unit of work asynchronously.</p>
@@ -485,12 +550,10 @@ Defaults to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.
 
   <h3 id="Raftel_Infrastructure_Data_RaftelDbContext_1_OnModelCreating_Microsoft_EntityFrameworkCore_ModelBuilder_" data-uid="Raftel.Infrastructure.Data.RaftelDbContext`1.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
   OnModelCreating(ModelBuilder)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L45"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Override this method to further configure the model that was discovered by convention from the entity types
-exposed in <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbset-1">DbSet&lt;TEntity&gt;</a> properties on your derived context. The resulting model may be cached
-and re-used for subsequent instances of your derived context.</p>
+  <div class="markdown level1 summary"><p>Configures the schema needed for the identity framework.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -501,10 +564,7 @@ and re-used for subsequent instances of your derived context.</p>
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>modelBuilder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.modelbuilder">ModelBuilder</a></dt>
-    <dd><p>The builder being used to construct the model for this context. Databases (and other extensions) typically
-define extension methods on this object that allow you to configure aspects of the model that are specific
-to a given database.</p>
-</dd>
+    <dd></dd>
   </dl>
 
 
@@ -514,16 +574,6 @@ to a given database.</p>
 
 
 
-  <h4 class="section" id="Raftel_Infrastructure_Data_RaftelDbContext_1_OnModelCreating_Microsoft_EntityFrameworkCore_ModelBuilder__remarks">Remarks</h4>
-  <div class="markdown level1 remarks"><p>
-    If a model is explicitly set on the options for this context (via <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.dbcontextoptionsbuilder.usemodel">UseModel(IModel)</a>)
-    then this method will not be run. However, it will still run when creating a compiled model.
-</p>
-<p>
-    See <a href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</a> for more information and
-    examples.
-</p>
-</div>
 
 
 
@@ -532,7 +582,7 @@ to a given database.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L15" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/RaftelDbContext.cs/#L17" class="edit-link">Edit this page</a>
         </div>
 
 

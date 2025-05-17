@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class AggregateRoot&lt;TId&gt; | Raftel </title>
+      <title>Class CommandEndpointMapper | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class AggregateRoot&lt;TId&gt; | Raftel ">
+      <meta name="title" content="Class CommandEndpointMapper | Raftel ">
       
-      <meta name="description" content="Represents the root of an aggregate in the domain model.">
+      
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_BaseTypes_AggregateRoot_1.md&amp;value=---%0Auid%3A%20Raftel.Domain.BaseTypes.AggregateRoot%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Api_Server_AutoEndpoints_CommandEndpointMapper.md&amp;value=---%0Auid%3A%20Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,67 +84,50 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1">
+        <article data-uid="Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper">
 
 
 
-  <h1 id="Raftel_Domain_BaseTypes_AggregateRoot_1" data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1" class="text-break">
-Class AggregateRoot&lt;TId&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/BaseTypes/AggregateRoot.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Api_Server_AutoEndpoints_CommandEndpointMapper" data-uid="Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper" class="text-break">
+Class CommandEndpointMapper  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/AutoEndpoints/CommandEndpointMapper.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Domain.html">Domain</a>.<a class="xref" href="Raftel.Domain.BaseTypes.html">BaseTypes</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>Raftel.Domain.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Api.html">Api</a>.<a class="xref" href="Raftel.Api.Server.html">Server</a>.<a class="xref" href="Raftel.Api.Server.AutoEndpoints.html">AutoEndpoints</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Raftel.Api.Server.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Represents the root of an aggregate in the domain model.</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class AggregateRoot&lt;TId&gt; : Entity&lt;TId&gt; where TId : TypedId&lt;Guid&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public static class CommandEndpointMapper</code></pre>
   </div>
 
 
 
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TId</code></dt>
-    <dd><p>The type of the aggregate's identifier.</p>
-</dd>
-  </dl>
 
   <dl class="typelist inheritance">
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html">Entity</a>&lt;TId&gt;</div>
-      <div><span class="xref">AggregateRoot&lt;TId&gt;</span></div>
+      <div><span class="xref">CommandEndpointMapper</span></div>
     </dd>
   </dl>
 
 
-  <dl class="typelist derived">
-    <dt>Derived</dt>
-    <dd>
-      <div><a class="xref" href="Raftel.Domain.Features.Users.User.html">User</a></div>
-    </dd>
-  </dl>
 
   <dl class="typelist inheritedMembers">
     <dt>Inherited Members</dt>
     <dd>
     <div>
-      <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id">Entity&lt;TId&gt;.Id</a>
-    </div>
-    <div>
-      <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Equals_System_Object_">Entity&lt;TId&gt;.Equals(object)</a>
-    </div>
-    <div>
-      <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_GetHashCode">Entity&lt;TId&gt;.GetHashCode()</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
@@ -165,59 +148,38 @@ Class AggregateRoot&lt;TId&gt;  <a class="header-action link-secondary" title="V
 
 
 
-  <h2 class="section" id="constructors">Constructors
+  <h2 class="section" id="methods">Methods
 </h2>
 
 
-  <a id="Raftel_Domain_BaseTypes_AggregateRoot_1__ctor_" data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor*"></a>
+  <a id="Raftel_Api_Server_AutoEndpoints_CommandEndpointMapper_MapCommandEndpoint_" data-uid="Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint*"></a>
 
-  <h3 id="Raftel_Domain_BaseTypes_AggregateRoot_1__ctor" data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor">
-  AggregateRoot()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/BaseTypes/AggregateRoot.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Api_Server_AutoEndpoints_CommandEndpointMapper_MapCommandEndpoint__1_Microsoft_AspNetCore_Routing_RouteGroupBuilder_Raftel_Api_Server_AutoEndpoints_CommandDefinition_" data-uid="Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint``1(Microsoft.AspNetCore.Routing.RouteGroupBuilder,Raftel.Api.Server.AutoEndpoints.CommandDefinition)">
+  MapCommandEndpoint&lt;TCommand&gt;(RouteGroupBuilder, CommandDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/AutoEndpoints/CommandEndpointMapper.cs/#L10"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected AggregateRoot()</code></pre>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <a id="Raftel_Domain_BaseTypes_AggregateRoot_1__ctor_" data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor*"></a>
-
-  <h3 id="Raftel_Domain_BaseTypes_AggregateRoot_1__ctor__0_" data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor(`0)">
-  AggregateRoot(TId)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/BaseTypes/AggregateRoot.cs/#L13"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Raftel.Domain.BaseTypes.AggregateRoot-1.html">AggregateRoot&lt;TId&gt;</a> class.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected AggregateRoot(TId id)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void MapCommandEndpoint&lt;TCommand&gt;(RouteGroupBuilder group, CommandDefinition command) where TCommand : ICommand</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>id</code> <span class="xref">TId</span></dt>
-    <dd><p>The identifier of the aggregate root.</p>
-</dd>
+    <dt><code>group</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.routing.routegroupbuilder">RouteGroupBuilder</a></dt>
+    <dd></dd>
+    <dt><code>command</code> <a class="xref" href="Raftel.Api.Server.AutoEndpoints.CommandDefinition.html">CommandDefinition</a></dt>
+    <dd></dd>
   </dl>
 
 
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TCommand</code></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -232,7 +194,7 @@ Class AggregateRoot&lt;TId&gt;  <a class="header-action link-secondary" title="V
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/BaseTypes/AggregateRoot.cs/#L7" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/AutoEndpoints/CommandEndpointMapper.cs/#L8" class="edit-link">Edit this page</a>
         </div>
 
 
