@@ -1,38 +1,21 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Raftel.Api.Client;
 using Raftel.Api.FunctionalTests.ApiDefinition;
-using Raftel.Demo.Application.Pirates.GetPirateByFilter;
-using Raftel.Demo.Application.Pirates.GetPirateById;
-using Raftel.Demo.Domain.Pirates;
 using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;
 
-public class ExternalApiIntegrationTests : IClassFixture<ApiTestFactory>
+public class ApiDefinitionTests : IClassFixture<ApiTestFactory>
 {
     private readonly HttpClient _client;
 
-    public ExternalApiIntegrationTests(ApiTestFactory factory)
+    public ApiDefinitionTests(ApiTestFactory factory)
     {
         _client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {
             BaseAddress = new Uri("https://localhost:5128")
         });
     }
-
-    // todo this test must use container databse
-    // [Fact] 
-    // public async Task Request_ShouldReturn_ExpectedData()
-    // {
-    //     Guid luffyId = MugiwaraCrew.Luffy().Id;
-    //     var response = await _client
-    //         .GetFromJsonAsync<GetPirateByIdResponse>($"/api/pirates/{luffyId}");
-    //
-    //     response.Id.ShouldBe(luffyId);
-    //     response.Name.ShouldBe(MugiwaraCrew.Luffy().Name);
-    //     response.Bounty.ShouldBe((int)MugiwaraCrew.Luffy().Bounty);
-    // }
 
     [Fact]
     public async Task ApiShouldHave_QueriesEndpoints_WithExpectedParameters()
@@ -54,21 +37,10 @@ public class ExternalApiIntegrationTests : IClassFixture<ApiTestFactory>
     {
         var swaggerJson = await _client.GetFromJsonAsync<SwaggerDocument>("/swagger/v1/swagger.json");
 
-        var piratesPath = swaggerJson.Paths["/api/pirates"]; 
-        
+        var piratesPath = swaggerJson.Paths["/api/pirates"];
+
         piratesPath.Count.ShouldBe(2);
         piratesPath.ShouldContainKey("post");
-        piratesPath.ShouldContainKey("get"); 
-    }
-
-    [Fact]
-    public async Task Request_ShouldReturn_FilteredData()
-    {
-        var filter = new GetPirateByFilterQuery("a", 150000000);
-
-        var response = await _client
-            .GetFromJsonAsync<GetPirateByFilterResponse>($"/api/pirates/{QueryFilter.FromObject(filter)}");
-
-        response.Pirates.Count.ShouldBe(4);
+        piratesPath.ShouldContainKey("get");
     }
 }
