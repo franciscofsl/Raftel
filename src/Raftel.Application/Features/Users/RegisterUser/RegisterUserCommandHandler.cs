@@ -11,7 +11,7 @@ internal sealed class RegisterUserCommandHandler(
 {
     public async Task<Result> HandleAsync(RegisterUserCommand request, CancellationToken token = default)
     {
-        var user = User.Create(request.Email, request.Name, request.Surname);
+        var user = User.Create(request.Email, request.Email, request.Email);
 
         if (await usersRepository.EmailIsUniqueAsync(request.Email, token) == false)
         {

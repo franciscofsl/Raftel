@@ -36,7 +36,7 @@ public static class AutoEndpointGroupExtensions
                 .GetMethod(nameof(CommandEndpointMapper.MapCommandEndpoint))!
                 .MakeGenericMethod(command.Request);
 
-            method.Invoke(null, new object[] { group, command.Route, command.Method });
+            method.Invoke(null, new object[] { group, command  });
         }
 
         return app;

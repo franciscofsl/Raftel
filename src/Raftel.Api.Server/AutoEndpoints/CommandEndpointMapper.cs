@@ -8,20 +8,25 @@ namespace Raftel.Api.Server.AutoEndpoints;
 public static class CommandEndpointMapper
 {
     public static void MapCommandEndpoint<TCommand>(RouteGroupBuilder group,
-        string route,
-        HttpMethod method) where TCommand : ICommand
+      CommandDefinition command) where TCommand : ICommand
     {
-        var endpoint = method switch
+        var endpoint = command.Method switch
         {
-            var m when m == HttpMethod.Post => group.MapPost(route, Handler),
-            var m when m == HttpMethod.Put => group.MapPut(route, Handler),
-            var m when m == HttpMethod.Delete => group.MapDelete(route, Handler),
-            _ => throw new NotSupportedException($"HTTP method {method} not supported for commands")
+            var m when m == HttpMethod.Post => group.MapPost(command.Route, Handler),
+            var m when m == HttpMethod.Put => group.MapPut(command.Route, Handler),
+            var m when m == HttpMethod.Delete => group.MapDelete(command.Route, Handler),
+            _ => throw new NotSupportedException($"HTTP method {command.Method} not supported for commands")
         };
 
         endpoint
-            .WithName($"{method.Method}_{typeof(TCommand).Name}")
+            .WithName($"{command.Method}_{typeof(TCommand).Name}")
             .WithOpenApi();
+
+        if (command.IsAnonymous)
+        {
+            endpoint.AllowAnonymous();
+        }
+        
         return;
 
         async Task<IResult> Handler(HttpContext context, ICommandDispatcher dispatcher)

@@ -20,7 +20,7 @@ public sealed class RegisterUserCommandHandlerTests
     [Fact]
     public async Task HandleAsync_Should_ReturnFailure_WhenEmailIsNotUnique()
     {
-        var command = new RegisterUserCommand("Monkey", "D. Luffy", "luffy@onepiece.com", "GomuGomuNoMi");
+        var command = new RegisterUserCommand("luffy@onepiece.com", "GomuGomuNoMi");
         _usersRepository.EmailIsUniqueAsync(command.Email, Arg.Any<CancellationToken>())
             .Returns(false);
 
@@ -35,7 +35,7 @@ public sealed class RegisterUserCommandHandlerTests
     [Fact]
     public async Task HandleAsync_Should_ReturnFailure_WhenRegistrationFails()
     {
-        var command = new RegisterUserCommand("Roronoa", "Zoro", "zoro@onepiece.com", "Santoryu");
+        var command = new RegisterUserCommand("zoro@onepiece.com", "Santoryu");
         _usersRepository.EmailIsUniqueAsync(command.Email, Arg.Any<CancellationToken>())
             .Returns(true);
 
@@ -51,7 +51,7 @@ public sealed class RegisterUserCommandHandlerTests
     [Fact]
     public async Task HandleAsync_Should_ReturnSuccess_And_AddUser_WhenRegistrationSucceeds()
     {
-        var command = new RegisterUserCommand("Nami", "Bellmere", "nami@onepiece.com", "Navigation123");
+        var command = new RegisterUserCommand("nami@onepiece.com", "Navigation123");
         _usersRepository.EmailIsUniqueAsync(command.Email, Arg.Any<CancellationToken>())
             .Returns(true);
 

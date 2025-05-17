@@ -20,7 +20,6 @@ public class AuthenticationTest : IClassFixture<ApiTestFactory>
 
     private record RegisterRequest(string Email, string Password);
 
-    private record RegisterResponse(string Message);
 
     private class LoginResponse
     {
@@ -35,11 +34,9 @@ public class AuthenticationTest : IClassFixture<ApiTestFactory>
         var email = $"user_{Guid.NewGuid():N}@test.com";
         var password = "Password123!";
 
-        var response = await _client.PostAsJsonAsync("/api/auth/register", new RegisterRequest(email, password));
+        var response = await _client.PostAsJsonAsync("/api/users/register", new RegisterRequest(email, password));
 
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
-        var data = await response.Content.ReadFromJsonAsync<RegisterResponse>();
-        data!.Message.ShouldBe("User successfully registered");
     }
 
     [Fact]
@@ -47,7 +44,7 @@ public class AuthenticationTest : IClassFixture<ApiTestFactory>
     {
         var email = $"user_{Guid.NewGuid():N}@test.com";
         var password = "Password123!";
-        var reg = await _client.PostAsJsonAsync("/api/auth/register", new RegisterRequest(email, password));
+        var reg = await _client.PostAsJsonAsync("/api/users/register", new RegisterRequest(email, password));
         reg.EnsureSuccessStatusCode();
 
         var form = new Dictionary<string, string>
@@ -75,7 +72,7 @@ public class AuthenticationTest : IClassFixture<ApiTestFactory>
         var email = $"user_{Guid.NewGuid():N}@test.com";
         var password = "Password123!";
         var reg = await _client.PostAsJsonAsync(
-            "/api/auth/register",
+            "/api/users/register",
             new RegisterRequest(email, password)
         );
         reg.EnsureSuccessStatusCode();
