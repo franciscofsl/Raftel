@@ -5,12 +5,14 @@ using Raftel.Shared.Extensions;
 
 namespace Raftel.Demo.Application.Pirates.GetPirateByFilter;
 
-internal sealed class GetPirateByFilterQueryHandler : IQueryHandler<GetPirateByFilterQuery, GetPirateByFilterResponse>
+internal sealed class GetPirateByFilterQueryHandler(IPirateRepository repository)
+    : IQueryHandler<GetPirateByFilterQuery, GetPirateByFilterResponse>
 {
     public async Task<Result<GetPirateByFilterResponse>> HandleAsync(GetPirateByFilterQuery request,
         CancellationToken token = default)
     {
-        var pirates = MugiwaraCrew.All
+        var pirates = await repository.ListAllAsync(token);
+        var result = pirates
             .WhereIf(!string.IsNullOrEmpty(request.Name),
                 _ => ((string)_.Name).Contains(request.Name, StringComparison.OrdinalIgnoreCase))
             .WhereIf(request.MaxBounty.HasValue, _ => _.Bounty <= request.MaxBounty)
@@ -18,7 +20,7 @@ internal sealed class GetPirateByFilterQueryHandler : IQueryHandler<GetPirateByF
 
         return Result.Success(new GetPirateByFilterResponse
         {
-            Pirates = pirates.ToList()
+            Pirates = result.ToList()
         });
     }
 }
