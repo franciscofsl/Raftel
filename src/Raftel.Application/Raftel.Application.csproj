@@ -15,4 +15,9 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Users\" />
+      <Folder Include="Users\" />
+    </ItemGroup>
+
 </Project>

@@ -1,5 +1,4 @@
-﻿using NSubstitute;
-using Raftel.Application.Abstractions;
+﻿using Raftel.Application.Abstractions;
 using Raftel.Application.Commands;
 using Raftel.Domain.Abstractions;
 using Shouldly;

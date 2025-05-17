@@ -68,9 +68,18 @@ internal sealed class AddQueryCommand : AsyncCommand<AddQueryCommand.Settings>
                 MethodDeclaration(ParseTypeName($"Task<Result<{responseType}>>"), "HandleAsync")
                     .AddModifiers(Token(SyntaxKind.PublicKeyword))
                     .WithParameterList(
-                        ParameterList(SingletonSeparatedList(
-                            Parameter(Identifier("request")).WithType(ParseTypeName($"{name}Query"))
-                        ))
+                        ParameterList(SeparatedList<ParameterSyntax>(new SyntaxNodeOrToken[]
+                        {
+                            Parameter(Identifier("request")).WithType(ParseTypeName($"{name}Query")),
+                            Token(SyntaxKind.CommaToken),
+                            Parameter(Identifier("token"))
+                                .WithType(ParseTypeName("CancellationToken"))
+                                .WithDefault(
+                                    EqualsValueClause(
+                                        DefaultExpression(ParseTypeName("CancellationToken"))
+                                    )
+                                )
+                        }))
                     )
                     .WithBody(
                         Block(
@@ -90,6 +99,7 @@ internal sealed class AddQueryCommand : AsyncCommand<AddQueryCommand.Settings>
 
         var compilationUnit = CompilationUnit()
             .AddUsings(
+                UsingDirective(ParseName("System.Threading")),
                 UsingDirective(ParseName("Raftel.Application.Queries")),
                 UsingDirective(ParseName("Raftel.Domain.Abstractions"))
             )

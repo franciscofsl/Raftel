@@ -13,6 +13,7 @@ public interface IRequestHandler<TRequest, TResponse>
     /// Handles the given request asynchronously.
     /// </summary>
     /// <param name="request">The request to process.</param>
+    /// <param name="token"></param>
     /// <returns>A task representing the asynchronous operation, containing the response.</returns>
     Task<TResponse> HandleAsync(TRequest request, CancellationToken token = default);
 }

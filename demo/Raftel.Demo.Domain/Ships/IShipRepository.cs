@@ -1,7 +1,6 @@
-﻿using Raftel.Demo.Domain.Ships;
-using Raftel.Domain.Abstractions;
+﻿using Raftel.Domain.Abstractions;
 
-namespace Raftel.Demo.Domain.Pirates;
+namespace Raftel.Demo.Domain.Ships;
 
 public interface IShipRepository : IRepository<Ship, ShipId>
 {

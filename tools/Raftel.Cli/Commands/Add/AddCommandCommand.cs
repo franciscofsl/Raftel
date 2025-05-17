@@ -65,9 +65,18 @@ internal sealed class AddCommandCommand : AsyncCommand<AddCommandCommand.Setting
                 MethodDeclaration(ParseTypeName("Task<Result>"), "HandleAsync")
                     .AddModifiers(Token(SyntaxKind.PublicKeyword))
                     .WithParameterList(
-                        ParameterList(SingletonSeparatedList(
-                            Parameter(Identifier("request")).WithType(ParseTypeName($"{name}Command"))
-                        ))
+                        ParameterList(SeparatedList<ParameterSyntax>(new SyntaxNodeOrToken[]
+                        {
+                            Parameter(Identifier("request")).WithType(ParseTypeName($"{name}Command")),
+                            Token(SyntaxKind.CommaToken),
+                            Parameter(Identifier("token"))
+                                .WithType(ParseTypeName("CancellationToken"))
+                                .WithDefault(
+                                    EqualsValueClause(
+                                        DefaultExpression(ParseTypeName("CancellationToken"))
+                                    )
+                                )
+                        }))
                     )
                     .WithBody(
                         Block(
@@ -87,6 +96,7 @@ internal sealed class AddCommandCommand : AsyncCommand<AddCommandCommand.Setting
 
         var compilationUnit = CompilationUnit()
             .AddUsings(
+                UsingDirective(ParseName("System.Threading")),
                 UsingDirective(ParseName("Raftel.Application.Commands")),
                 UsingDirective(ParseName("Raftel.Domain.Abstractions"))
             )
@@ -94,6 +104,7 @@ internal sealed class AddCommandCommand : AsyncCommand<AddCommandCommand.Setting
 
         return compilationUnit.NormalizeWhitespace().ToFullString();
     }
+
 
     private string GenerateValidatorCode(string name, string ns)
     {
