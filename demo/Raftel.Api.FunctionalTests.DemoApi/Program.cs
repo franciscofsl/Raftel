@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-} 
+}
 
 app.UseHttpsRedirection();
 app.UseRouting();
@@ -42,13 +42,19 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers(); 
+app.MapControllers();
 
-app.AddQueryEndpoint<GetPirateByIdQuery, GetPirateByIdResponse>("/api/pirates/{id}", HttpMethod.Get);
-app.AddQueryEndpoint<GetPirateByFilterQuery, GetPirateByFilterResponse>("/api/pirates/", HttpMethod.Get);
+app.AddEndpointGroup(group =>
+    {
+        group.Name = "Pirates";
+        group.BaseUri = "/api/pirates";
+        group.AddQuery<GetPirateByIdQuery, GetPirateByIdResponse>("{id}", HttpMethod.Get);
+        group.AddQuery<GetPirateByFilterQuery, GetPirateByFilterResponse>("", HttpMethod.Get);
+    }
+);
 
 using var scope = app.Services.CreateScope();
-await SeedData.InitializeAsync(scope.ServiceProvider); 
+await SeedData.InitializeAsync(scope.ServiceProvider);
 
 app.Run();
 

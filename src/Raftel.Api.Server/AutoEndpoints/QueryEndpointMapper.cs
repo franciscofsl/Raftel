@@ -8,18 +8,18 @@ using Raftel.Shared.Extensions;
 
 namespace Raftel.Api.Server.AutoEndpoints;
 
-public static class AutoEndpointExtensions
+public static class QueryEndpointMapper
 {
-    public static IEndpointRouteBuilder AddQueryEndpoint<TRequest, TResult>(
-        this IEndpointRouteBuilder app,
+    public static void MapQueryEndpoint<TRequest, TResult>(
+        RouteGroupBuilder group,
         string route,
         HttpMethod method)
         where TRequest : IRequest<Result<TResult>>
     {
         var endpoint = method switch
         {
-            var m when m == HttpMethod.Get => app.MapGet(route, Handler),
-            var m when m == HttpMethod.Post => app.MapPost(route, Handler),
+            var m when m == HttpMethod.Get => group.MapGet(route, Handler),
+            var m when m == HttpMethod.Post => group.MapPost(route, Handler),
             _ => throw new NotSupportedException($"HTTP method {method} not supported")
         };
 
@@ -30,13 +30,11 @@ public static class AutoEndpointExtensions
                 operation.Parameters = ApiParametersBuilder.Calculate<TRequest>(route);
                 return operation;
             });
-
-        return app;
+        return;
 
         async Task<IResult> Handler(HttpContext context, IRequestDispatcher dispatcher)
         {
             var request = BuildRequestFromRouteAndQuery<TRequest>(context);
-
             var result = await dispatcher.DispatchAsync<TRequest, Result<TResult>>(request);
 
             return result.IsSuccess
@@ -44,7 +42,7 @@ public static class AutoEndpointExtensions
                 : Results.BadRequest(result.Error);
         }
     }
-
+    
     private static TRequest BuildRequestFromRouteAndQuery<TRequest>(HttpContext context)
     {
         var constructor = typeof(TRequest).GetConstructors().FirstOrDefault()
