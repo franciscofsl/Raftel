@@ -1,9 +1,9 @@
 using Raftel.Application.Abstractions.Authentication;
 using Raftel.Application.Commands;
 using Raftel.Domain.Abstractions;
-using Raftel.Domain.Users;
+using Raftel.Domain.Features.Users;
 
-namespace Raftel.Application.Users.RegisterUser;
+namespace Raftel.Application.Features.Users.RegisterUser;
 
 internal sealed class RegisterUserCommandHandler(
     IAuthenticationService authenticationService,

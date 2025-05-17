@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Raftel.Application.Abstractions.Authentication;
 using Raftel.Domain.Abstractions;
-using Raftel.Domain.Users;
+using Raftel.Domain.Features.Users;
 
 namespace Raftel.Infrastructure.Authentication;
 

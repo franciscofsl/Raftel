@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Raftel.Application.Users.RegisterUser;
+using Raftel.Application.Features.Users.RegisterUser;
 
 namespace Raftel.Api.FunctionalTests.DemoApi.Controllers;
 

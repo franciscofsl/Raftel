@@ -1,7 +1,7 @@
 ﻿using Raftel.Application.Abstractions.Authentication;
-using Raftel.Application.Users.RegisterUser;
+using Raftel.Application.Features.Users.RegisterUser;
 using Raftel.Domain.Abstractions;
-using Raftel.Domain.Users;
+using Raftel.Domain.Features.Users;
 using Shouldly;
 
 namespace Raftel.Application.UnitTests.Users.Commands;

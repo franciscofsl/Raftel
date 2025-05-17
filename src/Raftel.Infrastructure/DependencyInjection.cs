@@ -7,7 +7,7 @@ using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
 using Raftel.Application;
 using Raftel.Application.Abstractions.Authentication;
-using Raftel.Domain.Users;
+using Raftel.Domain.Features.Users;
 using Raftel.Infrastructure.Authentication;
 using Raftel.Infrastructure.Data;
 using Raftel.Infrastructure.Data.Filters;

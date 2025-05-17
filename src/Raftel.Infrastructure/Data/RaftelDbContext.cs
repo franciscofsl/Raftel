@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Raftel.Application;
-using Raftel.Domain.Users;
+using Raftel.Domain.Features.Users;
 using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Data;

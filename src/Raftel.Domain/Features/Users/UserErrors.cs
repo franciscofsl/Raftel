@@ -1,6 +1,6 @@
 ﻿using Raftel.Domain.Abstractions;
 
-namespace Raftel.Domain.Users;
+namespace Raftel.Domain.Features.Users;
 
 public static class UserErrors
 {

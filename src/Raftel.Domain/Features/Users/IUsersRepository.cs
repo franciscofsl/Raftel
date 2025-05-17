@@ -1,7 +1,7 @@
 ﻿using Raftel.Domain.Abstractions;
-using Raftel.Domain.Users.ValueObjects;
+using Raftel.Domain.Features.Users.ValueObjects;
 
-namespace Raftel.Domain.Users;
+namespace Raftel.Domain.Features.Users;
 
 public interface IUsersRepository : IRepository<User, UserId>
 {

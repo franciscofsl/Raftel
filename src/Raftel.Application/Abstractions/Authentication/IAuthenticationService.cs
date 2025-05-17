@@ -1,5 +1,5 @@
 ﻿using Raftel.Domain.Abstractions;
-using Raftel.Domain.Users;
+using Raftel.Domain.Features.Users;
 
 namespace Raftel.Application.Abstractions.Authentication;
 

@@ -1,6 +1,6 @@
 ﻿using Raftel.Domain.BaseTypes;
 
-namespace Raftel.Domain.Users.ValueObjects;
+namespace Raftel.Domain.Features.Users.ValueObjects;
 
 public sealed record UserId : TypedGuidId
 {

@@ -1,8 +1,8 @@
 using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Application;
+using Raftel.Application.Features.Users.RegisterUser;
 using Raftel.Application.Middlewares;
-using Raftel.Application.Users.RegisterUser;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Raftel.Demo.Application.Pirates.GetPirateById;

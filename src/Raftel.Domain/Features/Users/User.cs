@@ -1,7 +1,7 @@
 ﻿using Raftel.Domain.BaseTypes;
-using Raftel.Domain.Users.ValueObjects;
+using Raftel.Domain.Features.Users.ValueObjects;
 
-namespace Raftel.Domain.Users;
+namespace Raftel.Domain.Features.Users;
 
 public sealed class User : AggregateRoot<UserId>
 {
