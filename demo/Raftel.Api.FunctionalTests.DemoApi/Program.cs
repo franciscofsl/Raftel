@@ -50,6 +50,7 @@ app.AddEndpointGroup(group =>
         group.BaseUri = "/api/pirates";
         group.AddQuery<GetPirateByIdQuery, GetPirateByIdResponse>("{id}", HttpMethod.Get);
         group.AddQuery<GetPirateByFilterQuery, GetPirateByFilterResponse>("", HttpMethod.Get);
+        group.AddCommand<CreatePirateCommand>("", HttpMethod.Post);
     }
 );
 
