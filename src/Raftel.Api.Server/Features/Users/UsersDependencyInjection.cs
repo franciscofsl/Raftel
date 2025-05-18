@@ -1,6 +1,7 @@
 ﻿  
 using Microsoft.AspNetCore.Routing;
 using Raftel.Api.Server.AutoEndpoints;
+using Raftel.Application.Features.Users.GetUserProfile;
 using Raftel.Application.Features.Users.RegisterUser;
 
 namespace Raftel.Api.Server.Features.Users;
@@ -14,6 +15,7 @@ public static class UsersDependencyInjection
             group.Name = "Users";
             group.BaseUri = "/api/users";
             group.AddCommand<RegisterUserCommand>("register", HttpMethod.Post).AllowAnonymous();
+            group.AddQuery<GetUserProfileQuery, GetUserProfileResponse>("me", HttpMethod.Get);
         });
 
         return app;

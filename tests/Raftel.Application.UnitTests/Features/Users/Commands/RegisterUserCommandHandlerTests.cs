@@ -4,7 +4,7 @@ using Raftel.Domain.Abstractions;
 using Raftel.Domain.Features.Users;
 using Shouldly;
 
-namespace Raftel.Application.UnitTests.Users.Commands;
+namespace Raftel.Application.UnitTests.Features.Users.Commands;
 
 public sealed class RegisterUserCommandHandlerTests
 {
