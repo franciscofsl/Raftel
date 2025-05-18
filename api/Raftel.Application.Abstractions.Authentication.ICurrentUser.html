@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Interface IAuthenticationService | Raftel </title>
+      <title>Interface ICurrentUser | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Interface IAuthenticationService | Raftel ">
+      <meta name="title" content="Interface ICurrentUser | Raftel ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Abstractions_Authentication_IAuthenticationService.md&amp;value=---%0Auid%3A%20Raftel.Application.Abstractions.Authentication.IAuthenticationService%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Abstractions_Authentication_ICurrentUser.md&amp;value=---%0Auid%3A%20Raftel.Application.Abstractions.Authentication.ICurrentUser%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,12 +84,12 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Application.Abstractions.Authentication.IAuthenticationService">
+        <article data-uid="Raftel.Application.Abstractions.Authentication.ICurrentUser">
 
 
 
-  <h1 id="Raftel_Application_Abstractions_Authentication_IAuthenticationService" data-uid="Raftel.Application.Abstractions.Authentication.IAuthenticationService" class="text-break">
-Interface IAuthenticationService  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Authentication/IAuthenticationService.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Application_Abstractions_Authentication_ICurrentUser" data-uid="Raftel.Application.Abstractions.Authentication.ICurrentUser" class="text-break">
+Interface ICurrentUser  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Authentication/ICurrentUser.cs/#L3"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -101,7 +101,7 @@ Interface IAuthenticationService  <a class="header-action link-secondary" title=
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IAuthenticationService</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ICurrentUser</code></pre>
   </div>
 
 
@@ -116,37 +116,31 @@ Interface IAuthenticationService  <a class="header-action link-secondary" title=
 
 
 
-  <h2 class="section" id="methods">Methods
+  <h2 class="section" id="properties">Properties
 </h2>
 
 
-  <a id="Raftel_Application_Abstractions_Authentication_IAuthenticationService_LogInAsync_" data-uid="Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync*"></a>
+  <a id="Raftel_Application_Abstractions_Authentication_ICurrentUser_IsAuthenticated_" data-uid="Raftel.Application.Abstractions.Authentication.ICurrentUser.IsAuthenticated*"></a>
 
-  <h3 id="Raftel_Application_Abstractions_Authentication_IAuthenticationService_LogInAsync_System_String_System_String_System_Threading_CancellationToken_" data-uid="Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync(System.String,System.String,System.Threading.CancellationToken)">
-  LogInAsync(string, string, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Authentication/IAuthenticationService.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Application_Abstractions_Authentication_ICurrentUser_IsAuthenticated" data-uid="Raftel.Application.Abstractions.Authentication.ICurrentUser.IsAuthenticated">
+  IsAuthenticated
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Authentication/ICurrentUser.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;Result&lt;LogInResult&gt;&gt; LogInAsync(string email, string password, CancellationToken cancellationToken = default)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IsAuthenticated { get; }</code></pre>
   </div>
 
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>email</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
-    <dt><code>password</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
-    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
-    <dd></dd>
-  </dl>
 
-  <h4 class="section">Returns</h4>
+
+
+
+  <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result</a>&lt;<a class="xref" href="Raftel.Application.Features.Users.LogInUser.LogInResult.html">LogInResult</a>&gt;&gt;</dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
     <dd></dd>
   </dl>
 
@@ -157,41 +151,91 @@ Interface IAuthenticationService  <a class="header-action link-secondary" title=
 
 
 
+  <a id="Raftel_Application_Abstractions_Authentication_ICurrentUser_Roles_" data-uid="Raftel.Application.Abstractions.Authentication.ICurrentUser.Roles*"></a>
 
-
-
-  <a id="Raftel_Application_Abstractions_Authentication_IAuthenticationService_RegisterAsync_" data-uid="Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync*"></a>
-
-  <h3 id="Raftel_Application_Abstractions_Authentication_IAuthenticationService_RegisterAsync_Raftel_Domain_Features_Users_User_System_String_System_Threading_CancellationToken_" data-uid="Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync(Raftel.Domain.Features.Users.User,System.String,System.Threading.CancellationToken)">
-  RegisterAsync(User, string, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Authentication/IAuthenticationService.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Application_Abstractions_Authentication_ICurrentUser_Roles" data-uid="Raftel.Application.Abstractions.Authentication.ICurrentUser.Roles">
+  Roles
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Authentication/ICurrentUser.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;Result&gt; RegisterAsync(User user, string password, CancellationToken cancellationToken = default)</code></pre>
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;string&gt; Roles { get; }</code></pre>
   </div>
 
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>user</code> <a class="xref" href="Raftel.Domain.Features.Users.User.html">User</a></dt>
-    <dd></dd>
-    <dt><code>password</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
-    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
-    <dd></dd>
-  </dl>
 
-  <h4 class="section">Returns</h4>
+
+
+
+  <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a>&gt;</dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
     <dd></dd>
   </dl>
 
 
 
+
+
+
+
+
+  <a id="Raftel_Application_Abstractions_Authentication_ICurrentUser_UserId_" data-uid="Raftel.Application.Abstractions.Authentication.ICurrentUser.UserId*"></a>
+
+  <h3 id="Raftel_Application_Abstractions_Authentication_ICurrentUser_UserId" data-uid="Raftel.Application.Abstractions.Authentication.ICurrentUser.UserId">
+  UserId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Authentication/ICurrentUser.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Guid? UserId { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Raftel_Application_Abstractions_Authentication_ICurrentUser_UserName_" data-uid="Raftel.Application.Abstractions.Authentication.ICurrentUser.UserName*"></a>
+
+  <h3 id="Raftel_Application_Abstractions_Authentication_ICurrentUser_UserName" data-uid="Raftel.Application.Abstractions.Authentication.ICurrentUser.UserName">
+  UserName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Authentication/ICurrentUser.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string? UserName { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -204,7 +248,7 @@ Interface IAuthenticationService  <a class="header-action link-secondary" title=
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Authentication/IAuthenticationService.cs/#L8" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/Authentication/ICurrentUser.cs/#L3" class="edit-link">Edit this page</a>
         </div>
 
 

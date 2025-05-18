@@ -351,6 +351,44 @@ references:
   commentId: N:Raftel.Api.Server.Features.Users
   fullName: Raftel.Api.Server.Features.Users
   nameWithType: Raftel.Api.Server.Features.Users
+- uid: Raftel.Api.Server.Features.Users.AuthorizationController
+  name: AuthorizationController
+  href: api/Raftel.Api.Server.Features.Users.AuthorizationController.html
+  commentId: T:Raftel.Api.Server.Features.Users.AuthorizationController
+  fullName: Raftel.Api.Server.Features.Users.AuthorizationController
+  nameWithType: AuthorizationController
+- uid: Raftel.Api.Server.Features.Users.AuthorizationController.#ctor(Raftel.Application.Queries.IQueryDispatcher)
+  name: AuthorizationController(IQueryDispatcher)
+  href: api/Raftel.Api.Server.Features.Users.AuthorizationController.html#Raftel_Api_Server_Features_Users_AuthorizationController__ctor_Raftel_Application_Queries_IQueryDispatcher_
+  commentId: M:Raftel.Api.Server.Features.Users.AuthorizationController.#ctor(Raftel.Application.Queries.IQueryDispatcher)
+  name.vb: New(IQueryDispatcher)
+  fullName: Raftel.Api.Server.Features.Users.AuthorizationController.AuthorizationController(Raftel.Application.Queries.IQueryDispatcher)
+  fullName.vb: Raftel.Api.Server.Features.Users.AuthorizationController.New(Raftel.Application.Queries.IQueryDispatcher)
+  nameWithType: AuthorizationController.AuthorizationController(IQueryDispatcher)
+  nameWithType.vb: AuthorizationController.New(IQueryDispatcher)
+- uid: Raftel.Api.Server.Features.Users.AuthorizationController.#ctor*
+  name: AuthorizationController
+  href: api/Raftel.Api.Server.Features.Users.AuthorizationController.html#Raftel_Api_Server_Features_Users_AuthorizationController__ctor_
+  commentId: Overload:Raftel.Api.Server.Features.Users.AuthorizationController.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Api.Server.Features.Users.AuthorizationController.AuthorizationController
+  fullName.vb: Raftel.Api.Server.Features.Users.AuthorizationController.New
+  nameWithType: AuthorizationController.AuthorizationController
+  nameWithType.vb: AuthorizationController.New
+- uid: Raftel.Api.Server.Features.Users.AuthorizationController.Exchange
+  name: Exchange()
+  href: api/Raftel.Api.Server.Features.Users.AuthorizationController.html#Raftel_Api_Server_Features_Users_AuthorizationController_Exchange
+  commentId: M:Raftel.Api.Server.Features.Users.AuthorizationController.Exchange
+  fullName: Raftel.Api.Server.Features.Users.AuthorizationController.Exchange()
+  nameWithType: AuthorizationController.Exchange()
+- uid: Raftel.Api.Server.Features.Users.AuthorizationController.Exchange*
+  name: Exchange
+  href: api/Raftel.Api.Server.Features.Users.AuthorizationController.html#Raftel_Api_Server_Features_Users_AuthorizationController_Exchange_
+  commentId: Overload:Raftel.Api.Server.Features.Users.AuthorizationController.Exchange
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Features.Users.AuthorizationController.Exchange
+  nameWithType: AuthorizationController.Exchange
 - uid: Raftel.Api.Server.Features.Users.UsersDependencyInjection
   name: UsersDependencyInjection
   href: api/Raftel.Api.Server.Features.Users.UsersDependencyInjection.html
@@ -394,6 +432,22 @@ references:
   commentId: T:Raftel.Application.Abstractions.Authentication.IAuthenticationService
   fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService
   nameWithType: IAuthenticationService
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync(System.String,System.String,System.Threading.CancellationToken)
+  name: LogInAsync(string, string, CancellationToken)
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_LogInAsync_System_String_System_String_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync(System.String,System.String,System.Threading.CancellationToken)
+  name.vb: LogInAsync(String, String, CancellationToken)
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync(string, string, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync(String, String, System.Threading.CancellationToken)
+  nameWithType: IAuthenticationService.LogInAsync(string, string, CancellationToken)
+  nameWithType.vb: IAuthenticationService.LogInAsync(String, String, CancellationToken)
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync*
+  name: LogInAsync
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_LogInAsync_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync
+  nameWithType: IAuthenticationService.LogInAsync
 - uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync(Raftel.Domain.Features.Users.User,System.String,System.Threading.CancellationToken)
   name: RegisterAsync(User, string, CancellationToken)
   href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_RegisterAsync_Raftel_Domain_Features_Users_User_System_String_System_Threading_CancellationToken_
@@ -410,6 +464,64 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync
   nameWithType: IAuthenticationService.RegisterAsync
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser
+  name: ICurrentUser
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html
+  commentId: T:Raftel.Application.Abstractions.Authentication.ICurrentUser
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser
+  nameWithType: ICurrentUser
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.IsAuthenticated
+  name: IsAuthenticated
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_IsAuthenticated
+  commentId: P:Raftel.Application.Abstractions.Authentication.ICurrentUser.IsAuthenticated
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.IsAuthenticated
+  nameWithType: ICurrentUser.IsAuthenticated
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.IsAuthenticated*
+  name: IsAuthenticated
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_IsAuthenticated_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.ICurrentUser.IsAuthenticated
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.IsAuthenticated
+  nameWithType: ICurrentUser.IsAuthenticated
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.Roles
+  name: Roles
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_Roles
+  commentId: P:Raftel.Application.Abstractions.Authentication.ICurrentUser.Roles
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.Roles
+  nameWithType: ICurrentUser.Roles
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.Roles*
+  name: Roles
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_Roles_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.ICurrentUser.Roles
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.Roles
+  nameWithType: ICurrentUser.Roles
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.UserId
+  name: UserId
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_UserId
+  commentId: P:Raftel.Application.Abstractions.Authentication.ICurrentUser.UserId
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.UserId
+  nameWithType: ICurrentUser.UserId
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.UserId*
+  name: UserId
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_UserId_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.ICurrentUser.UserId
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.UserId
+  nameWithType: ICurrentUser.UserId
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.UserName
+  name: UserName
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_UserName
+  commentId: P:Raftel.Application.Abstractions.Authentication.ICurrentUser.UserName
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.UserName
+  nameWithType: ICurrentUser.UserName
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.UserName*
+  name: UserName
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_UserName_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.ICurrentUser.UserName
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.UserName
+  nameWithType: ICurrentUser.UserName
 - uid: Raftel.Application.Abstractions.IRequestDispatcher
   name: IRequestDispatcher
   href: api/Raftel.Application.Abstractions.IRequestDispatcher.html
@@ -680,6 +792,254 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Exceptions.ValidationException.ToString
   nameWithType: ValidationException.ToString
+- uid: Raftel.Application.Features.Users.GetUserProfile
+  name: Raftel.Application.Features.Users.GetUserProfile
+  href: api/Raftel.Application.Features.Users.GetUserProfile.html
+  commentId: N:Raftel.Application.Features.Users.GetUserProfile
+  fullName: Raftel.Application.Features.Users.GetUserProfile
+  nameWithType: Raftel.Application.Features.Users.GetUserProfile
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery
+  name: GetUserProfileQuery
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.html
+  commentId: T:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery
+  nameWithType: GetUserProfileQuery
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.#ctor
+  name: GetUserProfileQuery()
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.html#Raftel_Application_Features_Users_GetUserProfile_GetUserProfileQuery__ctor
+  commentId: M:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.#ctor
+  name.vb: New()
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.GetUserProfileQuery()
+  fullName.vb: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.New()
+  nameWithType: GetUserProfileQuery.GetUserProfileQuery()
+  nameWithType.vb: GetUserProfileQuery.New()
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.#ctor*
+  name: GetUserProfileQuery
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.html#Raftel_Application_Features_Users_GetUserProfile_GetUserProfileQuery__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.GetUserProfileQuery
+  fullName.vb: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.New
+  nameWithType: GetUserProfileQuery.GetUserProfileQuery
+  nameWithType.vb: GetUserProfileQuery.New
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse
+  name: GetUserProfileResponse
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.html
+  commentId: T:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse
+  nameWithType: GetUserProfileResponse
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.IsAuthenticated
+  name: IsAuthenticated
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.html#Raftel_Application_Features_Users_GetUserProfile_GetUserProfileResponse_IsAuthenticated
+  commentId: P:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.IsAuthenticated
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.IsAuthenticated
+  nameWithType: GetUserProfileResponse.IsAuthenticated
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.IsAuthenticated*
+  name: IsAuthenticated
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.html#Raftel_Application_Features_Users_GetUserProfile_GetUserProfileResponse_IsAuthenticated_
+  commentId: Overload:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.IsAuthenticated
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.IsAuthenticated
+  nameWithType: GetUserProfileResponse.IsAuthenticated
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.Roles
+  name: Roles
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.html#Raftel_Application_Features_Users_GetUserProfile_GetUserProfileResponse_Roles
+  commentId: P:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.Roles
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.Roles
+  nameWithType: GetUserProfileResponse.Roles
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.Roles*
+  name: Roles
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.html#Raftel_Application_Features_Users_GetUserProfile_GetUserProfileResponse_Roles_
+  commentId: Overload:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.Roles
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.Roles
+  nameWithType: GetUserProfileResponse.Roles
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserId
+  name: UserId
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.html#Raftel_Application_Features_Users_GetUserProfile_GetUserProfileResponse_UserId
+  commentId: P:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserId
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserId
+  nameWithType: GetUserProfileResponse.UserId
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserId*
+  name: UserId
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.html#Raftel_Application_Features_Users_GetUserProfile_GetUserProfileResponse_UserId_
+  commentId: Overload:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserId
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserId
+  nameWithType: GetUserProfileResponse.UserId
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserName
+  name: UserName
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.html#Raftel_Application_Features_Users_GetUserProfile_GetUserProfileResponse_UserName
+  commentId: P:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserName
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserName
+  nameWithType: GetUserProfileResponse.UserName
+- uid: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserName*
+  name: UserName
+  href: api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.html#Raftel_Application_Features_Users_GetUserProfile_GetUserProfileResponse_UserName_
+  commentId: Overload:Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserName
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.UserName
+  nameWithType: GetUserProfileResponse.UserName
+- uid: Raftel.Application.Features.Users.LogInUser
+  name: Raftel.Application.Features.Users.LogInUser
+  href: api/Raftel.Application.Features.Users.LogInUser.html
+  commentId: N:Raftel.Application.Features.Users.LogInUser
+  fullName: Raftel.Application.Features.Users.LogInUser
+  nameWithType: Raftel.Application.Features.Users.LogInUser
+- uid: Raftel.Application.Features.Users.LogInUser.LogInResult
+  name: LogInResult
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInResult.html
+  commentId: T:Raftel.Application.Features.Users.LogInUser.LogInResult
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInResult
+  nameWithType: LogInResult
+- uid: Raftel.Application.Features.Users.LogInUser.LogInResult.#ctor(System.Security.Claims.ClaimsPrincipal,System.String)
+  name: LogInResult(ClaimsPrincipal, string)
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInResult.html#Raftel_Application_Features_Users_LogInUser_LogInResult__ctor_System_Security_Claims_ClaimsPrincipal_System_String_
+  commentId: M:Raftel.Application.Features.Users.LogInUser.LogInResult.#ctor(System.Security.Claims.ClaimsPrincipal,System.String)
+  name.vb: New(ClaimsPrincipal, String)
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInResult.LogInResult(System.Security.Claims.ClaimsPrincipal, string)
+  fullName.vb: Raftel.Application.Features.Users.LogInUser.LogInResult.New(System.Security.Claims.ClaimsPrincipal, String)
+  nameWithType: LogInResult.LogInResult(ClaimsPrincipal, string)
+  nameWithType.vb: LogInResult.New(ClaimsPrincipal, String)
+- uid: Raftel.Application.Features.Users.LogInUser.LogInResult.#ctor*
+  name: LogInResult
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInResult.html#Raftel_Application_Features_Users_LogInUser_LogInResult__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.LogInUser.LogInResult.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInResult.LogInResult
+  fullName.vb: Raftel.Application.Features.Users.LogInUser.LogInResult.New
+  nameWithType: LogInResult.LogInResult
+  nameWithType.vb: LogInResult.New
+- uid: Raftel.Application.Features.Users.LogInUser.LogInResult.ClaimsPrincipal
+  name: ClaimsPrincipal
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInResult.html#Raftel_Application_Features_Users_LogInUser_LogInResult_ClaimsPrincipal
+  commentId: P:Raftel.Application.Features.Users.LogInUser.LogInResult.ClaimsPrincipal
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInResult.ClaimsPrincipal
+  nameWithType: LogInResult.ClaimsPrincipal
+- uid: Raftel.Application.Features.Users.LogInUser.LogInResult.ClaimsPrincipal*
+  name: ClaimsPrincipal
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInResult.html#Raftel_Application_Features_Users_LogInUser_LogInResult_ClaimsPrincipal_
+  commentId: Overload:Raftel.Application.Features.Users.LogInUser.LogInResult.ClaimsPrincipal
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInResult.ClaimsPrincipal
+  nameWithType: LogInResult.ClaimsPrincipal
+- uid: Raftel.Application.Features.Users.LogInUser.LogInResult.Scheme
+  name: Scheme
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInResult.html#Raftel_Application_Features_Users_LogInUser_LogInResult_Scheme
+  commentId: P:Raftel.Application.Features.Users.LogInUser.LogInResult.Scheme
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInResult.Scheme
+  nameWithType: LogInResult.Scheme
+- uid: Raftel.Application.Features.Users.LogInUser.LogInResult.Scheme*
+  name: Scheme
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInResult.html#Raftel_Application_Features_Users_LogInUser_LogInResult_Scheme_
+  commentId: Overload:Raftel.Application.Features.Users.LogInUser.LogInResult.Scheme
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInResult.Scheme
+  nameWithType: LogInResult.Scheme
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserQuery
+  name: LogInUserQuery
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserQuery.html
+  commentId: T:Raftel.Application.Features.Users.LogInUser.LogInUserQuery
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserQuery
+  nameWithType: LogInUserQuery
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.#ctor(System.String,System.String)
+  name: LogInUserQuery(string, string)
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserQuery.html#Raftel_Application_Features_Users_LogInUser_LogInUserQuery__ctor_System_String_System_String_
+  commentId: M:Raftel.Application.Features.Users.LogInUser.LogInUserQuery.#ctor(System.String,System.String)
+  name.vb: New(String, String)
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.LogInUserQuery(string, string)
+  fullName.vb: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.New(String, String)
+  nameWithType: LogInUserQuery.LogInUserQuery(string, string)
+  nameWithType.vb: LogInUserQuery.New(String, String)
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.#ctor*
+  name: LogInUserQuery
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserQuery.html#Raftel_Application_Features_Users_LogInUser_LogInUserQuery__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.LogInUser.LogInUserQuery.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.LogInUserQuery
+  fullName.vb: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.New
+  nameWithType: LogInUserQuery.LogInUserQuery
+  nameWithType.vb: LogInUserQuery.New
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Email
+  name: Email
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserQuery.html#Raftel_Application_Features_Users_LogInUser_LogInUserQuery_Email
+  commentId: P:Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Email
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Email
+  nameWithType: LogInUserQuery.Email
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Email*
+  name: Email
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserQuery.html#Raftel_Application_Features_Users_LogInUser_LogInUserQuery_Email_
+  commentId: Overload:Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Email
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Email
+  nameWithType: LogInUserQuery.Email
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Password
+  name: Password
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserQuery.html#Raftel_Application_Features_Users_LogInUser_LogInUserQuery_Password
+  commentId: P:Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Password
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Password
+  nameWithType: LogInUserQuery.Password
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Password*
+  name: Password
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserQuery.html#Raftel_Application_Features_Users_LogInUser_LogInUserQuery_Password_
+  commentId: Overload:Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Password
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Password
+  nameWithType: LogInUserQuery.Password
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserResponse
+  name: LogInUserResponse
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserResponse.html
+  commentId: T:Raftel.Application.Features.Users.LogInUser.LogInUserResponse
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserResponse
+  nameWithType: LogInUserResponse
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.#ctor(System.Security.Claims.ClaimsPrincipal,System.String)
+  name: LogInUserResponse(ClaimsPrincipal, string)
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserResponse.html#Raftel_Application_Features_Users_LogInUser_LogInUserResponse__ctor_System_Security_Claims_ClaimsPrincipal_System_String_
+  commentId: M:Raftel.Application.Features.Users.LogInUser.LogInUserResponse.#ctor(System.Security.Claims.ClaimsPrincipal,System.String)
+  name.vb: New(ClaimsPrincipal, String)
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.LogInUserResponse(System.Security.Claims.ClaimsPrincipal, string)
+  fullName.vb: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.New(System.Security.Claims.ClaimsPrincipal, String)
+  nameWithType: LogInUserResponse.LogInUserResponse(ClaimsPrincipal, string)
+  nameWithType.vb: LogInUserResponse.New(ClaimsPrincipal, String)
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.#ctor*
+  name: LogInUserResponse
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserResponse.html#Raftel_Application_Features_Users_LogInUser_LogInUserResponse__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.LogInUser.LogInUserResponse.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.LogInUserResponse
+  fullName.vb: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.New
+  nameWithType: LogInUserResponse.LogInUserResponse
+  nameWithType.vb: LogInUserResponse.New
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Claims
+  name: Claims
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserResponse.html#Raftel_Application_Features_Users_LogInUser_LogInUserResponse_Claims
+  commentId: P:Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Claims
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Claims
+  nameWithType: LogInUserResponse.Claims
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Claims*
+  name: Claims
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserResponse.html#Raftel_Application_Features_Users_LogInUser_LogInUserResponse_Claims_
+  commentId: Overload:Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Claims
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Claims
+  nameWithType: LogInUserResponse.Claims
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Scheme
+  name: Scheme
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserResponse.html#Raftel_Application_Features_Users_LogInUser_LogInUserResponse_Scheme
+  commentId: P:Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Scheme
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Scheme
+  nameWithType: LogInUserResponse.Scheme
+- uid: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Scheme*
+  name: Scheme
+  href: api/Raftel.Application.Features.Users.LogInUser.LogInUserResponse.html#Raftel_Application_Features_Users_LogInUser_LogInUserResponse_Scheme_
+  commentId: Overload:Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Scheme
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.LogInUser.LogInUserResponse.Scheme
+  nameWithType: LogInUserResponse.Scheme
 - uid: Raftel.Application.Features.Users.RegisterUser
   name: Raftel.Application.Features.Users.RegisterUser
   href: api/Raftel.Application.Features.Users.RegisterUser.html
@@ -2353,6 +2713,31 @@ references:
   commentId: N:Raftel.Infrastructure
   fullName: Raftel.Infrastructure
   nameWithType: Raftel.Infrastructure
+- uid: Raftel.Infrastructure.Authentication
+  name: Raftel.Infrastructure.Authentication
+  href: api/Raftel.Infrastructure.Authentication.html
+  commentId: N:Raftel.Infrastructure.Authentication
+  fullName: Raftel.Infrastructure.Authentication
+  nameWithType: Raftel.Infrastructure.Authentication
+- uid: Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory
+  name: IClaimsPrincipalFactory
+  href: api/Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.html
+  commentId: T:Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory
+  fullName: Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory
+  nameWithType: IClaimsPrincipalFactory
+- uid: Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.CreateAsync(Microsoft.AspNetCore.Identity.IdentityUser)
+  name: CreateAsync(IdentityUser)
+  href: api/Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.html#Raftel_Infrastructure_Authentication_IClaimsPrincipalFactory_CreateAsync_Microsoft_AspNetCore_Identity_IdentityUser_
+  commentId: M:Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.CreateAsync(Microsoft.AspNetCore.Identity.IdentityUser)
+  fullName: Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.CreateAsync(Microsoft.AspNetCore.Identity.IdentityUser)
+  nameWithType: IClaimsPrincipalFactory.CreateAsync(IdentityUser)
+- uid: Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.CreateAsync*
+  name: CreateAsync
+  href: api/Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.html#Raftel_Infrastructure_Authentication_IClaimsPrincipalFactory_CreateAsync_
+  commentId: Overload:Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.CreateAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.CreateAsync
+  nameWithType: IClaimsPrincipalFactory.CreateAsync
 - uid: Raftel.Infrastructure.Data
   name: Raftel.Infrastructure.Data
   href: api/Raftel.Infrastructure.Data.html

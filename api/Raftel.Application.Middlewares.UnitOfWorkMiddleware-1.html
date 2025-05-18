@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Class UnitOfWorkMiddleware&lt;TRequest&gt; | Raftel ">
       
-      
+      <meta name="description" content="Middleware that ensures a unit of work is committed only if the preceding operation was successful.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -89,7 +89,7 @@
 
 
   <h1 id="Raftel_Application_Middlewares_UnitOfWorkMiddleware_1" data-uid="Raftel.Application.Middlewares.UnitOfWorkMiddleware`1" class="text-break">
-Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L7"><i class="bi bi-code-slash"></i></a>
+Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L13"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -97,7 +97,9 @@ Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-seconda
   <dl><dt>Assembly</dt><dd>Raftel.Application.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Middleware that ensures a unit of work is committed
+only if the preceding operation was successful.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -109,7 +111,8 @@ Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-seconda
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>TRequest</code></dt>
-    <dd></dd>
+    <dd><p>The type of the request implementing <a class="xref" href="Raftel.Application.Commands.ICommand.html">ICommand</a>.</p>
+</dd>
   </dl>
 
   <dl class="typelist inheritance">
@@ -168,10 +171,12 @@ Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-seconda
 
   <h3 id="Raftel_Application_Middlewares_UnitOfWorkMiddleware_1__ctor_Raftel_Application_IUnitOfWork_" data-uid="Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.#ctor(Raftel.Application.IUnitOfWork)">
   UnitOfWorkMiddleware(IUnitOfWork)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L13"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Middleware that ensures a unit of work is committed
+only if the preceding operation was successful.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -181,7 +186,8 @@ Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-seconda
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>unitOfWork</code> <a class="xref" href="Raftel.Application.IUnitOfWork.html">IUnitOfWork</a></dt>
-    <dd></dd>
+    <dd><p>The unit of work instance used to perform the commit.</p>
+</dd>
   </dl>
 
 
@@ -203,10 +209,11 @@ Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-seconda
 
   <h3 id="Raftel_Application_Middlewares_UnitOfWorkMiddleware_1_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate_Raftel_Domain_Abstractions_Result__" data-uid="Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result})">
   HandleAsync(TRequest, RequestHandlerDelegate&lt;Result&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L23"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Processes the request and optionally calls the next delegate in the pipeline.</p>
+  <div class="markdown level1 summary"><p>Handles the request by executing the next delegate in the middleware pipeline
+and commits the unit of work if the result is successful.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -217,17 +224,17 @@ Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-seconda
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">TRequest</span></dt>
-    <dd><p>The request instance.</p>
+    <dd><p>The request being processed.</p>
 </dd>
     <dt><code>next</code> <a class="xref" href="Raftel.Application.Abstractions.RequestHandlerDelegate-1.html">RequestHandlerDelegate</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a>&gt;</dt>
-    <dd><p>The next handler in the pipeline.</p>
+    <dd><p>The delegate representing the next middleware or handler in the pipeline.</p>
 </dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a>&gt;</dt>
-    <dd><p>A task containing the result of the request.</p>
+    <dd><p>A <a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a> indicating the outcome of the operation.</p>
 </dd>
   </dl>
 
@@ -245,7 +252,7 @@ Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-seconda
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L7" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L13" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -148,6 +148,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Features.Users.AuthorizationController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Features.Users.AuthorizationController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Features.Users.AuthorizationController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Api.Server.Features.Users.UsersDependencyInjection.yml",
       "output": {
         ".html": {
@@ -186,6 +200,20 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Application.Abstractions.Authentication.IAuthenticationService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.Authentication.ICurrentUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.Authentication.ICurrentUser",
       "Summary": null
     },
     {
@@ -400,6 +428,104 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.GetUserProfile.GetUserProfileResponse",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.GetUserProfile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.GetUserProfile.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.GetUserProfile",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.LogInUser.LogInResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.LogInUser.LogInResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.LogInUser.LogInResult",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.LogInUser.LogInUserQuery.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.LogInUser.LogInUserQuery.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.LogInUser.LogInUserQuery",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.LogInUser.LogInUserResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.LogInUser.LogInUserResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.LogInUser.LogInUserResponse",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.LogInUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.LogInUser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.LogInUser",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Features.Users.RegisterUser.RegisterUserCommand.yml",
       "output": {
         ".html": {
@@ -522,7 +648,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Application.Middlewares.UnitOfWorkMiddleware<TRequest>",
-      "Summary": null
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-1.yml\" sourcestartlinenumber=\"1\">Middleware that ensures a unit of work is committed\nonly if the preceding operation was successful.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -984,6 +1110,34 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Domain.Validators",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Authentication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Authentication.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Authentication",
       "Summary": null
     },
     {

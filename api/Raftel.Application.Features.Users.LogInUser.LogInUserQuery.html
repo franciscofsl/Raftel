@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class UsersDependencyInjection | Raftel </title>
+      <title>Class LogInUserQuery | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class UsersDependencyInjection | Raftel ">
+      <meta name="title" content="Class LogInUserQuery | Raftel ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Api_Server_Features_Users_UsersDependencyInjection.md&amp;value=---%0Auid%3A%20Raftel.Api.Server.Features.Users.UsersDependencyInjection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Features_Users_LogInUser_LogInUserQuery.md&amp;value=---%0Auid%3A%20Raftel.Application.Features.Users.LogInUser.LogInUserQuery%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,24 +84,24 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Api.Server.Features.Users.UsersDependencyInjection">
+        <article data-uid="Raftel.Application.Features.Users.LogInUser.LogInUserQuery">
 
 
 
-  <h1 id="Raftel_Api_Server_Features_Users_UsersDependencyInjection" data-uid="Raftel.Api.Server.Features.Users.UsersDependencyInjection" class="text-break">
-Class UsersDependencyInjection  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/UsersDependencyInjection.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Application_Features_Users_LogInUser_LogInUserQuery" data-uid="Raftel.Application.Features.Users.LogInUser.LogInUserQuery" class="text-break">
+Class LogInUserQuery  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/LogInUser/LogInUserQuery.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Api.html">Api</a>.<a class="xref" href="Raftel.Api.Server.html">Server</a>.<a class="xref" href="Raftel.Api.Server.Features.html">Features</a>.<a class="xref" href="Raftel.Api.Server.Features.Users.html">Users</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>Raftel.Api.Server.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Application.html">Application</a>.<a class="xref" href="Raftel.Application.Features.html">Features</a>.<a class="xref" href="Raftel.Application.Features.Users.html">Users</a>.<a class="xref" href="Raftel.Application.Features.Users.LogInUser.html">LogInUser</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Raftel.Application.dll</dd></dl>
   </div>
 
   <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class UsersDependencyInjection</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed record LogInUserQuery : IQuery&lt;LogInUserResponse&gt;, IRequest&lt;Result&lt;LogInUserResponse&gt;&gt;, IEquatable&lt;LogInUserQuery&gt;</code></pre>
   </div>
 
 
@@ -111,10 +111,18 @@ Class UsersDependencyInjection  <a class="header-action link-secondary" title="V
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">UsersDependencyInjection</span></div>
+      <div><span class="xref">LogInUserQuery</span></div>
     </dd>
   </dl>
 
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="Raftel.Application.Queries.IQuery-1.html">IQuery</a>&lt;<a class="xref" href="Raftel.Application.Features.Users.LogInUser.LogInUserResponse.html">LogInUserResponse</a>&gt;</div>
+      <div><a class="xref" href="Raftel.Application.Abstractions.IRequest-1.html">IRequest</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result</a>&lt;<a class="xref" href="Raftel.Application.Features.Users.LogInUser.LogInUserResponse.html">LogInUserResponse</a>&gt;&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Raftel.Application.Features.Users.LogInUser.LogInUserQuery.html">LogInUserQuery</a>&gt;</div>
+    </dd>
+  </dl>
 
 
   <dl class="typelist inheritedMembers">
@@ -133,9 +141,6 @@ Class UsersDependencyInjection  <a class="header-action link-secondary" title="V
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
-    </div>
-    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
@@ -148,38 +153,101 @@ Class UsersDependencyInjection  <a class="header-action link-secondary" title="V
 
 
 
-  <h2 class="section" id="methods">Methods
+  <h2 class="section" id="constructors">Constructors
 </h2>
 
 
-  <a id="Raftel_Api_Server_Features_Users_UsersDependencyInjection_AddRaftelUsers_" data-uid="Raftel.Api.Server.Features.Users.UsersDependencyInjection.AddRaftelUsers*"></a>
+  <a id="Raftel_Application_Features_Users_LogInUser_LogInUserQuery__ctor_" data-uid="Raftel.Application.Features.Users.LogInUser.LogInUserQuery.#ctor*"></a>
 
-  <h3 id="Raftel_Api_Server_Features_Users_UsersDependencyInjection_AddRaftelUsers_Microsoft_AspNetCore_Routing_IEndpointRouteBuilder_" data-uid="Raftel.Api.Server.Features.Users.UsersDependencyInjection.AddRaftelUsers(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)">
-  AddRaftelUsers(IEndpointRouteBuilder)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/UsersDependencyInjection.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Application_Features_Users_LogInUser_LogInUserQuery__ctor_System_String_System_String_" data-uid="Raftel.Application.Features.Users.LogInUser.LogInUserQuery.#ctor(System.String,System.String)">
+  LogInUserQuery(string, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/LogInUser/LogInUserQuery.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IEndpointRouteBuilder AddRaftelUsers(this IEndpointRouteBuilder app)</code></pre>
+    <pre><code class="lang-csharp hljs">public LogInUserQuery(string Email, string Password)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>app</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.routing.iendpointroutebuilder">IEndpointRouteBuilder</a></dt>
+    <dt><code>Email</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>Password</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
   </dl>
 
-  <h4 class="section">Returns</h4>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Raftel_Application_Features_Users_LogInUser_LogInUserQuery_Email_" data-uid="Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Email*"></a>
+
+  <h3 id="Raftel_Application_Features_Users_LogInUser_LogInUserQuery_Email" data-uid="Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Email">
+  Email
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/LogInUser/LogInUserQuery.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Email { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.routing.iendpointroutebuilder">IEndpointRouteBuilder</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
   </dl>
 
 
 
+
+
+
+
+
+  <a id="Raftel_Application_Features_Users_LogInUser_LogInUserQuery_Password_" data-uid="Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Password*"></a>
+
+  <h3 id="Raftel_Application_Features_Users_LogInUser_LogInUserQuery_Password" data-uid="Raftel.Application.Features.Users.LogInUser.LogInUserQuery.Password">
+  Password
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/LogInUser/LogInUserQuery.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Password { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -192,7 +260,7 @@ Class UsersDependencyInjection  <a class="header-action link-secondary" title="V
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/UsersDependencyInjection.cs/#L9" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/LogInUser/LogInUserQuery.cs/#L5" class="edit-link">Edit this page</a>
         </div>
 
 
