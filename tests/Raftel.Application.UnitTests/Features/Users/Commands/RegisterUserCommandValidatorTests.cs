@@ -2,7 +2,7 @@
 using Raftel.Domain.Features.Users.ValueObjects;
 using Shouldly;
 
-namespace Raftel.Application.UnitTests.Users.Commands;
+namespace Raftel.Application.UnitTests.Features.Users.Commands;
 
 public sealed class RegisterUserCommandValidatorTests
 {

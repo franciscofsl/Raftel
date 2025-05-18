@@ -4,7 +4,7 @@ using Raftel.Application.Features.Users.LogInUser;
 using Raftel.Domain.Abstractions;
 using Shouldly;
 
-namespace Raftel.Application.UnitTests.Users.Queries;
+namespace Raftel.Application.UnitTests.Features.Users.Queries;
 
 public sealed class LogInUserQueryHandlerTests
 {

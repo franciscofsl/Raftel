@@ -2,7 +2,7 @@
 using Raftel.Application.Features.Users.GetUserProfile;
 using Shouldly;
 
-namespace Raftel.Application.UnitTests.Users.Queries;
+namespace Raftel.Application.UnitTests.Features.Users.Queries;
 
 public sealed class GetUserProfileQueryHandlerTests
 {
