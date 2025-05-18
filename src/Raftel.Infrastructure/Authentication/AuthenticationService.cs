@@ -12,10 +12,11 @@ internal sealed class AuthenticationService(UserManager<IdentityUser> userManage
         var identityUser = new IdentityUser
         {
             UserName = user.Email,
-            Email = user.Email
+            Email = user.Email,
         };
+        
         var result = await userManager.CreateAsync(identityUser, password);
-
+        
         if (result.Succeeded)
         {
             return Result.Success();

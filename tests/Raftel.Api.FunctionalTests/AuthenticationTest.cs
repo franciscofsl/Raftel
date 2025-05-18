@@ -99,6 +99,12 @@ public class AuthenticationTest : IClassFixture<ApiTestFactory>
 
         var perfilResponse = await _client.GetAsync("/api/perfil");
         perfilResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
+        
+        
+        
+        
+        var algo = await _client.GetAsync("/api/users/me");
+        algo.StatusCode.ShouldBe(HttpStatusCode.OK);
 
         var perfilJson = await perfilResponse.Content.ReadFromJsonAsync<PerfilResponse>();
         perfilJson!.Message.ShouldBe("Usuario autenticado");

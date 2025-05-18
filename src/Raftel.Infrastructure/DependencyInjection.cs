@@ -74,6 +74,9 @@ public static class DependencyInjection
             options.DefaultChallengeScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
         });
         services.AddAuthorization();
+        services.AddHttpContextAccessor();
+        services.AddScoped<ICurrentUser, CurrentHttpUser>();
+        services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
 
 
         return services;

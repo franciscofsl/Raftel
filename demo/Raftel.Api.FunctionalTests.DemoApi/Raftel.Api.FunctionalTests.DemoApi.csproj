@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+        <PackageReference Include="OpenIddict.Abstractions" />
         <PackageReference Include="OpenIddict.Validation.ServerIntegration" />
         <PackageReference Include="Swashbuckle.AspNetCore"/>
     </ItemGroup>
