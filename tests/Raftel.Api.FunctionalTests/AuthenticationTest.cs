@@ -2,6 +2,7 @@
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Raftel.Application.Features.Users.GetUserProfile;
 using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;
@@ -97,22 +98,11 @@ public class AuthenticationTest : IClassFixture<ApiTestFactory>
         _client.DefaultRequestHeaders.Authorization =
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tokenData.Token);
 
-        var perfilResponse = await _client.GetAsync("/api/perfil");
-        perfilResponse.StatusCode.ShouldBe(HttpStatusCode.OK);
-        
-        
-        
-        
-        var algo = await _client.GetAsync("/api/users/me");
-        algo.StatusCode.ShouldBe(HttpStatusCode.OK);
-
-        var perfilJson = await perfilResponse.Content.ReadFromJsonAsync<PerfilResponse>();
-        perfilJson!.Message.ShouldBe("Usuario autenticado");
+        var me = await _client.GetAsync("/api/users/me");
+        me.StatusCode.ShouldBe(HttpStatusCode.OK);
+        var response = await me.Content.ReadFromJsonAsync<GetUserProfileResponse>();
+        response.IsAuthenticated.ShouldBeTrue();
+        response.UserId.ShouldNotBe(Guid.Empty);
+        response.UserName.ShouldBe(email);
     }
-
-    private record PerfilResponse(
-        [property: JsonPropertyName("message")]
-        string Message,
-        [property: JsonPropertyName("user")] string User
-    );
 }

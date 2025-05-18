@@ -15,7 +15,7 @@ internal sealed class GetUserProfileQueryHandler(ICurrentUser currentUser)
             UserName = currentUser.UserName,
             Roles = currentUser.Roles,
             IsAuthenticated = currentUser.IsAuthenticated,
-            UserId = currentUser.UserId,
+            UserId = currentUser.UserId ?? Guid.Empty
         });
     }
 }

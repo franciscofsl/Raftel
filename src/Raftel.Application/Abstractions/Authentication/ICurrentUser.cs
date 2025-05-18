@@ -3,7 +3,7 @@
 public interface ICurrentUser
 {
     bool IsAuthenticated { get; }
-    string? UserId { get; }
+    Guid? UserId { get; }
     string? UserName { get; }
     IEnumerable<string> Roles { get; }
 }
