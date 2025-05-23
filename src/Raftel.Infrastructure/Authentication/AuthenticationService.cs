@@ -15,7 +15,7 @@ internal sealed class AuthenticationService(
     IHttpContextAccessor httpContextAccessor,
     IClaimsPrincipalFactory claimsPrincipalFactory) : IAuthenticationService
 {
-    public async Task<Result> RegisterAsync(User user, string password, CancellationToken cancellationToken = default)
+    public async Task<Result<string>> RegisterAsync(User user, string password, CancellationToken cancellationToken = default)
     {
         var identityUser = new IdentityUser
         {
@@ -27,11 +27,11 @@ internal sealed class AuthenticationService(
 
         if (result.Succeeded)
         {
-            return Result.Success();
+            return Result<string>.Success(identityUser.Id);
         }
 
         var errorMessage = result.Errors.Select(e => e.Description).FirstOrDefault();
-        return Result.Failure(new Error("User.CantRegister", errorMessage));
+        return Result<string>.Failure(new Error("User.CantRegister", errorMessage));
     }
 
     public async Task<Result<LogInResult>> LogInAsync(string email, string password,

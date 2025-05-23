@@ -19,9 +19,18 @@ public sealed class User : AggregateRoot<UserId>
     public Email Email { get; set; }
     public string Name { get; set; }
     public string Surname { get; set; }
+    public string IdentityUserId { get; private set; }
 
     public static User Create(Email email, string name, string surname)
     {
         return new User(email, name, surname);
+    }
+
+    public void BindTo(string identityUserId)
+    {
+        if (string.IsNullOrEmpty(IdentityUserId))
+        {
+            IdentityUserId = identityUserId;
+        }
     }
 }
