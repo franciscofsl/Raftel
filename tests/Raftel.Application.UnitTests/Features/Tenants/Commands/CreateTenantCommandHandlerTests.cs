@@ -31,7 +31,8 @@ public sealed class CreateTenantCommandHandlerTests
     public async Task HandleAsync_Should_ReturnFailure_WhenCodeIsNotUnique()
     {
         var command = new CreateTenantCommand("Test Tenant", "TEST", "Test Description");
-        _tenantsRepository.CodeIsUniqueAsync(command.Code, Arg.Any<CancellationToken>())
+        var code = Code.Create(command.Code);
+        _tenantsRepository.CodeIsUniqueAsync(code.Value, Arg.Any<CancellationToken>())
             .Returns(false);
 
         var result = await _handler.HandleAsync(command, CancellationToken.None);
@@ -45,7 +46,8 @@ public sealed class CreateTenantCommandHandlerTests
     public async Task HandleAsync_Should_ReturnSuccess_And_AddTenant_WhenCodeIsValid()
     {
         var command = new CreateTenantCommand("Test Tenant", "TEST", "Test Description");
-        _tenantsRepository.CodeIsUniqueAsync(command.Code, Arg.Any<CancellationToken>())
+        var code = Code.Create(command.Code);
+        _tenantsRepository.CodeIsUniqueAsync(code.Value, Arg.Any<CancellationToken>())
             .Returns(true);
 
         var result = await _handler.HandleAsync(command, CancellationToken.None);
