@@ -7,7 +7,7 @@ namespace Raftel.Application.Abstractions.Authentication;
 
 public interface IAuthenticationService
 {
-    Task<Result> RegisterAsync(User user, string password, CancellationToken cancellationToken = default);
+    Task<Result<string>> RegisterAsync(User user, string password, CancellationToken cancellationToken = default);
     
     Task<Result<LogInResult>> LogInAsync(string email, string password, CancellationToken cancellationToken = default);
 }
