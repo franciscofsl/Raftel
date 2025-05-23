@@ -7,11 +7,13 @@ using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
 using Raftel.Application;
 using Raftel.Application.Abstractions.Authentication;
+using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Users;
 using Raftel.Infrastructure.Authentication;
 using Raftel.Infrastructure.Data;
 using Raftel.Infrastructure.Data.Filters;
 using Raftel.Infrastructure.Data.Interceptors;
+using Raftel.Infrastructure.Data.Repositories.Tenants;
 using Raftel.Infrastructure.Data.Repositories.Users;
 
 namespace Raftel.Infrastructure;
@@ -43,6 +45,7 @@ public static class DependencyInjection
 
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped(typeof(IUsersRepository), typeof(UsersRepository<TDbContext>));
+        services.AddScoped(typeof(ITenantsRepository), typeof(TenantsRepository<TDbContext>));
 
         services.AddOpenIddict()
             .AddCore(opt => opt.UseEntityFrameworkCore().UseDbContext<TDbContext>())

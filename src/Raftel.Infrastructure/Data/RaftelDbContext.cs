@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Raftel.Application;
 using Raftel.Domain.Features.Users;
+using Raftel.Domain.Features.Tenants;
 using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Data;
@@ -33,6 +34,7 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
     }
 
     public DbSet<User> User { get; set; }
+    public DbSet<Tenant> Tenant { get; set; }
     
     protected bool IsSoftDeleteFilterEnabled => _dataFilter?.IsEnabled<ISoftDeleteFilter>() ?? false;
 
