@@ -2227,6 +2227,22 @@ references:
   commentId: T:Raftel.Domain.Features.Users.User
   fullName: Raftel.Domain.Features.Users.User
   nameWithType: User
+- uid: Raftel.Domain.Features.Users.User.BindTo(System.String)
+  name: BindTo(string)
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_BindTo_System_String_
+  commentId: M:Raftel.Domain.Features.Users.User.BindTo(System.String)
+  name.vb: BindTo(String)
+  fullName: Raftel.Domain.Features.Users.User.BindTo(string)
+  fullName.vb: Raftel.Domain.Features.Users.User.BindTo(String)
+  nameWithType: User.BindTo(string)
+  nameWithType.vb: User.BindTo(String)
+- uid: Raftel.Domain.Features.Users.User.BindTo*
+  name: BindTo
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_BindTo_
+  commentId: Overload:Raftel.Domain.Features.Users.User.BindTo
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.User.BindTo
+  nameWithType: User.BindTo
 - uid: Raftel.Domain.Features.Users.User.Create(Raftel.Domain.Features.Users.ValueObjects.Email,System.String,System.String)
   name: Create(Email, string, string)
   href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Create_Raftel_Domain_Features_Users_ValueObjects_Email_System_String_System_String_
@@ -2256,6 +2272,19 @@ references:
   isSpec: "True"
   fullName: Raftel.Domain.Features.Users.User.Email
   nameWithType: User.Email
+- uid: Raftel.Domain.Features.Users.User.IdentityUserId
+  name: IdentityUserId
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_IdentityUserId
+  commentId: P:Raftel.Domain.Features.Users.User.IdentityUserId
+  fullName: Raftel.Domain.Features.Users.User.IdentityUserId
+  nameWithType: User.IdentityUserId
+- uid: Raftel.Domain.Features.Users.User.IdentityUserId*
+  name: IdentityUserId
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_IdentityUserId_
+  commentId: Overload:Raftel.Domain.Features.Users.User.IdentityUserId
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.User.IdentityUserId
+  nameWithType: User.IdentityUserId
 - uid: Raftel.Domain.Features.Users.User.Name
   name: Name
   href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Name
