@@ -9,21 +9,28 @@ public sealed class User : AggregateRoot<UserId>
     {
     }
 
-    private User(Email email, string name, string surname, string identityUserId) : base(UserId.New())
+    private User(Email email, string name, string surname) : base(UserId.New())
     {
         Email = email;
         Name = name;
         Surname = surname;
-        IdentityUserId = identityUserId;
     }
 
     public Email Email { get; set; }
     public string Name { get; set; }
     public string Surname { get; set; }
-    public string IdentityUserId { get; set; }
+    public string IdentityUserId { get; private set; }
 
-    public static User Create(Email email, string name, string surname, string identityUserId)
+    public static User Create(Email email, string name, string surname)
     {
-        return new User(email, name, surname, identityUserId);
+        return new User(email, name, surname);
+    }
+
+    public void BindTo(string identityUserId)
+    {
+        if (string.IsNullOrEmpty(IdentityUserId))
+        {
+            IdentityUserId = identityUserId;
+        }
     }
 }

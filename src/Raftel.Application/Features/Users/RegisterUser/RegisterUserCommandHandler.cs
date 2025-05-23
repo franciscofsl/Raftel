@@ -11,20 +11,20 @@ internal sealed class RegisterUserCommandHandler(
 {
     public async Task<Result> HandleAsync(RegisterUserCommand request, CancellationToken token = default)
     {
-        var user = User.Create(request.Email, request.Email, request.Email, string.Empty);
-
         if (await usersRepository.EmailIsUniqueAsync(request.Email, token) == false)
         {
             return Result.Failure(UserErrors.DuplicatedEmail);
         }
 
+        var user = User.Create(request.Email, request.Email, request.Email);
         var result = await authenticationService.RegisterAsync(user, request.Password, token);
-        if (result.IsSuccess)
+        if (result.IsFailure)
         {
-            user = User.Create(request.Email, request.Email, request.Email, result.Value);
-            await usersRepository.AddAsync(user, token);
+            return result;
         }
 
-        return result.IsSuccess ? Result.Success() : Result.Failure(result.Error);
+        user.BindTo(result.Value);
+        await usersRepository.AddAsync(user, token);
+        return result;
     }
 }

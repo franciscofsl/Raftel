@@ -33,11 +33,10 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.Surname)
             .HasMaxLength(100);
 
-        builder.Property(x => x.IdentityUserId)
+        builder.Property(_ => _.IdentityUserId)
             .HasMaxLength(450)
             .IsRequired();
 
         builder.HasIndex(x => x.Email);
-        builder.HasIndex(x => x.IdentityUserId);
     }
 }
