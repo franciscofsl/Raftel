@@ -1,5 +1,6 @@
 using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.Server.AutoEndpoints;
+using Raftel.Api.Server.Features.Tenants;
 using Raftel.Api.Server.Features.Users;
 using Raftel.Application;
 using Raftel.Application.Features.Users.RegisterUser;
@@ -45,6 +46,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.AddRaftelTenants();
 app.AddRaftelUsers();
 app.AddEndpointGroup(group =>
     {
