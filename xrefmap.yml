@@ -345,6 +345,31 @@ references:
   isSpec: "True"
   fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.Name
   nameWithType: RouteOptions.Name
+- uid: Raftel.Api.Server.Features.Tenants
+  name: Raftel.Api.Server.Features.Tenants
+  href: api/Raftel.Api.Server.Features.Tenants.html
+  commentId: N:Raftel.Api.Server.Features.Tenants
+  fullName: Raftel.Api.Server.Features.Tenants
+  nameWithType: Raftel.Api.Server.Features.Tenants
+- uid: Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection
+  name: TenantsDependencyInjection
+  href: api/Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.html
+  commentId: T:Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection
+  fullName: Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection
+  nameWithType: TenantsDependencyInjection
+- uid: Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.AddRaftelTenants(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)
+  name: AddRaftelTenants(IEndpointRouteBuilder)
+  href: api/Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.html#Raftel_Api_Server_Features_Tenants_TenantsDependencyInjection_AddRaftelTenants_Microsoft_AspNetCore_Routing_IEndpointRouteBuilder_
+  commentId: M:Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.AddRaftelTenants(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)
+  fullName: Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.AddRaftelTenants(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)
+  nameWithType: TenantsDependencyInjection.AddRaftelTenants(IEndpointRouteBuilder)
+- uid: Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.AddRaftelTenants*
+  name: AddRaftelTenants
+  href: api/Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.html#Raftel_Api_Server_Features_Tenants_TenantsDependencyInjection_AddRaftelTenants_
+  commentId: Overload:Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.AddRaftelTenants
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.AddRaftelTenants
+  nameWithType: TenantsDependencyInjection.AddRaftelTenants
 - uid: Raftel.Api.Server.Features.Users
   name: Raftel.Api.Server.Features.Users
   href: api/Raftel.Api.Server.Features.Users.html
@@ -579,6 +604,44 @@ references:
   fullName.vb: Raftel.Application.Abstractions.IRequest(Of TResponse)
   nameWithType: IRequest<TResponse>
   nameWithType.vb: IRequest(Of TResponse)
+- uid: Raftel.Application.Abstractions.Multitenancy
+  name: Raftel.Application.Abstractions.Multitenancy
+  href: api/Raftel.Application.Abstractions.Multitenancy.html
+  commentId: N:Raftel.Application.Abstractions.Multitenancy
+  fullName: Raftel.Application.Abstractions.Multitenancy
+  nameWithType: Raftel.Application.Abstractions.Multitenancy
+- uid: Raftel.Application.Abstractions.Multitenancy.ICurrentTenant
+  name: ICurrentTenant
+  href: api/Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.html
+  commentId: T:Raftel.Application.Abstractions.Multitenancy.ICurrentTenant
+  fullName: Raftel.Application.Abstractions.Multitenancy.ICurrentTenant
+  nameWithType: ICurrentTenant
+- uid: Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Change(System.Nullable{System.Guid})
+  name: Change(Guid?)
+  href: api/Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.html#Raftel_Application_Abstractions_Multitenancy_ICurrentTenant_Change_System_Nullable_System_Guid__
+  commentId: M:Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Change(System.Nullable{System.Guid})
+  fullName: Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Change(System.Guid?)
+  nameWithType: ICurrentTenant.Change(Guid?)
+- uid: Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Change*
+  name: Change
+  href: api/Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.html#Raftel_Application_Abstractions_Multitenancy_ICurrentTenant_Change_
+  commentId: Overload:Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Change
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Change
+  nameWithType: ICurrentTenant.Change
+- uid: Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Id
+  name: Id
+  href: api/Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.html#Raftel_Application_Abstractions_Multitenancy_ICurrentTenant_Id
+  commentId: P:Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Id
+  fullName: Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Id
+  nameWithType: ICurrentTenant.Id
+- uid: Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Id*
+  name: Id
+  href: api/Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.html#Raftel_Application_Abstractions_Multitenancy_ICurrentTenant_Id_
+  commentId: Overload:Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Id
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.Id
+  nameWithType: ICurrentTenant.Id
 - uid: Raftel.Application.Abstractions.RequestDispatcher
   name: RequestDispatcher
   href: api/Raftel.Application.Abstractions.RequestDispatcher.html
@@ -792,6 +855,355 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Exceptions.ValidationException.ToString
   nameWithType: ValidationException.ToString
+- uid: Raftel.Application.Features.Tenants.CreateTenant
+  name: Raftel.Application.Features.Tenants.CreateTenant
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.html
+  commentId: N:Raftel.Application.Features.Tenants.CreateTenant
+  fullName: Raftel.Application.Features.Tenants.CreateTenant
+  nameWithType: Raftel.Application.Features.Tenants.CreateTenant
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand
+  name: CreateTenantCommand
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html
+  commentId: T:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand
+  nameWithType: CreateTenantCommand
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.#ctor(System.String,System.String,System.String)
+  name: CreateTenantCommand(string, string, string)
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html#Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand__ctor_System_String_System_String_System_String_
+  commentId: M:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.#ctor(System.String,System.String,System.String)
+  name.vb: New(String, String, String)
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.CreateTenantCommand(string, string, string)
+  fullName.vb: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.New(String, String, String)
+  nameWithType: CreateTenantCommand.CreateTenantCommand(string, string, string)
+  nameWithType.vb: CreateTenantCommand.New(String, String, String)
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.#ctor*
+  name: CreateTenantCommand
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html#Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand__ctor_
+  commentId: Overload:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.CreateTenantCommand
+  fullName.vb: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.New
+  nameWithType: CreateTenantCommand.CreateTenantCommand
+  nameWithType.vb: CreateTenantCommand.New
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Code
+  name: Code
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html#Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand_Code
+  commentId: P:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Code
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Code
+  nameWithType: CreateTenantCommand.Code
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Code*
+  name: Code
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html#Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand_Code_
+  commentId: Overload:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Code
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Code
+  nameWithType: CreateTenantCommand.Code
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Description
+  name: Description
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html#Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand_Description
+  commentId: P:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Description
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Description
+  nameWithType: CreateTenantCommand.Description
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Description*
+  name: Description
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html#Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand_Description_
+  commentId: Overload:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Description
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Description
+  nameWithType: CreateTenantCommand.Description
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Name
+  name: Name
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html#Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand_Name
+  commentId: P:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Name
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Name
+  nameWithType: CreateTenantCommand.Name
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Name*
+  name: Name
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html#Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand_Name_
+  commentId: Overload:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Name
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Name
+  nameWithType: CreateTenantCommand.Name
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator
+  name: CreateTenantCommandValidator
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.html
+  commentId: T:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator
+  nameWithType: CreateTenantCommandValidator
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.#ctor
+  name: CreateTenantCommandValidator()
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.html#Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommandValidator__ctor
+  commentId: M:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.#ctor
+  name.vb: New()
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.CreateTenantCommandValidator()
+  fullName.vb: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.New()
+  nameWithType: CreateTenantCommandValidator.CreateTenantCommandValidator()
+  nameWithType.vb: CreateTenantCommandValidator.New()
+- uid: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.#ctor*
+  name: CreateTenantCommandValidator
+  href: api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.html#Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommandValidator__ctor_
+  commentId: Overload:Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.CreateTenantCommandValidator
+  fullName.vb: Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.New
+  nameWithType: CreateTenantCommandValidator.CreateTenantCommandValidator
+  nameWithType.vb: CreateTenantCommandValidator.New
+- uid: Raftel.Application.Features.Tenants.GetAllTenants
+  name: Raftel.Application.Features.Tenants.GetAllTenants
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.html
+  commentId: N:Raftel.Application.Features.Tenants.GetAllTenants
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants
+  nameWithType: Raftel.Application.Features.Tenants.GetAllTenants
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery
+  name: GetAllTenantsQuery
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html
+  commentId: T:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery
+  nameWithType: GetAllTenantsQuery
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor
+  name: GetAllTenantsQuery()
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery__ctor
+  commentId: M:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor
+  name.vb: New()
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.GetAllTenantsQuery()
+  fullName.vb: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.New()
+  nameWithType: GetAllTenantsQuery.GetAllTenantsQuery()
+  nameWithType.vb: GetAllTenantsQuery.New()
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor*
+  name: GetAllTenantsQuery
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery__ctor_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.GetAllTenantsQuery
+  fullName.vb: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.New
+  nameWithType: GetAllTenantsQuery.GetAllTenantsQuery
+  nameWithType.vb: GetAllTenantsQuery.New
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse
+  name: GetAllTenantsResponse
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html
+  commentId: T:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse
+  nameWithType: GetAllTenantsResponse
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Code
+  name: Code
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsResponse_Code
+  commentId: P:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Code
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Code
+  nameWithType: GetAllTenantsResponse.Code
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Code*
+  name: Code
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsResponse_Code_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Code
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Code
+  nameWithType: GetAllTenantsResponse.Code
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Description
+  name: Description
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsResponse_Description
+  commentId: P:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Description
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Description
+  nameWithType: GetAllTenantsResponse.Description
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Description*
+  name: Description
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsResponse_Description_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Description
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Description
+  nameWithType: GetAllTenantsResponse.Description
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Id
+  name: Id
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsResponse_Id
+  commentId: P:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Id
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Id
+  nameWithType: GetAllTenantsResponse.Id
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Id*
+  name: Id
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsResponse_Id_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Id
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Id
+  nameWithType: GetAllTenantsResponse.Id
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Name
+  name: Name
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsResponse_Name
+  commentId: P:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Name
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Name
+  nameWithType: GetAllTenantsResponse.Name
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Name*
+  name: Name
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsResponse_Name_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Name
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.Name
+  nameWithType: GetAllTenantsResponse.Name
+- uid: Raftel.Application.Features.Tenants.GetCurrentTenant
+  name: Raftel.Application.Features.Tenants.GetCurrentTenant
+  href: api/Raftel.Application.Features.Tenants.GetCurrentTenant.html
+  commentId: N:Raftel.Application.Features.Tenants.GetCurrentTenant
+  fullName: Raftel.Application.Features.Tenants.GetCurrentTenant
+  nameWithType: Raftel.Application.Features.Tenants.GetCurrentTenant
+- uid: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery
+  name: GetCurrentTenantQuery
+  href: api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.html
+  commentId: T:Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery
+  fullName: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery
+  nameWithType: GetCurrentTenantQuery
+- uid: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.#ctor
+  name: GetCurrentTenantQuery()
+  href: api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.html#Raftel_Application_Features_Tenants_GetCurrentTenant_GetCurrentTenantQuery__ctor
+  commentId: M:Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.#ctor
+  name.vb: New()
+  fullName: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.GetCurrentTenantQuery()
+  fullName.vb: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.New()
+  nameWithType: GetCurrentTenantQuery.GetCurrentTenantQuery()
+  nameWithType.vb: GetCurrentTenantQuery.New()
+- uid: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.#ctor*
+  name: GetCurrentTenantQuery
+  href: api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.html#Raftel_Application_Features_Tenants_GetCurrentTenant_GetCurrentTenantQuery__ctor_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.GetCurrentTenantQuery
+  fullName.vb: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.New
+  nameWithType: GetCurrentTenantQuery.GetCurrentTenantQuery
+  nameWithType.vb: GetCurrentTenantQuery.New
+- uid: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse
+  name: GetCurrentTenantResponse
+  href: api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.html
+  commentId: T:Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse
+  fullName: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse
+  nameWithType: GetCurrentTenantResponse
+- uid: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.IsMultiTenant
+  name: IsMultiTenant
+  href: api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.html#Raftel_Application_Features_Tenants_GetCurrentTenant_GetCurrentTenantResponse_IsMultiTenant
+  commentId: P:Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.IsMultiTenant
+  fullName: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.IsMultiTenant
+  nameWithType: GetCurrentTenantResponse.IsMultiTenant
+- uid: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.IsMultiTenant*
+  name: IsMultiTenant
+  href: api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.html#Raftel_Application_Features_Tenants_GetCurrentTenant_GetCurrentTenantResponse_IsMultiTenant_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.IsMultiTenant
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.IsMultiTenant
+  nameWithType: GetCurrentTenantResponse.IsMultiTenant
+- uid: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.TenantId
+  name: TenantId
+  href: api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.html#Raftel_Application_Features_Tenants_GetCurrentTenant_GetCurrentTenantResponse_TenantId
+  commentId: P:Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.TenantId
+  fullName: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.TenantId
+  nameWithType: GetCurrentTenantResponse.TenantId
+- uid: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.TenantId*
+  name: TenantId
+  href: api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.html#Raftel_Application_Features_Tenants_GetCurrentTenant_GetCurrentTenantResponse_TenantId_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.TenantId
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.TenantId
+  nameWithType: GetCurrentTenantResponse.TenantId
+- uid: Raftel.Application.Features.Tenants.GetTenant
+  name: Raftel.Application.Features.Tenants.GetTenant
+  href: api/Raftel.Application.Features.Tenants.GetTenant.html
+  commentId: N:Raftel.Application.Features.Tenants.GetTenant
+  fullName: Raftel.Application.Features.Tenants.GetTenant
+  nameWithType: Raftel.Application.Features.Tenants.GetTenant
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery
+  name: GetTenantQuery
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.html
+  commentId: T:Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery
+  nameWithType: GetTenantQuery
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.#ctor(System.Guid)
+  name: GetTenantQuery(Guid)
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantQuery__ctor_System_Guid_
+  commentId: M:Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.GetTenantQuery(System.Guid)
+  fullName.vb: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.New(System.Guid)
+  nameWithType: GetTenantQuery.GetTenantQuery(Guid)
+  nameWithType.vb: GetTenantQuery.New(Guid)
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.#ctor*
+  name: GetTenantQuery
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantQuery__ctor_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.GetTenantQuery
+  fullName.vb: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.New
+  nameWithType: GetTenantQuery.GetTenantQuery
+  nameWithType.vb: GetTenantQuery.New
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.Id
+  name: Id
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantQuery_Id
+  commentId: P:Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.Id
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.Id
+  nameWithType: GetTenantQuery.Id
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.Id*
+  name: Id
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantQuery_Id_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.Id
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.Id
+  nameWithType: GetTenantQuery.Id
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse
+  name: GetTenantResponse
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html
+  commentId: T:Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse
+  nameWithType: GetTenantResponse
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Code
+  name: Code
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantResponse_Code
+  commentId: P:Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Code
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Code
+  nameWithType: GetTenantResponse.Code
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Code*
+  name: Code
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantResponse_Code_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Code
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Code
+  nameWithType: GetTenantResponse.Code
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Description
+  name: Description
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantResponse_Description
+  commentId: P:Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Description
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Description
+  nameWithType: GetTenantResponse.Description
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Description*
+  name: Description
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantResponse_Description_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Description
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Description
+  nameWithType: GetTenantResponse.Description
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Id
+  name: Id
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantResponse_Id
+  commentId: P:Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Id
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Id
+  nameWithType: GetTenantResponse.Id
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Id*
+  name: Id
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantResponse_Id_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Id
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Id
+  nameWithType: GetTenantResponse.Id
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Name
+  name: Name
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantResponse_Name
+  commentId: P:Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Name
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Name
+  nameWithType: GetTenantResponse.Name
+- uid: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Name*
+  name: Name
+  href: api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html#Raftel_Application_Features_Tenants_GetTenant_GetTenantResponse_Name_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Name
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Name
+  nameWithType: GetTenantResponse.Name
 - uid: Raftel.Application.Features.Users.GetUserProfile
   name: Raftel.Application.Features.Users.GetUserProfile
   href: api/Raftel.Application.Features.Users.GetUserProfile.html
@@ -2193,6 +2605,168 @@ references:
   fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).CType
   nameWithType: TypedId<T>.implicit operator
   nameWithType.vb: TypedId(Of T).CType
+- uid: Raftel.Domain.Features.Tenants
+  name: Raftel.Domain.Features.Tenants
+  href: api/Raftel.Domain.Features.Tenants.html
+  commentId: N:Raftel.Domain.Features.Tenants
+  fullName: Raftel.Domain.Features.Tenants
+  nameWithType: Raftel.Domain.Features.Tenants
+- uid: Raftel.Domain.Features.Tenants.ITenantsRepository
+  name: ITenantsRepository
+  href: api/Raftel.Domain.Features.Tenants.ITenantsRepository.html
+  commentId: T:Raftel.Domain.Features.Tenants.ITenantsRepository
+  fullName: Raftel.Domain.Features.Tenants.ITenantsRepository
+  nameWithType: ITenantsRepository
+- uid: Raftel.Domain.Features.Tenants.ITenantsRepository.CodeIsUniqueAsync(Raftel.Domain.ValueObjects.Code,System.Threading.CancellationToken)
+  name: CodeIsUniqueAsync(Code, CancellationToken)
+  href: api/Raftel.Domain.Features.Tenants.ITenantsRepository.html#Raftel_Domain_Features_Tenants_ITenantsRepository_CodeIsUniqueAsync_Raftel_Domain_ValueObjects_Code_System_Threading_CancellationToken_
+  commentId: M:Raftel.Domain.Features.Tenants.ITenantsRepository.CodeIsUniqueAsync(Raftel.Domain.ValueObjects.Code,System.Threading.CancellationToken)
+  fullName: Raftel.Domain.Features.Tenants.ITenantsRepository.CodeIsUniqueAsync(Raftel.Domain.ValueObjects.Code, System.Threading.CancellationToken)
+  nameWithType: ITenantsRepository.CodeIsUniqueAsync(Code, CancellationToken)
+- uid: Raftel.Domain.Features.Tenants.ITenantsRepository.CodeIsUniqueAsync*
+  name: CodeIsUniqueAsync
+  href: api/Raftel.Domain.Features.Tenants.ITenantsRepository.html#Raftel_Domain_Features_Tenants_ITenantsRepository_CodeIsUniqueAsync_
+  commentId: Overload:Raftel.Domain.Features.Tenants.ITenantsRepository.CodeIsUniqueAsync
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Tenants.ITenantsRepository.CodeIsUniqueAsync
+  nameWithType: ITenantsRepository.CodeIsUniqueAsync
+- uid: Raftel.Domain.Features.Tenants.Tenant
+  name: Tenant
+  href: api/Raftel.Domain.Features.Tenants.Tenant.html
+  commentId: T:Raftel.Domain.Features.Tenants.Tenant
+  fullName: Raftel.Domain.Features.Tenants.Tenant
+  nameWithType: Tenant
+- uid: Raftel.Domain.Features.Tenants.Tenant.Code
+  name: Code
+  href: api/Raftel.Domain.Features.Tenants.Tenant.html#Raftel_Domain_Features_Tenants_Tenant_Code
+  commentId: P:Raftel.Domain.Features.Tenants.Tenant.Code
+  fullName: Raftel.Domain.Features.Tenants.Tenant.Code
+  nameWithType: Tenant.Code
+- uid: Raftel.Domain.Features.Tenants.Tenant.Code*
+  name: Code
+  href: api/Raftel.Domain.Features.Tenants.Tenant.html#Raftel_Domain_Features_Tenants_Tenant_Code_
+  commentId: Overload:Raftel.Domain.Features.Tenants.Tenant.Code
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Tenants.Tenant.Code
+  nameWithType: Tenant.Code
+- uid: Raftel.Domain.Features.Tenants.Tenant.Create(System.String,System.String,System.String)
+  name: Create(string, string, string)
+  href: api/Raftel.Domain.Features.Tenants.Tenant.html#Raftel_Domain_Features_Tenants_Tenant_Create_System_String_System_String_System_String_
+  commentId: M:Raftel.Domain.Features.Tenants.Tenant.Create(System.String,System.String,System.String)
+  name.vb: Create(String, String, String)
+  fullName: Raftel.Domain.Features.Tenants.Tenant.Create(string, string, string)
+  fullName.vb: Raftel.Domain.Features.Tenants.Tenant.Create(String, String, String)
+  nameWithType: Tenant.Create(string, string, string)
+  nameWithType.vb: Tenant.Create(String, String, String)
+- uid: Raftel.Domain.Features.Tenants.Tenant.Create*
+  name: Create
+  href: api/Raftel.Domain.Features.Tenants.Tenant.html#Raftel_Domain_Features_Tenants_Tenant_Create_
+  commentId: Overload:Raftel.Domain.Features.Tenants.Tenant.Create
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Tenants.Tenant.Create
+  nameWithType: Tenant.Create
+- uid: Raftel.Domain.Features.Tenants.Tenant.Description
+  name: Description
+  href: api/Raftel.Domain.Features.Tenants.Tenant.html#Raftel_Domain_Features_Tenants_Tenant_Description
+  commentId: P:Raftel.Domain.Features.Tenants.Tenant.Description
+  fullName: Raftel.Domain.Features.Tenants.Tenant.Description
+  nameWithType: Tenant.Description
+- uid: Raftel.Domain.Features.Tenants.Tenant.Description*
+  name: Description
+  href: api/Raftel.Domain.Features.Tenants.Tenant.html#Raftel_Domain_Features_Tenants_Tenant_Description_
+  commentId: Overload:Raftel.Domain.Features.Tenants.Tenant.Description
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Tenants.Tenant.Description
+  nameWithType: Tenant.Description
+- uid: Raftel.Domain.Features.Tenants.Tenant.Name
+  name: Name
+  href: api/Raftel.Domain.Features.Tenants.Tenant.html#Raftel_Domain_Features_Tenants_Tenant_Name
+  commentId: P:Raftel.Domain.Features.Tenants.Tenant.Name
+  fullName: Raftel.Domain.Features.Tenants.Tenant.Name
+  nameWithType: Tenant.Name
+- uid: Raftel.Domain.Features.Tenants.Tenant.Name*
+  name: Name
+  href: api/Raftel.Domain.Features.Tenants.Tenant.html#Raftel_Domain_Features_Tenants_Tenant_Name_
+  commentId: Overload:Raftel.Domain.Features.Tenants.Tenant.Name
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Tenants.Tenant.Name
+  nameWithType: Tenant.Name
+- uid: Raftel.Domain.Features.Tenants.TenantErrors
+  name: TenantErrors
+  href: api/Raftel.Domain.Features.Tenants.TenantErrors.html
+  commentId: T:Raftel.Domain.Features.Tenants.TenantErrors
+  fullName: Raftel.Domain.Features.Tenants.TenantErrors
+  nameWithType: TenantErrors
+- uid: Raftel.Domain.Features.Tenants.TenantErrors.DuplicatedCode
+  name: DuplicatedCode
+  href: api/Raftel.Domain.Features.Tenants.TenantErrors.html#Raftel_Domain_Features_Tenants_TenantErrors_DuplicatedCode
+  commentId: P:Raftel.Domain.Features.Tenants.TenantErrors.DuplicatedCode
+  fullName: Raftel.Domain.Features.Tenants.TenantErrors.DuplicatedCode
+  nameWithType: TenantErrors.DuplicatedCode
+- uid: Raftel.Domain.Features.Tenants.TenantErrors.DuplicatedCode*
+  name: DuplicatedCode
+  href: api/Raftel.Domain.Features.Tenants.TenantErrors.html#Raftel_Domain_Features_Tenants_TenantErrors_DuplicatedCode_
+  commentId: Overload:Raftel.Domain.Features.Tenants.TenantErrors.DuplicatedCode
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Tenants.TenantErrors.DuplicatedCode
+  nameWithType: TenantErrors.DuplicatedCode
+- uid: Raftel.Domain.Features.Tenants.TenantErrors.NameRequired
+  name: NameRequired
+  href: api/Raftel.Domain.Features.Tenants.TenantErrors.html#Raftel_Domain_Features_Tenants_TenantErrors_NameRequired
+  commentId: P:Raftel.Domain.Features.Tenants.TenantErrors.NameRequired
+  fullName: Raftel.Domain.Features.Tenants.TenantErrors.NameRequired
+  nameWithType: TenantErrors.NameRequired
+- uid: Raftel.Domain.Features.Tenants.TenantErrors.NameRequired*
+  name: NameRequired
+  href: api/Raftel.Domain.Features.Tenants.TenantErrors.html#Raftel_Domain_Features_Tenants_TenantErrors_NameRequired_
+  commentId: Overload:Raftel.Domain.Features.Tenants.TenantErrors.NameRequired
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Tenants.TenantErrors.NameRequired
+  nameWithType: TenantErrors.NameRequired
+- uid: Raftel.Domain.Features.Tenants.ValueObjects
+  name: Raftel.Domain.Features.Tenants.ValueObjects
+  href: api/Raftel.Domain.Features.Tenants.ValueObjects.html
+  commentId: N:Raftel.Domain.Features.Tenants.ValueObjects
+  fullName: Raftel.Domain.Features.Tenants.ValueObjects
+  nameWithType: Raftel.Domain.Features.Tenants.ValueObjects
+- uid: Raftel.Domain.Features.Tenants.ValueObjects.TenantId
+  name: TenantId
+  href: api/Raftel.Domain.Features.Tenants.ValueObjects.TenantId.html
+  commentId: T:Raftel.Domain.Features.Tenants.ValueObjects.TenantId
+  fullName: Raftel.Domain.Features.Tenants.ValueObjects.TenantId
+  nameWithType: TenantId
+- uid: Raftel.Domain.Features.Tenants.ValueObjects.TenantId.#ctor(System.Guid)
+  name: TenantId(Guid)
+  href: api/Raftel.Domain.Features.Tenants.ValueObjects.TenantId.html#Raftel_Domain_Features_Tenants_ValueObjects_TenantId__ctor_System_Guid_
+  commentId: M:Raftel.Domain.Features.Tenants.ValueObjects.TenantId.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: Raftel.Domain.Features.Tenants.ValueObjects.TenantId.TenantId(System.Guid)
+  fullName.vb: Raftel.Domain.Features.Tenants.ValueObjects.TenantId.New(System.Guid)
+  nameWithType: TenantId.TenantId(Guid)
+  nameWithType.vb: TenantId.New(Guid)
+- uid: Raftel.Domain.Features.Tenants.ValueObjects.TenantId.#ctor*
+  name: TenantId
+  href: api/Raftel.Domain.Features.Tenants.ValueObjects.TenantId.html#Raftel_Domain_Features_Tenants_ValueObjects_TenantId__ctor_
+  commentId: Overload:Raftel.Domain.Features.Tenants.ValueObjects.TenantId.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Features.Tenants.ValueObjects.TenantId.TenantId
+  fullName.vb: Raftel.Domain.Features.Tenants.ValueObjects.TenantId.New
+  nameWithType: TenantId.TenantId
+  nameWithType.vb: TenantId.New
+- uid: Raftel.Domain.Features.Tenants.ValueObjects.TenantId.New
+  name: New()
+  href: api/Raftel.Domain.Features.Tenants.ValueObjects.TenantId.html#Raftel_Domain_Features_Tenants_ValueObjects_TenantId_New
+  commentId: M:Raftel.Domain.Features.Tenants.ValueObjects.TenantId.New
+  fullName: Raftel.Domain.Features.Tenants.ValueObjects.TenantId.New()
+  nameWithType: TenantId.New()
+- uid: Raftel.Domain.Features.Tenants.ValueObjects.TenantId.New*
+  name: New
+  href: api/Raftel.Domain.Features.Tenants.ValueObjects.TenantId.html#Raftel_Domain_Features_Tenants_ValueObjects_TenantId_New_
+  commentId: Overload:Raftel.Domain.Features.Tenants.ValueObjects.TenantId.New
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Tenants.ValueObjects.TenantId.New
+  nameWithType: TenantId.New
 - uid: Raftel.Domain.Features.Users
   name: Raftel.Domain.Features.Users
   href: api/Raftel.Domain.Features.Users.html
@@ -2736,6 +3310,72 @@ references:
   fullName.vb: Raftel.Domain.Validators.Validator(Of TModel).Validate
   nameWithType: Validator<TModel>.Validate
   nameWithType.vb: Validator(Of TModel).Validate
+- uid: Raftel.Domain.ValueObjects
+  name: Raftel.Domain.ValueObjects
+  href: api/Raftel.Domain.ValueObjects.html
+  commentId: N:Raftel.Domain.ValueObjects
+  fullName: Raftel.Domain.ValueObjects
+  nameWithType: Raftel.Domain.ValueObjects
+- uid: Raftel.Domain.ValueObjects.Code
+  name: Code
+  href: api/Raftel.Domain.ValueObjects.Code.html
+  commentId: T:Raftel.Domain.ValueObjects.Code
+  fullName: Raftel.Domain.ValueObjects.Code
+  nameWithType: Code
+- uid: Raftel.Domain.ValueObjects.Code.Create(System.String)
+  name: Create(string)
+  href: api/Raftel.Domain.ValueObjects.Code.html#Raftel_Domain_ValueObjects_Code_Create_System_String_
+  commentId: M:Raftel.Domain.ValueObjects.Code.Create(System.String)
+  name.vb: Create(String)
+  fullName: Raftel.Domain.ValueObjects.Code.Create(string)
+  fullName.vb: Raftel.Domain.ValueObjects.Code.Create(String)
+  nameWithType: Code.Create(string)
+  nameWithType.vb: Code.Create(String)
+- uid: Raftel.Domain.ValueObjects.Code.Create*
+  name: Create
+  href: api/Raftel.Domain.ValueObjects.Code.html#Raftel_Domain_ValueObjects_Code_Create_
+  commentId: Overload:Raftel.Domain.ValueObjects.Code.Create
+  isSpec: "True"
+  fullName: Raftel.Domain.ValueObjects.Code.Create
+  nameWithType: Code.Create
+- uid: Raftel.Domain.ValueObjects.Code.op_Explicit(System.String)~Raftel.Domain.ValueObjects.Code
+  name: explicit operator Code(string)
+  href: api/Raftel.Domain.ValueObjects.Code.html#Raftel_Domain_ValueObjects_Code_op_Explicit_System_String__Raftel_Domain_ValueObjects_Code
+  commentId: M:Raftel.Domain.ValueObjects.Code.op_Explicit(System.String)~Raftel.Domain.ValueObjects.Code
+  name.vb: CType(String)
+  fullName: Raftel.Domain.ValueObjects.Code.explicit operator Raftel.Domain.ValueObjects.Code(string)
+  fullName.vb: Raftel.Domain.ValueObjects.Code.CType(String)
+  nameWithType: Code.explicit operator Code(string)
+  nameWithType.vb: Code.CType(String)
+- uid: Raftel.Domain.ValueObjects.Code.op_Explicit*
+  name: explicit operator
+  href: api/Raftel.Domain.ValueObjects.Code.html#Raftel_Domain_ValueObjects_Code_op_Explicit_
+  commentId: Overload:Raftel.Domain.ValueObjects.Code.op_Explicit
+  isSpec: "True"
+  name.vb: CType
+  fullName: Raftel.Domain.ValueObjects.Code.explicit operator
+  fullName.vb: Raftel.Domain.ValueObjects.Code.CType
+  nameWithType: Code.explicit operator
+  nameWithType.vb: Code.CType
+- uid: Raftel.Domain.ValueObjects.Code.op_Implicit(Raftel.Domain.ValueObjects.Code)~System.String
+  name: implicit operator string(Code)
+  href: api/Raftel.Domain.ValueObjects.Code.html#Raftel_Domain_ValueObjects_Code_op_Implicit_Raftel_Domain_ValueObjects_Code__System_String
+  commentId: M:Raftel.Domain.ValueObjects.Code.op_Implicit(Raftel.Domain.ValueObjects.Code)~System.String
+  name.vb: CType(Code)
+  fullName: Raftel.Domain.ValueObjects.Code.implicit operator string(Raftel.Domain.ValueObjects.Code)
+  fullName.vb: Raftel.Domain.ValueObjects.Code.CType(Raftel.Domain.ValueObjects.Code)
+  nameWithType: Code.implicit operator string(Code)
+  nameWithType.vb: Code.CType(Code)
+- uid: Raftel.Domain.ValueObjects.Code.op_Implicit*
+  name: implicit operator
+  href: api/Raftel.Domain.ValueObjects.Code.html#Raftel_Domain_ValueObjects_Code_op_Implicit_
+  commentId: Overload:Raftel.Domain.ValueObjects.Code.op_Implicit
+  isSpec: "True"
+  name.vb: CType
+  fullName: Raftel.Domain.ValueObjects.Code.implicit operator
+  fullName.vb: Raftel.Domain.ValueObjects.Code.CType
+  nameWithType: Code.implicit operator
+  nameWithType.vb: Code.CType
 - uid: Raftel.Infrastructure
   name: Raftel.Infrastructure
   href: api/Raftel.Infrastructure.html
@@ -2779,6 +3419,28 @@ references:
   commentId: N:Raftel.Infrastructure.Data.Configuration
   fullName: Raftel.Infrastructure.Data.Configuration
   nameWithType: Raftel.Infrastructure.Data.Configuration
+- uid: Raftel.Infrastructure.Data.Configuration.TenantConfiguration
+  name: TenantConfiguration
+  href: api/Raftel.Infrastructure.Data.Configuration.TenantConfiguration.html
+  commentId: T:Raftel.Infrastructure.Data.Configuration.TenantConfiguration
+  fullName: Raftel.Infrastructure.Data.Configuration.TenantConfiguration
+  nameWithType: TenantConfiguration
+- uid: Raftel.Infrastructure.Data.Configuration.TenantConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Features.Tenants.Tenant})
+  name: Configure(EntityTypeBuilder<Tenant>)
+  href: api/Raftel.Infrastructure.Data.Configuration.TenantConfiguration.html#Raftel_Infrastructure_Data_Configuration_TenantConfiguration_Configure_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder_Raftel_Domain_Features_Tenants_Tenant__
+  commentId: M:Raftel.Infrastructure.Data.Configuration.TenantConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Features.Tenants.Tenant})
+  name.vb: Configure(EntityTypeBuilder(Of Tenant))
+  fullName: Raftel.Infrastructure.Data.Configuration.TenantConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Raftel.Domain.Features.Tenants.Tenant>)
+  fullName.vb: Raftel.Infrastructure.Data.Configuration.TenantConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of Raftel.Domain.Features.Tenants.Tenant))
+  nameWithType: TenantConfiguration.Configure(EntityTypeBuilder<Tenant>)
+  nameWithType.vb: TenantConfiguration.Configure(EntityTypeBuilder(Of Tenant))
+- uid: Raftel.Infrastructure.Data.Configuration.TenantConfiguration.Configure*
+  name: Configure
+  href: api/Raftel.Infrastructure.Data.Configuration.TenantConfiguration.html#Raftel_Infrastructure_Data_Configuration_TenantConfiguration_Configure_
+  commentId: Overload:Raftel.Infrastructure.Data.Configuration.TenantConfiguration.Configure
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Configuration.TenantConfiguration.Configure
+  nameWithType: TenantConfiguration.Configure
 - uid: Raftel.Infrastructure.Data.Configuration.UserConfiguration
   name: UserConfiguration
   href: api/Raftel.Infrastructure.Data.Configuration.UserConfiguration.html
@@ -2964,6 +3626,12 @@ references:
   commentId: T:Raftel.Infrastructure.Data.Filters.ISoftDeleteFilter
   fullName: Raftel.Infrastructure.Data.Filters.ISoftDeleteFilter
   nameWithType: ISoftDeleteFilter
+- uid: Raftel.Infrastructure.Data.Filters.ITenantFilter
+  name: ITenantFilter
+  href: api/Raftel.Infrastructure.Data.Filters.ITenantFilter.html
+  commentId: T:Raftel.Infrastructure.Data.Filters.ITenantFilter
+  fullName: Raftel.Infrastructure.Data.Filters.ITenantFilter
+  nameWithType: ITenantFilter
 - uid: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions
   name: IEntityTypeConfigurationExtensions
   href: api/Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html
@@ -2986,6 +3654,22 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasSoftDelete(Of TEntity)(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of TEntity))
   nameWithType: IEntityTypeConfigurationExtensions.HasSoftDelete<TEntity>(EntityTypeBuilder<TEntity>)
   nameWithType.vb: IEntityTypeConfigurationExtensions.HasSoftDelete(Of TEntity)(EntityTypeBuilder(Of TEntity))
+- uid: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasTenantId*
+  name: HasTenantId
+  href: api/Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html#Raftel_Infrastructure_Data_IEntityTypeConfigurationExtensions_HasTenantId_
+  commentId: Overload:Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasTenantId
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasTenantId
+  nameWithType: IEntityTypeConfigurationExtensions.HasTenantId
+- uid: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasTenantId``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0})
+  name: HasTenantId<TEntity>(EntityTypeBuilder<TEntity>)
+  href: api/Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html#Raftel_Infrastructure_Data_IEntityTypeConfigurationExtensions_HasTenantId__1_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder___0__
+  commentId: M:Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasTenantId``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0})
+  name.vb: HasTenantId(Of TEntity)(EntityTypeBuilder(Of TEntity))
+  fullName: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasTenantId<TEntity>(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<TEntity>)
+  fullName.vb: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasTenantId(Of TEntity)(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of TEntity))
+  nameWithType: IEntityTypeConfigurationExtensions.HasTenantId<TEntity>(EntityTypeBuilder<TEntity>)
+  nameWithType.vb: IEntityTypeConfigurationExtensions.HasTenantId(Of TEntity)(EntityTypeBuilder(Of TEntity))
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1
   name: RaftelDbContext<TDbContext>
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html
@@ -3022,6 +3706,15 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New(Microsoft.EntityFrameworkCore.DbContextOptions(Of TDbContext), Raftel.Infrastructure.Data.Filters.IDataFilter)
   nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter)
   nameWithType.vb: RaftelDbContext(Of TDbContext).New(DbContextOptions(Of TDbContext), IDataFilter)
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0},Raftel.Infrastructure.Data.Filters.IDataFilter,Raftel.Application.Abstractions.Multitenancy.ICurrentTenant)
+  name: RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter, ICurrentTenant)
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__Raftel_Infrastructure_Data_Filters_IDataFilter_Raftel_Application_Abstractions_Multitenancy_ICurrentTenant_
+  commentId: M:Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0},Raftel.Infrastructure.Data.Filters.IDataFilter,Raftel.Application.Abstractions.Multitenancy.ICurrentTenant)
+  name.vb: New(DbContextOptions(Of TDbContext), IDataFilter, ICurrentTenant)
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.RaftelDbContext(Microsoft.EntityFrameworkCore.DbContextOptions<TDbContext>, Raftel.Infrastructure.Data.Filters.IDataFilter, Raftel.Application.Abstractions.Multitenancy.ICurrentTenant)
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New(Microsoft.EntityFrameworkCore.DbContextOptions(Of TDbContext), Raftel.Infrastructure.Data.Filters.IDataFilter, Raftel.Application.Abstractions.Multitenancy.ICurrentTenant)
+  nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter, ICurrentTenant)
+  nameWithType.vb: RaftelDbContext(Of TDbContext).New(DbContextOptions(Of TDbContext), IDataFilter, ICurrentTenant)
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor*
   name: RaftelDbContext
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_
@@ -3049,6 +3742,23 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).CommitAsync
   nameWithType: RaftelDbContext<TDbContext>.CommitAsync
   nameWithType.vb: RaftelDbContext(Of TDbContext).CommitAsync
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.CurrentTenantId
+  name: CurrentTenantId
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_CurrentTenantId
+  commentId: P:Raftel.Infrastructure.Data.RaftelDbContext`1.CurrentTenantId
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.CurrentTenantId
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).CurrentTenantId
+  nameWithType: RaftelDbContext<TDbContext>.CurrentTenantId
+  nameWithType.vb: RaftelDbContext(Of TDbContext).CurrentTenantId
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.CurrentTenantId*
+  name: CurrentTenantId
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_CurrentTenantId_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.CurrentTenantId
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.CurrentTenantId
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).CurrentTenantId
+  nameWithType: RaftelDbContext<TDbContext>.CurrentTenantId
+  nameWithType.vb: RaftelDbContext(Of TDbContext).CurrentTenantId
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.IsSoftDeleteFilterEnabled
   name: IsSoftDeleteFilterEnabled
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_IsSoftDeleteFilterEnabled
@@ -3066,6 +3776,23 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).IsSoftDeleteFilterEnabled
   nameWithType: RaftelDbContext<TDbContext>.IsSoftDeleteFilterEnabled
   nameWithType.vb: RaftelDbContext(Of TDbContext).IsSoftDeleteFilterEnabled
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.IsTenantFilterEnabled
+  name: IsTenantFilterEnabled
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_IsTenantFilterEnabled
+  commentId: P:Raftel.Infrastructure.Data.RaftelDbContext`1.IsTenantFilterEnabled
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.IsTenantFilterEnabled
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).IsTenantFilterEnabled
+  nameWithType: RaftelDbContext<TDbContext>.IsTenantFilterEnabled
+  nameWithType.vb: RaftelDbContext(Of TDbContext).IsTenantFilterEnabled
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.IsTenantFilterEnabled*
+  name: IsTenantFilterEnabled
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_IsTenantFilterEnabled_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.IsTenantFilterEnabled
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.IsTenantFilterEnabled
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).IsTenantFilterEnabled
+  nameWithType: RaftelDbContext<TDbContext>.IsTenantFilterEnabled
+  nameWithType.vb: RaftelDbContext(Of TDbContext).IsTenantFilterEnabled
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)
   name: OnModelCreating(ModelBuilder)
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_OnModelCreating_Microsoft_EntityFrameworkCore_ModelBuilder_
@@ -3083,6 +3810,23 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).OnModelCreating
   nameWithType: RaftelDbContext<TDbContext>.OnModelCreating
   nameWithType.vb: RaftelDbContext(Of TDbContext).OnModelCreating
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.Tenant
+  name: Tenant
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_Tenant
+  commentId: P:Raftel.Infrastructure.Data.RaftelDbContext`1.Tenant
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.Tenant
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).Tenant
+  nameWithType: RaftelDbContext<TDbContext>.Tenant
+  nameWithType.vb: RaftelDbContext(Of TDbContext).Tenant
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.Tenant*
+  name: Tenant
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_Tenant_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.Tenant
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.Tenant
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).Tenant
+  nameWithType: RaftelDbContext<TDbContext>.Tenant
+  nameWithType.vb: RaftelDbContext(Of TDbContext).Tenant
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.User
   name: User
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_User
@@ -3112,6 +3856,12 @@ references:
   commentId: F:Raftel.Infrastructure.Data.ShadowPropertyNames.IsDeleted
   fullName: Raftel.Infrastructure.Data.ShadowPropertyNames.IsDeleted
   nameWithType: ShadowPropertyNames.IsDeleted
+- uid: Raftel.Infrastructure.Data.ShadowPropertyNames.TenantId
+  name: TenantId
+  href: api/Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_TenantId
+  commentId: F:Raftel.Infrastructure.Data.ShadowPropertyNames.TenantId
+  fullName: Raftel.Infrastructure.Data.ShadowPropertyNames.TenantId
+  nameWithType: ShadowPropertyNames.TenantId
 - uid: Raftel.Infrastructure.DependencyInjection
   name: DependencyInjection
   href: api/Raftel.Infrastructure.DependencyInjection.html
@@ -3134,6 +3884,31 @@ references:
   fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String)
   nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string)
   nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String)
+- uid: Raftel.Infrastructure.Multitenancy.Middleware
+  name: Raftel.Infrastructure.Multitenancy.Middleware
+  href: api/Raftel.Infrastructure.Multitenancy.Middleware.html
+  commentId: N:Raftel.Infrastructure.Multitenancy.Middleware
+  fullName: Raftel.Infrastructure.Multitenancy.Middleware
+  nameWithType: Raftel.Infrastructure.Multitenancy.Middleware
+- uid: Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions
+  name: TenantMiddlewareExtensions
+  href: api/Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.html
+  commentId: T:Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions
+  fullName: Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions
+  nameWithType: TenantMiddlewareExtensions
+- uid: Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.UseTenantMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  name: UseTenantMiddleware(IApplicationBuilder)
+  href: api/Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.html#Raftel_Infrastructure_Multitenancy_Middleware_TenantMiddlewareExtensions_UseTenantMiddleware_Microsoft_AspNetCore_Builder_IApplicationBuilder_
+  commentId: M:Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.UseTenantMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  fullName: Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.UseTenantMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  nameWithType: TenantMiddlewareExtensions.UseTenantMiddleware(IApplicationBuilder)
+- uid: Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.UseTenantMiddleware*
+  name: UseTenantMiddleware
+  href: api/Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.html#Raftel_Infrastructure_Multitenancy_Middleware_TenantMiddlewareExtensions_UseTenantMiddleware_
+  commentId: Overload:Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.UseTenantMiddleware
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.UseTenantMiddleware
+  nameWithType: TenantMiddlewareExtensions.UseTenantMiddleware
 - uid: Raftel.Shared
   name: Raftel.Shared
   href: api/Raftel.Shared.html

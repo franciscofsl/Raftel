@@ -49,6 +49,16 @@
     "title": "Namespace Raftel.Api.Server.AutoEndpoints | Raftel",
     "summary": "Namespace Raftel.Api.Server.AutoEndpoints Classes AutoEndpointGroupExtensions CommandDefinition CommandEndpointMapper QueryDefinition QueryEndpointMapper RouteOptions"
   },
+  "api/Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.html": {
+    "href": "api/Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.html",
+    "title": "Class TenantsDependencyInjection | Raftel",
+    "summary": "Class TenantsDependencyInjection Namespace Raftel.Api.Server.Features.Tenants Assembly Raftel.Api.Server.dll public static class TenantsDependencyInjection Inheritance object TenantsDependencyInjection Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods AddRaftelTenants(IEndpointRouteBuilder) public static IEndpointRouteBuilder AddRaftelTenants(this IEndpointRouteBuilder app) Parameters app IEndpointRouteBuilder Returns IEndpointRouteBuilder"
+  },
+  "api/Raftel.Api.Server.Features.Tenants.html": {
+    "href": "api/Raftel.Api.Server.Features.Tenants.html",
+    "title": "Namespace Raftel.Api.Server.Features.Tenants | Raftel",
+    "summary": "Namespace Raftel.Api.Server.Features.Tenants Classes TenantsDependencyInjection"
+  },
   "api/Raftel.Api.Server.Features.Users.AuthorizationController.html": {
     "href": "api/Raftel.Api.Server.Features.Users.AuthorizationController.html",
     "title": "Class AuthorizationController | Raftel",
@@ -93,6 +103,16 @@
     "href": "api/Raftel.Application.Abstractions.IRequestHandler-2.html",
     "title": "Interface IRequestHandler<TRequest, TResponse> | Raftel",
     "summary": "Interface IRequestHandler<TRequest, TResponse> Namespace Raftel.Application.Abstractions Assembly Raftel.Application.dll Defines a handler that processes a request of type TRequest and returns a response of type TResponse. public interface IRequestHandler<TRequest, TResponse> where TRequest : IRequest<TResponse> Type Parameters TRequest The type of the request. TResponse The type of the response. Methods HandleAsync(TRequest, CancellationToken) Handles the given request asynchronously. Task<TResponse> HandleAsync(TRequest request, CancellationToken token = default) Parameters request TRequest The request to process. token CancellationToken Returns Task<TResponse> A task representing the asynchronous operation, containing the response."
+  },
+  "api/Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.html": {
+    "href": "api/Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.html",
+    "title": "Interface ICurrentTenant | Raftel",
+    "summary": "Interface ICurrentTenant Namespace Raftel.Application.Abstractions.Multitenancy Assembly Raftel.Application.dll Interface that represents the current tenant in a multitenancy system. public interface ICurrentTenant Properties Id Gets the identifier of the current tenant, if available. Guid? Id { get; } Property Value Guid? Methods Change(Guid?) Changes the context to the specified tenant. IDisposable Change(Guid? tenantId) Parameters tenantId Guid? The identifier of the tenant to switch the context to. Can be null. Returns IDisposable An IDisposable object that, when disposed, reverts the context change."
+  },
+  "api/Raftel.Application.Abstractions.Multitenancy.html": {
+    "href": "api/Raftel.Application.Abstractions.Multitenancy.html",
+    "title": "Namespace Raftel.Application.Abstractions.Multitenancy | Raftel",
+    "summary": "Namespace Raftel.Application.Abstractions.Multitenancy Interfaces ICurrentTenant Interface that represents the current tenant in a multitenancy system."
   },
   "api/Raftel.Application.Abstractions.RequestDispatcher.html": {
     "href": "api/Raftel.Application.Abstractions.RequestDispatcher.html",
@@ -148,6 +168,66 @@
     "href": "api/Raftel.Application.Exceptions.html",
     "title": "Namespace Raftel.Application.Exceptions | Raftel",
     "summary": "Namespace Raftel.Application.Exceptions Classes ValidationException Exception thrown when a validation process fails."
+  },
+  "api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html": {
+    "href": "api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html",
+    "title": "Class CreateTenantCommand | Raftel",
+    "summary": "Class CreateTenantCommand Namespace Raftel.Application.Features.Tenants.CreateTenant Assembly Raftel.Application.dll public sealed record CreateTenantCommand : ICommand, IRequest<Result>, IEquatable<CreateTenantCommand> Inheritance object CreateTenantCommand Implements ICommand IRequest<Result> IEquatable<CreateTenantCommand> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Constructors CreateTenantCommand(string, string, string) public CreateTenantCommand(string Name, string Code, string Description) Parameters Name string Code string Description string Properties Code public string Code { get; init; } Property Value string Description public string Description { get; init; } Property Value string Name public string Name { get; init; } Property Value string"
+  },
+  "api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.html": {
+    "href": "api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.html",
+    "title": "Class CreateTenantCommandValidator | Raftel",
+    "summary": "Class CreateTenantCommandValidator Namespace Raftel.Application.Features.Tenants.CreateTenant Assembly Raftel.Application.dll public sealed class CreateTenantCommandValidator : Validator<CreateTenantCommand> Inheritance object Validator<CreateTenantCommand> CreateTenantCommandValidator Inherited Members Validator<CreateTenantCommand>.Validate(CreateTenantCommand) object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Constructors CreateTenantCommandValidator() public CreateTenantCommandValidator()"
+  },
+  "api/Raftel.Application.Features.Tenants.CreateTenant.html": {
+    "href": "api/Raftel.Application.Features.Tenants.CreateTenant.html",
+    "title": "Namespace Raftel.Application.Features.Tenants.CreateTenant | Raftel",
+    "summary": "Namespace Raftel.Application.Features.Tenants.CreateTenant Classes CreateTenantCommand CreateTenantCommandValidator"
+  },
+  "api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html": {
+    "href": "api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html",
+    "title": "Class GetAllTenantsQuery | Raftel",
+    "summary": "Class GetAllTenantsQuery Namespace Raftel.Application.Features.Tenants.GetAllTenants Assembly Raftel.Application.dll public sealed record GetAllTenantsQuery : IQuery<List<GetAllTenantsResponse>>, IRequest<Result<List<GetAllTenantsResponse>>>, IEquatable<GetAllTenantsQuery> Inheritance object GetAllTenantsQuery Implements IQuery<List<GetAllTenantsResponse>> IRequest<Result<List<GetAllTenantsResponse>>> IEquatable<GetAllTenantsQuery> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Constructors GetAllTenantsQuery() public GetAllTenantsQuery()"
+  },
+  "api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html": {
+    "href": "api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html",
+    "title": "Class GetAllTenantsResponse | Raftel",
+    "summary": "Class GetAllTenantsResponse Namespace Raftel.Application.Features.Tenants.GetAllTenants Assembly Raftel.Application.dll public sealed class GetAllTenantsResponse Inheritance object GetAllTenantsResponse Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Properties Code public string Code { get; set; } Property Value string Description public string Description { get; set; } Property Value string Id public Guid Id { get; set; } Property Value Guid Name public string Name { get; set; } Property Value string"
+  },
+  "api/Raftel.Application.Features.Tenants.GetAllTenants.html": {
+    "href": "api/Raftel.Application.Features.Tenants.GetAllTenants.html",
+    "title": "Namespace Raftel.Application.Features.Tenants.GetAllTenants | Raftel",
+    "summary": "Namespace Raftel.Application.Features.Tenants.GetAllTenants Classes GetAllTenantsQuery GetAllTenantsResponse"
+  },
+  "api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.html": {
+    "href": "api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.html",
+    "title": "Class GetCurrentTenantQuery | Raftel",
+    "summary": "Class GetCurrentTenantQuery Namespace Raftel.Application.Features.Tenants.GetCurrentTenant Assembly Raftel.Application.dll public sealed record GetCurrentTenantQuery : IQuery<GetCurrentTenantResponse>, IRequest<Result<GetCurrentTenantResponse>>, IEquatable<GetCurrentTenantQuery> Inheritance object GetCurrentTenantQuery Implements IQuery<GetCurrentTenantResponse> IRequest<Result<GetCurrentTenantResponse>> IEquatable<GetCurrentTenantQuery> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Constructors GetCurrentTenantQuery() public GetCurrentTenantQuery()"
+  },
+  "api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.html": {
+    "href": "api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.html",
+    "title": "Class GetCurrentTenantResponse | Raftel",
+    "summary": "Class GetCurrentTenantResponse Namespace Raftel.Application.Features.Tenants.GetCurrentTenant Assembly Raftel.Application.dll public sealed class GetCurrentTenantResponse Inheritance object GetCurrentTenantResponse Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Properties IsMultiTenant public bool IsMultiTenant { get; set; } Property Value bool TenantId public Guid? TenantId { get; set; } Property Value Guid?"
+  },
+  "api/Raftel.Application.Features.Tenants.GetCurrentTenant.html": {
+    "href": "api/Raftel.Application.Features.Tenants.GetCurrentTenant.html",
+    "title": "Namespace Raftel.Application.Features.Tenants.GetCurrentTenant | Raftel",
+    "summary": "Namespace Raftel.Application.Features.Tenants.GetCurrentTenant Classes GetCurrentTenantQuery GetCurrentTenantResponse"
+  },
+  "api/Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.html": {
+    "href": "api/Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.html",
+    "title": "Class GetTenantQuery | Raftel",
+    "summary": "Class GetTenantQuery Namespace Raftel.Application.Features.Tenants.GetTenant Assembly Raftel.Application.dll public sealed record GetTenantQuery : IQuery<GetTenantResponse>, IRequest<Result<GetTenantResponse>>, IEquatable<GetTenantQuery> Inheritance object GetTenantQuery Implements IQuery<GetTenantResponse> IRequest<Result<GetTenantResponse>> IEquatable<GetTenantQuery> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Constructors GetTenantQuery(Guid) public GetTenantQuery(Guid Id) Parameters Id Guid Properties Id public Guid Id { get; init; } Property Value Guid"
+  },
+  "api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html": {
+    "href": "api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html",
+    "title": "Class GetTenantResponse | Raftel",
+    "summary": "Class GetTenantResponse Namespace Raftel.Application.Features.Tenants.GetTenant Assembly Raftel.Application.dll public sealed class GetTenantResponse Inheritance object GetTenantResponse Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Properties Code public string Code { get; set; } Property Value string Description public string Description { get; set; } Property Value string Id public Guid Id { get; set; } Property Value Guid Name public string Name { get; set; } Property Value string"
+  },
+  "api/Raftel.Application.Features.Tenants.GetTenant.html": {
+    "href": "api/Raftel.Application.Features.Tenants.GetTenant.html",
+    "title": "Namespace Raftel.Application.Features.Tenants.GetTenant | Raftel",
+    "summary": "Namespace Raftel.Application.Features.Tenants.GetTenant Classes GetTenantQuery GetTenantResponse"
   },
   "api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.html": {
     "href": "api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.html",
@@ -302,7 +382,7 @@
   "api/Raftel.Domain.BaseTypes.AggregateRoot-1.html": {
     "href": "api/Raftel.Domain.BaseTypes.AggregateRoot-1.html",
     "title": "Class AggregateRoot<TId> | Raftel",
-    "summary": "Class AggregateRoot<TId> Namespace Raftel.Domain.BaseTypes Assembly Raftel.Domain.dll Represents the root of an aggregate in the domain model. public abstract class AggregateRoot<TId> : Entity<TId> where TId : TypedId<Guid> Type Parameters TId The type of the aggregate's identifier. Inheritance object Entity<TId> AggregateRoot<TId> Derived User Inherited Members Entity<TId>.Id Entity<TId>.Equals(object) Entity<TId>.GetHashCode() object.Equals(object, object) object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors AggregateRoot() protected AggregateRoot() AggregateRoot(TId) Initializes a new instance of the AggregateRoot<TId> class. protected AggregateRoot(TId id) Parameters id TId The identifier of the aggregate root."
+    "summary": "Class AggregateRoot<TId> Namespace Raftel.Domain.BaseTypes Assembly Raftel.Domain.dll Represents the root of an aggregate in the domain model. public abstract class AggregateRoot<TId> : Entity<TId> where TId : TypedId<Guid> Type Parameters TId The type of the aggregate's identifier. Inheritance object Entity<TId> AggregateRoot<TId> Derived Tenant User Inherited Members Entity<TId>.Id Entity<TId>.Equals(object) Entity<TId>.GetHashCode() object.Equals(object, object) object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors AggregateRoot() protected AggregateRoot() AggregateRoot(TId) Initializes a new instance of the AggregateRoot<TId> class. protected AggregateRoot(TId id) Parameters id TId The identifier of the aggregate root."
   },
   "api/Raftel.Domain.BaseTypes.Entity-1.html": {
     "href": "api/Raftel.Domain.BaseTypes.Entity-1.html",
@@ -312,7 +392,7 @@
   "api/Raftel.Domain.BaseTypes.TypedGuidId.html": {
     "href": "api/Raftel.Domain.BaseTypes.TypedGuidId.html",
     "title": "Class TypedGuidId | Raftel",
-    "summary": "Class TypedGuidId Namespace Raftel.Domain.BaseTypes Assembly Raftel.Domain.dll Base class for identifiers that use Guid as the backing type. public abstract record TypedGuidId : TypedId<Guid>, IEquatable<TypedId<Guid>>, IEquatable<TypedGuidId> Inheritance object TypedId<Guid> TypedGuidId Implements IEquatable<TypedId<Guid>> IEquatable<TypedGuidId> Derived UserId Inherited Members TypedId<Guid>.ToString() TypedId<Guid>.Equals(TypedId<Guid>) TypedId<Guid>.GetHashCode() object.Equals(object) object.Equals(object, object) object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors TypedGuidId(Guid) Initializes a new instance of the TypedGuidId class. protected TypedGuidId(Guid value) Parameters value Guid The GUID value. Methods NewGuid() Generates a new GUID using version 7. public static Guid NewGuid() Returns Guid"
+    "summary": "Class TypedGuidId Namespace Raftel.Domain.BaseTypes Assembly Raftel.Domain.dll Base class for identifiers that use Guid as the backing type. public abstract record TypedGuidId : TypedId<Guid>, IEquatable<TypedId<Guid>>, IEquatable<TypedGuidId> Inheritance object TypedId<Guid> TypedGuidId Implements IEquatable<TypedId<Guid>> IEquatable<TypedGuidId> Derived TenantId UserId Inherited Members TypedId<Guid>.ToString() TypedId<Guid>.Equals(TypedId<Guid>) TypedId<Guid>.GetHashCode() object.Equals(object) object.Equals(object, object) object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) Constructors TypedGuidId(Guid) Initializes a new instance of the TypedGuidId class. protected TypedGuidId(Guid value) Parameters value Guid The GUID value. Methods NewGuid() Generates a new GUID using version 7. public static Guid NewGuid() Returns Guid"
   },
   "api/Raftel.Domain.BaseTypes.TypedId-1.html": {
     "href": "api/Raftel.Domain.BaseTypes.TypedId-1.html",
@@ -323,6 +403,36 @@
     "href": "api/Raftel.Domain.BaseTypes.html",
     "title": "Namespace Raftel.Domain.BaseTypes | Raftel",
     "summary": "Namespace Raftel.Domain.BaseTypes Classes AggregateRoot<TId> Represents the root of an aggregate in the domain model. Entity<TId> Base class for all domain entities with a strongly-typed ID. TypedGuidId Base class for identifiers that use Guid as the backing type. TypedId<T> Represents a strongly-typed identifier based on a primitive type."
+  },
+  "api/Raftel.Domain.Features.Tenants.ITenantsRepository.html": {
+    "href": "api/Raftel.Domain.Features.Tenants.ITenantsRepository.html",
+    "title": "Interface ITenantsRepository | Raftel",
+    "summary": "Interface ITenantsRepository Namespace Raftel.Domain.Features.Tenants Assembly Raftel.Domain.dll public interface ITenantsRepository : IRepository<Tenant, TenantId> Inherited Members IRepository<Tenant, TenantId>.GetByIdAsync(TenantId, CancellationToken) IRepository<Tenant, TenantId>.ListAllAsync(CancellationToken) IRepository<Tenant, TenantId>.AddAsync(Tenant, CancellationToken) IRepository<Tenant, TenantId>.Update(Tenant) IRepository<Tenant, TenantId>.Remove(Tenant) Methods CodeIsUniqueAsync(Code, CancellationToken) Task<bool> CodeIsUniqueAsync(Code code, CancellationToken token) Parameters code Code token CancellationToken Returns Task<bool>"
+  },
+  "api/Raftel.Domain.Features.Tenants.Tenant.html": {
+    "href": "api/Raftel.Domain.Features.Tenants.Tenant.html",
+    "title": "Class Tenant | Raftel",
+    "summary": "Class Tenant Namespace Raftel.Domain.Features.Tenants Assembly Raftel.Domain.dll public sealed class Tenant : AggregateRoot<TenantId> Inheritance object Entity<TenantId> AggregateRoot<TenantId> Tenant Inherited Members Entity<TenantId>.Id Entity<TenantId>.Equals(object) Entity<TenantId>.GetHashCode() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) object.ToString() Properties Code public Code Code { get; set; } Property Value Code Description public string Description { get; set; } Property Value string Name public string Name { get; set; } Property Value string Methods Create(string, string, string) public static Result<Tenant> Create(string name, string code, string description) Parameters name string code string description string Returns Result<Tenant>"
+  },
+  "api/Raftel.Domain.Features.Tenants.TenantErrors.html": {
+    "href": "api/Raftel.Domain.Features.Tenants.TenantErrors.html",
+    "title": "Class TenantErrors | Raftel",
+    "summary": "Class TenantErrors Namespace Raftel.Domain.Features.Tenants Assembly Raftel.Domain.dll public static class TenantErrors Inheritance object TenantErrors Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Properties DuplicatedCode public static Error DuplicatedCode { get; } Property Value Error NameRequired public static Error NameRequired { get; } Property Value Error"
+  },
+  "api/Raftel.Domain.Features.Tenants.ValueObjects.TenantId.html": {
+    "href": "api/Raftel.Domain.Features.Tenants.ValueObjects.TenantId.html",
+    "title": "Class TenantId | Raftel",
+    "summary": "Class TenantId Namespace Raftel.Domain.Features.Tenants.ValueObjects Assembly Raftel.Domain.dll public sealed record TenantId : TypedGuidId, IEquatable<TypedId<Guid>>, IEquatable<TypedGuidId>, IEquatable<TenantId> Inheritance object TypedId<Guid> TypedGuidId TenantId Implements IEquatable<TypedId<Guid>> IEquatable<TypedGuidId> IEquatable<TenantId> Inherited Members TypedGuidId.NewGuid() TypedId<Guid>.ToString() TypedId<Guid>.Equals(TypedId<Guid>) TypedId<Guid>.GetHashCode() object.Equals(object) object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Constructors TenantId(Guid) public TenantId(Guid value) Parameters value Guid Methods New() public static TenantId New() Returns TenantId"
+  },
+  "api/Raftel.Domain.Features.Tenants.ValueObjects.html": {
+    "href": "api/Raftel.Domain.Features.Tenants.ValueObjects.html",
+    "title": "Namespace Raftel.Domain.Features.Tenants.ValueObjects | Raftel",
+    "summary": "Namespace Raftel.Domain.Features.Tenants.ValueObjects Classes TenantId"
+  },
+  "api/Raftel.Domain.Features.Tenants.html": {
+    "href": "api/Raftel.Domain.Features.Tenants.html",
+    "title": "Namespace Raftel.Domain.Features.Tenants | Raftel",
+    "summary": "Namespace Raftel.Domain.Features.Tenants Classes Tenant TenantErrors Interfaces ITenantsRepository"
   },
   "api/Raftel.Domain.Features.Users.IUsersRepository.html": {
     "href": "api/Raftel.Domain.Features.Users.IUsersRepository.html",
@@ -387,12 +497,22 @@
   "api/Raftel.Domain.Validators.Validator-1.html": {
     "href": "api/Raftel.Domain.Validators.Validator-1.html",
     "title": "Class Validator<TModel> | Raftel",
-    "summary": "Class Validator<TModel> Namespace Raftel.Domain.Validators Assembly Raftel.Domain.dll Represents a base class for defining validation logic for a given model type. Allows registering validation rules through the EnsureThat(Func<TModel, bool>, Error) method, and executing them via the Validate(TModel) method. public abstract class Validator<TModel> Type Parameters TModel The type of the model to validate. Inheritance object Validator<TModel> Derived RegisterUserCommandValidator Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods EnsureThat(Func<TModel, bool>, Error) Registers a validation rule for the model. The rule is executed when Validate(TModel) is called. protected void EnsureThat(Func<TModel, bool> func, Error error) Parameters func Func<TModel, bool> A predicate that should return true if the model is valid. error Error The error to associate with the rule if the predicate returns false. Validate(TModel) Validates the specified model against all registered rules. public ValidationResult Validate(TModel model) Parameters model TModel The model instance to validate. Returns ValidationResult A ValidationResult representing the outcome of the validation. Returns success if no errors are found, otherwise returns a failure result with collected errors."
+    "summary": "Class Validator<TModel> Namespace Raftel.Domain.Validators Assembly Raftel.Domain.dll Represents a base class for defining validation logic for a given model type. Allows registering validation rules through the EnsureThat(Func<TModel, bool>, Error) method, and executing them via the Validate(TModel) method. public abstract class Validator<TModel> Type Parameters TModel The type of the model to validate. Inheritance object Validator<TModel> Derived CreateTenantCommandValidator RegisterUserCommandValidator Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods EnsureThat(Func<TModel, bool>, Error) Registers a validation rule for the model. The rule is executed when Validate(TModel) is called. protected void EnsureThat(Func<TModel, bool> func, Error error) Parameters func Func<TModel, bool> A predicate that should return true if the model is valid. error Error The error to associate with the rule if the predicate returns false. Validate(TModel) Validates the specified model against all registered rules. public ValidationResult Validate(TModel model) Parameters model TModel The model instance to validate. Returns ValidationResult A ValidationResult representing the outcome of the validation. Returns success if no errors are found, otherwise returns a failure result with collected errors."
   },
   "api/Raftel.Domain.Validators.html": {
     "href": "api/Raftel.Domain.Validators.html",
     "title": "Namespace Raftel.Domain.Validators | Raftel",
     "summary": "Namespace Raftel.Domain.Validators Classes ValidationResult Represents the result of a validation process, containing any validation errors found. Validator<TModel> Represents a base class for defining validation logic for a given model type. Allows registering validation rules through the EnsureThat(Func<TModel, bool>, Error) method, and executing them via the Validate(TModel) method."
+  },
+  "api/Raftel.Domain.ValueObjects.Code.html": {
+    "href": "api/Raftel.Domain.ValueObjects.Code.html",
+    "title": "Class Code | Raftel",
+    "summary": "Class Code Namespace Raftel.Domain.ValueObjects Assembly Raftel.Domain.dll public sealed record Code : IEquatable<Code> Inheritance object Code Implements IEquatable<Code> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Methods Create(string) public static Result<Code> Create(string value) Parameters value string Returns Result<Code> Operators explicit operator Code(string) public static explicit operator Code(string value) Parameters value string Returns Code implicit operator string(Code) public static implicit operator string(Code code) Parameters code Code Returns string"
+  },
+  "api/Raftel.Domain.ValueObjects.html": {
+    "href": "api/Raftel.Domain.ValueObjects.html",
+    "title": "Namespace Raftel.Domain.ValueObjects | Raftel",
+    "summary": "Namespace Raftel.Domain.ValueObjects Classes Code"
   },
   "api/Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.html": {
     "href": "api/Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.html",
@@ -404,6 +524,11 @@
     "title": "Namespace Raftel.Infrastructure.Authentication | Raftel",
     "summary": "Namespace Raftel.Infrastructure.Authentication Interfaces IClaimsPrincipalFactory"
   },
+  "api/Raftel.Infrastructure.Data.Configuration.TenantConfiguration.html": {
+    "href": "api/Raftel.Infrastructure.Data.Configuration.TenantConfiguration.html",
+    "title": "Class TenantConfiguration | Raftel",
+    "summary": "Class TenantConfiguration Namespace Raftel.Infrastructure.Data.Configuration Assembly Raftel.Infrastructure.dll public sealed class TenantConfiguration : IEntityTypeConfiguration<Tenant> Inheritance object TenantConfiguration Implements IEntityTypeConfiguration<Tenant> Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Methods Configure(EntityTypeBuilder<Tenant>) Configures the entity of type Tenant. public void Configure(EntityTypeBuilder<Tenant> builder) Parameters builder EntityTypeBuilder<Tenant> The builder to be used to configure the entity type."
+  },
   "api/Raftel.Infrastructure.Data.Configuration.UserConfiguration.html": {
     "href": "api/Raftel.Infrastructure.Data.Configuration.UserConfiguration.html",
     "title": "Class UserConfiguration | Raftel",
@@ -412,7 +537,7 @@
   "api/Raftel.Infrastructure.Data.Configuration.html": {
     "href": "api/Raftel.Infrastructure.Data.Configuration.html",
     "title": "Namespace Raftel.Infrastructure.Data.Configuration | Raftel",
-    "summary": "Namespace Raftel.Infrastructure.Data.Configuration Classes UserConfiguration"
+    "summary": "Namespace Raftel.Infrastructure.Data.Configuration Classes TenantConfiguration UserConfiguration"
   },
   "api/Raftel.Infrastructure.Data.EfRepository-3.html": {
     "href": "api/Raftel.Infrastructure.Data.EfRepository-3.html",
@@ -429,25 +554,30 @@
     "title": "Interface ISoftDeleteFilter | Raftel",
     "summary": "Interface ISoftDeleteFilter Namespace Raftel.Infrastructure.Data.Filters Assembly Raftel.Infrastructure.dll Marker interface used to identify the soft delete filter in the data filtering system. public interface ISoftDeleteFilter Remarks This interface has no members and is used exclusively as a type token to represent the soft delete filter when enabling or disabling it at runtime via IDataFilter."
   },
+  "api/Raftel.Infrastructure.Data.Filters.ITenantFilter.html": {
+    "href": "api/Raftel.Infrastructure.Data.Filters.ITenantFilter.html",
+    "title": "Interface ITenantFilter | Raftel",
+    "summary": "Interface ITenantFilter Namespace Raftel.Infrastructure.Data.Filters Assembly Raftel.Infrastructure.dll Marker interface used to identify the tenant filter in the data filtering system. public interface ITenantFilter Remarks This interface has no members and is used exclusively as a type token to represent the tenant filter when enabling or disabling it at runtime via IDataFilter."
+  },
   "api/Raftel.Infrastructure.Data.Filters.html": {
     "href": "api/Raftel.Infrastructure.Data.Filters.html",
     "title": "Namespace Raftel.Infrastructure.Data.Filters | Raftel",
-    "summary": "Namespace Raftel.Infrastructure.Data.Filters Interfaces IDataFilter Provides a mechanism to enable or disable data-level filters dynamically at runtime, such as soft delete or multi-tenancy filters. Filters are typically evaluated during query execution to include or exclude entities based on application-specific rules. ISoftDeleteFilter Marker interface used to identify the soft delete filter in the data filtering system."
+    "summary": "Namespace Raftel.Infrastructure.Data.Filters Interfaces IDataFilter Provides a mechanism to enable or disable data-level filters dynamically at runtime, such as soft delete or multi-tenancy filters. Filters are typically evaluated during query execution to include or exclude entities based on application-specific rules. ISoftDeleteFilter Marker interface used to identify the soft delete filter in the data filtering system. ITenantFilter Marker interface used to identify the tenant filter in the data filtering system."
   },
   "api/Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html": {
     "href": "api/Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html",
     "title": "Class IEntityTypeConfigurationExtensions | Raftel",
-    "summary": "Class IEntityTypeConfigurationExtensions Namespace Raftel.Infrastructure.Data Assembly Raftel.Infrastructure.dll Provides extension methods for configuring entity types in Entity Framework Core. public static class IEntityTypeConfigurationExtensions Inheritance object IEntityTypeConfigurationExtensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods HasSoftDelete<TEntity>(EntityTypeBuilder<TEntity>) Configures a shadow property for soft delete functionality on the specified entity type. public static void HasSoftDelete<TEntity>(this EntityTypeBuilder<TEntity> builder) where TEntity : class Parameters builder EntityTypeBuilder<TEntity> The EntityTypeBuilder<TEntity> used to configure the entity type. Type Parameters TEntity The type of the entity being configured."
+    "summary": "Class IEntityTypeConfigurationExtensions Namespace Raftel.Infrastructure.Data Assembly Raftel.Infrastructure.dll Provides extension methods for configuring entity types in Entity Framework Core. public static class IEntityTypeConfigurationExtensions Inheritance object IEntityTypeConfigurationExtensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods HasSoftDelete<TEntity>(EntityTypeBuilder<TEntity>) Configures a shadow property for soft delete functionality on the specified entity type. public static void HasSoftDelete<TEntity>(this EntityTypeBuilder<TEntity> builder) where TEntity : class Parameters builder EntityTypeBuilder<TEntity> The EntityTypeBuilder<TEntity> used to configure the entity type. Type Parameters TEntity The type of the entity being configured. HasTenantId<TEntity>(EntityTypeBuilder<TEntity>) Configures a shadow property for tenant identification on the specified entity type. public static void HasTenantId<TEntity>(this EntityTypeBuilder<TEntity> builder) where TEntity : class Parameters builder EntityTypeBuilder<TEntity> The EntityTypeBuilder<TEntity> used to configure the entity type. Type Parameters TEntity The type of the entity being configured."
   },
   "api/Raftel.Infrastructure.Data.RaftelDbContext-1.html": {
     "href": "api/Raftel.Infrastructure.Data.RaftelDbContext-1.html",
     "title": "Class RaftelDbContext<TDbContext> | Raftel",
-    "summary": "Class RaftelDbContext<TDbContext> Namespace Raftel.Infrastructure.Data Assembly Raftel.Infrastructure.dll Abstract base class for the Raftel database context, providing common functionality such as global query filters and unit of work implementation. public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IInfrastructure<IServiceProvider>, IDbContextDependencies, IDbSetCache, IDbContextPoolable, IResettableService, IDisposable, IAsyncDisposable, IUnitOfWork where TDbContext : RaftelDbContext<TDbContext> Type Parameters TDbContext The type of the derived DbContext. Inheritance object DbContext IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>> IdentityDbContext<IdentityUser, IdentityRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>> IdentityDbContext<IdentityUser, IdentityRole, string> IdentityDbContext RaftelDbContext<TDbContext> Implements IInfrastructure<IServiceProvider> IDbContextDependencies IDbSetCache IDbContextPoolable IResettableService IDisposable IAsyncDisposable IUnitOfWork Inherited Members IdentityDbContext<IdentityUser, IdentityRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>.OnModelCreating(ModelBuilder) IdentityDbContext<IdentityUser, IdentityRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>.UserRoles IdentityDbContext<IdentityUser, IdentityRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>.Roles IdentityDbContext<IdentityUser, IdentityRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>.RoleClaims IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.OnModelCreating(ModelBuilder) IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.Users IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.UserClaims IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.UserLogins IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.UserTokens IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.SchemaVersion DbContext.Set<TEntity>() DbContext.Set<TEntity>(string) DbContext.OnConfiguring(DbContextOptionsBuilder) DbContext.ConfigureConventions(ModelConfigurationBuilder) DbContext.SaveChanges() DbContext.SaveChanges(bool) DbContext.SaveChangesAsync(CancellationToken) DbContext.SaveChangesAsync(bool, CancellationToken) DbContext.Dispose() DbContext.DisposeAsync() DbContext.Entry<TEntity>(TEntity) DbContext.Entry(object) DbContext.Add<TEntity>(TEntity) DbContext.AddAsync<TEntity>(TEntity, CancellationToken) DbContext.Attach<TEntity>(TEntity) DbContext.Update<TEntity>(TEntity) DbContext.Remove<TEntity>(TEntity) DbContext.Add(object) DbContext.AddAsync(object, CancellationToken) DbContext.Attach(object) DbContext.Update(object) DbContext.Remove(object) DbContext.AddRange(params object[]) DbContext.AddRangeAsync(params object[]) DbContext.AttachRange(params object[]) DbContext.UpdateRange(params object[]) DbContext.RemoveRange(params object[]) DbContext.AddRange(IEnumerable<object>) DbContext.AddRangeAsync(IEnumerable<object>, CancellationToken) DbContext.AttachRange(IEnumerable<object>) DbContext.UpdateRange(IEnumerable<object>) DbContext.RemoveRange(IEnumerable<object>) DbContext.Find(Type, params object[]) DbContext.FindAsync(Type, params object[]) DbContext.FindAsync(Type, object[], CancellationToken) DbContext.Find<TEntity>(params object[]) DbContext.FindAsync<TEntity>(params object[]) DbContext.FindAsync<TEntity>(object[], CancellationToken) DbContext.FromExpression<TResult>(Expression<Func<IQueryable<TResult>>>) DbContext.Database DbContext.ChangeTracker DbContext.Model DbContext.ContextId DbContext.SavingChanges DbContext.SavedChanges DbContext.SaveChangesFailed object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors RaftelDbContext() protected RaftelDbContext() RaftelDbContext(DbContextOptions<TDbContext>) protected RaftelDbContext(DbContextOptions<TDbContext> options) Parameters options DbContextOptions<TDbContext> RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter) protected RaftelDbContext(DbContextOptions<TDbContext> options, IDataFilter dataFilter) Parameters options DbContextOptions<TDbContext> dataFilter IDataFilter Properties IsSoftDeleteFilterEnabled protected bool IsSoftDeleteFilterEnabled { get; } Property Value bool User public DbSet<User> User { get; set; } Property Value DbSet<User> Methods CommitAsync(CancellationToken) Commits all changes made within the unit of work asynchronously. public Task CommitAsync(CancellationToken cancellationToken = default) Parameters cancellationToken CancellationToken A token to monitor for cancellation requests. Defaults to None. Returns Task A task that represents the asynchronous commit operation. OnModelCreating(ModelBuilder) Configures the schema needed for the identity framework. protected override void OnModelCreating(ModelBuilder modelBuilder) Parameters modelBuilder ModelBuilder"
+    "summary": "Class RaftelDbContext<TDbContext> Namespace Raftel.Infrastructure.Data Assembly Raftel.Infrastructure.dll Abstract base class for the Raftel database context, providing common functionality such as global query filters and unit of work implementation. public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IInfrastructure<IServiceProvider>, IDbContextDependencies, IDbSetCache, IDbContextPoolable, IResettableService, IDisposable, IAsyncDisposable, IUnitOfWork where TDbContext : RaftelDbContext<TDbContext> Type Parameters TDbContext The type of the derived DbContext. Inheritance object DbContext IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>> IdentityDbContext<IdentityUser, IdentityRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>> IdentityDbContext<IdentityUser, IdentityRole, string> IdentityDbContext RaftelDbContext<TDbContext> Implements IInfrastructure<IServiceProvider> IDbContextDependencies IDbSetCache IDbContextPoolable IResettableService IDisposable IAsyncDisposable IUnitOfWork Inherited Members IdentityDbContext<IdentityUser, IdentityRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>.OnModelCreating(ModelBuilder) IdentityDbContext<IdentityUser, IdentityRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>.UserRoles IdentityDbContext<IdentityUser, IdentityRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>.Roles IdentityDbContext<IdentityUser, IdentityRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>.RoleClaims IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.OnModelCreating(ModelBuilder) IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.Users IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.UserClaims IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.UserLogins IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.UserTokens IdentityUserContext<IdentityUser, string, IdentityUserClaim<string>, IdentityUserLogin<string>, IdentityUserToken<string>>.SchemaVersion DbContext.Set<TEntity>() DbContext.Set<TEntity>(string) DbContext.OnConfiguring(DbContextOptionsBuilder) DbContext.ConfigureConventions(ModelConfigurationBuilder) DbContext.SaveChanges() DbContext.SaveChanges(bool) DbContext.SaveChangesAsync(CancellationToken) DbContext.SaveChangesAsync(bool, CancellationToken) DbContext.Dispose() DbContext.DisposeAsync() DbContext.Entry<TEntity>(TEntity) DbContext.Entry(object) DbContext.Add<TEntity>(TEntity) DbContext.AddAsync<TEntity>(TEntity, CancellationToken) DbContext.Attach<TEntity>(TEntity) DbContext.Update<TEntity>(TEntity) DbContext.Remove<TEntity>(TEntity) DbContext.Add(object) DbContext.AddAsync(object, CancellationToken) DbContext.Attach(object) DbContext.Update(object) DbContext.Remove(object) DbContext.AddRange(params object[]) DbContext.AddRangeAsync(params object[]) DbContext.AttachRange(params object[]) DbContext.UpdateRange(params object[]) DbContext.RemoveRange(params object[]) DbContext.AddRange(IEnumerable<object>) DbContext.AddRangeAsync(IEnumerable<object>, CancellationToken) DbContext.AttachRange(IEnumerable<object>) DbContext.UpdateRange(IEnumerable<object>) DbContext.RemoveRange(IEnumerable<object>) DbContext.Find(Type, params object[]) DbContext.FindAsync(Type, params object[]) DbContext.FindAsync(Type, object[], CancellationToken) DbContext.Find<TEntity>(params object[]) DbContext.FindAsync<TEntity>(params object[]) DbContext.FindAsync<TEntity>(object[], CancellationToken) DbContext.FromExpression<TResult>(Expression<Func<IQueryable<TResult>>>) DbContext.Database DbContext.ChangeTracker DbContext.Model DbContext.ContextId DbContext.SavingChanges DbContext.SavedChanges DbContext.SaveChangesFailed object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Constructors RaftelDbContext() protected RaftelDbContext() RaftelDbContext(DbContextOptions<TDbContext>) protected RaftelDbContext(DbContextOptions<TDbContext> options) Parameters options DbContextOptions<TDbContext> RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter) protected RaftelDbContext(DbContextOptions<TDbContext> options, IDataFilter dataFilter) Parameters options DbContextOptions<TDbContext> dataFilter IDataFilter RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter, ICurrentTenant) protected RaftelDbContext(DbContextOptions<TDbContext> options, IDataFilter dataFilter, ICurrentTenant currentTenant) Parameters options DbContextOptions<TDbContext> dataFilter IDataFilter currentTenant ICurrentTenant Properties CurrentTenantId protected Guid? CurrentTenantId { get; } Property Value Guid? IsSoftDeleteFilterEnabled protected bool IsSoftDeleteFilterEnabled { get; } Property Value bool IsTenantFilterEnabled protected bool IsTenantFilterEnabled { get; } Property Value bool Tenant public DbSet<Tenant> Tenant { get; set; } Property Value DbSet<Tenant> User public DbSet<User> User { get; set; } Property Value DbSet<User> Methods CommitAsync(CancellationToken) Commits all changes made within the unit of work asynchronously. public Task CommitAsync(CancellationToken cancellationToken = default) Parameters cancellationToken CancellationToken A token to monitor for cancellation requests. Defaults to None. Returns Task A task that represents the asynchronous commit operation. OnModelCreating(ModelBuilder) Configures the schema needed for the identity framework. protected override void OnModelCreating(ModelBuilder modelBuilder) Parameters modelBuilder ModelBuilder"
   },
   "api/Raftel.Infrastructure.Data.ShadowPropertyNames.html": {
     "href": "api/Raftel.Infrastructure.Data.ShadowPropertyNames.html",
     "title": "Class ShadowPropertyNames | Raftel",
-    "summary": "Class ShadowPropertyNames Namespace Raftel.Infrastructure.Data Assembly Raftel.Infrastructure.dll Provides the names of shadow properties used in the application. Shadow properties are properties that are not part of the entity class but are defined in the model. public static class ShadowPropertyNames Inheritance object ShadowPropertyNames Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields IsDeleted The name of the shadow property that indicates whether an entity is soft-deleted. public const string IsDeleted = \"IsDeleted\" Field Value string"
+    "summary": "Class ShadowPropertyNames Namespace Raftel.Infrastructure.Data Assembly Raftel.Infrastructure.dll Provides the names of shadow properties used in the application. Shadow properties are properties that are not part of the entity class but are defined in the model. public static class ShadowPropertyNames Inheritance object ShadowPropertyNames Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Fields IsDeleted The name of the shadow property that indicates whether an entity is soft-deleted. public const string IsDeleted = \"IsDeleted\" Field Value string TenantId The name of the shadow property that indicates the tenant identifier for multi-tenant entities. public const string TenantId = \"TenantId\" Field Value string"
   },
   "api/Raftel.Infrastructure.Data.html": {
     "href": "api/Raftel.Infrastructure.Data.html",
@@ -458,6 +588,16 @@
     "href": "api/Raftel.Infrastructure.DependencyInjection.html",
     "title": "Class DependencyInjection | Raftel",
     "summary": "Class DependencyInjection Namespace Raftel.Infrastructure Assembly Raftel.Infrastructure.dll public static class DependencyInjection Inheritance object DependencyInjection Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string) public static IServiceCollection AddRaftelData<TDbContext>(this IServiceCollection services, IConfiguration configuration, string connectionStringName = \"Default\") where TDbContext : RaftelDbContext<TDbContext> Parameters services IServiceCollection configuration IConfiguration connectionStringName string Returns IServiceCollection Type Parameters TDbContext"
+  },
+  "api/Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.html": {
+    "href": "api/Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.html",
+    "title": "Class TenantMiddlewareExtensions | Raftel",
+    "summary": "Class TenantMiddlewareExtensions Namespace Raftel.Infrastructure.Multitenancy.Middleware Assembly Raftel.Infrastructure.dll public static class TenantMiddlewareExtensions Inheritance object TenantMiddlewareExtensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods UseTenantMiddleware(IApplicationBuilder) public static IApplicationBuilder UseTenantMiddleware(this IApplicationBuilder builder) Parameters builder IApplicationBuilder Returns IApplicationBuilder"
+  },
+  "api/Raftel.Infrastructure.Multitenancy.Middleware.html": {
+    "href": "api/Raftel.Infrastructure.Multitenancy.Middleware.html",
+    "title": "Namespace Raftel.Infrastructure.Multitenancy.Middleware | Raftel",
+    "summary": "Namespace Raftel.Infrastructure.Multitenancy.Middleware Classes TenantMiddlewareExtensions"
   },
   "api/Raftel.Infrastructure.html": {
     "href": "api/Raftel.Infrastructure.html",

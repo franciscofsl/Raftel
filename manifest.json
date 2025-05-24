@@ -148,6 +148,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Features.Tenants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Features.Tenants.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Features.Tenants",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Api.Server.Features.Users.AuthorizationController.yml",
       "output": {
         ".html": {
@@ -271,6 +299,34 @@
       "IsMRef": true,
       "Title": "Raftel.Application.Abstractions.IRequestHandler<TRequest, TResponse>",
       "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.IRequestHandler-2.yml\" sourcestartlinenumber=\"1\">Defines a handler that processes a request of type <code class=\"typeparamref\">TRequest</code>\nand returns a response of type <code class=\"typeparamref\">TResponse</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.Multitenancy.ICurrentTenant",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.Multitenancy.ICurrentTenant.yml\" sourcestartlinenumber=\"1\">Interface that represents the current tenant in a multitenancy system.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.Multitenancy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.Multitenancy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.Multitenancy",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -424,6 +480,174 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Application.Exceptions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommandValidator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.CreateTenant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.CreateTenant.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.CreateTenant",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.GetAllTenants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.GetAllTenants.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.GetAllTenants",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantQuery",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.GetCurrentTenant.GetCurrentTenantResponse",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.GetCurrentTenant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.GetCurrentTenant.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.GetCurrentTenant",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.GetTenant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.GetTenant.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.GetTenant",
       "Summary": null
     },
     {
@@ -918,6 +1142,90 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Tenants.ITenantsRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Tenants.ITenantsRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Tenants.ITenantsRepository",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Tenants.Tenant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Tenants.Tenant.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Tenants.Tenant",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Tenants.TenantErrors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Tenants.TenantErrors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Tenants.TenantErrors",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Tenants.ValueObjects.TenantId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Tenants.ValueObjects.TenantId.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Tenants.ValueObjects.TenantId",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Tenants.ValueObjects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Tenants.ValueObjects.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Tenants.ValueObjects",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Tenants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Tenants.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Tenants",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Domain.Features.Users.IUsersRepository.yml",
       "output": {
         ".html": {
@@ -1114,6 +1422,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.ValueObjects.Code.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.ValueObjects.Code.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.ValueObjects.Code",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.ValueObjects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.ValueObjects.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.ValueObjects",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.yml",
       "output": {
         ".html": {
@@ -1138,6 +1474,20 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Infrastructure.Authentication",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Configuration.TenantConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Configuration.TenantConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Configuration.TenantConfiguration",
       "Summary": null
     },
     {
@@ -1209,6 +1559,20 @@
       "IsMRef": true,
       "Title": "Raftel.Infrastructure.Data.Filters.ISoftDeleteFilter",
       "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.Filters.ISoftDeleteFilter.yml\" sourcestartlinenumber=\"1\">Marker interface used to identify the soft delete filter in the data filtering system.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Filters.ITenantFilter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Filters.ITenantFilter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Filters.ITenantFilter",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.Filters.ITenantFilter.yml\" sourcestartlinenumber=\"1\">Marker interface used to identify the tenant filter in the data filtering system.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1292,6 +1656,34 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Infrastructure.DependencyInjection",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Multitenancy.Middleware.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Multitenancy.Middleware.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Multitenancy.Middleware",
       "Summary": null
     },
     {

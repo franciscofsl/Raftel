@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class DependencyInjection | Raftel </title>
+      <title>Interface ITenantsRepository | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class DependencyInjection | Raftel ">
+      <meta name="title" content="Interface ITenantsRepository | Raftel ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_DependencyInjection.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.DependencyInjection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Features_Tenants_ITenantsRepository.md&amp;value=---%0Auid%3A%20Raftel.Domain.Features.Tenants.ITenantsRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,36 +84,29 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Infrastructure.DependencyInjection">
+        <article data-uid="Raftel.Domain.Features.Tenants.ITenantsRepository">
 
 
 
-  <h1 id="Raftel_Infrastructure_DependencyInjection" data-uid="Raftel.Infrastructure.DependencyInjection" class="text-break">
-Class DependencyInjection  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Domain_Features_Tenants_ITenantsRepository" data-uid="Raftel.Domain.Features.Tenants.ITenantsRepository" class="text-break">
+Interface ITenantsRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Tenants/ITenantsRepository.cs/#L7"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Infrastructure.html">Infrastructure</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>Raftel.Infrastructure.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Domain.html">Domain</a>.<a class="xref" href="Raftel.Domain.Features.html">Features</a>.<a class="xref" href="Raftel.Domain.Features.Tenants.html">Tenants</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Raftel.Domain.dll</dd></dl>
   </div>
 
   <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class DependencyInjection</code></pre>
+    <pre><code class="lang-csharp hljs">public interface ITenantsRepository : IRepository&lt;Tenant, TenantId&gt;</code></pre>
   </div>
 
 
 
 
-  <dl class="typelist inheritance">
-    <dt>Inheritance</dt>
-    <dd>
-      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">DependencyInjection</span></div>
-    </dd>
-  </dl>
 
 
 
@@ -121,25 +114,19 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
     <dt>Inherited Members</dt>
     <dd>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_GetByIdAsync__1_System_Threading_CancellationToken_">IRepository&lt;Tenant, TenantId&gt;.GetByIdAsync(TenantId, CancellationToken)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_System_Threading_CancellationToken_">IRepository&lt;Tenant, TenantId&gt;.ListAllAsync(CancellationToken)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_AddAsync__0_System_Threading_CancellationToken_">IRepository&lt;Tenant, TenantId&gt;.AddAsync(Tenant, CancellationToken)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Update__0_">IRepository&lt;Tenant, TenantId&gt;.Update(Tenant)</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Remove__0_">IRepository&lt;Tenant, TenantId&gt;.Remove(Tenant)</a>
     </div>
   </dd></dl>
 
@@ -152,41 +139,34 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
 </h2>
 
 
-  <a id="Raftel_Infrastructure_DependencyInjection_AddRaftelData_" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData*"></a>
+  <a id="Raftel_Domain_Features_Tenants_ITenantsRepository_CodeIsUniqueAsync_" data-uid="Raftel.Domain.Features.Tenants.ITenantsRepository.CodeIsUniqueAsync*"></a>
 
-  <h3 id="Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)">
-  AddRaftelData&lt;TDbContext&gt;(IServiceCollection, IConfiguration, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Domain_Features_Tenants_ITenantsRepository_CodeIsUniqueAsync_Raftel_Domain_ValueObjects_Code_System_Threading_CancellationToken_" data-uid="Raftel.Domain.Features.Tenants.ITenantsRepository.CodeIsUniqueAsync(Raftel.Domain.ValueObjects.Code,System.Threading.CancellationToken)">
+  CodeIsUniqueAsync(Code, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Tenants/ITenantsRepository.cs/#L9"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IServiceCollection AddRaftelData&lt;TDbContext&gt;(this IServiceCollection services, IConfiguration configuration, string connectionStringName = &quot;Default&quot;) where TDbContext : RaftelDbContext&lt;TDbContext&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; CodeIsUniqueAsync(Code code, CancellationToken token)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>services</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a></dt>
+    <dt><code>code</code> <a class="xref" href="Raftel.Domain.ValueObjects.Code.html">Code</a></dt>
     <dd></dd>
-    <dt><code>configuration</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration">IConfiguration</a></dt>
-    <dd></dd>
-    <dt><code>connectionStringName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dt><code>token</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
     <dd></dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
     <dd></dd>
   </dl>
 
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TDbContext</code></dt>
-    <dd></dd>
-  </dl>
 
 
 
@@ -201,7 +181,7 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L23" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Tenants/ITenantsRepository.cs/#L7" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Namespace Raftel.Infrastructure.Data.Filters | Raftel </title>
+      <title>Interface ITenantFilter | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Namespace Raftel.Infrastructure.Data.Filters | Raftel ">
+      <meta name="title" content="Interface ITenantFilter | Raftel ">
       
-      
+      <meta name="description" content="Marker interface used to identify the tenant filter in the data filtering system.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_Data_Filters_ITenantFilter.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.Data.Filters.ITenantFilter%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,38 +84,48 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Infrastructure.Data.Filters">
+        <article data-uid="Raftel.Infrastructure.Data.Filters.ITenantFilter">
 
-  <h1 id="Raftel_Infrastructure_Data_Filters" data-uid="Raftel.Infrastructure.Data.Filters" class="text-break">Namespace Raftel.Infrastructure.Data.Filters</h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
 
-    <h3 id="interfaces">
-Interfaces
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Infrastructure.Data.Filters.IDataFilter.html">IDataFilter</a></dt>
-      <dd><p>Provides a mechanism to enable or disable data-level filters dynamically at runtime,
-such as soft delete or multi-tenancy filters. Filters are typically evaluated during
-query execution to include or exclude entities based on application-specific rules.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Infrastructure.Data.Filters.ISoftDeleteFilter.html">ISoftDeleteFilter</a></dt>
-      <dd><p>Marker interface used to identify the soft delete filter in the data filtering system.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Infrastructure.Data.Filters.ITenantFilter.html">ITenantFilter</a></dt>
-      <dd><p>Marker interface used to identify the tenant filter in the data filtering system.</p>
-</dd>
-    </dl>
+
+  <h1 id="Raftel_Infrastructure_Data_Filters_ITenantFilter" data-uid="Raftel.Infrastructure.Data.Filters.ITenantFilter" class="text-break">
+Interface ITenantFilter  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/Filters/ITenantFilter.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Infrastructure.html">Infrastructure</a>.<a class="xref" href="Raftel.Infrastructure.Data.html">Data</a>.<a class="xref" href="Raftel.Infrastructure.Data.Filters.html">Filters</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Raftel.Infrastructure.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Marker interface used to identify the tenant filter in the data filtering system.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface ITenantFilter</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 id="Raftel_Infrastructure_Data_Filters_ITenantFilter_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>This interface has no members and is used exclusively as a type token to represent the
+tenant filter when enabling or disabling it at runtime via <a class="xref" href="Raftel.Infrastructure.Data.Filters.IDataFilter.html">IDataFilter</a>.</p>
+</div>
+
 
 
 </article>
 
         <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/Filters/ITenantFilter.cs/#L12" class="edit-link">Edit this page</a>
         </div>
 
 
