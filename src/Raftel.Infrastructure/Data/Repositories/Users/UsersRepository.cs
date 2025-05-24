@@ -8,9 +8,9 @@ internal sealed class UsersRepository<TDbContext>(TDbContext dbContext)
     : EfRepository<TDbContext, User, UserId>(dbContext), IUsersRepository
     where TDbContext : RaftelDbContext<TDbContext>
 {
-    public Task<bool> EmailIsUniqueAsync(string email, CancellationToken token)
+    public async Task<bool> EmailIsUniqueAsync(string email, CancellationToken token)
     {
-        return !dbContext.Set<User>()
+        return !await dbContext.Set<User>()
             .AnyAsync(u => u.Email == email, token);
     }
 }
