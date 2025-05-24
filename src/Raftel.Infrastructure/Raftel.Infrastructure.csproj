@@ -31,4 +31,7 @@
       <PackageReference Include="OpenIddict.Validation.ServerIntegration" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="Raftel.Infrastructure.Tests" />
+    </ItemGroup>
 </Project>

@@ -7,6 +7,7 @@ using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
 using Raftel.Application;
 using Raftel.Application.Abstractions.Authentication;
+using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Users;
 using Raftel.Infrastructure.Authentication;
@@ -15,6 +16,7 @@ using Raftel.Infrastructure.Data.Filters;
 using Raftel.Infrastructure.Data.Interceptors;
 using Raftel.Infrastructure.Data.Repositories.Tenants;
 using Raftel.Infrastructure.Data.Repositories.Users;
+using Raftel.Infrastructure.Multitenancy;
 
 namespace Raftel.Infrastructure;
 
@@ -80,7 +82,7 @@ public static class DependencyInjection
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
         services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
-
+        services.AddScoped<ICurrentTenant, CurrentTenant>();
 
         return services;
     }
