@@ -1,4 +1,5 @@
-﻿using Raftel.Domain.Features.Users;
+﻿using Microsoft.EntityFrameworkCore;
+using Raftel.Domain.Features.Users;
 using Raftel.Domain.Features.Users.ValueObjects;
 
 namespace Raftel.Infrastructure.Data.Repositories.Users;
@@ -9,6 +10,7 @@ internal sealed class UsersRepository<TDbContext>(TDbContext dbContext)
 {
     public Task<bool> EmailIsUniqueAsync(string email, CancellationToken token)
     {
-        return Task.FromResult(true);
+        return dbContext.Set<User>()
+            .AllAsync(u => u.Email != email, token);
     }
 }

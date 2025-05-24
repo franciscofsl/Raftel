@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Raftel.Domain.Features.Users;
 using Raftel.Domain.Features.Users.ValueObjects;
+using Raftel.Infrastructure.Data;
 
 namespace Raftel.Infrastructure.Data.Configuration;
 
@@ -38,5 +39,8 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired();
 
         builder.HasIndex(x => x.Email);
+
+        // Configure multi-tenancy
+        builder.HasTenantId();
     }
 }
