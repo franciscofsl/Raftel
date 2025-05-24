@@ -7,12 +7,16 @@ using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
 using Raftel.Application;
 using Raftel.Application.Abstractions.Authentication;
+using Raftel.Application.Abstractions.Multitenancy;
+using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Users;
 using Raftel.Infrastructure.Authentication;
 using Raftel.Infrastructure.Data;
 using Raftel.Infrastructure.Data.Filters;
 using Raftel.Infrastructure.Data.Interceptors;
+using Raftel.Infrastructure.Data.Repositories.Tenants;
 using Raftel.Infrastructure.Data.Repositories.Users;
+using Raftel.Infrastructure.Multitenancy;
 
 namespace Raftel.Infrastructure;
 
@@ -31,11 +35,14 @@ public static class DependencyInjection
         services.AddDbContext<TDbContext>((serviceProvider, options) => options
             .UseSqlServer(connectionString)
             .UseOpenIddict()
-            .AddInterceptors(serviceProvider.GetRequiredService<SoftDeleteInterceptor>()));
+            .AddInterceptors(
+                serviceProvider.GetRequiredService<SoftDeleteInterceptor>(),
+                serviceProvider.GetRequiredService<TenantInterceptor>()));
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TDbContext>());
 
         services.AddScoped(typeof(IDataFilter), typeof(DataFilter));
         services.AddScoped<SoftDeleteInterceptor>();
+        services.AddScoped<TenantInterceptor>();
 
         services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<TDbContext>()
@@ -43,6 +50,7 @@ public static class DependencyInjection
 
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped(typeof(IUsersRepository), typeof(UsersRepository<TDbContext>));
+        services.AddScoped(typeof(ITenantsRepository), typeof(TenantsRepository<TDbContext>));
 
         services.AddOpenIddict()
             .AddCore(opt => opt.UseEntityFrameworkCore().UseDbContext<TDbContext>())
@@ -77,7 +85,7 @@ public static class DependencyInjection
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
         services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
-
+        services.AddScoped<ICurrentTenant, CurrentTenant>();
 
         return services;
     }

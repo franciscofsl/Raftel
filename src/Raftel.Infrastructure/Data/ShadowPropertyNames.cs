@@ -10,4 +10,9 @@ public static class ShadowPropertyNames
     /// The name of the shadow property that indicates whether an entity is soft-deleted.
     /// </summary>
     public const string IsDeleted = nameof(IsDeleted);
+
+    /// <summary>
+    /// The name of the shadow property that indicates the tenant identifier for multi-tenant entities.
+    /// </summary>
+    public const string TenantId = nameof(TenantId);
 }

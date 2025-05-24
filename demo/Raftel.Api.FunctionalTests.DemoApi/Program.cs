@@ -1,5 +1,6 @@
 using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.Server.AutoEndpoints;
+using Raftel.Api.Server.Features.Tenants;
 using Raftel.Api.Server.Features.Users;
 using Raftel.Application;
 using Raftel.Application.Features.Users.RegisterUser;
@@ -9,6 +10,7 @@ using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Raftel.Demo.Application.Pirates.GetPirateById;
 using Raftel.Demo.Infrastructure;
 using Raftel.Infrastructure;
+using Raftel.Infrastructure.Multitenancy.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,11 +42,14 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseTenantMiddleware();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
+app.AddRaftelTenants();
 app.AddRaftelUsers();
 app.AddEndpointGroup(group =>
     {
