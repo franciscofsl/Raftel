@@ -10,7 +10,7 @@ internal sealed class UsersRepository<TDbContext>(TDbContext dbContext)
 {
     public Task<bool> EmailIsUniqueAsync(string email, CancellationToken token)
     {
-        return dbContext.Set<User>()
-            .AllAsync(u => u.Email != email, token);
+        return !dbContext.Set<User>()
+            .AnyAsync(u => u.Email == email, token);
     }
 }
