@@ -1,4 +1,4 @@
-# Raftel
+# Raftel 
 
 **Raftel** is a training project. It's a small framework for building .NET Core applications, intended to be reused as a base for developing solutions that follow clean architecture and apply good coding practices.
  
