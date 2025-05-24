@@ -1,8 +1,11 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Features.Users.GetUserProfile;
+using Raftel.Domain.Features.Users;
 using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;
@@ -10,9 +13,11 @@ namespace Raftel.Api.FunctionalTests;
 public class AuthenticationTest : IClassFixture<ApiTestFactory>
 {
     private readonly HttpClient _client;
+    private readonly ApiTestFactory _factory;
 
     public AuthenticationTest(ApiTestFactory factory)
     {
+        _factory = factory;
         _client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {
             BaseAddress = new Uri("https://localhost:5128")
@@ -38,6 +43,29 @@ public class AuthenticationTest : IClassFixture<ApiTestFactory>
         var response = await _client.PostAsJsonAsync("/api/users/register", new RegisterRequest(email, password));
 
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
+    }
+
+    [Fact]
+    public async Task Register_NewUser_ShouldSaveIdentityUserId()
+    {
+        var email = $"user_{Guid.NewGuid():N}@test.com";
+        var password = "Password123!";
+
+        var response = await _client.PostAsJsonAsync("/api/users/register", new RegisterRequest(email, password));
+        response.EnsureSuccessStatusCode();
+
+        using var scope = _factory.Services.CreateScope();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+        var usersRepository = scope.ServiceProvider.GetRequiredService<IUsersRepository>();
+        
+        var identityUser = await userManager.FindByEmailAsync(email);
+        identityUser.ShouldNotBeNull();
+
+        var users = await usersRepository.ListAllAsync();
+        var user = users.FirstOrDefault(u => u.Email == email);
+        
+        user.ShouldNotBeNull();
+        user.IdentityUserId.ShouldBe(identityUser.Id);
     }
 
     [Fact]

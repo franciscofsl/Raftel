@@ -40,7 +40,7 @@ public sealed class RegisterUserCommandHandlerTests
             .Returns(true);
 
         _authenticationService.RegisterAsync(Arg.Any<User>(), command.Password, Arg.Any<CancellationToken>())
-            .Returns(Result.Failure(new Error("Registration failed", "Registration failed")));
+            .Returns(Result.Failure<string>(new Error("Registration failed", "Registration failed")));
 
         var result = await _handler.HandleAsync(command, CancellationToken.None);
 
@@ -56,7 +56,7 @@ public sealed class RegisterUserCommandHandlerTests
             .Returns(true);
 
         _authenticationService.RegisterAsync(Arg.Any<User>(), command.Password, Arg.Any<CancellationToken>())
-            .Returns(Result.Success());
+            .Returns(Result.Success("UserId123"));
 
         var result = await _handler.HandleAsync(command, CancellationToken.None);
 
