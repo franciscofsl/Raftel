@@ -10,6 +10,7 @@ using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Raftel.Demo.Application.Pirates.GetPirateById;
 using Raftel.Demo.Infrastructure;
 using Raftel.Infrastructure;
+using Raftel.Infrastructure.Multitenancy.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseTenantMiddleware();
 
 app.UseAuthentication();
 app.UseAuthorization();
