@@ -19,4 +19,15 @@ public static class IEntityTypeConfigurationExtensions
             .HasDefaultValue(false)
             .IsRequired();
     }
+
+    /// <summary>
+    /// Configures a shadow property for tenant identification on the specified entity type.
+    /// </summary>
+    /// <typeparam name="TEntity">The type of the entity being configured.</typeparam>
+    /// <param name="builder">The <see cref="EntityTypeBuilder{TEntity}"/> used to configure the entity type.</param>
+    public static void HasTenantId<TEntity>(this EntityTypeBuilder<TEntity> builder) where TEntity : class
+    {
+        builder.Property<Guid?>(ShadowPropertyNames.TenantId)
+            .HasDefaultValue(null);
+    }
 }

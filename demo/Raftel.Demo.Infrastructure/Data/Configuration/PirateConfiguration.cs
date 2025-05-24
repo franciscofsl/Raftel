@@ -4,6 +4,7 @@ using Raftel.Demo.Domain.Common.ValueObjects;
 using Raftel.Demo.Domain.Pirates;
 using Raftel.Demo.Domain.Pirates.DevilFruits;
 using Raftel.Demo.Domain.Pirates.ValueObjects;
+using Raftel.Infrastructure.Data;
 
 namespace Raftel.Demo.Infrastructure.Data.Configuration;
 
@@ -55,5 +56,8 @@ public class PirateConfiguration : IEntityTypeConfiguration<Pirate>
                     .HasForeignKey("PirateId")
                     .IsRequired()
             );
+
+        // Configure multi-tenancy
+        builder.HasTenantId();
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Raftel.Application;
+using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Domain.Features.Users;
 using Raftel.Domain.Features.Tenants;
 using Raftel.Infrastructure.Data.Filters;
@@ -19,6 +20,7 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
     where TDbContext : RaftelDbContext<TDbContext>
 {
     private readonly IDataFilter _dataFilter;
+    private readonly ICurrentTenant _currentTenant;
 
     protected RaftelDbContext()
     {
@@ -33,11 +35,18 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
         _dataFilter = dataFilter;
     }
 
+    protected RaftelDbContext(DbContextOptions<TDbContext> options, IDataFilter dataFilter, ICurrentTenant currentTenant) : base(options)
+    {
+        _dataFilter = dataFilter;
+        _currentTenant = currentTenant;
+    }
+
     public DbSet<User> User { get; set; }
     public DbSet<Tenant> Tenant { get; set; }
     
     protected bool IsSoftDeleteFilterEnabled => _dataFilter?.IsEnabled<ISoftDeleteFilter>() ?? false;
-
+    protected bool IsTenantFilterEnabled => _dataFilter?.IsEnabled<ITenantFilter>() ?? true;
+    protected Guid? CurrentTenantId => _currentTenant?.Id;
 
     public Task CommitAsync(CancellationToken cancellationToken = default)
     {
@@ -78,12 +87,16 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
     private Expression<Func<TEntity, bool>> BuildGlobalFilterExpression<TEntity>(IMutableEntityType entityType)
         where TEntity : class
     {
-        if (entityType.FindProperty(ShadowPropertyNames.IsDeleted)?.ClrType == typeof(bool))
+        var hasSoftDelete = entityType.FindProperty(ShadowPropertyNames.IsDeleted)?.ClrType == typeof(bool);
+        var hasTenantId = entityType.FindProperty(ShadowPropertyNames.TenantId)?.ClrType == typeof(Guid?);
+
+        if (!hasSoftDelete && !hasTenantId)
         {
-            return expression => !IsSoftDeleteFilterEnabled ||
-                                 !EF.Property<bool>(expression, ShadowPropertyNames.IsDeleted);
+            return null;
         }
 
-        return null;
+        return expression =>
+            (!hasSoftDelete || !IsSoftDeleteFilterEnabled || !EF.Property<bool>(expression, ShadowPropertyNames.IsDeleted)) &&
+            (!hasTenantId || !IsTenantFilterEnabled || CurrentTenantId == null || EF.Property<Guid?>(expression, ShadowPropertyNames.TenantId) == CurrentTenantId);
     }
 }

@@ -35,11 +35,14 @@ public static class DependencyInjection
         services.AddDbContext<TDbContext>((serviceProvider, options) => options
             .UseSqlServer(connectionString)
             .UseOpenIddict()
-            .AddInterceptors(serviceProvider.GetRequiredService<SoftDeleteInterceptor>()));
+            .AddInterceptors(
+                serviceProvider.GetRequiredService<SoftDeleteInterceptor>(),
+                serviceProvider.GetRequiredService<TenantInterceptor>()));
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TDbContext>());
 
         services.AddScoped(typeof(IDataFilter), typeof(DataFilter));
         services.AddScoped<SoftDeleteInterceptor>();
+        services.AddScoped<TenantInterceptor>();
 
         services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<TDbContext>()
