@@ -28,12 +28,7 @@ public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
             .IsUnique();
 
         builder.HasMany<Permission>()
-            .WithOne()
-            .HasForeignKey("RoleId")
-            .OnDelete(DeleteBehavior.Cascade);
-
-        builder.Navigation("_permissions")
-            .UsePropertyAccessMode(PropertyAccessMode.Field);
+            .WithMany();
 
         builder.HasTenantId();
     }
