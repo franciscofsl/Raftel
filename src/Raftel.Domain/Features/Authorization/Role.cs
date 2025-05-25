@@ -48,4 +48,19 @@ public sealed class Role : AggregateRoot<RoleId>
     {
         return _permissions.Add(permissionName, description);
     }
+
+    public Result RemovePermission(string permissionName)
+    {
+        return _permissions.Remove(permissionName);
+    }
+
+    public bool HasPermission(string permissionName)
+    {
+        return _permissions.Has(permissionName);
+    }
+
+    public void ClearPermissions()
+    {
+        _permissions.Clear();
+    }
 } 

@@ -59,3 +59,30 @@ public class RoleTests
         result.IsSuccess.ShouldBeTrue();
         role.HasPermission("Pirates.Navigate").ShouldBeTrue();
     }
+
+    [Fact]
+    public void RemovePermission_ShouldRemoveSuccessfully()
+    {
+        var role = Role.Create("TestRole").Value;
+        role.AddPermission("Temporary.Permission");
+
+        var result = role.RemovePermission("Temporary.Permission");
+
+        result.IsSuccess.ShouldBeTrue();
+        role.HasPermission("Temporary.Permission").ShouldBeFalse();
+    }
+
+    [Fact]
+    public void ClearPermissions_ShouldRemoveAll()
+    {
+        var role = Role.Create("TestRole").Value;
+        role.AddPermission("Permission1");
+        role.AddPermission("Permission2");
+        role.AddPermission("Permission3");
+
+        role.ClearPermissions();
+
+        role.HasPermission("Permission1").ShouldBeFalse();
+        role.HasPermission("Permission2").ShouldBeFalse();
+        role.HasPermission("Permission3").ShouldBeFalse();
+    }
