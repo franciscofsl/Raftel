@@ -14,6 +14,7 @@ public class RoleTests
         var role = result.Value;
         role.Name.ShouldBe("Administrator");
         role.Description.ShouldBe("Full system access");
+        role.Id.ShouldNotBe(default);
     }
 
     [Fact]
@@ -47,4 +48,14 @@ public class RoleTests
         result.IsSuccess.ShouldBeTrue();
         role.Name.ShouldBe("NewRoleName");
     }
-} 
+
+    [Fact]
+    public void AddPermission_ShouldAddSuccessfully()
+    {
+        var role = Role.Create("TestRole").Value;
+
+        var result = role.AddPermission("Pirates.Navigate", "Navigate the seas");
+
+        result.IsSuccess.ShouldBeTrue();
+        role.HasPermission("Pirates.Navigate").ShouldBeTrue();
+    }

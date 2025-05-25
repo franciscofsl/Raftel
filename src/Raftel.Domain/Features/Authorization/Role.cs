@@ -7,6 +7,7 @@ namespace Raftel.Domain.Features.Authorization;
 
 public sealed class Role : AggregateRoot<RoleId>
 {
+    private readonly PermissionCollection _permissions = new();
 
     [ExcludeFromCodeCoverage]
     private Role()
@@ -20,7 +21,7 @@ public sealed class Role : AggregateRoot<RoleId>
     }
 
     public string Name { get; private set; } = string.Empty;
-    public string? Description { get; private set; }
+    public string? Description { get; set; }
 
     public static Result<Role> Create(string name, string? description = null)
     {
@@ -41,5 +42,10 @@ public sealed class Role : AggregateRoot<RoleId>
 
         Name = name;
         return Result.Success();
+    }
+
+    public Result AddPermission(string permissionName, string? description = null)
+    {
+        return _permissions.Add(permissionName, description);
     }
 } 
