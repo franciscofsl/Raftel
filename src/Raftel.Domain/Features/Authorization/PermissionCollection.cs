@@ -7,6 +7,23 @@ internal class PermissionCollection : IEnumerable<Permission>
 {
     private readonly List<Permission> _permissions = new();
 
+    internal Result Add(string permissionName, string? description = null)
+    {
+
+        if (Has(permissionName))
+        {
+            return Result.Failure(RoleErrors.PermissionAlreadyExists);
+        }
+
+        var permissionResult = Permission.Create(permissionName, description);
+        if (permissionResult.IsFailure)
+        {
+            return Result.Failure(permissionResult.Error);
+        }
+
+        _permissions.Add(permissionResult.Value);
+        return Result.Success();
+    }
 
     internal Result Add(Permission permission)
     {

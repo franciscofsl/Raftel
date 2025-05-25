@@ -86,3 +86,15 @@ public class RoleTests
         role.HasPermission("Permission2").ShouldBeFalse();
         role.HasPermission("Permission3").ShouldBeFalse();
     }
+
+    [Fact]
+    public void AddDuplicatePermission_ShouldPreventIt()
+    {
+        var role = Role.Create("TestRole").Value;
+        role.AddPermission("Users.Create");
+
+        var result = role.AddPermission("Users.Create");
+
+        result.IsFailure.ShouldBeTrue();
+        result.Error.ShouldBe(RoleErrors.PermissionAlreadyExists);
+    }
