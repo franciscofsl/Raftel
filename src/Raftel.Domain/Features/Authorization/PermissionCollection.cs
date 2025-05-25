@@ -28,6 +28,11 @@ internal class PermissionCollection : IEnumerable<Permission>
 
         var permission = _permissions.FirstOrDefault(p => 
             p.Name.Equals(permissionName, StringComparison.OrdinalIgnoreCase));
+        
+        if (permission == null)
+        {
+            return Result.Failure(RoleErrors.PermissionNotFound);
+        }
 
         _permissions.Remove(permission);
         return Result.Success();

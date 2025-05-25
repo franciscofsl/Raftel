@@ -112,3 +112,14 @@ public class RoleTests
         result.IsFailure.ShouldBeTrue();
         result.Error.ShouldBe(RoleErrors.InvalidPermissionName);
     }
+
+    [Fact]
+    public void RemoveNonExistentPermission_ShouldFail()
+    {
+        var role = Role.Create("TestRole").Value;
+
+        var result = role.RemovePermission("NonExistent.Permission");
+
+        result.IsFailure.ShouldBeTrue();
+        result.Error.ShouldBe(RoleErrors.PermissionNotFound);
+    }
