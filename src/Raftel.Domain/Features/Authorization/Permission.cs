@@ -23,6 +23,10 @@ public sealed class Permission : Entity<PermissionId>
 
     public static Result<Permission> Create(string name, string? description = null)
     {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return Result.Failure<Permission>(RoleErrors.InvalidPermissionName);
+        }
 
         return Result.Success(new Permission(name, description));
     }

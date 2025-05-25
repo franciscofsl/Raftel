@@ -98,3 +98,17 @@ public class RoleTests
         result.IsFailure.ShouldBeTrue();
         result.Error.ShouldBe(RoleErrors.PermissionAlreadyExists);
     }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void AddPermission_WithInvalidName_ShouldFail(string invalidName)
+    {
+        var role = Role.Create("TestRole").Value;
+
+        var result = role.AddPermission(invalidName);
+
+        result.IsFailure.ShouldBeTrue();
+        result.Error.ShouldBe(RoleErrors.InvalidPermissionName);
+    }

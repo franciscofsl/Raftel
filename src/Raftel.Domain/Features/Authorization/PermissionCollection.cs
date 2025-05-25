@@ -9,7 +9,6 @@ internal class PermissionCollection : IEnumerable<Permission>
 
     internal Result Add(string permissionName, string? description = null)
     {
-
         if (Has(permissionName))
         {
             return Result.Failure(RoleErrors.PermissionAlreadyExists);
@@ -22,13 +21,6 @@ internal class PermissionCollection : IEnumerable<Permission>
         }
 
         _permissions.Add(permissionResult.Value);
-        return Result.Success();
-    }
-
-    internal Result Add(Permission permission)
-    {
-
-        _permissions.Add(permission);
         return Result.Success();
     }
 
