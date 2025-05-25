@@ -36,4 +36,15 @@ public class RoleTests
         result.IsFailure.ShouldBeTrue();
         result.Error.ShouldBe(RoleErrors.InvalidName);
     }
+
+    [Fact]
+    public void Rename_ShouldUpdateSuccessfully()
+    {
+        var role = Role.Create("OldRoleName").Value;
+
+        var result = role.Rename("NewRoleName");
+
+        result.IsSuccess.ShouldBeTrue();
+        role.Name.ShouldBe("NewRoleName");
+    }
 } 

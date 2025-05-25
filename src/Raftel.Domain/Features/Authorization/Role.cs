@@ -32,4 +32,14 @@ public sealed class Role : AggregateRoot<RoleId>
         return Result.Success(new Role(name, description));
     }
 
+    public Result Rename(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return Result.Failure(RoleErrors.InvalidName);
+        }
+
+        Name = name;
+        return Result.Success();
+    }
 } 
