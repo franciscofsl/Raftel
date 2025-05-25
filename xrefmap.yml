@@ -2605,6 +2605,347 @@ references:
   fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).CType
   nameWithType: TypedId<T>.implicit operator
   nameWithType.vb: TypedId(Of T).CType
+- uid: Raftel.Domain.Features.Authorization
+  name: Raftel.Domain.Features.Authorization
+  href: api/Raftel.Domain.Features.Authorization.html
+  commentId: N:Raftel.Domain.Features.Authorization
+  fullName: Raftel.Domain.Features.Authorization
+  nameWithType: Raftel.Domain.Features.Authorization
+- uid: Raftel.Domain.Features.Authorization.IRolesRepository
+  name: IRolesRepository
+  href: api/Raftel.Domain.Features.Authorization.IRolesRepository.html
+  commentId: T:Raftel.Domain.Features.Authorization.IRolesRepository
+  fullName: Raftel.Domain.Features.Authorization.IRolesRepository
+  nameWithType: IRolesRepository
+- uid: Raftel.Domain.Features.Authorization.Permission
+  name: Permission
+  href: api/Raftel.Domain.Features.Authorization.Permission.html
+  commentId: T:Raftel.Domain.Features.Authorization.Permission
+  fullName: Raftel.Domain.Features.Authorization.Permission
+  nameWithType: Permission
+- uid: Raftel.Domain.Features.Authorization.Permission.Create(System.String,System.String)
+  name: Create(string, string?)
+  href: api/Raftel.Domain.Features.Authorization.Permission.html#Raftel_Domain_Features_Authorization_Permission_Create_System_String_System_String_
+  commentId: M:Raftel.Domain.Features.Authorization.Permission.Create(System.String,System.String)
+  name.vb: Create(String, String)
+  fullName: Raftel.Domain.Features.Authorization.Permission.Create(string, string?)
+  fullName.vb: Raftel.Domain.Features.Authorization.Permission.Create(String, String)
+  nameWithType: Permission.Create(string, string?)
+  nameWithType.vb: Permission.Create(String, String)
+- uid: Raftel.Domain.Features.Authorization.Permission.Create*
+  name: Create
+  href: api/Raftel.Domain.Features.Authorization.Permission.html#Raftel_Domain_Features_Authorization_Permission_Create_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Permission.Create
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Permission.Create
+  nameWithType: Permission.Create
+- uid: Raftel.Domain.Features.Authorization.Permission.Description
+  name: Description
+  href: api/Raftel.Domain.Features.Authorization.Permission.html#Raftel_Domain_Features_Authorization_Permission_Description
+  commentId: P:Raftel.Domain.Features.Authorization.Permission.Description
+  fullName: Raftel.Domain.Features.Authorization.Permission.Description
+  nameWithType: Permission.Description
+- uid: Raftel.Domain.Features.Authorization.Permission.Description*
+  name: Description
+  href: api/Raftel.Domain.Features.Authorization.Permission.html#Raftel_Domain_Features_Authorization_Permission_Description_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Permission.Description
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Permission.Description
+  nameWithType: Permission.Description
+- uid: Raftel.Domain.Features.Authorization.Permission.Name
+  name: Name
+  href: api/Raftel.Domain.Features.Authorization.Permission.html#Raftel_Domain_Features_Authorization_Permission_Name
+  commentId: P:Raftel.Domain.Features.Authorization.Permission.Name
+  fullName: Raftel.Domain.Features.Authorization.Permission.Name
+  nameWithType: Permission.Name
+- uid: Raftel.Domain.Features.Authorization.Permission.Name*
+  name: Name
+  href: api/Raftel.Domain.Features.Authorization.Permission.html#Raftel_Domain_Features_Authorization_Permission_Name_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Permission.Name
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Permission.Name
+  nameWithType: Permission.Name
+- uid: Raftel.Domain.Features.Authorization.Role
+  name: Role
+  href: api/Raftel.Domain.Features.Authorization.Role.html
+  commentId: T:Raftel.Domain.Features.Authorization.Role
+  fullName: Raftel.Domain.Features.Authorization.Role
+  nameWithType: Role
+- uid: Raftel.Domain.Features.Authorization.Role.AddPermission(System.String,System.String)
+  name: AddPermission(string, string?)
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_AddPermission_System_String_System_String_
+  commentId: M:Raftel.Domain.Features.Authorization.Role.AddPermission(System.String,System.String)
+  name.vb: AddPermission(String, String)
+  fullName: Raftel.Domain.Features.Authorization.Role.AddPermission(string, string?)
+  fullName.vb: Raftel.Domain.Features.Authorization.Role.AddPermission(String, String)
+  nameWithType: Role.AddPermission(string, string?)
+  nameWithType.vb: Role.AddPermission(String, String)
+- uid: Raftel.Domain.Features.Authorization.Role.AddPermission*
+  name: AddPermission
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_AddPermission_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Role.AddPermission
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Role.AddPermission
+  nameWithType: Role.AddPermission
+- uid: Raftel.Domain.Features.Authorization.Role.AddPermissions(System.Collections.Generic.IEnumerable{System.String})
+  name: AddPermissions(IEnumerable<string>)
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_AddPermissions_System_Collections_Generic_IEnumerable_System_String__
+  commentId: M:Raftel.Domain.Features.Authorization.Role.AddPermissions(System.Collections.Generic.IEnumerable{System.String})
+  name.vb: AddPermissions(IEnumerable(Of String))
+  fullName: Raftel.Domain.Features.Authorization.Role.AddPermissions(System.Collections.Generic.IEnumerable<string>)
+  fullName.vb: Raftel.Domain.Features.Authorization.Role.AddPermissions(System.Collections.Generic.IEnumerable(Of String))
+  nameWithType: Role.AddPermissions(IEnumerable<string>)
+  nameWithType.vb: Role.AddPermissions(IEnumerable(Of String))
+- uid: Raftel.Domain.Features.Authorization.Role.AddPermissions*
+  name: AddPermissions
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_AddPermissions_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Role.AddPermissions
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Role.AddPermissions
+  nameWithType: Role.AddPermissions
+- uid: Raftel.Domain.Features.Authorization.Role.ClearPermissions
+  name: ClearPermissions()
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_ClearPermissions
+  commentId: M:Raftel.Domain.Features.Authorization.Role.ClearPermissions
+  fullName: Raftel.Domain.Features.Authorization.Role.ClearPermissions()
+  nameWithType: Role.ClearPermissions()
+- uid: Raftel.Domain.Features.Authorization.Role.ClearPermissions*
+  name: ClearPermissions
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_ClearPermissions_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Role.ClearPermissions
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Role.ClearPermissions
+  nameWithType: Role.ClearPermissions
+- uid: Raftel.Domain.Features.Authorization.Role.Create(System.String,System.String)
+  name: Create(string, string?)
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_Create_System_String_System_String_
+  commentId: M:Raftel.Domain.Features.Authorization.Role.Create(System.String,System.String)
+  name.vb: Create(String, String)
+  fullName: Raftel.Domain.Features.Authorization.Role.Create(string, string?)
+  fullName.vb: Raftel.Domain.Features.Authorization.Role.Create(String, String)
+  nameWithType: Role.Create(string, string?)
+  nameWithType.vb: Role.Create(String, String)
+- uid: Raftel.Domain.Features.Authorization.Role.Create*
+  name: Create
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_Create_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Role.Create
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Role.Create
+  nameWithType: Role.Create
+- uid: Raftel.Domain.Features.Authorization.Role.Description
+  name: Description
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_Description
+  commentId: P:Raftel.Domain.Features.Authorization.Role.Description
+  fullName: Raftel.Domain.Features.Authorization.Role.Description
+  nameWithType: Role.Description
+- uid: Raftel.Domain.Features.Authorization.Role.Description*
+  name: Description
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_Description_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Role.Description
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Role.Description
+  nameWithType: Role.Description
+- uid: Raftel.Domain.Features.Authorization.Role.HasPermission(System.String)
+  name: HasPermission(string)
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_HasPermission_System_String_
+  commentId: M:Raftel.Domain.Features.Authorization.Role.HasPermission(System.String)
+  name.vb: HasPermission(String)
+  fullName: Raftel.Domain.Features.Authorization.Role.HasPermission(string)
+  fullName.vb: Raftel.Domain.Features.Authorization.Role.HasPermission(String)
+  nameWithType: Role.HasPermission(string)
+  nameWithType.vb: Role.HasPermission(String)
+- uid: Raftel.Domain.Features.Authorization.Role.HasPermission*
+  name: HasPermission
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_HasPermission_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Role.HasPermission
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Role.HasPermission
+  nameWithType: Role.HasPermission
+- uid: Raftel.Domain.Features.Authorization.Role.Name
+  name: Name
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_Name
+  commentId: P:Raftel.Domain.Features.Authorization.Role.Name
+  fullName: Raftel.Domain.Features.Authorization.Role.Name
+  nameWithType: Role.Name
+- uid: Raftel.Domain.Features.Authorization.Role.Name*
+  name: Name
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_Name_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Role.Name
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Role.Name
+  nameWithType: Role.Name
+- uid: Raftel.Domain.Features.Authorization.Role.RemovePermission(System.String)
+  name: RemovePermission(string)
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_RemovePermission_System_String_
+  commentId: M:Raftel.Domain.Features.Authorization.Role.RemovePermission(System.String)
+  name.vb: RemovePermission(String)
+  fullName: Raftel.Domain.Features.Authorization.Role.RemovePermission(string)
+  fullName.vb: Raftel.Domain.Features.Authorization.Role.RemovePermission(String)
+  nameWithType: Role.RemovePermission(string)
+  nameWithType.vb: Role.RemovePermission(String)
+- uid: Raftel.Domain.Features.Authorization.Role.RemovePermission*
+  name: RemovePermission
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_RemovePermission_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Role.RemovePermission
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Role.RemovePermission
+  nameWithType: Role.RemovePermission
+- uid: Raftel.Domain.Features.Authorization.Role.Rename(System.String)
+  name: Rename(string)
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_Rename_System_String_
+  commentId: M:Raftel.Domain.Features.Authorization.Role.Rename(System.String)
+  name.vb: Rename(String)
+  fullName: Raftel.Domain.Features.Authorization.Role.Rename(string)
+  fullName.vb: Raftel.Domain.Features.Authorization.Role.Rename(String)
+  nameWithType: Role.Rename(string)
+  nameWithType.vb: Role.Rename(String)
+- uid: Raftel.Domain.Features.Authorization.Role.Rename*
+  name: Rename
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_Rename_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Role.Rename
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Role.Rename
+  nameWithType: Role.Rename
+- uid: Raftel.Domain.Features.Authorization.RoleErrors
+  name: RoleErrors
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html
+  commentId: T:Raftel.Domain.Features.Authorization.RoleErrors
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors
+  nameWithType: RoleErrors
+- uid: Raftel.Domain.Features.Authorization.RoleErrors.InvalidName
+  name: InvalidName
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_InvalidName
+  commentId: P:Raftel.Domain.Features.Authorization.RoleErrors.InvalidName
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors.InvalidName
+  nameWithType: RoleErrors.InvalidName
+- uid: Raftel.Domain.Features.Authorization.RoleErrors.InvalidName*
+  name: InvalidName
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_InvalidName_
+  commentId: Overload:Raftel.Domain.Features.Authorization.RoleErrors.InvalidName
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors.InvalidName
+  nameWithType: RoleErrors.InvalidName
+- uid: Raftel.Domain.Features.Authorization.RoleErrors.InvalidPermissionName
+  name: InvalidPermissionName
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_InvalidPermissionName
+  commentId: P:Raftel.Domain.Features.Authorization.RoleErrors.InvalidPermissionName
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors.InvalidPermissionName
+  nameWithType: RoleErrors.InvalidPermissionName
+- uid: Raftel.Domain.Features.Authorization.RoleErrors.InvalidPermissionName*
+  name: InvalidPermissionName
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_InvalidPermissionName_
+  commentId: Overload:Raftel.Domain.Features.Authorization.RoleErrors.InvalidPermissionName
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors.InvalidPermissionName
+  nameWithType: RoleErrors.InvalidPermissionName
+- uid: Raftel.Domain.Features.Authorization.RoleErrors.PermissionAlreadyExists
+  name: PermissionAlreadyExists
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_PermissionAlreadyExists
+  commentId: P:Raftel.Domain.Features.Authorization.RoleErrors.PermissionAlreadyExists
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors.PermissionAlreadyExists
+  nameWithType: RoleErrors.PermissionAlreadyExists
+- uid: Raftel.Domain.Features.Authorization.RoleErrors.PermissionAlreadyExists*
+  name: PermissionAlreadyExists
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_PermissionAlreadyExists_
+  commentId: Overload:Raftel.Domain.Features.Authorization.RoleErrors.PermissionAlreadyExists
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors.PermissionAlreadyExists
+  nameWithType: RoleErrors.PermissionAlreadyExists
+- uid: Raftel.Domain.Features.Authorization.RoleErrors.PermissionNotFound
+  name: PermissionNotFound
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_PermissionNotFound
+  commentId: P:Raftel.Domain.Features.Authorization.RoleErrors.PermissionNotFound
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors.PermissionNotFound
+  nameWithType: RoleErrors.PermissionNotFound
+- uid: Raftel.Domain.Features.Authorization.RoleErrors.PermissionNotFound*
+  name: PermissionNotFound
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_PermissionNotFound_
+  commentId: Overload:Raftel.Domain.Features.Authorization.RoleErrors.PermissionNotFound
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors.PermissionNotFound
+  nameWithType: RoleErrors.PermissionNotFound
+- uid: Raftel.Domain.Features.Authorization.ValueObjects
+  name: Raftel.Domain.Features.Authorization.ValueObjects
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.html
+  commentId: N:Raftel.Domain.Features.Authorization.ValueObjects
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects
+  nameWithType: Raftel.Domain.Features.Authorization.ValueObjects
+- uid: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId
+  name: PermissionId
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.html
+  commentId: T:Raftel.Domain.Features.Authorization.ValueObjects.PermissionId
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId
+  nameWithType: PermissionId
+- uid: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.#ctor(System.Guid)
+  name: PermissionId(Guid)
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.html#Raftel_Domain_Features_Authorization_ValueObjects_PermissionId__ctor_System_Guid_
+  commentId: M:Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.PermissionId(System.Guid)
+  fullName.vb: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.New(System.Guid)
+  nameWithType: PermissionId.PermissionId(Guid)
+  nameWithType.vb: PermissionId.New(Guid)
+- uid: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.#ctor*
+  name: PermissionId
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.html#Raftel_Domain_Features_Authorization_ValueObjects_PermissionId__ctor_
+  commentId: Overload:Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.PermissionId
+  fullName.vb: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.New
+  nameWithType: PermissionId.PermissionId
+  nameWithType.vb: PermissionId.New
+- uid: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.New
+  name: New()
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.html#Raftel_Domain_Features_Authorization_ValueObjects_PermissionId_New
+  commentId: M:Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.New
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.New()
+  nameWithType: PermissionId.New()
+- uid: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.New*
+  name: New
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.html#Raftel_Domain_Features_Authorization_ValueObjects_PermissionId_New_
+  commentId: Overload:Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.New
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.New
+  nameWithType: PermissionId.New
+- uid: Raftel.Domain.Features.Authorization.ValueObjects.RoleId
+  name: RoleId
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.RoleId.html
+  commentId: T:Raftel.Domain.Features.Authorization.ValueObjects.RoleId
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects.RoleId
+  nameWithType: RoleId
+- uid: Raftel.Domain.Features.Authorization.ValueObjects.RoleId.#ctor(System.Guid)
+  name: RoleId(Guid)
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.RoleId.html#Raftel_Domain_Features_Authorization_ValueObjects_RoleId__ctor_System_Guid_
+  commentId: M:Raftel.Domain.Features.Authorization.ValueObjects.RoleId.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects.RoleId.RoleId(System.Guid)
+  fullName.vb: Raftel.Domain.Features.Authorization.ValueObjects.RoleId.New(System.Guid)
+  nameWithType: RoleId.RoleId(Guid)
+  nameWithType.vb: RoleId.New(Guid)
+- uid: Raftel.Domain.Features.Authorization.ValueObjects.RoleId.#ctor*
+  name: RoleId
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.RoleId.html#Raftel_Domain_Features_Authorization_ValueObjects_RoleId__ctor_
+  commentId: Overload:Raftel.Domain.Features.Authorization.ValueObjects.RoleId.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects.RoleId.RoleId
+  fullName.vb: Raftel.Domain.Features.Authorization.ValueObjects.RoleId.New
+  nameWithType: RoleId.RoleId
+  nameWithType.vb: RoleId.New
+- uid: Raftel.Domain.Features.Authorization.ValueObjects.RoleId.New
+  name: New()
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.RoleId.html#Raftel_Domain_Features_Authorization_ValueObjects_RoleId_New
+  commentId: M:Raftel.Domain.Features.Authorization.ValueObjects.RoleId.New
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects.RoleId.New()
+  nameWithType: RoleId.New()
+- uid: Raftel.Domain.Features.Authorization.ValueObjects.RoleId.New*
+  name: New
+  href: api/Raftel.Domain.Features.Authorization.ValueObjects.RoleId.html#Raftel_Domain_Features_Authorization_ValueObjects_RoleId_New_
+  commentId: Overload:Raftel.Domain.Features.Authorization.ValueObjects.RoleId.New
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.ValueObjects.RoleId.New
+  nameWithType: RoleId.New
 - uid: Raftel.Domain.Features.Tenants
   name: Raftel.Domain.Features.Tenants
   href: api/Raftel.Domain.Features.Tenants.html
@@ -3419,6 +3760,50 @@ references:
   commentId: N:Raftel.Infrastructure.Data.Configuration
   fullName: Raftel.Infrastructure.Data.Configuration
   nameWithType: Raftel.Infrastructure.Data.Configuration
+- uid: Raftel.Infrastructure.Data.Configuration.PermissionConfiguration
+  name: PermissionConfiguration
+  href: api/Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.html
+  commentId: T:Raftel.Infrastructure.Data.Configuration.PermissionConfiguration
+  fullName: Raftel.Infrastructure.Data.Configuration.PermissionConfiguration
+  nameWithType: PermissionConfiguration
+- uid: Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Features.Authorization.Permission})
+  name: Configure(EntityTypeBuilder<Permission>)
+  href: api/Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.html#Raftel_Infrastructure_Data_Configuration_PermissionConfiguration_Configure_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder_Raftel_Domain_Features_Authorization_Permission__
+  commentId: M:Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Features.Authorization.Permission})
+  name.vb: Configure(EntityTypeBuilder(Of Permission))
+  fullName: Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Raftel.Domain.Features.Authorization.Permission>)
+  fullName.vb: Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of Raftel.Domain.Features.Authorization.Permission))
+  nameWithType: PermissionConfiguration.Configure(EntityTypeBuilder<Permission>)
+  nameWithType.vb: PermissionConfiguration.Configure(EntityTypeBuilder(Of Permission))
+- uid: Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.Configure*
+  name: Configure
+  href: api/Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.html#Raftel_Infrastructure_Data_Configuration_PermissionConfiguration_Configure_
+  commentId: Overload:Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.Configure
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.Configure
+  nameWithType: PermissionConfiguration.Configure
+- uid: Raftel.Infrastructure.Data.Configuration.RoleConfiguration
+  name: RoleConfiguration
+  href: api/Raftel.Infrastructure.Data.Configuration.RoleConfiguration.html
+  commentId: T:Raftel.Infrastructure.Data.Configuration.RoleConfiguration
+  fullName: Raftel.Infrastructure.Data.Configuration.RoleConfiguration
+  nameWithType: RoleConfiguration
+- uid: Raftel.Infrastructure.Data.Configuration.RoleConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Features.Authorization.Role})
+  name: Configure(EntityTypeBuilder<Role>)
+  href: api/Raftel.Infrastructure.Data.Configuration.RoleConfiguration.html#Raftel_Infrastructure_Data_Configuration_RoleConfiguration_Configure_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder_Raftel_Domain_Features_Authorization_Role__
+  commentId: M:Raftel.Infrastructure.Data.Configuration.RoleConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Features.Authorization.Role})
+  name.vb: Configure(EntityTypeBuilder(Of Role))
+  fullName: Raftel.Infrastructure.Data.Configuration.RoleConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Raftel.Domain.Features.Authorization.Role>)
+  fullName.vb: Raftel.Infrastructure.Data.Configuration.RoleConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of Raftel.Domain.Features.Authorization.Role))
+  nameWithType: RoleConfiguration.Configure(EntityTypeBuilder<Role>)
+  nameWithType.vb: RoleConfiguration.Configure(EntityTypeBuilder(Of Role))
+- uid: Raftel.Infrastructure.Data.Configuration.RoleConfiguration.Configure*
+  name: Configure
+  href: api/Raftel.Infrastructure.Data.Configuration.RoleConfiguration.html#Raftel_Infrastructure_Data_Configuration_RoleConfiguration_Configure_
+  commentId: Overload:Raftel.Infrastructure.Data.Configuration.RoleConfiguration.Configure
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Configuration.RoleConfiguration.Configure
+  nameWithType: RoleConfiguration.Configure
 - uid: Raftel.Infrastructure.Data.Configuration.TenantConfiguration
   name: TenantConfiguration
   href: api/Raftel.Infrastructure.Data.Configuration.TenantConfiguration.html
@@ -3810,6 +4195,40 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).OnModelCreating
   nameWithType: RaftelDbContext<TDbContext>.OnModelCreating
   nameWithType.vb: RaftelDbContext(Of TDbContext).OnModelCreating
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.Permission
+  name: Permission
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_Permission
+  commentId: P:Raftel.Infrastructure.Data.RaftelDbContext`1.Permission
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.Permission
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).Permission
+  nameWithType: RaftelDbContext<TDbContext>.Permission
+  nameWithType.vb: RaftelDbContext(Of TDbContext).Permission
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.Permission*
+  name: Permission
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_Permission_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.Permission
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.Permission
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).Permission
+  nameWithType: RaftelDbContext<TDbContext>.Permission
+  nameWithType.vb: RaftelDbContext(Of TDbContext).Permission
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.Role
+  name: Role
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_Role
+  commentId: P:Raftel.Infrastructure.Data.RaftelDbContext`1.Role
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.Role
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).Role
+  nameWithType: RaftelDbContext<TDbContext>.Role
+  nameWithType.vb: RaftelDbContext(Of TDbContext).Role
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.Role*
+  name: Role
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_Role_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.Role
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.Role
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).Role
+  nameWithType: RaftelDbContext<TDbContext>.Role
+  nameWithType.vb: RaftelDbContext(Of TDbContext).Role
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.Tenant
   name: Tenant
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_Tenant

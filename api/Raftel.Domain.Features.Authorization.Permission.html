@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class AggregateRoot&lt;TId&gt; | Raftel </title>
+      <title>Class Permission | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class AggregateRoot&lt;TId&gt; | Raftel ">
+      <meta name="title" content="Class Permission | Raftel ">
       
-      <meta name="description" content="Represents the root of an aggregate in the domain model.">
+      
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_BaseTypes_AggregateRoot_1.md&amp;value=---%0Auid%3A%20Raftel.Domain.BaseTypes.AggregateRoot%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Features_Authorization_Permission.md&amp;value=---%0Auid%3A%20Raftel.Domain.Features.Authorization.Permission%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,75 +84,57 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1">
+        <article data-uid="Raftel.Domain.Features.Authorization.Permission">
 
 
 
-  <h1 id="Raftel_Domain_BaseTypes_AggregateRoot_1" data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1" class="text-break">
-Class AggregateRoot&lt;TId&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/BaseTypes/AggregateRoot.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Domain_Features_Authorization_Permission" data-uid="Raftel.Domain.Features.Authorization.Permission" class="text-break">
+Class Permission  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Authorization/Permission.cs/#L8"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Domain.html">Domain</a>.<a class="xref" href="Raftel.Domain.BaseTypes.html">BaseTypes</a></dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Domain.html">Domain</a>.<a class="xref" href="Raftel.Domain.Features.html">Features</a>.<a class="xref" href="Raftel.Domain.Features.Authorization.html">Authorization</a></dd></dl>
   <dl><dt>Assembly</dt><dd>Raftel.Domain.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"><p>Represents the root of an aggregate in the domain model.</p>
-</div>
+  <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class AggregateRoot&lt;TId&gt; : Entity&lt;TId&gt; where TId : TypedId&lt;Guid&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Permission : Entity&lt;PermissionId&gt;</code></pre>
   </div>
 
 
 
-  <h4 class="section">Type Parameters</h4>
-  <dl class="parameters">
-    <dt><code>TId</code></dt>
-    <dd><p>The type of the aggregate's identifier.</p>
-</dd>
-  </dl>
 
   <dl class="typelist inheritance">
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html">Entity</a>&lt;TId&gt;</div>
-      <div><span class="xref">AggregateRoot&lt;TId&gt;</span></div>
+      <div><a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html">Entity</a>&lt;<a class="xref" href="Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.html">PermissionId</a>&gt;</div>
+      <div><span class="xref">Permission</span></div>
     </dd>
   </dl>
 
 
-  <dl class="typelist derived">
-    <dt>Derived</dt>
-    <dd>
-      <div><a class="xref" href="Raftel.Domain.Features.Authorization.Role.html">Role</a></div>
-      <div><a class="xref" href="Raftel.Domain.Features.Tenants.Tenant.html">Tenant</a></div>
-      <div><a class="xref" href="Raftel.Domain.Features.Users.User.html">User</a></div>
-    </dd>
-  </dl>
 
   <dl class="typelist inheritedMembers">
     <dt>Inherited Members</dt>
     <dd>
     <div>
-      <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id">Entity&lt;TId&gt;.Id</a>
+      <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id">Entity&lt;PermissionId&gt;.Id</a>
     </div>
     <div>
-      <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Equals_System_Object_">Entity&lt;TId&gt;.Equals(object)</a>
+      <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Equals_System_Object_">Entity&lt;PermissionId&gt;.Equals(object)</a>
     </div>
     <div>
-      <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_GetHashCode">Entity&lt;TId&gt;.GetHashCode()</a>
+      <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_GetHashCode">Entity&lt;PermissionId&gt;.GetHashCode()</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
@@ -167,28 +149,33 @@ Class AggregateRoot&lt;TId&gt;  <a class="header-action link-secondary" title="V
 
 
 
-  <h2 class="section" id="constructors">Constructors
+  <h2 class="section" id="properties">Properties
 </h2>
 
 
-  <a id="Raftel_Domain_BaseTypes_AggregateRoot_1__ctor_" data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor*"></a>
+  <a id="Raftel_Domain_Features_Authorization_Permission_Description_" data-uid="Raftel.Domain.Features.Authorization.Permission.Description*"></a>
 
-  <h3 id="Raftel_Domain_BaseTypes_AggregateRoot_1__ctor" data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor">
-  AggregateRoot()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/BaseTypes/AggregateRoot.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Domain_Features_Authorization_Permission_Description" data-uid="Raftel.Domain.Features.Authorization.Permission.Description">
+  Description
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Authorization/Permission.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected AggregateRoot()</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Description { get; set; }</code></pre>
   </div>
 
 
 
 
 
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -197,28 +184,68 @@ Class AggregateRoot&lt;TId&gt;  <a class="header-action link-secondary" title="V
 
 
 
-  <a id="Raftel_Domain_BaseTypes_AggregateRoot_1__ctor_" data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor*"></a>
+  <a id="Raftel_Domain_Features_Authorization_Permission_Name_" data-uid="Raftel.Domain.Features.Authorization.Permission.Name*"></a>
 
-  <h3 id="Raftel_Domain_BaseTypes_AggregateRoot_1__ctor__0_" data-uid="Raftel.Domain.BaseTypes.AggregateRoot`1.#ctor(`0)">
-  AggregateRoot(TId)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/BaseTypes/AggregateRoot.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Domain_Features_Authorization_Permission_Name" data-uid="Raftel.Domain.Features.Authorization.Permission.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Authorization/Permission.cs/#L21"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Raftel.Domain.BaseTypes.AggregateRoot-1.html">AggregateRoot&lt;TId&gt;</a> class.</p>
-</div>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected AggregateRoot(TId id)</code></pre>
+    <pre><code class="lang-csharp hljs">public string Name { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Raftel_Domain_Features_Authorization_Permission_Create_" data-uid="Raftel.Domain.Features.Authorization.Permission.Create*"></a>
+
+  <h3 id="Raftel_Domain_Features_Authorization_Permission_Create_System_String_System_String_" data-uid="Raftel.Domain.Features.Authorization.Permission.Create(System.String,System.String)">
+  Create(string, string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Authorization/Permission.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Result&lt;Permission&gt; Create(string name, string? description = null)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>id</code> <span class="xref">TId</span></dt>
-    <dd><p>The identifier of the aggregate root.</p>
-</dd>
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>description</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
   </dl>
 
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result</a>&lt;<a class="xref" href="Raftel.Domain.Features.Authorization.Permission.html">Permission</a>&gt;</dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -234,7 +261,7 @@ Class AggregateRoot&lt;TId&gt;  <a class="header-action link-secondary" title="V
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/BaseTypes/AggregateRoot.cs/#L7" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Authorization/Permission.cs/#L8" class="edit-link">Edit this page</a>
         </div>
 
 

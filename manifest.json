@@ -1142,6 +1142,118 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Authorization.IRolesRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Authorization.IRolesRepository.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Authorization.IRolesRepository",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Authorization.Permission.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Authorization.Permission.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Authorization.Permission",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Authorization.Role.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Authorization.Role.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Authorization.Role",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Authorization.RoleErrors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Authorization.RoleErrors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Authorization.RoleErrors",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Authorization.ValueObjects.PermissionId.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Authorization.ValueObjects.PermissionId",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Authorization.ValueObjects.RoleId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Authorization.ValueObjects.RoleId.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Authorization.ValueObjects.RoleId",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Authorization.ValueObjects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Authorization.ValueObjects.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Authorization.ValueObjects",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Features.Authorization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Features.Authorization.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Features.Authorization",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Domain.Features.Tenants.ITenantsRepository.yml",
       "output": {
         ".html": {
@@ -1474,6 +1586,34 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Infrastructure.Authentication",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Configuration.PermissionConfiguration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Configuration.RoleConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Configuration.RoleConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Configuration.RoleConfiguration",
       "Summary": null
     },
     {
