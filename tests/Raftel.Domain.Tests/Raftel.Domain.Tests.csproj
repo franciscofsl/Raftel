@@ -35,5 +35,9 @@
     <ItemGroup>
         <AssemblyAttribute Include="System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute"/>
     </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Features\Authorization\" />
+    </ItemGroup>
 
 </Project>

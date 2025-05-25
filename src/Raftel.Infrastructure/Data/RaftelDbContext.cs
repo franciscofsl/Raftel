@@ -7,6 +7,7 @@ using Raftel.Application;
 using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Domain.Features.Users;
 using Raftel.Domain.Features.Tenants;
+using Raftel.Domain.Features.Authorization;
 using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Data;
@@ -43,6 +44,8 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
 
     public DbSet<User> User { get; set; }
     public DbSet<Tenant> Tenant { get; set; }
+    public DbSet<Role> Role { get; set; }
+    public DbSet<Permission> Permission { get; set; }
     
     protected bool IsSoftDeleteFilterEnabled => _dataFilter?.IsEnabled<ISoftDeleteFilter>() ?? false;
     protected bool IsTenantFilterEnabled => _dataFilter?.IsEnabled<ITenantFilter>() ?? true;
