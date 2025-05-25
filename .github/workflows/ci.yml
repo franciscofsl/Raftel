@@ -6,7 +6,7 @@ on:
       branches: [main]
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
     env:
       working-directory: ./ 
@@ -22,10 +22,6 @@ jobs:
       - name: Install required workloads
         run: |
           dotnet workload install aspire
-
-      - name: Install reportgenerator
-        run: |
-          dotnet tool install -g dotnet-reportgenerator-globaltool
 
       - name: Start dependencies (docker-compose)
         run: |
