@@ -123,3 +123,21 @@ public class RoleTests
         result.IsFailure.ShouldBeTrue();
         result.Error.ShouldBe(RoleErrors.PermissionNotFound);
     }
+
+    [Theory]
+    [InlineData("Users.Create", "USERS.CREATE", true)]
+    [InlineData("Users.Read", "users.read", true)]
+    [InlineData("Users.Update", "NonExistent.Permission", false)]
+    public void QueryPermission_ShouldBeCaseInsensitive(string addedPermission, string queriedPermission,
+        bool expectedResult)
+    {
+        var role = Role.Create("TestRole").Value;
+        if (!string.IsNullOrEmpty(addedPermission))
+        {
+            role.AddPermission(addedPermission);
+        }
+
+        var hasPermission = role.HasPermission(queriedPermission);
+
+        hasPermission.ShouldBe(expectedResult);
+    }
