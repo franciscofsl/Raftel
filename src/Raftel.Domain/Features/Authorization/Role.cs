@@ -63,4 +63,9 @@ public sealed class Role : AggregateRoot<RoleId>
     {
         _permissions.Clear();
     }
-} 
+
+    public void AddPermissions(IEnumerable<string> permissionNames)
+    {
+        _permissions.AddRange(permissionNames);
+    }
+}
