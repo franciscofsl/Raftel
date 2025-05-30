@@ -1,3 +1,8 @@
+---
+description: 
+globs: .cs
+alwaysApply: false
+---
 
   # .NET Development Rules
 
