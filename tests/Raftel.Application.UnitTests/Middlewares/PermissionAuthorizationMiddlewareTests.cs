@@ -1,3 +1,4 @@
+using NSubstitute;
 using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.Authentication;
 using Raftel.Application.Authorization;
@@ -38,7 +39,8 @@ public class PermissionAuthorizationMiddlewareTests
     [Fact]
     public async Task HandleAsync_WhenCommandHasPermissionButUserIsNotAuthenticated_ShouldThrowUnauthorizedException()
     {
-        _currentUser.IsAuthenticated.Returns(false);
+        _currentUser.When(c => c.EnsureHasPermission("test.permission"))
+            .Do(_ => throw new UnauthorizedException("User is not authenticated"));
 
         await Should.ThrowAsync<UnauthorizedException>(
             async () => await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next)
@@ -48,8 +50,8 @@ public class PermissionAuthorizationMiddlewareTests
     [Fact]
     public async Task HandleAsync_WhenCommandHasPermissionAndUserIsAuthenticatedButLacksPermission_ShouldThrowUnauthorizedException()
     {
-        _currentUser.IsAuthenticated.Returns(true);
-        _currentUser.HasPermission("test.permission").Returns(false);
+        _currentUser.When(c => c.EnsureHasPermission("test.permission"))
+            .Do(_ => throw new UnauthorizedException("User does not have the required permission: test.permission"));
 
         await Should.ThrowAsync<UnauthorizedException>(
             async () => await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next)
@@ -59,8 +61,7 @@ public class PermissionAuthorizationMiddlewareTests
     [Fact]
     public async Task HandleAsync_WhenCommandHasPermissionAndUserIsAuthenticatedAndHasPermission_ShouldAllowAccess()
     {
-        _currentUser.IsAuthenticated.Returns(true);
-        _currentUser.HasPermission("test.permission").Returns(true);
+        // No action needed, by default the mock will do nothing when EnsureHasPermission is called
 
         var result = await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next);
 
@@ -70,9 +71,7 @@ public class PermissionAuthorizationMiddlewareTests
     [Fact]
     public async Task HandleAsync_WhenCommandHasMultiplePermissionsAndUserHasAllPermissions_ShouldAllowAccess()
     {
-        _currentUser.IsAuthenticated.Returns(true);
-        _currentUser.HasPermission("test.permission1").Returns(true);
-        _currentUser.HasPermission("test.permission2").Returns(true);
+        // No action needed, by default the mock will do nothing when EnsureHasPermission is called
 
         var result = await _middlewareWithMultiplePermissions.HandleAsync(new CommandWithMultiplePermissions(), _next);
 
@@ -82,9 +81,11 @@ public class PermissionAuthorizationMiddlewareTests
     [Fact]
     public async Task HandleAsync_WhenCommandHasMultiplePermissionsAndUserLacksSomePermission_ShouldThrowUnauthorizedException()
     {
-        _currentUser.IsAuthenticated.Returns(true);
-        _currentUser.HasPermission("test.permission1").Returns(true);
-        _currentUser.HasPermission("test.permission2").Returns(false);
+        _currentUser.When(c => c.EnsureHasPermission("test.permission1"))
+            .Do(_ => { }); // Do nothing for first permission
+        
+        _currentUser.When(c => c.EnsureHasPermission("test.permission2"))
+            .Do(_ => throw new UnauthorizedException("User does not have the required permission: test.permission2"));
 
         await Should.ThrowAsync<UnauthorizedException>(
             async () => await _middlewareWithMultiplePermissions.HandleAsync(new CommandWithMultiplePermissions(), _next)

@@ -11,16 +11,10 @@ namespace Raftel.Application.Middlewares;
 /// </summary>
 /// <typeparam name="TRequest">The type of request being processed.</typeparam>
 /// <typeparam name="TResponse">The type of response expected.</typeparam>
-public class PermissionAuthorizationMiddleware<TRequest, TResponse> : IGlobalMiddleware<TRequest, TResponse>
+public class PermissionAuthorizationMiddleware<TRequest, TResponse>(ICurrentUser currentUser)
+    : IGlobalMiddleware<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
-    private readonly ICurrentUser _currentUser;
-
-    public PermissionAuthorizationMiddleware(ICurrentUser currentUser)
-    {
-        _currentUser = currentUser;
-    }
-
     /// <summary>
     /// Handles the request by checking if the current user has the required permissions.
     /// </summary>
@@ -40,17 +34,9 @@ public class PermissionAuthorizationMiddleware<TRequest, TResponse> : IGlobalMid
             return next();
         }
 
-        if (!_currentUser.IsAuthenticated)
-        {
-            throw new UnauthorizedException("User is not authenticated");
-        }
-
         foreach (var permission in requiredPermissions)
         {
-            if (!_currentUser.HasPermission(permission))
-            {
-                throw new UnauthorizedException($"User does not have the required permission: {permission}");
-            }
+            currentUser.EnsureHasPermission(permission);
         }
 
         return next();
