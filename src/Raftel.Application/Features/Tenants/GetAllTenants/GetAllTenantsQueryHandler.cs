@@ -10,7 +10,7 @@ internal sealed class GetAllTenantsQueryHandler(ITenantsRepository tenantsReposi
     public async Task<Result<List<GetAllTenantsResponse>>> HandleAsync(GetAllTenantsQuery request,
         CancellationToken token = default)
     {
-        var tenants = await tenantsRepository.ListAllAsync(token);
+        var tenants = await tenantsRepository.ListAllAsync(cancellationToken: token);
 
         var response = tenants
             .Select(tenant => new GetAllTenantsResponse
