@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using Raftel.Domain.Abstractions;
 using Raftel.Domain.BaseTypes;
+using Raftel.Shared.Extensions;
 
 namespace Raftel.Infrastructure.Data;
 
@@ -32,9 +34,12 @@ public abstract class EfRepository<TDbContext, TEntity, TId>(TDbContext dbContex
     /// </summary>
     /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a list of all entities.</returns>
-    public Task<List<TEntity>> ListAllAsync(CancellationToken cancellationToken = default)
+    public Task<List<TEntity>> ListAllAsync(Expression<Func<TEntity, bool>> filter = null,
+        CancellationToken cancellationToken = default)
     {
-        return dbContext.Set<TEntity>().ToListAsync(cancellationToken);
+        return dbContext.Set<TEntity>()
+            .WhereIf(filter is not null, filter)
+            .ToListAsync(cancellationToken);
     }
 
     /// <summary>
