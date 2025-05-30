@@ -61,8 +61,6 @@ public class PermissionAuthorizationMiddlewareTests
     [Fact]
     public async Task HandleAsync_WhenCommandHasPermissionAndUserIsAuthenticatedAndHasPermission_ShouldAllowAccess()
     {
-        // No action needed, by default the mock will do nothing when EnsureHasPermission is called
-
         var result = await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next);
 
         result.ShouldBe("Result");
@@ -71,8 +69,6 @@ public class PermissionAuthorizationMiddlewareTests
     [Fact]
     public async Task HandleAsync_WhenCommandHasMultiplePermissionsAndUserHasAllPermissions_ShouldAllowAccess()
     {
-        // No action needed, by default the mock will do nothing when EnsureHasPermission is called
-
         var result = await _middlewareWithMultiplePermissions.HandleAsync(new CommandWithMultiplePermissions(), _next);
 
         result.ShouldBe("Result");
@@ -82,7 +78,7 @@ public class PermissionAuthorizationMiddlewareTests
     public async Task HandleAsync_WhenCommandHasMultiplePermissionsAndUserLacksSomePermission_ShouldThrowUnauthorizedException()
     {
         _currentUser.When(c => c.EnsureHasPermission("test.permission1"))
-            .Do(_ => { }); // Do nothing for first permission
+            .Do(_ => { });
         
         _currentUser.When(c => c.EnsureHasPermission("test.permission2"))
             .Do(_ => throw new UnauthorizedException("User does not have the required permission: test.permission2"));
