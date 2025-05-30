@@ -19,4 +19,14 @@ internal sealed class CurrentHttpUser(IHttpContextAccessor accessor) : ICurrentU
             .Where(c => c.Type == "role")
             .Select(c => c.Value)
         ?? Enumerable.Empty<string>();
+
+    private IEnumerable<string> Permissions =>
+        accessor.HttpContext?.User?.Claims
+            .Where(c => c.Type == "permission")
+            .Select(c => c.Value)
+        ?? Enumerable.Empty<string>();
+
+    public bool HasPermission(string permission) =>
+        IsAuthenticated && Permissions.Contains(permission);
 }
+
