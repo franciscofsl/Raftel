@@ -11,7 +11,7 @@ internal sealed class GetPirateByFilterQueryHandler(IPirateRepository repository
     public async Task<Result<GetPirateByFilterResponse>> HandleAsync(GetPirateByFilterQuery request,
         CancellationToken token = default)
     {
-        var pirates = await repository.ListAllAsync(token);
+        var pirates = await repository.ListAllAsync(cancellationToken: token);
         var result = pirates
             .WhereIf(!string.IsNullOrEmpty(request.Name),
                 _ => ((string)_.Name).Contains(request.Name, StringComparison.OrdinalIgnoreCase))

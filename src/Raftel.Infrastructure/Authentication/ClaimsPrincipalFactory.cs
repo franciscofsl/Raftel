@@ -2,10 +2,13 @@
 using Microsoft.AspNetCore.Identity;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
+using Raftel.Domain.Features.Authorization;
 
 namespace Raftel.Infrastructure.Authentication;
 
-internal sealed class ClaimsPrincipalFactory(UserManager<IdentityUser> userManager)
+internal sealed class ClaimsPrincipalFactory(
+    UserManager<IdentityUser> userManager,
+    IRolesRepository rolesRepository)
     : IClaimsPrincipalFactory
 {
     public async Task<ClaimsPrincipal> CreateAsync(IdentityUser user)
@@ -16,10 +19,18 @@ internal sealed class ClaimsPrincipalFactory(UserManager<IdentityUser> userManag
         identity.AddClaim(CreateClaim(OpenIddictConstants.Claims.Name, user.UserName));
         identity.AddClaim(CreateClaim(OpenIddictConstants.Claims.Email, user.Email ?? ""));
 
-        var roles = await userManager.GetRolesAsync(user);
-        foreach (var role in roles)
+        var rolesFromUser = await userManager.GetRolesAsync(user);
+        var roles = await rolesRepository.ListAllAsync(_ => rolesFromUser.Contains(_.Name));
+        var permissions = roles.SelectMany(_ => _.PermissionNames()).ToArray();
+
+        foreach (var role in rolesFromUser)
         {
             identity.AddClaim(CreateClaim(OpenIddictConstants.Claims.Role, role));
+        }
+
+        foreach (var permission in permissions)
+        {
+            identity.AddClaim(CreateClaim("permission", permission));
         }
 
         return new ClaimsPrincipal(identity);

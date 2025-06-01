@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Raftel.Application.Features.Tenants.GetAllTenants;
 using Raftel.Domain.Features.Tenants;
 using Shouldly;
@@ -22,7 +23,7 @@ public sealed class GetAllTenantsQueryHandlerTests
         var tenants = new List<Tenant> { tenant1.Value, tenant2.Value };
         var query = new GetAllTenantsQuery();
 
-        _tenantsRepository.ListAllAsync(Arg.Any<CancellationToken>())
+        _tenantsRepository.ListAllAsync(Arg.Any<Expression<Func<Tenant, bool>>>(), Arg.Any<CancellationToken>())
             .Returns(tenants);
 
         var result = await _handler.HandleAsync(query);
@@ -43,7 +44,7 @@ public sealed class GetAllTenantsQueryHandlerTests
         var tenants = new List<Tenant>();
         var query = new GetAllTenantsQuery();
 
-        _tenantsRepository.ListAllAsync(Arg.Any<CancellationToken>())
+        _tenantsRepository.ListAllAsync(Arg.Any<Expression<Func<Tenant, bool>>>(), Arg.Any<CancellationToken>())
             .Returns(tenants);
 
         var result = await _handler.HandleAsync(query);
@@ -51,4 +52,4 @@ public sealed class GetAllTenantsQueryHandlerTests
         result.IsSuccess.ShouldBeTrue();
         result.Value.Count.ShouldBe(0);
     }
-} 
+}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Commands;
+using Raftel.Demo.Application.Pirates;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Domain.Pirates;
 using Shouldly;
@@ -13,6 +14,7 @@ public class UnitOfWorkMiddlewareTests : IntegrationTestBase
     {
         await ExecuteScopedAsync(async sp =>
         {
+            CurrentUser.AddPermission(PiratesPermissions.Management);
             var commandDispatcher = sp.GetService<ICommandDispatcher>();
 
             var command = new CreatePirateCommand("Ace", 9514361);

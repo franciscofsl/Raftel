@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Raftel.Application.Abstractions.Authentication;
+using Raftel.Application.IntegrationTests.Authentication;
 using Raftel.Application.Middlewares;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Infrastructure;
@@ -12,6 +14,8 @@ public abstract class IntegrationTestBase : IAsyncLifetime
     private readonly SqlServerTestContainerFixture _fixture;
 
     protected IServiceProvider ServiceProvider { get; private set; } = default!;
+
+    protected readonly TestCurrentUser CurrentUser = new();
 
     protected IntegrationTestBase()
     {
@@ -48,11 +52,13 @@ public abstract class IntegrationTestBase : IAsyncLifetime
         services.AddRaftelApplication(cfg =>
         {
             cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommandHandler).Assembly);
+            cfg.AddGlobalMiddleware(typeof(PermissionAuthorizationMiddleware<,>));
             cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
             cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
         });
 
         services.AddSampleInfrastructure(_fixture.ConnectionString);
+        services.AddSingleton<ICurrentUser>(CurrentUser);
     }
 
     protected TService GetService<TService>() where TService : notnull

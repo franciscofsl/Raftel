@@ -1,10 +1,14 @@
-﻿using Raftel.Domain.BaseTypes;
+﻿using Raftel.Domain.Abstractions;
+using Raftel.Domain.BaseTypes;
+using Raftel.Domain.Features.Authorization;
 using Raftel.Domain.Features.Users.ValueObjects;
 
 namespace Raftel.Domain.Features.Users;
 
 public sealed class User : AggregateRoot<UserId>
 {
+    private readonly List<Role> _roleIds = new();
+
     private User()
     {
     }
@@ -32,5 +36,21 @@ public sealed class User : AggregateRoot<UserId>
         {
             IdentityUserId = identityUserId;
         }
+    }
+
+    public Result AssignRole(Role role)
+    {
+        if (HasRole(role))
+        {
+            return Result.Failure(UserErrors.RoleAlreadyAssigned);
+        }
+
+        _roleIds.Add(role);
+        return Result.Success();
+    }
+
+    private bool HasRole(Role role)
+    {
+        return _roleIds.Contains(role);
     }
 }

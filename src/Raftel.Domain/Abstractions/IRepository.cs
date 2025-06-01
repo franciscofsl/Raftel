@@ -1,4 +1,5 @@
-﻿using Raftel.Domain.BaseTypes;
+﻿using System.Linq.Expressions;
+using Raftel.Domain.BaseTypes;
 
 namespace Raftel.Domain.Abstractions;
 
@@ -23,7 +24,7 @@ public interface IRepository<TEntity, in TId>
     /// </summary>
     /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a list of all entities.</returns>
-    Task<List<TEntity>> ListAllAsync(CancellationToken cancellationToken = default);
+    Task<List<TEntity>> ListAllAsync(Expression<Func<TEntity, bool>> filter = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Adds a new entity to the repository asynchronously.

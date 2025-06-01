@@ -68,4 +68,10 @@ public sealed class Role : AggregateRoot<RoleId>
     {
         _permissions.AddRange(permissionNames);
     }
+
+    public IEnumerable<string> PermissionNames()
+    {
+        return _permissions.Select(p => p.Name);
+    }
 }
+

@@ -6,4 +6,5 @@ public interface ICurrentUser
     Guid? UserId { get; }
     string? UserName { get; }
     IEnumerable<string> Roles { get; }
+    void EnsureHasPermission(string permission);
 }

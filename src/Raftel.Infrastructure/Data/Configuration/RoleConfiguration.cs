@@ -24,9 +24,6 @@ public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.Property(x => x.Description)
             .HasMaxLength(500);
 
-        builder.HasIndex(x => x.Name)
-            .IsUnique();
-
         builder.HasMany<Permission>()
             .WithMany();
 
