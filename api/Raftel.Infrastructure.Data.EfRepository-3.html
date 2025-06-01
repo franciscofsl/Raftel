@@ -89,7 +89,7 @@
 
 
   <h1 id="Raftel_Infrastructure_Data_EfRepository_3" data-uid="Raftel.Infrastructure.Data.EfRepository`3" class="text-break">
-Class EfRepository&lt;TDbContext, TEntity, TId&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L14"><i class="bi bi-code-slash"></i></a>
+Class EfRepository&lt;TDbContext, TEntity, TId&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -175,7 +175,7 @@ Class EfRepository&lt;TDbContext, TEntity, TId&gt;  <a class="header-action link
 
   <h3 id="Raftel_Infrastructure_Data_EfRepository_3__ctor__0_" data-uid="Raftel.Infrastructure.Data.EfRepository`3.#ctor(`0)">
   EfRepository(TDbContext)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Represents a base implementation of a repository using Entity Framework.</p>
@@ -212,7 +212,7 @@ Class EfRepository&lt;TDbContext, TEntity, TId&gt;  <a class="header-action link
 
   <h3 id="Raftel_Infrastructure_Data_EfRepository_3_AddAsync__1_System_Threading_CancellationToken_" data-uid="Raftel.Infrastructure.Data.EfRepository`3.AddAsync(`1,System.Threading.CancellationToken)">
   AddAsync(TEntity, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L51"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds a new entity to the repository asynchronously.</p>
@@ -254,7 +254,7 @@ Class EfRepository&lt;TDbContext, TEntity, TId&gt;  <a class="header-action link
 
   <h3 id="Raftel_Infrastructure_Data_EfRepository_3_GetByIdAsync__2_System_Threading_CancellationToken_" data-uid="Raftel.Infrastructure.Data.EfRepository`3.GetByIdAsync(`2,System.Threading.CancellationToken)">
   GetByIdAsync(TId, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L27"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Retrieves an entity by its identifier asynchronously.</p>
@@ -294,9 +294,9 @@ Class EfRepository&lt;TDbContext, TEntity, TId&gt;  <a class="header-action link
 
   <a id="Raftel_Infrastructure_Data_EfRepository_3_ListAllAsync_" data-uid="Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync*"></a>
 
-  <h3 id="Raftel_Infrastructure_Data_EfRepository_3_ListAllAsync_System_Threading_CancellationToken_" data-uid="Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync(System.Threading.CancellationToken)">
-  ListAllAsync(CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L35"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Infrastructure_Data_EfRepository_3_ListAllAsync_System_Linq_Expressions_Expression_System_Func__1_System_Boolean___System_Threading_CancellationToken_" data-uid="Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Threading.CancellationToken)">
+  ListAllAsync(Expression&lt;Func&lt;TEntity, bool&gt;&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L37"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Retrieves all entities asynchronously.</p>
@@ -304,11 +304,13 @@ Class EfRepository&lt;TDbContext, TEntity, TId&gt;  <a class="header-action link
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;List&lt;TEntity&gt;&gt; ListAllAsync(CancellationToken cancellationToken = default)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;List&lt;TEntity&gt;&gt; ListAllAsync(Expression&lt;Func&lt;TEntity, bool&gt;&gt; filter = null, CancellationToken cancellationToken = default)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
+    <dt><code>filter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TEntity, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;&gt;</dt>
+    <dd></dd>
     <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
     <dd><p>A token to monitor for cancellation requests.</p>
 </dd>
@@ -335,7 +337,7 @@ Class EfRepository&lt;TDbContext, TEntity, TId&gt;  <a class="header-action link
 
   <h3 id="Raftel_Infrastructure_Data_EfRepository_3_Remove__1_" data-uid="Raftel.Infrastructure.Data.EfRepository`3.Remove(`1)">
   Remove(TEntity)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L69"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Removes an entity from the repository.</p>
@@ -368,7 +370,7 @@ Class EfRepository&lt;TDbContext, TEntity, TId&gt;  <a class="header-action link
 
   <h3 id="Raftel_Infrastructure_Data_EfRepository_3_Update__1_" data-uid="Raftel.Infrastructure.Data.EfRepository`3.Update(`1)">
   Update(TEntity)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L60"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Updates an existing entity in the repository.</p>
@@ -401,7 +403,7 @@ Class EfRepository&lt;TDbContext, TEntity, TId&gt;  <a class="header-action link
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L14" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/EfRepository.cs/#L16" class="edit-link">Edit this page</a>
         </div>
 
 

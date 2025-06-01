@@ -101,7 +101,8 @@ Class GetCurrentTenantQuery  <a class="header-action link-secondary" title="View
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed record GetCurrentTenantQuery : IQuery&lt;GetCurrentTenantResponse&gt;, IRequest&lt;Result&lt;GetCurrentTenantResponse&gt;&gt;, IEquatable&lt;GetCurrentTenantQuery&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">[RequiresPermission(&quot;Tenants.View&quot;)]
+public sealed record GetCurrentTenantQuery : IQuery&lt;GetCurrentTenantResponse&gt;, IRequest&lt;Result&lt;GetCurrentTenantResponse&gt;&gt;, IEquatable&lt;GetCurrentTenantQuery&gt;</code></pre>
   </div>
 
 

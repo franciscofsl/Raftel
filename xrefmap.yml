@@ -457,6 +457,19 @@ references:
   commentId: T:Raftel.Application.Abstractions.Authentication.IAuthenticationService
   fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService
   nameWithType: IAuthenticationService
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.AssignRoleAsync(Raftel.Domain.Features.Users.User,Raftel.Domain.Features.Authorization.Role,System.Threading.CancellationToken)
+  name: AssignRoleAsync(User, Role, CancellationToken)
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_AssignRoleAsync_Raftel_Domain_Features_Users_User_Raftel_Domain_Features_Authorization_Role_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.Authentication.IAuthenticationService.AssignRoleAsync(Raftel.Domain.Features.Users.User,Raftel.Domain.Features.Authorization.Role,System.Threading.CancellationToken)
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.AssignRoleAsync(Raftel.Domain.Features.Users.User, Raftel.Domain.Features.Authorization.Role, System.Threading.CancellationToken)
+  nameWithType: IAuthenticationService.AssignRoleAsync(User, Role, CancellationToken)
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.AssignRoleAsync*
+  name: AssignRoleAsync
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_AssignRoleAsync_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.IAuthenticationService.AssignRoleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.AssignRoleAsync
+  nameWithType: IAuthenticationService.AssignRoleAsync
 - uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync(System.String,System.String,System.Threading.CancellationToken)
   name: LogInAsync(string, string, CancellationToken)
   href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_LogInAsync_System_String_System_String_System_Threading_CancellationToken_
@@ -495,6 +508,22 @@ references:
   commentId: T:Raftel.Application.Abstractions.Authentication.ICurrentUser
   fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser
   nameWithType: ICurrentUser
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission(System.String)
+  name: EnsureHasPermission(string)
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_EnsureHasPermission_System_String_
+  commentId: M:Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission(System.String)
+  name.vb: EnsureHasPermission(String)
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission(string)
+  fullName.vb: Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission(String)
+  nameWithType: ICurrentUser.EnsureHasPermission(string)
+  nameWithType.vb: ICurrentUser.EnsureHasPermission(String)
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission*
+  name: EnsureHasPermission
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_EnsureHasPermission_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission
+  nameWithType: ICurrentUser.EnsureHasPermission
 - uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.IsAuthenticated
   name: IsAuthenticated
   href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_IsAuthenticated
@@ -692,6 +721,50 @@ references:
   fullName.vb: Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse)
   nameWithType: RequestHandlerDelegate<TResponse>
   nameWithType.vb: RequestHandlerDelegate(Of TResponse)
+- uid: Raftel.Application.Authorization
+  name: Raftel.Application.Authorization
+  href: api/Raftel.Application.Authorization.html
+  commentId: N:Raftel.Application.Authorization
+  fullName: Raftel.Application.Authorization
+  nameWithType: Raftel.Application.Authorization
+- uid: Raftel.Application.Authorization.RequiresPermissionAttribute
+  name: RequiresPermissionAttribute
+  href: api/Raftel.Application.Authorization.RequiresPermissionAttribute.html
+  commentId: T:Raftel.Application.Authorization.RequiresPermissionAttribute
+  fullName: Raftel.Application.Authorization.RequiresPermissionAttribute
+  nameWithType: RequiresPermissionAttribute
+- uid: Raftel.Application.Authorization.RequiresPermissionAttribute.#ctor(System.String)
+  name: RequiresPermissionAttribute(string)
+  href: api/Raftel.Application.Authorization.RequiresPermissionAttribute.html#Raftel_Application_Authorization_RequiresPermissionAttribute__ctor_System_String_
+  commentId: M:Raftel.Application.Authorization.RequiresPermissionAttribute.#ctor(System.String)
+  name.vb: New(String)
+  fullName: Raftel.Application.Authorization.RequiresPermissionAttribute.RequiresPermissionAttribute(string)
+  fullName.vb: Raftel.Application.Authorization.RequiresPermissionAttribute.New(String)
+  nameWithType: RequiresPermissionAttribute.RequiresPermissionAttribute(string)
+  nameWithType.vb: RequiresPermissionAttribute.New(String)
+- uid: Raftel.Application.Authorization.RequiresPermissionAttribute.#ctor*
+  name: RequiresPermissionAttribute
+  href: api/Raftel.Application.Authorization.RequiresPermissionAttribute.html#Raftel_Application_Authorization_RequiresPermissionAttribute__ctor_
+  commentId: Overload:Raftel.Application.Authorization.RequiresPermissionAttribute.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Authorization.RequiresPermissionAttribute.RequiresPermissionAttribute
+  fullName.vb: Raftel.Application.Authorization.RequiresPermissionAttribute.New
+  nameWithType: RequiresPermissionAttribute.RequiresPermissionAttribute
+  nameWithType.vb: RequiresPermissionAttribute.New
+- uid: Raftel.Application.Authorization.RequiresPermissionAttribute.Permission
+  name: Permission
+  href: api/Raftel.Application.Authorization.RequiresPermissionAttribute.html#Raftel_Application_Authorization_RequiresPermissionAttribute_Permission
+  commentId: P:Raftel.Application.Authorization.RequiresPermissionAttribute.Permission
+  fullName: Raftel.Application.Authorization.RequiresPermissionAttribute.Permission
+  nameWithType: RequiresPermissionAttribute.Permission
+- uid: Raftel.Application.Authorization.RequiresPermissionAttribute.Permission*
+  name: Permission
+  href: api/Raftel.Application.Authorization.RequiresPermissionAttribute.html#Raftel_Application_Authorization_RequiresPermissionAttribute_Permission_
+  commentId: Overload:Raftel.Application.Authorization.RequiresPermissionAttribute.Permission
+  isSpec: "True"
+  fullName: Raftel.Application.Authorization.RequiresPermissionAttribute.Permission
+  nameWithType: RequiresPermissionAttribute.Permission
 - uid: Raftel.Application.Commands
   name: Raftel.Application.Commands
   href: api/Raftel.Application.Commands.html
@@ -804,6 +877,40 @@ references:
   commentId: N:Raftel.Application.Exceptions
   fullName: Raftel.Application.Exceptions
   nameWithType: Raftel.Application.Exceptions
+- uid: Raftel.Application.Exceptions.UnauthorizedException
+  name: UnauthorizedException
+  href: api/Raftel.Application.Exceptions.UnauthorizedException.html
+  commentId: T:Raftel.Application.Exceptions.UnauthorizedException
+  fullName: Raftel.Application.Exceptions.UnauthorizedException
+  nameWithType: UnauthorizedException
+- uid: Raftel.Application.Exceptions.UnauthorizedException.#ctor(System.String)
+  name: UnauthorizedException(string)
+  href: api/Raftel.Application.Exceptions.UnauthorizedException.html#Raftel_Application_Exceptions_UnauthorizedException__ctor_System_String_
+  commentId: M:Raftel.Application.Exceptions.UnauthorizedException.#ctor(System.String)
+  name.vb: New(String)
+  fullName: Raftel.Application.Exceptions.UnauthorizedException.UnauthorizedException(string)
+  fullName.vb: Raftel.Application.Exceptions.UnauthorizedException.New(String)
+  nameWithType: UnauthorizedException.UnauthorizedException(string)
+  nameWithType.vb: UnauthorizedException.New(String)
+- uid: Raftel.Application.Exceptions.UnauthorizedException.#ctor(System.String,System.Exception)
+  name: UnauthorizedException(string, Exception)
+  href: api/Raftel.Application.Exceptions.UnauthorizedException.html#Raftel_Application_Exceptions_UnauthorizedException__ctor_System_String_System_Exception_
+  commentId: M:Raftel.Application.Exceptions.UnauthorizedException.#ctor(System.String,System.Exception)
+  name.vb: New(String, Exception)
+  fullName: Raftel.Application.Exceptions.UnauthorizedException.UnauthorizedException(string, System.Exception)
+  fullName.vb: Raftel.Application.Exceptions.UnauthorizedException.New(String, System.Exception)
+  nameWithType: UnauthorizedException.UnauthorizedException(string, Exception)
+  nameWithType.vb: UnauthorizedException.New(String, Exception)
+- uid: Raftel.Application.Exceptions.UnauthorizedException.#ctor*
+  name: UnauthorizedException
+  href: api/Raftel.Application.Exceptions.UnauthorizedException.html#Raftel_Application_Exceptions_UnauthorizedException__ctor_
+  commentId: Overload:Raftel.Application.Exceptions.UnauthorizedException.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Exceptions.UnauthorizedException.UnauthorizedException
+  fullName.vb: Raftel.Application.Exceptions.UnauthorizedException.New
+  nameWithType: UnauthorizedException.UnauthorizedException
+  nameWithType.vb: UnauthorizedException.New
 - uid: Raftel.Application.Exceptions.ValidationException
   name: ValidationException
   href: api/Raftel.Application.Exceptions.ValidationException.html
@@ -855,6 +962,12 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Exceptions.ValidationException.ToString
   nameWithType: ValidationException.ToString
+- uid: Raftel.Application.Features.Tenants
+  name: Raftel.Application.Features.Tenants
+  href: api/Raftel.Application.Features.Tenants.html
+  commentId: N:Raftel.Application.Features.Tenants
+  fullName: Raftel.Application.Features.Tenants
+  nameWithType: Raftel.Application.Features.Tenants
 - uid: Raftel.Application.Features.Tenants.CreateTenant
   name: Raftel.Application.Features.Tenants.CreateTenant
   href: api/Raftel.Application.Features.Tenants.CreateTenant.html
@@ -1204,6 +1317,87 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Features.Tenants.GetTenant.GetTenantResponse.Name
   nameWithType: GetTenantResponse.Name
+- uid: Raftel.Application.Features.Tenants.TenantsPermissions
+  name: TenantsPermissions
+  href: api/Raftel.Application.Features.Tenants.TenantsPermissions.html
+  commentId: T:Raftel.Application.Features.Tenants.TenantsPermissions
+  fullName: Raftel.Application.Features.Tenants.TenantsPermissions
+  nameWithType: TenantsPermissions
+- uid: Raftel.Application.Features.Tenants.TenantsPermissions.Management
+  name: Management
+  href: api/Raftel.Application.Features.Tenants.TenantsPermissions.html#Raftel_Application_Features_Tenants_TenantsPermissions_Management
+  commentId: F:Raftel.Application.Features.Tenants.TenantsPermissions.Management
+  fullName: Raftel.Application.Features.Tenants.TenantsPermissions.Management
+  nameWithType: TenantsPermissions.Management
+- uid: Raftel.Application.Features.Tenants.TenantsPermissions.View
+  name: View
+  href: api/Raftel.Application.Features.Tenants.TenantsPermissions.html#Raftel_Application_Features_Tenants_TenantsPermissions_View
+  commentId: F:Raftel.Application.Features.Tenants.TenantsPermissions.View
+  fullName: Raftel.Application.Features.Tenants.TenantsPermissions.View
+  nameWithType: TenantsPermissions.View
+- uid: Raftel.Application.Features.Users
+  name: Raftel.Application.Features.Users
+  href: api/Raftel.Application.Features.Users.html
+  commentId: N:Raftel.Application.Features.Users
+  fullName: Raftel.Application.Features.Users
+  nameWithType: Raftel.Application.Features.Users
+- uid: Raftel.Application.Features.Users.AssignRoleToUser
+  name: Raftel.Application.Features.Users.AssignRoleToUser
+  href: api/Raftel.Application.Features.Users.AssignRoleToUser.html
+  commentId: N:Raftel.Application.Features.Users.AssignRoleToUser
+  fullName: Raftel.Application.Features.Users.AssignRoleToUser
+  nameWithType: Raftel.Application.Features.Users.AssignRoleToUser
+- uid: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand
+  name: AssignRoleToUserCommand
+  href: api/Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.html
+  commentId: T:Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand
+  fullName: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand
+  nameWithType: AssignRoleToUserCommand
+- uid: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.#ctor(System.Guid,System.Guid)
+  name: AssignRoleToUserCommand(Guid, Guid)
+  href: api/Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.html#Raftel_Application_Features_Users_AssignRoleToUser_AssignRoleToUserCommand__ctor_System_Guid_System_Guid_
+  commentId: M:Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.#ctor(System.Guid,System.Guid)
+  name.vb: New(Guid, Guid)
+  fullName: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.AssignRoleToUserCommand(System.Guid, System.Guid)
+  fullName.vb: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.New(System.Guid, System.Guid)
+  nameWithType: AssignRoleToUserCommand.AssignRoleToUserCommand(Guid, Guid)
+  nameWithType.vb: AssignRoleToUserCommand.New(Guid, Guid)
+- uid: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.#ctor*
+  name: AssignRoleToUserCommand
+  href: api/Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.html#Raftel_Application_Features_Users_AssignRoleToUser_AssignRoleToUserCommand__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.AssignRoleToUserCommand
+  fullName.vb: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.New
+  nameWithType: AssignRoleToUserCommand.AssignRoleToUserCommand
+  nameWithType.vb: AssignRoleToUserCommand.New
+- uid: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.RoleId
+  name: RoleId
+  href: api/Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.html#Raftel_Application_Features_Users_AssignRoleToUser_AssignRoleToUserCommand_RoleId
+  commentId: P:Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.RoleId
+  fullName: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.RoleId
+  nameWithType: AssignRoleToUserCommand.RoleId
+- uid: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.RoleId*
+  name: RoleId
+  href: api/Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.html#Raftel_Application_Features_Users_AssignRoleToUser_AssignRoleToUserCommand_RoleId_
+  commentId: Overload:Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.RoleId
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.RoleId
+  nameWithType: AssignRoleToUserCommand.RoleId
+- uid: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.UserId
+  name: UserId
+  href: api/Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.html#Raftel_Application_Features_Users_AssignRoleToUser_AssignRoleToUserCommand_UserId
+  commentId: P:Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.UserId
+  fullName: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.UserId
+  nameWithType: AssignRoleToUserCommand.UserId
+- uid: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.UserId*
+  name: UserId
+  href: api/Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.html#Raftel_Application_Features_Users_AssignRoleToUser_AssignRoleToUserCommand_UserId_
+  commentId: Overload:Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.UserId
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.UserId
+  nameWithType: AssignRoleToUserCommand.UserId
 - uid: Raftel.Application.Features.Users.GetUserProfile
   name: Raftel.Application.Features.Users.GetUserProfile
   href: api/Raftel.Application.Features.Users.GetUserProfile.html
@@ -1534,6 +1728,24 @@ references:
   fullName.vb: Raftel.Application.Features.Users.RegisterUser.RegisterUserCommandValidator.New
   nameWithType: RegisterUserCommandValidator.RegisterUserCommandValidator
   nameWithType.vb: RegisterUserCommandValidator.New
+- uid: Raftel.Application.Features.Users.UsersPermissions
+  name: UsersPermissions
+  href: api/Raftel.Application.Features.Users.UsersPermissions.html
+  commentId: T:Raftel.Application.Features.Users.UsersPermissions
+  fullName: Raftel.Application.Features.Users.UsersPermissions
+  nameWithType: UsersPermissions
+- uid: Raftel.Application.Features.Users.UsersPermissions.AssignRoleToUser
+  name: AssignRoleToUser
+  href: api/Raftel.Application.Features.Users.UsersPermissions.html#Raftel_Application_Features_Users_UsersPermissions_AssignRoleToUser
+  commentId: F:Raftel.Application.Features.Users.UsersPermissions.AssignRoleToUser
+  fullName: Raftel.Application.Features.Users.UsersPermissions.AssignRoleToUser
+  nameWithType: UsersPermissions.AssignRoleToUser
+- uid: Raftel.Application.Features.Users.UsersPermissions.View
+  name: View
+  href: api/Raftel.Application.Features.Users.UsersPermissions.html#Raftel_Application_Features_Users_UsersPermissions_View
+  commentId: F:Raftel.Application.Features.Users.UsersPermissions.View
+  fullName: Raftel.Application.Features.Users.UsersPermissions.View
+  nameWithType: UsersPermissions.View
 - uid: Raftel.Application.IRaftelApplicationBuilder
   name: IRaftelApplicationBuilder
   href: api/Raftel.Application.IRaftelApplicationBuilder.html
@@ -1662,6 +1874,52 @@ references:
   fullName.vb: Raftel.Application.Middlewares.IQueryMiddleware(Of TRequest, TResponse)
   nameWithType: IQueryMiddleware<TRequest, TResponse>
   nameWithType.vb: IQueryMiddleware(Of TRequest, TResponse)
+- uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2
+  name: PermissionAuthorizationMiddleware<TRequest, TResponse>
+  href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html
+  commentId: T:Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2
+  name.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse)
+  fullName: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware<TRequest, TResponse>
+  fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse)
+  nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>
+  nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse)
+- uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.#ctor(Raftel.Application.Abstractions.Authentication.ICurrentUser)
+  name: PermissionAuthorizationMiddleware(ICurrentUser)
+  href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html#Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2__ctor_Raftel_Application_Abstractions_Authentication_ICurrentUser_
+  commentId: M:Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.#ctor(Raftel.Application.Abstractions.Authentication.ICurrentUser)
+  name.vb: New(ICurrentUser)
+  fullName: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware<TRequest, TResponse>.PermissionAuthorizationMiddleware(Raftel.Application.Abstractions.Authentication.ICurrentUser)
+  fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse).New(Raftel.Application.Abstractions.Authentication.ICurrentUser)
+  nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>.PermissionAuthorizationMiddleware(ICurrentUser)
+  nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse).New(ICurrentUser)
+- uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.#ctor*
+  name: PermissionAuthorizationMiddleware
+  href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html#Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2__ctor_
+  commentId: Overload:Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware<TRequest, TResponse>.PermissionAuthorizationMiddleware
+  fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse).New
+  nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>.PermissionAuthorizationMiddleware
+  nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse).New
+- uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html#Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  commentId: M:Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  fullName: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
+  fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
+  nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+- uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html#Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2_HandleAsync_
+  commentId: Overload:Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware<TRequest, TResponse>.HandleAsync
+  fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse).HandleAsync
+  nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>.HandleAsync
+  nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse).HandleAsync
 - uid: Raftel.Application.Middlewares.UnitOfWorkMiddleware`1
   name: UnitOfWorkMiddleware<TRequest>
   href: api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-1.html
@@ -2063,14 +2321,15 @@ references:
   fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).GetByIdAsync
   nameWithType: IRepository<TEntity, TId>.GetByIdAsync
   nameWithType.vb: IRepository(Of TEntity, TId).GetByIdAsync
-- uid: Raftel.Domain.Abstractions.IRepository`2.ListAllAsync(System.Threading.CancellationToken)
-  name: ListAllAsync(CancellationToken)
-  href: api/Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_System_Threading_CancellationToken_
-  commentId: M:Raftel.Domain.Abstractions.IRepository`2.ListAllAsync(System.Threading.CancellationToken)
-  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.ListAllAsync(System.Threading.CancellationToken)
-  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).ListAllAsync(System.Threading.CancellationToken)
-  nameWithType: IRepository<TEntity, TId>.ListAllAsync(CancellationToken)
-  nameWithType.vb: IRepository(Of TEntity, TId).ListAllAsync(CancellationToken)
+- uid: Raftel.Domain.Abstractions.IRepository`2.ListAllAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)
+  name: ListAllAsync(Expression<Func<TEntity, bool>>, CancellationToken)
+  href: api/Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_System_Linq_Expressions_Expression_System_Func__0_System_Boolean___System_Threading_CancellationToken_
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.ListAllAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)
+  name.vb: ListAllAsync(Expression(Of Func(Of TEntity, Boolean)), CancellationToken)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.ListAllAsync(System.Linq.Expressions.Expression<System.Func<TEntity, bool>>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).ListAllAsync(System.Linq.Expressions.Expression(Of System.Func(Of TEntity, Boolean)), System.Threading.CancellationToken)
+  nameWithType: IRepository<TEntity, TId>.ListAllAsync(Expression<Func<TEntity, bool>>, CancellationToken)
+  nameWithType.vb: IRepository(Of TEntity, TId).ListAllAsync(Expression(Of Func(Of TEntity, Boolean)), CancellationToken)
 - uid: Raftel.Domain.Abstractions.IRepository`2.ListAllAsync*
   name: ListAllAsync
   href: api/Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_
@@ -2774,6 +3033,19 @@ references:
   isSpec: "True"
   fullName: Raftel.Domain.Features.Authorization.Role.Name
   nameWithType: Role.Name
+- uid: Raftel.Domain.Features.Authorization.Role.PermissionNames
+  name: PermissionNames()
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_PermissionNames
+  commentId: M:Raftel.Domain.Features.Authorization.Role.PermissionNames
+  fullName: Raftel.Domain.Features.Authorization.Role.PermissionNames()
+  nameWithType: Role.PermissionNames()
+- uid: Raftel.Domain.Features.Authorization.Role.PermissionNames*
+  name: PermissionNames
+  href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_PermissionNames_
+  commentId: Overload:Raftel.Domain.Features.Authorization.Role.PermissionNames
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.Role.PermissionNames
+  nameWithType: Role.PermissionNames
 - uid: Raftel.Domain.Features.Authorization.Role.RemovePermission(System.String)
   name: RemovePermission(string)
   href: api/Raftel.Domain.Features.Authorization.Role.html#Raftel_Domain_Features_Authorization_Role_RemovePermission_System_String_
@@ -3142,6 +3414,19 @@ references:
   commentId: T:Raftel.Domain.Features.Users.User
   fullName: Raftel.Domain.Features.Users.User
   nameWithType: User
+- uid: Raftel.Domain.Features.Users.User.AssignRole(Raftel.Domain.Features.Authorization.Role)
+  name: AssignRole(Role)
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_AssignRole_Raftel_Domain_Features_Authorization_Role_
+  commentId: M:Raftel.Domain.Features.Users.User.AssignRole(Raftel.Domain.Features.Authorization.Role)
+  fullName: Raftel.Domain.Features.Users.User.AssignRole(Raftel.Domain.Features.Authorization.Role)
+  nameWithType: User.AssignRole(Role)
+- uid: Raftel.Domain.Features.Users.User.AssignRole*
+  name: AssignRole
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_AssignRole_
+  commentId: Overload:Raftel.Domain.Features.Users.User.AssignRole
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.User.AssignRole
+  nameWithType: User.AssignRole
 - uid: Raftel.Domain.Features.Users.User.BindTo(System.String)
   name: BindTo(string)
   href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_BindTo_System_String_
@@ -3245,6 +3530,19 @@ references:
   isSpec: "True"
   fullName: Raftel.Domain.Features.Users.UserErrors.DuplicatedEmail
   nameWithType: UserErrors.DuplicatedEmail
+- uid: Raftel.Domain.Features.Users.UserErrors.RoleAlreadyAssigned
+  name: RoleAlreadyAssigned
+  href: api/Raftel.Domain.Features.Users.UserErrors.html#Raftel_Domain_Features_Users_UserErrors_RoleAlreadyAssigned
+  commentId: P:Raftel.Domain.Features.Users.UserErrors.RoleAlreadyAssigned
+  fullName: Raftel.Domain.Features.Users.UserErrors.RoleAlreadyAssigned
+  nameWithType: UserErrors.RoleAlreadyAssigned
+- uid: Raftel.Domain.Features.Users.UserErrors.RoleAlreadyAssigned*
+  name: RoleAlreadyAssigned
+  href: api/Raftel.Domain.Features.Users.UserErrors.html#Raftel_Domain_Features_Users_UserErrors_RoleAlreadyAssigned_
+  commentId: Overload:Raftel.Domain.Features.Users.UserErrors.RoleAlreadyAssigned
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.UserErrors.RoleAlreadyAssigned
+  nameWithType: UserErrors.RoleAlreadyAssigned
 - uid: Raftel.Domain.Features.Users.ValueObjects
   name: Raftel.Domain.Features.Users.ValueObjects
   href: api/Raftel.Domain.Features.Users.ValueObjects.html
@@ -3910,14 +4208,15 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).GetByIdAsync
   nameWithType: EfRepository<TDbContext, TEntity, TId>.GetByIdAsync
   nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).GetByIdAsync
-- uid: Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync(System.Threading.CancellationToken)
-  name: ListAllAsync(CancellationToken)
-  href: api/Raftel.Infrastructure.Data.EfRepository-3.html#Raftel_Infrastructure_Data_EfRepository_3_ListAllAsync_System_Threading_CancellationToken_
-  commentId: M:Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync(System.Threading.CancellationToken)
-  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.ListAllAsync(System.Threading.CancellationToken)
-  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).ListAllAsync(System.Threading.CancellationToken)
-  nameWithType: EfRepository<TDbContext, TEntity, TId>.ListAllAsync(CancellationToken)
-  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).ListAllAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Threading.CancellationToken)
+  name: ListAllAsync(Expression<Func<TEntity, bool>>, CancellationToken)
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.html#Raftel_Infrastructure_Data_EfRepository_3_ListAllAsync_System_Linq_Expressions_Expression_System_Func__1_System_Boolean___System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync(System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Threading.CancellationToken)
+  name.vb: ListAllAsync(Expression(Of Func(Of TEntity, Boolean)), CancellationToken)
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.ListAllAsync(System.Linq.Expressions.Expression<System.Func<TEntity, bool>>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).ListAllAsync(System.Linq.Expressions.Expression(Of System.Func(Of TEntity, Boolean)), System.Threading.CancellationToken)
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.ListAllAsync(Expression<Func<TEntity, bool>>, CancellationToken)
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).ListAllAsync(Expression(Of Func(Of TEntity, Boolean)), CancellationToken)
 - uid: Raftel.Infrastructure.Data.EfRepository`3.ListAllAsync*
   name: ListAllAsync
   href: api/Raftel.Infrastructure.Data.EfRepository-3.html#Raftel_Infrastructure_Data_EfRepository_3_ListAllAsync_
@@ -4412,6 +4711,28 @@ references:
   fullName.vb: Raftel.Shared.Extensions.EnumerableExtensions.WhereIf(Of T)(System.Collections.Generic.IEnumerable(Of T), Boolean, System.Func(Of T, Boolean))
   nameWithType: EnumerableExtensions.WhereIf<T>(IEnumerable<T>, bool, Func<T, bool>)
   nameWithType.vb: EnumerableExtensions.WhereIf(Of T)(IEnumerable(Of T), Boolean, Func(Of T, Boolean))
+- uid: Raftel.Shared.Extensions.QueryableExtensions
+  name: QueryableExtensions
+  href: api/Raftel.Shared.Extensions.QueryableExtensions.html
+  commentId: T:Raftel.Shared.Extensions.QueryableExtensions
+  fullName: Raftel.Shared.Extensions.QueryableExtensions
+  nameWithType: QueryableExtensions
+- uid: Raftel.Shared.Extensions.QueryableExtensions.WhereIf*
+  name: WhereIf
+  href: api/Raftel.Shared.Extensions.QueryableExtensions.html#Raftel_Shared_Extensions_QueryableExtensions_WhereIf_
+  commentId: Overload:Raftel.Shared.Extensions.QueryableExtensions.WhereIf
+  isSpec: "True"
+  fullName: Raftel.Shared.Extensions.QueryableExtensions.WhereIf
+  nameWithType: QueryableExtensions.WhereIf
+- uid: Raftel.Shared.Extensions.QueryableExtensions.WhereIf``1(System.Linq.IQueryable{``0},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})
+  name: WhereIf<T>(IQueryable<T>, bool, Expression<Func<T, bool>>)
+  href: api/Raftel.Shared.Extensions.QueryableExtensions.html#Raftel_Shared_Extensions_QueryableExtensions_WhereIf__1_System_Linq_IQueryable___0__System_Boolean_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___
+  commentId: M:Raftel.Shared.Extensions.QueryableExtensions.WhereIf``1(System.Linq.IQueryable{``0},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})
+  name.vb: WhereIf(Of T)(IQueryable(Of T), Boolean, Expression(Of Func(Of T, Boolean)))
+  fullName: Raftel.Shared.Extensions.QueryableExtensions.WhereIf<T>(System.Linq.IQueryable<T>, bool, System.Linq.Expressions.Expression<System.Func<T, bool>>)
+  fullName.vb: Raftel.Shared.Extensions.QueryableExtensions.WhereIf(Of T)(System.Linq.IQueryable(Of T), Boolean, System.Linq.Expressions.Expression(Of System.Func(Of T, Boolean)))
+  nameWithType: QueryableExtensions.WhereIf<T>(IQueryable<T>, bool, Expression<Func<T, bool>>)
+  nameWithType.vb: QueryableExtensions.WhereIf(Of T)(IQueryable(Of T), Boolean, Expression(Of Func(Of T, Boolean)))
 - uid: Raftel.Shared.Extensions.StringExtensions
   name: StringExtensions
   href: api/Raftel.Shared.Extensions.StringExtensions.html

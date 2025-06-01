@@ -89,7 +89,7 @@
 
 
   <h1 id="Raftel_Application_Features_Users_GetUserProfile_GetUserProfileQuery" data-uid="Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery" class="text-break">
-Class GetUserProfileQuery  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/GetUserProfile/GetUserProfileQuery.cs/#L5"><i class="bi bi-code-slash"></i></a>
+Class GetUserProfileQuery  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/GetUserProfile/GetUserProfileQuery.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -101,7 +101,8 @@ Class GetUserProfileQuery  <a class="header-action link-secondary" title="View s
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed record GetUserProfileQuery : IQuery&lt;GetUserProfileResponse&gt;, IRequest&lt;Result&lt;GetUserProfileResponse&gt;&gt;, IEquatable&lt;GetUserProfileQuery&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">[RequiresPermission(&quot;Users.View&quot;)]
+public sealed record GetUserProfileQuery : IQuery&lt;GetUserProfileResponse&gt;, IRequest&lt;Result&lt;GetUserProfileResponse&gt;&gt;, IEquatable&lt;GetUserProfileQuery&gt;</code></pre>
   </div>
 
 
@@ -161,7 +162,7 @@ Class GetUserProfileQuery  <a class="header-action link-secondary" title="View s
 
   <h3 id="Raftel_Application_Features_Users_GetUserProfile_GetUserProfileQuery__ctor" data-uid="Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.#ctor">
   GetUserProfileQuery()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/GetUserProfile/GetUserProfileQuery.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/GetUserProfile/GetUserProfileQuery.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -187,7 +188,7 @@ Class GetUserProfileQuery  <a class="header-action link-secondary" title="View s
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/GetUserProfile/GetUserProfileQuery.cs/#L5" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Users/GetUserProfile/GetUserProfileQuery.cs/#L6" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -101,7 +101,8 @@ Class CreateTenantCommand  <a class="header-action link-secondary" title="View s
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed record CreateTenantCommand : ICommand, IRequest&lt;Result&gt;, IEquatable&lt;CreateTenantCommand&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">[RequiresPermission(&quot;Tenants.Management&quot;)]
+public sealed record CreateTenantCommand : ICommand, IRequest&lt;Result&gt;, IEquatable&lt;CreateTenantCommand&gt;</code></pre>
   </div>
 
 
@@ -200,7 +201,7 @@ Class CreateTenantCommand  <a class="header-action link-secondary" title="View s
 
   <h3 id="Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand_Code" data-uid="Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Code">
   Code
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/CreateTenant/CreateTenantCommand.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/CreateTenant/CreateTenantCommand.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -231,7 +232,7 @@ Class CreateTenantCommand  <a class="header-action link-secondary" title="View s
 
   <h3 id="Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand_Description" data-uid="Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Description">
   Description
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/CreateTenant/CreateTenantCommand.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/CreateTenant/CreateTenantCommand.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -262,7 +263,7 @@ Class CreateTenantCommand  <a class="header-action link-secondary" title="View s
 
   <h3 id="Raftel_Application_Features_Tenants_CreateTenant_CreateTenantCommand_Name" data-uid="Raftel.Application.Features.Tenants.CreateTenant.CreateTenantCommand.Name">
   Name
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/CreateTenant/CreateTenantCommand.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/CreateTenant/CreateTenantCommand.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>

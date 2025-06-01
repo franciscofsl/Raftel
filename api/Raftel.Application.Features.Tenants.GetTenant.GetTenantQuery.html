@@ -89,7 +89,7 @@
 
 
   <h1 id="Raftel_Application_Features_Tenants_GetTenant_GetTenantQuery" data-uid="Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery" class="text-break">
-Class GetTenantQuery  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/GetTenant/GetTenantQuery.cs/#L6"><i class="bi bi-code-slash"></i></a>
+Class GetTenantQuery  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/GetTenant/GetTenantQuery.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -101,7 +101,8 @@ Class GetTenantQuery  <a class="header-action link-secondary" title="View source
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed record GetTenantQuery : IQuery&lt;GetTenantResponse&gt;, IRequest&lt;Result&lt;GetTenantResponse&gt;&gt;, IEquatable&lt;GetTenantQuery&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">[RequiresPermission(&quot;Tenants.View&quot;)]
+public sealed record GetTenantQuery : IQuery&lt;GetTenantResponse&gt;, IRequest&lt;Result&lt;GetTenantResponse&gt;&gt;, IEquatable&lt;GetTenantQuery&gt;</code></pre>
   </div>
 
 
@@ -161,7 +162,7 @@ Class GetTenantQuery  <a class="header-action link-secondary" title="View source
 
   <h3 id="Raftel_Application_Features_Tenants_GetTenant_GetTenantQuery__ctor_System_Guid_" data-uid="Raftel.Application.Features.Tenants.GetTenant.GetTenantQuery.#ctor(System.Guid)">
   GetTenantQuery(Guid)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/GetTenant/GetTenantQuery.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/GetTenant/GetTenantQuery.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -227,7 +228,7 @@ Class GetTenantQuery  <a class="header-action link-secondary" title="View source
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/GetTenant/GetTenantQuery.cs/#L6" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/GetTenant/GetTenantQuery.cs/#L5" class="edit-link">Edit this page</a>
         </div>
 
 

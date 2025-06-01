@@ -89,7 +89,7 @@
 
 
   <h1 id="Raftel_Domain_Features_Authorization_IRolesRepository" data-uid="Raftel.Domain.Features.Authorization.IRolesRepository" class="text-break">
-Interface IRolesRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Authorization/IRolesRepository.cs/#L3"><i class="bi bi-code-slash"></i></a>
+Interface IRolesRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Authorization/IRolesRepository.cs/#L6"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -101,7 +101,7 @@ Interface IRolesRepository  <a class="header-action link-secondary" title="View 
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IRolesRepository</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IRolesRepository : IRepository&lt;Role, RoleId&gt;</code></pre>
   </div>
 
 
@@ -110,6 +110,25 @@ Interface IRolesRepository  <a class="header-action link-secondary" title="View 
 
 
 
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_GetByIdAsync__1_System_Threading_CancellationToken_">IRepository&lt;Role, RoleId&gt;.GetByIdAsync(RoleId, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_System_Linq_Expressions_Expression_System_Func__0_System_Boolean___System_Threading_CancellationToken_">IRepository&lt;Role, RoleId&gt;.ListAllAsync(Expression&lt;Func&lt;Role, bool&gt;&gt;, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_AddAsync__0_System_Threading_CancellationToken_">IRepository&lt;Role, RoleId&gt;.AddAsync(Role, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Update__0_">IRepository&lt;Role, RoleId&gt;.Update(Role)</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Remove__0_">IRepository&lt;Role, RoleId&gt;.Remove(Role)</a>
+    </div>
+  </dd></dl>
 
 
 
@@ -120,7 +139,7 @@ Interface IRolesRepository  <a class="header-action link-secondary" title="View 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Authorization/IRolesRepository.cs/#L3" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Authorization/IRolesRepository.cs/#L6" class="edit-link">Edit this page</a>
         </div>
 
 

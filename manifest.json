@@ -372,6 +372,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Authorization.RequiresPermissionAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Authorization.RequiresPermissionAttribute.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Authorization.RequiresPermissionAttribute",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Authorization.RequiresPermissionAttribute.yml\" sourcestartlinenumber=\"1\">Specifies that the command or query requires a specific permission to be executed.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Authorization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Authorization.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Authorization",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Commands.CommandDispatcher.yml",
       "output": {
         ".html": {
@@ -453,6 +481,20 @@
       "IsMRef": true,
       "Title": "Raftel.Application.DependencyInjection",
       "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Exceptions.UnauthorizedException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Exceptions.UnauthorizedException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Exceptions.UnauthorizedException",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Exceptions.UnauthorizedException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a user attempts to perform an operation without proper authorization.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -652,6 +694,62 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.TenantsPermissions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.TenantsPermissions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants.TenantsPermissions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Tenants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Tenants.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Tenants",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.AssignRoleToUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.AssignRoleToUser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.AssignRoleToUser",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.yml",
       "output": {
         ".html": {
@@ -792,6 +890,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.UsersPermissions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.UsersPermissions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.UsersPermissions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.IRaftelApplicationBuilder.yml",
       "output": {
         ".html": {
@@ -859,6 +985,20 @@
       "IsMRef": true,
       "Title": "Raftel.Application.Middlewares.IQueryMiddleware<TRequest, TResponse>",
       "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.IQueryMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware specific to query handling in the request pipeline.\nInherits from <xref href=\"Raftel.Application.Middlewares.IGlobalMiddleware%602\" data-throw-if-not-resolved=\"false\"></xref> with a response type of <xref href=\"Raftel.Domain.Abstractions.Result%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares.PermissionAuthorizationMiddleware<TRequest, TResponse>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.yml\" sourcestartlinenumber=\"1\">Middleware that enforces permission-based authorization for requests decorated with <xref href=\"Raftel.Application.Authorization.RequiresPermissionAttribute\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1894,6 +2034,20 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Shared.Extensions.EnumerableExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Shared.Extensions.QueryableExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Shared.Extensions.QueryableExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Shared.Extensions.QueryableExtensions",
       "Summary": null
     },
     {
