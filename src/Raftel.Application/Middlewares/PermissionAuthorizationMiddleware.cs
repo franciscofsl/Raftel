@@ -1,7 +1,6 @@
 using System.Reflection;
 using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.Authentication;
-using Raftel.Application.Authorization;
 using Raftel.Application.Exceptions;
 
 namespace Raftel.Application.Middlewares;

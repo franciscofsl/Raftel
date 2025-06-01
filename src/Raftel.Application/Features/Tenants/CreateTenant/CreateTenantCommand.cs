@@ -2,4 +2,5 @@ using Raftel.Application.Commands;
 
 namespace Raftel.Application.Features.Tenants.CreateTenant;
 
-public sealed record CreateTenantCommand(string Name, string Code, string Description) : ICommand; 
+[RequiresPermission(TenantsPermissions.Management)]
+public sealed record CreateTenantCommand(string Name, string Code, string Description) : ICommand;

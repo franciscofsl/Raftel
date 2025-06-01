@@ -1,4 +1,3 @@
-using Raftel.Application.Authorization;
 using Raftel.Application.Commands;
 
 namespace Raftel.Application.Features.Users.AssignRoleToUser;
