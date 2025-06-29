@@ -57,7 +57,29 @@ public sealed class CreateTenantCommandHandlerTests
             .AddAsync(Arg.Is<Tenant>(t => 
                 t.Name == command.Name && 
                 t.Code == command.Code && 
-                t.Description == command.Description), 
+                t.Description == command.Description && 
+                t.GetConnectionString() == null), 
+            Arg.Any<CancellationToken>());
+    }
+
+    [Fact]
+    public async Task HandleAsync_Should_ReturnSuccess_And_AddTenant_WithConnectionString_WhenProvided()
+    {
+        var connectionString = "Server=localhost;Database=TenantDb;User Id=sa;Password=secure123;";
+        var command = new CreateTenantCommand("Test Tenant", "TEST", "Test Description", connectionString);
+        var code = Code.Create(command.Code);
+        _tenantsRepository.CodeIsUniqueAsync(code.Value, Arg.Any<CancellationToken>())
+            .Returns(true);
+
+        var result = await _handler.HandleAsync(command, CancellationToken.None);
+
+        result.IsSuccess.ShouldBeTrue();
+        await _tenantsRepository.Received(1)
+            .AddAsync(Arg.Is<Tenant>(t => 
+                t.Name == command.Name && 
+                t.Code == command.Code && 
+                t.Description == command.Description && 
+                t.GetConnectionString() == connectionString), 
             Arg.Any<CancellationToken>());
     }
 } 

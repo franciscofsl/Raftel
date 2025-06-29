@@ -576,9 +576,6 @@ namespace Raftel.Demo.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("Role");
                 });
 
@@ -591,6 +588,10 @@ namespace Raftel.Demo.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ConnectionString")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
