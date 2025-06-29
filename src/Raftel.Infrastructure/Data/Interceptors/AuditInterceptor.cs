@@ -91,7 +91,28 @@ internal sealed class AuditInterceptor : SaveChangesInterceptor
         // Capture property changes for updates
         if (entry.State == EntityState.Modified && configuration.AuditUpdate)
         {
-            CapturePropertyChanges(entry, auditEntry, configuration);
+            // Check if this is a soft delete (IsDeleted property changed to true)
+            try
+            {
+                var isDeletedProperty = entry.Property(ShadowPropertyNames.IsDeleted);
+                if (isDeletedProperty != null && 
+                    isDeletedProperty.IsModified && 
+                    isDeletedProperty.CurrentValue is true &&
+                    configuration.AuditDeletion)
+                {
+                    // This is actually a soft delete, update the change type
+                    auditEntry = AuditEntry.Create(AuditChangeType.Delete, entityName, entityId);
+                }
+                else
+                {
+                    CapturePropertyChanges(entry, auditEntry, configuration);
+                }
+            }
+            catch
+            {
+                // Entity doesn't have IsDeleted property, treat as normal update
+                CapturePropertyChanges(entry, auditEntry, configuration);
+            }
         }
         // Capture all properties for creation
         else if (entry.State == EntityState.Added && configuration.AuditCreation)

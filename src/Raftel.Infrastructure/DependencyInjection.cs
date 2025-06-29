@@ -13,6 +13,8 @@ using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Users;
 using Raftel.Infrastructure.Authentication;
 using Raftel.Infrastructure.Data;
+using Raftel.Infrastructure.Data.Audit;
+using Raftel.Infrastructure.Data.Extensions;
 using Raftel.Infrastructure.Data.Filters;
 using Raftel.Infrastructure.Data.Interceptors;
 using Raftel.Infrastructure.Data.Repositories.Authorization;
@@ -27,19 +29,35 @@ public static class DependencyInjection
     public static IServiceCollection AddRaftelData<TDbContext>(
         this IServiceCollection services,
         IConfiguration configuration,
-        string connectionStringName = "Default")
+        string connectionStringName = "Default",
+        Action<AuditableEntitiesOptions>? configureAudit = null)
         where TDbContext : RaftelDbContext<TDbContext>
     {
         var connectionString = configuration.GetConnectionString(connectionStringName)
                                ?? throw new InvalidOperationException(
                                    $"Connection string '{connectionStringName}' not found.");
 
-        services.AddDbContext<TDbContext>((serviceProvider, options) => options
-            .UseSqlServer(connectionString)
-            .UseOpenIddict()
-            .AddInterceptors(
-                serviceProvider.GetRequiredService<SoftDeleteInterceptor>(),
-                serviceProvider.GetRequiredService<TenantInterceptor>()));
+        // Add audit services if configuration is provided
+        if (configureAudit != null)
+        {
+            services.AddAudit<TDbContext>(configureAudit);
+        }
+
+        services.AddDbContext<TDbContext>((serviceProvider, options) =>
+        {
+            var dbOptions = options
+                .UseSqlServer(connectionString)
+                .UseOpenIddict()
+                .AddInterceptors(
+                    serviceProvider.GetRequiredService<SoftDeleteInterceptor>(),
+                    serviceProvider.GetRequiredService<TenantInterceptor>());
+
+            // Add audit interceptor if audit is configured
+            if (configureAudit != null)
+            {
+                dbOptions.AddInterceptors(serviceProvider.GetRequiredService<AuditInterceptor>());
+            }
+        });
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TDbContext>());
 
         services.AddScoped(typeof(IDataFilter), typeof(DataFilter));
