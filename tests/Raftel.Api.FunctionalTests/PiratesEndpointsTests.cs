@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Raftel.Api.Client;
+using Raftel.Api.FunctionalTests.Extensions;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Raftel.Demo.Application.Pirates.GetPirateById;
 using Raftel.Demo.Domain.Pirates;
@@ -23,6 +24,8 @@ public class PiratesEndpointsTests : IClassFixture<ApiTestFactory>
     [Fact]
     public async Task PostPirate_ShouldCreateAndReturnFilteredPirate()
     {
+        await _client.AuthenticateAsync();
+        
         const string pirateName = "Created by Functional Test";
         var result = await _client.PostAsJsonAsync("/api/pirates", new
         {

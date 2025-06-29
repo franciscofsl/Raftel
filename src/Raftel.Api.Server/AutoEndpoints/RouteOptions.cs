@@ -18,11 +18,11 @@ public sealed class RouteOptions
         return this;
     }
 
-    public CommandDefinition AddCommand<TRequest>(string route, HttpMethod method)
+    public RouteOptions AddCommand<TRequest>(string route, HttpMethod method)
         where TRequest : ICommand
     {
         var definition = new CommandDefinition(typeof(TRequest), route, method);
         Commands.Add(definition);
-        return definition;
+        return this;
     }
 }

@@ -8,7 +8,7 @@ namespace Raftel.Api.Server.AutoEndpoints;
 public static class CommandEndpointMapper
 {
     public static void MapCommandEndpoint<TCommand>(RouteGroupBuilder group,
-      CommandDefinition command) where TCommand : ICommand
+        CommandDefinition command) where TCommand : ICommand
     {
         var endpoint = command.Method switch
         {
@@ -20,13 +20,9 @@ public static class CommandEndpointMapper
 
         endpoint
             .WithName($"{command.Method}_{typeof(TCommand).Name}")
-            .WithOpenApi();
+            .WithOpenApi()
+            .AuthorizeByRequiresPermissionAttribute<TCommand>();
 
-        if (command.IsAnonymous)
-        {
-            endpoint.AllowAnonymous();
-        }
-        
         return;
 
         async Task<IResult> Handler(HttpContext context, ICommandDispatcher dispatcher)

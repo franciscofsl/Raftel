@@ -30,7 +30,9 @@ public static class QueryEndpointMapper
             {
                 operation.Parameters = ApiParametersBuilder.Calculate<TRequest>(route);
                 return operation;
-            });
+            })
+            .AuthorizeByRequiresPermissionAttribute<TRequest>();
+
         return;
 
         async Task<IResult> Handler(HttpContext context, IRequestDispatcher dispatcher)
@@ -43,7 +45,7 @@ public static class QueryEndpointMapper
                 : Results.BadRequest(result.Error);
         }
     }
-    
+
     private static TRequest BuildRequestFromRouteAndQuery<TRequest>(HttpContext context)
     {
         var constructor = typeof(TRequest).GetConstructors().FirstOrDefault()
