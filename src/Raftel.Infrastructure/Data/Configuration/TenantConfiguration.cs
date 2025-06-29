@@ -33,6 +33,14 @@ public sealed class TenantConfiguration : IEntityTypeConfiguration<Tenant>
         builder.Property(x => x.Description)
             .HasMaxLength(500);
 
+        builder.Property(x => x.ConnectionString)
+            .HasConversion(
+                encryptedString => encryptedString != null ? encryptedString.GetEncryptedValue() : null,
+                value => value != null ? EncryptedString.FromEncrypted(value, null).Value : null
+            )
+            .HasMaxLength(2000)
+            .IsRequired(false);
+
         builder.HasIndex(x => x.Code)
             .IsUnique();
     }
