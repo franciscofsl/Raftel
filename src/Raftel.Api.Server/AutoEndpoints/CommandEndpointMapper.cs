@@ -1,8 +1,6 @@
-﻿using System.Reflection;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Raftel.Application.Authorization;
 using Raftel.Application.Commands;
 
 namespace Raftel.Api.Server.AutoEndpoints;
@@ -10,7 +8,7 @@ namespace Raftel.Api.Server.AutoEndpoints;
 public static class CommandEndpointMapper
 {
     public static void MapCommandEndpoint<TCommand>(RouteGroupBuilder group,
-      CommandDefinition command) where TCommand : ICommand
+        CommandDefinition command) where TCommand : ICommand
     {
         var endpoint = command.Method switch
         {
@@ -22,21 +20,9 @@ public static class CommandEndpointMapper
 
         endpoint
             .WithName($"{command.Method}_{typeof(TCommand).Name}")
-            .WithOpenApi();
+            .WithOpenApi()
+            .AuthorizeByRequiresPermissionAttribute<TCommand>();
 
-        var permissionAttributes = typeof(TCommand)
-            .GetCustomAttributes<RequiresPermissionAttribute>(true)
-            .ToArray();
-
-        if (permissionAttributes.Length == 0)
-        {
-            endpoint.AllowAnonymous();
-        }
-        else
-        {
-            endpoint.RequireAuthorization();
-        }
-        
         return;
 
         async Task<IResult> Handler(HttpContext context, ICommandDispatcher dispatcher)

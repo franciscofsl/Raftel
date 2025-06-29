@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Raftel.Application.Abstractions;
-using Raftel.Application.Authorization;
 using Raftel.Application.Queries;
 using Raftel.Domain.Abstractions;
 using Raftel.Shared.Extensions;
@@ -31,20 +30,9 @@ public static class QueryEndpointMapper
             {
                 operation.Parameters = ApiParametersBuilder.Calculate<TRequest>(route);
                 return operation;
-            });
+            })
+            .AuthorizeByRequiresPermissionAttribute<TRequest>();
 
-        var permissionAttributes = typeof(TRequest)
-            .GetCustomAttributes<RequiresPermissionAttribute>(true)
-            .ToArray();
-
-        if (permissionAttributes.Length == 0)
-        {
-            endpoint.AllowAnonymous();
-        }
-        else
-        {
-            endpoint.RequireAuthorization();
-        }
         return;
 
         async Task<IResult> Handler(HttpContext context, IRequestDispatcher dispatcher)
@@ -57,7 +45,7 @@ public static class QueryEndpointMapper
                 : Results.BadRequest(result.Error);
         }
     }
-    
+
     private static TRequest BuildRequestFromRouteAndQuery<TRequest>(HttpContext context)
     {
         var constructor = typeof(TRequest).GetConstructors().FirstOrDefault()
