@@ -108,19 +108,6 @@ references:
   fullName.vb: Raftel.Api.Server.AutoEndpoints.CommandDefinition.New
   nameWithType: CommandDefinition.CommandDefinition
   nameWithType.vb: CommandDefinition.New
-- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous
-  name: AllowAnonymous()
-  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_AllowAnonymous
-  commentId: M:Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous
-  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous()
-  nameWithType: CommandDefinition.AllowAnonymous()
-- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous*
-  name: AllowAnonymous
-  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_AllowAnonymous_
-  commentId: Overload:Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous
-  isSpec: "True"
-  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.AllowAnonymous
-  nameWithType: CommandDefinition.AllowAnonymous
 - uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Method
   name: Method
   href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_Method
