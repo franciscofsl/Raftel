@@ -24,13 +24,17 @@ public static class CommandEndpointMapper
             .WithName($"{command.Method}_{typeof(TCommand).Name}")
             .WithOpenApi();
 
-        var hasRequiredPermissions = typeof(TCommand)
+        var permissionAttributes = typeof(TCommand)
             .GetCustomAttributes<RequiresPermissionAttribute>(true)
-            .Any();
+            .ToArray();
 
-        if (!hasRequiredPermissions)
+        if (permissionAttributes.Length == 0)
         {
             endpoint.AllowAnonymous();
+        }
+        else
+        {
+            endpoint.RequireAuthorization();
         }
         
         return;

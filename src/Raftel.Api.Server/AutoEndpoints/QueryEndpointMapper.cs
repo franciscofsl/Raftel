@@ -33,13 +33,17 @@ public static class QueryEndpointMapper
                 return operation;
             });
 
-        var hasRequiredPermissions = typeof(TRequest)
+        var permissionAttributes = typeof(TRequest)
             .GetCustomAttributes<RequiresPermissionAttribute>(true)
-            .Any();
+            .ToArray();
 
-        if (!hasRequiredPermissions)
+        if (permissionAttributes.Length == 0)
         {
             endpoint.AllowAnonymous();
+        }
+        else
+        {
+            endpoint.RequireAuthorization();
         }
         return;
 

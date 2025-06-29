@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Raftel.Api.Client;
+using Raftel.Api.FunctionalTests.Extensions;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Shouldly;
 
@@ -21,6 +22,8 @@ public class MultitenancyTests : IClassFixture<ApiTestFactory>
     [Fact]
     public async Task ApiShould_CreateTenant()
     {
+        await _client.AuthenticateAsync();
+        
         await Should.NotThrowAsync(async () =>
         {
             var result = await _client.PostAsJsonAsync("/api/tenants", new
@@ -36,6 +39,8 @@ public class MultitenancyTests : IClassFixture<ApiTestFactory>
     [Fact]
     public async Task ApiShould_CreateTenant_GetAllTenants_SelectRandomTenant_AndExecuteWithinTenantContext()
     {
+        await _client.AuthenticateAsync();
+        
         var createTenantResponse = await _client.PostAsJsonAsync("/api/tenants", new
         {
             name = "Tenant Multitenancy Test",
