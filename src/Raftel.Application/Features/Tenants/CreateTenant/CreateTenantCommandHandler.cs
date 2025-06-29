@@ -16,7 +16,7 @@ internal sealed class CreateTenantCommandHandler(ITenantsRepository tenantsRepos
             return Result.Failure(codeResult.Error);
         }
 
-        var tenantResult = Tenant.Create(request.Name, request.Code, request.Description);
+        var tenantResult = Tenant.Create(request.Name, request.Code, request.Description, request.ConnectionString);
         if (tenantResult.IsFailure)
         {
             return Result.Failure(tenantResult.Error);
