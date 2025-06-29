@@ -17,7 +17,7 @@ internal class AuditPropertyChangeConfiguration : IEntityTypeConfiguration<Audit
 
         builder.Property(x => x.Id)
             .HasConversion(
-                id => id.Value,
+                id => (Guid)id,
                 value => new AuditPropertyChangeId(value))
             .IsRequired();
 
@@ -33,7 +33,7 @@ internal class AuditPropertyChangeConfiguration : IEntityTypeConfiguration<Audit
 
         builder.Property(x => x.AuditEntryId)
             .HasConversion(
-                id => id.Value,
+                id => (Guid)id,
                 value => new AuditEntryId(value))
             .IsRequired();
 

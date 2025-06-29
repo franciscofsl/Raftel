@@ -51,4 +51,16 @@ public class AuditableEntitiesOptions
     {
         return _auditableEntities.Keys;
     }
+
+    /// <summary>
+    /// Gets the effective entity name for a given entity type.
+    /// Returns the configured entity name if set, otherwise the type name.
+    /// </summary>
+    /// <param name="entityType">The entity type.</param>
+    /// <returns>The effective entity name to use in audit records.</returns>
+    public string GetEntityName(Type entityType)
+    {
+        var configuration = GetConfiguration(entityType);
+        return configuration?.GetEffectiveEntityName() ?? entityType.Name;
+    }
 }

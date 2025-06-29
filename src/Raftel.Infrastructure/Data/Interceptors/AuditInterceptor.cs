@@ -84,7 +84,7 @@ internal sealed class AuditInterceptor : SaveChangesInterceptor
         }
 
         var entityId = GetEntityId(entry);
-        var entityName = entry.Entity.GetType().Name;
+        var entityName = _auditableEntitiesOptions.GetEntityName(entry.Entity.GetType());
 
         var auditEntry = AuditEntry.Create(changeType, entityName, entityId);
 

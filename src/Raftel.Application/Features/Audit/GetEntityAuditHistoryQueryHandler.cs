@@ -1,6 +1,6 @@
 using Raftel.Application.Queries;
 using Raftel.Domain.Abstractions;
-using Raftel.Infrastructure.Data.Repositories.Audit;
+using Raftel.Domain.Features.Audit;
 
 namespace Raftel.Application.Features.Audit;
 
@@ -36,7 +36,7 @@ public sealed class GetEntityAuditHistoryQueryHandler : IQueryHandler<GetEntityA
         }
     }
 
-    private static AuditEntryDto MapToDto(Infrastructure.Data.Audit.AuditEntry auditEntry)
+    private static AuditEntryDto MapToDto(AuditEntry auditEntry)
     {
         return new AuditEntryDto
         {

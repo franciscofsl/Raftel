@@ -13,5 +13,5 @@ public sealed record AuditPropertyChangeId : TypedId<Guid>
     public static AuditPropertyChangeId Empty() => new(Guid.Empty);
     
     public static implicit operator AuditPropertyChangeId(Guid value) => new(value);
-    public static implicit operator Guid(AuditPropertyChangeId id) => id.Value;
+    public static implicit operator Guid(AuditPropertyChangeId id) => id;
 }

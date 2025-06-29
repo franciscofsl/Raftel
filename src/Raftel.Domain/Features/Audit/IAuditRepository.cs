@@ -1,6 +1,4 @@
-using Raftel.Infrastructure.Data.Audit;
-
-namespace Raftel.Infrastructure.Data.Repositories.Audit;
+namespace Raftel.Domain.Features.Audit;
 
 /// <summary>
 /// Repository interface for audit operations.

@@ -1,9 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Demo.Domain.Pirates;
 using Raftel.Demo.Infrastructure.Data;
+using Raftel.Domain.Features.Audit;
 using Raftel.Infrastructure.Data.Audit;
 using Raftel.Infrastructure.Data.Extensions;
-using Raftel.Infrastructure.Data.Repositories.Audit;
 using Raftel.Infrastructure.Tests;
 using Shouldly;
 
@@ -37,13 +37,13 @@ public class AuditIntegrationTests : InfrastructureTestBase
             await unitOfWork.CommitAsync();
 
             // Check audit entry was created
-            var auditEntries = await auditRepository.GetEntityAuditHistoryAsync("Pirate", pirate.Id.Value.ToString());
+            var auditEntries = await auditRepository.GetEntityAuditHistoryAsync("Pirate", ((Guid)pirate.Id).ToString());
 
             auditEntries.Count.ShouldBe(1);
             var auditEntry = auditEntries.First();
             auditEntry.ChangeType.ShouldBe(AuditChangeType.Create);
             auditEntry.EntityName.ShouldBe("Pirate");
-            auditEntry.EntityId.ShouldBe(pirate.Id.Value.ToString());
+            auditEntry.EntityId.ShouldBe(((Guid)pirate.Id).ToString());
             auditEntry.PropertyChanges.ShouldNotBeEmpty();
         });
     }
@@ -68,7 +68,7 @@ public class AuditIntegrationTests : InfrastructureTestBase
             await unitOfWork.CommitAsync();
 
             // Check audit entries
-            var auditEntries = await auditRepository.GetEntityAuditHistoryAsync("Pirate", pirate.Id.Value.ToString());
+            var auditEntries = await auditRepository.GetEntityAuditHistoryAsync("Pirate", ((Guid)pirate.Id).ToString());
 
             auditEntries.Count.ShouldBe(2);
             
@@ -100,7 +100,7 @@ public class AuditIntegrationTests : InfrastructureTestBase
             await unitOfWork.CommitAsync();
 
             // Check audit entries
-            var auditEntries = await auditRepository.GetEntityAuditHistoryAsync("Pirate", pirate.Id.Value.ToString());
+            var auditEntries = await auditRepository.GetEntityAuditHistoryAsync("Pirate", ((Guid)pirate.Id).ToString());
 
             auditEntries.Count.ShouldBe(2);
             

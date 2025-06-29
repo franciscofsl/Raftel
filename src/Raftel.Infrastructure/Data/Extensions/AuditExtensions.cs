@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Raftel.Domain.Features.Audit;
 using Raftel.Infrastructure.Data.Audit;
 using Raftel.Infrastructure.Data.Interceptors;
 using Raftel.Infrastructure.Data.Repositories.Audit;
