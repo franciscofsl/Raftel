@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Raftel.Application.Authorization;
 using Raftel.Application.Commands;
 
 namespace Raftel.Api.Server.AutoEndpoints;
@@ -22,7 +24,11 @@ public static class CommandEndpointMapper
             .WithName($"{command.Method}_{typeof(TCommand).Name}")
             .WithOpenApi();
 
-        if (command.IsAnonymous)
+        var hasRequiredPermissions = typeof(TCommand)
+            .GetCustomAttributes<RequiresPermissionAttribute>(true)
+            .Any();
+
+        if (!hasRequiredPermissions)
         {
             endpoint.AllowAnonymous();
         }

@@ -14,7 +14,7 @@ public static class UsersDependencyInjection
         {
             group.Name = "Users";
             group.BaseUri = "/api/users";
-            group.AddCommand<RegisterUserCommand>("register", HttpMethod.Post).AllowAnonymous();
+            group.AddCommand<RegisterUserCommand>("register", HttpMethod.Post);
             group.AddQuery<GetUserProfileQuery, GetUserProfileResponse>("me", HttpMethod.Get);
             group.AddCommand<AssignRoleToUserCommand>("{userId}/roles", HttpMethod.Post);
         });
