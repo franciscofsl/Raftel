@@ -40,16 +40,16 @@ public sealed class GetEntityAuditHistoryQueryHandler : IQueryHandler<GetEntityA
     {
         return new AuditEntryDto
         {
-            Fecha = auditEntry.Timestamp,
-            TipoCambio = auditEntry.ChangeType,
-            Entidad = auditEntry.EntityName,
-            IdEntidad = auditEntry.EntityId,
-            Detalle = auditEntry.Details,
-            Cambios = auditEntry.PropertyChanges.Select(pc => new AuditPropertyChangeDto
+            Date = auditEntry.Timestamp,
+            ChangeType = auditEntry.ChangeType,
+            EntityName = auditEntry.EntityName,
+            EntityId = auditEntry.EntityId,
+            Details = auditEntry.Details,
+            Changes = auditEntry.PropertyChanges.Select(pc => new AuditPropertyChangeDto
             {
-                Propiedad = pc.PropertyName,
-                Antes = pc.OldValue,
-                Despues = pc.NewValue
+                PropertyName = pc.PropertyName,
+                OldValue = pc.OldValue,
+                NewValue = pc.NewValue
             }).ToList()
         };
     }

@@ -11,42 +11,9 @@ public class AuditEntityConfigurationTests
         var configuration = new AuditEntityConfiguration(typeof(TestEntity));
 
         configuration.EntityType.ShouldBe(typeof(TestEntity));
-        configuration.AuditCreation.ShouldBeTrue();
-        configuration.AuditUpdate.ShouldBeTrue();
-        configuration.AuditDeletion.ShouldBeTrue();
         configuration.AuditChildEntities.ShouldBeTrue();
         configuration.ExcludedProperties.ShouldBeEmpty();
         configuration.IncludedProperties.ShouldBeEmpty();
-    }
-
-    [Fact]
-    public void WithCreation_ShouldSetAuditCreation()
-    {
-        var configuration = new AuditEntityConfiguration(typeof(TestEntity));
-
-        configuration.WithCreation(false);
-
-        configuration.AuditCreation.ShouldBeFalse();
-    }
-
-    [Fact]
-    public void WithUpdate_ShouldSetAuditUpdate()
-    {
-        var configuration = new AuditEntityConfiguration(typeof(TestEntity));
-
-        configuration.WithUpdate(false);
-
-        configuration.AuditUpdate.ShouldBeFalse();
-    }
-
-    [Fact]
-    public void WithDeletion_ShouldSetAuditDeletion()
-    {
-        var configuration = new AuditEntityConfiguration(typeof(TestEntity));
-
-        configuration.WithDeletion(false);
-
-        configuration.AuditDeletion.ShouldBeFalse();
     }
 
     [Fact]

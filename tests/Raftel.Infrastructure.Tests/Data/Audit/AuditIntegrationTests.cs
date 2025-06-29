@@ -18,10 +18,7 @@ public class AuditIntegrationTests : InfrastructureTestBase
         // Configure audit for Pirate entity
         services.AddAudit<TestingRaftelDbContext>(options =>
         {
-            options.Add<Pirate>()
-                .WithCreation()
-                .WithUpdate()
-                .WithDeletion();
+            options.Add<Pirate>();
         });
     }
 

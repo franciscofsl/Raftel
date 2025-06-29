@@ -8,9 +8,6 @@ public class AuditEntityConfiguration
     public AuditEntityConfiguration(Type entityType)
     {
         EntityType = entityType;
-        AuditCreation = true;
-        AuditUpdate = true;
-        AuditDeletion = true;
         AuditChildEntities = true;
         ExcludedProperties = new HashSet<string>();
         IncludedProperties = new HashSet<string>();
@@ -20,21 +17,6 @@ public class AuditEntityConfiguration
     /// The entity type being configured for auditing.
     /// </summary>
     public Type EntityType { get; }
-
-    /// <summary>
-    /// Indicates whether to audit entity creation.
-    /// </summary>
-    public bool AuditCreation { get; private set; }
-
-    /// <summary>
-    /// Indicates whether to audit entity updates.
-    /// </summary>
-    public bool AuditUpdate { get; private set; }
-
-    /// <summary>
-    /// Indicates whether to audit entity deletion.
-    /// </summary>
-    public bool AuditDeletion { get; private set; }
 
     /// <summary>
     /// Indicates whether to audit changes to child entities.
@@ -50,33 +32,6 @@ public class AuditEntityConfiguration
     /// Properties to include in auditing (if specified, only these will be audited).
     /// </summary>
     public HashSet<string> IncludedProperties { get; }
-
-    /// <summary>
-    /// Configures whether to audit entity creation.
-    /// </summary>
-    public AuditEntityConfiguration WithCreation(bool audit = true)
-    {
-        AuditCreation = audit;
-        return this;
-    }
-
-    /// <summary>
-    /// Configures whether to audit entity updates.
-    /// </summary>
-    public AuditEntityConfiguration WithUpdate(bool audit = true)
-    {
-        AuditUpdate = audit;
-        return this;
-    }
-
-    /// <summary>
-    /// Configures whether to audit entity deletion.
-    /// </summary>
-    public AuditEntityConfiguration WithDeletion(bool audit = true)
-    {
-        AuditDeletion = audit;
-        return this;
-    }
 
     /// <summary>
     /// Configures whether to audit child entities.

@@ -89,7 +89,7 @@ internal sealed class AuditInterceptor : SaveChangesInterceptor
         var auditEntry = AuditEntry.Create(changeType, entityName, entityId);
 
         // Capture property changes for updates
-        if (entry.State == EntityState.Modified && configuration.AuditUpdate)
+        if (entry.State == EntityState.Modified)
         {
             // Check if this is a soft delete (IsDeleted property changed to true)
             try
@@ -97,8 +97,7 @@ internal sealed class AuditInterceptor : SaveChangesInterceptor
                 var isDeletedProperty = entry.Property(ShadowPropertyNames.IsDeleted);
                 if (isDeletedProperty != null && 
                     isDeletedProperty.IsModified && 
-                    isDeletedProperty.CurrentValue is true &&
-                    configuration.AuditDeletion)
+                    isDeletedProperty.CurrentValue is true)
                 {
                     // This is actually a soft delete, update the change type
                     auditEntry = AuditEntry.Create(AuditChangeType.Delete, entityName, entityId);
@@ -115,7 +114,7 @@ internal sealed class AuditInterceptor : SaveChangesInterceptor
             }
         }
         // Capture all properties for creation
-        else if (entry.State == EntityState.Added && configuration.AuditCreation)
+        else if (entry.State == EntityState.Added)
         {
             CaptureAllProperties(entry, auditEntry, configuration);
         }
@@ -127,9 +126,9 @@ internal sealed class AuditInterceptor : SaveChangesInterceptor
     {
         return entry.State switch
         {
-            EntityState.Added when configuration.AuditCreation => AuditChangeType.Create,
-            EntityState.Modified when configuration.AuditUpdate => AuditChangeType.Update,
-            EntityState.Deleted when configuration.AuditDeletion => AuditChangeType.Delete,
+            EntityState.Added => AuditChangeType.Create,
+            EntityState.Modified => AuditChangeType.Update,
+            EntityState.Deleted => AuditChangeType.Delete,
             _ => null
         };
     }

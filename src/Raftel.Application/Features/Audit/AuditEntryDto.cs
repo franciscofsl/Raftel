@@ -5,13 +5,13 @@ namespace Raftel.Application.Features.Audit;
 /// </summary>
 public sealed record AuditEntryDto
 {
-    public required DateTime Fecha { get; init; }
-    public required string TipoCambio { get; init; }
-    public required string Entidad { get; init; }
-    public required string IdEntidad { get; init; }
-    public string? Detalle { get; init; }
-    public List<AuditPropertyChangeDto> Cambios { get; init; } = new();
-    public List<AuditPropertyChangeDto>? CambiosHija { get; init; }
+    public required DateTime Date { get; init; }
+    public required string ChangeType { get; init; }
+    public required string EntityName { get; init; }
+    public required string EntityId { get; init; }
+    public string? Details { get; init; }
+    public List<AuditPropertyChangeDto> Changes { get; init; } = new();
+    public List<AuditPropertyChangeDto>? ChildChanges { get; init; }
 }
 
 /// <summary>
@@ -19,7 +19,7 @@ public sealed record AuditEntryDto
 /// </summary>
 public sealed record AuditPropertyChangeDto
 {
-    public required string Propiedad { get; init; }
-    public string? Antes { get; init; }
-    public string? Despues { get; init; }
+    public required string PropertyName { get; init; }
+    public string? OldValue { get; init; }
+    public string? NewValue { get; init; }
 }

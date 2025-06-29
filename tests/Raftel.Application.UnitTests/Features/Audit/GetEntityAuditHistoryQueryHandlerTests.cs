@@ -39,13 +39,13 @@ public class GetEntityAuditHistoryQueryHandlerTests
         result.Value.Count.ShouldBe(1);
         
         var dto = result.Value.First();
-        dto.TipoCambio.ShouldBe(AuditChangeType.Update);
-        dto.Entidad.ShouldBe("TestEntity");
-        dto.IdEntidad.ShouldBe("123");
-        dto.Cambios.Count.ShouldBe(1);
-        dto.Cambios.First().Propiedad.ShouldBe("Name");
-        dto.Cambios.First().Antes.ShouldBe("OldValue");
-        dto.Cambios.First().Despues.ShouldBe("NewValue");
+        dto.ChangeType.ShouldBe(AuditChangeType.Update);
+        dto.EntityName.ShouldBe("TestEntity");
+        dto.EntityId.ShouldBe("123");
+        dto.Changes.Count.ShouldBe(1);
+        dto.Changes.First().PropertyName.ShouldBe("Name");
+        dto.Changes.First().OldValue.ShouldBe("OldValue");
+        dto.Changes.First().NewValue.ShouldBe("NewValue");
     }
 
     [Fact]
