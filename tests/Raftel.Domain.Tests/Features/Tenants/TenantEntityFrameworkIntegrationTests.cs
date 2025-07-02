@@ -2,12 +2,28 @@ using Microsoft.EntityFrameworkCore;
 using Raftel.Demo.Infrastructure.Data;
 using Raftel.Domain.Features.Tenants;
 using Shouldly;
+using Testcontainers.MsSql;
 using Xunit;
 
 namespace Raftel.Domain.Tests.Features.Tenants;
 
-public class TenantEntityFrameworkIntegrationTests
+public class TenantEntityFrameworkIntegrationTests : IAsyncLifetime
 {
+    private readonly MsSqlContainer _container = new MsSqlBuilder()
+        .WithPassword("yourStrong(!)Password")
+        .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
+        .WithCleanUp(true)
+        .Build();
+
+    public async Task InitializeAsync()
+    {
+        await _container.StartAsync();
+    }
+
+    public async Task DisposeAsync()
+    {
+        await _container.DisposeAsync();
+    }
     [Fact]
     public async Task Tenant_With_ConnectionString_Should_Persist_And_Retrieve_Correctly()
     {
@@ -16,12 +32,13 @@ public class TenantEntityFrameworkIntegrationTests
         var tenant = Tenant.Create("Integration Test Tenant", "INTEGRATION_TENANT", "Test tenant for EF integration", connectionString).Value;
 
         var options = new DbContextOptionsBuilder<TestingRaftelDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .UseSqlServer(_container.GetConnectionString())
             .Options;
 
         // Act & Assert - Save to database
         await using (var context = new TestingRaftelDbContext(options))
         {
+            await context.Database.EnsureCreatedAsync();
             context.Tenant.Add(tenant);
             await context.SaveChangesAsync();
         }
@@ -49,12 +66,13 @@ public class TenantEntityFrameworkIntegrationTests
         var tenant = Tenant.Create("Test Tenant", "TEST_TENANT", "Test tenant without connection string").Value;
 
         var options = new DbContextOptionsBuilder<TestingRaftelDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .UseSqlServer(_container.GetConnectionString())
             .Options;
 
         // Act & Assert - Save to database
         await using (var context = new TestingRaftelDbContext(options))
         {
+            await context.Database.EnsureCreatedAsync();
             context.Tenant.Add(tenant);
             await context.SaveChangesAsync();
         }
@@ -79,12 +97,13 @@ public class TenantEntityFrameworkIntegrationTests
         var tenant3 = Tenant.Create("Tenant 3", "TENANT_3", "Third tenant").Value; // No connection string
 
         var options = new DbContextOptionsBuilder<TestingRaftelDbContext>()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .UseSqlServer(_container.GetConnectionString())
             .Options;
 
         // Act - Save to database
         await using (var context = new TestingRaftelDbContext(options))
         {
+            await context.Database.EnsureCreatedAsync();
             context.Tenant.AddRange(tenant1, tenant2, tenant3);
             await context.SaveChangesAsync();
         }
