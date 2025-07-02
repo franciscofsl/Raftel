@@ -4,6 +4,7 @@ using Raftel.Application.Features.Tenants.CreateTenant;
 using Raftel.Application.Features.Tenants.GetTenant;
 using Raftel.Application.Features.Tenants.GetAllTenants;
 using Raftel.Application.Features.Tenants.GetCurrentTenant;
+using Raftel.Application.Features.Tenants.GetTenantDatabaseInfo;
 
 namespace Raftel.Api.Server.Features.Tenants;
 
@@ -19,6 +20,7 @@ public static class TenantsDependencyInjection
             group.AddQuery<GetTenantQuery, GetTenantResponse>("{id}", HttpMethod.Get);
             group.AddQuery<GetAllTenantsQuery, List<GetAllTenantsResponse>>("", HttpMethod.Get);
             group.AddQuery<GetCurrentTenantQuery, GetCurrentTenantResponse>("current", HttpMethod.Get);
+            group.AddQuery<GetTenantDatabaseInfoQuery, TenantDatabaseInfoResponse>("database-info", HttpMethod.Get);
         });
 
         return app;

@@ -90,6 +90,7 @@ public static class DependencyInjection
         services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
         services.AddScoped<ICurrentTenant, CurrentTenant>();
         services.AddScoped(typeof(ITenantDbContextFactory<>), typeof(TenantDbContextFactory<>));
+        services.AddScoped<ITenantSpecificDatabaseService, TenantSpecificDatabaseService>();
 
         return services;
     }
