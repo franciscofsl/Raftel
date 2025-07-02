@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,10 +29,23 @@ public static class DependencyInjection
         string connectionStringName = "Default")
         where TDbContext : RaftelDbContext<TDbContext>
     {
+        services.AddDataAccess<TDbContext>(configuration, connectionStringName);
+        services.AddAuthentication<TDbContext>();
+
+        services.AddScoped<ICurrentUser, CurrentHttpUser>();
+        services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
+        services.AddScoped<ICurrentTenant, CurrentTenant>();
+
+        return services;
+    }
+
+    private static void AddDataAccess<TDbContext>(this IServiceCollection services, IConfiguration configuration,
+        string connectionStringName)
+        where TDbContext : RaftelDbContext<TDbContext>
+    {
         var connectionString = configuration.GetConnectionString(connectionStringName)
                                ?? throw new InvalidOperationException(
                                    $"Connection string '{connectionStringName}' not found.");
-
         services.AddDbContext<TDbContext>((serviceProvider, options) => options
             .UseSqlServer(connectionString)
             .UseOpenIddict()
@@ -46,14 +58,19 @@ public static class DependencyInjection
         services.AddScoped<SoftDeleteInterceptor>();
         services.AddScoped<TenantInterceptor>();
 
+        services.AddScoped(typeof(IUsersRepository), typeof(UsersRepository<TDbContext>));
+        services.AddScoped(typeof(ITenantsRepository), typeof(TenantsRepository<TDbContext>));
+        services.AddScoped(typeof(IRolesRepository), typeof(RolesRepository<TDbContext>));
+    }
+
+    private static void AddAuthentication<TDbContext>(this IServiceCollection services)
+        where TDbContext : RaftelDbContext<TDbContext>
+    {
         services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<TDbContext>()
             .AddDefaultTokenProviders();
 
         services.AddScoped<IAuthenticationService, AuthenticationService>();
-        services.AddScoped(typeof(IUsersRepository), typeof(UsersRepository<TDbContext>));
-        services.AddScoped(typeof(ITenantsRepository), typeof(TenantsRepository<TDbContext>));
-        services.AddScoped(typeof(IRolesRepository), typeof(RolesRepository<TDbContext>));
 
         services.AddOpenIddict()
             .AddCore(opt => opt.UseEntityFrameworkCore().UseDbContext<TDbContext>())
@@ -84,12 +101,8 @@ public static class DependencyInjection
             options.DefaultAuthenticateScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
             options.DefaultChallengeScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
         });
-        services.AddAuthorization();
-        services.AddHttpContextAccessor();
-        services.AddScoped<ICurrentUser, CurrentHttpUser>();
-        services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
-        services.AddScoped<ICurrentTenant, CurrentTenant>();
 
-        return services;
+        services.AddHttpContextAccessor();
+        services.AddAuthorization();
     }
 }
