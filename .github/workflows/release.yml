@@ -2,29 +2,34 @@ name: Release to NuGet
 
 on:
   release:
-    types: [ published ]
+    types: [published]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     env:
-      TAG_NAME: ${{ github.event.release.tag_name }}
+      TAG_NAME: 1.0.2
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: "9.0.x"
 
       - name: Build
         run: dotnet build -c Release
 
       - name: Pack NuGets
-        run: dotnet pack -c Release --no-build --output . /p:Version=${TAG_NAME}
+        run: |
+          dotnet pack src/Raftel.Domain/Raftel.Domain.csproj -c Release --no-build --output . /p:Version=${TAG_NAME}
+          dotnet pack src/Raftel.Application/Raftel.Application.csproj -c Release --no-build --output . /p:Version=${TAG_NAME}
+          dotnet pack src/Raftel.Infrastructure/Raftel.Infrastructure.csproj -c Release --no-build --output . /p:Version=${TAG_NAME}
+          dotnet pack src/Raftel.Api.Server/Raftel.Api.Server.csproj -c Release --no-build --output . /p:Version=${TAG_NAME}
+          dotnet pack src/Raftel.Shared/Raftel.Shared.csproj -c Release --no-build --output . /p:Version=${TAG_NAME}
 
       - name: Push to NuGet
         run: dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
