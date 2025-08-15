@@ -45,4 +45,6 @@ public interface IRepository<TEntity, in TId>
     /// </summary>
     /// <param name="entity">The entity to remove.</param>
     void Remove(TEntity entity);
+    
+    Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate = null, CancellationToken token = default);
 }

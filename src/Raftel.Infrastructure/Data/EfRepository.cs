@@ -70,4 +70,14 @@ public abstract class EfRepository<TDbContext, TEntity, TId>(TDbContext dbContex
     {
         dbContext.Set<TEntity>().Remove(entity);
     }
+
+    public Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate = null, CancellationToken token = default)
+    {
+        if (predicate is null)
+        {
+            return dbContext.Set<TEntity>().AnyAsync(cancellationToken: token);
+        }
+
+        return dbContext.Set<TEntity>().AnyAsync(predicate, token);
+    }
 }
