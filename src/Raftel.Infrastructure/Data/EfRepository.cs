@@ -14,7 +14,7 @@ namespace Raftel.Infrastructure.Data;
 /// <typeparam name="TId">The type of the identifier for the aggregate root entity.</typeparam>
 /// <param name="dbContext">The database context instance.</param>
 public abstract class EfRepository<TDbContext, TEntity, TId>(TDbContext dbContext) : IRepository<TEntity, TId>
-    where TEntity : AggregateRoot<TId>
+    where TEntity : Entity<TId>
     where TId : TypedId<Guid>
     where TDbContext : RaftelDbContext<TDbContext>
 {

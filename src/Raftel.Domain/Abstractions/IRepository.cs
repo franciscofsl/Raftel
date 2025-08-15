@@ -9,7 +9,7 @@ namespace Raftel.Domain.Abstractions;
 /// <typeparam name="TEntity">The type of the aggregate root entity.</typeparam>
 /// <typeparam name="TId">The type of the identifier for the aggregate root entity.</typeparam>
 public interface IRepository<TEntity, in TId>
-    where TEntity : AggregateRoot<TId> where TId : TypedId<Guid>
+    where TEntity : Entity<TId> where TId : TypedId<Guid>
 {
     /// <summary>
     /// Retrieves an entity by its identifier asynchronously.
