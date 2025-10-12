@@ -1,0 +1,2 @@
+# Version tracker file for automatic version generation
+# Format: YYYYMM:XX where XX is the incremental counter for the month
