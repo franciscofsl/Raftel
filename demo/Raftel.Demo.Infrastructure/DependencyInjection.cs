@@ -16,10 +16,17 @@ public static class DependencyInjection
     public static void AddSampleInfrastructure(this IServiceCollection services,
         string connectionString)
     {
+        AddSampleInfrastructure(services, connectionString, "SqlServer");
+    }
+
+    public static void AddSampleInfrastructure(this IServiceCollection services,
+        string connectionString, string databaseProvider)
+    {
         var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
-                ["ConnectionStrings:TestConnection"] = connectionString
+                ["ConnectionStrings:TestConnection"] = connectionString,
+                ["Database:Provider"] = databaseProvider
             })
             .Build();
         services.AddRaftelData<TestingRaftelDbContext>(configuration, "TestConnection");

@@ -46,12 +46,26 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString(connectionStringName)
                                ?? throw new InvalidOperationException(
                                    $"Connection string '{connectionStringName}' not found.");
-        services.AddDbContext<TDbContext>((serviceProvider, options) => options
-            .UseSqlServer(connectionString)
-            .UseOpenIddict()
-            .AddInterceptors(
-                serviceProvider.GetRequiredService<SoftDeleteInterceptor>(),
-                serviceProvider.GetRequiredService<TenantInterceptor>()));
+
+        var databaseOptions = new Data.DatabaseOptions();
+        configuration.GetSection("Database").Bind(databaseOptions);
+
+        services.AddDbContext<TDbContext>((serviceProvider, options) =>
+        {
+            var dbContextOptionsBuilder = databaseOptions.Provider switch
+            {
+                Data.DatabaseProvider.SqlServer => options.UseSqlServer(connectionString),
+                Data.DatabaseProvider.PostgreSql => options.UseNpgsql(connectionString),
+                _ => throw new InvalidOperationException($"Unsupported database provider: {databaseOptions.Provider}")
+            };
+
+            dbContextOptionsBuilder
+                .UseOpenIddict()
+                .AddInterceptors(
+                    serviceProvider.GetRequiredService<SoftDeleteInterceptor>(),
+                    serviceProvider.GetRequiredService<TenantInterceptor>());
+        });
+
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TDbContext>());
 
         services.AddScoped(typeof(IDataFilter), typeof(DataFilter));
