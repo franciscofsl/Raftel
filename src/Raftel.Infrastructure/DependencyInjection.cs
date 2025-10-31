@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
 using Raftel.Application;
@@ -47,11 +49,11 @@ public static class DependencyInjection
                                ?? throw new InvalidOperationException(
                                    $"Connection string '{connectionStringName}' not found.");
 
-        var databaseOptions = new Data.DatabaseOptions();
-        configuration.GetSection("Database").Bind(databaseOptions);
+        services.Configure<Data.DatabaseOptions>(configuration.GetSection("Database"));
 
         services.AddDbContext<TDbContext>((serviceProvider, options) =>
         {
+            var databaseOptions = serviceProvider.GetRequiredService<IOptions<Data.DatabaseOptions>>().Value;
             var dbContextOptionsBuilder = databaseOptions.Provider switch
             {
                 Data.DatabaseProvider.SqlServer => options.UseSqlServer(connectionString),
