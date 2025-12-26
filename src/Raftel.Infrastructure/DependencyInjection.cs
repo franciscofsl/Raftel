@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
 using Raftel.Application;
@@ -46,12 +48,26 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString(connectionStringName)
                                ?? throw new InvalidOperationException(
                                    $"Connection string '{connectionStringName}' not found.");
-        services.AddDbContext<TDbContext>((serviceProvider, options) => options
-            .UseSqlServer(connectionString)
-            .UseOpenIddict()
-            .AddInterceptors(
-                serviceProvider.GetRequiredService<SoftDeleteInterceptor>(),
-                serviceProvider.GetRequiredService<TenantInterceptor>()));
+
+        services.Configure<Data.DatabaseOptions>(configuration.GetSection("Database"));
+
+        services.AddDbContext<TDbContext>((serviceProvider, options) =>
+        {
+            var databaseOptions = serviceProvider.GetRequiredService<IOptions<Data.DatabaseOptions>>().Value;
+            var dbContextOptionsBuilder = databaseOptions.Provider switch
+            {
+                Data.DatabaseProvider.SqlServer => options.UseSqlServer(connectionString),
+                Data.DatabaseProvider.PostgreSql => options.UseNpgsql(connectionString),
+                _ => throw new InvalidOperationException($"Unsupported database provider: {databaseOptions.Provider}")
+            };
+
+            dbContextOptionsBuilder
+                .UseOpenIddict()
+                .AddInterceptors(
+                    serviceProvider.GetRequiredService<SoftDeleteInterceptor>(),
+                    serviceProvider.GetRequiredService<TenantInterceptor>());
+        });
+
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TDbContext>());
 
         services.AddScoped(typeof(IDataFilter), typeof(DataFilter));
