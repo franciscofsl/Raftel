@@ -1800,6 +1800,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.DatabaseOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.DatabaseOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.DatabaseOptions",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.DatabaseOptions.yml\" sourcestartlinenumber=\"1\">Configuration options for database provider selection.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.DatabaseProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.DatabaseProvider.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.DatabaseProvider",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.DatabaseProvider.yml\" sourcestartlinenumber=\"1\">Represents the available database providers for the application.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Infrastructure.Data.EfRepository-3.yml",
       "output": {
         ".html": {
@@ -2115,6 +2143,26 @@
         },
         ".json": {
           "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "demo/Raftel.Api.FunctionalTests.DemoApi/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "demo/Raftel.Api.FunctionalTests.DemoApi/README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/database-configuration.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/database-configuration.html"
         }
       },
       "version": ""

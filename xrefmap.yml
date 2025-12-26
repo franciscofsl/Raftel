@@ -4133,6 +4133,43 @@ references:
   isSpec: "True"
   fullName: Raftel.Infrastructure.Data.Configuration.UserConfiguration.Configure
   nameWithType: UserConfiguration.Configure
+- uid: Raftel.Infrastructure.Data.DatabaseOptions
+  name: DatabaseOptions
+  href: api/Raftel.Infrastructure.Data.DatabaseOptions.html
+  commentId: T:Raftel.Infrastructure.Data.DatabaseOptions
+  fullName: Raftel.Infrastructure.Data.DatabaseOptions
+  nameWithType: DatabaseOptions
+- uid: Raftel.Infrastructure.Data.DatabaseOptions.Provider
+  name: Provider
+  href: api/Raftel.Infrastructure.Data.DatabaseOptions.html#Raftel_Infrastructure_Data_DatabaseOptions_Provider
+  commentId: P:Raftel.Infrastructure.Data.DatabaseOptions.Provider
+  fullName: Raftel.Infrastructure.Data.DatabaseOptions.Provider
+  nameWithType: DatabaseOptions.Provider
+- uid: Raftel.Infrastructure.Data.DatabaseOptions.Provider*
+  name: Provider
+  href: api/Raftel.Infrastructure.Data.DatabaseOptions.html#Raftel_Infrastructure_Data_DatabaseOptions_Provider_
+  commentId: Overload:Raftel.Infrastructure.Data.DatabaseOptions.Provider
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.DatabaseOptions.Provider
+  nameWithType: DatabaseOptions.Provider
+- uid: Raftel.Infrastructure.Data.DatabaseProvider
+  name: DatabaseProvider
+  href: api/Raftel.Infrastructure.Data.DatabaseProvider.html
+  commentId: T:Raftel.Infrastructure.Data.DatabaseProvider
+  fullName: Raftel.Infrastructure.Data.DatabaseProvider
+  nameWithType: DatabaseProvider
+- uid: Raftel.Infrastructure.Data.DatabaseProvider.PostgreSql
+  name: PostgreSql
+  href: api/Raftel.Infrastructure.Data.DatabaseProvider.html#Raftel_Infrastructure_Data_DatabaseProvider_PostgreSql
+  commentId: F:Raftel.Infrastructure.Data.DatabaseProvider.PostgreSql
+  fullName: Raftel.Infrastructure.Data.DatabaseProvider.PostgreSql
+  nameWithType: DatabaseProvider.PostgreSql
+- uid: Raftel.Infrastructure.Data.DatabaseProvider.SqlServer
+  name: SqlServer
+  href: api/Raftel.Infrastructure.Data.DatabaseProvider.html#Raftel_Infrastructure_Data_DatabaseProvider_SqlServer
+  commentId: F:Raftel.Infrastructure.Data.DatabaseProvider.SqlServer
+  fullName: Raftel.Infrastructure.Data.DatabaseProvider.SqlServer
+  nameWithType: DatabaseProvider.SqlServer
 - uid: Raftel.Infrastructure.Data.EfRepository`3
   name: EfRepository<TDbContext, TEntity, TId>
   href: api/Raftel.Infrastructure.Data.EfRepository-3.html
