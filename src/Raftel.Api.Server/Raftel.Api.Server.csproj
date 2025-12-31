@@ -9,7 +9,6 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.OpenApi" />
         <PackageReference Include="OpenIddict.Server.AspNetCore" />
-        <Reference Include="Microsoft.AspNetCore.Routing" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     </ItemGroup>
     
