@@ -34,7 +34,7 @@ internal sealed class OpenApiType
 
         if (type == typeof(float) || type == typeof(double) || type == typeof(decimal))
         {
-            return new OpenApiType(JsonSchemaType.Number, null);
+            return new OpenApiType(JsonSchemaType.Number, "double");
         }
 
         if (type == typeof(bool))
