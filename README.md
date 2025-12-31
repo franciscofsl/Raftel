@@ -19,7 +19,7 @@
 
 ## ⚙️ Requirements
 
-- [.NET SDK 9.0 or higher](https://dotnet.microsoft.com/download)
+- [.NET SDK 10.0 or higher](https://dotnet.microsoft.com/download)
 - [Docker](https://www.docker.com/) (optional, but recommended for full development experience)
 
 ## 📚 Documentation

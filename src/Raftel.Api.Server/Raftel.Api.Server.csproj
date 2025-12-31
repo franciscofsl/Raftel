@@ -1,24 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>disable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.OpenApi" />
         <PackageReference Include="OpenIddict.Server.AspNetCore" />
-        <Reference Include="Microsoft.AspNetCore.Routing"/>
+        <Reference Include="Microsoft.AspNetCore.Routing" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     </ItemGroup>
     
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
     
     <ItemGroup>
-        <ProjectReference Include="..\Raftel.Application\Raftel.Application.csproj"/>
-        <ProjectReference Include="..\Raftel.Domain\Raftel.Domain.csproj"/>
+        <ProjectReference Include="..\Raftel.Application\Raftel.Application.csproj" />
+        <ProjectReference Include="..\Raftel.Domain\Raftel.Domain.csproj" />
         <ProjectReference Include="..\Raftel.Shared\Raftel.Shared.csproj" />
     </ItemGroup> 
 

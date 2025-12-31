@@ -1,13 +1,13 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi;
 
 namespace Raftel.Api.Server.AutoEndpoints;
 
 internal sealed class OpenApiType
 {
-    private readonly string _typeName;
+    private readonly JsonSchemaType _typeName;
     private readonly string _format;
 
-    private OpenApiType(string typeName, string format)
+    private OpenApiType(JsonSchemaType typeName, string format)
     {
         _typeName = typeName;
         _format = format;
@@ -19,30 +19,30 @@ internal sealed class OpenApiType
 
         if (type == typeof(Guid))
         {
-            return new OpenApiType("string", "uuid");
+            return new OpenApiType(JsonSchemaType.String, "uuid");
         }
 
         if (type == typeof(DateTime))
         {
-            return new OpenApiType("string", "date-time");
+            return new OpenApiType(JsonSchemaType.String, "date-time");
         }
 
         if (type == typeof(int) || type == typeof(long))
         {
-            return new OpenApiType("integer", null);
+            return new OpenApiType(JsonSchemaType.Integer, null);
         }
 
         if (type == typeof(float) || type == typeof(double) || type == typeof(decimal))
         {
-            return new OpenApiType("number", "double");
+            return new OpenApiType(JsonSchemaType.Number, null);
         }
 
         if (type == typeof(bool))
         {
-            return new OpenApiType("boolean", null);
+            return new OpenApiType(JsonSchemaType.Boolean, null);
         }
 
-        return new OpenApiType("string", null);
+        return new OpenApiType(JsonSchemaType.String, null);
     }
 
     public OpenApiSchema ToSchema()
