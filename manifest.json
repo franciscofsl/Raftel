@@ -12,6 +12,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "BREAKING_CHANGES.md",
+      "output": {
+        ".html": {
+          "relative_path": "BREAKING_CHANGES.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "README.md",
       "output": {
         ".html": {

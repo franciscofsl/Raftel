@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Breaking Changes - .NET 10 Migration | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Breaking Changes - .NET 10 Migration | Raftel ">
+      
+      
+      <link rel="icon" href="favicon.ico">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/BREAKING_CHANGES.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="breaking-changes---net-10-migration">Breaking Changes - .NET 10 Migration</h1>
+
+<p>This document describes the breaking changes introduced during the migration from .NET 9 to .NET 10.</p>
+<h2 id="framework-update">Framework Update</h2>
+<h3 id="net-10-target-framework">.NET 10 Target Framework</h3>
+<p><strong>What changed:</strong> All projects now target .NET 10 instead of .NET 9.</p>
+<p><strong>Why:</strong> To adopt the latest framework version and benefit from new features, performance improvements, and security updates.</p>
+<p><strong>Impact:</strong> Consumers must upgrade to .NET 10 SDK to build and run the library.</p>
+<p><strong>Action required:</strong></p>
+<ul>
+<li>Install <a href="https://dotnet.microsoft.com/download">.NET 10 SDK</a> (version 10.0 or higher)</li>
+<li>Update your project's <code>TargetFramework</code> to <code>net10.0</code> if you're consuming this library</li>
+</ul>
+<hr>
+<h2 id="nuget-package-updates">NuGet Package Updates</h2>
+<h3 id="microsoftopenapi-200">Microsoft.OpenApi 2.0.0</h3>
+<p><strong>What changed:</strong> Updated from Microsoft.OpenApi 1.6.x to 2.0.0</p>
+<p><strong>Why:</strong> Required for compatibility with .NET 10's <code>Microsoft.AspNetCore.OpenApi 10.0.1</code> package.</p>
+<p><strong>Impact:</strong> The <code>Microsoft.OpenApi.Models</code> namespace has been removed. All OpenApi types are now in the <code>Microsoft.OpenApi</code> namespace directly.</p>
+<p><strong>Action required:</strong>
+If you're using the Raftel.Api.Server package and customizing OpenAPI configurations:</p>
+<ul>
+<li>Change <code>using Microsoft.OpenApi.Models;</code> to <code>using Microsoft.OpenApi;</code></li>
+<li><code>OpenApiSchema.Type</code> now uses <code>JsonSchemaType</code> enum instead of string</li>
+<li>Update custom OpenAPI filters and configurations according to <a href="https://github.com/dotnet/aspnetcore/issues/61123">Microsoft.OpenApi 2.0 migration guide</a></li>
+</ul>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-csharp">// Before (.NET 9)
+using Microsoft.OpenApi.Models;
+
+var schema = new OpenApiSchema 
+{ 
+    Type = &quot;string&quot;,
+    Format = &quot;uuid&quot;
+};
+
+// After (.NET 10)
+using Microsoft.OpenApi;
+
+var schema = new OpenApiSchema 
+{ 
+    Type = JsonSchemaType.String,
+    Format = &quot;uuid&quot;
+};
+</code></pre>
+<h3 id="swashbuckleaspnetcore-1010">Swashbuckle.AspNetCore 10.1.0</h3>
+<p><strong>What changed:</strong> Updated from Swashbuckle.AspNetCore 8.1.1 to 10.1.0</p>
+<p><strong>Why:</strong> Required for compatibility with Microsoft.OpenApi 2.0.0</p>
+<p><strong>Impact:</strong> If you're using Swashbuckle in your application that consumes this library, you may need to update custom Swagger filters and configurations.</p>
+<p><strong>Action required:</strong></p>
+<ul>
+<li>Update Swashbuckle.AspNetCore to version 10.1.0 or higher</li>
+<li>Review and update custom Swagger filters according to <a href="https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/master/docs/migrating-to-v10.md">Swashbuckle v10 migration guide</a></li>
+</ul>
+<h3 id="entity-framework-core-1001">Entity Framework Core 10.0.1</h3>
+<p><strong>What changed:</strong> Updated all Entity Framework Core packages from 9.0.4 to 10.0.1</p>
+<p><strong>Why:</strong> Required for .NET 10 compatibility</p>
+<p><strong>Impact:</strong> No breaking changes expected in normal usage.</p>
+<p><strong>Action required:</strong> Update your EF Core packages to 10.0.1 or higher if you're using Entity Framework.</p>
+<h3 id="microsoftextensions-packages-1001">Microsoft.Extensions.* Packages 10.0.1</h3>
+<p><strong>What changed:</strong> Updated all Microsoft.Extensions packages from 9.0.x to 10.0.1</p>
+<p><strong>Why:</strong> Required for .NET 10 compatibility</p>
+<p><strong>Impact:</strong> No breaking changes expected in normal usage.</p>
+<p><strong>Action required:</strong> Update your Microsoft.Extensions packages to 10.0.1 or higher.</p>
+<hr>
+<h2 id="deprecated-apis">Deprecated APIs</h2>
+<h3 id="withopenapi-extension-method">WithOpenApi Extension Method</h3>
+<p><strong>What changed:</strong> The <code>WithOpenApi</code> extension method is now marked as obsolete in .NET 10.</p>
+<p><strong>Why:</strong> Microsoft is moving towards a new OpenAPI generation approach.</p>
+<p><strong>Impact:</strong> You'll see deprecation warnings (ASPDEPR002) when using <code>WithOpenApi</code>.</p>
+<p><strong>Action required:</strong></p>
+<ul>
+<li>The method still works in .NET 10 but will be removed in a future version</li>
+<li>Plan to migrate to the new OpenAPI generation APIs when they become available</li>
+<li>For now, you can suppress the warning or continue using it until a replacement is provided</li>
+</ul>
+<hr>
+<h2 id="summary">Summary</h2>
+<p>The migration to .NET 10 is primarily focused on framework and dependency updates. The main breaking change that may affect consumers is the Microsoft.OpenApi 2.0 update, which requires namespace and type changes if you're customizing OpenAPI/Swagger configurations.</p>
+<p>All tests pass successfully after migration, confirming that the functional behavior of the library remains unchanged.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/BREAKING_CHANGES.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
