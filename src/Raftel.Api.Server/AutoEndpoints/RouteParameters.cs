@@ -1,5 +1,5 @@
 ﻿using System.Text.RegularExpressions;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 
 namespace Raftel.Api.Server.AutoEndpoints;
 

@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Raftel.Shared.Extensions;
 
 namespace Raftel.Api.Server.AutoEndpoints;
 
 internal static class ApiParametersBuilder
 {
-    public static IList<OpenApiParameter> Calculate<TRequest>(string route)
+    public static IList<IOpenApiParameter> Calculate<TRequest>(string route)
     {
-        var parameters = new List<OpenApiParameter>();
+        var parameters = new List<IOpenApiParameter>();
         var routeParameters = RouteParameters.FromRoute(route);
 
         var properties = typeof(TRequest)
@@ -24,7 +24,7 @@ internal static class ApiParametersBuilder
         return parameters;
     }
 
-    private static OpenApiParameter RequestParameterToOpenApiParameter(Type paramType,
+    private static IOpenApiParameter RequestParameterToOpenApiParameter(Type paramType,
         RouteParameters routeParameters,
         string name)
     {
