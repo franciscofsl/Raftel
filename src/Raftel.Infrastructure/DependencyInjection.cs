@@ -64,14 +64,15 @@ public static class DependencyInjection
             dbContextOptionsBuilder
                 .UseOpenIddict()
                 .AddInterceptors(
-                    serviceProvider.GetRequiredService<SoftDeleteInterceptor>(),
+                    serviceProvider.GetRequiredService<AuditPropertiesInterceptor>(),
                     serviceProvider.GetRequiredService<TenantInterceptor>());
         });
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TDbContext>());
 
         services.AddScoped(typeof(IDataFilter), typeof(DataFilter));
-        services.AddScoped<SoftDeleteInterceptor>();
+        services.AddSingleton(TimeProvider.System);
+        services.AddScoped<AuditPropertiesInterceptor>();
         services.AddScoped<TenantInterceptor>();
 
         services.AddScoped(typeof(IUsersRepository), typeof(UsersRepository<TDbContext>));
