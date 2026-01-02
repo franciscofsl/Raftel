@@ -15,7 +15,7 @@ internal sealed class AuditPropertiesInterceptor : SaveChangesInterceptor
 
     public AuditPropertiesInterceptor(IServiceProvider serviceProvider, TimeProvider timeProvider)
     {
-        // ICurrentUser puede no estar disponible en algunos contextos (migraciones, seeds, etc.)
+        // ICurrentUser may not be available in some contexts (migrations, seeds, etc.)
         _currentUser = serviceProvider.GetService<ICurrentUser>();
         _timeProvider = timeProvider;
     }
