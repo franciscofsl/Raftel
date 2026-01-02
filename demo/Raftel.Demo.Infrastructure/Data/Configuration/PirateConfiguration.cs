@@ -59,5 +59,8 @@ public class PirateConfiguration : IEntityTypeConfiguration<Pirate>
 
         // Configure multi-tenancy
         builder.HasTenantId();
+
+        // Configure user auditing
+        builder.HasUserAuditing();
     }
 }
