@@ -231,6 +231,52 @@ Class IEntityTypeConfigurationExtensions  <a class="header-action link-secondary
 
 
 
+  <a id="Raftel_Infrastructure_Data_IEntityTypeConfigurationExtensions_HasUserAuditing_" data-uid="Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasUserAuditing*"></a>
+
+  <h3 id="Raftel_Infrastructure_Data_IEntityTypeConfigurationExtensions_HasUserAuditing__1_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder___0__" data-uid="Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasUserAuditing``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0})">
+  HasUserAuditing&lt;TEntity&gt;(EntityTypeBuilder&lt;TEntity&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/IEntityTypeConfigurationExtensions.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Configures shadow properties for user auditing (creation and modification tracking) on the specified entity type.
+The properties will be automatically populated by an interceptor using <a class="xref" href="Raftel.Application.Abstractions.Authentication.ICurrentUser.html">ICurrentUser</a>.
+If no authenticated user is available, the UserId properties will remain null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void HasUserAuditing&lt;TEntity&gt;(this EntityTypeBuilder&lt;TEntity&gt; builder) where TEntity : class</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>builder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.metadata.builders.entitytypebuilder-1">EntityTypeBuilder</a>&lt;TEntity&gt;</dt>
+    <dd><p>The <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.metadata.builders.entitytypebuilder-1">EntityTypeBuilder&lt;TEntity&gt;</a> used to configure the entity type.</p>
+</dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TEntity</code></dt>
+    <dd><p>The type of the entity being configured.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Raftel_Infrastructure_Data_IEntityTypeConfigurationExtensions_HasUserAuditing__1_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder___0___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This method configures four shadow properties:</p>
+<ul><li><a class="xref" href="Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_CreatorId">CreatorId</a> - The ID of the user who created the entity</li><li><a class="xref" href="Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_CreationTime">CreationTime</a> - The timestamp when the entity was created</li><li><a class="xref" href="Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_LastModifierId">LastModifierId</a> - The ID of the user who last modified the entity</li><li><a class="xref" href="Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_LastModificationTime">LastModificationTime</a> - The timestamp when the entity was last modified</li></ul>
+All properties are nullable and do not have referential integrity constraints.
+</div>
+
+
+
+
 
 </article>
 

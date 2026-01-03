@@ -4378,6 +4378,22 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasTenantId(Of TEntity)(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of TEntity))
   nameWithType: IEntityTypeConfigurationExtensions.HasTenantId<TEntity>(EntityTypeBuilder<TEntity>)
   nameWithType.vb: IEntityTypeConfigurationExtensions.HasTenantId(Of TEntity)(EntityTypeBuilder(Of TEntity))
+- uid: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasUserAuditing*
+  name: HasUserAuditing
+  href: api/Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html#Raftel_Infrastructure_Data_IEntityTypeConfigurationExtensions_HasUserAuditing_
+  commentId: Overload:Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasUserAuditing
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasUserAuditing
+  nameWithType: IEntityTypeConfigurationExtensions.HasUserAuditing
+- uid: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasUserAuditing``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0})
+  name: HasUserAuditing<TEntity>(EntityTypeBuilder<TEntity>)
+  href: api/Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.html#Raftel_Infrastructure_Data_IEntityTypeConfigurationExtensions_HasUserAuditing__1_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder___0__
+  commentId: M:Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasUserAuditing``1(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{``0})
+  name.vb: HasUserAuditing(Of TEntity)(EntityTypeBuilder(Of TEntity))
+  fullName: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasUserAuditing<TEntity>(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<TEntity>)
+  fullName.vb: Raftel.Infrastructure.Data.IEntityTypeConfigurationExtensions.HasUserAuditing(Of TEntity)(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of TEntity))
+  nameWithType: IEntityTypeConfigurationExtensions.HasUserAuditing<TEntity>(EntityTypeBuilder<TEntity>)
+  nameWithType.vb: IEntityTypeConfigurationExtensions.HasUserAuditing(Of TEntity)(EntityTypeBuilder(Of TEntity))
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1
   name: RaftelDbContext<TDbContext>
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html
@@ -4592,12 +4608,36 @@ references:
   commentId: T:Raftel.Infrastructure.Data.ShadowPropertyNames
   fullName: Raftel.Infrastructure.Data.ShadowPropertyNames
   nameWithType: ShadowPropertyNames
+- uid: Raftel.Infrastructure.Data.ShadowPropertyNames.CreationTime
+  name: CreationTime
+  href: api/Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_CreationTime
+  commentId: F:Raftel.Infrastructure.Data.ShadowPropertyNames.CreationTime
+  fullName: Raftel.Infrastructure.Data.ShadowPropertyNames.CreationTime
+  nameWithType: ShadowPropertyNames.CreationTime
+- uid: Raftel.Infrastructure.Data.ShadowPropertyNames.CreatorId
+  name: CreatorId
+  href: api/Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_CreatorId
+  commentId: F:Raftel.Infrastructure.Data.ShadowPropertyNames.CreatorId
+  fullName: Raftel.Infrastructure.Data.ShadowPropertyNames.CreatorId
+  nameWithType: ShadowPropertyNames.CreatorId
 - uid: Raftel.Infrastructure.Data.ShadowPropertyNames.IsDeleted
   name: IsDeleted
   href: api/Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_IsDeleted
   commentId: F:Raftel.Infrastructure.Data.ShadowPropertyNames.IsDeleted
   fullName: Raftel.Infrastructure.Data.ShadowPropertyNames.IsDeleted
   nameWithType: ShadowPropertyNames.IsDeleted
+- uid: Raftel.Infrastructure.Data.ShadowPropertyNames.LastModificationTime
+  name: LastModificationTime
+  href: api/Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_LastModificationTime
+  commentId: F:Raftel.Infrastructure.Data.ShadowPropertyNames.LastModificationTime
+  fullName: Raftel.Infrastructure.Data.ShadowPropertyNames.LastModificationTime
+  nameWithType: ShadowPropertyNames.LastModificationTime
+- uid: Raftel.Infrastructure.Data.ShadowPropertyNames.LastModifierId
+  name: LastModifierId
+  href: api/Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_LastModifierId
+  commentId: F:Raftel.Infrastructure.Data.ShadowPropertyNames.LastModifierId
+  fullName: Raftel.Infrastructure.Data.ShadowPropertyNames.LastModifierId
+  nameWithType: ShadowPropertyNames.LastModifierId
 - uid: Raftel.Infrastructure.Data.ShadowPropertyNames.TenantId
   name: TenantId
   href: api/Raftel.Infrastructure.Data.ShadowPropertyNames.html#Raftel_Infrastructure_Data_ShadowPropertyNames_TenantId
