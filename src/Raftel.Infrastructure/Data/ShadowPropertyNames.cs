@@ -15,4 +15,24 @@ public static class ShadowPropertyNames
     /// The name of the shadow property that indicates the tenant identifier for multi-tenant entities.
     /// </summary>
     public const string TenantId = nameof(TenantId);
+
+    /// <summary>
+    /// The name of the shadow property that indicates the user who created the entity.
+    /// </summary>
+    public const string CreatorId = nameof(CreatorId);
+
+    /// <summary>
+    /// The name of the shadow property that indicates when the entity was created.
+    /// </summary>
+    public const string CreationTime = nameof(CreationTime);
+
+    /// <summary>
+    /// The name of the shadow property that indicates the user who last modified the entity.
+    /// </summary>
+    public const string LastModifierId = nameof(LastModifierId);
+
+    /// <summary>
+    /// The name of the shadow property that indicates when the entity was last modified.
+    /// </summary>
+    public const string LastModificationTime = nameof(LastModificationTime);
 }
