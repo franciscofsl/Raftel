@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Localization;
 using Raftel.Application.Queries;
 using Raftel.Demo.Domain.Pirates;
 using Raftel.Domain.Abstractions;
@@ -6,6 +7,13 @@ namespace Raftel.Demo.Application.Pirates.GetPirateById;
 
 internal sealed class GetPirateByIdQueryHandler : IQueryHandler<GetPirateByIdQuery, GetPirateByIdResponse>
 {
+    private readonly IStringLocalizer<PiratesModule> _localizer;
+
+    public GetPirateByIdQueryHandler(IStringLocalizer<PiratesModule> localizer)
+    {
+        _localizer = localizer;
+    }
+
     public async Task<Result<GetPirateByIdResponse>> HandleAsync(GetPirateByIdQuery request,
         CancellationToken token = default)
     {
@@ -13,7 +21,9 @@ internal sealed class GetPirateByIdQueryHandler : IQueryHandler<GetPirateByIdQue
 
         if (mugiwara is null)
         {
-            return Result.Failure<GetPirateByIdResponse>(new Error("PirateNotFound", "Pirate not found"));
+            // Use localized error message
+            var errorMessage = _localizer["PirateNotFound"].Value;
+            return Result.Failure<GetPirateByIdResponse>(new Error("PirateNotFound", errorMessage));
         }
 
         return Result<GetPirateByIdResponse>.Success(new GetPirateByIdResponse

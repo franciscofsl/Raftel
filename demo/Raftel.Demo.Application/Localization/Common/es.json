@@ -1,0 +1,16 @@
+{
+  "culture": "es",
+  "texts": {
+    "Save": "Guardar",
+    "Cancel": "Cancelar",
+    "Delete": "Eliminar",
+    "Edit": "Editar",
+    "Create": "Crear",
+    "Search": "Buscar",
+    "Yes": "Sí",
+    "No": "No",
+    "ValidationError": "Error de validación",
+    "Success": "Éxito",
+    "Error": "Error"
+  }
+}

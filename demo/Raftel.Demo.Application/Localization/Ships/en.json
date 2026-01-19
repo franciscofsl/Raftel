@@ -1,0 +1,13 @@
+{
+  "culture": "en",
+  "texts": {
+    "ShipNotFound": "Ship not found",
+    "ShipCreated": "Ship created successfully",
+    "ShipUpdated": "Ship updated successfully",
+    "ShipDeleted": "Ship deleted successfully",
+    "InvalidShipName": "The ship name is not valid",
+    "ShipList": "Ship List",
+    "CreateShip": "Create Ship",
+    "EditShip": "Edit Ship"
+  }
+}
