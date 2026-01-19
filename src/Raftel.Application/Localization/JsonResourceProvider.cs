@@ -39,9 +39,11 @@ public class JsonResourceProvider : IResourceProvider
 
                 return resource;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // Log the exception in production
+                // In production, use a proper logger to log the exception
+                // For now, we'll silently skip the file and continue searching
+                System.Diagnostics.Debug.WriteLine($"Failed to load localization file '{filePath}': {ex.Message}");
                 continue;
             }
         }

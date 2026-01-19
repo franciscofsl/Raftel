@@ -39,8 +39,9 @@ public class LocalizationService : ILocalizationService
             {
                 return string.Format(text, arguments);
             }
-            catch
+            catch (FormatException)
             {
+                // Return unformatted text if format arguments don't match
                 return text;
             }
         }
@@ -67,7 +68,11 @@ public class LocalizationService : ILocalizationService
             {
                 foreach (var kvp in resource.Texts)
                 {
-                    result.Texts[kvp.Key] = kvp.Value;
+                    // Avoid overwriting keys - first module wins
+                    if (!result.Texts.ContainsKey(kvp.Key))
+                    {
+                        result.Texts[kvp.Key] = kvp.Value;
+                    }
                 }
             }
         }
@@ -86,8 +91,8 @@ public class LocalizationService : ILocalizationService
             }
         }
 
-        // Try to find in all modules
-        var allModules = _resourceProvider.GetAvailableModulesAsync().GetAwaiter().GetResult();
+        // Try to find in all modules - use ConfigureAwait(false) to avoid deadlock
+        var allModules = _resourceProvider.GetAvailableModulesAsync().ConfigureAwait(false).GetAwaiter().GetResult();
         foreach (var module in allModules)
         {
             var text = GetTextFromModule(key, culture, module);
@@ -108,7 +113,8 @@ public class LocalizationService : ILocalizationService
 
     private string? GetTextFromModule(string key, string culture, string moduleName)
     {
-        var resource = LoadResourceWithCacheAsync(moduleName, culture).GetAwaiter().GetResult();
+        // Use ConfigureAwait(false) to avoid potential deadlocks
+        var resource = LoadResourceWithCacheAsync(moduleName, culture).ConfigureAwait(false).GetAwaiter().GetResult();
 
         if (resource?.Texts.TryGetValue(key, out var text) == true)
         {
