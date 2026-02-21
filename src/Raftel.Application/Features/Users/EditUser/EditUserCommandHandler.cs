@@ -26,8 +26,6 @@ internal sealed class EditUserCommandHandler(
             return Result.Failure(UserErrors.DuplicatedEmail);
         }
 
-        user.Update(request.Name, request.Surname, request.Email);
-
         if (emailChanged)
         {
             var emailResult = await authenticationService.UpdateEmailAsync(user, request.Email, token);
@@ -37,6 +35,7 @@ internal sealed class EditUserCommandHandler(
             }
         }
 
+        user.Update(request.Name, request.Surname, request.Email);
         usersRepository.Update(user);
         return Result.Success();
     }
