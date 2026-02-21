@@ -13,4 +13,8 @@ public interface IAuthenticationService
     Task<Result<LogInResult>> LogInAsync(string email, string password, CancellationToken cancellationToken = default);
     
     Task<Result> AssignRoleAsync(User user, Role role, CancellationToken cancellationToken = default);
+
+    Task<Result> UpdateEmailAsync(User user, string newEmail, CancellationToken cancellationToken = default);
+
+    Task<Result> DeleteAsync(User user, CancellationToken cancellationToken = default);
 }

@@ -30,6 +30,13 @@ public sealed class User : AggregateRoot<UserId>
         return new User(email, name, surname);
     }
 
+    public void Update(string name, string surname, Email email)
+    {
+        Name = name;
+        Surname = surname;
+        Email = email;
+    }
+
     public void BindTo(string identityUserId)
     {
         if (string.IsNullOrEmpty(IdentityUserId))
