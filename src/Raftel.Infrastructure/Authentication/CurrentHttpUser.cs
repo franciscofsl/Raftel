@@ -17,13 +17,13 @@ internal sealed class CurrentHttpUser(IHttpContextAccessor accessor) : ICurrentU
 
     public IEnumerable<string> Roles =>
         accessor.HttpContext?.User?.Claims
-            .Where(c => c.Type == "role")
+            .Where(c => c.Type == RaftelClaimTypes.Role)
             .Select(c => c.Value)
         ?? Enumerable.Empty<string>();
 
     private IEnumerable<string> Permissions =>
         accessor.HttpContext?.User?.Claims
-            .Where(c => c.Type == "permission")
+            .Where(c => c.Type == RaftelClaimTypes.Permission)
             .Select(c => c.Value)
         ?? Enumerable.Empty<string>();
  

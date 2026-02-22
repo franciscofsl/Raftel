@@ -30,7 +30,7 @@ internal sealed class ClaimsPrincipalFactory(
 
         foreach (var permission in permissions)
         {
-            identity.AddClaim(CreateClaim("permission", permission));
+            identity.AddClaim(CreateClaim(RaftelClaimTypes.Permission, permission));
         }
 
         return new ClaimsPrincipal(identity);
