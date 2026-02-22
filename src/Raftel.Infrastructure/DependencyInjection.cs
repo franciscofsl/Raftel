@@ -33,6 +33,7 @@ public static class DependencyInjection
     {
         services.AddDataAccess<TDbContext>(configuration, connectionStringName);
         services.AddAuthentication<TDbContext>();
+        services.AddMemoryCache();
 
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
         services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();

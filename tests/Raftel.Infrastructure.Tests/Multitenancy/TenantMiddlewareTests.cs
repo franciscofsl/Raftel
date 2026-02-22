@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using NSubstitute;
 using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Domain.Features.Tenants;
@@ -7,18 +8,24 @@ using Raftel.Infrastructure.Multitenancy.Middleware;
 
 namespace Raftel.Infrastructure.Tests.Multitenancy;
 
-public class TenantMiddlewareTests
+public class TenantMiddlewareTests : IDisposable
 {
     private readonly RequestDelegate _next = Substitute.For<RequestDelegate>();
     private readonly ICurrentTenant _currentTenant = Substitute.For<ICurrentTenant>();
     private readonly ITenantsRepository _tenantsRepository = Substitute.For<ITenantsRepository>();
+    private readonly MemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
     private readonly TenantMiddleware _middleware;
     private readonly DefaultHttpContext _httpContext;
 
     public TenantMiddlewareTests()
     {
-        _middleware = new TenantMiddleware(_next);
+        _middleware = new TenantMiddleware(_next, _cache);
         _httpContext = new DefaultHttpContext();
+    }
+
+    public void Dispose()
+    {
+        _cache.Dispose();
     }
 
     [Fact]
@@ -52,6 +59,28 @@ public class TenantMiddlewareTests
         _httpContext.Response.StatusCode.ShouldBe(StatusCodes.Status404NotFound);
         _currentTenant.DidNotReceive().Change(Arg.Any<Guid>());
         await _next.DidNotReceive().Invoke(_httpContext);
+    }
+
+    [Fact]
+    public async Task InvokeAsync_Should_SkipRepositoryLookup_WhenTenantIsCached()
+    {
+        var tenantId = Guid.NewGuid();
+        var disposableScope = Substitute.For<IDisposable>();
+        var tenant = Tenant.Create("Cached", "CCH", "Cached tenant").Value;
+
+        _httpContext.Request.Headers["X-Tenant-Id"] = tenantId.ToString();
+        _tenantsRepository.GetByIdAsync(new TenantId(tenantId)).Returns(tenant);
+        _currentTenant.Change(tenantId).Returns(disposableScope);
+
+        await _middleware.InvokeAsync(_httpContext, _currentTenant, _tenantsRepository);
+
+        var secondContext = new DefaultHttpContext();
+        secondContext.Request.Headers["X-Tenant-Id"] = tenantId.ToString();
+        _currentTenant.Change(tenantId).Returns(disposableScope);
+
+        await _middleware.InvokeAsync(secondContext, _currentTenant, _tenantsRepository);
+
+        await _tenantsRepository.Received(1).GetByIdAsync(Arg.Any<TenantId>(), Arg.Any<CancellationToken>());
     }
 
     [Fact]
