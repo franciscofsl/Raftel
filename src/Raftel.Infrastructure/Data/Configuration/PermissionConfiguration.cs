@@ -31,5 +31,7 @@ public sealed class PermissionConfiguration : IEntityTypeConfiguration<Permissio
             .IsUnique();
 
         builder.HasTenantId();
+
+        builder.HasSoftDelete();
     }
 } 

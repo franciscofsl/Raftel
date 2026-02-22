@@ -28,5 +28,7 @@ public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
             .WithMany();
 
         builder.HasTenantId();
+
+        builder.HasSoftDelete();
     }
 } 
