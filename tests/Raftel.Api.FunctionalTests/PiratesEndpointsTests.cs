@@ -4,8 +4,10 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Raftel.Api.Client;
 using Raftel.Api.FunctionalTests.Extensions;
+using Raftel.Application.Queries;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Raftel.Demo.Application.Pirates.GetPirateById;
+using Raftel.Demo.Application.Pirates.GetPiratesPaged;
 using Raftel.Demo.Domain.Pirates;
 using Shouldly;
 
@@ -55,5 +57,68 @@ public class PiratesEndpointsTests : IClassFixture<ApiTestFactory>
         var response = await _client.PostAsync("/api/pirates", content);
 
         response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task GetPiratesPaged_ShouldReturnPagedResult_WithValidParameters()
+    {
+        await _client.AuthenticateAsync();
+
+        var pirateName = $"Paged Pirate {Guid.NewGuid():N}";
+        var createResult = await _client.PostAsJsonAsync("/api/pirates", new
+        {
+            Name = pirateName,
+            Bounty = 500,
+            IsKing = false
+        });
+        createResult.EnsureSuccessStatusCode();
+
+        var query = new GetPiratesPagedQuery(1, 10, pirateName);
+        var response = await _client
+            .GetFromJsonAsync<PagedResponse>($"/api/pirates/paged{QueryFilter.FromObject(query)}");
+
+        response.ShouldNotBeNull();
+        response.Page.ShouldBe(1);
+        response.PageSize.ShouldBe(10);
+        response.TotalCount.ShouldBeGreaterThanOrEqualTo(1);
+        response.Items.ShouldContain(p => p.Name == pirateName);
+    }
+
+    [Fact]
+    public async Task GetPiratesPaged_WithInvalidPage_ShouldReturnBadRequest()
+    {
+        await _client.AuthenticateAsync();
+
+        var query = new GetPiratesPagedQuery(0, 10, null);
+        var response = await _client
+            .GetAsync($"/api/pirates/paged{QueryFilter.FromObject(query)}");
+
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task GetPiratesPaged_WithPageSizeExceedingMaximum_ShouldReturnBadRequest()
+    {
+        await _client.AuthenticateAsync();
+
+        var query = new GetPiratesPagedQuery(1, 101, null);
+        var response = await _client
+            .GetAsync($"/api/pirates/paged{QueryFilter.FromObject(query)}");
+
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+    }
+
+    private sealed class PagedResponse
+    {
+        public List<PirateItem> Items { get; set; } = new();
+        public int TotalCount { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+    }
+
+    private sealed class PirateItem
+    {
+        public string Name { get; set; }
+        public uint Bounty { get; set; }
     }
 }

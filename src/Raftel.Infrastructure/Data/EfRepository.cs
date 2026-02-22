@@ -43,6 +43,18 @@ public abstract class EfRepository<TDbContext, TEntity, TId>(TDbContext dbContex
     }
 
     /// <summary>
+    /// Retrieves a paginated subset of entities asynchronously, optionally filtered.
+    /// </summary>
+    public async Task<(IReadOnlyList<TEntity> Items, int TotalCount)> ListPagedAsync(int page, int pageSize,
+        Expression<Func<TEntity, bool>> filter = null, CancellationToken cancellationToken = default)
+    {
+        var query = dbContext.Set<TEntity>().WhereIf(filter is not null, filter);
+        var totalCount = await query.CountAsync(cancellationToken);
+        var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
+        return (items, totalCount);
+    }
+
+    /// <summary>
     /// Adds a new entity to the repository asynchronously.
     /// </summary>
     /// <param name="entity">The entity to add.</param>

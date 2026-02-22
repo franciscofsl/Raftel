@@ -27,6 +27,17 @@ public interface IRepository<TEntity, in TId>
     Task<List<TEntity>> ListAllAsync(Expression<Func<TEntity, bool>> filter = null, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Retrieves a paginated subset of entities asynchronously, optionally filtered.
+    /// </summary>
+    /// <param name="page">The 1-based page number.</param>
+    /// <param name="pageSize">The number of items per page.</param>
+    /// <param name="filter">An optional filter expression applied before pagination.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+    /// <returns>A tuple containing the items for the requested page and the total count of matching entities.</returns>
+    Task<(IReadOnlyList<TEntity> Items, int TotalCount)> ListPagedAsync(int page, int pageSize,
+        Expression<Func<TEntity, bool>> filter = null, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Adds a new entity to the repository asynchronously.
     /// </summary>
     /// <param name="entity">The entity to add.</param>
