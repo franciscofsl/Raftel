@@ -148,7 +148,7 @@ public class UsersMultitenancyTests : InfrastructureTestBase
             }
 
             var allUsers = await repository.ListAllAsync();
-            allUsers.Count.ShouldBe(0);
+            allUsers.ShouldBeEmpty();
         });
     }
 

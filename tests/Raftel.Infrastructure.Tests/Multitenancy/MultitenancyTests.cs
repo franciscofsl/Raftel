@@ -90,7 +90,7 @@ public class MultitenancyTests : InfrastructureTestBase
             }
 
             var allPirates = await repository.ListAllAsync();
-            allPirates.Count.ShouldBe(0);
+            allPirates.ShouldBeEmpty();
         });
     }
 
