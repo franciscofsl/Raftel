@@ -26,7 +26,7 @@ builder.Services.AddRaftelApplication(cfg =>
     cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
 });
 
-builder.Services.AddSampleInfrastructure(builder.Configuration.GetConnectionString("Default")!);
+builder.Services.AddSampleInfrastructure(builder.Configuration.GetConnectionString("Default")!, builder.Environment);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
