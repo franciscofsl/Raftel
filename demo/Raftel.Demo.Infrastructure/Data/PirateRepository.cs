@@ -15,7 +15,7 @@ public class PirateRepository(TestingRaftelDbContext dbContext)
 
         if (!string.IsNullOrEmpty(nameFilter))
         {
-            query = query.Where(p => EF.Property<string>(p, "Name").Contains(nameFilter));
+            query = query.Where(p => EF.Property<string>(p, nameof(Pirate.Name)).Contains(nameFilter));
         }
 
         var totalCount = await query.CountAsync(cancellationToken);

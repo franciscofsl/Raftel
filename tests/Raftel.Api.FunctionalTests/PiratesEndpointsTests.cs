@@ -108,6 +108,20 @@ public class PiratesEndpointsTests : IClassFixture<ApiTestFactory>
         response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
     }
 
+    [Fact]
+    public async Task GetPiratesPaged_WithPageBeyondAvailableData_ShouldReturnEmptyItems()
+    {
+        await _client.AuthenticateAsync();
+
+        var query = new GetPiratesPagedQuery(999, 10, $"NoSuchPirate_{Guid.NewGuid():N}");
+        var response = await _client
+            .GetFromJsonAsync<PagedResponse>($"/api/pirates/paged{QueryFilter.FromObject(query)}");
+
+        response.ShouldNotBeNull();
+        response.Items.ShouldBeEmpty();
+        response.TotalCount.ShouldBe(0);
+    }
+
     private sealed class PagedResponse
     {
         public List<PirateItem> Items { get; set; } = new();
