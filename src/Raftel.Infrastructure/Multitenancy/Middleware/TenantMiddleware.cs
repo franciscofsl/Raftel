@@ -20,7 +20,7 @@ internal class TenantMiddleware(RequestDelegate next)
             return;
         }
 
-        var tenant = await tenantsRepository.GetByIdAsync(new TenantId(tenantId.Value));
+        var tenant = await tenantsRepository.GetByIdAsync(new TenantId(tenantId.Value), context.RequestAborted);
         if (tenant is null)
         {
             context.Response.StatusCode = StatusCodes.Status404NotFound;
