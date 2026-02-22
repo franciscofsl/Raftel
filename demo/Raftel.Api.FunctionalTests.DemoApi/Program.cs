@@ -9,6 +9,7 @@ using Raftel.Application.Middlewares;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Raftel.Demo.Application.Pirates.GetPirateById;
+using Raftel.Demo.Application.Pirates.GetPiratesPaged;
 using Raftel.Demo.Infrastructure;
 using Raftel.Infrastructure;
 using Raftel.Infrastructure.Multitenancy.Middleware;
@@ -59,6 +60,7 @@ app.AddEndpointGroup(group =>
         group.BaseUri = "/api/pirates";
         group.AddQuery<GetPirateByIdQuery, GetPirateByIdResponse>("{id}", HttpMethod.Get);
         group.AddQuery<GetPirateByFilterQuery, GetPirateByFilterResponse>("", HttpMethod.Get);
+        group.AddPagedQuery<GetPiratesPagedQuery, PiratePageInfo>("paged", HttpMethod.Get);
         group.AddCommand<CreatePirateCommand>("", HttpMethod.Post);
     }
 );
