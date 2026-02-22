@@ -20,6 +20,19 @@ public class MultitenancyTests : IClassFixture<ApiTestFactory>
     }
 
     [Fact]
+    public async Task ApiShould_Return404_WhenTenantIdIsUnknown()
+    {
+        await _client.AuthenticateAsync();
+
+        var request = new HttpRequestMessage(HttpMethod.Get, "/api/tenants/current");
+        request.Headers.Add("X-Tenant-Id", Guid.NewGuid().ToString());
+
+        var response = await _client.SendAsync(request);
+
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
+    }
+
+    [Fact]
     public async Task ApiShould_CreateTenant()
     {
         await _client.AuthenticateAsync();
