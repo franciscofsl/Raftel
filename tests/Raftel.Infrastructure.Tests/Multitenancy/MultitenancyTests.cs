@@ -239,4 +239,37 @@ public class MultitenancyTests : InfrastructureTestBase
             }
         });
     }
+
+    [Fact]
+    public async Task UpdateAsync_ShouldNotChangeTenantId_WhenTenantIdIsModified()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
+            var repository = sp.GetRequiredService<IPirateRepository>();
+            var currentTenant = sp.GetRequiredService<ICurrentTenant>();
+            var dbContext = sp.GetRequiredService<TestingRaftelDbContext>();
+
+            var tenant1Id = Guid.NewGuid();
+            var tenant2Id = Guid.NewGuid();
+
+            var pirate = Pirate.Normal("Luffy", 500_000_000);
+
+            using (currentTenant.Change(tenant1Id))
+            {
+                await repository.AddAsync(pirate);
+                await unitOfWork.CommitAsync();
+            }
+
+            using (currentTenant.Change(tenant2Id))
+            {
+                var entry = dbContext.Entry(pirate);
+                entry.Property(ShadowPropertyNames.TenantId).CurrentValue = tenant2Id;
+
+                await unitOfWork.CommitAsync();
+
+                entry.Property(ShadowPropertyNames.TenantId).CurrentValue.ShouldBe(tenant1Id);
+            }
+        });
+    }
 }
