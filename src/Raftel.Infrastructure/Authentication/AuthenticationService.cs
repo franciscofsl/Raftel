@@ -86,5 +86,49 @@ internal sealed class AuthenticationService(
         var errorMessage = result.Errors.Select(e => e.Description).FirstOrDefault();
         return Result.Failure(new Error("User.RoleAssignmentFailed", errorMessage ?? "Failed to assign role to user in Identity."));
     }
+
+    public async Task<Result> UpdateEmailAsync(User user, string newEmail,
+        CancellationToken cancellationToken = default)
+    {
+        var identityUser = await userManager.FindByEmailAsync(user.Email);
+        if (identityUser == null)
+        {
+            return Result.Failure(new Error("User.NotFound", "The specified user was not found in Identity."));
+        }
+
+        var emailResult = await userManager.SetEmailAsync(identityUser, newEmail);
+        if (!emailResult.Succeeded)
+        {
+            var errorMessage = emailResult.Errors.Select(e => e.Description).FirstOrDefault();
+            return Result.Failure(new Error("User.UpdateEmailFailed", errorMessage ?? "Failed to update email."));
+        }
+
+        var usernameResult = await userManager.SetUserNameAsync(identityUser, newEmail);
+        if (!usernameResult.Succeeded)
+        {
+            var errorMessage = usernameResult.Errors.Select(e => e.Description).FirstOrDefault();
+            return Result.Failure(new Error("User.UpdateUserNameFailed", errorMessage ?? "Failed to update username."));
+        }
+
+        return Result.Success();
+    }
+
+    public async Task<Result> DeleteAsync(User user, CancellationToken cancellationToken = default)
+    {
+        var identityUser = await userManager.FindByEmailAsync(user.Email);
+        if (identityUser == null)
+        {
+            return Result.Failure(new Error("User.NotFound", "The specified user was not found in Identity."));
+        }
+
+        var result = await userManager.DeleteAsync(identityUser);
+        if (!result.Succeeded)
+        {
+            var errorMessage = result.Errors.Select(e => e.Description).FirstOrDefault();
+            return Result.Failure(new Error("User.DeleteFailed", errorMessage ?? "Failed to delete user."));
+        }
+
+        return Result.Success();
+    }
 }
 
