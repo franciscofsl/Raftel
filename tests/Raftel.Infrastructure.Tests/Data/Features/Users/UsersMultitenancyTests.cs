@@ -121,7 +121,7 @@ public class UsersMultitenancyTests : InfrastructureTestBase
     }
 
     [Fact]
-    public async Task ListAllAsync_ShouldReturnAllUsers_WhenNoTenantIsSet()
+    public async Task ListAllAsync_ShouldReturnNoUsers_WhenNoTenantIsSet()
     {
         await ExecuteScopedAsync(async sp =>
         {
@@ -148,9 +148,7 @@ public class UsersMultitenancyTests : InfrastructureTestBase
             }
 
             var allUsers = await repository.ListAllAsync();
-            allUsers.Count.ShouldBe(2);
-            allUsers.ShouldContain(luffy);
-            allUsers.ShouldContain(bigMom);
+            allUsers.Count.ShouldBe(0);
         });
     }
 
