@@ -1,4 +1,6 @@
-﻿using System.Net.Http.Json;
+﻿using System.Net;
+using System.Net.Http.Json;
+using System.Text;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Raftel.Api.Client;
 using Raftel.Api.FunctionalTests.Extensions;
@@ -42,5 +44,16 @@ public class PiratesEndpointsTests : IClassFixture<ApiTestFactory>
 
         response.Pirates.Count.ShouldBe(1);
         response.Pirates.ShouldContain(_ => _.Name == pirateName);
+    }
+
+    [Fact]
+    public async Task PostPirate_WithMalformedJson_ShouldReturnBadRequest()
+    {
+        await _client.AuthenticateAsync();
+
+        var content = new StringContent("{ invalid json }", Encoding.UTF8, "application/json");
+        var response = await _client.PostAsync("/api/pirates", content);
+
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
     }
 }

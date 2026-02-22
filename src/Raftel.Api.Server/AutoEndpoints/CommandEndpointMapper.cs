@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Raftel.Application.Commands;
@@ -27,10 +28,28 @@ public static class CommandEndpointMapper
 
         async Task<IResult> Handler(HttpContext context, ICommandDispatcher dispatcher)
         {
-            var command = await context.Request.ReadFromJsonAsync<TCommand>()
-                          ?? throw new InvalidOperationException("Invalid command payload");
+            TCommand parsedCommand;
+            try
+            {
+                parsedCommand = await context.Request.ReadFromJsonAsync<TCommand>();
+            }
+            catch (JsonException)
+            {
+                return Results.Problem(
+                    detail: "The request body contains invalid JSON syntax.",
+                    statusCode: StatusCodes.Status400BadRequest,
+                    title: "Invalid JSON payload");
+            }
 
-            var result = await dispatcher.DispatchAsync(command);
+            if (parsedCommand is null)
+            {
+                return Results.Problem(
+                    detail: "The request body must not be null.",
+                    statusCode: StatusCodes.Status400BadRequest,
+                    title: "Invalid JSON payload");
+            }
+
+            var result = await dispatcher.DispatchAsync(parsedCommand);
 
             return result.IsSuccess
                 ? Results.Ok()
