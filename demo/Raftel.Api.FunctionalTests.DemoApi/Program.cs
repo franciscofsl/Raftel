@@ -2,6 +2,7 @@ using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Api.Server.Features.Tenants;
 using Raftel.Api.Server.Features.Users;
+using Raftel.Api.Server.Middlewares;
 using Raftel.Application;
 using Raftel.Application.Features.Users.RegisterUser;
 using Raftel.Application.Middlewares;
@@ -39,6 +40,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRaftelExceptionHandling();
 app.UseHttpsRedirection();
 app.UseRouting();
 
@@ -60,6 +62,8 @@ app.AddEndpointGroup(group =>
         group.AddCommand<CreatePirateCommand>("", HttpMethod.Post);
     }
 );
+
+app.MapGet("/api/test/throw", () => { throw new InvalidOperationException("Test unhandled exception."); });
 
 using var scope = app.Services.CreateScope();
 await SeedData.InitializeAsync(scope.ServiceProvider);
