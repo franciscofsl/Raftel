@@ -760,6 +760,104 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.CreateUser.CreateUserCommand",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.CreateUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.CreateUser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.CreateUser",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.DeleteUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.DeleteUser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.DeleteUser",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.EditUser.EditUserCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.EditUser.EditUserCommand",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Features.Users.EditUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Features.Users.EditUser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Features.Users.EditUser",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Features.Users.GetUserProfile.GetUserProfileQuery.yml",
       "output": {
         ".html": {

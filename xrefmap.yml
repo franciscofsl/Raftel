@@ -457,6 +457,19 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.AssignRoleAsync
   nameWithType: IAuthenticationService.AssignRoleAsync
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.DeleteAsync(Raftel.Domain.Features.Users.User,System.Threading.CancellationToken)
+  name: DeleteAsync(User, CancellationToken)
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_DeleteAsync_Raftel_Domain_Features_Users_User_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.Authentication.IAuthenticationService.DeleteAsync(Raftel.Domain.Features.Users.User,System.Threading.CancellationToken)
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.DeleteAsync(Raftel.Domain.Features.Users.User, System.Threading.CancellationToken)
+  nameWithType: IAuthenticationService.DeleteAsync(User, CancellationToken)
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.DeleteAsync*
+  name: DeleteAsync
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_DeleteAsync_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.IAuthenticationService.DeleteAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.DeleteAsync
+  nameWithType: IAuthenticationService.DeleteAsync
 - uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.LogInAsync(System.String,System.String,System.Threading.CancellationToken)
   name: LogInAsync(string, string, CancellationToken)
   href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_LogInAsync_System_String_System_String_System_Threading_CancellationToken_
@@ -489,6 +502,22 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.RegisterAsync
   nameWithType: IAuthenticationService.RegisterAsync
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.UpdateEmailAsync(Raftel.Domain.Features.Users.User,System.String,System.Threading.CancellationToken)
+  name: UpdateEmailAsync(User, string, CancellationToken)
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_UpdateEmailAsync_Raftel_Domain_Features_Users_User_System_String_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.Authentication.IAuthenticationService.UpdateEmailAsync(Raftel.Domain.Features.Users.User,System.String,System.Threading.CancellationToken)
+  name.vb: UpdateEmailAsync(User, String, CancellationToken)
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.UpdateEmailAsync(Raftel.Domain.Features.Users.User, string, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Abstractions.Authentication.IAuthenticationService.UpdateEmailAsync(Raftel.Domain.Features.Users.User, String, System.Threading.CancellationToken)
+  nameWithType: IAuthenticationService.UpdateEmailAsync(User, string, CancellationToken)
+  nameWithType.vb: IAuthenticationService.UpdateEmailAsync(User, String, CancellationToken)
+- uid: Raftel.Application.Abstractions.Authentication.IAuthenticationService.UpdateEmailAsync*
+  name: UpdateEmailAsync
+  href: api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html#Raftel_Application_Abstractions_Authentication_IAuthenticationService_UpdateEmailAsync_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.IAuthenticationService.UpdateEmailAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Authentication.IAuthenticationService.UpdateEmailAsync
+  nameWithType: IAuthenticationService.UpdateEmailAsync
 - uid: Raftel.Application.Abstractions.Authentication.ICurrentUser
   name: ICurrentUser
   href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html
@@ -1385,6 +1414,241 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Features.Users.AssignRoleToUser.AssignRoleToUserCommand.UserId
   nameWithType: AssignRoleToUserCommand.UserId
+- uid: Raftel.Application.Features.Users.CreateUser
+  name: Raftel.Application.Features.Users.CreateUser
+  href: api/Raftel.Application.Features.Users.CreateUser.html
+  commentId: N:Raftel.Application.Features.Users.CreateUser
+  fullName: Raftel.Application.Features.Users.CreateUser
+  nameWithType: Raftel.Application.Features.Users.CreateUser
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand
+  name: CreateUserCommand
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html
+  commentId: T:Raftel.Application.Features.Users.CreateUser.CreateUserCommand
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand
+  nameWithType: CreateUserCommand
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.#ctor(System.String,System.String,System.String,System.String)
+  name: CreateUserCommand(string, string, string, string)
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommand__ctor_System_String_System_String_System_String_System_String_
+  commentId: M:Raftel.Application.Features.Users.CreateUser.CreateUserCommand.#ctor(System.String,System.String,System.String,System.String)
+  name.vb: New(String, String, String, String)
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.CreateUserCommand(string, string, string, string)
+  fullName.vb: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.New(String, String, String, String)
+  nameWithType: CreateUserCommand.CreateUserCommand(string, string, string, string)
+  nameWithType.vb: CreateUserCommand.New(String, String, String, String)
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.#ctor*
+  name: CreateUserCommand
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommand__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.CreateUser.CreateUserCommand.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.CreateUserCommand
+  fullName.vb: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.New
+  nameWithType: CreateUserCommand.CreateUserCommand
+  nameWithType.vb: CreateUserCommand.New
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Email
+  name: Email
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommand_Email
+  commentId: P:Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Email
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Email
+  nameWithType: CreateUserCommand.Email
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Email*
+  name: Email
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommand_Email_
+  commentId: Overload:Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Email
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Email
+  nameWithType: CreateUserCommand.Email
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Name
+  name: Name
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommand_Name
+  commentId: P:Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Name
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Name
+  nameWithType: CreateUserCommand.Name
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Name*
+  name: Name
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommand_Name_
+  commentId: Overload:Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Name
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Name
+  nameWithType: CreateUserCommand.Name
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Password
+  name: Password
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommand_Password
+  commentId: P:Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Password
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Password
+  nameWithType: CreateUserCommand.Password
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Password*
+  name: Password
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommand_Password_
+  commentId: Overload:Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Password
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Password
+  nameWithType: CreateUserCommand.Password
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Surname
+  name: Surname
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommand_Surname
+  commentId: P:Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Surname
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Surname
+  nameWithType: CreateUserCommand.Surname
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Surname*
+  name: Surname
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommand.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommand_Surname_
+  commentId: Overload:Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Surname
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommand.Surname
+  nameWithType: CreateUserCommand.Surname
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator
+  name: CreateUserCommandValidator
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.html
+  commentId: T:Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator
+  nameWithType: CreateUserCommandValidator
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.#ctor
+  name: CreateUserCommandValidator()
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommandValidator__ctor
+  commentId: M:Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.#ctor
+  name.vb: New()
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.CreateUserCommandValidator()
+  fullName.vb: Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.New()
+  nameWithType: CreateUserCommandValidator.CreateUserCommandValidator()
+  nameWithType.vb: CreateUserCommandValidator.New()
+- uid: Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.#ctor*
+  name: CreateUserCommandValidator
+  href: api/Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.html#Raftel_Application_Features_Users_CreateUser_CreateUserCommandValidator__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.CreateUserCommandValidator
+  fullName.vb: Raftel.Application.Features.Users.CreateUser.CreateUserCommandValidator.New
+  nameWithType: CreateUserCommandValidator.CreateUserCommandValidator
+  nameWithType.vb: CreateUserCommandValidator.New
+- uid: Raftel.Application.Features.Users.DeleteUser
+  name: Raftel.Application.Features.Users.DeleteUser
+  href: api/Raftel.Application.Features.Users.DeleteUser.html
+  commentId: N:Raftel.Application.Features.Users.DeleteUser
+  fullName: Raftel.Application.Features.Users.DeleteUser
+  nameWithType: Raftel.Application.Features.Users.DeleteUser
+- uid: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand
+  name: DeleteUserCommand
+  href: api/Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.html
+  commentId: T:Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand
+  fullName: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand
+  nameWithType: DeleteUserCommand
+- uid: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.#ctor(System.Guid)
+  name: DeleteUserCommand(Guid)
+  href: api/Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.html#Raftel_Application_Features_Users_DeleteUser_DeleteUserCommand__ctor_System_Guid_
+  commentId: M:Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.DeleteUserCommand(System.Guid)
+  fullName.vb: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.New(System.Guid)
+  nameWithType: DeleteUserCommand.DeleteUserCommand(Guid)
+  nameWithType.vb: DeleteUserCommand.New(Guid)
+- uid: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.#ctor*
+  name: DeleteUserCommand
+  href: api/Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.html#Raftel_Application_Features_Users_DeleteUser_DeleteUserCommand__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.DeleteUserCommand
+  fullName.vb: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.New
+  nameWithType: DeleteUserCommand.DeleteUserCommand
+  nameWithType.vb: DeleteUserCommand.New
+- uid: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.UserId
+  name: UserId
+  href: api/Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.html#Raftel_Application_Features_Users_DeleteUser_DeleteUserCommand_UserId
+  commentId: P:Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.UserId
+  fullName: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.UserId
+  nameWithType: DeleteUserCommand.UserId
+- uid: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.UserId*
+  name: UserId
+  href: api/Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.html#Raftel_Application_Features_Users_DeleteUser_DeleteUserCommand_UserId_
+  commentId: Overload:Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.UserId
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.DeleteUser.DeleteUserCommand.UserId
+  nameWithType: DeleteUserCommand.UserId
+- uid: Raftel.Application.Features.Users.EditUser
+  name: Raftel.Application.Features.Users.EditUser
+  href: api/Raftel.Application.Features.Users.EditUser.html
+  commentId: N:Raftel.Application.Features.Users.EditUser
+  fullName: Raftel.Application.Features.Users.EditUser
+  nameWithType: Raftel.Application.Features.Users.EditUser
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand
+  name: EditUserCommand
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html
+  commentId: T:Raftel.Application.Features.Users.EditUser.EditUserCommand
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand
+  nameWithType: EditUserCommand
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand.#ctor(System.Guid,System.String,System.String,System.String)
+  name: EditUserCommand(Guid, string, string, string)
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html#Raftel_Application_Features_Users_EditUser_EditUserCommand__ctor_System_Guid_System_String_System_String_System_String_
+  commentId: M:Raftel.Application.Features.Users.EditUser.EditUserCommand.#ctor(System.Guid,System.String,System.String,System.String)
+  name.vb: New(Guid, String, String, String)
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand.EditUserCommand(System.Guid, string, string, string)
+  fullName.vb: Raftel.Application.Features.Users.EditUser.EditUserCommand.New(System.Guid, String, String, String)
+  nameWithType: EditUserCommand.EditUserCommand(Guid, string, string, string)
+  nameWithType.vb: EditUserCommand.New(Guid, String, String, String)
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand.#ctor*
+  name: EditUserCommand
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html#Raftel_Application_Features_Users_EditUser_EditUserCommand__ctor_
+  commentId: Overload:Raftel.Application.Features.Users.EditUser.EditUserCommand.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand.EditUserCommand
+  fullName.vb: Raftel.Application.Features.Users.EditUser.EditUserCommand.New
+  nameWithType: EditUserCommand.EditUserCommand
+  nameWithType.vb: EditUserCommand.New
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand.Email
+  name: Email
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html#Raftel_Application_Features_Users_EditUser_EditUserCommand_Email
+  commentId: P:Raftel.Application.Features.Users.EditUser.EditUserCommand.Email
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand.Email
+  nameWithType: EditUserCommand.Email
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand.Email*
+  name: Email
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html#Raftel_Application_Features_Users_EditUser_EditUserCommand_Email_
+  commentId: Overload:Raftel.Application.Features.Users.EditUser.EditUserCommand.Email
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand.Email
+  nameWithType: EditUserCommand.Email
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand.Name
+  name: Name
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html#Raftel_Application_Features_Users_EditUser_EditUserCommand_Name
+  commentId: P:Raftel.Application.Features.Users.EditUser.EditUserCommand.Name
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand.Name
+  nameWithType: EditUserCommand.Name
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand.Name*
+  name: Name
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html#Raftel_Application_Features_Users_EditUser_EditUserCommand_Name_
+  commentId: Overload:Raftel.Application.Features.Users.EditUser.EditUserCommand.Name
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand.Name
+  nameWithType: EditUserCommand.Name
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand.Surname
+  name: Surname
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html#Raftel_Application_Features_Users_EditUser_EditUserCommand_Surname
+  commentId: P:Raftel.Application.Features.Users.EditUser.EditUserCommand.Surname
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand.Surname
+  nameWithType: EditUserCommand.Surname
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand.Surname*
+  name: Surname
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html#Raftel_Application_Features_Users_EditUser_EditUserCommand_Surname_
+  commentId: Overload:Raftel.Application.Features.Users.EditUser.EditUserCommand.Surname
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand.Surname
+  nameWithType: EditUserCommand.Surname
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand.UserId
+  name: UserId
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html#Raftel_Application_Features_Users_EditUser_EditUserCommand_UserId
+  commentId: P:Raftel.Application.Features.Users.EditUser.EditUserCommand.UserId
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand.UserId
+  nameWithType: EditUserCommand.UserId
+- uid: Raftel.Application.Features.Users.EditUser.EditUserCommand.UserId*
+  name: UserId
+  href: api/Raftel.Application.Features.Users.EditUser.EditUserCommand.html#Raftel_Application_Features_Users_EditUser_EditUserCommand_UserId_
+  commentId: Overload:Raftel.Application.Features.Users.EditUser.EditUserCommand.UserId
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Users.EditUser.EditUserCommand.UserId
+  nameWithType: EditUserCommand.UserId
 - uid: Raftel.Application.Features.Users.GetUserProfile
   name: Raftel.Application.Features.Users.GetUserProfile
   href: api/Raftel.Application.Features.Users.GetUserProfile.html
@@ -1727,6 +1991,24 @@ references:
   commentId: F:Raftel.Application.Features.Users.UsersPermissions.AssignRoleToUser
   fullName: Raftel.Application.Features.Users.UsersPermissions.AssignRoleToUser
   nameWithType: UsersPermissions.AssignRoleToUser
+- uid: Raftel.Application.Features.Users.UsersPermissions.Create
+  name: Create
+  href: api/Raftel.Application.Features.Users.UsersPermissions.html#Raftel_Application_Features_Users_UsersPermissions_Create
+  commentId: F:Raftel.Application.Features.Users.UsersPermissions.Create
+  fullName: Raftel.Application.Features.Users.UsersPermissions.Create
+  nameWithType: UsersPermissions.Create
+- uid: Raftel.Application.Features.Users.UsersPermissions.Delete
+  name: Delete
+  href: api/Raftel.Application.Features.Users.UsersPermissions.html#Raftel_Application_Features_Users_UsersPermissions_Delete
+  commentId: F:Raftel.Application.Features.Users.UsersPermissions.Delete
+  fullName: Raftel.Application.Features.Users.UsersPermissions.Delete
+  nameWithType: UsersPermissions.Delete
+- uid: Raftel.Application.Features.Users.UsersPermissions.Edit
+  name: Edit
+  href: api/Raftel.Application.Features.Users.UsersPermissions.html#Raftel_Application_Features_Users_UsersPermissions_Edit
+  commentId: F:Raftel.Application.Features.Users.UsersPermissions.Edit
+  fullName: Raftel.Application.Features.Users.UsersPermissions.Edit
+  nameWithType: UsersPermissions.Edit
 - uid: Raftel.Application.Features.Users.UsersPermissions.View
   name: View
   href: api/Raftel.Application.Features.Users.UsersPermissions.html#Raftel_Application_Features_Users_UsersPermissions_View
@@ -3498,6 +3780,22 @@ references:
   isSpec: "True"
   fullName: Raftel.Domain.Features.Users.User.Surname
   nameWithType: User.Surname
+- uid: Raftel.Domain.Features.Users.User.Update(System.String,System.String,Raftel.Domain.Features.Users.ValueObjects.Email)
+  name: Update(string, string, Email)
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Update_System_String_System_String_Raftel_Domain_Features_Users_ValueObjects_Email_
+  commentId: M:Raftel.Domain.Features.Users.User.Update(System.String,System.String,Raftel.Domain.Features.Users.ValueObjects.Email)
+  name.vb: Update(String, String, Email)
+  fullName: Raftel.Domain.Features.Users.User.Update(string, string, Raftel.Domain.Features.Users.ValueObjects.Email)
+  fullName.vb: Raftel.Domain.Features.Users.User.Update(String, String, Raftel.Domain.Features.Users.ValueObjects.Email)
+  nameWithType: User.Update(string, string, Email)
+  nameWithType.vb: User.Update(String, String, Email)
+- uid: Raftel.Domain.Features.Users.User.Update*
+  name: Update
+  href: api/Raftel.Domain.Features.Users.User.html#Raftel_Domain_Features_Users_User_Update_
+  commentId: Overload:Raftel.Domain.Features.Users.User.Update
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.User.Update
+  nameWithType: User.Update
 - uid: Raftel.Domain.Features.Users.UserErrors
   name: UserErrors
   href: api/Raftel.Domain.Features.Users.UserErrors.html
@@ -3517,6 +3815,19 @@ references:
   isSpec: "True"
   fullName: Raftel.Domain.Features.Users.UserErrors.DuplicatedEmail
   nameWithType: UserErrors.DuplicatedEmail
+- uid: Raftel.Domain.Features.Users.UserErrors.NotFound
+  name: NotFound
+  href: api/Raftel.Domain.Features.Users.UserErrors.html#Raftel_Domain_Features_Users_UserErrors_NotFound
+  commentId: P:Raftel.Domain.Features.Users.UserErrors.NotFound
+  fullName: Raftel.Domain.Features.Users.UserErrors.NotFound
+  nameWithType: UserErrors.NotFound
+- uid: Raftel.Domain.Features.Users.UserErrors.NotFound*
+  name: NotFound
+  href: api/Raftel.Domain.Features.Users.UserErrors.html#Raftel_Domain_Features_Users_UserErrors_NotFound_
+  commentId: Overload:Raftel.Domain.Features.Users.UserErrors.NotFound
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Users.UserErrors.NotFound
+  nameWithType: UserErrors.NotFound
 - uid: Raftel.Domain.Features.Users.UserErrors.RoleAlreadyAssigned
   name: RoleAlreadyAssigned
   href: api/Raftel.Domain.Features.Users.UserErrors.html#Raftel_Domain_Features_Users_UserErrors_RoleAlreadyAssigned
