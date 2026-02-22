@@ -228,6 +228,48 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.yml\" sourcestartlinenumber=\"1\">Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses.\nStack traces are never exposed in responses.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddlewareExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddlewareExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Middlewares.ExceptionHandlingMiddlewareExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Middlewares.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Middlewares.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Middlewares",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.yml",
       "output": {
         ".html": {

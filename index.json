@@ -79,6 +79,21 @@
     "title": "Namespace Raftel.Api.Server.Features.Users | Raftel",
     "summary": "Namespace Raftel.Api.Server.Features.Users Classes AuthorizationController UsersDependencyInjection"
   },
+  "api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.html": {
+    "href": "api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.html",
+    "title": "Class ExceptionHandlingMiddleware | Raftel",
+    "summary": "Class ExceptionHandlingMiddleware Namespace Raftel.Api.Server.Middlewares Assembly Raftel.Api.Server.dll Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses. Stack traces are never exposed in responses. public sealed class ExceptionHandlingMiddleware Inheritance object ExceptionHandlingMiddleware Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.ReferenceEquals(object, object) object.ToString() Constructors ExceptionHandlingMiddleware(RequestDelegate) Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses. Stack traces are never exposed in responses. public ExceptionHandlingMiddleware(RequestDelegate next) Parameters next RequestDelegate Methods InvokeAsync(HttpContext) public Task InvokeAsync(HttpContext context) Parameters context HttpContext Returns Task"
+  },
+  "api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddlewareExtensions.html": {
+    "href": "api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddlewareExtensions.html",
+    "title": "Class ExceptionHandlingMiddlewareExtensions | Raftel",
+    "summary": "Class ExceptionHandlingMiddlewareExtensions Namespace Raftel.Api.Server.Middlewares Assembly Raftel.Api.Server.dll public static class ExceptionHandlingMiddlewareExtensions Inheritance object ExceptionHandlingMiddlewareExtensions Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Methods UseRaftelExceptionHandling(IApplicationBuilder) public static IApplicationBuilder UseRaftelExceptionHandling(this IApplicationBuilder builder) Parameters builder IApplicationBuilder Returns IApplicationBuilder"
+  },
+  "api/Raftel.Api.Server.Middlewares.html": {
+    "href": "api/Raftel.Api.Server.Middlewares.html",
+    "title": "Namespace Raftel.Api.Server.Middlewares | Raftel",
+    "summary": "Namespace Raftel.Api.Server.Middlewares Classes ExceptionHandlingMiddleware Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses. Stack traces are never exposed in responses. ExceptionHandlingMiddlewareExtensions"
+  },
   "api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html": {
     "href": "api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.html",
     "title": "Interface IAuthenticationService | Raftel",
