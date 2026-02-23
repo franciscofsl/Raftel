@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using OpenIddict.Abstractions;
@@ -25,14 +26,23 @@ namespace Raftel.Infrastructure;
 
 public static class DependencyInjection
 {
+    /// <summary>
+    /// Registers Raftel data access, authentication, and multitenancy services.
+    /// </summary>
+    /// <remarks>
+    /// In development, ephemeral RSA certificates are generated automatically for OpenIddict token encryption and signing.
+    /// In staging and production environments, you must provide real X.509 certificates via
+    /// <c>opt.AddEncryptionCertificate(...)</c> and <c>opt.AddSigningCertificate(...)</c>.
+    /// </remarks>
     public static IServiceCollection AddRaftelData<TDbContext>(
         this IServiceCollection services,
         IConfiguration configuration,
+        IHostEnvironment environment,
         string connectionStringName = "Default")
         where TDbContext : RaftelDbContext<TDbContext>
     {
         services.AddDataAccess<TDbContext>(configuration, connectionStringName);
-        services.AddAuthentication<TDbContext>();
+        services.AddAuthentication<TDbContext>(environment);
 
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
         services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
@@ -80,7 +90,7 @@ public static class DependencyInjection
         services.AddScoped(typeof(IRolesRepository), typeof(RolesRepository<TDbContext>));
     }
 
-    private static void AddAuthentication<TDbContext>(this IServiceCollection services)
+    private static void AddAuthentication<TDbContext>(this IServiceCollection services, IHostEnvironment environment)
         where TDbContext : RaftelDbContext<TDbContext>
     {
         services.AddIdentity<IdentityUser, IdentityRole>()
@@ -97,8 +107,15 @@ public static class DependencyInjection
                     .AllowPasswordFlow()
                     .AllowRefreshTokenFlow();
 
-                opt.AddDevelopmentEncryptionCertificate()
-                    .AddDevelopmentSigningCertificate();
+                if (environment.IsDevelopment())
+                {
+                    // Ephemeral development-only certificates — never use in staging or production.
+                    // For staging/production, configure real X.509 certificates:
+                    //   opt.AddEncryptionCertificate(certificate)
+                    //   opt.AddSigningCertificate(certificate)
+                    opt.AddDevelopmentEncryptionCertificate()
+                        .AddDevelopmentSigningCertificate();
+                }
 
                 opt.RegisterScopes(OpenIddictConstants.Scopes.Email,
                     OpenIddictConstants.Scopes.OfflineAccess,
