@@ -1,0 +1,15 @@
+{
+  "culture": "fr",
+  "texts": {
+    "PirateNotFound": "Pirate non trouvé",
+    "PirateCreated": "Pirate créé avec succès",
+    "PirateUpdated": "Pirate mis à jour avec succès",
+    "PirateDeleted": "Pirate supprimé avec succès",
+    "InvalidName": "Le nom n'est pas valide",
+    "InvalidBounty": "La prime doit être supérieure à zéro",
+    "Welcome": "Bienvenue {0}",
+    "PirateList": "Liste des Pirates",
+    "CreatePirate": "Créer un Pirate",
+    "EditPirate": "Modifier le Pirate"
+  }
+}
