@@ -24,4 +24,9 @@ public class QueryDispatcher : IQueryDispatcher
     public Task<Result<TResult>> DispatchAsync<TQuery, TResult>(TQuery query)
         where TQuery : IQuery<TResult>
         => _dispatcher.DispatchAsync<TQuery, Result<TResult>>(query);
+
+    /// <inheritdoc />
+    public Task<Result<PagedResult<TResult>>> DispatchPagedAsync<TQuery, TResult>(TQuery query)
+        where TQuery : IPagedQuery<TResult>
+        => _dispatcher.DispatchAsync<TQuery, Result<PagedResult<TResult>>>(query);
 }

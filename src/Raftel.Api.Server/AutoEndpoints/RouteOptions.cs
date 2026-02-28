@@ -18,6 +18,13 @@ public sealed class RouteOptions
         return this;
     }
 
+    public RouteOptions AddPagedQuery<TRequest, TResult>(string route, HttpMethod method)
+        where TRequest : IPagedQuery<TResult>
+    {
+        Queries.Add(new QueryDefinition(typeof(TRequest), typeof(PagedResult<TResult>), route, method));
+        return this;
+    }
+
     public RouteOptions AddCommand<TRequest>(string route, HttpMethod method)
         where TRequest : ICommand
     {
