@@ -13,4 +13,10 @@ public class CommandDispatcher(IRequestDispatcher dispatcher) : ICommandDispatch
     public Task<Result> DispatchAsync<TCommand>(TCommand command, CancellationToken token = default)
         where TCommand : ICommand
         => dispatcher.DispatchAsync<TCommand, Result>(command);
+
+    /// <inheritdoc />
+    public Task<Result<TResult>> DispatchAsync<TCommand, TResult>(TCommand command,
+        CancellationToken token = default)
+        where TCommand : ICommand<TResult>
+        => dispatcher.DispatchAsync<TCommand, Result<TResult>>(command);
 }

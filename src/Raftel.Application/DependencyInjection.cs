@@ -29,7 +29,7 @@ public static class DependencyInjection
 
     private static void RegisterHandlers(IServiceCollection services, IEnumerable<Assembly> assemblies)
     {
-        var handlerTypes = new[] { typeof(ICommandHandler<>), typeof(IQueryHandler<,>), typeof(IRequestHandler<,>) };
+        var handlerTypes = new[] { typeof(ICommandHandler<>), typeof(ICommandHandler<,>), typeof(IQueryHandler<,>), typeof(IRequestHandler<,>) };
 
         foreach (var assembly in assemblies)
         {
