@@ -42,5 +42,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
 
         // Configure multi-tenancy
         builder.HasTenantId();
+
+        builder.HasSoftDelete();
     }
 }
