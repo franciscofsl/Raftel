@@ -35,15 +35,29 @@ public class RequestDispatcher(IServiceProvider serviceProvider) : IRequestDispa
     private IGlobalMiddleware<TRequest, TResponse>[] GetCommandMiddlewares<TRequest, TResponse>(TRequest request)
         where TRequest : IRequest<TResponse>
     {
-        if (request is not ICommand || typeof(TResponse) != typeof(Result))
+        if (request is ICommand && typeof(TResponse) == typeof(Result))
         {
-            return [];
+            return serviceProvider
+                .GetServices(typeof(ICommandMiddleware<>).MakeGenericType(typeof(TRequest)))
+                .Cast<IGlobalMiddleware<TRequest, TResponse>>()
+                .ToArray();
         }
 
-        return serviceProvider
-            .GetServices(typeof(ICommandMiddleware<>).MakeGenericType(typeof(TRequest)))
-            .Cast<IGlobalMiddleware<TRequest, TResponse>>()
-            .ToArray();
+        var commandInterface = typeof(TRequest).GetInterfaces()
+            .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICommand<>));
+
+        if (commandInterface is not null)
+        {
+            var resultType = commandInterface.GetGenericArguments()[0];
+            var middlewareType = typeof(ICommandMiddleware<,>).MakeGenericType(typeof(TRequest), resultType);
+
+            return serviceProvider
+                .GetServices(middlewareType)
+                .Cast<IGlobalMiddleware<TRequest, TResponse>>()
+                .ToArray();
+        }
+
+        return [];
     }
 
     private IGlobalMiddleware<TRequest, TResponse>[] GetQueriesMiddlewares<TRequest, TResponse>(

@@ -20,7 +20,7 @@ public class PermissionAuthorizationMiddlewareTests : IntegrationTestBase
         {
             var commandDispatcher = sp.GetRequiredService<ICommandDispatcher>();
             var command = new CreatePirateCommand("Zoro", 320000000);
-            var result = await commandDispatcher.DispatchAsync(command);
+            var result = await commandDispatcher.DispatchAsync<CreatePirateCommand, Guid>(command);
             
             result.IsSuccess.ShouldBeTrue();
         });
@@ -34,7 +34,7 @@ public class PermissionAuthorizationMiddlewareTests : IntegrationTestBase
             var commandDispatcher = sp.GetRequiredService<ICommandDispatcher>();
             
             await Should.ThrowAsync<UnauthorizedException>(async () => 
-                await commandDispatcher.DispatchAsync(new CreatePirateCommand("Zoro", 320000000)));
+                await commandDispatcher.DispatchAsync<CreatePirateCommand, Guid>(new CreatePirateCommand("Zoro", 320000000)));
         });
     }
     
@@ -78,7 +78,7 @@ public class PermissionAuthorizationMiddlewareTests : IntegrationTestBase
             var queryDispatcher = sp.GetRequiredService<IQueryDispatcher>();
             
             var createCommand = new CreatePirateCommand("Luffy", 1500000000);
-            var createResult = await commandDispatcher.DispatchAsync(createCommand);
+            var createResult = await commandDispatcher.DispatchAsync<CreatePirateCommand, Guid>(createCommand);
             
             var queryResult = await queryDispatcher.DispatchAsync<GetPirateByFilterQuery, GetPirateByFilterResponse>(
                 new GetPirateByFilterQuery("Luffy", null));

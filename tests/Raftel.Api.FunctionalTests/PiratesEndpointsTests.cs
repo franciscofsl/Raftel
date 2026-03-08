@@ -47,6 +47,25 @@ public class PiratesEndpointsTests : IClassFixture<ApiTestFactory>
     }
 
     [Fact]
+    public async Task PostPirate_ShouldReturnCreatedPirateId()
+    {
+        await _client.AuthenticateAsync();
+
+        const string pirateName = "Pirate With Returned Id";
+        var response = await _client.PostAsJsonAsync("/api/pirates", new
+        {
+            Name = pirateName,
+            Bounty = 500,
+            IsKing = false
+        });
+        response.EnsureSuccessStatusCode();
+
+        var pirateId = await response.Content.ReadFromJsonAsync<Guid>();
+
+        pirateId.ShouldNotBe(Guid.Empty);
+    }
+
+    [Fact]
     public async Task PostPirate_WithMalformedJson_ShouldReturnBadRequest()
     {
         await _client.AuthenticateAsync();

@@ -55,6 +55,7 @@ public abstract class IntegrationTestBase : IAsyncLifetime
             cfg.AddGlobalMiddleware(typeof(PermissionAuthorizationMiddleware<,>));
             cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
             cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
+            cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<,>));
         });
 
         services.AddSampleInfrastructure(_fixture.ConnectionString);

@@ -21,7 +21,15 @@ public sealed class RouteOptions
     public RouteOptions AddCommand<TRequest>(string route, HttpMethod method)
         where TRequest : ICommand
     {
-        var definition = new CommandDefinition(typeof(TRequest), route, method);
+        var definition = new CommandDefinition(typeof(TRequest), null, route, method);
+        Commands.Add(definition);
+        return this;
+    }
+
+    public RouteOptions AddCommand<TRequest, TResult>(string route, HttpMethod method)
+        where TRequest : ICommand<TResult>
+    {
+        var definition = new CommandDefinition(typeof(TRequest), typeof(TResult), route, method);
         Commands.Add(definition);
         return this;
     }

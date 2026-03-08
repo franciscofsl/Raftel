@@ -88,4 +88,33 @@ public sealed class RequestDispatcherTests
         interceptedMessage.ShouldBe(new[]
             { "Hi Global 1", "Hi Global 2", "HandlerWithResult", "By Global 2", "By Global 1" });
     }
+
+    [Fact]
+    public async Task DispatchAsync_CommandWithResult_ShouldExecuteCommandMiddlewaresInExpectedOrder()
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ISpy, Spy>();
+        services.AddRaftelApplication(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(RequestDispatcherTests).Assembly);
+            cfg.AddGlobalMiddleware(typeof(GlobalMiddleware1<,>));
+            cfg.AddCommandMiddleware(typeof(CommandWithResultMiddleware1<,>));
+        });
+
+        var provider = services.BuildServiceProvider();
+        var dispatcher = provider.GetRequiredService<ICommandDispatcher>();
+
+        var result = await dispatcher.DispatchAsync<TestCommandWithResult, string>(
+            new TestCommandWithResult("Raftel"));
+
+        result.IsSuccess.ShouldBeTrue();
+        result.Value.ShouldBe("Raftel");
+
+        var spy = provider.GetRequiredService<ISpy>();
+        var interceptedMessage = spy.InterceptedMessages();
+        interceptedMessage.ShouldBe(new[]
+        {
+            "Hi Global 1", "Hi CommandResult 1", "HandlerWithResult", "By CommandResult 1", "By Global 1"
+        });
+    }
 }

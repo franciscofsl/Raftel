@@ -18,7 +18,7 @@ public class DependencyInjectionTests
     {
         var provider = BuildServiceProvider();
 
-        var handler = provider.GetService<ICommandHandler<CreatePirateCommand>>();
+        var handler = provider.GetService<ICommandHandler<CreatePirateCommand, Guid>>();
 
         handler.ShouldNotBeNull();
         handler.ShouldBeOfType<CreatePirateCommandHandler>();
