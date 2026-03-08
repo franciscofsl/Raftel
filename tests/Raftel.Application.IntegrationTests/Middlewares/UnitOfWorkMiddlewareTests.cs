@@ -18,7 +18,7 @@ public class UnitOfWorkMiddlewareTests : IntegrationTestBase
             var commandDispatcher = sp.GetService<ICommandDispatcher>();
 
             var command = new CreatePirateCommand("Ace", 9514361);
-            var result = await commandDispatcher!.DispatchAsync(command);
+            var result = await commandDispatcher!.DispatchAsync<CreatePirateCommand, Guid>(command);
             result.IsSuccess.ShouldBeTrue();
 
             var repository = sp.GetRequiredService<IPirateRepository>();

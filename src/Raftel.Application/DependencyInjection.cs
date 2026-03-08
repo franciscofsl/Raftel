@@ -29,7 +29,7 @@ public static class DependencyInjection
 
     private static void RegisterHandlers(IServiceCollection services, IEnumerable<Assembly> assemblies)
     {
-        var handlerTypes = new[] { typeof(ICommandHandler<>), typeof(IQueryHandler<,>), typeof(IRequestHandler<,>) };
+        var handlerTypes = new[] { typeof(ICommandHandler<>), typeof(ICommandHandler<,>), typeof(IQueryHandler<,>), typeof(IRequestHandler<,>) };
 
         foreach (var assembly in assemblies)
         {
@@ -93,7 +93,15 @@ public static class DependencyInjection
 
         foreach (var type in builder.CommandMiddlewares)
         {
-            services.AddScoped(typeof(ICommandMiddleware<>), type);
+            var genericArgCount = type.GetGenericArguments().Length;
+            if (genericArgCount == 2)
+            {
+                services.AddScoped(typeof(ICommandMiddleware<,>), type);
+            }
+            else
+            {
+                services.AddScoped(typeof(ICommandMiddleware<>), type);
+            }
         }
 
         foreach (var type in builder.QueryMiddlewares)

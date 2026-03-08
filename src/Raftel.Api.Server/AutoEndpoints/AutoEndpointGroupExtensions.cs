@@ -32,11 +32,22 @@ public static class AutoEndpointGroupExtensions
 
         foreach (var command in options.Commands)
         {
-            var method = typeof(CommandEndpointMapper)
-                .GetMethod(nameof(CommandEndpointMapper.MapCommandEndpoint))!
-                .MakeGenericMethod(command.Request);
+            if (command.Result is not null)
+            {
+                var method = typeof(CommandEndpointMapper)
+                    .GetMethod(nameof(CommandEndpointMapper.MapCommandEndpointWithResult))!
+                    .MakeGenericMethod(command.Request, command.Result);
 
-            method.Invoke(null, new object[] { group, command  });
+                method.Invoke(null, new object[] { group, command });
+            }
+            else
+            {
+                var method = typeof(CommandEndpointMapper)
+                    .GetMethod(nameof(CommandEndpointMapper.MapCommandEndpoint))!
+                    .MakeGenericMethod(command.Request);
+
+                method.Invoke(null, new object[] { group, command });
+            }
         }
 
         return app;
