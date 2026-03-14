@@ -466,6 +466,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Commands.ICommand-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Commands.ICommand-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Commands.ICommand<TResult>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Commands.ICommand-1.yml\" sourcestartlinenumber=\"1\">Represents a command that returns a typed result of type <code class=\"typeparamref\">TResult</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Commands.ICommand.yml",
       "output": {
         ".html": {
@@ -505,6 +519,20 @@
       "IsMRef": true,
       "Title": "Raftel.Application.Commands.ICommandHandler<TCommand>",
       "Summary": "<p sourcefile=\"api/Raftel.Application.Commands.ICommandHandler-1.yml\" sourcestartlinenumber=\"1\">Defines a handler for processing a command of type <code class=\"typeparamref\">TCommand</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Commands.ICommandHandler-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Commands.ICommandHandler-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Commands.ICommandHandler<TCommand, TResult>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Commands.ICommandHandler-2.yml\" sourcestartlinenumber=\"1\">Defines a handler for processing a command of type <code class=\"typeparamref\">TCommand</code>\nthat returns a result of type <code class=\"typeparamref\">TResult</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1110,6 +1138,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.ICommandMiddleware-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.ICommandMiddleware-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares.ICommandMiddleware<TRequest, TResult>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.ICommandMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware specific to command handling in the request pipeline\nfor commands that return a typed result.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Middlewares.IGlobalMiddleware-2.yml",
       "output": {
         ".html": {
@@ -1163,6 +1205,20 @@
       "IsMRef": true,
       "Title": "Raftel.Application.Middlewares.UnitOfWorkMiddleware<TRequest>",
       "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-1.yml\" sourcestartlinenumber=\"1\">Middleware that ensures a unit of work is committed\nonly if the preceding operation was successful.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares.UnitOfWorkMiddleware<TRequest, TResult>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-2.yml\" sourcestartlinenumber=\"1\">Middleware that ensures a unit of work is committed\nonly if the preceding operation was successful, for commands that return a typed result.</p>\n"
     },
     {
       "type": "ManagedReference",

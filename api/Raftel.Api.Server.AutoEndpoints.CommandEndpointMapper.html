@@ -152,6 +152,46 @@ Class CommandEndpointMapper  <a class="header-action link-secondary" title="View
 </h2>
 
 
+  <a id="Raftel_Api_Server_AutoEndpoints_CommandEndpointMapper_MapCommandEndpointWithResult_" data-uid="Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpointWithResult*"></a>
+
+  <h3 id="Raftel_Api_Server_AutoEndpoints_CommandEndpointMapper_MapCommandEndpointWithResult__2_Microsoft_AspNetCore_Routing_RouteGroupBuilder_Raftel_Api_Server_AutoEndpoints_CommandDefinition_" data-uid="Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpointWithResult``2(Microsoft.AspNetCore.Routing.RouteGroupBuilder,Raftel.Api.Server.AutoEndpoints.CommandDefinition)">
+  MapCommandEndpointWithResult&lt;TCommand, TResult&gt;(RouteGroupBuilder, CommandDefinition)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/AutoEndpoints/CommandEndpointMapper.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void MapCommandEndpointWithResult&lt;TCommand, TResult&gt;(RouteGroupBuilder group, CommandDefinition command) where TCommand : ICommand&lt;TResult&gt;</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>group</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.routing.routegroupbuilder">RouteGroupBuilder</a></dt>
+    <dd></dd>
+    <dt><code>command</code> <a class="xref" href="Raftel.Api.Server.AutoEndpoints.CommandDefinition.html">CommandDefinition</a></dt>
+    <dd></dd>
+  </dl>
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TCommand</code></dt>
+    <dd></dd>
+    <dt><code>TResult</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <a id="Raftel_Api_Server_AutoEndpoints_CommandEndpointMapper_MapCommandEndpoint_" data-uid="Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint*"></a>
 
   <h3 id="Raftel_Api_Server_AutoEndpoints_CommandEndpointMapper_MapCommandEndpoint__1_Microsoft_AspNetCore_Routing_RouteGroupBuilder_Raftel_Api_Server_AutoEndpoints_CommandDefinition_" data-uid="Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint``1(Microsoft.AspNetCore.Routing.RouteGroupBuilder,Raftel.Api.Server.AutoEndpoints.CommandDefinition)">
