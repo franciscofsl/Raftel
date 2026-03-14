@@ -4,11 +4,13 @@ using Raftel.Domain.Abstractions;
 
 namespace Raftel.Demo.Application.Pirates.CreatePirate;
 
-public sealed class CreatePirateCommandHandler(IPirateRepository repository) : ICommandHandler<CreatePirateCommand>
+public sealed class CreatePirateCommandHandler(IPirateRepository repository)
+    : ICommandHandler<CreatePirateCommand, Guid>
 {
-    public async Task<Result> HandleAsync(CreatePirateCommand request, CancellationToken token = default)
+    public async Task<Result<Guid>> HandleAsync(CreatePirateCommand request, CancellationToken token = default)
     {
-        await repository.AddAsync(Pirate.Normal(request.Name, request.Bounty), token);
-        return Result.Success();
+        var pirate = Pirate.Normal(request.Name, request.Bounty);
+        await repository.AddAsync(pirate, token);
+        return Result.Success((Guid)pirate.Id);
     }
 }

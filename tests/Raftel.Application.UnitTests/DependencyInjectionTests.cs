@@ -2,6 +2,7 @@
 using Raftel.Application.Commands;
 using Raftel.Application.Middlewares;
 using Raftel.Application.Queries;
+using Raftel.Application.UnitTests.Abstractions;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Application.Pirates.GetPirateById;
 using Raftel.Demo.Domain.Pirates;
@@ -17,10 +18,21 @@ public class DependencyInjectionTests
     {
         var provider = BuildServiceProvider();
 
-        var handler = provider.GetService<ICommandHandler<CreatePirateCommand>>();
+        var handler = provider.GetService<ICommandHandler<CreatePirateCommand, Guid>>();
 
         handler.ShouldNotBeNull();
         handler.ShouldBeOfType<CreatePirateCommandHandler>();
+    }
+
+    [Fact]
+    public void AddRaftelApplication_ShouldRegisterCommandHandlerWithResult_FromAssembly()
+    {
+        var provider = BuildServiceProviderWithTestAssembly();
+
+        var handler = provider.GetService<ICommandHandler<TestCommandWithResult, string>>();
+
+        handler.ShouldNotBeNull();
+        handler.ShouldBeOfType<TestCommandWithResultHandler>();
     }
 
     [Fact]
@@ -66,6 +78,19 @@ public class DependencyInjectionTests
             cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommand).Assembly);
             cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
             cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>)); 
+        });
+
+        return services.BuildServiceProvider();
+    }
+
+    private static ServiceProvider BuildServiceProviderWithTestAssembly()
+    {
+        var services = new ServiceCollection();
+        services.AddSingleton<ISpy, Spy>();
+
+        services.AddRaftelApplication(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(TestCommandWithResult).Assembly);
         });
 
         return services.BuildServiceProvider();
