@@ -1,10 +1,12 @@
 using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.Server.AutoEndpoints;
+using Raftel.Api.Server.Features.Localization;
 using Raftel.Api.Server.Features.Tenants;
 using Raftel.Api.Server.Features.Users;
 using Raftel.Api.Server.Middlewares;
 using Raftel.Application;
 using Raftel.Application.Features.Users.RegisterUser;
+using Raftel.Application.Localization;
 using Raftel.Application.Middlewares;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
@@ -27,6 +29,14 @@ builder.Services.AddRaftelApplication(cfg =>
     cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
 });
 
+// Add localization services
+builder.Services.AddRaftelLocalization(options =>
+{
+    options.DefaultCulture = "en";
+    options.SupportedCultures = new List<string> { "en", "es", "fr" };
+    options.EnableCaching = true;
+}, AppDomain.CurrentDomain.BaseDirectory);
+
 builder.Services.AddSampleInfrastructure(builder.Configuration.GetConnectionString("Default")!);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -43,6 +53,9 @@ if (app.Environment.IsDevelopment())
 app.UseRaftelExceptionHandling();
 app.UseHttpsRedirection();
 app.UseRouting();
+
+// Add localization middleware
+app.AddRaftelLocalization();
 
 app.UseTenantMiddleware();
 
