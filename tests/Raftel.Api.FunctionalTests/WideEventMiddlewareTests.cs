@@ -75,6 +75,25 @@ public class WideEventMiddlewareTests
     }
 
     [Fact]
+    public async Task InvokeAsync_WhenClientError_ShouldSetOutcomeToClientError()
+    {
+        var wideEvent = new WideEvent();
+        var context = CreateHttpContext(wideEvent, "GET", "/api/notfound");
+
+        var middleware = new WideEventMiddleware(ctx =>
+        {
+            ctx.Response.StatusCode = 404;
+            return Task.CompletedTask;
+        }, _logger);
+
+        await middleware.InvokeAsync(context);
+
+        var properties = wideEvent.GetProperties();
+        properties["status_code"].ShouldBe(404);
+        properties["outcome"].ShouldBe("client_error");
+    }
+
+    [Fact]
     public async Task InvokeAsync_WhenExceptionThrown_ShouldCaptureErrorDetails()
     {
         var wideEvent = new WideEvent();

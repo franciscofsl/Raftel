@@ -64,8 +64,18 @@ public sealed class WideEventMiddleware(RequestDelegate next, ILogger<WideEventM
         wideEvent.Add("status_code", context.Response.StatusCode);
         wideEvent.Add("duration_ms", durationMs);
 
-        var outcome = context.Response.StatusCode >= 500 ? "error" : "success";
+        var outcome = ResolveOutcome(context.Response.StatusCode);
         wideEvent.Add("outcome", outcome);
+    }
+
+    private static string ResolveOutcome(int statusCode)
+    {
+        return statusCode switch
+        {
+            >= 500 => "error",
+            >= 400 => "client_error",
+            _ => "success"
+        };
     }
 
     private void EmitEvent(IWideEvent wideEvent)
