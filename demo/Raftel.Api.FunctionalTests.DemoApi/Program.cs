@@ -29,6 +29,7 @@ builder.Services.AddRaftelApplication(cfg =>
 });
 
 builder.Services.AddSampleInfrastructure(builder.Configuration.GetConnectionString("Default")!);
+builder.Services.AddRaftelWideEvent();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -41,6 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRaftelWideEvent();
 app.UseRaftelExceptionHandling();
 app.UseHttpsRedirection();
 app.UseRouting();
