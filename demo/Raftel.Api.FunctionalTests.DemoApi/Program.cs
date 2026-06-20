@@ -24,6 +24,7 @@ builder.Services.AddRaftelApplication(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommand).Assembly);
     cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
     cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
+    cfg.AddGlobalMiddleware(typeof(AuditLogMiddleware<,>));
     cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
     cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<,>));
 });
