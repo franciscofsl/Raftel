@@ -22,6 +22,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "README.md",
       "output": {
         ".html": {
@@ -2355,10 +2365,50 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "demo/Raftel.Api.FunctionalTests.DemoApi/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "demo/Raftel.Api.FunctionalTests.DemoApi/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "demo/Raftel.Api.FunctionalTests.DemoApi/README.md",
       "output": {
         ".html": {
           "relative_path": "demo/Raftel.Api.FunctionalTests.DemoApi/README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "demo/Raftel.Demo.Application/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "demo/Raftel.Demo.Application/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "demo/Raftel.Demo.Domain/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "demo/Raftel.Demo.Domain/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "demo/Raftel.Demo.Infrastructure/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "demo/Raftel.Demo.Infrastructure/CLAUDE.html"
         }
       },
       "version": ""
@@ -2417,6 +2467,136 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "src/Raftel.Api.Client/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "src/Raftel.Api.Client/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "src/Raftel.Api.Server/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "src/Raftel.Api.Server/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "src/Raftel.Application/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "src/Raftel.Application/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "src/Raftel.Domain/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "src/Raftel.Domain/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "src/Raftel.Infrastructure/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "src/Raftel.Infrastructure/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "src/Raftel.Shared/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "src/Raftel.Shared/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tests/Raftel.Api.Client.UnitTests/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "tests/Raftel.Api.Client.UnitTests/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tests/Raftel.Api.FunctionalTests/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "tests/Raftel.Api.FunctionalTests/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tests/Raftel.Application.IntegrationTests/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "tests/Raftel.Application.IntegrationTests/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tests/Raftel.Application.UnitTests/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "tests/Raftel.Application.UnitTests/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tests/Raftel.Domain.Tests/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "tests/Raftel.Domain.Tests/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tests/Raftel.Infrastructure.Tests/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "tests/Raftel.Infrastructure.Tests/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tests/Raftel.Shared.Tests/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "tests/Raftel.Shared.Tests/CLAUDE.html"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
@@ -2425,6 +2605,16 @@
         },
         ".json": {
           "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tools/Raftel.Cli/CLAUDE.md",
+      "output": {
+        ".html": {
+          "relative_path": "tools/Raftel.Cli/CLAUDE.html"
         }
       },
       "version": ""

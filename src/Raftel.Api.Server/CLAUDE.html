@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Raftel.Api.Server | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Raftel.Api.Server | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/CLAUDE.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="raftelapiserver">Raftel.Api.Server</h1>
+
+<p>API layer. Its central piece is <strong>AutoEndpoints</strong>: maps Commands/Queries to minimal API via reflection, eliminating the need for controllers. Depends only on <code>Infrastructure</code>. <strong>EF Core forbidden here</strong> and no business logic: only routing and orchestration.</p>
+<h2 id="structure">Structure</h2>
+<pre><code>AutoEndpoints/
+    EndpointRouteBuilderExtensions / AutoEndpointGroupExtensions   fluent API: AddEndpointGroup, AddCommand&lt;T&gt;, AddQuery&lt;T,R&gt;
+    CommandEndpointMapper / QueryEndpointMapper                    mount endpoint and dispatch to pipeline
+    CommandDefinition / QueryDefinition / RouteOptions / RouteParameters   metadata per route
+    ApiParametersBuilder / OpenApiType                             parameter and OpenAPI type inference
+Features/&lt;Feature&gt;/   &lt;Feature&gt;DependencyInjection.cs (feature endpoint registration) and exceptional controllers
+    Users/AuthorizationController.cs   classic controller for OpenIddict flow (/connect/token)
+Middlewares/          ExceptionHandlingMiddleware (+ extensions) → errors in ProblemDetails (RFC 7807)
+</code></pre>
+<h2 id="patterns-and-practices">Patterns and Practices</h2>
+<ul>
+<li><strong>AutoEndpoints</strong>: register routes declaratively.
+<pre><code class="lang-csharp">app.AddEndpointGroup(group =&gt;
+{
+    group.Name = &quot;Pirates&quot;;
+    group.BaseUri = &quot;/api/pirates&quot;;
+    group.AddQuery&lt;GetPirateByIdQuery, GetPirateByIdResponse&gt;(&quot;{id}&quot;, HttpMethod.Get);
+    group.AddCommand&lt;CreatePirateCommand&gt;(&quot;&quot;, HttpMethod.Post);
+});
+</code></pre>
+<ul>
+<li>Route/query parameters inferred via reflection on the Command/Query record <strong>constructor</strong>.</li>
+<li>If the type carries <code>[RequiresPermission]</code>, authorization is applied automatically.</li>
+</ul>
+</li>
+<li><strong>Controllers</strong>: only as exception when AutoEndpoints doesn't fit (e.g., <code>AuthorizationController</code> for OpenIddict handshake). Always use Commands/Queries for business CRUD.</li>
+<li><strong>Errors</strong>: <code>ExceptionHandlingMiddleware</code> centralizes everything in <code>ProblemDetails</code>, no stack traces leaked. ⚠️ Currently swallows the real exception without logging — this is the point to enhance if you add observability.</li>
+</ul>
+<h2 id="conventions">Conventions</h2>
+<ul>
+<li>This layer doesn't reference <code>Domain</code> directly in practice except Response types already living in Application.</li>
+<li>One <code>&lt;Feature&gt;DependencyInjection.cs</code> file per feature to group its endpoint/service registration.</li>
+<li>File-scoped namespaces <code>Raftel.Api.Server.*</code>, one type per file.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/CLAUDE.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

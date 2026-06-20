@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Raftel.Demo.Domain | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Raftel.Demo.Domain | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/demo/Raftel.Demo.Domain/CLAUDE.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="rafteldemodomain">Raftel.Demo.Domain</h1>
+
+<p>Domain of the <strong>&quot;Pirates&quot; example app</strong> (One Piece) documenting how to use the framework. It's the <strong>canonical reference</strong> for modeling a domain with <code>Raftel.Domain</code>. Depends only on <code>Raftel.Domain</code>.</p>
+<h2 id="structure">Structure</h2>
+<pre><code>Common/ValueObjects/   Name (shared VO)
+Pirates/               Pirate aggregate (example root)
+    Pirate.cs              AggregateRoot&lt;PirateId&gt;: private ctor, Normal()/Special() factories, business methods (FoundOnePiece, EatFruit)
+    PirateErrors.cs        strongly-typed errors
+    PirateValidator.cs     domain validation
+    IPirateRepository.cs   interface (impl. in Demo.Infrastructure)
+    ValueObjects/          PirateId (TypedGuidId), Bounty (readonly record struct with implicit conversion)
+    DevilFruits/           entity/collection owned by aggregate + KnownDevilFruits, DevilFruitKind
+    Specifications/        examples of combinable Specification&lt;Pirate&gt; (BountyOver, IsKing, And/Or)
+    BlackBeardCrew.cs / MugiwaraCrew.cs   example data
+Ships/                 Ship aggregate (simpler second example)
+</code></pre>
+<h2 id="what-it-demonstrates-use-as-template">What It Demonstrates (use as template)</h2>
+<ul>
+<li><strong>Aggregate</strong>: <code>Pirate : AggregateRoot&lt;PirateId&gt;</code> with private constructor, <strong>factory methods</strong> (<code>Pirate.Normal</code>, <code>Pirate.Special</code>) and business logic in methods (<code>EatFruit</code> returns <code>Result</code>). No public business setters.</li>
+<li><strong>Value Objects</strong>: <code>Bounty</code> as <code>readonly record struct</code> with ctor validation and implicit operators; <code>PirateId</code> as <code>record : TypedGuidId</code> with <code>New()</code>.</li>
+<li><strong>First-class collections</strong>: <code>DevilFruitCollection</code> encapsulates the fruit list; aggregate doesn't expose raw <code>List&lt;&gt;</code>.</li>
+<li><strong>Specifications</strong>: reusable, combinable business filters translatable to SQL.</li>
+<li><strong>Errors</strong>: <code>PirateErrors</code> as <code>static class</code> of <code>Error</code>.</li>
+</ul>
+<h2 id="conventions">Conventions</h2>
+<ul>
+<li>Strict Object Calisthenics and DDD (it's the framework showcase): no <code>else</code>, wrapped primitives, business names. Keep consistent with <code>src/Raftel.Domain/CLAUDE.md</code>.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/demo/Raftel.Demo.Domain/CLAUDE.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Raftel.Infrastructure | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Raftel.Infrastructure | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/CLAUDE.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="raftelinfrastructure">Raftel.Infrastructure</h1>
+
+<p>Technical implementations: EF Core, repositories, multitenancy, audit logging, and authentication. <strong>Only framework layer that knows EF Core.</strong> Depends on <code>Application</code> and <code>Domain</code>; implements interfaces they declare.</p>
+<h2 id="structure">Structure</h2>
+<pre><code>Data/
+    RaftelDbContext&lt;TDbContext&gt;      base DbContext: applies composable global filters (soft-delete + tenant)
+    EfRepository&lt;TDbContext,T,TId&gt;   generic IRepository implementation
+    AuditStore.cs                    entity change log persistence
+    ShadowPropertyNames.cs           shadow property names (TenantId, IsDeleted, audit...)
+    DatabaseOptions / DatabaseProvider   SqlServer | PostgreSql
+    Configuration/                   IEntityTypeConfiguration per framework entity (User, Role, Tenant, Permission)
+    Filters/                         IDataFilter + ISoftDeleteFilter/ITenantFilter + QueryFilterExtensions
+    Interceptors/                    AuditPropertiesInterceptor, TenantInterceptor, EntityChangesTrackerInterceptor
+    Repositories/&lt;Feature&gt;/          UsersRepository, TenantsRepository, RolesRepository
+Authentication/                      AuthenticationService, CurrentHttpUser, ClaimsPrincipalFactory, RaftelClaimTypes
+Multitenancy/                        CurrentTenant (AsyncLocal) + Middleware/TenantMiddleware
+DependencyInjection.cs               AddRaftelData&lt;TDbContext&gt;(configuration, connectionStringName)
+</code></pre>
+<h2 id="patterns-and-practices">Patterns and Practices</h2>
+<ul>
+<li><strong>DbContext</strong>: apps derive from <code>RaftelDbContext&lt;TDbContext&gt;</code>. Global filters (soft-delete + multitenancy) are applied via reflection on shadow properties and <strong>combine</strong> with any existing entity filter (<code>CombineQueryFilter</code>) — they don't overwrite.</li>
+<li><strong>Repositories</strong>: inherit from <code>EfRepository&lt;TDbContext, TAggregate, TId&gt;</code> and implement Domain interface. Most remain empty; add methods only for aggregate-specific queries.</li>
+<li><strong>Interceptors</strong> (EF <code>SaveChanges</code>): automate audit logging (creator/date), <code>TenantId</code> assignment, and change tracking without touching handlers. Registered and hooked in <code>AddDbContext</code>.</li>
+<li><strong>Disableable filters</strong>: <code>IDataFilter.Disable&lt;TFilter&gt;()</code> temporarily disables a filter with <code>AsyncLocal</code> + <code>IDisposable</code> (<code>using</code>), for admin tasks/jobs. Don't mutate global state.</li>
+<li><strong>End-to-end multitenancy</strong>: header <code>X-Tenant-Id</code> → <code>TenantMiddleware</code> → <code>ICurrentTenant</code> (AsyncLocal) → <code>TenantInterceptor</code> (writes) → query filter (reads).</li>
+<li><strong>Auth</strong>: ASP.NET Identity + OpenIddict (password flow + refresh token), self-hosted. Token endpoint at <code>/connect/token</code>.</li>
+<li><strong>Multi-provider</strong>: SQL Server and PostgreSQL selected via <code>DatabaseOptions.Provider</code>.</li>
+</ul>
+<h2 id="conventions">Conventions</h2>
+<ul>
+<li>All cross-layer dependencies registered here via <code>AddRaftelData&lt;TDbContext&gt;</code>; apps invoke it from their own <code>DependencyInjection</code>.</li>
+<li><strong>No</strong> business logic here: only persistence, Value Object mapping (conversions in <code>Configuration/</code>), and integrations.</li>
+<li>Object Calisthenics relaxed for infrastructure code, but maintain one type per file and file-scoped namespaces.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/CLAUDE.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

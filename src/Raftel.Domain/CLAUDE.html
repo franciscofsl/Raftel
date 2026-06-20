@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Raftel.Domain | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Raftel.Domain | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/CLAUDE.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="rafteldomain">Raftel.Domain</h1>
+
+<p>Domain layer (tactical DDD). <strong>Framework core: no dependencies to any other layer or EF Core.</strong> Contains reusable primitives (<code>Entity</code>, <code>Result</code>, <code>Specification</code>, <code>Validator</code>) and framework-owned domain features (<code>Users</code>, <code>Tenants</code>, <code>Authorization</code>).</p>
+<h2 id="structure">Structure</h2>
+<pre><code>Abstractions/        Error, Result/Result&lt;T&gt;, IRepository&lt;TEntity,TId&gt;
+BaseTypes/           Entity&lt;TId&gt;, AggregateRoot&lt;TId&gt;, TypedId&lt;T&gt;, TypedGuidId
+Specifications/      Specification&lt;T&gt; + And/OrSpecification (Expression&lt;Func&lt;T,bool&gt;&gt;)
+Validators/          Validator&lt;T&gt;, ValidationRule, ValidationResult (EnsureThat DSL)
+ValueObjects/        Cross-cutting Value Objects (Code)
+Auditing/            AuditLog (entity change model)
+Features/&lt;Feature&gt;/  One folder per aggregate:
+    &lt;Aggregate&gt;.cs           the aggregate / root entity
+    &lt;Aggregate&gt;Errors.cs     strongly-typed errors (static class of Error)
+    I&lt;Feature&gt;Repository.cs  repository interface (impl. in Infrastructure)
+    ValueObjects/            feature-specific IDs and VOs (e.g., UserId, Email)
+</code></pre>
+<h2 id="patterns-and-practices">Patterns and Practices</h2>
+<ul>
+<li><strong>Strongly-typed identities</strong>: every Id is a <code>record</code> inheriting from <code>TypedGuidId</code> with <code>New()</code> factory using <code>Guid.CreateVersion7()</code> (UUIDv7, sortable). Never use bare <code>Guid</code> as Id.</li>
+<li><strong>Aggregates/entities</strong>: inherit from <code>AggregateRoot&lt;TId&gt;</code> / <code>Entity&lt;TId&gt;</code>. Private constructor + <strong>static factory methods</strong> (<code>User.Create(...)</code>) + business methods to mutate state. <code>Id</code> has <code>protected set</code>.
+<ul>
+<li>⚠️ Encapsulation: the goal is <code>{ get; private set; }</code> with mutation only via business methods. Known debt exists (<code>User</code>/<code>Tenant</code> with public setters) — <strong>don't imitate in new code</strong>.</li>
+</ul>
+</li>
+<li><strong>Value Objects</strong>: <code>readonly record struct</code> or <code>sealed record</code>, immutable, with constructor validation (fail-fast) and implicit conversion operators when useful (see <code>Email</code>, <code>Code</code>).</li>
+<li><strong>Errors</strong>: <code>static class XxxErrors</code> with <code>Error</code> properties (code + message). Handlers return <code>Result.Failure(XxxErrors.Something)</code>.</li>
+<li><strong>Result</strong>: <code>Success</code> cannot coexist with an <code>Error</code> other than <code>Error.None</code>. Implicit conversion from <code>Error</code> exists.</li>
+<li><strong>Specifications</strong>: encapsulate filters as <code>Expression&lt;Func&lt;T,bool&gt;&gt;</code> combinable with <code>And</code>/<code>Or</code>; translatable to SQL by EF Core. Use them for reusable query rules.</li>
+<li><strong>Validators</strong>: <code>Validator&lt;TCommand&gt;</code> with <code>EnsureThat(predicate, error)</code> in constructor. Live in Application alongside their command, but use this DSL.</li>
+<li><strong>Repositories</strong>: interface here, implementation in Infrastructure. Only for aggregate roots.</li>
+</ul>
+<h2 id="conventions">Conventions</h2>
+<ul>
+<li>Strict Object Calisthenics here: no <code>else</code>, one indentation per method, wrap primitives, no public getters/setters on aggregates.</li>
+<li>No <code>ILogger</code>, no unnecessary <code>async</code>, no infrastructure references.</li>
+<li>One type per file, file-scoped namespace <code>Raftel.Domain.*</code>.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/CLAUDE.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
