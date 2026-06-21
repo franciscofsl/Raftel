@@ -44,13 +44,14 @@ Your goal is to help me write effective unit tests with XUnit, covering both sta
 
 ## Assertions
 
-- Use `Assert.Equal` for value equality
-- Use `Assert.Same` for reference equality
-- Use `Assert.True`/`Assert.False` for boolean conditions
-- Use `Assert.Contains`/`Assert.DoesNotContain` for collections
-- Use `Assert.Matches`/`Assert.DoesNotMatch` for regex pattern matching
-- Use `Assert.Throws<T>` or `await Assert.ThrowsAsync<T>` to test exceptions
-- Use fluent assertions library for more readable assertions
+- Prefer Shouldly assertions for readability and better failure messages
+- Use `actual.ShouldBe(expected)` for value equality
+- Use `actual.ShouldBeSameAs(expected)` for reference equality
+- Use `condition.ShouldBeTrue()` and `condition.ShouldBeFalse()` for boolean conditions
+- Use `collection.ShouldContain(item)` and `collection.ShouldNotContain(item)` for collections
+- Use `actual.ShouldMatch(pattern)` and `actual.ShouldNotMatch(pattern)` for regex pattern matching
+- Use `Should.Throw<T>(() => action())` or `await Should.ThrowAsync<T>(() => action())` to test exceptions
+- Keep assertions intention-revealing and consistent across the test suite by avoiding mixed assertion styles in the same test
 
 ## Mocking and Isolation
 
