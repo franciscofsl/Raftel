@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Plan: eliminar la duplicaci&#243;n de tests de integraci&#243;n multi-motor (SQL Server + PostgreSQL) | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Plan: eliminar la duplicaci&#243;n de tests de integraci&#243;n multi-motor (SQL Server + PostgreSQL) | Raftel ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/tests/MULTI_PROVIDER_INTEGRATION_TESTS_PLAN.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="plan-eliminar-la-duplicación-de-tests-de-integración-multi-motor-sql-server--postgresql">Plan: eliminar la duplicación de tests de integración multi-motor (SQL Server + PostgreSQL)</h1>
+
+<h2 id="objetivo">Objetivo</h2>
+<p>Raftel soporta conectarse a <strong>SQL Server</strong> y <strong>PostgreSQL</strong>. Hoy, para cubrir ambos
+motores, los tests de integración se <strong>duplican</strong>: existe una clase de test por motor,
+con el mismo cuerpo de test copiado y un sufijo <code>_WithPostgreSql</code> en los nombres.</p>
+<p>Queremos <strong>escribir el cuerpo del test una sola vez</strong> y que se ejecute contra <strong>ambos
+motores</strong>, reduciendo el código a mantener sin perder cobertura.</p>
+<hr>
+<h2 id="situación-actual-inventario-de-la-duplicación">Situación actual (inventario de la duplicación)</h2>
+<h3 id="infraestructura-de-test-triplicada-por-motor">Infraestructura de test triplicada por motor</h3>
+<table>
+<thead>
+<tr>
+<th>Pieza</th>
+<th>SQL Server</th>
+<th>PostgreSQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Container fixture</td>
+<td><code>SqlServerTestContainerFixture</code></td>
+<td><code>PostgreSqlTestContainerFixture</code></td>
+</tr>
+<tr>
+<td>Collection</td>
+<td><code>SqlServerTestCollection</code></td>
+<td><code>PostgreSqlTestCollection</code></td>
+</tr>
+<tr>
+<td>Base de test</td>
+<td><code>InfrastructureTestBase</code></td>
+<td><code>PostgreSqlInfrastructureTestBase</code></td>
+</tr>
+</tbody>
+</table>
+<p>Las dos <em>bases</em> son <strong>idénticas</strong> salvo por tres puntos:</p>
+<ol>
+<li>El tipo de fixture inyectado.</li>
+<li><code>AddSampleInfrastructure(conn)</code> vs <code>AddSampleInfrastructure(conn, DatabaseProvider.PostgreSql)</code>.</li>
+<li><code>new SqlConnection</code> + <code>DbAdapter.SqlServer</code> vs <code>new NpgsqlConnection</code> + <code>DbAdapter.Postgres</code> (Respawn).</li>
+</ol>
+<blockquote>
+<p><code>Raftel.Application.IntegrationTests</code> reutiliza <code>SqlServerTestContainerFixture</code> vía
+referencia de proyecto y tiene su propia <code>IntegrationTestBase</code> (solo SQL Server).
+<code>Raftel.Api.FunctionalTests</code> levanta su propio <code>MsSqlContainer</code> en <code>ApiTestFactory</code>
+(también solo SQL Server). Ambos heredarían cualquier abstracción que creemos.</p>
+</blockquote>
+<h3 id="cuerpos-de-test-duplicados-la-duplicación-cara">Cuerpos de test duplicados (la duplicación cara)</h3>
+<table>
+<thead>
+<tr>
+<th>Comportamiento</th>
+<th>SQL Server</th>
+<th>PostgreSQL</th>
+<th>¿Cuerpo idéntico?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Repositorio EF</td>
+<td><code>Data/EfRepositoryTests.cs</code> (7)</td>
+<td><code>Data/PostgreSqlEfRepositoryTests.cs</code> (8)</td>
+<td>Sí (PG tiene 1 test extra)</td>
+</tr>
+<tr>
+<td>Multitenancy de usuarios</td>
+<td><code>Data/Features/Users/UsersMultitenancyTests.cs</code> (12)</td>
+<td><code>Data/Features/Users/PostgreSqlUsersMultitenancyTests.cs</code> (2)</td>
+<td>Parcial</td>
+</tr>
+<tr>
+<td>Interceptor de cambios</td>
+<td><code>Data/Auditing/EntityChangesTrackerInterceptorTests.cs</code> (9)</td>
+<td><code>Data/Auditing/EntityChangesTrackerInterceptorPostgreSqlTests.cs</code> (4)</td>
+<td>Parcial</td>
+</tr>
+</tbody>
+</table>
+<p>El resto de clases (<code>UnitOfWorkTests</code>, <code>TenantsRepositoryTests</code>, <code>UsersSoftDeleteTests</code>,
+<code>MultitenancyTests</code>, <code>DatabaseProviderTests</code>, <code>UserAuditingTests</code>, auditoría pura…)
+hoy solo corren contra <strong>SQL Server</strong>; con la solución elegida pasarían a correr en
+ambos motores <strong>gratis</strong>, aumentando cobertura.</p>
+<h3 id="restricción-técnica-clave">Restricción técnica clave</h3>
+<ul>
+<li><strong>xUnit 2.9.3 (v2)</strong> (ver <code>Directory.Packages.props</code>). Esto descarta algunas
+facilidades de paralelización/fixtures de xUnit v3 y condiciona las opciones.</li>
+<li>Cada motor usa <strong>un contenedor por ensamblado</strong> (no por test) + reset con <strong>Respawn</strong>
+en <code>InitializeAsync</code>. Hay que preservar este modelo para no disparar el tiempo de CI.</li>
+</ul>
+<hr>
+<h2 id="opciones">Opciones</h2>
+<h3 id="opción-a--clase-base-abstracta-de-test--clases-derivadas-finas-por-motor-template-method">Opción A — Clase base abstracta de test + clases derivadas finas por motor (Template Method)</h3>
+<p>El cuerpo de cada test vive <strong>una vez</strong> en una clase base abstracta. Por cada motor se
+crea una clase derivada <strong>trivial</strong> (~8 líneas) que solo aporta <code>[Collection]</code> y el
+fixture. xUnit descubre y ejecuta los <code>[Fact]</code> heredados en cada derivada.</p>
+<pre><code class="lang-csharp">// Cuerpo escrito UNA vez
+public abstract class EfRepositoryTestsBase : InfrastructureTestBase
+{
+    protected EfRepositoryTestsBase(IDbContainerFixture fixture) : base(fixture) { }
+
+    [Fact]
+    public async Task GetByIdAsync_ShouldRetrieveExpectedData() { /* ... */ }
+    // resto de tests...
+}
+
+// Wiring por motor (lo único duplicado, mínimo y mecánico)
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerEfRepositoryTests(SqlServerTestContainerFixture f)
+    : EfRepositoryTestsBase(f);
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlEfRepositoryTests(PostgreSqlTestContainerFixture f)
+    : EfRepositoryTestsBase(f);
+</code></pre>
+<p>Requiere antes <strong>unificar la base</strong> en una sola <code>InfrastructureTestBase</code> parametrizada
+por una abstracción <code>IDbContainerFixture</code> que exponga <code>ConnectionString</code>,
+<code>DatabaseProvider</code> y el <code>DbAdapter</code> de Respawn (elimina <code>PostgreSqlInfrastructureTestBase</code>).</p>
+<ul>
+<li>✅ Compatible 100% con xUnit v2, sin magia.</li>
+<li>✅ Elimina la duplicación real (los cuerpos de test) y unifica las dos bases en una.</li>
+<li>✅ Reutiliza el modelo actual de contenedor-por-ensamblado + Respawn sin cambios.</li>
+<li>✅ Permite excluir un motor puntual (no creas la derivada) o añadir tests específicos
+de un motor en su derivada.</li>
+<li>⚠️ Sigue habiendo 2 clases <em>triviales</em> por comportamiento (solo wiring, sin lógica).</li>
+<li>⚠️ Refactor mecánico de todas las clases de test existentes.</li>
+</ul>
+<h3 id="opción-b--tests-data-driven-theory-con-matriz-de-proveedores-una-sola-clase">Opción B — Tests data-driven: <code>[Theory]</code> con matriz de proveedores (una sola clase)</h3>
+<p>Una única clase de test; cada <code>[Fact]</code> pasa a <code>[Theory]</code> y recibe el proveedor como
+dato. El <code>ServiceProvider</code>/<code>DbContext</code> se construye <strong>dentro</strong> del test (o vía helper)
+según el proveedor recibido.</p>
+<pre><code class="lang-csharp">[CollectionDefinition(Name)]
+public sealed class DatabasesCollection
+    : ICollectionFixture&lt;SqlServerTestContainerFixture&gt;,
+      ICollectionFixture&lt;PostgreSqlTestContainerFixture&gt; { public const string Name = &quot;Databases&quot;; }
+
+[Collection(DatabasesCollection.Name)]
+public class EfRepositoryTests
+{
+    public static IEnumerable&lt;object[]&gt; Providers =&gt;
+        [[DatabaseProvider.SqlServer], [DatabaseProvider.PostgreSql]];
+
+    [Theory, MemberData(nameof(Providers))]
+    public async Task GetByIdAsync_ShouldRetrieveExpectedData(DatabaseProvider provider)
+    {
+        await using var ctx = await _harness.CreateAsync(provider); // build SP + respawn
+        // ... cuerpo único
+    }
+}
+</code></pre>
+<ul>
+<li>✅ Máxima reducción: <strong>una sola clase</strong> corre en ambos motores; cada caso aparece como
+dos filas en el runner (<code>...(provider: SqlServer)</code> / <code>...(provider: PostgreSql)</code>).</li>
+<li>✅ Añadir un tercer motor = añadir una fila.</li>
+<li>⚠️ Cambia el modelo de ciclo de vida: <code>IAsyncLifetime</code> (init/respawn por instancia) ya
+no encaja porque el proveedor es por <em>fila</em>, no por instancia → hay que mover la
+construcción del SP y el Respawn a un <em>harness</em> invocado dentro del test (<code>using</code>).</li>
+<li>⚠️ La colección debe declarar <strong>ambos</strong> <code>ICollectionFixture&lt;&gt;</code>, por lo que <strong>ambos
+contenedores arrancan siempre</strong>, aunque filtres por un motor.</li>
+<li>⚠️ Refactor más invasivo de las firmas y del manejo de scope/SP en cada test.</li>
+</ul>
+<h3 id="opción-c--migrar-a-xunit-v3-y-usar-fixtures-de-ensamblado--theory-nativa">Opción C — Migrar a xUnit v3 y usar fixtures de ensamblado + theory nativa</h3>
+<p>xUnit v3 mejora la parametrización (assembly fixtures, <code>ITheoryDataRow</code>, mejor control
+de paralelismo) y permitiría una matriz de proveedores más limpia que en v2.</p>
+<ul>
+<li>✅ La solución más “nativa” a medio plazo.</li>
+<li>⚠️ Migración de <strong>todos</strong> los proyectos de test (breaking changes de v2→v3: runner,
+paquetes, <code>IAsyncLifetime</code>, etc.). Riesgo y alcance altos para el problema concreto.</li>
+<li>⚠️ No resuelve por sí sola la duplicación: aun en v3 hay que aplicar A o B.</li>
+<li>❌ Desproporcionado como primer paso; valorar solo como evolución futura.</li>
+</ul>
+<h3 id="opción-d--mantener-la-duplicación-statu-quo">Opción D — Mantener la duplicación (statu quo)</h3>
+<ul>
+<li>❌ Es justo lo que queremos eliminar. Listada solo como línea base de comparación.</li>
+</ul>
+<hr>
+<h2 id="recomendación">Recomendación</h2>
+<p><strong>Opción A (clase base abstracta + derivadas finas)</strong> como primer paso, precedida de la
+<strong>unificación de la base</strong> en una sola <code>InfrastructureTestBase</code> parametrizada por
+<code>IDbContainerFixture</code>.</p>
+<p>Motivos:</p>
+<ul>
+<li>Resuelve la duplicación <strong>real</strong> (cuerpos de test) con <strong>riesgo bajo</strong> y sin tocar el
+modelo de contenedores/Respawn que ya funciona.</li>
+<li>Es 100% compatible con xUnit v2; no obliga a una migración mayor.</li>
+<li>El wiring por motor que queda es trivial, mecánico y revisable de un vistazo, y permite
+incluir/excluir motores o añadir tests específicos de un motor sin fricción.</li>
+<li>Como efecto secundario, sube la cobertura: clases hoy solo-SQL-Server correrán en ambos.</li>
+</ul>
+<p>La <strong>Opción B</strong> es atractiva si se prioriza “una sola clase por comportamiento”, pero el
+cambio de ciclo de vida (perder <code>IAsyncLifetime</code> por instancia) y el arranque obligatorio
+de ambos contenedores la hacen más invasiva. Es una buena <strong>evolución posterior</strong> una vez
+estabilizada A. La <strong>Opción C</strong> se deja como hoja de ruta futura, desacoplada de este
+problema.</p>
+<hr>
+<h2 id="plan-de-implementación-opción-a">Plan de implementación (Opción A)</h2>
+<ol>
+<li><strong>Abstracción de fixture.</strong> Crear <code>IDbContainerFixture</code> con <code>ConnectionString</code>,
+<code>Provider</code> (<code>DatabaseProvider</code>) y <code>RespawnAdapter</code> (<code>DbAdapter</code>). Implementarlo en
+<code>SqlServerTestContainerFixture</code> y <code>PostgreSqlTestContainerFixture</code> (cambio mínimo).</li>
+<li><strong>Unificar la base.</strong> Refactorizar <code>InfrastructureTestBase</code> para recibir
+<code>IDbContainerFixture</code> y usar <code>Provider</code>/<code>RespawnAdapter</code> y la <code>DbConnection</code> correcta
+(helper que devuelva <code>SqlConnection</code>/<code>NpgsqlConnection</code> según proveedor). <strong>Eliminar
+<code>PostgreSqlInfrastructureTestBase</code>.</strong></li>
+<li><strong>Extraer bases abstractas de test.</strong> Por cada comportamiento duplicado, mover el
+cuerpo a <code>XxxTestsBase : InfrastructureTestBase</code> y crear las dos derivadas finas
+(<code>SqlServer…</code> / <code>PostgreSql…</code>) con su <code>[Collection]</code> y fixture. Empezar por
+<code>EfRepositoryTests</code> (par limpio y representativo) como prueba de concepto.</li>
+<li><strong>Consolidar los pares parciales.</strong> En <code>UsersMultitenancy</code> y
+<code>EntityChangesTrackerInterceptor</code>, mover el tronco común a la base y dejar en las
+derivadas únicamente los tests específicos de cada motor (si los hay).</li>
+<li><strong>Ampliar cobertura.</strong> Las clases hoy solo-SQL-Server pasan a heredar de su base
+abstracta y obtienen su derivada PostgreSQL.</li>
+<li><strong>Replicar el patrón</strong> en <code>Raftel.Application.IntegrationTests</code> (su <code>IntegrationTestBase</code>
+pasa a parametrizarse por <code>IDbContainerFixture</code>).</li>
+<li><strong>Valorar <code>Api.FunctionalTests</code>.</strong> Parametrizar <code>ApiTestFactory</code> por proveedor
+(matriz de factories) es un trabajo aparte; documentar si entra en alcance o no.</li>
+<li><strong>Verificación.</strong> <code>dotnet test</code> debe pasar en ambos motores; comprobar en el runner
+que cada caso aparece para SQL Server y PostgreSQL, y que el tiempo total no se dispara
+(un contenedor por motor por ensamblado).</li>
+<li><strong>Documentación.</strong> Actualizar <code>tests/Raftel.Infrastructure.Tests/CLAUDE.md</code> y
+<code>tests/Raftel.Application.IntegrationTests/CLAUDE.md</code> con el nuevo patrón base/derivadas.</li>
+</ol>
+<h2 id="criterios-de-aceptación">Criterios de aceptación</h2>
+<ul>
+<li>El cuerpo de cada test de integración se escribe <strong>una sola vez</strong>.</li>
+<li>Cada comportamiento se ejecuta contra <strong>SQL Server y PostgreSQL</strong>.</li>
+<li>No quedan clases <code>Postgre…</code>/<code>…PostgreSql</code> con cuerpos de test copiados.</li>
+<li>Se mantiene el modelo de <strong>un contenedor por motor por ensamblado</strong> + Respawn.</li>
+<li>La suite pasa en verde y la cobertura por motor es igual o mayor que la actual.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/tests/MULTI_PROVIDER_INTEGRATION_TESTS_PLAN.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -2978,6 +2978,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "tests/MULTI_PROVIDER_INTEGRATION_TESTS_PLAN.md",
+      "output": {
+        ".html": {
+          "relative_path": "tests/MULTI_PROVIDER_INTEGRATION_TESTS_PLAN.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "tests/Raftel.Api.Client.UnitTests/CLAUDE.md",
       "output": {
         ".html": {

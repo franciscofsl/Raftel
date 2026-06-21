@@ -81,15 +81,50 @@
 <li>One SQL Server container and one PostgreSQL container for the <strong>whole assembly run</strong>, not per test:
 <ul>
 <li><code>SqlServerTestCollection</code> / <code>PostgreSqlTestCollection</code> — <code>[CollectionDefinition]</code> declaring <code>SqlServerTestContainerFixture</code> / <code>PostgreSqlTestContainerFixture</code> as <code>ICollectionFixture&lt;T&gt;</code>. xUnit starts each container once and disposes it once, at assembly scope.</li>
-<li><code>InfrastructureTestBase</code> (SQL Server) and <code>PostgreSqlInfrastructureTestBase</code> (PostgreSQL) — receive the shared fixture via constructor, build a fresh <code>ServiceProvider</code>/<code>DbContext</code> per test, then reset table data with <code>Respawner</code> (so each test still starts from an empty database without restarting the container).</li>
+<li><code>IDbContainerFixture</code> — abstraction implemented by both fixtures (<code>ConnectionString</code>, <code>Provider</code>, <code>RespawnAdapter</code>). <code>InfrastructureTestBase</code> depends on this interface, not on a concrete provider, so the same base works for SQL Server and PostgreSQL.</li>
+<li><code>InfrastructureTestBase</code> — receives the shared fixture via constructor, builds a fresh <code>ServiceProvider</code>/<code>DbContext</code> per test, then resets table data with <code>Respawner</code> (so each test still starts from an empty database without restarting the container). The Respawner instance is cached <strong>per provider</strong> (not per test class), since both providers' containers run concurrently.</li>
 <li><code>GlobalUsings.cs</code> for common usings.</li>
 </ul>
 </li>
-<li>Every concrete test class must declare <code>[Collection(SqlServerTestCollection.Name)]</code> (or <code>PostgreSqlTestCollection.Name</code>) and a constructor forwarding the injected fixture to <code>base(fixture)</code> — this is what makes it share the container with its siblings.</li>
 </ul>
+<h3 id="template-method-pattern-one-test-body-two-providers">Template Method pattern: one test body, two providers</h3>
+<p>Test bodies are <strong>never duplicated per provider</strong>. Each behavior is written once in an
+<code>abstract class XxxTestsBase : InfrastructureTestBase</code>, and two trivial <code>sealed</code> classes
+derive from it — one per provider, each only adding <code>[Collection]</code> + constructor wiring:</p>
+<pre><code class="lang-csharp">public abstract class EfRepositoryTestsBase : InfrastructureTestBase
+{
+    protected EfRepositoryTestsBase(IDbContainerFixture fixture) : base(fixture) { }
+
+    [Fact]
+    public async Task GetByIdAsync_ShouldRetrieveExpectedData() { /* body written once */ }
+}
+
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerEfRepositoryTests : EfRepositoryTestsBase
+{
+    public SqlServerEfRepositoryTests(SqlServerTestContainerFixture fixture) : base(fixture) { }
+}
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlEfRepositoryTests : EfRepositoryTestsBase
+{
+    public PostgreSqlEfRepositoryTests(PostgreSqlTestContainerFixture fixture) : base(fixture) { }
+}
+</code></pre>
+<p>xUnit discovers and runs every <code>[Fact]</code> declared on the base class once per derived
+(non-abstract) class, so each behavior is exercised against <strong>both</strong> providers without
+copy-pasting the test body.</p>
 <h2 id="conventions">Conventions</h2>
 <ul>
-<li>Inherit from the appropriate base for the provider you want to cover; many behaviors (filters, interceptors) should be verified on <strong>both</strong> providers.</li>
+<li>New DB-bound behavior: add the test to the relevant <code>XxxTestsBase</code>, never directly to a
+<code>SqlServerXxx</code>/<code>PostgreSqlXxx</code> class — those derived classes must stay wiring-only (constructor
+<ul>
+<li><code>[Collection]</code>), no test logic and no overrides beyond what the behavior needs from both
+providers (e.g. <code>ConfigureServices</code>).</li>
+</ul>
+</li>
+<li>If a test only makes sense for one provider, add it as a <code>[Fact]</code> directly on that provider's
+derived class instead of the shared base.</li>
 <li>To test filter disabling use <code>IDataFilter.Disable&lt;TFilter&gt;()</code> inside a <code>using</code> and verify query behavior change.</li>
 <li>Isolation per test is guaranteed by the Respawn reset in <code>InitializeAsync</code>, not by a fresh container — don't add manual container creation in a test.</li>
 <li>Verify real DB effects (audit columns, <code>TenantId</code>, <code>IsDeleted</code>), not mocks.</li>
