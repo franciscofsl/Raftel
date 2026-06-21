@@ -7,8 +7,13 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Tests.Data.Features.Users;
 
+[Collection(SqlServerTestCollection.Name)]
 public class UsersMultitenancyTests : InfrastructureTestBase
 {
+    public UsersMultitenancyTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
     private static User CreateUser(string email, string name, string surname)
     {
         var user = User.Create(email, name, surname);

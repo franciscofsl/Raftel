@@ -11,7 +11,8 @@ using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;
 
-public class PiratesEndpointsTests : IClassFixture<ApiTestFactory>
+[Collection(ApiTestCollection.Name)]
+public class PiratesEndpointsTests
 {
     private readonly HttpClient _client;
 

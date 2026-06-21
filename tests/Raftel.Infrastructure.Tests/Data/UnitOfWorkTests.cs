@@ -5,8 +5,13 @@ using Raftel.Demo.Infrastructure.Data;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
+[Collection(SqlServerTestCollection.Name)]
 public class UnitOfWorkTests : InfrastructureTestBase
 {
+    public UnitOfWorkTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
     [Fact]
     public async Task CommitAsync_ShouldPersistData()
     {
