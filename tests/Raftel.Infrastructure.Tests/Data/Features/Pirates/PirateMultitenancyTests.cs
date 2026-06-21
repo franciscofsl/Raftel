@@ -4,17 +4,16 @@ using Raftel.Demo.Infrastructure.Data;
 using Raftel.Infrastructure.Data;
 using Raftel.Infrastructure.Data.Filters;
 
-namespace Raftel.Infrastructure.Tests.Data.Features.Users;
+namespace Raftel.Infrastructure.Tests.Data.Features.Pirates;
 
-[Collection(PostgreSqlTestCollection.Name)]
-public class PostgreSqlUsersMultitenancyTests : PostgreSqlInfrastructureTestBase
+public abstract class PirateMultitenancyTestsBase : InfrastructureTestBase
 {
-    public PostgreSqlUsersMultitenancyTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    protected PirateMultitenancyTestsBase(IDbContainerFixture fixture) : base(fixture)
     {
     }
 
     [Fact]
-    public async Task GetByIdAsync_ShouldReturnNull_WhenPirateIsFromDifferentTenant_WithPostgreSql()
+    public async Task GetByIdAsync_ShouldReturnNull_WhenPirateIsFromDifferentTenant()
     {
         await ExecuteScopedAsync(async sp =>
         {
@@ -47,7 +46,7 @@ public class PostgreSqlUsersMultitenancyTests : PostgreSqlInfrastructureTestBase
     }
 
     [Fact]
-    public async Task ListAllAsync_ShouldReturnOnlyCurrentTenantPirates_WithPostgreSql()
+    public async Task ListAllAsync_ShouldReturnOnlyCurrentTenantPirates()
     {
         await ExecuteScopedAsync(async sp =>
         {
@@ -73,5 +72,21 @@ public class PostgreSqlUsersMultitenancyTests : PostgreSqlInfrastructureTestBase
             piratesOfTenantB.ShouldContain(zoro);
             piratesOfTenantB.ShouldNotContain(luffy);
         });
+    }
+}
+
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerPirateMultitenancyTests : PirateMultitenancyTestsBase
+{
+    public SqlServerPirateMultitenancyTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+}
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlPirateMultitenancyTests : PirateMultitenancyTestsBase
+{
+    public PostgreSqlPirateMultitenancyTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
     }
 }

@@ -4,10 +4,9 @@ using Raftel.Domain.ValueObjects;
 
 namespace Raftel.Infrastructure.Tests.Data.Features.Tenants;
 
-[Collection(SqlServerTestCollection.Name)]
-public sealed class TenantsRepositoryTests : InfrastructureTestBase
+public abstract class TenantsRepositoryTestsBase : InfrastructureTestBase
 {
-    public TenantsRepositoryTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    protected TenantsRepositoryTestsBase(IDbContainerFixture fixture) : base(fixture)
     {
     }
 
@@ -58,5 +57,21 @@ public sealed class TenantsRepositoryTests : InfrastructureTestBase
             var result = await repository.CodeIsUniqueAsync(newCode, CancellationToken.None);
             result.ShouldBeTrue();
         });
+    }
+}
+
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerTenantsRepositoryTests : TenantsRepositoryTestsBase
+{
+    public SqlServerTenantsRepositoryTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+}
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlTenantsRepositoryTests : TenantsRepositoryTestsBase
+{
+    public PostgreSqlTenantsRepositoryTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
     }
 }

@@ -1,14 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Raftel.Demo.Domain.Pirates;
 using Raftel.Demo.Domain.Pirates.ValueObjects;
 using Raftel.Demo.Infrastructure.Data;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
-[Collection(SqlServerTestCollection.Name)]
-public class UnitOfWorkTests : InfrastructureTestBase
+public abstract class UnitOfWorkTestsBase : InfrastructureTestBase
 {
-    public UnitOfWorkTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    protected UnitOfWorkTestsBase(IDbContainerFixture fixture) : base(fixture)
     {
     }
 
@@ -54,5 +53,21 @@ public class UnitOfWorkTests : InfrastructureTestBase
             loaded.Bounty.ShouldBe(new Bounty(150_000_000));
             pirate.ShouldBe(loaded);
         });
+    }
+}
+
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerUnitOfWorkTests : UnitOfWorkTestsBase
+{
+    public SqlServerUnitOfWorkTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+}
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlUnitOfWorkTests : UnitOfWorkTestsBase
+{
+    public PostgreSqlUnitOfWorkTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
     }
 }

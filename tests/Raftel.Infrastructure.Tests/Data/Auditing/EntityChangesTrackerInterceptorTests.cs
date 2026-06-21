@@ -15,15 +15,16 @@ using Shouldly;
 
 namespace Raftel.Infrastructure.Tests.Data.Auditing;
 
-[Collection(SqlServerTestCollection.Name)]
-public class EntityChangesTrackerInterceptorTests : InfrastructureTestBase
+public abstract class EntityChangesTrackerInterceptorTestsBase : InfrastructureTestBase
 {
     private static readonly Guid TestUserId = Guid.NewGuid();
-   
-    public EntityChangesTrackerInterceptorTests(SqlServerTestContainerFixture fixture) : base(fixture)
+
+    protected EntityChangesTrackerInterceptorTestsBase(IDbContainerFixture fixture) : base(fixture)
     {
     }
-    
+
+    protected abstract Task<IDbContainerFixture> CreateFreshFixtureAsync();
+
     protected override void ConfigureServices(IServiceCollection services)
     {
         base.ConfigureServices(services);
@@ -147,7 +148,7 @@ public class EntityChangesTrackerInterceptorTests : InfrastructureTestBase
             var dbContext = sp.GetRequiredService<TestingRaftelDbContext>();
 
             var user = User.Create("sanji@strawhat.crew", "Sanji", "Vinsmoke");
-            user.BindTo("identity-user-id");
+            user.BindTo(Guid.NewGuid().ToString());
             await repository.AddAsync(user);
             await unitOfWork.CommitAsync();
 
@@ -267,13 +268,12 @@ public class EntityChangesTrackerInterceptorTests : InfrastructureTestBase
     [Fact]
     public async Task Create_WithoutCurrentUser_ShouldRecordAuditLogWithNullUser()
     {
-        var services = new ServiceCollection();
-        var fixture = new SqlServerTestContainerFixture();
-        await fixture.InitializeAsync();
+        var fixture = await CreateFreshFixtureAsync();
 
         try
         {
-            services.AddSampleInfrastructure(fixture.ConnectionString);
+            var services = new ServiceCollection();
+            services.AddSampleInfrastructure(fixture.ConnectionString, fixture.Provider);
             // Don't register ICurrentUser
 
             var serviceProvider = services.BuildServiceProvider(validateScopes: true);
@@ -315,5 +315,35 @@ public class EntityChangesTrackerInterceptorTests : InfrastructureTestBase
         {
             // No-op for testing
         }
+    }
+}
+
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerEntityChangesTrackerInterceptorTests : EntityChangesTrackerInterceptorTestsBase
+{
+    public SqlServerEntityChangesTrackerInterceptorTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
+    protected override async Task<IDbContainerFixture> CreateFreshFixtureAsync()
+    {
+        var fixture = new SqlServerTestContainerFixture();
+        await fixture.InitializeAsync();
+        return fixture;
+    }
+}
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlEntityChangesTrackerInterceptorTests : EntityChangesTrackerInterceptorTestsBase
+{
+    public PostgreSqlEntityChangesTrackerInterceptorTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
+    protected override async Task<IDbContainerFixture> CreateFreshFixtureAsync()
+    {
+        var fixture = new PostgreSqlTestContainerFixture();
+        await fixture.InitializeAsync();
+        return fixture;
     }
 }

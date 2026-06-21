@@ -1,19 +1,23 @@
+using System.Collections.Concurrent;
+using System.Data.Common;
 using Microsoft.Data.SqlClient;
+using Npgsql;
 using Raftel.Demo.Infrastructure;
 using Raftel.Demo.Infrastructure.Data;
+using Raftel.Infrastructure.Data;
 using Respawn;
 
 namespace Raftel.Infrastructure.Tests;
 
 public abstract class InfrastructureTestBase : IAsyncLifetime
 {
-    private static Respawner? _respawner;
+    private static readonly ConcurrentDictionary<DatabaseProvider, Respawner> Respawners = new();
 
-    private readonly SqlServerTestContainerFixture _fixture;
+    private readonly IDbContainerFixture _fixture;
 
     protected IServiceProvider ServiceProvider { get; private set; } = default!;
 
-    protected InfrastructureTestBase(SqlServerTestContainerFixture fixture)
+    protected InfrastructureTestBase(IDbContainerFixture fixture)
     {
         _fixture = fixture;
     }
@@ -45,7 +49,7 @@ public abstract class InfrastructureTestBase : IAsyncLifetime
 
     protected virtual void ConfigureServices(IServiceCollection services)
     {
-        services.AddSampleInfrastructure(_fixture.ConnectionString);
+        services.AddSampleInfrastructure(_fixture.ConnectionString, _fixture.Provider);
     }
 
     protected TService GetService<TService>() where TService : notnull
@@ -61,14 +65,25 @@ public abstract class InfrastructureTestBase : IAsyncLifetime
 
     private async Task ResetDatabaseAsync()
     {
-        await using var connection = new SqlConnection(_fixture.ConnectionString);
+        await using var connection = CreateConnection();
         await connection.OpenAsync();
 
-        _respawner ??= await Respawner.CreateAsync(connection, new RespawnerOptions
+        if (!Respawners.TryGetValue(_fixture.Provider, out var respawner))
         {
-            DbAdapter = DbAdapter.SqlServer
-        });
+            respawner = await Respawner.CreateAsync(connection, new RespawnerOptions
+            {
+                DbAdapter = _fixture.RespawnAdapter
+            });
+            respawner = Respawners.GetOrAdd(_fixture.Provider, respawner);
+        }
 
-        await _respawner.ResetAsync(connection);
+        await respawner.ResetAsync(connection);
+    }
+
+    private DbConnection CreateConnection()
+    {
+        return _fixture.Provider == DatabaseProvider.PostgreSql
+            ? new NpgsqlConnection(_fixture.ConnectionString)
+            : new SqlConnection(_fixture.ConnectionString);
     }
 }

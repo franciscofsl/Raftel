@@ -8,14 +8,13 @@ using Raftel.Infrastructure.Data;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
-[Collection(SqlServerTestCollection.Name)]
-public class UserAuditingTests : InfrastructureTestBase
+public abstract class UserAuditingTestsBase : InfrastructureTestBase
 {
     private static readonly Guid TestUserId = Guid.NewGuid();
 
-    private readonly SqlServerTestContainerFixture _fixture;
+    private readonly IDbContainerFixture _fixture;
 
-    public UserAuditingTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    protected UserAuditingTestsBase(IDbContainerFixture fixture) : base(fixture)
     {
         _fixture = fixture;
     }
@@ -84,7 +83,7 @@ public class UserAuditingTests : InfrastructureTestBase
     {
         // Create a new service provider without ICurrentUser, reusing the shared container
         var services = new ServiceCollection();
-        services.AddSampleInfrastructure(_fixture.ConnectionString);
+        services.AddSampleInfrastructure(_fixture.ConnectionString, _fixture.Provider);
         // Don't register ICurrentUser
         using var serviceProvider = services.BuildServiceProvider(validateScopes: true);
 
@@ -107,7 +106,7 @@ public class UserAuditingTests : InfrastructureTestBase
         creationTime.ShouldNotBeNull();
     }
 
-    private class TestCurrentUser : ICurrentUser
+    private sealed class TestCurrentUser : ICurrentUser
     {
         public TestCurrentUser(Guid userId)
         {
@@ -123,5 +122,21 @@ public class UserAuditingTests : InfrastructureTestBase
         {
             // No-op for testing
         }
+    }
+}
+
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerUserAuditingTests : UserAuditingTestsBase
+{
+    public SqlServerUserAuditingTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+}
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlUserAuditingTests : UserAuditingTestsBase
+{
+    public PostgreSqlUserAuditingTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
     }
 }

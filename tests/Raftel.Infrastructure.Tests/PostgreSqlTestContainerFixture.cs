@@ -1,13 +1,19 @@
 using Npgsql;
+using Raftel.Infrastructure.Data;
+using Respawn;
 using Testcontainers.PostgreSql;
 
 namespace Raftel.Infrastructure.Tests;
 
-public class PostgreSqlTestContainerFixture : IAsyncLifetime
+public class PostgreSqlTestContainerFixture : IAsyncLifetime, IDbContainerFixture
 {
     private readonly PostgreSqlContainer _container;
 
     public string ConnectionString => _container.GetConnectionString();
+
+    public DatabaseProvider Provider => DatabaseProvider.PostgreSql;
+
+    public IDbAdapter RespawnAdapter => DbAdapter.Postgres;
 
     public PostgreSqlTestContainerFixture()
     {

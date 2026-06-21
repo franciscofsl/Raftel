@@ -6,10 +6,9 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Tests.Data.Features.Users;
 
-[Collection(SqlServerTestCollection.Name)]
-public class UsersSoftDeleteTests : InfrastructureTestBase
+public abstract class UsersSoftDeleteTestsBase : InfrastructureTestBase
 {
-    public UsersSoftDeleteTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    protected UsersSoftDeleteTestsBase(IDbContainerFixture fixture) : base(fixture)
     {
     }
 
@@ -154,5 +153,21 @@ public class UsersSoftDeleteTests : InfrastructureTestBase
                 softDeleted.ShouldNotBeNull();
             }
         });
+    }
+}
+
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerUsersSoftDeleteTests : UsersSoftDeleteTestsBase
+{
+    public SqlServerUsersSoftDeleteTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+}
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlUsersSoftDeleteTests : UsersSoftDeleteTestsBase
+{
+    public PostgreSqlUsersSoftDeleteTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
     }
 }
