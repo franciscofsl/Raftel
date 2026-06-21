@@ -12,14 +12,15 @@ using Shouldly;
 
 namespace Raftel.Infrastructure.Tests.Data.Auditing;
 
-/// <summary>
-/// PostgreSQL counterpart of <see cref="EntityChangesTrackerInterceptorTests"/>, covering the
-/// same Created/Updated/Deleted and multi-entity scenarios to confirm provider parity.
-/// </summary>
+[Collection(PostgreSqlTestCollection.Name)]
 public class EntityChangesTrackerInterceptorPostgreSqlTests : PostgreSqlInfrastructureTestBase
 {
     private static readonly Guid TestUserId = Guid.NewGuid();
-
+   
+    public EntityChangesTrackerInterceptorPostgreSqlTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
+    }
+    
     protected override void ConfigureServices(IServiceCollection services)
     {
         base.ConfigureServices(services);

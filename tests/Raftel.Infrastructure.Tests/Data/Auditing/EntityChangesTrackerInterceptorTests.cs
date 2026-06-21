@@ -15,10 +15,15 @@ using Shouldly;
 
 namespace Raftel.Infrastructure.Tests.Data.Auditing;
 
+[Collection(SqlServerTestCollection.Name)]
 public class EntityChangesTrackerInterceptorTests : InfrastructureTestBase
 {
     private static readonly Guid TestUserId = Guid.NewGuid();
-
+   
+    public EntityChangesTrackerInterceptorTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+    
     protected override void ConfigureServices(IServiceCollection services)
     {
         base.ConfigureServices(services);
