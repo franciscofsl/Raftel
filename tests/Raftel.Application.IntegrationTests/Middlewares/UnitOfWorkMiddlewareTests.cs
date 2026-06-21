@@ -3,12 +3,18 @@ using Raftel.Application.Commands;
 using Raftel.Demo.Application.Pirates;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Domain.Pirates;
+using Raftel.Infrastructure.Tests;
 using Shouldly;
 
 namespace Raftel.Application.IntegrationTests.Middlewares;
 
+[Collection(IntegrationSqlServerTestCollection.Name)]
 public class UnitOfWorkMiddlewareTests : IntegrationTestBase
 {
+    public UnitOfWorkMiddlewareTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
     [Fact]
     public async Task CommitAsync_ShouldPersistData_UsingMiddleware()
     {

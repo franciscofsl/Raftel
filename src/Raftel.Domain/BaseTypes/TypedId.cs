@@ -39,7 +39,13 @@ public abstract record TypedId<T> where T : notnull
         if (other is null || GetType() != other.GetType()) return false;
         return EqualityComparer<T>.Default.Equals(_value, other._value);
     }
-
+    
+    /// <summary>
+    /// Converts the typed identifier to its string representation.
+    /// </summary>
+    /// <param name="id">The typed identifier.</param>
+    public static implicit operator string(TypedId<T> id) => id._value.ToString();
+    
     /// <inheritdoc/>
     public override int GetHashCode() => HashCode.Combine(_value);
 }

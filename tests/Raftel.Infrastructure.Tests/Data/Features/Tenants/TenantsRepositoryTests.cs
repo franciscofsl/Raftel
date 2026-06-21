@@ -4,8 +4,13 @@ using Raftel.Domain.ValueObjects;
 
 namespace Raftel.Infrastructure.Tests.Data.Features.Tenants;
 
+[Collection(SqlServerTestCollection.Name)]
 public sealed class TenantsRepositoryTests : InfrastructureTestBase
 {
+    public TenantsRepositoryTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
     [Fact]
     public async Task CodeIsUniqueAsync_Should_ReturnTrue_WhenCodeDoesNotExist()
     {

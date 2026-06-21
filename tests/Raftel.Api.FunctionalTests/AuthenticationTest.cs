@@ -10,7 +10,8 @@ using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;
 
-public class AuthenticationTest : IClassFixture<ApiTestFactory>
+[Collection(ApiTestCollection.Name)]
+public class AuthenticationTest
 {
     private readonly HttpClient _client;
     private readonly ApiTestFactory _factory;
