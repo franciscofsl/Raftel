@@ -1,4 +1,4 @@
-﻿using Raftel.Demo.Domain.Pirates;
+using Raftel.Demo.Domain.Pirates;
 using Raftel.Demo.Domain.Pirates.ValueObjects;
 using Raftel.Demo.Domain.Ships;
 using Raftel.Demo.Infrastructure.Data;
@@ -7,10 +7,9 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
-[Collection(SqlServerTestCollection.Name)]
-public class EfRepositoryTests : InfrastructureTestBase
+public abstract class EfRepositoryTestsBase : InfrastructureTestBase
 {
-    public EfRepositoryTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    protected EfRepositoryTestsBase(IDbContainerFixture fixture) : base(fixture)
     {
     }
 
@@ -161,5 +160,43 @@ public class EfRepositoryTests : InfrastructureTestBase
             var luffy = await repository.GetByIdAsync(createdLuffy.Id);
             luffy!.HasEaten(gomuGomu).ShouldBeTrue();
         });
+    }
+
+    [Fact]
+    public async Task AddAsync_ShouldPersistMultipleEntities()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
+            var repository = sp.GetRequiredService<IPirateRepository>();
+
+            var zoro = MugiwaraCrew.Zoro();
+            var chopper = MugiwaraCrew.Chopper();
+
+            await repository.AddAsync(zoro);
+            await repository.AddAsync(chopper);
+            await unitOfWork.CommitAsync();
+
+            var allPirates = await repository.ListAllAsync();
+            allPirates.Count.ShouldBe(2);
+            allPirates.ShouldContain(zoro);
+            allPirates.ShouldContain(chopper);
+        });
+    }
+}
+
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerEfRepositoryTests : EfRepositoryTestsBase
+{
+    public SqlServerEfRepositoryTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+}
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlEfRepositoryTests : EfRepositoryTestsBase
+{
+    public PostgreSqlEfRepositoryTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
     }
 }

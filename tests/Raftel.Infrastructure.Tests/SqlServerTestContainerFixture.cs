@@ -1,13 +1,19 @@
 using Microsoft.Data.SqlClient;
+using Raftel.Infrastructure.Data;
+using Respawn;
 using Testcontainers.MsSql;
 
 namespace Raftel.Infrastructure.Tests;
 
-public class SqlServerTestContainerFixture : IAsyncLifetime
+public class SqlServerTestContainerFixture : IAsyncLifetime, IDbContainerFixture
 {
     private readonly MsSqlContainer _container;
 
     public string ConnectionString => _container.GetConnectionString();
+
+    public DatabaseProvider Provider => DatabaseProvider.SqlServer;
+
+    public IDbAdapter RespawnAdapter => DbAdapter.SqlServer;
 
     public SqlServerTestContainerFixture()
     {

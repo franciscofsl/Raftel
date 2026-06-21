@@ -7,10 +7,9 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Tests.Data.Features.Users;
 
-[Collection(SqlServerTestCollection.Name)]
-public class UsersMultitenancyTests : InfrastructureTestBase
+public abstract class UsersMultitenancyTestsBase : InfrastructureTestBase
 {
-    public UsersMultitenancyTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    protected UsersMultitenancyTestsBase(IDbContainerFixture fixture) : base(fixture)
     {
     }
 
@@ -496,4 +495,20 @@ public class UsersMultitenancyTests : InfrastructureTestBase
             }
         });
     }
-} 
+}
+
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerUsersMultitenancyTests : UsersMultitenancyTestsBase
+{
+    public SqlServerUsersMultitenancyTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+}
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlUsersMultitenancyTests : UsersMultitenancyTestsBase
+{
+    public PostgreSqlUsersMultitenancyTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
+    }
+}

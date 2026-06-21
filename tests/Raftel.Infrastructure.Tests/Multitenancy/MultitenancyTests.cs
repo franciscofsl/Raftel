@@ -6,10 +6,9 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Tests.Multitenancy;
 
-[Collection(SqlServerTestCollection.Name)]
-public class MultitenancyTests : InfrastructureTestBase
+public abstract class MultitenancyTestsBase : InfrastructureTestBase
 {
-    public MultitenancyTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    protected MultitenancyTestsBase(IDbContainerFixture fixture) : base(fixture)
     {
     }
 
@@ -276,5 +275,21 @@ public class MultitenancyTests : InfrastructureTestBase
                 entry.Property(ShadowPropertyNames.TenantId).CurrentValue.ShouldBe(tenant1Id);
             }
         });
+    }
+}
+
+[Collection(SqlServerTestCollection.Name)]
+public sealed class SqlServerMultitenancyTests : MultitenancyTestsBase
+{
+    public SqlServerMultitenancyTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+}
+
+[Collection(PostgreSqlTestCollection.Name)]
+public sealed class PostgreSqlMultitenancyTests : MultitenancyTestsBase
+{
+    public PostgreSqlMultitenancyTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
     }
 }
