@@ -80,6 +80,7 @@
     RequestHandlerDelegate                                                pipeline link
     Authentication/   ICurrentUser, IAuthenticationService (interfaces, impl. in Infrastructure)
     Multitenancy/     ICurrentTenant
+    DomainEvents/     IDomainEventHandler&lt;TEvent&gt;, IDomainEventsDispatcher + DomainEventsDispatcher impl.
 Commands/             ICommand, ICommand&lt;TResult&gt;, ICommandHandler&lt;,&gt;, ICommandDispatcher, CommandDispatcher
 Queries/              IQuery&lt;TResult&gt;, IQueryHandler&lt;,&gt;, IQueryDispatcher, QueryDispatcher
 Middlewares/          IGlobalMiddleware / ICommandMiddleware / IQueryMiddleware + implementations + MiddlewareRegistry
@@ -105,11 +106,17 @@ RaftelApplicationBuilder.cs     assembly and middleware registration
 <li>Included middlewares: <code>ValidationMiddleware</code> (runs <code>Validator&lt;T&gt;</code>), <code>PermissionAuthorizationMiddleware</code> (via <code>[RequiresPermission]</code>), <code>UnitOfWorkMiddleware</code> (commits <strong>only if result succeeds</strong>).</li>
 <li>To add new cross-cutting behavior (caching, logging…), create a middleware of the appropriate type and register it in <code>AddRaftelApplication</code>.</li>
 </ul>
+<h2 id="domain-events">Domain Events</h2>
+<ul>
+<li><code>IDomainEventHandler&lt;TEvent&gt;</code> is a side-effect handler for one <code>IDomainEvent</code>; implement one per use case, e.g. <code>Features/&lt;Feature&gt;/Events/&lt;EventName&gt;Handler.cs</code>.</li>
+<li><code>DomainEventsDispatcher</code> resolves all <code>IDomainEventHandler&lt;TConcrete&gt;</code> for a given event from <code>IServiceProvider</code> and invokes them — zero handlers is a no-op, multiple handlers all run.</li>
+<li>Dispatch itself is triggered by Infrastructure (<code>DomainEventsDispatchInterceptor</code>, post-commit), never by a command handler directly — handlers stay thin and don't know about events being raised.</li>
+</ul>
 <h2 id="conventions">Conventions</h2>
 <ul>
 <li>Handlers <code>sealed</code>; max ~2 instance dependencies (Object Calisthenics — logger doesn't count).</li>
 <li>No EF Core or infrastructure types: only interfaces (<code>IRepository</code>, <code>ICurrentUser</code>, <code>IUnitOfWork</code>).</li>
-<li>Auto-discovery: handlers and validators are discovered by assembly in <code>RegisterServicesFromAssembly(...)</code>. Don't register manually.</li>
+<li>Auto-discovery: handlers, validators, and <code>IDomainEventHandler&lt;&gt;</code> are discovered by assembly in <code>RegisterServicesFromAssembly(...)</code>. Don't register manually.</li>
 <li><code>InternalsVisibleTo(&quot;Raftel.Application.UnitTests&quot;)</code> is active; handlers can be <code>internal sealed</code>.</li>
 </ul>
 

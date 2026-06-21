@@ -101,7 +101,7 @@ Class Tenant  <a class="header-action link-secondary" title="View source" href="
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Tenant : AggregateRoot&lt;TenantId&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Tenant : AggregateRoot&lt;TenantId&gt;, IHasDomainEvents</code></pre>
   </div>
 
 
@@ -117,11 +117,23 @@ Class Tenant  <a class="header-action link-secondary" title="View source" href="
     </dd>
   </dl>
 
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="Raftel.Domain.Abstractions.IHasDomainEvents.html">IHasDomainEvents</a></div>
+    </dd>
+  </dl>
 
 
   <dl class="typelist inheritedMembers">
     <dt>Inherited Members</dt>
     <dd>
+    <div>
+      <a class="xref" href="Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_DomainEvents">AggregateRoot&lt;TenantId&gt;.DomainEvents</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_ClearDomainEvents">AggregateRoot&lt;TenantId&gt;.ClearDomainEvents()</a>
+    </div>
     <div>
       <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id">Entity&lt;TenantId&gt;.Id</a>
     </div>

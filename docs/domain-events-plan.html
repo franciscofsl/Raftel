@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Plan de implementaci&#243;n: Eventos de Dominio (Domain Events) | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Plan de implementaci&#243;n: Eventos de Dominio (Domain Events) | Raftel ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/domain-events-plan.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="plan-de-implementación-eventos-de-dominio-domain-events">Plan de implementación: Eventos de Dominio (Domain Events)</h1>
+
+<blockquote>
+<p>Estado: <strong>Implementado</strong>
+Rama: <code>claude/determined-einstein-0g6idd</code>
+Ámbito: <code>Raftel.Domain</code>, <code>Raftel.Application</code>, <code>Raftel.Infrastructure</code> (+ demo y tests)</p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>Hoy no existe ningún rastro de <code>IDomainEvent</code>, <code>INotification</code> ni mecanismo de
+despacho de eventos de dominio en el repositorio, pese a que el proyecto cita
+<strong>DDD</strong> como objetivo de aprendizaje. Esto limita escenarios habituales:</p>
+<ul>
+<li><strong>Integración eventual entre features/módulos</strong> sin acoplarlos
+(ej.: <em>&quot;cuando se crea un <code>Tenant</code>, dar de alta su configuración por defecto&quot;</em>).</li>
+<li><strong>Proyecciones de lectura</strong> y side-effects (envío de correos, notificaciones,
+outbox) desacoplados del handler que muta el agregado.</li>
+<li>Mantener los handlers de comando <strong>finos</strong> (Object Calisthenics: máx. ~2
+dependencias) delegando los efectos secundarios a handlers de evento.</li>
+</ul>
+<p>Los eventos de dominio son el complemento natural del <code>AggregateRoot&lt;TId&gt;</code>
+existente: el agregado <strong>registra</strong> eventos mientras aplica reglas de negocio, y
+el framework los <strong>despacha tras el commit</strong>, reutilizando exactamente el mismo
+patrón ya usado para el Unit of Work (<code>UnitOfWorkMiddleware</code> commitea solo si el
+<code>Result</code> es exitoso).</p>
+<h2 id="2-principios-de-diseño">2. Principios de diseño</h2>
+<ol>
+<li><strong>El dominio no conoce infraestructura.</strong> <code>IDomainEvent</code> y el registro de
+eventos viven en <code>Raftel.Domain</code> sin dependencias nuevas.</li>
+<li><strong>Reutilizar el patrón mediador existente.</strong> Los handlers de evento se
+autodescubren por ensamblado igual que <code>ICommandHandler</code> / <code>Validator&lt;T&gt;</code>.</li>
+<li><strong>Despacho tras persistir (post-commit).</strong> Un evento solo se despacha si la
+transacción se confirma con éxito, coherente con <code>UnitOfWorkMiddleware</code>.</li>
+<li><strong>Mínima fricción para el consumidor.</strong> Levantar un evento = una llamada
+(<code>RaiseDomainEvent(...)</code>) dentro de un método de negocio del agregado.</li>
+<li><strong>Sin librerías externas</strong> (sin MediatR/INotification): implementación propia,
+en línea con la filosofía del micro-framework.</li>
+</ol>
+<h2 id="3-arquitectura-propuesta">3. Arquitectura propuesta</h2>
+<p>Flujo extremo a extremo:</p>
+<pre><code>HTTP → AutoEndpoint → CommandHandler → Aggregate.RaiseDomainEvent(evt)
+                                          │ (evento queda pendiente en el agregado)
+                                          ▼
+                              UnitOfWorkMiddleware.CommitAsync()   ← persiste cambios
+                                          │
+                                          ▼
+                        DomainEventsDispatcher (post-commit)       ← recolecta y despacha
+                                          │
+                                          ▼
+                        IDomainEventHandler&lt;TEvent&gt;.HandleAsync()  ← side-effects / integración
+</code></pre>
+<p>Decisión clave — <strong>¿dónde se recolectan y despachan los eventos?</strong></p>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Dónde</th>
+<th>Pros</th>
+<th>Contras</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A. Interceptor EF Core</strong> (recomendada)</td>
+<td><code>Raftel.Infrastructure</code>, en <code>SavedChanges</code> del <code>DbContext</code></td>
+<td>Acceso directo al <code>ChangeTracker</code>; recolecta eventos de <strong>todos</strong> los agregados realmente persistidos; despacho garantizado post-commit</td>
+<td>El despacho ocurre dentro del ciclo de <code>SaveChanges</code></td>
+</tr>
+<tr>
+<td>B. Middleware en Application</td>
+<td><code>Raftel.Application</code>, tras <code>unitOfWork.CommitAsync()</code></td>
+<td>Simétrico textual a <code>UnitOfWorkMiddleware</code></td>
+<td>Application <strong>no</strong> tiene acceso al <code>ChangeTracker</code>; obligaría a exponer los agregados rastreados a través de <code>IUnitOfWork</code>, filtrando una preocupación de persistencia</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recomendación: Opción A</strong> (interceptor), porque el <code>ChangeTracker</code> es la única
+fuente fiable de &quot;qué agregados se persistieron&quot; y ya es el patrón usado por
+<code>AuditPropertiesInterceptor</code> / <code>TenantInterceptor</code>. La abstracción <code>IDomainEventsDispatcher</code>
+vive en <code>Application</code> (para que el dominio/aplicación razonen sobre ella) y su
+disparo se ancla en el interceptor de Infrastructure.</p>
+<blockquote>
+<p>Nota: el despacho <strong>in-process y síncrono</strong> es el alcance de esta fase. Un
+patrón <strong>Outbox</strong> (persistir los eventos en la misma transacción para entrega
+fiable) se documenta como evolución futura en §9.</p>
+</blockquote>
+<h2 id="4-cambios-por-capa">4. Cambios por capa</h2>
+<h3 id="41-rafteldomain">4.1. <code>Raftel.Domain</code></h3>
+<p><strong>Nuevos archivos</strong> (en <code>BaseTypes/</code> o nuevo <code>DomainEvents/</code>):</p>
+<ul>
+<li><code>Abstractions/IDomainEvent.cs</code>
+<pre><code class="lang-csharp">namespace Raftel.Domain.Abstractions;
+
+/// &lt;summary&gt;Marca un evento de dominio inmutable. Implementar como record.&lt;/summary&gt;
+public interface IDomainEvent
+{
+    DateTimeOffset OccurredOn { get; }
+}
+</code></pre>
+<ul>
+<li>Convención: los eventos son <code>sealed record</code> inmutables, nombrados en pasado
+(<code>TenantCreated</code>, <code>PirateCrownedKing</code>), viven junto a su agregado
+(<code>Features/&lt;Feature&gt;/Events/</code>).</li>
+</ul>
+</li>
+</ul>
+<p><strong>Modificar</strong> <code>BaseTypes/AggregateRoot.cs</code> — añadir el registro de eventos
+pendientes:</p>
+<pre><code class="lang-csharp">public abstract class AggregateRoot&lt;TId&gt; : Entity&lt;TId&gt; where TId : TypedId&lt;Guid&gt;
+{
+    private readonly List&lt;IDomainEvent&gt; _domainEvents = new();
+
+    public IReadOnlyCollection&lt;IDomainEvent&gt; DomainEvents =&gt; _domainEvents.AsReadOnly();
+
+    protected void RaiseDomainEvent(IDomainEvent domainEvent) =&gt; _domainEvents.Add(domainEvent);
+
+    public void ClearDomainEvents() =&gt; _domainEvents.Clear();
+
+    // ctores existentes intactos
+}
+</code></pre>
+<ul>
+<li><code>RaiseDomainEvent</code> es <code>protected</code>: solo el propio agregado registra sus eventos
+desde sus métodos de negocio (respeta encapsulación / Object Calisthenics).</li>
+<li><code>DomainEvents</code> y <code>ClearDomainEvents</code> son <code>public</code> para que el dispatcher de
+infraestructura los lea y vacíe tras despachar.</li>
+</ul>
+<blockquote>
+<p>Sin dependencias nuevas en Domain; <code>EF Core</code> sigue prohibido aquí.</p>
+</blockquote>
+<h3 id="42-raftelapplication">4.2. <code>Raftel.Application</code></h3>
+<p><strong>Nuevos archivos</strong> (en <code>Abstractions/DomainEvents/</code>):</p>
+<ul>
+<li><code>IDomainEventHandler.cs</code>
+<pre><code class="lang-csharp">public interface IDomainEventHandler&lt;in TEvent&gt; where TEvent : IDomainEvent
+{
+    Task HandleAsync(TEvent domainEvent, CancellationToken cancellationToken = default);
+}
+</code></pre>
+</li>
+<li><code>IDomainEventsDispatcher.cs</code>
+<pre><code class="lang-csharp">public interface IDomainEventsDispatcher
+{
+    Task DispatchAsync(IReadOnlyCollection&lt;IDomainEvent&gt; events, CancellationToken ct = default);
+}
+</code></pre>
+</li>
+<li><code>DomainEventsDispatcher.cs</code> — implementación que resuelve por reflexión el/los
+<code>IDomainEventHandler&lt;TConcreto&gt;</code> de cada evento desde el <code>IServiceProvider</code> y los
+invoca. Maneja el caso de <strong>cero o múltiples</strong> handlers por evento.</li>
+</ul>
+<p><strong>Modificar</strong> <code>DependencyInjection.cs</code> — autodescubrir handlers de evento por
+ensamblado, igual que ya se hace con handlers de comando/query y validadores:</p>
+<ul>
+<li>Añadir <code>typeof(IDomainEventHandler&lt;&gt;)</code> al array <code>handlerTypes</code> de
+<code>RegisterHandlers</code>, de modo que cada <code>IDomainEventHandler&lt;TEvent&gt;</code> quede
+registrado automáticamente (<code>AddTransient</code>).</li>
+<li>Registrar <code>IDomainEventsDispatcher</code> → <code>DomainEventsDispatcher</code> como <code>Scoped</code>.</li>
+</ul>
+<blockquote>
+<p>Application sigue dependiendo solo de Domain; no aparecen tipos de EF Core.</p>
+</blockquote>
+<h3 id="43-raftelinfrastructure">4.3. <code>Raftel.Infrastructure</code></h3>
+<p><strong>Nuevo</strong> <code>Data/Interceptors/DomainEventsDispatchInterceptor.cs</code>:</p>
+<ul>
+<li>Hereda de <code>SaveChangesInterceptor</code>, sobrescribe <code>SavedChangesAsync</code>
+(post-commit) — patrón idéntico a <code>AuditPropertiesInterceptor</code>.</li>
+<li>Recorre <code>context.ChangeTracker.Entries&lt;IAggregateWithEvents&gt;()</code> (ver nota
+abajo), recolecta <code>DomainEvents</code>, llama a <code>ClearDomainEvents()</code> y delega en
+<code>IDomainEventsDispatcher.DispatchAsync(...)</code>.</li>
+<li>Se resuelve <code>IDomainEventsDispatcher</code> vía <code>IServiceProvider</code> (inyectado igual
+que <code>ICurrentUser</code> en <code>AuditPropertiesInterceptor</code>).</li>
+</ul>
+<p><strong>Detalle técnico — filtrar agregados con eventos.</strong> <code>AggregateRoot&lt;TId&gt;</code> es
+genérico, por lo que <code>ChangeTracker.Entries&lt;AggregateRoot&lt;...&gt;&gt;()</code> no es directo.
+Solución: introducir una interfaz marcador <strong>no genérica</strong> que exponga los eventos.</p>
+<p>Opción recomendada: declarar en Domain una interfaz mínima
+<code>IHasDomainEvents</code> y que <code>AggregateRoot&lt;TId&gt;</code> la implemente:</p>
+<pre><code class="lang-csharp">// Raftel.Domain/Abstractions/IHasDomainEvents.cs
+public interface IHasDomainEvents
+{
+    IReadOnlyCollection&lt;IDomainEvent&gt; DomainEvents { get; }
+    void ClearDomainEvents();
+}
+</code></pre>
+<p>Así el interceptor filtra con <code>ChangeTracker.Entries&lt;IHasDomainEvents&gt;()</code> sin
+reflexión sobre genéricos.</p>
+<p><strong>Modificar</strong> <code>DependencyInjection.cs</code> (<code>AddDataAccess</code>):</p>
+<ul>
+<li>Registrar <code>DomainEventsDispatchInterceptor</code> (<code>AddScoped</code>).</li>
+<li>Añadirlo a <code>.AddInterceptors(...)</code> junto a <code>AuditPropertiesInterceptor</code> y
+<code>TenantInterceptor</code>.</li>
+</ul>
+<h3 id="44-orden-de-ejecución-de-interceptores">4.4. Orden de ejecución de interceptores</h3>
+<p><code>SavingChanges</code>: Audit/Tenant ya operan aquí (mutan shadow properties antes de
+persistir). El despacho de eventos debe ir en <code>SavedChanges</code>/<code>SavedChangesAsync</code>
+(post-persistencia) para garantizar la semántica &quot;solo si commitea&quot;. Documentar
+explícitamente que <code>DomainEventsDispatchInterceptor</code> <strong>no</strong> modifica entidades.</p>
+<h2 id="5-demo-rafteldemo--ejemplo-canónico">5. Demo (<code>Raftel.Demo.*</code>) — ejemplo canónico</h2>
+<p>Para mantener el demo como showcase del framework:</p>
+<ul>
+<li><code>Raftel.Demo.Domain/Pirates/Events/PirateCrownedKing.cs</code>:
+<pre><code class="lang-csharp">public sealed record PirateCrownedKing(PirateId PirateId) : IDomainEvent
+{
+    public DateTimeOffset OccurredOn { get; } = DateTimeOffset.UtcNow;
+}
+</code></pre>
+</li>
+<li>Modificar <code>Pirate.FoundOnePiece()</code> para <code>RaiseDomainEvent(new PirateCrownedKing(Id))</code>.</li>
+<li><code>Raftel.Demo.Application/Pirates/.../PirateCrownedKingHandler.cs</code> implementando
+<code>IDomainEventHandler&lt;PirateCrownedKing&gt;</code> (ej.: log / proyección de ejemplo).</li>
+</ul>
+<h2 id="6-tests-tdd--test-antes-que-implementación">6. Tests (TDD — test antes que implementación)</h2>
+<h3 id="dominio-rafteldomaintests">Dominio (<code>Raftel.Domain.Tests</code>)</h3>
+<ul>
+<li><code>AggregateRoot</code> registra eventos al llamar un método de negocio.</li>
+<li><code>DomainEvents</code> es de solo lectura; <code>ClearDomainEvents</code> los vacía.</li>
+<li><code>RaiseDomainEvent</code> no es accesible desde fuera del agregado.</li>
+</ul>
+<h3 id="aplicación-raftelapplicationunittests">Aplicación (<code>Raftel.Application.UnitTests</code>)</h3>
+<ul>
+<li><code>DomainEventsDispatcher</code> invoca el handler correcto por tipo de evento.</li>
+<li>Evento sin handler → no falla (no-op).</li>
+<li>Evento con múltiples handlers → se invocan todos.</li>
+<li><code>DependencyInjectionTests</code>: los <code>IDomainEventHandler&lt;&gt;</code> se autodescubren.</li>
+</ul>
+<h3 id="infraestructura-raftelinfrastructuretests">Infraestructura (<code>Raftel.Infrastructure.Tests</code>)</h3>
+<ul>
+<li>Tras <code>CommitAsync</code>, los eventos de los agregados rastreados se despachan.</li>
+<li>Si la transacción no se confirma, no se despacha nada.</li>
+<li>Los eventos se vacían del agregado tras despacharse (no se reenvían en el
+siguiente <code>SaveChanges</code>).</li>
+<li>(Testcontainers/PostgreSql) test de integración end-to-end con el demo.</li>
+</ul>
+<h2 id="7-pasos-de-implementación-orden-sugerido-conventional-commits">7. Pasos de implementación (orden sugerido, conventional commits)</h2>
+<ol>
+<li><code>feat(domain): add IDomainEvent and domain event tracking to AggregateRoot</code>
+<ul>
+<li><code>IDomainEvent</code>, <code>IHasDomainEvents</code>, cambios en <code>AggregateRoot</code>, tests de dominio.</li>
+</ul>
+</li>
+<li><code>feat(application): add domain event handler abstraction and dispatcher</code>
+<ul>
+<li><code>IDomainEventHandler&lt;&gt;</code>, <code>IDomainEventsDispatcher</code> + impl., autodescubrimiento
+en DI, tests de aplicación.</li>
+</ul>
+</li>
+<li><code>feat(infrastructure): dispatch domain events after commit via interceptor</code>
+<ul>
+<li><code>DomainEventsDispatchInterceptor</code>, registro en DI, tests de integración.</li>
+</ul>
+</li>
+<li><code>feat(demo): showcase domain events with PirateCrownedKing</code>
+<ul>
+<li>evento + handler de ejemplo en el demo.</li>
+</ul>
+</li>
+<li><code>docs: document domain events in CLAUDE.md hierarchy and docs/</code>
+<ul>
+<li>actualizar los <code>CLAUDE.md</code> de Domain/Application/Infrastructure y <code>docs/</code>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="8-impacto-y-compatibilidad">8. Impacto y compatibilidad</h2>
+<ul>
+<li><strong>Retrocompatible.</strong> Los agregados existentes no cambian su comportamiento; la
+lista de eventos arranca vacía y solo se usa si un agregado llama a
+<code>RaiseDomainEvent</code>.</li>
+<li><strong>Sin nuevas dependencias de paquetes</strong> (<code>Directory.Packages.props</code> sin cambios).</li>
+<li><strong>Regla de dependencias entre capas</strong> intacta: Domain sigue sin EF Core; el
+despacho con <code>ChangeTracker</code> queda confinado a Infrastructure.</li>
+<li>Actualizar la documentación: <code>src/Raftel.Domain/CLAUDE.md</code> (patrón de eventos en
+agregados), <code>src/Raftel.Application/CLAUDE.md</code> (handlers de evento + dispatcher),
+<code>src/Raftel.Infrastructure/CLAUDE.md</code> (interceptor de despacho) y el <code>README.md</code>
+raíz (mención de Domain Events como capacidad del framework).</li>
+</ul>
+<h2 id="9-evolución-futura-fuera-del-alcance-de-esta-fase">9. Evolución futura (fuera del alcance de esta fase)</h2>
+<ul>
+<li><strong>Outbox pattern</strong>: persistir los eventos en la misma transacción y despacharlos
+asíncronamente para entrega fiable e idempotente.</li>
+<li><strong>Eventos de integración</strong>: mapear eventos de dominio a eventos de integración
+publicados a un bus (RabbitMQ/Kafka) para comunicación entre microservicios.</li>
+<li><strong>Despacho antes vs. después del commit configurable</strong> (pre-commit para eventos
+que deban participar en la misma transacción).</li>
+<li><strong>Reglas de re-entrada</strong>: handlers que levantan nuevos eventos / mutan agregados
+y disparan un nuevo <code>SaveChanges</code>.</li>
+</ul>
+<h2 id="10-criterios-de-aceptación">10. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Un agregado puede registrar eventos desde un método de negocio sin exponer
+la colección a mutación externa.</li>
+<li>[ ] Los eventos se despachan <strong>solo</strong> cuando la transacción se confirma.</li>
+<li>[ ] Los handlers de evento se autodescubren por ensamblado (sin registro manual).</li>
+<li>[ ] El demo &quot;Pirates&quot; muestra un evento de dominio y su handler.</li>
+<li>[ ] Domain sigue sin dependencias a EF Core ni a otras capas.</li>
+<li>[ ] Cobertura de tests en las tres capas (dominio, aplicación, infraestructura).</li>
+<li>[ ] <code>dotnet build Raftel.sln</code> y <code>dotnet test</code> en verde.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/domain-events-plan.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

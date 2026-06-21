@@ -83,7 +83,7 @@
     DatabaseOptions / DatabaseProvider   SqlServer | PostgreSql
     Configuration/                   IEntityTypeConfiguration per framework entity (User, Role, Tenant, Permission)
     Filters/                         IDataFilter + ISoftDeleteFilter/ITenantFilter + QueryFilterExtensions
-    Interceptors/                    AuditPropertiesInterceptor, TenantInterceptor, EntityChangesTrackerInterceptor
+    Interceptors/                    AuditPropertiesInterceptor, TenantInterceptor, EntityChangesTrackerInterceptor, DomainEventsDispatchInterceptor
     Repositories/&lt;Feature&gt;/          UsersRepository, TenantsRepository, RolesRepository
 Authentication/                      AuthenticationService, CurrentHttpUser, ClaimsPrincipalFactory, RaftelClaimTypes
 Multitenancy/                        CurrentTenant (AsyncLocal) + Middleware/TenantMiddleware
@@ -94,6 +94,7 @@ DependencyInjection.cs               AddRaftelData&lt;TDbContext&gt;(configurati
 <li><strong>DbContext</strong>: apps derive from <code>RaftelDbContext&lt;TDbContext&gt;</code>. Global filters (soft-delete + multitenancy) are applied via reflection on shadow properties and <strong>combine</strong> with any existing entity filter (<code>CombineQueryFilter</code>) — they don't overwrite.</li>
 <li><strong>Repositories</strong>: inherit from <code>EfRepository&lt;TDbContext, TAggregate, TId&gt;</code> and implement Domain interface. Most remain empty; add methods only for aggregate-specific queries.</li>
 <li><strong>Interceptors</strong> (EF <code>SaveChanges</code>): automate audit logging (creator/date), <code>TenantId</code> assignment, and change tracking without touching handlers. Registered and hooked in <code>AddDbContext</code>.</li>
+<li><strong>Domain events dispatch</strong>: <code>DomainEventsDispatchInterceptor</code> runs in <code>SavedChanges</code>/<code>SavedChangesAsync</code> (post-commit, not <code>SavingChanges</code>) — events only reach <code>IDomainEventsDispatcher</code> (Application) if the transaction actually committed. It reads <code>ChangeTracker.Entries&lt;IHasDomainEvents&gt;()</code> (the non-generic marker from Domain) instead of the generic <code>AggregateRoot&lt;TId&gt;</code>, collects <code>DomainEvents</code>, calls <code>ClearDomainEvents()</code>, then dispatches. It never mutates entities.</li>
 <li><strong>Disableable filters</strong>: <code>IDataFilter.Disable&lt;TFilter&gt;()</code> temporarily disables a filter with <code>AsyncLocal</code> + <code>IDisposable</code> (<code>using</code>), for admin tasks/jobs. Don't mutate global state.</li>
 <li><strong>End-to-end multitenancy</strong>: header <code>X-Tenant-Id</code> → <code>TenantMiddleware</code> → <code>ICurrentTenant</code> (AsyncLocal) → <code>TenantInterceptor</code> (writes) → query filter (reads).</li>
 <li><strong>Auth</strong>: ASP.NET Identity + OpenIddict (password flow + refresh token), self-hosted. Token endpoint at <code>/connect/token</code>.</li>

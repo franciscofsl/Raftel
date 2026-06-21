@@ -75,7 +75,7 @@
 
 <p>Domain layer (tactical DDD). <strong>Framework core: no dependencies to any other layer or EF Core.</strong> Contains reusable primitives (<code>Entity</code>, <code>Result</code>, <code>Specification</code>, <code>Validator</code>) and framework-owned domain features (<code>Users</code>, <code>Tenants</code>, <code>Authorization</code>).</p>
 <h2 id="structure">Structure</h2>
-<pre><code>Abstractions/        Error, Result/Result&lt;T&gt;, IRepository&lt;TEntity,TId&gt;
+<pre><code>Abstractions/        Error, Result/Result&lt;T&gt;, IRepository&lt;TEntity,TId&gt;, IDomainEvent, IHasDomainEvents
 BaseTypes/           Entity&lt;TId&gt;, AggregateRoot&lt;TId&gt;, TypedId&lt;T&gt;, TypedGuidId
 Specifications/      Specification&lt;T&gt; + And/OrSpecification (Expression&lt;Func&lt;T,bool&gt;&gt;)
 Validators/          Validator&lt;T&gt;, ValidationRule, ValidationResult (EnsureThat DSL)
@@ -101,6 +101,7 @@ Features/&lt;Feature&gt;/  One folder per aggregate:
 <li><strong>Specifications</strong>: encapsulate filters as <code>Expression&lt;Func&lt;T,bool&gt;&gt;</code> combinable with <code>And</code>/<code>Or</code>; translatable to SQL by EF Core. Use them for reusable query rules.</li>
 <li><strong>Validators</strong>: <code>Validator&lt;TCommand&gt;</code> with <code>EnsureThat(predicate, error)</code> in constructor. Live in Application alongside their command, but use this DSL.</li>
 <li><strong>Repositories</strong>: interface here, implementation in Infrastructure. Only for aggregate roots.</li>
+<li><strong>Domain events</strong>: <code>AggregateRoot&lt;TId&gt;</code> exposes <code>DomainEvents</code> (read-only) and <code>ClearDomainEvents()</code>, and implements <code>IHasDomainEvents</code> so Infrastructure can collect them without knowing the generic type. Business methods call the <code>protected RaiseDomainEvent(IDomainEvent)</code> to register an event — never expose it publicly. Events are <code>sealed record</code>, named in the past tense (<code>PirateCrownedKing</code>), implement <code>IDomainEvent</code> (<code>OccurredOn</code>), and live in <code>Features/&lt;Feature&gt;/Events/</code>. Dispatch is post-commit and owned by Infrastructure (<code>DomainEventsDispatchInterceptor</code>); Domain only tracks pending events.</li>
 </ul>
 <h2 id="conventions">Conventions</h2>
 <ul>

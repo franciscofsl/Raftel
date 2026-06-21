@@ -350,6 +350,62 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.yml\" sourcestartlinenumber=\"1\">Resolves the <xref href=\"Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler%601\" data-throw-if-not-resolved=\"false\"></xref> implementations registered for each\ndomain event's concrete type and invokes them. Events without a handler are a no-op.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler<TEvent>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler-1.yml\" sourcestartlinenumber=\"1\">Handles side effects triggered by a domain event of type <code class=\"typeparamref\">TEvent</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.yml\" sourcestartlinenumber=\"1\">Dispatches domain events to their registered <xref href=\"Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.DomainEvents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.DomainEvents.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.DomainEvents",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Abstractions.IRequest-1.yml",
       "output": {
         ".html": {
@@ -1411,6 +1467,34 @@
       "IsMRef": true,
       "Title": "Raftel.Domain.Abstractions.Error",
       "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.Error.yml\" sourcestartlinenumber=\"1\">Represents an error with a specific code and message.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Abstractions.IDomainEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Abstractions.IDomainEvent.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Abstractions.IDomainEvent",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.IDomainEvent.yml\" sourcestartlinenumber=\"1\">Marks an immutable domain event. Implement as a <code>sealed record</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Abstractions.IHasDomainEvents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Abstractions.IHasDomainEvents.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Abstractions.IHasDomainEvents",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.IHasDomainEvents.yml\" sourcestartlinenumber=\"1\">Exposes the pending domain events of an aggregate without requiring its generic\n<code>AggregateRoot&lt;TId&gt;</code> type, so infrastructure can collect and clear them via\n<code>ChangeTracker.Entries&lt;IHasDomainEvents&gt;()</code>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -2765,6 +2849,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/database-configuration.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/domain-events-plan.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/domain-events-plan.html"
         }
       },
       "version": ""

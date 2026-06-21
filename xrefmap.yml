@@ -734,6 +734,101 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.UserName
   nameWithType: ICurrentUser.UserName
+- uid: Raftel.Application.Abstractions.DomainEvents
+  name: Raftel.Application.Abstractions.DomainEvents
+  href: api/Raftel.Application.Abstractions.DomainEvents.html
+  commentId: N:Raftel.Application.Abstractions.DomainEvents
+  fullName: Raftel.Application.Abstractions.DomainEvents
+  nameWithType: Raftel.Application.Abstractions.DomainEvents
+- uid: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher
+  name: DomainEventsDispatcher
+  href: api/Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.html
+  commentId: T:Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher
+  fullName: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher
+  nameWithType: DomainEventsDispatcher
+- uid: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.#ctor(System.IServiceProvider)
+  name: DomainEventsDispatcher(IServiceProvider)
+  href: api/Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.html#Raftel_Application_Abstractions_DomainEvents_DomainEventsDispatcher__ctor_System_IServiceProvider_
+  commentId: M:Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.#ctor(System.IServiceProvider)
+  name.vb: New(IServiceProvider)
+  fullName: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.DomainEventsDispatcher(System.IServiceProvider)
+  fullName.vb: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.New(System.IServiceProvider)
+  nameWithType: DomainEventsDispatcher.DomainEventsDispatcher(IServiceProvider)
+  nameWithType.vb: DomainEventsDispatcher.New(IServiceProvider)
+- uid: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.#ctor*
+  name: DomainEventsDispatcher
+  href: api/Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.html#Raftel_Application_Abstractions_DomainEvents_DomainEventsDispatcher__ctor_
+  commentId: Overload:Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.DomainEventsDispatcher
+  fullName.vb: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.New
+  nameWithType: DomainEventsDispatcher.DomainEventsDispatcher
+  nameWithType.vb: DomainEventsDispatcher.New
+- uid: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.DispatchAsync(System.Collections.Generic.IReadOnlyCollection{Raftel.Domain.Abstractions.IDomainEvent},System.Threading.CancellationToken)
+  name: DispatchAsync(IReadOnlyCollection<IDomainEvent>, CancellationToken)
+  href: api/Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.html#Raftel_Application_Abstractions_DomainEvents_DomainEventsDispatcher_DispatchAsync_System_Collections_Generic_IReadOnlyCollection_Raftel_Domain_Abstractions_IDomainEvent__System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.DispatchAsync(System.Collections.Generic.IReadOnlyCollection{Raftel.Domain.Abstractions.IDomainEvent},System.Threading.CancellationToken)
+  name.vb: DispatchAsync(IReadOnlyCollection(Of IDomainEvent), CancellationToken)
+  fullName: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.DispatchAsync(System.Collections.Generic.IReadOnlyCollection<Raftel.Domain.Abstractions.IDomainEvent>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.DispatchAsync(System.Collections.Generic.IReadOnlyCollection(Of Raftel.Domain.Abstractions.IDomainEvent), System.Threading.CancellationToken)
+  nameWithType: DomainEventsDispatcher.DispatchAsync(IReadOnlyCollection<IDomainEvent>, CancellationToken)
+  nameWithType.vb: DomainEventsDispatcher.DispatchAsync(IReadOnlyCollection(Of IDomainEvent), CancellationToken)
+- uid: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.DispatchAsync*
+  name: DispatchAsync
+  href: api/Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.html#Raftel_Application_Abstractions_DomainEvents_DomainEventsDispatcher_DispatchAsync_
+  commentId: Overload:Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.DispatchAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.DispatchAsync
+  nameWithType: DomainEventsDispatcher.DispatchAsync
+- uid: Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1
+  name: IDomainEventHandler<TEvent>
+  href: api/Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler-1.html
+  commentId: T:Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1
+  name.vb: IDomainEventHandler(Of TEvent)
+  fullName: Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler<TEvent>
+  fullName.vb: Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler(Of TEvent)
+  nameWithType: IDomainEventHandler<TEvent>
+  nameWithType.vb: IDomainEventHandler(Of TEvent)
+- uid: Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1.HandleAsync(`0,System.Threading.CancellationToken)
+  name: HandleAsync(TEvent, CancellationToken)
+  href: api/Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler-1.html#Raftel_Application_Abstractions_DomainEvents_IDomainEventHandler_1_HandleAsync__0_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1.HandleAsync(`0,System.Threading.CancellationToken)
+  fullName: Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler<TEvent>.HandleAsync(TEvent, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler(Of TEvent).HandleAsync(TEvent, System.Threading.CancellationToken)
+  nameWithType: IDomainEventHandler<TEvent>.HandleAsync(TEvent, CancellationToken)
+  nameWithType.vb: IDomainEventHandler(Of TEvent).HandleAsync(TEvent, CancellationToken)
+- uid: Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler-1.html#Raftel_Application_Abstractions_DomainEvents_IDomainEventHandler_1_HandleAsync_
+  commentId: Overload:Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler<TEvent>.HandleAsync
+  fullName.vb: Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler(Of TEvent).HandleAsync
+  nameWithType: IDomainEventHandler<TEvent>.HandleAsync
+  nameWithType.vb: IDomainEventHandler(Of TEvent).HandleAsync
+- uid: Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher
+  name: IDomainEventsDispatcher
+  href: api/Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.html
+  commentId: T:Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher
+  fullName: Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher
+  nameWithType: IDomainEventsDispatcher
+- uid: Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.DispatchAsync(System.Collections.Generic.IReadOnlyCollection{Raftel.Domain.Abstractions.IDomainEvent},System.Threading.CancellationToken)
+  name: DispatchAsync(IReadOnlyCollection<IDomainEvent>, CancellationToken)
+  href: api/Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.html#Raftel_Application_Abstractions_DomainEvents_IDomainEventsDispatcher_DispatchAsync_System_Collections_Generic_IReadOnlyCollection_Raftel_Domain_Abstractions_IDomainEvent__System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.DispatchAsync(System.Collections.Generic.IReadOnlyCollection{Raftel.Domain.Abstractions.IDomainEvent},System.Threading.CancellationToken)
+  name.vb: DispatchAsync(IReadOnlyCollection(Of IDomainEvent), CancellationToken)
+  fullName: Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.DispatchAsync(System.Collections.Generic.IReadOnlyCollection<Raftel.Domain.Abstractions.IDomainEvent>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.DispatchAsync(System.Collections.Generic.IReadOnlyCollection(Of Raftel.Domain.Abstractions.IDomainEvent), System.Threading.CancellationToken)
+  nameWithType: IDomainEventsDispatcher.DispatchAsync(IReadOnlyCollection<IDomainEvent>, CancellationToken)
+  nameWithType.vb: IDomainEventsDispatcher.DispatchAsync(IReadOnlyCollection(Of IDomainEvent), CancellationToken)
+- uid: Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.DispatchAsync*
+  name: DispatchAsync
+  href: api/Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.html#Raftel_Application_Abstractions_DomainEvents_IDomainEventsDispatcher_DispatchAsync_
+  commentId: Overload:Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.DispatchAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.DispatchAsync
+  nameWithType: IDomainEventsDispatcher.DispatchAsync
 - uid: Raftel.Application.Abstractions.IRequestDispatcher
   name: IRequestDispatcher
   href: api/Raftel.Application.Abstractions.IRequestDispatcher.html
@@ -2826,6 +2921,57 @@ references:
   commentId: F:Raftel.Domain.Abstractions.Error.NullValue
   fullName: Raftel.Domain.Abstractions.Error.NullValue
   nameWithType: Error.NullValue
+- uid: Raftel.Domain.Abstractions.IDomainEvent
+  name: IDomainEvent
+  href: api/Raftel.Domain.Abstractions.IDomainEvent.html
+  commentId: T:Raftel.Domain.Abstractions.IDomainEvent
+  fullName: Raftel.Domain.Abstractions.IDomainEvent
+  nameWithType: IDomainEvent
+- uid: Raftel.Domain.Abstractions.IDomainEvent.OccurredOn
+  name: OccurredOn
+  href: api/Raftel.Domain.Abstractions.IDomainEvent.html#Raftel_Domain_Abstractions_IDomainEvent_OccurredOn
+  commentId: P:Raftel.Domain.Abstractions.IDomainEvent.OccurredOn
+  fullName: Raftel.Domain.Abstractions.IDomainEvent.OccurredOn
+  nameWithType: IDomainEvent.OccurredOn
+- uid: Raftel.Domain.Abstractions.IDomainEvent.OccurredOn*
+  name: OccurredOn
+  href: api/Raftel.Domain.Abstractions.IDomainEvent.html#Raftel_Domain_Abstractions_IDomainEvent_OccurredOn_
+  commentId: Overload:Raftel.Domain.Abstractions.IDomainEvent.OccurredOn
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IDomainEvent.OccurredOn
+  nameWithType: IDomainEvent.OccurredOn
+- uid: Raftel.Domain.Abstractions.IHasDomainEvents
+  name: IHasDomainEvents
+  href: api/Raftel.Domain.Abstractions.IHasDomainEvents.html
+  commentId: T:Raftel.Domain.Abstractions.IHasDomainEvents
+  fullName: Raftel.Domain.Abstractions.IHasDomainEvents
+  nameWithType: IHasDomainEvents
+- uid: Raftel.Domain.Abstractions.IHasDomainEvents.ClearDomainEvents
+  name: ClearDomainEvents()
+  href: api/Raftel.Domain.Abstractions.IHasDomainEvents.html#Raftel_Domain_Abstractions_IHasDomainEvents_ClearDomainEvents
+  commentId: M:Raftel.Domain.Abstractions.IHasDomainEvents.ClearDomainEvents
+  fullName: Raftel.Domain.Abstractions.IHasDomainEvents.ClearDomainEvents()
+  nameWithType: IHasDomainEvents.ClearDomainEvents()
+- uid: Raftel.Domain.Abstractions.IHasDomainEvents.ClearDomainEvents*
+  name: ClearDomainEvents
+  href: api/Raftel.Domain.Abstractions.IHasDomainEvents.html#Raftel_Domain_Abstractions_IHasDomainEvents_ClearDomainEvents_
+  commentId: Overload:Raftel.Domain.Abstractions.IHasDomainEvents.ClearDomainEvents
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IHasDomainEvents.ClearDomainEvents
+  nameWithType: IHasDomainEvents.ClearDomainEvents
+- uid: Raftel.Domain.Abstractions.IHasDomainEvents.DomainEvents
+  name: DomainEvents
+  href: api/Raftel.Domain.Abstractions.IHasDomainEvents.html#Raftel_Domain_Abstractions_IHasDomainEvents_DomainEvents
+  commentId: P:Raftel.Domain.Abstractions.IHasDomainEvents.DomainEvents
+  fullName: Raftel.Domain.Abstractions.IHasDomainEvents.DomainEvents
+  nameWithType: IHasDomainEvents.DomainEvents
+- uid: Raftel.Domain.Abstractions.IHasDomainEvents.DomainEvents*
+  name: DomainEvents
+  href: api/Raftel.Domain.Abstractions.IHasDomainEvents.html#Raftel_Domain_Abstractions_IHasDomainEvents_DomainEvents_
+  commentId: Overload:Raftel.Domain.Abstractions.IHasDomainEvents.DomainEvents
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IHasDomainEvents.DomainEvents
+  nameWithType: IHasDomainEvents.DomainEvents
 - uid: Raftel.Domain.Abstractions.IRepository`2
   name: IRepository<TEntity, TId>
   href: api/Raftel.Domain.Abstractions.IRepository-2.html
@@ -3639,6 +3785,57 @@ references:
   fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId).New
   nameWithType: AggregateRoot<TId>.AggregateRoot
   nameWithType.vb: AggregateRoot(Of TId).New
+- uid: Raftel.Domain.BaseTypes.AggregateRoot`1.ClearDomainEvents
+  name: ClearDomainEvents()
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_ClearDomainEvents
+  commentId: M:Raftel.Domain.BaseTypes.AggregateRoot`1.ClearDomainEvents
+  fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>.ClearDomainEvents()
+  fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId).ClearDomainEvents()
+  nameWithType: AggregateRoot<TId>.ClearDomainEvents()
+  nameWithType.vb: AggregateRoot(Of TId).ClearDomainEvents()
+- uid: Raftel.Domain.BaseTypes.AggregateRoot`1.ClearDomainEvents*
+  name: ClearDomainEvents
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_ClearDomainEvents_
+  commentId: Overload:Raftel.Domain.BaseTypes.AggregateRoot`1.ClearDomainEvents
+  isSpec: "True"
+  fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>.ClearDomainEvents
+  fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId).ClearDomainEvents
+  nameWithType: AggregateRoot<TId>.ClearDomainEvents
+  nameWithType.vb: AggregateRoot(Of TId).ClearDomainEvents
+- uid: Raftel.Domain.BaseTypes.AggregateRoot`1.DomainEvents
+  name: DomainEvents
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_DomainEvents
+  commentId: P:Raftel.Domain.BaseTypes.AggregateRoot`1.DomainEvents
+  fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>.DomainEvents
+  fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId).DomainEvents
+  nameWithType: AggregateRoot<TId>.DomainEvents
+  nameWithType.vb: AggregateRoot(Of TId).DomainEvents
+- uid: Raftel.Domain.BaseTypes.AggregateRoot`1.DomainEvents*
+  name: DomainEvents
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_DomainEvents_
+  commentId: Overload:Raftel.Domain.BaseTypes.AggregateRoot`1.DomainEvents
+  isSpec: "True"
+  fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>.DomainEvents
+  fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId).DomainEvents
+  nameWithType: AggregateRoot<TId>.DomainEvents
+  nameWithType.vb: AggregateRoot(Of TId).DomainEvents
+- uid: Raftel.Domain.BaseTypes.AggregateRoot`1.RaiseDomainEvent(Raftel.Domain.Abstractions.IDomainEvent)
+  name: RaiseDomainEvent(IDomainEvent)
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_RaiseDomainEvent_Raftel_Domain_Abstractions_IDomainEvent_
+  commentId: M:Raftel.Domain.BaseTypes.AggregateRoot`1.RaiseDomainEvent(Raftel.Domain.Abstractions.IDomainEvent)
+  fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>.RaiseDomainEvent(Raftel.Domain.Abstractions.IDomainEvent)
+  fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId).RaiseDomainEvent(Raftel.Domain.Abstractions.IDomainEvent)
+  nameWithType: AggregateRoot<TId>.RaiseDomainEvent(IDomainEvent)
+  nameWithType.vb: AggregateRoot(Of TId).RaiseDomainEvent(IDomainEvent)
+- uid: Raftel.Domain.BaseTypes.AggregateRoot`1.RaiseDomainEvent*
+  name: RaiseDomainEvent
+  href: api/Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_RaiseDomainEvent_
+  commentId: Overload:Raftel.Domain.BaseTypes.AggregateRoot`1.RaiseDomainEvent
+  isSpec: "True"
+  fullName: Raftel.Domain.BaseTypes.AggregateRoot<TId>.RaiseDomainEvent
+  fullName.vb: Raftel.Domain.BaseTypes.AggregateRoot(Of TId).RaiseDomainEvent
+  nameWithType: AggregateRoot<TId>.RaiseDomainEvent
+  nameWithType.vb: AggregateRoot(Of TId).RaiseDomainEvent
 - uid: Raftel.Domain.BaseTypes.Entity`1
   name: Entity<TId>
   href: api/Raftel.Domain.BaseTypes.Entity-1.html

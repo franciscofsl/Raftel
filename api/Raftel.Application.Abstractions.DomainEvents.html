@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Namespace Raftel.Domain.Abstractions | Raftel </title>
+      <title>Namespace Raftel.Application.Abstractions.DomainEvents | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Namespace Raftel.Domain.Abstractions | Raftel ">
+      <meta name="title" content="Namespace Raftel.Application.Abstractions.DomainEvents | Raftel ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -84,9 +84,9 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Domain.Abstractions">
+        <article data-uid="Raftel.Application.Abstractions.DomainEvents">
 
-  <h1 id="Raftel_Domain_Abstractions" data-uid="Raftel.Domain.Abstractions" class="text-break">Namespace Raftel.Domain.Abstractions</h1>
+  <h1 id="Raftel_Application_Abstractions_DomainEvents" data-uid="Raftel.Application.Abstractions.DomainEvents" class="text-break">Namespace Raftel.Application.Abstractions.DomainEvents</h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="markdown level0 remarks"></div>
@@ -95,38 +95,22 @@
 Classes
 </h3>
     <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.Error.html">Error</a></dt>
-      <dd><p>Represents an error with a specific code and message.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a></dt>
-      <dd><p>Represents the result of an operation, encapsulating success or failure information.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result&lt;TValue&gt;</a></dt>
-      <dd><p>Represents the result of an operation with a value.</p>
+      <dt><a class="xref" href="Raftel.Application.Abstractions.DomainEvents.DomainEventsDispatcher.html">DomainEventsDispatcher</a></dt>
+      <dd><p>Resolves the <a class="xref" href="Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler-1.html">IDomainEventHandler&lt;TEvent&gt;</a> implementations registered for each
+domain event's concrete type and invokes them. Events without a handler are a no-op.</p>
 </dd>
     </dl>
     <h3 id="interfaces">
 Interfaces
 </h3>
     <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.IDomainEvent.html">IDomainEvent</a></dt>
-      <dd><p>Marks an immutable domain event. Implement as a <code>sealed record</code>.</p>
+      <dt><a class="xref" href="Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler-1.html">IDomainEventHandler&lt;TEvent&gt;</a></dt>
+      <dd><p>Handles side effects triggered by a domain event of type <code class="typeparamref">TEvent</code>.</p>
 </dd>
     </dl>
     <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.IHasDomainEvents.html">IHasDomainEvents</a></dt>
-      <dd><p>Exposes the pending domain events of an aggregate without requiring its generic
-<code>AggregateRoot&lt;TId&gt;</code> type, so infrastructure can collect and clear them via
-<code>ChangeTracker.Entries&lt;IHasDomainEvents&gt;()</code>.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html">IRepository&lt;TEntity, TId&gt;</a></dt>
-      <dd><p>Defines a generic repository interface for managing aggregate root entities.</p>
+      <dt><a class="xref" href="Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.html">IDomainEventsDispatcher</a></dt>
+      <dd><p>Dispatches domain events to their registered <a class="xref" href="Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler-1.html">IDomainEventHandler&lt;TEvent&gt;</a>.</p>
 </dd>
     </dl>
 

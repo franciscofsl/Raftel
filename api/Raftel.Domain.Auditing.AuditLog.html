@@ -103,7 +103,7 @@ Raftel command or query.</p>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class AuditLog : AggregateRoot&lt;AuditLogId&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class AuditLog : AggregateRoot&lt;AuditLogId&gt;, IHasDomainEvents</code></pre>
   </div>
 
 
@@ -119,11 +119,23 @@ Raftel command or query.</p>
     </dd>
   </dl>
 
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="Raftel.Domain.Abstractions.IHasDomainEvents.html">IHasDomainEvents</a></div>
+    </dd>
+  </dl>
 
 
   <dl class="typelist inheritedMembers">
     <dt>Inherited Members</dt>
     <dd>
+    <div>
+      <a class="xref" href="Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_DomainEvents">AggregateRoot&lt;AuditLogId&gt;.DomainEvents</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_ClearDomainEvents">AggregateRoot&lt;AuditLogId&gt;.ClearDomainEvents()</a>
+    </div>
     <div>
       <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id">Entity&lt;AuditLogId&gt;.Id</a>
     </div>

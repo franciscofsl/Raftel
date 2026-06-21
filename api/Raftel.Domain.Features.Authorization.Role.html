@@ -101,7 +101,7 @@ Class Role  <a class="header-action link-secondary" title="View source" href="ht
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Role : AggregateRoot&lt;RoleId&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Role : AggregateRoot&lt;RoleId&gt;, IHasDomainEvents</code></pre>
   </div>
 
 
@@ -117,11 +117,23 @@ Class Role  <a class="header-action link-secondary" title="View source" href="ht
     </dd>
   </dl>
 
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="Raftel.Domain.Abstractions.IHasDomainEvents.html">IHasDomainEvents</a></div>
+    </dd>
+  </dl>
 
 
   <dl class="typelist inheritedMembers">
     <dt>Inherited Members</dt>
     <dd>
+    <div>
+      <a class="xref" href="Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_DomainEvents">AggregateRoot&lt;RoleId&gt;.DomainEvents</a>
+    </div>
+    <div>
+      <a class="xref" href="Raftel.Domain.BaseTypes.AggregateRoot-1.html#Raftel_Domain_BaseTypes_AggregateRoot_1_ClearDomainEvents">AggregateRoot&lt;RoleId&gt;.ClearDomainEvents()</a>
+    </div>
     <div>
       <a class="xref" href="Raftel.Domain.BaseTypes.Entity-1.html#Raftel_Domain_BaseTypes_Entity_1_Id">Entity&lt;RoleId&gt;.Id</a>
     </div>

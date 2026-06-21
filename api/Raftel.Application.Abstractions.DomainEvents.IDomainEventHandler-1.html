@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class DependencyInjection | Raftel </title>
+      <title>Interface IDomainEventHandler&lt;TEvent&gt; | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class DependencyInjection | Raftel ">
+      <meta name="title" content="Interface IDomainEventHandler&lt;TEvent&gt; | Raftel ">
       
-      
+      <meta name="description" content="Handles side effects triggered by a domain event of type TEvent.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_DependencyInjection.md&amp;value=---%0Auid%3A%20Raftel.Application.DependencyInjection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Abstractions_DomainEvents_IDomainEventHandler_1.md&amp;value=---%0Auid%3A%20Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,64 +84,39 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Application.DependencyInjection">
+        <article data-uid="Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1">
 
 
 
-  <h1 id="Raftel_Application_DependencyInjection" data-uid="Raftel.Application.DependencyInjection" class="text-break">
-Class DependencyInjection  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/DependencyInjection.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Application_Abstractions_DomainEvents_IDomainEventHandler_1" data-uid="Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1" class="text-break">
+Interface IDomainEventHandler&lt;TEvent&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/DomainEvents/IDomainEventHandler.cs/#L9"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Application.html">Application</a></dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Application.html">Application</a>.<a class="xref" href="Raftel.Application.Abstractions.html">Abstractions</a>.<a class="xref" href="Raftel.Application.Abstractions.DomainEvents.html">DomainEvents</a></dd></dl>
   <dl><dt>Assembly</dt><dd>Raftel.Application.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Handles side effects triggered by a domain event of type <code class="typeparamref">TEvent</code>.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class DependencyInjection</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IDomainEventHandler&lt;in TEvent&gt; where TEvent : IDomainEvent</code></pre>
   </div>
 
 
 
-
-  <dl class="typelist inheritance">
-    <dt>Inheritance</dt>
-    <dd>
-      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">DependencyInjection</span></div>
-    </dd>
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TEvent</code></dt>
+    <dd><p>The type of domain event to handle.</p>
+</dd>
   </dl>
 
 
 
-  <dl class="typelist inheritedMembers">
-    <dt>Inherited Members</dt>
-    <dd>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
-    </div>
-  </dd></dl>
+
 
 
 
@@ -152,28 +127,33 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
 </h2>
 
 
-  <a id="Raftel_Application_DependencyInjection_AddRaftelApplication_" data-uid="Raftel.Application.DependencyInjection.AddRaftelApplication*"></a>
+  <a id="Raftel_Application_Abstractions_DomainEvents_IDomainEventHandler_1_HandleAsync_" data-uid="Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1.HandleAsync*"></a>
 
-  <h3 id="Raftel_Application_DependencyInjection_AddRaftelApplication_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Raftel_Application_IRaftelApplicationBuilder__" data-uid="Raftel.Application.DependencyInjection.AddRaftelApplication(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Raftel.Application.IRaftelApplicationBuilder})">
-  AddRaftelApplication(IServiceCollection, Action&lt;IRaftelApplicationBuilder&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/DependencyInjection.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Application_Abstractions_DomainEvents_IDomainEventHandler_1_HandleAsync__0_System_Threading_CancellationToken_" data-uid="Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1.HandleAsync(`0,System.Threading.CancellationToken)">
+  HandleAsync(TEvent, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/DomainEvents/IDomainEventHandler.cs/#L11"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void AddRaftelApplication(this IServiceCollection services, Action&lt;IRaftelApplicationBuilder&gt; configure)</code></pre>
+    <pre><code class="lang-csharp hljs">Task HandleAsync(TEvent domainEvent, CancellationToken cancellationToken = default)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>services</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a></dt>
+    <dt><code>domainEvent</code> <span class="xref">TEvent</span></dt>
     <dd></dd>
-    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Raftel.Application.IRaftelApplicationBuilder.html">IRaftelApplicationBuilder</a>&gt;</dt>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
     <dd></dd>
   </dl>
 
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -189,7 +169,7 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/DependencyInjection.cs/#L15" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/DomainEvents/IDomainEventHandler.cs/#L9" class="edit-link">Edit this page</a>
         </div>
 
 
