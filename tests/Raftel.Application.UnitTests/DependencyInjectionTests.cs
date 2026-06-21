@@ -1,11 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Raftel.Application.Abstractions.DomainEvents;
 using Raftel.Application.Commands;
 using Raftel.Application.Middlewares;
 using Raftel.Application.Queries;
 using Raftel.Application.UnitTests.Abstractions;
 using Raftel.Demo.Application.Pirates.CreatePirate;
+using Raftel.Demo.Application.Pirates.Events;
 using Raftel.Demo.Application.Pirates.GetPirateById;
 using Raftel.Demo.Domain.Pirates;
+using Raftel.Demo.Domain.Pirates.Events;
 using Raftel.Domain.Validators;
 using Shouldly;
 
@@ -66,6 +69,28 @@ public class DependencyInjectionTests
 
         validator.ShouldNotBeNull();
         validator.ShouldBeOfType<CreatePirateCommandValidator>();
+    }
+
+    [Fact]
+    public void AddRaftelApplication_ShouldRegisterDomainEventHandler_FromAssembly()
+    {
+        var provider = BuildServiceProvider();
+
+        var handler = provider.GetService<IDomainEventHandler<PirateCrownedKing>>();
+
+        handler.ShouldNotBeNull();
+        handler.ShouldBeOfType<PirateCrownedKingHandler>();
+    }
+
+    [Fact]
+    public void AddRaftelApplication_ShouldRegisterDomainEventsDispatcher()
+    {
+        var provider = BuildServiceProvider();
+
+        var dispatcher = provider.GetService<IDomainEventsDispatcher>();
+
+        dispatcher.ShouldNotBeNull();
+        dispatcher.ShouldBeOfType<DomainEventsDispatcher>();
     }
 
     private static ServiceProvider BuildServiceProvider()

@@ -16,6 +16,7 @@
 - **Integrated testing**: with code coverage and continuous integration from the start.
 - **Docker-ready development environment**: quickly spin up dependencies like databases with a single command.
 - **No external dependencies**: all code is built purely on the .NET platform, without additional frameworks.
+- **Domain events**: aggregates raise events that are dispatched in-process after a successful commit, for decoupled side effects between features.
 
 ## ⚙️ Requirements
 

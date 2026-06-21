@@ -73,7 +73,8 @@ public static class DependencyInjection
                 .AddInterceptors(
                     serviceProvider.GetRequiredService<AuditPropertiesInterceptor>(),
                     serviceProvider.GetRequiredService<TenantInterceptor>(),
-                    serviceProvider.GetRequiredService<EntityChangesTrackerInterceptor>());
+                    serviceProvider.GetRequiredService<EntityChangesTrackerInterceptor>(),
+                    serviceProvider.GetRequiredService<DomainEventsDispatchInterceptor>());
         });
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TDbContext>());
@@ -82,6 +83,7 @@ public static class DependencyInjection
         services.AddSingleton(TimeProvider.System);
         services.AddScoped<AuditPropertiesInterceptor>();
         services.AddScoped<TenantInterceptor>();
+        services.AddScoped<DomainEventsDispatchInterceptor>();
 
         services.AddAuditing(configureAudit);
 
