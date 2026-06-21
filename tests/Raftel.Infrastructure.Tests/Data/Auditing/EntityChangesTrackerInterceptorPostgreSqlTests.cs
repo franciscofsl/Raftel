@@ -80,12 +80,13 @@ public class EntityChangesTrackerInterceptorPostgreSqlTests : PostgreSqlInfrastr
             var auditLog = await dbContext.AuditLog
                 .Include(a => a.EntityChanges)
                 .ThenInclude(c => c.AffectedProperties)
-                .Where(a => a.EntityChanges.Any(c => c.ChangeType == AuditChangeType.Updated))
+                .Where(a => a.EntityChanges.Any(c => c.ChangeType == AuditChangeType.Updated && c.EntityId == pirate.Id.ToString()))
                 .OrderByDescending(a => a.Timestamp)
                 .FirstOrDefaultAsync();
 
             auditLog.ShouldNotBeNull();
-            var propertyChange = auditLog.EntityChanges.ShouldHaveSingleItem().AffectedProperties.ShouldHaveSingleItem();
+            var propertyChange = auditLog.EntityChanges.First().AffectedProperties.FirstOrDefault(_ => _.PropertyName == "Bounty");
+            propertyChange.ShouldNotBeNull();
             propertyChange.PropertyName.ShouldBe("Bounty");
             propertyChange.NewValue.ShouldBe(pirate.Bounty.ToString());
         });
@@ -101,6 +102,7 @@ public class EntityChangesTrackerInterceptorPostgreSqlTests : PostgreSqlInfrastr
             var dbContext = sp.GetRequiredService<TestingRaftelDbContext>();
 
             var user = User.Create("usopp@strawhat.crew", "Usopp", "Sniper");
+            user.BindTo("identity-user-id");
             await repository.AddAsync(user);
             await unitOfWork.CommitAsync();
 

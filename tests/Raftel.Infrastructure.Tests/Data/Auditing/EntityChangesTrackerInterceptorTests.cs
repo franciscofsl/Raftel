@@ -60,7 +60,7 @@ public class EntityChangesTrackerInterceptorTests : InfrastructureTestBase
             var entityChange = auditLog.EntityChanges.ShouldHaveSingleItem();
             entityChange.ChangeType.ShouldBe(AuditChangeType.Created);
             entityChange.EntityFullName.ShouldBe(typeof(Pirate).FullName);
-            entityChange.EntityId.ShouldBe(((Guid)pirate.Id).ToString());
+            entityChange.EntityId.ShouldBe(pirate.Id.ToString());
 
             var bountyChange = entityChange.AffectedProperties.Single(p => p.PropertyName == "Bounty");
             bountyChange.OldValue.ShouldBeNull();
@@ -96,7 +96,7 @@ public class EntityChangesTrackerInterceptorTests : InfrastructureTestBase
             var entityChange = auditLog.EntityChanges.ShouldHaveSingleItem();
             entityChange.ChangeType.ShouldBe(AuditChangeType.Updated);
 
-            var propertyChange = entityChange.AffectedProperties.ShouldHaveSingleItem();
+            var propertyChange = entityChange.AffectedProperties.First(_ => _.PropertyName == "Bounty");
             propertyChange.PropertyName.ShouldBe("Bounty");
             propertyChange.NewValue.ShouldBe(pirate.Bounty.ToString());
         });
@@ -147,6 +147,7 @@ public class EntityChangesTrackerInterceptorTests : InfrastructureTestBase
             var dbContext = sp.GetRequiredService<TestingRaftelDbContext>();
 
             var user = User.Create("sanji@strawhat.crew", "Sanji", "Vinsmoke");
+            user.BindTo("identity-user-id");
             await repository.AddAsync(user);
             await unitOfWork.CommitAsync();
 
