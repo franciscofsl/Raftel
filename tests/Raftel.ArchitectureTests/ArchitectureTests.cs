@@ -29,7 +29,7 @@ public class ArchitectureTests
             .NotHaveDependencyOnAny(ApplicationNamespace, InfrastructureNamespace)
             .GetResult();
 
-        result.IsSuccessful.ShouldBeTrue(FailureMessage("Domain no debe depender de otras capas", result));
+        result.IsSuccessful.ShouldBeTrue(FailureMessage("Domain must not depend on other layers", result));
     }
 
     [Fact]
@@ -40,7 +40,7 @@ public class ArchitectureTests
             .NotHaveDependencyOn(EntityFrameworkCore)
             .GetResult();
 
-        result.IsSuccessful.ShouldBeTrue(FailureMessage("EF Core esta prohibido en Domain", result));
+        result.IsSuccessful.ShouldBeTrue(FailureMessage("EF Core is prohibited in Domain", result));
     }
 
     [Fact]
@@ -53,7 +53,7 @@ public class ArchitectureTests
             .NotHaveDependencyOn(ApiAssembly.GetName().Name!)
             .GetResult();
 
-        result.IsSuccessful.ShouldBeTrue(FailureMessage("Application solo debe depender de Domain", result));
+        result.IsSuccessful.ShouldBeTrue(FailureMessage("Application must only depend on Domain", result));
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class ArchitectureTests
             .NotHaveDependencyOn(EntityFrameworkCore)
             .GetResult();
 
-        result.IsSuccessful.ShouldBeTrue(FailureMessage("EF Core esta prohibido en Application", result));
+        result.IsSuccessful.ShouldBeTrue(FailureMessage("EF Core is prohibited in Application", result));
     }
 
     [Fact]
@@ -75,7 +75,7 @@ public class ArchitectureTests
             .NotHaveDependencyOn(AspNetCore)
             .GetResult();
 
-        result.IsSuccessful.ShouldBeTrue(FailureMessage("ASP.NET Core esta prohibido en Application", result));
+        result.IsSuccessful.ShouldBeTrue(FailureMessage("ASP.NET Core is prohibited in Application", result));
     }
 
     [Fact]
@@ -86,7 +86,7 @@ public class ArchitectureTests
             .NotHaveDependencyOn(InfrastructureNamespace)
             .GetResult();
 
-        result.IsSuccessful.ShouldBeTrue(FailureMessage("Api.Server no debe depender de Infrastructure", result));
+        result.IsSuccessful.ShouldBeTrue(FailureMessage("Api.Server must not depend on Infrastructure", result));
     }
 
     [Fact]
@@ -97,7 +97,7 @@ public class ArchitectureTests
             .NotHaveDependencyOn(EntityFrameworkCore)
             .GetResult();
 
-        result.IsSuccessful.ShouldBeTrue(FailureMessage("EF Core esta prohibido en Api.Server", result));
+        result.IsSuccessful.ShouldBeTrue(FailureMessage("EF Core is prohibited in Api.Server", result));
     }
 
     private static string FailureMessage(string rule, TestResult result)
@@ -106,6 +106,6 @@ public class ArchitectureTests
             ? "-"
             : string.Join(", ", result.FailingTypeNames);
 
-        return $"{rule}. Tipos infractores: {offenders}";
+        return $"{rule}. Bad types: {offenders}";
     }
 }
