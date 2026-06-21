@@ -8,9 +8,17 @@ using Raftel.Infrastructure.Data;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
+[Collection(SqlServerTestCollection.Name)]
 public class UserAuditingTests : InfrastructureTestBase
 {
     private static readonly Guid TestUserId = Guid.NewGuid();
+
+    private readonly SqlServerTestContainerFixture _fixture;
+
+    public UserAuditingTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+        _fixture = fixture;
+    }
 
     protected override void ConfigureServices(IServiceCollection services)
     {
@@ -74,39 +82,29 @@ public class UserAuditingTests : InfrastructureTestBase
     [Fact]
     public async Task AddAsync_WithoutCurrentUser_ShouldSetCreationTimeButNotCreatorId()
     {
-        // Create a new test without ICurrentUser
+        // Create a new service provider without ICurrentUser, reusing the shared container
         var services = new ServiceCollection();
-        var fixture = new SqlServerTestContainerFixture();
-        await fixture.InitializeAsync();
+        services.AddSampleInfrastructure(_fixture.ConnectionString);
+        // Don't register ICurrentUser
+        using var serviceProvider = services.BuildServiceProvider(validateScopes: true);
 
-        try
-        {
-            services.AddSampleInfrastructure(fixture.ConnectionString);
-            // Don't register ICurrentUser
-            var serviceProvider = services.BuildServiceProvider(validateScopes: true);
+        using var scope = serviceProvider.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<TestingRaftelDbContext>();
+        await context.Database.EnsureCreatedAsync();
 
-            using var scope = serviceProvider.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<TestingRaftelDbContext>();
-            await context.Database.EnsureCreatedAsync();
+        var pirate = Pirate.Normal("Nami", 66_000_000);
+        var repository = scope.ServiceProvider.GetRequiredService<IPirateRepository>();
+        var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
 
-            var pirate = Pirate.Normal("Nami", 66_000_000);
-            var repository = scope.ServiceProvider.GetRequiredService<IPirateRepository>();
-            var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
+        await repository.AddAsync(pirate);
+        await unitOfWork.CommitAsync();
 
-            await repository.AddAsync(pirate);
-            await unitOfWork.CommitAsync();
+        var entry = context.Entry(pirate);
+        var creatorId = entry.Property<Guid?>(ShadowPropertyNames.CreatorId).CurrentValue;
+        var creationTime = entry.Property<DateTime?>(ShadowPropertyNames.CreationTime).CurrentValue;
 
-            var entry = context.Entry(pirate);
-            var creatorId = entry.Property<Guid?>(ShadowPropertyNames.CreatorId).CurrentValue;
-            var creationTime = entry.Property<DateTime?>(ShadowPropertyNames.CreationTime).CurrentValue;
-
-            creatorId.ShouldBeNull();
-            creationTime.ShouldNotBeNull();
-        }
-        finally
-        {
-            await fixture.DisposeAsync();
-        }
+        creatorId.ShouldBeNull();
+        creationTime.ShouldNotBeNull();
     }
 
     private class TestCurrentUser : ICurrentUser

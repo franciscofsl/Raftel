@@ -7,8 +7,13 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
+[Collection(SqlServerTestCollection.Name)]
 public class EfRepositoryTests : InfrastructureTestBase
 {
+    public EfRepositoryTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
     [Fact]
     public async Task GetByIdAsync_ShouldRetrieveExpectedData()
     {

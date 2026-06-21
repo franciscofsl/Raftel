@@ -5,7 +5,8 @@ using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;
 
-public class ApiDefinitionTests : IClassFixture<ApiTestFactory>
+[Collection(ApiTestCollection.Name)]
+public class ApiDefinitionTests
 {
     private readonly HttpClient _client;
 

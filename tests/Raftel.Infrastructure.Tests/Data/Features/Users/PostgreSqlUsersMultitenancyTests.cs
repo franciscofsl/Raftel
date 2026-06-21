@@ -6,8 +6,13 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Tests.Data.Features.Users;
 
+[Collection(PostgreSqlTestCollection.Name)]
 public class PostgreSqlUsersMultitenancyTests : PostgreSqlInfrastructureTestBase
 {
+    public PostgreSqlUsersMultitenancyTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
     [Fact]
     public async Task GetByIdAsync_ShouldReturnNull_WhenPirateIsFromDifferentTenant_WithPostgreSql()
     {
