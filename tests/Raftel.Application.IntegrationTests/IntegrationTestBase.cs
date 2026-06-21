@@ -58,6 +58,7 @@ public abstract class IntegrationTestBase : IAsyncLifetime
             cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommandHandler).Assembly);
             cfg.AddGlobalMiddleware(typeof(PermissionAuthorizationMiddleware<,>));
             cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
+            cfg.AddGlobalMiddleware(typeof(AuditLogMiddleware<,>));
             cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
             cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<,>));
         });

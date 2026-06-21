@@ -8,12 +8,15 @@ using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
 using Raftel.Application;
 using Raftel.Application.Abstractions.Authentication;
+using Raftel.Application.Abstractions.Auditing;
 using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Domain.Features.Authorization;
 using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Users;
+using Raftel.Infrastructure.Auditing;
 using Raftel.Infrastructure.Authentication;
 using Raftel.Infrastructure.Data;
+using Raftel.Infrastructure.Data.Auditing;
 using Raftel.Infrastructure.Data.Filters;
 using Raftel.Infrastructure.Data.Interceptors;
 using Raftel.Infrastructure.Data.Repositories.Authorization;
@@ -28,10 +31,11 @@ public static class DependencyInjection
     public static IServiceCollection AddRaftelData<TDbContext>(
         this IServiceCollection services,
         IConfiguration configuration,
-        string connectionStringName = "Default")
+        string connectionStringName = "Default",
+        Action<AuditOptions>? configureAudit = null)
         where TDbContext : RaftelDbContext<TDbContext>
     {
-        services.AddDataAccess<TDbContext>(configuration, connectionStringName);
+        services.AddDataAccess<TDbContext>(configuration, connectionStringName, configureAudit);
         services.AddAuthentication<TDbContext>();
 
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
@@ -41,8 +45,11 @@ public static class DependencyInjection
         return services;
     }
 
-    private static void AddDataAccess<TDbContext>(this IServiceCollection services, IConfiguration configuration,
-        string connectionStringName)
+    private static void AddDataAccess<TDbContext>(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        string connectionStringName,
+        Action<AuditOptions>? configureAudit)
         where TDbContext : RaftelDbContext<TDbContext>
     {
         var connectionString = configuration.GetConnectionString(connectionStringName)
@@ -65,7 +72,8 @@ public static class DependencyInjection
                 .UseOpenIddict()
                 .AddInterceptors(
                     serviceProvider.GetRequiredService<AuditPropertiesInterceptor>(),
-                    serviceProvider.GetRequiredService<TenantInterceptor>());
+                    serviceProvider.GetRequiredService<TenantInterceptor>(),
+                    serviceProvider.GetRequiredService<EntityChangesTrackerInterceptor>());
         });
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TDbContext>());
@@ -75,9 +83,25 @@ public static class DependencyInjection
         services.AddScoped<AuditPropertiesInterceptor>();
         services.AddScoped<TenantInterceptor>();
 
+        services.AddAuditing(configureAudit);
+
         services.AddScoped(typeof(IUsersRepository), typeof(UsersRepository<TDbContext>));
         services.AddScoped(typeof(ITenantsRepository), typeof(TenantsRepository<TDbContext>));
         services.AddScoped(typeof(IRolesRepository), typeof(RolesRepository<TDbContext>));
+    }
+
+    private static void AddAuditing(this IServiceCollection services, Action<AuditOptions>? configureAudit)
+    {
+        var auditOptions = new AuditOptions();
+        configureAudit?.Invoke(auditOptions);
+
+        services.AddSingleton(auditOptions);
+        services.AddScoped<IAuditLogScope, AuditLogScope>();
+        services.AddScoped<IAuditValueSerializer, AuditValueSerializer>();
+        services.AddScoped<IChangeSnapshotExtractor, ChangeSnapshotExtractor>();
+        services.AddScoped<IAuditLogFactory, AuditLogFactory>();
+        services.AddScoped<IAuditStore, AuditStore>();
+        services.AddScoped<EntityChangesTrackerInterceptor>();
     }
 
     private static void AddAuthentication<TDbContext>(this IServiceCollection services)

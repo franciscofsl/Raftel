@@ -30,7 +30,11 @@ public static class DependencyInjection
                 ["Database:Provider"] = databaseProvider.ToString()
             })
             .Build();
-        services.AddRaftelData<TestingRaftelDbContext>(configuration, "TestConnection");
+        services.AddRaftelData<TestingRaftelDbContext>(configuration, "TestConnection", audit =>
+        {
+            audit.Audit<Pirate>();
+            audit.Audit<Ship>();
+        });
         services.AddScoped(typeof(IPirateRepository), typeof(PirateRepository));
         services.AddScoped(typeof(IShipRepository), typeof(ShipRepository));
     }
