@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Abstractions;
+using Raftel.Application.Abstractions.DomainEvents;
 using Raftel.Application.Commands;
 using Raftel.Application.Middlewares;
 using Raftel.Application.Queries;
@@ -25,11 +26,16 @@ public static class DependencyInjection
         services.AddScoped<IRequestDispatcher, RequestDispatcher>();
         services.AddScoped<ICommandDispatcher, CommandDispatcher>();
         services.AddScoped<IQueryDispatcher, QueryDispatcher>();
+        services.AddScoped<IDomainEventsDispatcher, DomainEventsDispatcher>();
     }
 
     private static void RegisterHandlers(IServiceCollection services, IEnumerable<Assembly> assemblies)
     {
-        var handlerTypes = new[] { typeof(ICommandHandler<>), typeof(ICommandHandler<,>), typeof(IQueryHandler<,>), typeof(IRequestHandler<,>) };
+        var handlerTypes = new[]
+        {
+            typeof(ICommandHandler<>), typeof(ICommandHandler<,>), typeof(IQueryHandler<,>),
+            typeof(IRequestHandler<,>), typeof(IDomainEventHandler<>)
+        };
 
         foreach (var assembly in assemblies)
         {

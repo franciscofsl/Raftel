@@ -1,5 +1,6 @@
 ﻿using Raftel.Demo.Domain.Common.ValueObjects;
 using Raftel.Demo.Domain.Pirates.DevilFruits;
+using Raftel.Demo.Domain.Pirates.Events;
 using Raftel.Demo.Domain.Pirates.ValueObjects;
 using Raftel.Domain.Abstractions;
 using Raftel.Domain.BaseTypes;
@@ -31,7 +32,11 @@ public class Pirate : AggregateRoot<PirateId>
 
     public static Pirate Special(Name name, Bounty bounty) => new(name, bounty, BodyType.Special);
 
-    public void FoundOnePiece() => IsKing = true;
+    public void FoundOnePiece()
+    {
+        IsKing = true;
+        RaiseDomainEvent(new PirateCrownedKing(Id));
+    }
 
     public Result EatFruit(DevilFruit fruit)
     {

@@ -10,4 +10,10 @@ public class Customer : AggregateRoot<CustomerId>
     {
         Name = name;
     }
+
+    public void Rename(string name)
+    {
+        Name = name;
+        RaiseDomainEvent(new CustomerRenamed(Id, name));
+    }
 }

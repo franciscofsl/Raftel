@@ -5,7 +5,7 @@ Domain layer (tactical DDD). **Framework core: no dependencies to any other laye
 ## Structure
 
 ```
-Abstractions/        Error, Result/Result<T>, IRepository<TEntity,TId>
+Abstractions/        Error, Result/Result<T>, IRepository<TEntity,TId>, IDomainEvent, IHasDomainEvents
 BaseTypes/           Entity<TId>, AggregateRoot<TId>, TypedId<T>, TypedGuidId
 Specifications/      Specification<T> + And/OrSpecification (Expression<Func<T,bool>>)
 Validators/          Validator<T>, ValidationRule, ValidationResult (EnsureThat DSL)
@@ -29,6 +29,7 @@ Features/<Feature>/  One folder per aggregate:
 - **Specifications**: encapsulate filters as `Expression<Func<T,bool>>` combinable with `And`/`Or`; translatable to SQL by EF Core. Use them for reusable query rules.
 - **Validators**: `Validator<TCommand>` with `EnsureThat(predicate, error)` in constructor. Live in Application alongside their command, but use this DSL.
 - **Repositories**: interface here, implementation in Infrastructure. Only for aggregate roots.
+- **Domain events**: `AggregateRoot<TId>` exposes `DomainEvents` (read-only) and `ClearDomainEvents()`, and implements `IHasDomainEvents` so Infrastructure can collect them without knowing the generic type. Business methods call the `protected RaiseDomainEvent(IDomainEvent)` to register an event — never expose it publicly. Events are `sealed record`, named in the past tense (`PirateCrownedKing`), implement `IDomainEvent` (`OccurredOn`), and live in `Features/<Feature>/Events/`. Dispatch is post-commit and owned by Infrastructure (`DomainEventsDispatchInterceptor`); Domain only tracks pending events.
 
 ## Conventions
 

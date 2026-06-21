@@ -1,11 +1,15 @@
-﻿namespace Raftel.Domain.BaseTypes;
+﻿using Raftel.Domain.Abstractions;
+
+namespace Raftel.Domain.BaseTypes;
 
 /// <summary>
 /// Represents the root of an aggregate in the domain model.
 /// </summary>
 /// <typeparam name="TId">The type of the aggregate's identifier.</typeparam>
-public abstract class AggregateRoot<TId> : Entity<TId> where TId : TypedId<Guid>
+public abstract class AggregateRoot<TId> : Entity<TId>, IHasDomainEvents where TId : TypedId<Guid>
 {
+    private readonly List<IDomainEvent> _domainEvents = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="AggregateRoot{TId}"/> class.
     /// </summary>
@@ -14,6 +18,12 @@ public abstract class AggregateRoot<TId> : Entity<TId> where TId : TypedId<Guid>
 
     protected AggregateRoot()
     {
-        
+
     }
+
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    protected void RaiseDomainEvent(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
 }

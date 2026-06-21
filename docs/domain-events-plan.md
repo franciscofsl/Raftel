@@ -1,6 +1,6 @@
 # Plan de implementación: Eventos de Dominio (Domain Events)
 
-> Estado: **Propuesta / Plan de implementación**
+> Estado: **Implementado**
 > Rama: `claude/determined-einstein-0g6idd`
 > Ámbito: `Raftel.Domain`, `Raftel.Application`, `Raftel.Infrastructure` (+ demo y tests)
 

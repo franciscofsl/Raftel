@@ -10,6 +10,7 @@ Abstractions/
     RequestHandlerDelegate                                                pipeline link
     Authentication/   ICurrentUser, IAuthenticationService (interfaces, impl. in Infrastructure)
     Multitenancy/     ICurrentTenant
+    DomainEvents/     IDomainEventHandler<TEvent>, IDomainEventsDispatcher + DomainEventsDispatcher impl.
 Commands/             ICommand, ICommand<TResult>, ICommandHandler<,>, ICommandDispatcher, CommandDispatcher
 Queries/              IQuery<TResult>, IQueryHandler<,>, IQueryDispatcher, QueryDispatcher
 Middlewares/          IGlobalMiddleware / ICommandMiddleware / IQueryMiddleware + implementations + MiddlewareRegistry
@@ -37,9 +38,15 @@ Each use case is a folder `Features/<Feature>/<UseCase>/` grouping everything:
 - Included middlewares: `ValidationMiddleware` (runs `Validator<T>`), `PermissionAuthorizationMiddleware` (via `[RequiresPermission]`), `UnitOfWorkMiddleware` (commits **only if result succeeds**).
 - To add new cross-cutting behavior (caching, logging…), create a middleware of the appropriate type and register it in `AddRaftelApplication`.
 
+## Domain Events
+
+- `IDomainEventHandler<TEvent>` is a side-effect handler for one `IDomainEvent`; implement one per use case, e.g. `Features/<Feature>/Events/<EventName>Handler.cs`.
+- `DomainEventsDispatcher` resolves all `IDomainEventHandler<TConcrete>` for a given event from `IServiceProvider` and invokes them — zero handlers is a no-op, multiple handlers all run.
+- Dispatch itself is triggered by Infrastructure (`DomainEventsDispatchInterceptor`, post-commit), never by a command handler directly — handlers stay thin and don't know about events being raised.
+
 ## Conventions
 
 - Handlers `sealed`; max ~2 instance dependencies (Object Calisthenics — logger doesn't count).
 - No EF Core or infrastructure types: only interfaces (`IRepository`, `ICurrentUser`, `IUnitOfWork`).
-- Auto-discovery: handlers and validators are discovered by assembly in `RegisterServicesFromAssembly(...)`. Don't register manually.
+- Auto-discovery: handlers, validators, and `IDomainEventHandler<>` are discovered by assembly in `RegisterServicesFromAssembly(...)`. Don't register manually.
 - `InternalsVisibleTo("Raftel.Application.UnitTests")` is active; handlers can be `internal sealed`.
