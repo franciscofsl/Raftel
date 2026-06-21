@@ -6,8 +6,13 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Tests.Multitenancy;
 
+[Collection(SqlServerTestCollection.Name)]
 public class MultitenancyTests : InfrastructureTestBase
 {
+    public MultitenancyTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
     [Fact]
     public async Task ListAllAsync_ShouldReturnOnlyCurrentTenantEntities_WhenTenantIsSet()
     {

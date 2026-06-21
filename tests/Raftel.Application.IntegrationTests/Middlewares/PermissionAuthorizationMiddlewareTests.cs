@@ -5,12 +5,18 @@ using Raftel.Application.Queries;
 using Raftel.Demo.Application.Pirates;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
+using Raftel.Infrastructure.Tests;
 using Shouldly;
 
 namespace Raftel.Application.IntegrationTests.Middlewares;
 
+[Collection(IntegrationSqlServerTestCollection.Name)]
 public class PermissionAuthorizationMiddlewareTests : IntegrationTestBase
 {
+    public PermissionAuthorizationMiddlewareTests(SqlServerTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
     [Fact]
     public async Task CreatePirateCommand_WhenUserHasManagementPermission_ShouldSucceed()
     {

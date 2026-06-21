@@ -7,7 +7,8 @@ using Shouldly;
 
 namespace Raftel.Api.FunctionalTests;
 
-public class ExceptionHandlingTests : IClassFixture<ApiTestFactory>
+[Collection(ApiTestCollection.Name)]
+public class ExceptionHandlingTests
 {
     private readonly HttpClient _client;
 

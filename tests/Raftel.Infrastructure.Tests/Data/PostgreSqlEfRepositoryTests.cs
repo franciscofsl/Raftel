@@ -7,8 +7,13 @@ using Raftel.Infrastructure.Data.Filters;
 
 namespace Raftel.Infrastructure.Tests.Data;
 
+[Collection(PostgreSqlTestCollection.Name)]
 public class PostgreSqlEfRepositoryTests : PostgreSqlInfrastructureTestBase
 {
+    public PostgreSqlEfRepositoryTests(PostgreSqlTestContainerFixture fixture) : base(fixture)
+    {
+    }
+
     [Fact]
     public async Task GetByIdAsync_ShouldRetrieveExpectedData_WithPostgreSql()
     {
