@@ -533,6 +533,47 @@ references:
   commentId: N:Raftel.Application.Abstractions
   fullName: Raftel.Application.Abstractions
   nameWithType: Raftel.Application.Abstractions
+- uid: Raftel.Application.Abstractions.Auditing
+  name: Raftel.Application.Abstractions.Auditing
+  href: api/Raftel.Application.Abstractions.Auditing.html
+  commentId: N:Raftel.Application.Abstractions.Auditing
+  fullName: Raftel.Application.Abstractions.Auditing
+  nameWithType: Raftel.Application.Abstractions.Auditing
+- uid: Raftel.Application.Abstractions.Auditing.IAuditLogScope
+  name: IAuditLogScope
+  href: api/Raftel.Application.Abstractions.Auditing.IAuditLogScope.html
+  commentId: T:Raftel.Application.Abstractions.Auditing.IAuditLogScope
+  fullName: Raftel.Application.Abstractions.Auditing.IAuditLogScope
+  nameWithType: IAuditLogScope
+- uid: Raftel.Application.Abstractions.Auditing.IAuditLogScope.Begin(System.String)
+  name: Begin(string)
+  href: api/Raftel.Application.Abstractions.Auditing.IAuditLogScope.html#Raftel_Application_Abstractions_Auditing_IAuditLogScope_Begin_System_String_
+  commentId: M:Raftel.Application.Abstractions.Auditing.IAuditLogScope.Begin(System.String)
+  name.vb: Begin(String)
+  fullName: Raftel.Application.Abstractions.Auditing.IAuditLogScope.Begin(string)
+  fullName.vb: Raftel.Application.Abstractions.Auditing.IAuditLogScope.Begin(String)
+  nameWithType: IAuditLogScope.Begin(string)
+  nameWithType.vb: IAuditLogScope.Begin(String)
+- uid: Raftel.Application.Abstractions.Auditing.IAuditLogScope.Begin*
+  name: Begin
+  href: api/Raftel.Application.Abstractions.Auditing.IAuditLogScope.html#Raftel_Application_Abstractions_Auditing_IAuditLogScope_Begin_
+  commentId: Overload:Raftel.Application.Abstractions.Auditing.IAuditLogScope.Begin
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Auditing.IAuditLogScope.Begin
+  nameWithType: IAuditLogScope.Begin
+- uid: Raftel.Application.Abstractions.Auditing.IAuditLogScope.Command
+  name: Command
+  href: api/Raftel.Application.Abstractions.Auditing.IAuditLogScope.html#Raftel_Application_Abstractions_Auditing_IAuditLogScope_Command
+  commentId: P:Raftel.Application.Abstractions.Auditing.IAuditLogScope.Command
+  fullName: Raftel.Application.Abstractions.Auditing.IAuditLogScope.Command
+  nameWithType: IAuditLogScope.Command
+- uid: Raftel.Application.Abstractions.Auditing.IAuditLogScope.Command*
+  name: Command
+  href: api/Raftel.Application.Abstractions.Auditing.IAuditLogScope.html#Raftel_Application_Abstractions_Auditing_IAuditLogScope_Command_
+  commentId: Overload:Raftel.Application.Abstractions.Auditing.IAuditLogScope.Command
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Auditing.IAuditLogScope.Command
+  nameWithType: IAuditLogScope.Command
 - uid: Raftel.Application.Abstractions.Authentication
   name: Raftel.Application.Abstractions.Authentication
   href: api/Raftel.Application.Abstractions.Authentication.html
@@ -2235,6 +2276,52 @@ references:
   commentId: N:Raftel.Application.Middlewares
   fullName: Raftel.Application.Middlewares
   nameWithType: Raftel.Application.Middlewares
+- uid: Raftel.Application.Middlewares.AuditLogMiddleware`2
+  name: AuditLogMiddleware<TRequest, TResponse>
+  href: api/Raftel.Application.Middlewares.AuditLogMiddleware-2.html
+  commentId: T:Raftel.Application.Middlewares.AuditLogMiddleware`2
+  name.vb: AuditLogMiddleware(Of TRequest, TResponse)
+  fullName: Raftel.Application.Middlewares.AuditLogMiddleware<TRequest, TResponse>
+  fullName.vb: Raftel.Application.Middlewares.AuditLogMiddleware(Of TRequest, TResponse)
+  nameWithType: AuditLogMiddleware<TRequest, TResponse>
+  nameWithType.vb: AuditLogMiddleware(Of TRequest, TResponse)
+- uid: Raftel.Application.Middlewares.AuditLogMiddleware`2.#ctor(Raftel.Application.Abstractions.Auditing.IAuditLogScope)
+  name: AuditLogMiddleware(IAuditLogScope)
+  href: api/Raftel.Application.Middlewares.AuditLogMiddleware-2.html#Raftel_Application_Middlewares_AuditLogMiddleware_2__ctor_Raftel_Application_Abstractions_Auditing_IAuditLogScope_
+  commentId: M:Raftel.Application.Middlewares.AuditLogMiddleware`2.#ctor(Raftel.Application.Abstractions.Auditing.IAuditLogScope)
+  name.vb: New(IAuditLogScope)
+  fullName: Raftel.Application.Middlewares.AuditLogMiddleware<TRequest, TResponse>.AuditLogMiddleware(Raftel.Application.Abstractions.Auditing.IAuditLogScope)
+  fullName.vb: Raftel.Application.Middlewares.AuditLogMiddleware(Of TRequest, TResponse).New(Raftel.Application.Abstractions.Auditing.IAuditLogScope)
+  nameWithType: AuditLogMiddleware<TRequest, TResponse>.AuditLogMiddleware(IAuditLogScope)
+  nameWithType.vb: AuditLogMiddleware(Of TRequest, TResponse).New(IAuditLogScope)
+- uid: Raftel.Application.Middlewares.AuditLogMiddleware`2.#ctor*
+  name: AuditLogMiddleware
+  href: api/Raftel.Application.Middlewares.AuditLogMiddleware-2.html#Raftel_Application_Middlewares_AuditLogMiddleware_2__ctor_
+  commentId: Overload:Raftel.Application.Middlewares.AuditLogMiddleware`2.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Middlewares.AuditLogMiddleware<TRequest, TResponse>.AuditLogMiddleware
+  fullName.vb: Raftel.Application.Middlewares.AuditLogMiddleware(Of TRequest, TResponse).New
+  nameWithType: AuditLogMiddleware<TRequest, TResponse>.AuditLogMiddleware
+  nameWithType.vb: AuditLogMiddleware(Of TRequest, TResponse).New
+- uid: Raftel.Application.Middlewares.AuditLogMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  href: api/Raftel.Application.Middlewares.AuditLogMiddleware-2.html#Raftel_Application_Middlewares_AuditLogMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
+  commentId: M:Raftel.Application.Middlewares.AuditLogMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+  fullName: Raftel.Application.Middlewares.AuditLogMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
+  fullName.vb: Raftel.Application.Middlewares.AuditLogMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
+  nameWithType: AuditLogMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
+  nameWithType.vb: AuditLogMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+- uid: Raftel.Application.Middlewares.AuditLogMiddleware`2.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Middlewares.AuditLogMiddleware-2.html#Raftel_Application_Middlewares_AuditLogMiddleware_2_HandleAsync_
+  commentId: Overload:Raftel.Application.Middlewares.AuditLogMiddleware`2.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Middlewares.AuditLogMiddleware<TRequest, TResponse>.HandleAsync
+  fullName.vb: Raftel.Application.Middlewares.AuditLogMiddleware(Of TRequest, TResponse).HandleAsync
+  nameWithType: AuditLogMiddleware<TRequest, TResponse>.HandleAsync
+  nameWithType.vb: AuditLogMiddleware(Of TRequest, TResponse).HandleAsync
 - uid: Raftel.Application.Middlewares.ICommandMiddleware`1
   name: ICommandMiddleware<TRequest>
   href: api/Raftel.Application.Middlewares.ICommandMiddleware-1.html
@@ -3056,6 +3143,459 @@ references:
   fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).CType
   nameWithType: Result<TValue>.implicit operator
   nameWithType.vb: Result(Of TValue).CType
+- uid: Raftel.Domain.Auditing
+  name: Raftel.Domain.Auditing
+  href: api/Raftel.Domain.Auditing.html
+  commentId: N:Raftel.Domain.Auditing
+  fullName: Raftel.Domain.Auditing
+  nameWithType: Raftel.Domain.Auditing
+- uid: Raftel.Domain.Auditing.AuditChangeType
+  name: AuditChangeType
+  href: api/Raftel.Domain.Auditing.AuditChangeType.html
+  commentId: T:Raftel.Domain.Auditing.AuditChangeType
+  fullName: Raftel.Domain.Auditing.AuditChangeType
+  nameWithType: AuditChangeType
+- uid: Raftel.Domain.Auditing.AuditChangeType.Created
+  name: Created
+  href: api/Raftel.Domain.Auditing.AuditChangeType.html#Raftel_Domain_Auditing_AuditChangeType_Created
+  commentId: F:Raftel.Domain.Auditing.AuditChangeType.Created
+  fullName: Raftel.Domain.Auditing.AuditChangeType.Created
+  nameWithType: AuditChangeType.Created
+- uid: Raftel.Domain.Auditing.AuditChangeType.Deleted
+  name: Deleted
+  href: api/Raftel.Domain.Auditing.AuditChangeType.html#Raftel_Domain_Auditing_AuditChangeType_Deleted
+  commentId: F:Raftel.Domain.Auditing.AuditChangeType.Deleted
+  fullName: Raftel.Domain.Auditing.AuditChangeType.Deleted
+  nameWithType: AuditChangeType.Deleted
+- uid: Raftel.Domain.Auditing.AuditChangeType.Updated
+  name: Updated
+  href: api/Raftel.Domain.Auditing.AuditChangeType.html#Raftel_Domain_Auditing_AuditChangeType_Updated
+  commentId: F:Raftel.Domain.Auditing.AuditChangeType.Updated
+  fullName: Raftel.Domain.Auditing.AuditChangeType.Updated
+  nameWithType: AuditChangeType.Updated
+- uid: Raftel.Domain.Auditing.AuditLog
+  name: AuditLog
+  href: api/Raftel.Domain.Auditing.AuditLog.html
+  commentId: T:Raftel.Domain.Auditing.AuditLog
+  fullName: Raftel.Domain.Auditing.AuditLog
+  nameWithType: AuditLog
+- uid: Raftel.Domain.Auditing.AuditLog.Command
+  name: Command
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_Command
+  commentId: P:Raftel.Domain.Auditing.AuditLog.Command
+  fullName: Raftel.Domain.Auditing.AuditLog.Command
+  nameWithType: AuditLog.Command
+- uid: Raftel.Domain.Auditing.AuditLog.Command*
+  name: Command
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_Command_
+  commentId: Overload:Raftel.Domain.Auditing.AuditLog.Command
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.AuditLog.Command
+  nameWithType: AuditLog.Command
+- uid: Raftel.Domain.Auditing.AuditLog.Details
+  name: Details
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_Details
+  commentId: P:Raftel.Domain.Auditing.AuditLog.Details
+  fullName: Raftel.Domain.Auditing.AuditLog.Details
+  nameWithType: AuditLog.Details
+- uid: Raftel.Domain.Auditing.AuditLog.Details*
+  name: Details
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_Details_
+  commentId: Overload:Raftel.Domain.Auditing.AuditLog.Details
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.AuditLog.Details
+  nameWithType: AuditLog.Details
+- uid: Raftel.Domain.Auditing.AuditLog.EntityChanges
+  name: EntityChanges
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_EntityChanges
+  commentId: P:Raftel.Domain.Auditing.AuditLog.EntityChanges
+  fullName: Raftel.Domain.Auditing.AuditLog.EntityChanges
+  nameWithType: AuditLog.EntityChanges
+- uid: Raftel.Domain.Auditing.AuditLog.EntityChanges*
+  name: EntityChanges
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_EntityChanges_
+  commentId: Overload:Raftel.Domain.Auditing.AuditLog.EntityChanges
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.AuditLog.EntityChanges
+  nameWithType: AuditLog.EntityChanges
+- uid: Raftel.Domain.Auditing.AuditLog.For(System.String,System.DateTime,System.Nullable{System.Guid},System.String,System.String)
+  name: For(string, DateTime, Guid?, string?, string?)
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_For_System_String_System_DateTime_System_Nullable_System_Guid__System_String_System_String_
+  commentId: M:Raftel.Domain.Auditing.AuditLog.For(System.String,System.DateTime,System.Nullable{System.Guid},System.String,System.String)
+  name.vb: For(String, Date, Guid?, String, String)
+  fullName: Raftel.Domain.Auditing.AuditLog.For(string, System.DateTime, System.Guid?, string?, string?)
+  fullName.vb: Raftel.Domain.Auditing.AuditLog.For(String, Date, System.Guid?, String, String)
+  nameWithType: AuditLog.For(string, DateTime, Guid?, string?, string?)
+  nameWithType.vb: AuditLog.For(String, Date, Guid?, String, String)
+- uid: Raftel.Domain.Auditing.AuditLog.For*
+  name: For
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_For_
+  commentId: Overload:Raftel.Domain.Auditing.AuditLog.For
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.AuditLog.For
+  nameWithType: AuditLog.For
+- uid: Raftel.Domain.Auditing.AuditLog.HasChanges
+  name: HasChanges
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_HasChanges
+  commentId: P:Raftel.Domain.Auditing.AuditLog.HasChanges
+  fullName: Raftel.Domain.Auditing.AuditLog.HasChanges
+  nameWithType: AuditLog.HasChanges
+- uid: Raftel.Domain.Auditing.AuditLog.HasChanges*
+  name: HasChanges
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_HasChanges_
+  commentId: Overload:Raftel.Domain.Auditing.AuditLog.HasChanges
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.AuditLog.HasChanges
+  nameWithType: AuditLog.HasChanges
+- uid: Raftel.Domain.Auditing.AuditLog.RegisterChange(Raftel.Domain.Auditing.EntityChange)
+  name: RegisterChange(EntityChange)
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_RegisterChange_Raftel_Domain_Auditing_EntityChange_
+  commentId: M:Raftel.Domain.Auditing.AuditLog.RegisterChange(Raftel.Domain.Auditing.EntityChange)
+  fullName: Raftel.Domain.Auditing.AuditLog.RegisterChange(Raftel.Domain.Auditing.EntityChange)
+  nameWithType: AuditLog.RegisterChange(EntityChange)
+- uid: Raftel.Domain.Auditing.AuditLog.RegisterChange*
+  name: RegisterChange
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_RegisterChange_
+  commentId: Overload:Raftel.Domain.Auditing.AuditLog.RegisterChange
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.AuditLog.RegisterChange
+  nameWithType: AuditLog.RegisterChange
+- uid: Raftel.Domain.Auditing.AuditLog.Timestamp
+  name: Timestamp
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_Timestamp
+  commentId: P:Raftel.Domain.Auditing.AuditLog.Timestamp
+  fullName: Raftel.Domain.Auditing.AuditLog.Timestamp
+  nameWithType: AuditLog.Timestamp
+- uid: Raftel.Domain.Auditing.AuditLog.Timestamp*
+  name: Timestamp
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_Timestamp_
+  commentId: Overload:Raftel.Domain.Auditing.AuditLog.Timestamp
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.AuditLog.Timestamp
+  nameWithType: AuditLog.Timestamp
+- uid: Raftel.Domain.Auditing.AuditLog.UserId
+  name: UserId
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_UserId
+  commentId: P:Raftel.Domain.Auditing.AuditLog.UserId
+  fullName: Raftel.Domain.Auditing.AuditLog.UserId
+  nameWithType: AuditLog.UserId
+- uid: Raftel.Domain.Auditing.AuditLog.UserId*
+  name: UserId
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_UserId_
+  commentId: Overload:Raftel.Domain.Auditing.AuditLog.UserId
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.AuditLog.UserId
+  nameWithType: AuditLog.UserId
+- uid: Raftel.Domain.Auditing.AuditLog.UserName
+  name: UserName
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_UserName
+  commentId: P:Raftel.Domain.Auditing.AuditLog.UserName
+  fullName: Raftel.Domain.Auditing.AuditLog.UserName
+  nameWithType: AuditLog.UserName
+- uid: Raftel.Domain.Auditing.AuditLog.UserName*
+  name: UserName
+  href: api/Raftel.Domain.Auditing.AuditLog.html#Raftel_Domain_Auditing_AuditLog_UserName_
+  commentId: Overload:Raftel.Domain.Auditing.AuditLog.UserName
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.AuditLog.UserName
+  nameWithType: AuditLog.UserName
+- uid: Raftel.Domain.Auditing.EntityChange
+  name: EntityChange
+  href: api/Raftel.Domain.Auditing.EntityChange.html
+  commentId: T:Raftel.Domain.Auditing.EntityChange
+  fullName: Raftel.Domain.Auditing.EntityChange
+  nameWithType: EntityChange
+- uid: Raftel.Domain.Auditing.EntityChange.AffectedProperties
+  name: AffectedProperties
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_AffectedProperties
+  commentId: P:Raftel.Domain.Auditing.EntityChange.AffectedProperties
+  fullName: Raftel.Domain.Auditing.EntityChange.AffectedProperties
+  nameWithType: EntityChange.AffectedProperties
+- uid: Raftel.Domain.Auditing.EntityChange.AffectedProperties*
+  name: AffectedProperties
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_AffectedProperties_
+  commentId: Overload:Raftel.Domain.Auditing.EntityChange.AffectedProperties
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.EntityChange.AffectedProperties
+  nameWithType: EntityChange.AffectedProperties
+- uid: Raftel.Domain.Auditing.EntityChange.ChangeType
+  name: ChangeType
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_ChangeType
+  commentId: P:Raftel.Domain.Auditing.EntityChange.ChangeType
+  fullName: Raftel.Domain.Auditing.EntityChange.ChangeType
+  nameWithType: EntityChange.ChangeType
+- uid: Raftel.Domain.Auditing.EntityChange.ChangeType*
+  name: ChangeType
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_ChangeType_
+  commentId: Overload:Raftel.Domain.Auditing.EntityChange.ChangeType
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.EntityChange.ChangeType
+  nameWithType: EntityChange.ChangeType
+- uid: Raftel.Domain.Auditing.EntityChange.Create(System.DateTime,System.String,System.String,System.String)
+  name: Create(DateTime, string, string, string)
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_Create_System_DateTime_System_String_System_String_System_String_
+  commentId: M:Raftel.Domain.Auditing.EntityChange.Create(System.DateTime,System.String,System.String,System.String)
+  name.vb: Create(Date, String, String, String)
+  fullName: Raftel.Domain.Auditing.EntityChange.Create(System.DateTime, string, string, string)
+  fullName.vb: Raftel.Domain.Auditing.EntityChange.Create(Date, String, String, String)
+  nameWithType: EntityChange.Create(DateTime, string, string, string)
+  nameWithType.vb: EntityChange.Create(Date, String, String, String)
+- uid: Raftel.Domain.Auditing.EntityChange.Create*
+  name: Create
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_Create_
+  commentId: Overload:Raftel.Domain.Auditing.EntityChange.Create
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.EntityChange.Create
+  nameWithType: EntityChange.Create
+- uid: Raftel.Domain.Auditing.EntityChange.EntityFullName
+  name: EntityFullName
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_EntityFullName
+  commentId: P:Raftel.Domain.Auditing.EntityChange.EntityFullName
+  fullName: Raftel.Domain.Auditing.EntityChange.EntityFullName
+  nameWithType: EntityChange.EntityFullName
+- uid: Raftel.Domain.Auditing.EntityChange.EntityFullName*
+  name: EntityFullName
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_EntityFullName_
+  commentId: Overload:Raftel.Domain.Auditing.EntityChange.EntityFullName
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.EntityChange.EntityFullName
+  nameWithType: EntityChange.EntityFullName
+- uid: Raftel.Domain.Auditing.EntityChange.EntityId
+  name: EntityId
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_EntityId
+  commentId: P:Raftel.Domain.Auditing.EntityChange.EntityId
+  fullName: Raftel.Domain.Auditing.EntityChange.EntityId
+  nameWithType: EntityChange.EntityId
+- uid: Raftel.Domain.Auditing.EntityChange.EntityId*
+  name: EntityId
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_EntityId_
+  commentId: Overload:Raftel.Domain.Auditing.EntityChange.EntityId
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.EntityChange.EntityId
+  nameWithType: EntityChange.EntityId
+- uid: Raftel.Domain.Auditing.EntityChange.RegisterPropertyChange(System.String,System.String,System.String,System.String)
+  name: RegisterPropertyChange(string, string, string?, string?)
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_RegisterPropertyChange_System_String_System_String_System_String_System_String_
+  commentId: M:Raftel.Domain.Auditing.EntityChange.RegisterPropertyChange(System.String,System.String,System.String,System.String)
+  name.vb: RegisterPropertyChange(String, String, String, String)
+  fullName: Raftel.Domain.Auditing.EntityChange.RegisterPropertyChange(string, string, string?, string?)
+  fullName.vb: Raftel.Domain.Auditing.EntityChange.RegisterPropertyChange(String, String, String, String)
+  nameWithType: EntityChange.RegisterPropertyChange(string, string, string?, string?)
+  nameWithType.vb: EntityChange.RegisterPropertyChange(String, String, String, String)
+- uid: Raftel.Domain.Auditing.EntityChange.RegisterPropertyChange*
+  name: RegisterPropertyChange
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_RegisterPropertyChange_
+  commentId: Overload:Raftel.Domain.Auditing.EntityChange.RegisterPropertyChange
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.EntityChange.RegisterPropertyChange
+  nameWithType: EntityChange.RegisterPropertyChange
+- uid: Raftel.Domain.Auditing.EntityChange.Timestamp
+  name: Timestamp
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_Timestamp
+  commentId: P:Raftel.Domain.Auditing.EntityChange.Timestamp
+  fullName: Raftel.Domain.Auditing.EntityChange.Timestamp
+  nameWithType: EntityChange.Timestamp
+- uid: Raftel.Domain.Auditing.EntityChange.Timestamp*
+  name: Timestamp
+  href: api/Raftel.Domain.Auditing.EntityChange.html#Raftel_Domain_Auditing_EntityChange_Timestamp_
+  commentId: Overload:Raftel.Domain.Auditing.EntityChange.Timestamp
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.EntityChange.Timestamp
+  nameWithType: EntityChange.Timestamp
+- uid: Raftel.Domain.Auditing.PropertyChange
+  name: PropertyChange
+  href: api/Raftel.Domain.Auditing.PropertyChange.html
+  commentId: T:Raftel.Domain.Auditing.PropertyChange
+  fullName: Raftel.Domain.Auditing.PropertyChange
+  nameWithType: PropertyChange
+- uid: Raftel.Domain.Auditing.PropertyChange.Create(System.String,System.String,System.String,System.String)
+  name: Create(string, string, string?, string?)
+  href: api/Raftel.Domain.Auditing.PropertyChange.html#Raftel_Domain_Auditing_PropertyChange_Create_System_String_System_String_System_String_System_String_
+  commentId: M:Raftel.Domain.Auditing.PropertyChange.Create(System.String,System.String,System.String,System.String)
+  name.vb: Create(String, String, String, String)
+  fullName: Raftel.Domain.Auditing.PropertyChange.Create(string, string, string?, string?)
+  fullName.vb: Raftel.Domain.Auditing.PropertyChange.Create(String, String, String, String)
+  nameWithType: PropertyChange.Create(string, string, string?, string?)
+  nameWithType.vb: PropertyChange.Create(String, String, String, String)
+- uid: Raftel.Domain.Auditing.PropertyChange.Create*
+  name: Create
+  href: api/Raftel.Domain.Auditing.PropertyChange.html#Raftel_Domain_Auditing_PropertyChange_Create_
+  commentId: Overload:Raftel.Domain.Auditing.PropertyChange.Create
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.PropertyChange.Create
+  nameWithType: PropertyChange.Create
+- uid: Raftel.Domain.Auditing.PropertyChange.NewValue
+  name: NewValue
+  href: api/Raftel.Domain.Auditing.PropertyChange.html#Raftel_Domain_Auditing_PropertyChange_NewValue
+  commentId: P:Raftel.Domain.Auditing.PropertyChange.NewValue
+  fullName: Raftel.Domain.Auditing.PropertyChange.NewValue
+  nameWithType: PropertyChange.NewValue
+- uid: Raftel.Domain.Auditing.PropertyChange.NewValue*
+  name: NewValue
+  href: api/Raftel.Domain.Auditing.PropertyChange.html#Raftel_Domain_Auditing_PropertyChange_NewValue_
+  commentId: Overload:Raftel.Domain.Auditing.PropertyChange.NewValue
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.PropertyChange.NewValue
+  nameWithType: PropertyChange.NewValue
+- uid: Raftel.Domain.Auditing.PropertyChange.OldValue
+  name: OldValue
+  href: api/Raftel.Domain.Auditing.PropertyChange.html#Raftel_Domain_Auditing_PropertyChange_OldValue
+  commentId: P:Raftel.Domain.Auditing.PropertyChange.OldValue
+  fullName: Raftel.Domain.Auditing.PropertyChange.OldValue
+  nameWithType: PropertyChange.OldValue
+- uid: Raftel.Domain.Auditing.PropertyChange.OldValue*
+  name: OldValue
+  href: api/Raftel.Domain.Auditing.PropertyChange.html#Raftel_Domain_Auditing_PropertyChange_OldValue_
+  commentId: Overload:Raftel.Domain.Auditing.PropertyChange.OldValue
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.PropertyChange.OldValue
+  nameWithType: PropertyChange.OldValue
+- uid: Raftel.Domain.Auditing.PropertyChange.PropertyName
+  name: PropertyName
+  href: api/Raftel.Domain.Auditing.PropertyChange.html#Raftel_Domain_Auditing_PropertyChange_PropertyName
+  commentId: P:Raftel.Domain.Auditing.PropertyChange.PropertyName
+  fullName: Raftel.Domain.Auditing.PropertyChange.PropertyName
+  nameWithType: PropertyChange.PropertyName
+- uid: Raftel.Domain.Auditing.PropertyChange.PropertyName*
+  name: PropertyName
+  href: api/Raftel.Domain.Auditing.PropertyChange.html#Raftel_Domain_Auditing_PropertyChange_PropertyName_
+  commentId: Overload:Raftel.Domain.Auditing.PropertyChange.PropertyName
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.PropertyChange.PropertyName
+  nameWithType: PropertyChange.PropertyName
+- uid: Raftel.Domain.Auditing.PropertyChange.PropertyType
+  name: PropertyType
+  href: api/Raftel.Domain.Auditing.PropertyChange.html#Raftel_Domain_Auditing_PropertyChange_PropertyType
+  commentId: P:Raftel.Domain.Auditing.PropertyChange.PropertyType
+  fullName: Raftel.Domain.Auditing.PropertyChange.PropertyType
+  nameWithType: PropertyChange.PropertyType
+- uid: Raftel.Domain.Auditing.PropertyChange.PropertyType*
+  name: PropertyType
+  href: api/Raftel.Domain.Auditing.PropertyChange.html#Raftel_Domain_Auditing_PropertyChange_PropertyType_
+  commentId: Overload:Raftel.Domain.Auditing.PropertyChange.PropertyType
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.PropertyChange.PropertyType
+  nameWithType: PropertyChange.PropertyType
+- uid: Raftel.Domain.Auditing.ValueObjects
+  name: Raftel.Domain.Auditing.ValueObjects
+  href: api/Raftel.Domain.Auditing.ValueObjects.html
+  commentId: N:Raftel.Domain.Auditing.ValueObjects
+  fullName: Raftel.Domain.Auditing.ValueObjects
+  nameWithType: Raftel.Domain.Auditing.ValueObjects
+- uid: Raftel.Domain.Auditing.ValueObjects.AuditLogId
+  name: AuditLogId
+  href: api/Raftel.Domain.Auditing.ValueObjects.AuditLogId.html
+  commentId: T:Raftel.Domain.Auditing.ValueObjects.AuditLogId
+  fullName: Raftel.Domain.Auditing.ValueObjects.AuditLogId
+  nameWithType: AuditLogId
+- uid: Raftel.Domain.Auditing.ValueObjects.AuditLogId.#ctor(System.Guid)
+  name: AuditLogId(Guid)
+  href: api/Raftel.Domain.Auditing.ValueObjects.AuditLogId.html#Raftel_Domain_Auditing_ValueObjects_AuditLogId__ctor_System_Guid_
+  commentId: M:Raftel.Domain.Auditing.ValueObjects.AuditLogId.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: Raftel.Domain.Auditing.ValueObjects.AuditLogId.AuditLogId(System.Guid)
+  fullName.vb: Raftel.Domain.Auditing.ValueObjects.AuditLogId.New(System.Guid)
+  nameWithType: AuditLogId.AuditLogId(Guid)
+  nameWithType.vb: AuditLogId.New(Guid)
+- uid: Raftel.Domain.Auditing.ValueObjects.AuditLogId.#ctor*
+  name: AuditLogId
+  href: api/Raftel.Domain.Auditing.ValueObjects.AuditLogId.html#Raftel_Domain_Auditing_ValueObjects_AuditLogId__ctor_
+  commentId: Overload:Raftel.Domain.Auditing.ValueObjects.AuditLogId.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Auditing.ValueObjects.AuditLogId.AuditLogId
+  fullName.vb: Raftel.Domain.Auditing.ValueObjects.AuditLogId.New
+  nameWithType: AuditLogId.AuditLogId
+  nameWithType.vb: AuditLogId.New
+- uid: Raftel.Domain.Auditing.ValueObjects.AuditLogId.New
+  name: New()
+  href: api/Raftel.Domain.Auditing.ValueObjects.AuditLogId.html#Raftel_Domain_Auditing_ValueObjects_AuditLogId_New
+  commentId: M:Raftel.Domain.Auditing.ValueObjects.AuditLogId.New
+  fullName: Raftel.Domain.Auditing.ValueObjects.AuditLogId.New()
+  nameWithType: AuditLogId.New()
+- uid: Raftel.Domain.Auditing.ValueObjects.AuditLogId.New*
+  name: New
+  href: api/Raftel.Domain.Auditing.ValueObjects.AuditLogId.html#Raftel_Domain_Auditing_ValueObjects_AuditLogId_New_
+  commentId: Overload:Raftel.Domain.Auditing.ValueObjects.AuditLogId.New
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.ValueObjects.AuditLogId.New
+  nameWithType: AuditLogId.New
+- uid: Raftel.Domain.Auditing.ValueObjects.EntityChangeId
+  name: EntityChangeId
+  href: api/Raftel.Domain.Auditing.ValueObjects.EntityChangeId.html
+  commentId: T:Raftel.Domain.Auditing.ValueObjects.EntityChangeId
+  fullName: Raftel.Domain.Auditing.ValueObjects.EntityChangeId
+  nameWithType: EntityChangeId
+- uid: Raftel.Domain.Auditing.ValueObjects.EntityChangeId.#ctor(System.Guid)
+  name: EntityChangeId(Guid)
+  href: api/Raftel.Domain.Auditing.ValueObjects.EntityChangeId.html#Raftel_Domain_Auditing_ValueObjects_EntityChangeId__ctor_System_Guid_
+  commentId: M:Raftel.Domain.Auditing.ValueObjects.EntityChangeId.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: Raftel.Domain.Auditing.ValueObjects.EntityChangeId.EntityChangeId(System.Guid)
+  fullName.vb: Raftel.Domain.Auditing.ValueObjects.EntityChangeId.New(System.Guid)
+  nameWithType: EntityChangeId.EntityChangeId(Guid)
+  nameWithType.vb: EntityChangeId.New(Guid)
+- uid: Raftel.Domain.Auditing.ValueObjects.EntityChangeId.#ctor*
+  name: EntityChangeId
+  href: api/Raftel.Domain.Auditing.ValueObjects.EntityChangeId.html#Raftel_Domain_Auditing_ValueObjects_EntityChangeId__ctor_
+  commentId: Overload:Raftel.Domain.Auditing.ValueObjects.EntityChangeId.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Auditing.ValueObjects.EntityChangeId.EntityChangeId
+  fullName.vb: Raftel.Domain.Auditing.ValueObjects.EntityChangeId.New
+  nameWithType: EntityChangeId.EntityChangeId
+  nameWithType.vb: EntityChangeId.New
+- uid: Raftel.Domain.Auditing.ValueObjects.EntityChangeId.New
+  name: New()
+  href: api/Raftel.Domain.Auditing.ValueObjects.EntityChangeId.html#Raftel_Domain_Auditing_ValueObjects_EntityChangeId_New
+  commentId: M:Raftel.Domain.Auditing.ValueObjects.EntityChangeId.New
+  fullName: Raftel.Domain.Auditing.ValueObjects.EntityChangeId.New()
+  nameWithType: EntityChangeId.New()
+- uid: Raftel.Domain.Auditing.ValueObjects.EntityChangeId.New*
+  name: New
+  href: api/Raftel.Domain.Auditing.ValueObjects.EntityChangeId.html#Raftel_Domain_Auditing_ValueObjects_EntityChangeId_New_
+  commentId: Overload:Raftel.Domain.Auditing.ValueObjects.EntityChangeId.New
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.ValueObjects.EntityChangeId.New
+  nameWithType: EntityChangeId.New
+- uid: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId
+  name: PropertyChangeId
+  href: api/Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.html
+  commentId: T:Raftel.Domain.Auditing.ValueObjects.PropertyChangeId
+  fullName: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId
+  nameWithType: PropertyChangeId
+- uid: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.#ctor(System.Guid)
+  name: PropertyChangeId(Guid)
+  href: api/Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.html#Raftel_Domain_Auditing_ValueObjects_PropertyChangeId__ctor_System_Guid_
+  commentId: M:Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.#ctor(System.Guid)
+  name.vb: New(Guid)
+  fullName: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.PropertyChangeId(System.Guid)
+  fullName.vb: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.New(System.Guid)
+  nameWithType: PropertyChangeId.PropertyChangeId(Guid)
+  nameWithType.vb: PropertyChangeId.New(Guid)
+- uid: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.#ctor*
+  name: PropertyChangeId
+  href: api/Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.html#Raftel_Domain_Auditing_ValueObjects_PropertyChangeId__ctor_
+  commentId: Overload:Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.PropertyChangeId
+  fullName.vb: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.New
+  nameWithType: PropertyChangeId.PropertyChangeId
+  nameWithType.vb: PropertyChangeId.New
+- uid: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.New
+  name: New()
+  href: api/Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.html#Raftel_Domain_Auditing_ValueObjects_PropertyChangeId_New
+  commentId: M:Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.New
+  fullName: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.New()
+  nameWithType: PropertyChangeId.New()
+- uid: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.New*
+  name: New
+  href: api/Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.html#Raftel_Domain_Auditing_ValueObjects_PropertyChangeId_New_
+  commentId: Overload:Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.New
+  isSpec: "True"
+  fullName: Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.New
+  nameWithType: PropertyChangeId.New
 - uid: Raftel.Domain.BaseTypes
   name: Raftel.Domain.BaseTypes
   href: api/Raftel.Domain.BaseTypes.html
@@ -3306,6 +3846,15 @@ references:
   fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).ToString
   nameWithType: TypedId<T>.ToString
   nameWithType.vb: TypedId(Of T).ToString
+- uid: Raftel.Domain.BaseTypes.TypedId`1.op_Implicit(Raftel.Domain.BaseTypes.TypedId{`0})~System.String
+  name: implicit operator string(TypedId<T>)
+  href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_op_Implicit_Raftel_Domain_BaseTypes_TypedId__0___System_String
+  commentId: M:Raftel.Domain.BaseTypes.TypedId`1.op_Implicit(Raftel.Domain.BaseTypes.TypedId{`0})~System.String
+  name.vb: CType(TypedId(Of T))
+  fullName: Raftel.Domain.BaseTypes.TypedId<T>.implicit operator string(Raftel.Domain.BaseTypes.TypedId<T>)
+  fullName.vb: Raftel.Domain.BaseTypes.TypedId(Of T).CType(Raftel.Domain.BaseTypes.TypedId(Of T))
+  nameWithType: TypedId<T>.implicit operator string(TypedId<T>)
+  nameWithType.vb: TypedId(Of T).CType(TypedId(Of T))
 - uid: Raftel.Domain.BaseTypes.TypedId`1.op_Implicit(Raftel.Domain.BaseTypes.TypedId{`0})~`0
   name: implicit operator T(TypedId<T>)
   href: api/Raftel.Domain.BaseTypes.TypedId-1.html#Raftel_Domain_BaseTypes_TypedId_1_op_Implicit_Raftel_Domain_BaseTypes_TypedId__0____0
@@ -4542,12 +5091,374 @@ references:
   commentId: N:Raftel.Infrastructure.Data
   fullName: Raftel.Infrastructure.Data
   nameWithType: Raftel.Infrastructure.Data
+- uid: Raftel.Infrastructure.Data.Auditing
+  name: Raftel.Infrastructure.Data.Auditing
+  href: api/Raftel.Infrastructure.Data.Auditing.html
+  commentId: N:Raftel.Infrastructure.Data.Auditing
+  fullName: Raftel.Infrastructure.Data.Auditing
+  nameWithType: Raftel.Infrastructure.Data.Auditing
+- uid: Raftel.Infrastructure.Data.Auditing.AuditOptions
+  name: AuditOptions
+  href: api/Raftel.Infrastructure.Data.Auditing.AuditOptions.html
+  commentId: T:Raftel.Infrastructure.Data.Auditing.AuditOptions
+  fullName: Raftel.Infrastructure.Data.Auditing.AuditOptions
+  nameWithType: AuditOptions
+- uid: Raftel.Infrastructure.Data.Auditing.AuditOptions.Audit*
+  name: Audit
+  href: api/Raftel.Infrastructure.Data.Auditing.AuditOptions.html#Raftel_Infrastructure_Data_Auditing_AuditOptions_Audit_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.AuditOptions.Audit
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.AuditOptions.Audit
+  nameWithType: AuditOptions.Audit
+- uid: Raftel.Infrastructure.Data.Auditing.AuditOptions.Audit``1
+  name: Audit<TEntity>()
+  href: api/Raftel.Infrastructure.Data.Auditing.AuditOptions.html#Raftel_Infrastructure_Data_Auditing_AuditOptions_Audit__1
+  commentId: M:Raftel.Infrastructure.Data.Auditing.AuditOptions.Audit``1
+  name.vb: Audit(Of TEntity)()
+  fullName: Raftel.Infrastructure.Data.Auditing.AuditOptions.Audit<TEntity>()
+  fullName.vb: Raftel.Infrastructure.Data.Auditing.AuditOptions.Audit(Of TEntity)()
+  nameWithType: AuditOptions.Audit<TEntity>()
+  nameWithType.vb: AuditOptions.Audit(Of TEntity)()
+- uid: Raftel.Infrastructure.Data.Auditing.AuditOptions.AuditedTypes
+  name: AuditedTypes
+  href: api/Raftel.Infrastructure.Data.Auditing.AuditOptions.html#Raftel_Infrastructure_Data_Auditing_AuditOptions_AuditedTypes
+  commentId: P:Raftel.Infrastructure.Data.Auditing.AuditOptions.AuditedTypes
+  fullName: Raftel.Infrastructure.Data.Auditing.AuditOptions.AuditedTypes
+  nameWithType: AuditOptions.AuditedTypes
+- uid: Raftel.Infrastructure.Data.Auditing.AuditOptions.AuditedTypes*
+  name: AuditedTypes
+  href: api/Raftel.Infrastructure.Data.Auditing.AuditOptions.html#Raftel_Infrastructure_Data_Auditing_AuditOptions_AuditedTypes_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.AuditOptions.AuditedTypes
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.AuditOptions.AuditedTypes
+  nameWithType: AuditOptions.AuditedTypes
+- uid: Raftel.Infrastructure.Data.Auditing.AuditOptions.IsAudited(System.Type)
+  name: IsAudited(Type)
+  href: api/Raftel.Infrastructure.Data.Auditing.AuditOptions.html#Raftel_Infrastructure_Data_Auditing_AuditOptions_IsAudited_System_Type_
+  commentId: M:Raftel.Infrastructure.Data.Auditing.AuditOptions.IsAudited(System.Type)
+  fullName: Raftel.Infrastructure.Data.Auditing.AuditOptions.IsAudited(System.Type)
+  nameWithType: AuditOptions.IsAudited(Type)
+- uid: Raftel.Infrastructure.Data.Auditing.AuditOptions.IsAudited*
+  name: IsAudited
+  href: api/Raftel.Infrastructure.Data.Auditing.AuditOptions.html#Raftel_Infrastructure_Data_Auditing_AuditOptions_IsAudited_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.AuditOptions.IsAudited
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.AuditOptions.IsAudited
+  nameWithType: AuditOptions.IsAudited
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot
+  name: EntityChangeSnapshot
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html
+  commentId: T:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot
+  nameWithType: EntityChangeSnapshot
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.#ctor(System.String,System.String,System.String,System.Collections.Generic.IReadOnlyList{Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot})
+  name: EntityChangeSnapshot(string, string, string, IReadOnlyList<PropertyChangeSnapshot>)
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot__ctor_System_String_System_String_System_String_System_Collections_Generic_IReadOnlyList_Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot__
+  commentId: M:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.#ctor(System.String,System.String,System.String,System.Collections.Generic.IReadOnlyList{Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot})
+  name.vb: New(String, String, String, IReadOnlyList(Of PropertyChangeSnapshot))
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityChangeSnapshot(string, string, string, System.Collections.Generic.IReadOnlyList<Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot>)
+  fullName.vb: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.New(String, String, String, System.Collections.Generic.IReadOnlyList(Of Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot))
+  nameWithType: EntityChangeSnapshot.EntityChangeSnapshot(string, string, string, IReadOnlyList<PropertyChangeSnapshot>)
+  nameWithType.vb: EntityChangeSnapshot.New(String, String, String, IReadOnlyList(Of PropertyChangeSnapshot))
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.#ctor*
+  name: EntityChangeSnapshot
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot__ctor_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityChangeSnapshot
+  fullName.vb: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.New
+  nameWithType: EntityChangeSnapshot.EntityChangeSnapshot
+  nameWithType.vb: EntityChangeSnapshot.New
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.ChangeType
+  name: ChangeType
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot_ChangeType
+  commentId: P:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.ChangeType
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.ChangeType
+  nameWithType: EntityChangeSnapshot.ChangeType
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.ChangeType*
+  name: ChangeType
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot_ChangeType_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.ChangeType
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.ChangeType
+  nameWithType: EntityChangeSnapshot.ChangeType
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityFullName
+  name: EntityFullName
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot_EntityFullName
+  commentId: P:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityFullName
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityFullName
+  nameWithType: EntityChangeSnapshot.EntityFullName
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityFullName*
+  name: EntityFullName
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot_EntityFullName_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityFullName
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityFullName
+  nameWithType: EntityChangeSnapshot.EntityFullName
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityId
+  name: EntityId
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot_EntityId
+  commentId: P:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityId
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityId
+  nameWithType: EntityChangeSnapshot.EntityId
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityId*
+  name: EntityId
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot_EntityId_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityId
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.EntityId
+  nameWithType: EntityChangeSnapshot.EntityId
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.PropertyChanges
+  name: PropertyChanges
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot_PropertyChanges
+  commentId: P:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.PropertyChanges
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.PropertyChanges
+  nameWithType: EntityChangeSnapshot.PropertyChanges
+- uid: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.PropertyChanges*
+  name: PropertyChanges
+  href: api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot_PropertyChanges_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.PropertyChanges
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.PropertyChanges
+  nameWithType: EntityChangeSnapshot.PropertyChanges
+- uid: Raftel.Infrastructure.Data.Auditing.IAuditLogFactory
+  name: IAuditLogFactory
+  href: api/Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.html
+  commentId: T:Raftel.Infrastructure.Data.Auditing.IAuditLogFactory
+  fullName: Raftel.Infrastructure.Data.Auditing.IAuditLogFactory
+  nameWithType: IAuditLogFactory
+- uid: Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.Create(System.String,System.DateTime,System.Nullable{System.Guid},System.String,System.Collections.Generic.IReadOnlyList{Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot})
+  name: Create(string, DateTime, Guid?, string?, IReadOnlyList<EntityChangeSnapshot>)
+  href: api/Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.html#Raftel_Infrastructure_Data_Auditing_IAuditLogFactory_Create_System_String_System_DateTime_System_Nullable_System_Guid__System_String_System_Collections_Generic_IReadOnlyList_Raftel_Infrastructure_Data_Auditing_EntityChangeSnapshot__
+  commentId: M:Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.Create(System.String,System.DateTime,System.Nullable{System.Guid},System.String,System.Collections.Generic.IReadOnlyList{Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot})
+  name.vb: Create(String, Date, Guid?, String, IReadOnlyList(Of EntityChangeSnapshot))
+  fullName: Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.Create(string, System.DateTime, System.Guid?, string?, System.Collections.Generic.IReadOnlyList<Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot>)
+  fullName.vb: Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.Create(String, Date, System.Guid?, String, System.Collections.Generic.IReadOnlyList(Of Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot))
+  nameWithType: IAuditLogFactory.Create(string, DateTime, Guid?, string?, IReadOnlyList<EntityChangeSnapshot>)
+  nameWithType.vb: IAuditLogFactory.Create(String, Date, Guid?, String, IReadOnlyList(Of EntityChangeSnapshot))
+- uid: Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.Create*
+  name: Create
+  href: api/Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.html#Raftel_Infrastructure_Data_Auditing_IAuditLogFactory_Create_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.Create
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.Create
+  nameWithType: IAuditLogFactory.Create
+- uid: Raftel.Infrastructure.Data.Auditing.IAuditStore
+  name: IAuditStore
+  href: api/Raftel.Infrastructure.Data.Auditing.IAuditStore.html
+  commentId: T:Raftel.Infrastructure.Data.Auditing.IAuditStore
+  fullName: Raftel.Infrastructure.Data.Auditing.IAuditStore
+  nameWithType: IAuditStore
+- uid: Raftel.Infrastructure.Data.Auditing.IAuditStore.Save(Microsoft.EntityFrameworkCore.DbContext,Raftel.Domain.Auditing.AuditLog)
+  name: Save(DbContext, AuditLog)
+  href: api/Raftel.Infrastructure.Data.Auditing.IAuditStore.html#Raftel_Infrastructure_Data_Auditing_IAuditStore_Save_Microsoft_EntityFrameworkCore_DbContext_Raftel_Domain_Auditing_AuditLog_
+  commentId: M:Raftel.Infrastructure.Data.Auditing.IAuditStore.Save(Microsoft.EntityFrameworkCore.DbContext,Raftel.Domain.Auditing.AuditLog)
+  fullName: Raftel.Infrastructure.Data.Auditing.IAuditStore.Save(Microsoft.EntityFrameworkCore.DbContext, Raftel.Domain.Auditing.AuditLog)
+  nameWithType: IAuditStore.Save(DbContext, AuditLog)
+- uid: Raftel.Infrastructure.Data.Auditing.IAuditStore.Save*
+  name: Save
+  href: api/Raftel.Infrastructure.Data.Auditing.IAuditStore.html#Raftel_Infrastructure_Data_Auditing_IAuditStore_Save_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.IAuditStore.Save
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.IAuditStore.Save
+  nameWithType: IAuditStore.Save
+- uid: Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer
+  name: IAuditValueSerializer
+  href: api/Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.html
+  commentId: T:Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer
+  fullName: Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer
+  nameWithType: IAuditValueSerializer
+- uid: Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.Serialize(System.Object)
+  name: Serialize(object?)
+  href: api/Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.html#Raftel_Infrastructure_Data_Auditing_IAuditValueSerializer_Serialize_System_Object_
+  commentId: M:Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.Serialize(System.Object)
+  name.vb: Serialize(Object)
+  fullName: Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.Serialize(object?)
+  fullName.vb: Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.Serialize(Object)
+  nameWithType: IAuditValueSerializer.Serialize(object?)
+  nameWithType.vb: IAuditValueSerializer.Serialize(Object)
+- uid: Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.Serialize*
+  name: Serialize
+  href: api/Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.html#Raftel_Infrastructure_Data_Auditing_IAuditValueSerializer_Serialize_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.Serialize
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.Serialize
+  nameWithType: IAuditValueSerializer.Serialize
+- uid: Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor
+  name: IChangeSnapshotExtractor
+  href: api/Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.html
+  commentId: T:Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor
+  fullName: Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor
+  nameWithType: IChangeSnapshotExtractor
+- uid: Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.Extract(Microsoft.EntityFrameworkCore.DbContext)
+  name: Extract(DbContext)
+  href: api/Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.html#Raftel_Infrastructure_Data_Auditing_IChangeSnapshotExtractor_Extract_Microsoft_EntityFrameworkCore_DbContext_
+  commentId: M:Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.Extract(Microsoft.EntityFrameworkCore.DbContext)
+  fullName: Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.Extract(Microsoft.EntityFrameworkCore.DbContext)
+  nameWithType: IChangeSnapshotExtractor.Extract(DbContext)
+- uid: Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.Extract*
+  name: Extract
+  href: api/Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.html#Raftel_Infrastructure_Data_Auditing_IChangeSnapshotExtractor_Extract_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.Extract
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.Extract
+  nameWithType: IChangeSnapshotExtractor.Extract
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot
+  name: PropertyChangeSnapshot
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html
+  commentId: T:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot
+  nameWithType: PropertyChangeSnapshot
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.#ctor(System.String,System.String,System.String,System.String)
+  name: PropertyChangeSnapshot(string, string, string?, string?)
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot__ctor_System_String_System_String_System_String_System_String_
+  commentId: M:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.#ctor(System.String,System.String,System.String,System.String)
+  name.vb: New(String, String, String, String)
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyChangeSnapshot(string, string, string?, string?)
+  fullName.vb: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.New(String, String, String, String)
+  nameWithType: PropertyChangeSnapshot.PropertyChangeSnapshot(string, string, string?, string?)
+  nameWithType.vb: PropertyChangeSnapshot.New(String, String, String, String)
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.#ctor*
+  name: PropertyChangeSnapshot
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot__ctor_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyChangeSnapshot
+  fullName.vb: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.New
+  nameWithType: PropertyChangeSnapshot.PropertyChangeSnapshot
+  nameWithType.vb: PropertyChangeSnapshot.New
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.NewValue
+  name: NewValue
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot_NewValue
+  commentId: P:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.NewValue
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.NewValue
+  nameWithType: PropertyChangeSnapshot.NewValue
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.NewValue*
+  name: NewValue
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot_NewValue_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.NewValue
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.NewValue
+  nameWithType: PropertyChangeSnapshot.NewValue
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.OldValue
+  name: OldValue
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot_OldValue
+  commentId: P:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.OldValue
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.OldValue
+  nameWithType: PropertyChangeSnapshot.OldValue
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.OldValue*
+  name: OldValue
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot_OldValue_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.OldValue
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.OldValue
+  nameWithType: PropertyChangeSnapshot.OldValue
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyName
+  name: PropertyName
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot_PropertyName
+  commentId: P:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyName
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyName
+  nameWithType: PropertyChangeSnapshot.PropertyName
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyName*
+  name: PropertyName
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot_PropertyName_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyName
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyName
+  nameWithType: PropertyChangeSnapshot.PropertyName
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyType
+  name: PropertyType
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot_PropertyType
+  commentId: P:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyType
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyType
+  nameWithType: PropertyChangeSnapshot.PropertyType
+- uid: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyType*
+  name: PropertyType
+  href: api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html#Raftel_Infrastructure_Data_Auditing_PropertyChangeSnapshot_PropertyType_
+  commentId: Overload:Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyType
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.PropertyType
+  nameWithType: PropertyChangeSnapshot.PropertyType
 - uid: Raftel.Infrastructure.Data.Configuration
   name: Raftel.Infrastructure.Data.Configuration
   href: api/Raftel.Infrastructure.Data.Configuration.html
   commentId: N:Raftel.Infrastructure.Data.Configuration
   fullName: Raftel.Infrastructure.Data.Configuration
   nameWithType: Raftel.Infrastructure.Data.Configuration
+- uid: Raftel.Infrastructure.Data.Configuration.Auditing
+  name: Raftel.Infrastructure.Data.Configuration.Auditing
+  href: api/Raftel.Infrastructure.Data.Configuration.Auditing.html
+  commentId: N:Raftel.Infrastructure.Data.Configuration.Auditing
+  fullName: Raftel.Infrastructure.Data.Configuration.Auditing
+  nameWithType: Raftel.Infrastructure.Data.Configuration.Auditing
+- uid: Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration
+  name: AuditLogConfiguration
+  href: api/Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.html
+  commentId: T:Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration
+  fullName: Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration
+  nameWithType: AuditLogConfiguration
+- uid: Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Auditing.AuditLog})
+  name: Configure(EntityTypeBuilder<AuditLog>)
+  href: api/Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.html#Raftel_Infrastructure_Data_Configuration_Auditing_AuditLogConfiguration_Configure_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder_Raftel_Domain_Auditing_AuditLog__
+  commentId: M:Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Auditing.AuditLog})
+  name.vb: Configure(EntityTypeBuilder(Of AuditLog))
+  fullName: Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Raftel.Domain.Auditing.AuditLog>)
+  fullName.vb: Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of Raftel.Domain.Auditing.AuditLog))
+  nameWithType: AuditLogConfiguration.Configure(EntityTypeBuilder<AuditLog>)
+  nameWithType.vb: AuditLogConfiguration.Configure(EntityTypeBuilder(Of AuditLog))
+- uid: Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.Configure*
+  name: Configure
+  href: api/Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.html#Raftel_Infrastructure_Data_Configuration_Auditing_AuditLogConfiguration_Configure_
+  commentId: Overload:Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.Configure
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.Configure
+  nameWithType: AuditLogConfiguration.Configure
+- uid: Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration
+  name: EntityChangeConfiguration
+  href: api/Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.html
+  commentId: T:Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration
+  fullName: Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration
+  nameWithType: EntityChangeConfiguration
+- uid: Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Auditing.EntityChange})
+  name: Configure(EntityTypeBuilder<EntityChange>)
+  href: api/Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.html#Raftel_Infrastructure_Data_Configuration_Auditing_EntityChangeConfiguration_Configure_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder_Raftel_Domain_Auditing_EntityChange__
+  commentId: M:Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Auditing.EntityChange})
+  name.vb: Configure(EntityTypeBuilder(Of EntityChange))
+  fullName: Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Raftel.Domain.Auditing.EntityChange>)
+  fullName.vb: Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of Raftel.Domain.Auditing.EntityChange))
+  nameWithType: EntityChangeConfiguration.Configure(EntityTypeBuilder<EntityChange>)
+  nameWithType.vb: EntityChangeConfiguration.Configure(EntityTypeBuilder(Of EntityChange))
+- uid: Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.Configure*
+  name: Configure
+  href: api/Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.html#Raftel_Infrastructure_Data_Configuration_Auditing_EntityChangeConfiguration_Configure_
+  commentId: Overload:Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.Configure
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.Configure
+  nameWithType: EntityChangeConfiguration.Configure
+- uid: Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration
+  name: PropertyChangeConfiguration
+  href: api/Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.html
+  commentId: T:Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration
+  fullName: Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration
+  nameWithType: PropertyChangeConfiguration
+- uid: Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Auditing.PropertyChange})
+  name: Configure(EntityTypeBuilder<PropertyChange>)
+  href: api/Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.html#Raftel_Infrastructure_Data_Configuration_Auditing_PropertyChangeConfiguration_Configure_Microsoft_EntityFrameworkCore_Metadata_Builders_EntityTypeBuilder_Raftel_Domain_Auditing_PropertyChange__
+  commentId: M:Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Raftel.Domain.Auditing.PropertyChange})
+  name.vb: Configure(EntityTypeBuilder(Of PropertyChange))
+  fullName: Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Raftel.Domain.Auditing.PropertyChange>)
+  fullName.vb: Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder(Of Raftel.Domain.Auditing.PropertyChange))
+  nameWithType: PropertyChangeConfiguration.Configure(EntityTypeBuilder<PropertyChange>)
+  nameWithType.vb: PropertyChangeConfiguration.Configure(EntityTypeBuilder(Of PropertyChange))
+- uid: Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.Configure*
+  name: Configure
+  href: api/Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.html#Raftel_Infrastructure_Data_Configuration_Auditing_PropertyChangeConfiguration_Configure_
+  commentId: Overload:Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.Configure
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.Configure
+  nameWithType: PropertyChangeConfiguration.Configure
 - uid: Raftel.Infrastructure.Data.Configuration.PermissionConfiguration
   name: PermissionConfiguration
   href: api/Raftel.Infrastructure.Data.Configuration.PermissionConfiguration.html
@@ -4952,6 +5863,23 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New
   nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext
   nameWithType.vb: RaftelDbContext(Of TDbContext).New
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.AuditLog
+  name: AuditLog
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_AuditLog
+  commentId: P:Raftel.Infrastructure.Data.RaftelDbContext`1.AuditLog
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.AuditLog
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).AuditLog
+  nameWithType: RaftelDbContext<TDbContext>.AuditLog
+  nameWithType.vb: RaftelDbContext(Of TDbContext).AuditLog
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.AuditLog*
+  name: AuditLog
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_AuditLog_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.AuditLog
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.AuditLog
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).AuditLog
+  nameWithType: RaftelDbContext<TDbContext>.AuditLog
+  nameWithType.vb: RaftelDbContext(Of TDbContext).AuditLog
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.CommitAsync(System.Threading.CancellationToken)
   name: CommitAsync(CancellationToken)
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_CommitAsync_System_Threading_CancellationToken_
@@ -5160,15 +6088,15 @@ references:
   isSpec: "True"
   fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData
   nameWithType: DependencyInjection.AddRaftelData
-- uid: Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)
-  name: AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string)
-  href: api/Raftel.Infrastructure.DependencyInjection.html#Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_
-  commentId: M:Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String)
-  name.vb: AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String)
-  fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData<TDbContext>(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, string)
-  fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String)
-  nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string)
-  nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String)
+- uid: Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions})
+  name: AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?)
+  href: api/Raftel.Infrastructure.DependencyInjection.html#Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_System_Action_Raftel_Infrastructure_Data_Auditing_AuditOptions__
+  commentId: M:Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions})
+  name.vb: AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions))
+  fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData<TDbContext>(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, string, System.Action<Raftel.Infrastructure.Data.Auditing.AuditOptions>?)
+  fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String, System.Action(Of Raftel.Infrastructure.Data.Auditing.AuditOptions))
+  nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?)
+  nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions))
 - uid: Raftel.Infrastructure.Multitenancy.Middleware
   name: Raftel.Infrastructure.Multitenancy.Middleware
   href: api/Raftel.Infrastructure.Multitenancy.Middleware.html

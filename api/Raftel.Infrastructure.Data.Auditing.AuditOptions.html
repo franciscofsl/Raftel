@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class DependencyInjection | Raftel </title>
+      <title>Class AuditOptions | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class DependencyInjection | Raftel ">
+      <meta name="title" content="Class AuditOptions | Raftel ">
       
-      
+      <meta name="description" content="Options that determine which entity types are tracked by the entity-change audit system. Entities are opt-in: only types explicitly registered via  are audited.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_DependencyInjection.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.DependencyInjection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Infrastructure_Data_Auditing_AuditOptions.md&amp;value=---%0Auid%3A%20Raftel.Infrastructure.Data.Auditing.AuditOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,24 +84,26 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Infrastructure.DependencyInjection">
+        <article data-uid="Raftel.Infrastructure.Data.Auditing.AuditOptions">
 
 
 
-  <h1 id="Raftel_Infrastructure_DependencyInjection" data-uid="Raftel.Infrastructure.DependencyInjection" class="text-break">
-Class DependencyInjection  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Infrastructure_Data_Auditing_AuditOptions" data-uid="Raftel.Infrastructure.Data.Auditing.AuditOptions" class="text-break">
+Class AuditOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/Auditing/AuditOptions.cs/#L7"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Infrastructure.html">Infrastructure</a></dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Infrastructure.html">Infrastructure</a>.<a class="xref" href="Raftel.Infrastructure.Data.html">Data</a>.<a class="xref" href="Raftel.Infrastructure.Data.Auditing.html">Auditing</a></dd></dl>
   <dl><dt>Assembly</dt><dd>Raftel.Infrastructure.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Options that determine which entity types are tracked by the entity-change audit system.
+Entities are opt-in: only types explicitly registered via <a class="xref" href="Raftel.Infrastructure.Data.Auditing.AuditOptions.html#Raftel_Infrastructure_Data_Auditing_AuditOptions_Audit__1">Audit&lt;TEntity&gt;()</a> are audited.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class DependencyInjection</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class AuditOptions</code></pre>
   </div>
 
 
@@ -111,7 +113,7 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
     <dt>Inheritance</dt>
     <dd>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">DependencyInjection</span></div>
+      <div><span class="xref">AuditOptions</span></div>
     </dd>
   </dl>
 
@@ -133,9 +135,6 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
     <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
-    </div>
-    <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
@@ -148,47 +147,111 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
 
 
 
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Raftel_Infrastructure_Data_Auditing_AuditOptions_AuditedTypes_" data-uid="Raftel.Infrastructure.Data.Auditing.AuditOptions.AuditedTypes*"></a>
+
+  <h3 id="Raftel_Infrastructure_Data_Auditing_AuditOptions_AuditedTypes" data-uid="Raftel.Infrastructure.Data.Auditing.AuditOptions.AuditedTypes">
+  AuditedTypes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/Auditing/AuditOptions.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the set of entity types currently registered for auditing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlySet&lt;Type&gt; AuditedTypes { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlyset-1">IReadOnlySet</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <h2 class="section" id="methods">Methods
 </h2>
 
 
-  <a id="Raftel_Infrastructure_DependencyInjection_AddRaftelData_" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData*"></a>
+  <a id="Raftel_Infrastructure_Data_Auditing_AuditOptions_Audit_" data-uid="Raftel.Infrastructure.Data.Auditing.AuditOptions.Audit*"></a>
 
-  <h3 id="Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_System_Action_Raftel_Infrastructure_Data_Auditing_AuditOptions__" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions})">
-  AddRaftelData&lt;TDbContext&gt;(IServiceCollection, IConfiguration, string, Action&lt;AuditOptions&gt;?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Infrastructure_Data_Auditing_AuditOptions_Audit__1" data-uid="Raftel.Infrastructure.Data.Auditing.AuditOptions.Audit``1">
+  Audit&lt;TEntity&gt;()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/Auditing/AuditOptions.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers <code class="typeparamref">TEntity</code> so that its changes are captured by the
+entity-change tracking interceptor.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IServiceCollection AddRaftelData&lt;TDbContext&gt;(this IServiceCollection services, IConfiguration configuration, string connectionStringName = &quot;Default&quot;, Action&lt;AuditOptions&gt;? configureAudit = null) where TDbContext : RaftelDbContext&lt;TDbContext&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public AuditOptions Audit&lt;TEntity&gt;()</code></pre>
   </div>
 
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>services</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a></dt>
-    <dd></dd>
-    <dt><code>configuration</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration">IConfiguration</a></dt>
-    <dd></dd>
-    <dt><code>connectionStringName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
-    <dt><code>configureAudit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Raftel.Infrastructure.Data.Auditing.AuditOptions.html">AuditOptions</a>&gt;</dt>
-    <dd></dd>
-  </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a></dt>
+    <dt><a class="xref" href="Raftel.Infrastructure.Data.Auditing.AuditOptions.html">AuditOptions</a></dt>
     <dd></dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
-    <dt><code>TDbContext</code></dt>
+    <dt><code>TEntity</code></dt>
     <dd></dd>
   </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Raftel_Infrastructure_Data_Auditing_AuditOptions_IsAudited_" data-uid="Raftel.Infrastructure.Data.Auditing.AuditOptions.IsAudited*"></a>
+
+  <h3 id="Raftel_Infrastructure_Data_Auditing_AuditOptions_IsAudited_System_Type_" data-uid="Raftel.Infrastructure.Data.Auditing.AuditOptions.IsAudited(System.Type)">
+  IsAudited(Type)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/Auditing/AuditOptions.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the given entity type has been registered for auditing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsAudited(Type entityType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>entityType</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.type">Type</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
 
 
 
@@ -203,7 +266,7 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L29" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/Data/Auditing/AuditOptions.cs/#L7" class="edit-link">Edit this page</a>
         </div>
 
 

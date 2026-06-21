@@ -280,6 +280,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.Auditing.IAuditLogScope.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.Auditing.IAuditLogScope.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.Auditing.IAuditLogScope",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.Auditing.IAuditLogScope.yml\" sourcestartlinenumber=\"1\">Provides ambient access to the Raftel command or query that is currently being\nprocessed, so that infrastructure components (e.g. an EF Core interceptor) can\nattribute entity changes to the request that caused them.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.Auditing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.Auditing.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.Auditing",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Abstractions.Authentication.IAuthenticationService.yml",
       "output": {
         ".html": {
@@ -1134,6 +1162,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.AuditLogMiddleware-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.AuditLogMiddleware-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares.AuditLogMiddleware<TRequest, TResponse>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.AuditLogMiddleware-2.yml\" sourcestartlinenumber=\"1\">Global middleware that opens an <xref href=\"Raftel.Application.Abstractions.Auditing.IAuditLogScope\" data-throw-if-not-resolved=\"false\"></xref> for the duration of the request,\nidentifying the command or query that is being processed so that infrastructure components\n(e.g. the entity-change tracking interceptor) can attribute audited changes to it.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Middlewares.ICommandMiddleware-1.yml",
       "output": {
         ".html": {
@@ -1424,6 +1466,132 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Domain.Abstractions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Auditing.AuditChangeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Auditing.AuditChangeType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Auditing.AuditChangeType",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Auditing.AuditChangeType.yml\" sourcestartlinenumber=\"1\">Represents the kind of change that occurred on an audited entity.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Auditing.AuditLog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Auditing.AuditLog.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Auditing.AuditLog",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Auditing.AuditLog.yml\" sourcestartlinenumber=\"1\">Aggregate root that records the entity changes produced while handling a single\nRaftel command or query.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Auditing.EntityChange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Auditing.EntityChange.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Auditing.EntityChange",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Auditing.EntityChange.yml\" sourcestartlinenumber=\"1\">Represents the audit trail of a single entity affected by a create, update or delete operation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Auditing.PropertyChange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Auditing.PropertyChange.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Auditing.PropertyChange",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Auditing.PropertyChange.yml\" sourcestartlinenumber=\"1\">Represents a single property value change captured for an audited entity.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Auditing.ValueObjects.AuditLogId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Auditing.ValueObjects.AuditLogId.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Auditing.ValueObjects.AuditLogId",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Auditing.ValueObjects.EntityChangeId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Auditing.ValueObjects.EntityChangeId.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Auditing.ValueObjects.EntityChangeId",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Auditing.ValueObjects.PropertyChangeId.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Auditing.ValueObjects.PropertyChangeId",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Auditing.ValueObjects.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Auditing.ValueObjects.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Auditing.ValueObjects",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Auditing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Auditing.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Auditing",
       "Summary": null
     },
     {
@@ -1942,6 +2110,174 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Infrastructure.Authentication",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Auditing.AuditOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Auditing.AuditOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Auditing.AuditOptions",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.Auditing.AuditOptions.yml\" sourcestartlinenumber=\"1\">Options that determine which entity types are tracked by the entity-change audit system.\nEntities are opt-in: only types explicitly registered via <xref href=\"Raftel.Infrastructure.Data.Auditing.AuditOptions.Audit%60%601\" data-throw-if-not-resolved=\"false\"></xref> are audited.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.Auditing.EntityChangeSnapshot.yml\" sourcestartlinenumber=\"1\">EF Core-agnostic representation of a single entity change, produced by\n<xref href=\"Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor\" data-throw-if-not-resolved=\"false\"></xref> and consumed by <xref href=\"Raftel.Infrastructure.Data.Auditing.IAuditLogFactory\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Auditing.IAuditLogFactory",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.Auditing.IAuditLogFactory.yml\" sourcestartlinenumber=\"1\">Builds an <xref href=\"Raftel.Domain.Auditing.AuditLog\" data-throw-if-not-resolved=\"false\"></xref> aggregate from EF Core-agnostic change snapshots.\nHas no dependency on EF Core or the dependency injection container, making it fully\nunit-testable in isolation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Auditing.IAuditStore.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Auditing.IAuditStore.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Auditing.IAuditStore",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.Auditing.IAuditStore.yml\" sourcestartlinenumber=\"1\">Persists an <xref href=\"Raftel.Domain.Auditing.AuditLog\" data-throw-if-not-resolved=\"false\"></xref> aggregate as part of an ongoing EF Core save operation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.Auditing.IAuditValueSerializer.yml\" sourcestartlinenumber=\"1\">Converts an arbitrary property value (primitive, value object, or nested value object)\ninto a human-readable string suitable for audit storage. Has no dependency on EF Core.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor.yml\" sourcestartlinenumber=\"1\">Reads the EF Core change tracker and produces EF Core-agnostic snapshots for every\naudited entity that was added, modified or deleted. This is the only audit component\ndirectly coupled to EF Core.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Data.Auditing.PropertyChangeSnapshot.yml\" sourcestartlinenumber=\"1\">EF Core-agnostic representation of a single property value change, produced by\n<xref href=\"Raftel.Infrastructure.Data.Auditing.IChangeSnapshotExtractor\" data-throw-if-not-resolved=\"false\"></xref> and consumed by <xref href=\"Raftel.Infrastructure.Data.Auditing.IAuditLogFactory\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Auditing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Auditing.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Auditing",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Configuration.Auditing.AuditLogConfiguration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Configuration.Auditing.EntityChangeConfiguration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Configuration.Auditing.PropertyChangeConfiguration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Data.Configuration.Auditing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Data.Configuration.Auditing.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Data.Configuration.Auditing",
       "Summary": null
     },
     {
