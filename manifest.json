@@ -2415,6 +2415,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/architecture-tests-plan.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/architecture-tests-plan.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/database-configuration.md",
       "output": {
         ".html": {
@@ -2439,6 +2449,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/plan-optimizacion-tests-integracion.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/plan-optimizacion-tests-integracion.html"
         }
       },
       "version": ""

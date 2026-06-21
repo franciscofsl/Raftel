@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Plan de implementaci&#243;n: optimizaci&#243;n de los tests de integraci&#243;n (Testcontainers) | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Plan de implementaci&#243;n: optimizaci&#243;n de los tests de integraci&#243;n (Testcontainers) | Raftel ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/plan-optimizacion-tests-integracion.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="plan-de-implementación-optimización-de-los-tests-de-integración-testcontainers">Plan de implementación: optimización de los tests de integración (Testcontainers)</h1>
+
+<blockquote>
+<p><strong>Estado: Fases 0–4 implementadas.</strong> <code>Raftel.Infrastructure.Tests</code>, <code>Raftel.Application.IntegrationTests</code>
+y <code>Raftel.Api.FunctionalTests</code> ya comparten contenedor por assembly (vía <code>ICollectionFixture</code>) y usan
+Respawn para aislar datos entre tests donde aplica. Suite completa verde. Pendientes: Fase 5
+(paralelismo/límites de recursos) y Fase 6 final (medición comparativa formal con <code>docker stats</code>).</p>
+</blockquote>
+<h2 id="1-diagnóstico-causa-raíz">1. Diagnóstico (causa raíz)</h2>
+<p>El consumo de memoria venía de que <strong>se creaba un contenedor de base de datos por cada
+método de test</strong>, no por clase ni por suite.</p>
+<p>En xUnit se instancia una clase de test nueva <strong>por cada <code>[Fact]</code>/<code>[Theory]</code></strong>. Las bases
+originales creaban el contenedor en el constructor + <code>IAsyncLifetime</code> a nivel de clase:</p>
+<table>
+<thead>
+<tr>
+<th>Base / fixture</th>
+<th>Ámbito real (antes)</th>
+<th>Contenedor por…</th>
+<th>Imagen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>IntegrationTestBase</code></td>
+<td><code>IAsyncLifetime</code> de la clase de test</td>
+<td><strong>método de test</strong></td>
+<td>SQL Server 2022</td>
+</tr>
+<tr>
+<td><code>InfrastructureTestBase</code></td>
+<td><code>IAsyncLifetime</code> de la clase de test</td>
+<td><strong>método de test</strong></td>
+<td>SQL Server 2022</td>
+</tr>
+<tr>
+<td><code>PostgreSqlInfrastructureTestBase</code></td>
+<td><code>IAsyncLifetime</code> de la clase de test</td>
+<td><strong>método de test</strong></td>
+<td>Postgres 17</td>
+</tr>
+<tr>
+<td><code>DatabaseProviderTests</code></td>
+<td>contenedor inline dentro de cada <code>[Fact]</code></td>
+<td><strong>método de test</strong></td>
+<td>SQL Server + Postgres</td>
+</tr>
+<tr>
+<td><code>ApiTestFactory</code></td>
+<td><code>IClassFixture</code></td>
+<td>clase de test (5 clases)</td>
+<td>SQL Server 2022</td>
+</tr>
+</tbody>
+</table>
+<p>Con paralelismo de xUnit, decenas de contenedores SQL Server (~1,5–2 GB de RAM cada uno) y
+Postgres se levantaban a la vez. Ese era el origen del problema.</p>
+<h2 id="2-estrategia">2. Estrategia</h2>
+<ol>
+<li><strong>Compartir el contenedor</strong> a nivel de assembly con <code>ICollectionFixture</code>. Un solo SQL
+Server y un solo Postgres por proyecto de tests, arrancados una vez.</li>
+<li><strong>Aislar los datos entre tests</strong> sin recrear el contenedor. El esquema se crea una vez
+(<code>EnsureCreated</code>) y entre tests se limpian los datos con <strong>Respawn</strong>.</li>
+</ol>
+<h2 id="3-implementación-realizada">3. Implementación realizada</h2>
+<h3 id="raftelinfrastructuretests"><code>Raftel.Infrastructure.Tests</code></h3>
+<ul>
+<li><code>SqlServerTestCollection</code> / <code>PostgreSqlTestCollection</code> (<code>[CollectionDefinition]</code> +
+<code>ICollectionFixture&lt;...Fixture&gt;</code>): un contenedor SQL Server y uno PostgreSQL para todo el
+assembly.</li>
+<li><code>InfrastructureTestBase</code> / <code>PostgreSqlInfrastructureTestBase</code>: ya no instancian ni paran el
+contenedor; lo reciben por constructor y, en <code>InitializeAsync</code>, ejecutan <code>Respawner.ResetAsync</code>
+(instancia estática, creada una vez, reutilizada en todos los tests de esa base).</li>
+<li>Las ~9 clases de test concretas ahora declaran <code>[Collection(...)]</code> y reenvían el fixture
+inyectado al constructor base.</li>
+<li><code>DatabaseProviderTests</code> se dividió en <code>PostgreSqlDatabaseProviderTests</code> y
+<code>SqlServerDatabaseProviderTests</code>, cada una en su colección, reutilizando el contenedor
+compartido en lugar de crear uno inline por <code>[Fact]</code>.</li>
+<li><code>UserAuditingTests.AddAsync_WithoutCurrentUser_...</code> (que creaba un contenedor extra inline)
+ahora reutiliza el contenedor de la colección, solo construye un <code>ServiceProvider</code> nuevo.</li>
+</ul>
+<h3 id="raftelapplicationintegrationtests"><code>Raftel.Application.IntegrationTests</code></h3>
+<ul>
+<li><code>IntegrationSqlServerTestCollection</code> propia (las definiciones de colección son por
+assembly, no se pueden compartir físicamente entre proyectos/procesos aunque reutilicen el
+mismo tipo <code>SqlServerTestContainerFixture</code> vía referencia de proyecto).</li>
+<li><code>IntegrationTestBase</code> sigue el mismo patrón: recibe el fixture, resetea con Respawn.</li>
+</ul>
+<h3 id="raftelapifunctionaltests"><code>Raftel.Api.FunctionalTests</code></h3>
+<ul>
+<li><code>ApiTestCollection</code> (<code>ICollectionFixture&lt;ApiTestFactory&gt;</code>): las 5 clases funcionales pasan
+de <code>IClassFixture&lt;ApiTestFactory&gt;</code> (1 contenedor por clase) a compartir un único
+<code>ApiTestFactory</code>/contenedor para todo el assembly.</li>
+<li>Sin Respawn aquí: el seed de <code>SeedData</code> (rol admin, cliente OpenIddict) debe sobrevivir
+entre tests, y los tests ya usan datos únicos (GUIDs en emails, nombres específicos usados
+una sola vez), así que no hay colisión de datos al compartir contenedor.</li>
+</ul>
+<h3 id="paquetes">Paquetes</h3>
+<ul>
+<li><code>Respawn</code> 7.0.0 añadido a <code>Directory.Packages.props</code> y a los csproj de
+<code>Raftel.Infrastructure.Tests</code> y <code>Raftel.Application.IntegrationTests</code>.</li>
+<li><code>Microsoft.Data.SqlClient</code> central actualizado de 5.1.6 → 6.1.1 (versión mínima exigida
+transitivamente por <code>Microsoft.EntityFrameworkCore.SqlServer</code> 10.0.1; sin esto, NuGet
+fallaba con NU1605 por &quot;degradación de paquete&quot;).</li>
+</ul>
+<h2 id="4-resultado-verificado">4. Resultado verificado</h2>
+<ul>
+<li><code>dotnet test</code> en <code>Raftel.Infrastructure.Tests</code>: 69/69 ✅, pico observado de <strong>2 contenedores</strong>
+(1 SQL Server + 1 Postgres) en vez de uno por test.</li>
+<li><code>dotnet test</code> en <code>Raftel.Application.IntegrationTests</code>: 6/6 ✅, 1 contenedor SQL Server
+compartido por las 2 clases.</li>
+<li><code>dotnet test</code> en <code>Raftel.Api.FunctionalTests</code>: 13/13 ✅, 1 contenedor SQL Server compartido
+por las 5 clases.</li>
+<li><code>dotnet test Raftel.sln</code> (suite completa): todos los proyectos en verde.</li>
+<li>Sin contenedores huérfanos al finalizar (Ryuk de Testcontainers limpia y <code>StopAsync</code> se
+ejecuta una vez al cerrar la colección).</li>
+</ul>
+<h2 id="5-pendiente-no-implementado-en-esta-iteración">5. Pendiente (no implementado en esta iteración)</h2>
+<ul>
+<li><strong>Fase 5 — Paralelismo y límites de recursos</strong>: configurar <code>xunit.runner.json</code> con
+<code>maxParallelThreads</code> si se quiere acotar cuántos <em>assemblies</em> corren en paralelo cuando se
+ejecuta <code>dotnet test</code> a nivel de solución (cada assembly sigue siendo un proceso/testhost
+independiente con sus propios 1-2 contenedores). Evaluar límites de memoria del contenedor
+(<code>--memory</code>) si aún se nota presión en CI.</li>
+<li><strong>Fase 6 — Medición comparativa formal</strong>: capturar <code>docker stats</code> antes/después con un
+script reproducible para documentar la mejora cuantitativa (esta iteración verificó
+manualmente el pico de contenedores con <code>docker ps</code>, pero no dejó un script ni números de
+memoria pico formales).</li>
+</ul>
+<h2 id="6-riesgos-y-notas-para-quien-continúe">6. Riesgos y notas para quien continúe</h2>
+<ul>
+<li><strong>Estática por proceso</strong>: <code>_respawner</code> es un campo <code>static</code> en cada base (<code>InfrastructureTestBase</code>,
+<code>PostgreSqlInfrastructureTestBase</code>, <code>IntegrationTestBase</code>). Funciona porque xUnit ejecuta en
+serie las clases de una misma <code>[Collection]</code>; si se cambia el comportamiento de paralelismo
+por defecto, revisar esta suposición.</li>
+<li><strong><code>ApiTestFactory</code> sin reset</strong>: si en el futuro se añaden tests que dependan de un estado
+limpio (conteos exactos de filas, etc.), habrá que introducir Respawn ahí también y revisar
+qué tablas (rol admin, cliente OpenIddict <code>web-app</code>) no se deben borrar.</li>
+<li><strong>Nombres de colección duplicados entre proyectos</strong>: <code>Raftel.Infrastructure.Tests</code> tiene
+<code>SqlServerTestCollection</code> y <code>Raftel.Application.IntegrationTests</code> tiene
+<code>IntegrationSqlServerTestCollection</code> (nombre distinto a propósito) para evitar ambigüedad
+cuando un archivo de test importa ambos namespaces.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/plan-optimizacion-tests-integracion.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

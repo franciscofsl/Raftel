@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Plan de implementaci&#243;n: Tests de arquitectura (NetArchTest) | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Plan de implementaci&#243;n: Tests de arquitectura (NetArchTest) | Raftel ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/architecture-tests-plan.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="plan-de-implementación-tests-de-arquitectura-netarchtest">Plan de implementación: Tests de arquitectura (NetArchTest)</h1>
+
+<blockquote>
+<p><strong>Objetivo</strong>: cerrar la discrepancia entre lo que prescriben las instrucciones internas
+(<code>.github/instructions/clean-architecture.instructions.md</code>) y el estado real del repositorio,
+añadiendo tests automáticos que validen las dependencias entre capas y prohíban dependencias
+indebidas (p. ej. EF Core en <code>Domain</code>, <code>Application</code> o <code>Api</code>).</p>
+</blockquote>
+<h2 id="1-contexto-y-motivación">1. Contexto y motivación</h2>
+<p>Las instrucciones de Clean Architecture del propio repo prescriben <strong>explícitamente</strong> un
+<code>ArchitectureTests.cs</code> con <a href="https://github.com/BenMorris/NetArchTest">NetArchTest</a> para validar
+la regla de dependencias entre capas. Sin embargo, hoy:</p>
+<ul>
+<li>❌ <code>NetArchTest</code> <strong>no</strong> figura en <code>Directory.Packages.props</code>.</li>
+<li>❌ <strong>No existe</strong> ningún fichero <code>ArchitectureTests.cs</code> en <code>tests/</code>.</li>
+</ul>
+<p>Esto es una discrepancia clara entre documentación y código. Un test de arquitectura es barato de
+escribir y previene <strong>regresiones de capa</strong> a futuro (es una de las mejoras con mejor relación
+esfuerzo/beneficio del repo).</p>
+<p>La regla de dependencias (de <code>CLAUDE.md</code> y de las instrucciones) es <strong>innegociable</strong>:</p>
+<ul>
+<li><strong>Domain</strong> → sin dependencias.</li>
+<li><strong>Application</strong> → depende solo de <strong>Domain</strong>.</li>
+<li><strong>Infrastructure</strong> → depende de <strong>Application</strong> y <strong>Domain</strong>.</li>
+<li><strong>Api</strong> → depende de <strong>Infrastructure</strong> (que arrastra Application y Domain).</li>
+<li><code>Microsoft.EntityFrameworkCore</code> está <strong>prohibido</strong> en <code>Domain</code> y en la capa <code>Api</code>.</li>
+</ul>
+<h2 id="2-hallazgo-importante-framework--app-concreta">2. Hallazgo importante: framework ≠ app concreta</h2>
+<p>El ejemplo de las instrucciones está escrito para una <strong>aplicación concreta</strong> (<code>Order.Api</code> con
+<code>Program.cs</code> que solo depende de <code>Application</code>). Raftel <strong>no es una app</strong>: es un <strong>micro-framework</strong>
+distribuido como librerías. Las referencias reales son:</p>
+<table>
+<thead>
+<tr>
+<th>Proyecto (<code>src/</code>)</th>
+<th>Referencias de proyecto</th>
+<th>EF Core</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Raftel.Domain</code></td>
+<td><em>(ninguna)</em></td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>Raftel.Application</code></td>
+<td><code>Domain</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>Raftel.Infrastructure</code></td>
+<td><code>Application</code>, <code>Domain</code>, <code>Shared</code></td>
+<td><strong>Sí</strong></td>
+</tr>
+<tr>
+<td><code>Raftel.Api.Server</code></td>
+<td><code>Application</code>, <code>Domain</code>, <code>Shared</code></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong><code>Raftel.Api.Server</code> referencia <code>Application</code> y <code>Domain</code> directamente, NO <code>Infrastructure</code>.</strong>
+Es correcto: <code>Api.Server</code> es una librería que genera endpoints (AutoEndpoints) sobre las
+abstracciones de <code>Application</code>. El host real (con <code>Program.cs</code>) vive en <code>demo/</code> y es quien compone
+<code>Infrastructure</code>.</p>
+</blockquote>
+<p><strong>Conclusión</strong>: no se puede copiar la regla literal &quot;Api solo depende de Application&quot;. Hay que
+codificar las reglas que son <strong>verdaderas y deseables</strong> para el framework. La regla de mayor valor
+y siempre válida es <strong>la prohibición de EF Core</strong> en <code>Domain</code>, <code>Application</code> y <code>Api.Server</code>.</p>
+<h2 id="3-reglas-a-implementar">3. Reglas a implementar</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Regla</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td><code>Raftel.Domain</code> no depende de <code>Application</code>, <code>Infrastructure</code> ni <code>Api.Server</code></td>
+<td>Capas</td>
+</tr>
+<tr>
+<td>R2</td>
+<td><code>Raftel.Domain</code> no depende de <code>Microsoft.EntityFrameworkCore</code></td>
+<td>Prohibición</td>
+</tr>
+<tr>
+<td>R3</td>
+<td><code>Raftel.Application</code> no depende de <code>Infrastructure</code> ni de <code>Api.Server</code></td>
+<td>Capas</td>
+</tr>
+<tr>
+<td>R4</td>
+<td><code>Raftel.Application</code> no depende de <code>Microsoft.EntityFrameworkCore</code></td>
+<td>Prohibición</td>
+</tr>
+<tr>
+<td>R5</td>
+<td><code>Raftel.Api.Server</code> no depende de <code>Infrastructure</code></td>
+<td>Capas</td>
+</tr>
+<tr>
+<td>R6</td>
+<td><code>Raftel.Api.Server</code> no depende de <code>Microsoft.EntityFrameworkCore</code></td>
+<td>Prohibición</td>
+</tr>
+<tr>
+<td>R7</td>
+<td><code>Raftel.Application</code> no depende de ASP.NET Core (<code>Microsoft.AspNetCore.*</code>)</td>
+<td>Prohibición <em>(opcional)</em></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>R7 es opcional pero refuerza que la lógica de aplicación se mantenga agnóstica del transporte HTTP.
+EF Core en <code>Infrastructure</code> <strong>sí</strong> está permitido (es su responsabilidad), por lo que no se testea.</p>
+</blockquote>
+<h2 id="4-decisiones-de-diseño">4. Decisiones de diseño</h2>
+<h3 id="41-ubicación-del-proyecto-de-tests">4.1 Ubicación del proyecto de tests</h3>
+<p>Las capas a validar son varias (<code>Domain</code>, <code>Application</code>, <code>Infrastructure</code>, <code>Api.Server</code>) y ningún
+proyecto de tests actual referencia a todas. Se crea un <strong>proyecto de tests dedicado</strong>:</p>
+<pre><code>tests/Raftel.ArchitectureTests/
+  Raftel.ArchitectureTests.csproj
+  ArchitectureTests.cs
+</code></pre>
+<p><strong>Por qué un proyecto propio</strong> (y no reutilizar <code>Raftel.Infrastructure.Tests</code>):</p>
+<ul>
+<li>Necesita referenciar <code>Domain</code>, <code>Application</code>, <code>Infrastructure</code> <strong>y</strong> <code>Api.Server</code> a la vez.</li>
+<li>Mantiene los tests de arquitectura aislados, rápidos y sin dependencias de Testcontainers/DB.</li>
+<li>Encaja con la nomenclatura de las instrucciones (<code>ArchitectureTests.cs</code>).</li>
+</ul>
+<h3 id="42-resolución-de-assemblies-sin-ficheros-marcador">4.2 Resolución de assemblies (sin ficheros marcador)</h3>
+<p>El ejemplo de las instrucciones usa ficheros marcador (<code>DomainReference.cs</code>, etc.). Para <strong>no tocar
+<code>src/</code></strong>, se resuelven los assemblies vía <code>typeof()</code> de un tipo público y estable de cada capa:</p>
+<table>
+<thead>
+<tr>
+<th>Capa</th>
+<th>Tipo ancla sugerido (verificar antes de usar)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Domain</td>
+<td><code>Raftel.Domain.BaseTypes.AggregateRoot&lt;&gt;</code> o un tipo de <code>Abstractions</code></td>
+</tr>
+<tr>
+<td>Application</td>
+<td><code>Raftel.Application.RaftelApplicationBuilder</code></td>
+</tr>
+<tr>
+<td>Infrastructure</td>
+<td><code>Raftel.Infrastructure.DependencyInjection</code></td>
+</tr>
+<tr>
+<td>Api.Server</td>
+<td>un tipo público de <code>Raftel.Api.Server.AutoEndpoints</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Antes de fijar los anclas, confirmar que el tipo es <code>public</code>. Si alguno fuera <code>internal</code>, la
+alternativa es añadir un marcador <code>public sealed class XxxReference;</code> en cada <code>csproj</code> de <code>src/</code>
+(coste mínimo y alineado literalmente con las instrucciones).</p>
+</blockquote>
+<h3 id="43-paquete-y-versión">4.3 Paquete y versión</h3>
+<p>Añadir a <code>Directory.Packages.props</code> (gestión centralizada de versiones ya activa):</p>
+<pre><code class="lang-xml">&lt;PackageVersion Include=&quot;NetArchTest.Rules&quot; Version=&quot;1.3.2&quot; /&gt;
+</code></pre>
+<blockquote>
+<p>Verificar en NuGet la última versión estable compatible con <code>net10.0</code> en el momento de
+implementar. <code>NetArchTest.Rules</code> es la librería base (sin acoplar a un runner concreto).</p>
+</blockquote>
+<h2 id="5-pasos-de-implementación-tdd-friendly">5. Pasos de implementación (TDD-friendly)</h2>
+<ol>
+<li><strong>Añadir el paquete</strong> <code>NetArchTest.Rules</code> a <code>Directory.Packages.props</code>.</li>
+<li><strong>Crear el proyecto</strong> <code>tests/Raftel.ArchitectureTests/Raftel.ArchitectureTests.csproj</code>:
+<ul>
+<li><code>TargetFramework</code> <code>net10.0</code>, <code>IsTestProject=true</code>, <code>IsPackable=false</code>.</li>
+<li><code>PackageReference</code>: <code>Microsoft.NET.Test.Sdk</code>, <code>xunit</code>, <code>xunit.runner.visualstudio</code>,
+<code>Shouldly</code>, <code>coverlet.collector</code>, <code>NetArchTest.Rules</code>.</li>
+<li><code>ProjectReference</code> a <code>Raftel.Domain</code>, <code>Raftel.Application</code>, <code>Raftel.Infrastructure</code>,
+<code>Raftel.Api.Server</code>.</li>
+<li>Copiar el bloque <code>ExcludeFromCodeCoverage</code> y <code>&lt;Using Include=&quot;Xunit&quot;/&gt;</code> del resto de tests.</li>
+</ul>
+</li>
+<li><strong>Registrar el proyecto</strong> en <code>Raftel.sln</code> (bajo la carpeta de solución <code>tests</code>).</li>
+<li><strong>Escribir <code>ArchitectureTests.cs</code></strong> con un <code>[Fact]</code> por cada regla R1–R6 (R7 opcional).
+<ul>
+<li>Usar <code>Shouldly</code> para los asserts (<code>result.IsSuccessful.ShouldBeTrue(...)</code>), coherente con el
+resto del repo (ver commit <code>1ef61fc</code>, que migró asserts a Shouldly).</li>
+<li>En el mensaje de fallo, incluir <code>result.FailingTypeNames</code> para diagnóstico.</li>
+</ul>
+</li>
+<li><strong>Ejecutar</strong> <code>dotnet test tests/Raftel.ArchitectureTests</code> y verificar que todo pasa en verde.</li>
+<li><strong>(Opcional) Verificación negativa temporal</strong>: introducir a propósito un <code>using</code> prohibido para
+confirmar que el test falla, y luego revertirlo. Da confianza de que las reglas &quot;muerden&quot;.</li>
+<li><strong>Build completo</strong>: <code>dotnet build Raftel.sln</code> y <code>dotnet test</code>.</li>
+</ol>
+<h2 id="6-esqueleto-de-referencia">6. Esqueleto de referencia</h2>
+<pre><code class="lang-csharp">using System.Reflection;
+using NetArchTest.Rules;
+using Shouldly;
+
+namespace Raftel.ArchitectureTests;
+
+public class ArchitectureTests
+{
+    private const string EntityFrameworkCore = &quot;Microsoft.EntityFrameworkCore&quot;;
+    private const string AspNetCore = &quot;Microsoft.AspNetCore&quot;;
+
+    private const string DomainNamespace = &quot;Raftel.Domain&quot;;
+    private const string ApplicationNamespace = &quot;Raftel.Application&quot;;
+    private const string InfrastructureNamespace = &quot;Raftel.Infrastructure&quot;;
+    private const string ApiNamespace = &quot;Raftel.Api.Server&quot;;
+
+    // Confirmar que los tipos ancla son public antes de usarlos.
+    private static readonly Assembly DomainAssembly = typeof(Raftel.Domain.BaseTypes.AggregateRoot&lt;&gt;).Assembly;
+    private static readonly Assembly ApplicationAssembly = typeof(Raftel.Application.RaftelApplicationBuilder).Assembly;
+    private static readonly Assembly InfrastructureAssembly = typeof(Raftel.Infrastructure.DependencyInjection).Assembly;
+    // private static readonly Assembly ApiAssembly = typeof(/* tipo de AutoEndpoints */).Assembly;
+
+    [Fact] // R1
+    public void Domain_Should_Not_DependOn_OtherLayers()
+    {
+        var result = Types.InAssembly(DomainAssembly)
+            .Should()
+            .NotHaveDependencyOnAny(ApplicationNamespace, InfrastructureNamespace, ApiNamespace)
+            .GetResult();
+
+        result.IsSuccessful.ShouldBeTrue(
+            $&quot;Domain no debe depender de otras capas. Tipos infractores: {Format(result)}&quot;);
+    }
+
+    [Fact] // R2
+    public void Domain_Should_Not_DependOn_EntityFrameworkCore()
+    {
+        var result = Types.InAssembly(DomainAssembly)
+            .Should().NotHaveDependencyOn(EntityFrameworkCore)
+            .GetResult();
+
+        result.IsSuccessful.ShouldBeTrue($&quot;EF Core prohibido en Domain. {Format(result)}&quot;);
+    }
+
+    [Fact] // R3
+    public void Application_Should_Not_DependOn_InfrastructureOrApi()
+    {
+        var result = Types.InAssembly(ApplicationAssembly)
+            .Should()
+            .NotHaveDependencyOnAny(InfrastructureNamespace, ApiNamespace)
+            .GetResult();
+
+        result.IsSuccessful.ShouldBeTrue(
+            $&quot;Application solo debe depender de Domain. {Format(result)}&quot;);
+    }
+
+    [Fact] // R4
+    public void Application_Should_Not_DependOn_EntityFrameworkCore()
+    {
+        var result = Types.InAssembly(ApplicationAssembly)
+            .Should().NotHaveDependencyOn(EntityFrameworkCore)
+            .GetResult();
+
+        result.IsSuccessful.ShouldBeTrue($&quot;EF Core prohibido en Application. {Format(result)}&quot;);
+    }
+
+    // R5 y R6: equivalentes sobre ApiAssembly (no Infrastructure, no EF Core).
+
+    private static string Format(TestResult result) =&gt;
+        result.FailingTypeNames is null ? &quot;-&quot; : string.Join(&quot;, &quot;, result.FailingTypeNames);
+}
+</code></pre>
+<h2 id="7-riesgos-y-consideraciones">7. Riesgos y consideraciones</h2>
+<ul>
+<li><strong><code>NetArchTest</code> analiza dependencias a nivel de IL</strong>: detecta usos reales de tipos, no solo
+referencias de proyecto. Esto es lo que queremos, pero puede aflorar acoplamientos no evidentes.
+Si R5 (Api → Infrastructure) fallara, sería un hallazgo legítimo a corregir, no un falso positivo.</li>
+<li><strong>No testear EF Core en <code>Infrastructure</code></strong>: ahí es una dependencia legítima.</li>
+<li><strong>Tipos ancla <code>internal</code></strong>: si algún tipo elegido no es público, usar marcadores <code>public</code> en <code>src/</code>
+(alineado con las instrucciones) en lugar de exponer internals.</li>
+<li><strong>Demo (<code>demo/</code>)</strong>: queda fuera del alcance de estos tests (es app de ejemplo). Opcionalmente se
+podría añadir un segundo bloque para validar las capas de <code>Raftel.Demo.*</code>, pero no es prioritario.</li>
+<li><strong>CI</strong>: estos tests corren con <code>dotnet test</code> estándar; no requieren contenedores ni BD, por lo que
+son rápidos y aptos para cada pull request.</li>
+</ul>
+<h2 id="8-criterios-de-aceptación-definition-of-done">8. Criterios de aceptación (Definition of Done)</h2>
+<ul>
+<li>[ ] <code>NetArchTest.Rules</code> añadido a <code>Directory.Packages.props</code>.</li>
+<li>[ ] Proyecto <code>tests/Raftel.ArchitectureTests</code> creado y referenciado en <code>Raftel.sln</code>.</li>
+<li>[ ] <code>ArchitectureTests.cs</code> con tests para R1–R6 (R7 opcional), usando Shouldly.</li>
+<li>[ ] <code>dotnet build Raftel.sln</code> y <code>dotnet test</code> en verde.</li>
+<li>[ ] Verificación negativa realizada (un <code>using</code> prohibido hace fallar el test) y revertida.</li>
+<li>[ ] Commit siguiendo Conventional Commits (p. ej. <code>test: add architecture tests with NetArchTest</code>).</li>
+</ul>
+<h2 id="9-estimación">9. Estimación</h2>
+<table>
+<thead>
+<tr>
+<th>Tarea</th>
+<th>Esfuerzo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paquete + proyecto + sln</td>
+<td>~20 min</td>
+</tr>
+<tr>
+<td><code>ArchitectureTests.cs</code> (R1–R6)</td>
+<td>~30 min</td>
+</tr>
+<tr>
+<td>Verificación negativa + build/test</td>
+<td>~15 min</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>~1 h</strong></td>
+</tr>
+</tbody>
+</table>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/architecture-tests-plan.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

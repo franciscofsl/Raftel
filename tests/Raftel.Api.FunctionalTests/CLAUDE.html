@@ -78,9 +78,11 @@
 <ul>
 <li><strong>xUnit 2.9.3</strong> + <strong>Shouldly</strong> + <strong>Testcontainers</strong> + <code>Microsoft.AspNetCore.Mvc.Testing</code> (<code>WebApplicationFactory</code>).</li>
 <li><code>ApiTestFactory.cs</code> — <code>WebApplicationFactory</code> spinning up demo host pointing to containerized DB.</li>
+<li><code>ApiTestCollection.cs</code> — <code>[CollectionDefinition]</code> + <code>ICollectionFixture&lt;ApiTestFactory&gt;</code>: all functional test classes share <strong>one</strong> factory/container for the whole assembly run instead of one per class.</li>
 </ul>
 <h2 id="files-and-coverage-areas">Files and Coverage Areas</h2>
 <pre><code>ApiTestFactory.cs           shared factory/SUT
+ApiTestCollection.cs        collection definition shared by all classes below
 ApiDefinitionTests.cs       correct endpoint generation (AutoEndpoints)
 AuthenticationTest.cs       OpenIddict flow (/connect/token), tokens
 PiratesEndpointsTests.cs    business CRUD via HTTP
@@ -89,9 +91,10 @@ ExceptionHandlingTests.cs   ProblemDetails responses (RFC 7807)
 <h2 id="conventions">Conventions</h2>
 <ul>
 <li>Use <code>HttpClient</code> from <code>ApiTestFactory</code>; don't spin up the host manually.</li>
+<li>Decorate every test class with <code>[Collection(ApiTestCollection.Name)]</code> (not <code>IClassFixture&lt;ApiTestFactory&gt;</code>) so it joins the shared container instead of starting a new one.</li>
 <li>Test <strong>observable HTTP contract</strong>: status codes, JSON body, ProblemDetails format on error, authorization (401/403 without permission).</li>
 <li>For protected endpoints, obtain a token via password flow first.</li>
-<li>Isolation per test; seed with demo <code>SeedData</code> when needed.</li>
+<li>Data isn't reset between tests (no Respawn here, since the seeded admin role/OpenIddict client must survive); use unique values (GUIDs) for anything you create so tests don't collide.</li>
 </ul>
 
 </article>

@@ -76,14 +76,15 @@
 <p><strong>Integration</strong> tests of server-side use cases end-to-end (handler + EF Core + real database), no HTTP. Verify application pipeline works against real persistence.</p>
 <h2 id="stack">Stack</h2>
 <ul>
-<li><strong>xUnit 2.9.3</strong> + <strong>Shouldly</strong> + <strong>NSubstitute</strong>.</li>
-<li><strong>Testcontainers</strong> (SQL Server / PostgreSQL) for ephemeral DB per run.</li>
-<li><code>IntegrationTestBase.cs</code> base class that spins up container, builds real <code>ServiceProvider</code> (Application + Infrastructure), and exposes dispatchers.</li>
+<li><strong>xUnit 2.9.3</strong> + <strong>Shouldly</strong> + <strong>NSubstitute</strong> + <strong>Respawn</strong>.</li>
+<li><strong>Testcontainers</strong> (SQL Server), reused from <code>Raftel.Infrastructure.Tests</code> via project reference. One container for the whole assembly run, declared by <code>IntegrationSqlServerTestCollection</code> (<code>[CollectionDefinition]</code> + <code>ICollectionFixture&lt;SqlServerTestContainerFixture&gt;</code>).</li>
+<li><code>IntegrationTestBase.cs</code> receives the shared fixture by constructor, builds a real <code>ServiceProvider</code> (Application + Infrastructure) per test, and resets table data with <code>Respawner</code> between tests instead of restarting the container.</li>
 </ul>
 <h2 id="conventions">Conventions</h2>
 <ul>
 <li>Inherit from <code>IntegrationTestBase</code>; don't manually instantiate containers or <code>DbContext</code>.</li>
-<li>Each test must be <strong>isolated</strong>: don't assume other tests' data; clean/seed what you need.</li>
+<li>Every concrete test class needs <code>[Collection(IntegrationSqlServerTestCollection.Name)]</code> and a constructor that takes <code>SqlServerTestContainerFixture</code> and forwards it to <code>base(fixture)</code>.</li>
+<li>Each test must be <strong>isolated</strong>: don't assume other tests' data; clean/seed what you need. Isolation comes from the Respawn reset, not from a fresh container.</li>
 <li>Test full flow: dispatch a real Command/Query and verify persisted state.</li>
 <li>These tests are slow (spin Docker): keep them focused on integration, leave fine logic to unit tests.</li>
 </ul>

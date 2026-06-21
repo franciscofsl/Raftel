@@ -76,21 +76,22 @@
 <p><strong>Infrastructure integration</strong> tests: <code>RaftelDbContext</code>, global filters (soft-delete + multitenancy), interceptors (audit, tenant, change tracking), <code>EfRepository</code> repositories, and audit logging (<code>AuditStore</code>). Run against <strong>real containerized databases</strong>, both SQL Server <strong>and</strong> PostgreSQL.</p>
 <h2 id="stack-and-fixtures">Stack and Fixtures</h2>
 <ul>
-<li><strong>xUnit 2.9.3</strong> + <strong>Shouldly</strong> + <strong>NSubstitute</strong>.</li>
+<li><strong>xUnit 2.9.3</strong> + <strong>Shouldly</strong> + <strong>NSubstitute</strong> + <strong>Respawn</strong>.</li>
 <li><strong>Testcontainers.MsSql</strong> and <strong>Testcontainers.PostgreSql</strong>.</li>
-<li>Fixtures/bases:
+<li>One SQL Server container and one PostgreSQL container for the <strong>whole assembly run</strong>, not per test:
 <ul>
-<li><code>SqlServerTestContainerFixture</code> / <code>PostgreSqlTestContainerFixture</code> — container lifecycle (collection fixtures).</li>
-<li><code>InfrastructureTestBase</code> (SQL Server) and <code>PostgreSqlInfrastructureTestBase</code> (PostgreSQL) — base per test with real <code>DbContext</code>.</li>
+<li><code>SqlServerTestCollection</code> / <code>PostgreSqlTestCollection</code> — <code>[CollectionDefinition]</code> declaring <code>SqlServerTestContainerFixture</code> / <code>PostgreSqlTestContainerFixture</code> as <code>ICollectionFixture&lt;T&gt;</code>. xUnit starts each container once and disposes it once, at assembly scope.</li>
+<li><code>InfrastructureTestBase</code> (SQL Server) and <code>PostgreSqlInfrastructureTestBase</code> (PostgreSQL) — receive the shared fixture via constructor, build a fresh <code>ServiceProvider</code>/<code>DbContext</code> per test, then reset table data with <code>Respawner</code> (so each test still starts from an empty database without restarting the container).</li>
 <li><code>GlobalUsings.cs</code> for common usings.</li>
 </ul>
 </li>
+<li>Every concrete test class must declare <code>[Collection(SqlServerTestCollection.Name)]</code> (or <code>PostgreSqlTestCollection.Name</code>) and a constructor forwarding the injected fixture to <code>base(fixture)</code> — this is what makes it share the container with its siblings.</li>
 </ul>
 <h2 id="conventions">Conventions</h2>
 <ul>
 <li>Inherit from the appropriate base for the provider you want to cover; many behaviors (filters, interceptors) should be verified on <strong>both</strong> providers.</li>
 <li>To test filter disabling use <code>IDataFilter.Disable&lt;TFilter&gt;()</code> inside a <code>using</code> and verify query behavior change.</li>
-<li>Isolation per test; don't depend on execution order.</li>
+<li>Isolation per test is guaranteed by the Respawn reset in <code>InitializeAsync</code>, not by a fresh container — don't add manual container creation in a test.</li>
 <li>Verify real DB effects (audit columns, <code>TenantId</code>, <code>IsDeleted</code>), not mocks.</li>
 </ul>
 
