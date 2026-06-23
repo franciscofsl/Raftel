@@ -67,7 +67,7 @@ public abstract class MultitenancyTestsBase : InfrastructureTestBase
     }
 
     [Fact]
-    public async Task ListAllAsync_ShouldReturnAllEntities_WhenNoTenantIsSet()
+    public async Task ListAllAsync_ShouldReturnNoEntities_WhenNoTenantIsSet()
     {
         await ExecuteScopedAsync(async sp =>
         {
@@ -94,9 +94,7 @@ public abstract class MultitenancyTestsBase : InfrastructureTestBase
             }
 
             var allPirates = await repository.ListAllAsync();
-            allPirates.Count.ShouldBe(2);
-            allPirates.ShouldContain(luffy);
-            allPirates.ShouldContain(kaido);
+            allPirates.ShouldBeEmpty();
         });
     }
 
@@ -136,7 +134,7 @@ public abstract class MultitenancyTestsBase : InfrastructureTestBase
     }
 
     [Fact]
-    public async Task GetByIdAsync_ShouldReturnEntity_WhenNoTenantIsSet()
+    public async Task GetByIdAsync_ShouldReturnNull_WhenNoTenantIsSet()
     {
         await ExecuteScopedAsync(async sp =>
         {
@@ -155,8 +153,7 @@ public abstract class MultitenancyTestsBase : InfrastructureTestBase
             }
 
             var pirateWithoutTenant = await repository.GetByIdAsync(luffy.Id);
-            pirateWithoutTenant.ShouldNotBeNull();
-            pirateWithoutTenant.ShouldBe(luffy);
+            pirateWithoutTenant.ShouldBeNull();
         });
     }
 

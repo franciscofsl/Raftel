@@ -102,6 +102,6 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
 
         return expression =>
             (!hasSoftDelete || !IsSoftDeleteFilterEnabled || !EF.Property<bool>(expression, ShadowPropertyNames.IsDeleted)) &&
-            (!hasTenantId || !IsTenantFilterEnabled || CurrentTenantId == null || EF.Property<Guid?>(expression, ShadowPropertyNames.TenantId) == CurrentTenantId);
+            (!hasTenantId || !IsTenantFilterEnabled || (CurrentTenantId != null && EF.Property<Guid?>(expression, ShadowPropertyNames.TenantId) == CurrentTenantId));
     }
 }
