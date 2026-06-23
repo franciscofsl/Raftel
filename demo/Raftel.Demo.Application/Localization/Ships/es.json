@@ -1,0 +1,13 @@
+{
+  "culture": "es",
+  "texts": {
+    "ShipNotFound": "Barco no encontrado",
+    "ShipCreated": "Barco creado exitosamente",
+    "ShipUpdated": "Barco actualizado exitosamente",
+    "ShipDeleted": "Barco eliminado exitosamente",
+    "InvalidShipName": "El nombre del barco no es válido",
+    "ShipList": "Lista de Barcos",
+    "CreateShip": "Crear Barco",
+    "EditShip": "Editar Barco"
+  }
+}

@@ -4,3 +4,5 @@
   href: getting-started.md
 - name: Database Configuration
   href: database-configuration.md
+- name: Localization
+  href: localization.md
