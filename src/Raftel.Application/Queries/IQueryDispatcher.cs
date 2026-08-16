@@ -13,7 +13,8 @@ public interface IQueryDispatcher
     /// <typeparam name="TQuery">The type of the query to dispatch.</typeparam>
     /// <typeparam name="TResult">The type of the result expected from the query.</typeparam>
     /// <param name="query">The query instance to process.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     /// <returns>A <see cref="Result{TResult}"/> representing the outcome of the query execution.</returns>
-    Task<Result<TResult>> DispatchAsync<TQuery, TResult>(TQuery query)
+    Task<Result<TResult>> DispatchAsync<TQuery, TResult>(TQuery query, CancellationToken cancellationToken = default)
         where TQuery : IQuery<TResult>;
 }

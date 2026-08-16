@@ -8,10 +8,11 @@ namespace Raftel.Application.UnitTests.Abstractions;
 public class QueryMiddleware2<TRequest, TResponse>(ISpy spy)
     : IQueryMiddleware<TRequest, TResponse> where TRequest : IQuery<TResponse>
 {
-    public async Task<Result<TResponse>> HandleAsync(TRequest request, RequestHandlerDelegate<Result<TResponse>> next)
+    public async Task<Result<TResponse>> HandleAsync(TRequest request,
+        RequestHandlerDelegate<Result<TResponse>> next, CancellationToken cancellationToken)
     {
         spy.Intercept("Hi Query 2");
-        var result = await next();
+        var result = await next(cancellationToken);
         spy.Intercept("By Query 2");
         return result;
     }

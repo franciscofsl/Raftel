@@ -18,7 +18,8 @@ public class CreatePirateCommandMiddlewareTests
         var invalidCommand = new CreatePirateCommand(string.Empty, 1, true);
 
         var exception = await Should.ThrowAsync<ValidationException>(() =>
-            middleware.HandleAsync(invalidCommand, () => Task.FromResult(Result.Success(Guid.NewGuid()))));
+            middleware.HandleAsync(invalidCommand, _ => Task.FromResult(Result.Success(Guid.NewGuid())),
+                CancellationToken.None));
 
         exception.Errors.ShouldContain(CreatePirateErrors.NameRequired);
         exception.Errors.ShouldContain(CreatePirateErrors.KingMustBeLuffy);
@@ -32,7 +33,8 @@ public class CreatePirateCommandMiddlewareTests
 
         var validCommand = new CreatePirateCommand("Luffy", 56, true);
 
-        var result = await middleware.HandleAsync(validCommand, () => Task.FromResult(Result.Success(Guid.NewGuid())));
+        var result = await middleware.HandleAsync(validCommand, _ => Task.FromResult(Result.Success(Guid.NewGuid())),
+            CancellationToken.None);
 
         result.IsSuccess.ShouldBeTrue();
     }
