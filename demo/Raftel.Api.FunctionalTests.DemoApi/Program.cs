@@ -1,4 +1,5 @@
 using Raftel.Api.FunctionalTests.DemoApi;
+using Raftel.Api.FunctionalTests.DemoApi.TestSupport;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Api.Server.Features.Tenants;
 using Raftel.Api.Server.Features.Users;
@@ -10,6 +11,7 @@ using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Raftel.Demo.Application.Pirates.GetPirateById;
 using Raftel.Demo.Infrastructure;
+using Raftel.Domain.Abstractions;
 using Raftel.Infrastructure;
 using Raftel.Infrastructure.Multitenancy.Middleware;
 
@@ -23,6 +25,7 @@ builder.Services.AddRaftelApplication(cfg =>
 {
     cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommand).Assembly);
     cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(CreateTestResourceCommand).Assembly);
     cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
     cfg.AddGlobalMiddleware(typeof(AuditLogMiddleware<,>));
     cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
@@ -61,11 +64,30 @@ app.AddEndpointGroup(group =>
         group.BaseUri = "/api/pirates";
         group.AddQuery<GetPirateByIdQuery, GetPirateByIdResponse>("{id}", HttpMethod.Get);
         group.AddQuery<GetPirateByFilterQuery, GetPirateByFilterResponse>("", HttpMethod.Get);
-        group.AddCommand<CreatePirateCommand, Guid>("", HttpMethod.Post);
+        group.AddCommand<CreatePirateCommand, Guid>("", HttpMethod.Post, createdRouteName: "GET_GetPirateByIdQuery");
+    }
+);
+
+app.AddEndpointGroup(group =>
+    {
+        group.Name = "TestResources";
+        group.BaseUri = "/api/test/resources";
+        group.AddCommand<CreateTestResourceCommand, Guid>("", HttpMethod.Post);
     }
 );
 
 app.MapGet("/api/test/throw", () => { throw new InvalidOperationException("Test unhandled exception."); });
+
+app.MapGet("/api/test/error/{type}", (string type) => ErrorResults.ToProblem(type switch
+{
+    "not-found" => Error.NotFound("Test.NotFound", "Resource not found"),
+    "conflict" => Error.Conflict("Test.Conflict", "Conflict occurred"),
+    "validation" => Error.Validation("Test.Validation", "Validation failed"),
+    "forbidden" => Error.Forbidden("Test.Forbidden", "Forbidden"),
+    "unauthorized" => Error.Unauthorized("Test.Unauthorized", "Unauthorized"),
+    "failure" => Error.Failure("Test.Failure", "Unclassified failure"),
+    _ => throw new NotSupportedException($"Unknown error type '{type}'")
+}));
 
 using var scope = app.Services.CreateScope();
 await SeedData.InitializeAsync(scope.ServiceProvider);

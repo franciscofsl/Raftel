@@ -14,7 +14,7 @@ internal sealed class GetTenantQueryHandler(ITenantsRepository tenantsRepository
         
         if (tenant is null)
         {
-            return Result.Failure<GetTenantResponse>(new Error("Tenant.NotFound", "Tenant not found"));
+            return Result.Failure<GetTenantResponse>(Error.NotFound("Tenant.NotFound", "Tenant not found"));
         }
 
         return new GetTenantResponse

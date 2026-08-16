@@ -52,8 +52,8 @@ public static class CommandEndpointMapper
             var result = await dispatcher.DispatchAsync(parsedCommand);
 
             return result.IsSuccess
-                ? Results.Ok()
-                : Results.BadRequest(result.Error);
+                ? Results.NoContent()
+                : ErrorResults.ToProblem(result.Error);
         }
     }
 
@@ -100,9 +100,14 @@ public static class CommandEndpointMapper
 
             var result = await dispatcher.DispatchAsync<TCommand, TResult>(parsedCommand);
 
-            return result.IsSuccess
-                ? Results.Ok(result.Value)
-                : Results.BadRequest(result.Error);
+            if (!result.IsSuccess)
+            {
+                return ErrorResults.ToProblem(result.Error);
+            }
+
+            return command.CreatedRouteName is not null
+                ? Results.CreatedAtRoute(command.CreatedRouteName, new { id = result.Value }, result.Value)
+                : Results.Ok(result.Value);
         }
     }
 }

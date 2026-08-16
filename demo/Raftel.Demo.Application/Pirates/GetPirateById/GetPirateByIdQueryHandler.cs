@@ -13,7 +13,7 @@ internal sealed class GetPirateByIdQueryHandler : IQueryHandler<GetPirateByIdQue
 
         if (mugiwara is null)
         {
-            return Result.Failure<GetPirateByIdResponse>(new Error("PirateNotFound", "Pirate not found"));
+            return Result.Failure<GetPirateByIdResponse>(Error.NotFound("PirateNotFound", "Pirate not found"));
         }
 
         return Result<GetPirateByIdResponse>.Success(new GetPirateByIdResponse

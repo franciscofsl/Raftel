@@ -42,7 +42,7 @@ public static class QueryEndpointMapper
 
             return result.IsSuccess
                 ? Results.Ok(result.Value)
-                : Results.BadRequest(result.Error);
+                : ErrorResults.ToProblem(result.Error);
         }
     }
 

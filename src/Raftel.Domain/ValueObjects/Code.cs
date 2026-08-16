@@ -16,12 +16,12 @@ public sealed record Code
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            return Result.Failure<Code>(new Error("Code.Required", "Code is required"));
+            return Result.Failure<Code>(Error.Validation("Code.Required", "Code is required"));
         }
 
         if (value.Length > MaxLength)
         {
-            return Result.Failure<Code>(new Error("Code.TooLong", $"Code must be less than {MaxLength} characters"));
+            return Result.Failure<Code>(Error.Validation("Code.TooLong", $"Code must be less than {MaxLength} characters"));
         }
 
         return new Code(value);

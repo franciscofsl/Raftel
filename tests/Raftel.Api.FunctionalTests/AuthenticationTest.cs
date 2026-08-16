@@ -36,14 +36,14 @@ public class AuthenticationTest
     }
 
     [Fact]
-    public async Task Register_NewUser_ShouldReturnOk()
+    public async Task Register_NewUser_ShouldReturnNoContent()
     {
         var email = $"user_{Guid.NewGuid():N}@test.com";
         var password = "Password123!";
 
         var response = await _client.PostAsJsonAsync("/api/users/register", new RegisterRequest(email, password));
 
-        response.StatusCode.ShouldBe(HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
     }
 
     [Fact]
