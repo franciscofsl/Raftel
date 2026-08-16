@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/error-typed-http-mapping/proposal.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="why">Why</h2>
+<p><code>Error</code> today is <code>record Error(string Code, string Message)</code> with no semantic
+category, and both <code>CommandEndpointMapper</code> and <code>QueryEndpointMapper</code> collapse
+every failed <code>Result</code> to <code>400 Bad Request</code>:</p>
+<pre><code class="lang-csharp">return result.IsSuccess
+    ? Results.Ok()
+    : Results.BadRequest(result.Error);
+</code></pre>
+<p>A missing aggregate returns <code>400</code> instead of <code>404</code>, a uniqueness conflict
+returns <code>400</code> instead of <code>409</code>, and clients cannot distinguish &quot;malformed
+request&quot; from &quot;business rule violated.&quot; The error body is also a plain
+serialized <code>Error</code>, while <code>ExceptionHandlingMiddleware</code> already returns RFC
+7807 <code>ProblemDetails</code> — two different error shapes in the same API. This is
+the first item in the framework backlog: paging, validation-as-Result, and
+caching all return errors and need this taxonomy to already be stable.</p>
+<h2 id="what-changes">What Changes</h2>
+<ul>
+<li>Add <code>ErrorType</code> enum (<code>Failure</code>, <code>Validation</code>, <code>NotFound</code>, <code>Conflict</code>,
+<code>Unauthorized</code>, <code>Forbidden</code>, <code>Unexpected</code>) in <code>Raftel.Domain.Abstractions</code>,
+with no HTTP knowledge — the domain stays transport-agnostic.</li>
+<li>Extend <code>Error</code> with a <code>Type</code> property (default <code>Failure</code>, so the existing
+two-arg constructor keeps compiling) and typed factory methods
+(<code>Error.Validation</code>, <code>Error.NotFound</code>, <code>Error.Conflict</code>, <code>Error.Forbidden</code>,
+<code>Error.Unauthorized</code>, <code>Error.Failure</code>).</li>
+<li><strong>BREAKING</strong>: <code>Error.None</code> and <code>Error.NullValue</code> change from mutable
+<code>public static</code> fields to <code>static readonly</code> — closes a latent bug where
+either could be reassigned.</li>
+<li>Add <code>ErrorResults.ToProblem(Error)</code> in <code>Raftel.Api.Server</code> as the single
+translation point from <code>Error</code> to an HTTP <code>ProblemDetails</code> response, mapping
+<code>ErrorType</code> to status code (<code>Validation</code>→400, <code>NotFound</code>→404, <code>Conflict</code>→409,
+<code>Unauthorized</code>→401, <code>Forbidden</code>→403, <code>Unexpected</code>→500).</li>
+<li>Wire <code>ErrorResults</code> into <code>CommandEndpointMapper</code> and <code>QueryEndpointMapper</code>
+instead of the current <code>Results.BadRequest(result.Error)</code>.</li>
+<li><strong>BREAKING</strong>: success codes change from a hardcoded <code>200 OK</code> to
+method-appropriate codes: <code>POST</code>/<code>PUT</code>/<code>DELETE</code> commands without a result
+value return <code>204 No Content</code>; commands with a result value return <code>201 Created</code> (with a <code>Location</code> header) when <code>CommandDefinition.CreatedRouteName</code>
+is set, otherwise <code>200</code>.</li>
+<li>Add optional <code>CreatedRouteName</code> to <code>CommandDefinition</code>.</li>
+<li>Migrate <code>UserErrors</code>, <code>TenantErrors</code>, <code>RoleErrors</code>, and the demo's
+<code>*Errors.cs</code> files to the typed factories so none stay in <code>ErrorType.Failure</code>
+by omission.</li>
+</ul>
+<h2 id="capabilities">Capabilities</h2>
+<h3 id="new-capabilities">New Capabilities</h3>
+<ul>
+<li><code>error-handling</code>: typed <code>Error</code>/<code>ErrorType</code> taxonomy in the domain layer and
+its translation to HTTP <code>ProblemDetails</code> responses (status codes, success
+codes) in the API layer.</li>
+</ul>
+<h3 id="modified-capabilities">Modified Capabilities</h3>
+<p>(none — no pre-existing specs in this repo)</p>
+<h2 id="impact">Impact</h2>
+<ul>
+<li><strong>Affected code</strong>: <code>Raftel.Domain.Abstractions.Error</code> (new <code>Type</code> property,
+<code>static readonly</code> fields, typed factories); new <code>ErrorType</code> enum; new
+<code>Raftel.Api.Server.AutoEndpoints.ErrorResults</code>; <code>CommandEndpointMapper</code>,
+<code>QueryEndpointMapper</code>, <code>CommandDefinition</code>; <code>UserErrors</code>, <code>TenantErrors</code>,
+<code>RoleErrors</code> and demo equivalents.</li>
+<li><strong>Affected tests</strong>: existing functional tests in
+<code>tests/Raftel.Api.FunctionalTests</code> that assert <code>400</code> on business-rule
+failures must be updated to the correct status code; new unit tests for
+<code>Error</code> factories and <code>ErrorResults</code>, new functional tests per <code>ErrorType</code>.</li>
+<li><strong>Consumers</strong>: any client relying on <code>Error.None</code>/<code>Error.NullValue</code>
+reassignment (unlikely, but now a compile error), any client checking
+<code>== 200</code> on command endpoints, any client parsing the old flat <code>Error</code> JSON
+body instead of <code>ProblemDetails</code> + <code>code</code> extension. Documented in
+<code>BREAKING_CHANGES.md</code>.</li>
+<li><strong>No dependency changes</strong>; no new packages.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/error-typed-http-mapping/proposal.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

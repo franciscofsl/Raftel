@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Namespace Raftel.Domain.Abstractions | Raftel </title>
+      <title>Enum ErrorType | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Namespace Raftel.Domain.Abstractions | Raftel ">
+      <meta name="title" content="Enum ErrorType | Raftel ">
       
-      
+      <meta name="description" content="Classifies the semantic category of an .">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_ErrorType.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.ErrorType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,64 +84,68 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Domain.Abstractions">
+        <article data-uid="Raftel.Domain.Abstractions.ErrorType">
 
-  <h1 id="Raftel_Domain_Abstractions" data-uid="Raftel.Domain.Abstractions" class="text-break">Namespace Raftel.Domain.Abstractions</h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
 
-    <h3 id="classes">
-Classes
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.Error.html">Error</a></dt>
-      <dd><p>Represents an error with a specific code and message.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a></dt>
-      <dd><p>Represents the result of an operation, encapsulating success or failure information.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result&lt;TValue&gt;</a></dt>
-      <dd><p>Represents the result of an operation with a value.</p>
-</dd>
-    </dl>
-    <h3 id="interfaces">
-Interfaces
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.IDomainEvent.html">IDomainEvent</a></dt>
-      <dd><p>Marks an immutable domain event. Implement as a <code>sealed record</code>.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.IHasDomainEvents.html">IHasDomainEvents</a></dt>
-      <dd><p>Exposes the pending domain events of an aggregate without requiring its generic
-<code>AggregateRoot&lt;TId&gt;</code> type, so infrastructure can collect and clear them via
-<code>ChangeTracker.Entries&lt;IHasDomainEvents&gt;()</code>.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html">IRepository&lt;TEntity, TId&gt;</a></dt>
-      <dd><p>Defines a generic repository interface for managing aggregate root entities.</p>
-</dd>
-    </dl>
-    <h3 id="enums">
-Enums
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Abstractions.ErrorType.html">ErrorType</a></dt>
-      <dd><p>Classifies the semantic category of an <a class="xref" href="Raftel.Domain.Abstractions.Error.html">Error</a>.</p>
-</dd>
-    </dl>
+
+
+  <h1 id="Raftel_Domain_Abstractions_ErrorType" data-uid="Raftel.Domain.Abstractions.ErrorType" class="text-break">
+Enum ErrorType  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/ErrorType.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Domain.html">Domain</a>.<a class="xref" href="Raftel.Domain.Abstractions.html">Abstractions</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Raftel.Domain.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Classifies the semantic category of an <a class="xref" href="Raftel.Domain.Abstractions.Error.html">Error</a>.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public enum ErrorType</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="Raftel_Domain_Abstractions_ErrorType_Conflict"><code>Conflict = 3</code></dt>
+  
+  <dd></dd>
+    <dt id="Raftel_Domain_Abstractions_ErrorType_Failure"><code>Failure = 0</code></dt>
+  
+  <dd></dd>
+    <dt id="Raftel_Domain_Abstractions_ErrorType_Forbidden"><code>Forbidden = 5</code></dt>
+  
+  <dd></dd>
+    <dt id="Raftel_Domain_Abstractions_ErrorType_NotFound"><code>NotFound = 2</code></dt>
+  
+  <dd></dd>
+    <dt id="Raftel_Domain_Abstractions_ErrorType_Unauthorized"><code>Unauthorized = 4</code></dt>
+  
+  <dd></dd>
+    <dt id="Raftel_Domain_Abstractions_ErrorType_Unexpected"><code>Unexpected = 6</code></dt>
+  
+  <dd></dd>
+    <dt id="Raftel_Domain_Abstractions_ErrorType_Validation"><code>Validation = 1</code></dt>
+  
+  <dd></dd>
+  </dl>
+
 
 
 </article>
 
         <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/ErrorType.cs/#L6" class="edit-link">Edit this page</a>
         </div>
 
 

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/error-typed-http-mapping/design.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="context">Context</h2>
+<p>See <code>proposal.md</code> - Why. Constraints that shape this design:</p>
+<ul>
+<li><code>Raftel.Domain</code> must not depend on HTTP concepts (project-wide layering
+rule; <code>Microsoft.EntityFrameworkCore</code> and ASP.NET types are already
+forbidden in <code>Domain</code>).</li>
+<li><code>Error</code>/<code>Result</code> is the framework's declared error-handling pattern —
+exceptions for business-logic flow are out (see root <code>CLAUDE.md</code>).</li>
+<li><code>Error</code> is currently a two-argument positional record consumed by
+<code>UserErrors</code>, <code>TenantErrors</code>, <code>RoleErrors</code>, and their demo equivalents; the
+extension must not force every call site to change in the same commit that
+introduces the type.</li>
+<li><code>ExceptionHandlingMiddleware</code> already emits RFC 7807 <code>ProblemDetails</code> for
+thrown exceptions; the new <code>Result</code>-based path must converge on the same
+shape.</li>
+</ul>
+<h2 id="goals--non-goals">Goals / Non-Goals</h2>
+<p><strong>Goals:</strong></p>
+<ul>
+<li>Give <code>Error</code> a semantic <code>ErrorType</code> with typed factories, defaulting
+existing two-arg construction to <code>Failure</code> so nothing breaks at compile
+time.</li>
+<li>Provide one translation point (<code>ErrorResults</code>) from <code>Error</code> to an HTTP
+<code>ProblemDetails</code> response, replacing the blanket <code>Results.BadRequest</code>.</li>
+<li>Fix success status codes for command endpoints (204/201/200) to match REST
+conventions.</li>
+<li>Migrate the framework's own <code>*Errors.cs</code> files to typed factories as proof
+the taxonomy is usable end-to-end.</li>
+</ul>
+<p><strong>Non-Goals:</strong></p>
+<ul>
+<li>Replacing exceptions with <code>Result</code> inside the middleware pipeline
+(<code>ValidationException</code>, <code>UnauthorizedException</code> stay as-is; that's a
+separate, later backlog item).</li>
+<li>Localizing error messages.</li>
+<li>Changing the query endpoint success contract (stays <code>200</code>).</li>
+<li>Introducing per-field validation error detail shape — this change only
+fixes the top-level status/type mapping.</li>
+</ul>
+<h2 id="decisions">Decisions</h2>
+<p><strong><code>ErrorType</code> lives in <code>Raftel.Domain.Abstractions</code>, <code>ErrorResults</code> lives in
+<code>Raftel.Api.Server</code>.</strong> The enum is a pure classification with no transport
+meaning (<code>NotFound</code>, not <code>Http404</code>); only the API layer knows what a status
+code is. This keeps the layering rule intact and lets a future non-HTTP
+transport (e.g. gRPC) map the same <code>ErrorType</code> differently.</p>
+<p><em>Alternative considered</em>: put an <code>int HttpStatusCode</code> directly on <code>Error</code>.
+Rejected — leaks HTTP into the domain, and a single int can't express
+different transports' status conventions.</p>
+<p><strong><code>Error</code> keeps its two-arg constructor and adds <code>Type</code> with a default
+value</strong>, rather than introducing a new type or requiring a breaking
+constructor change. <code>Error.None</code> and <code>Error.NullValue</code> become <code>static readonly</code> as part of this same change since they're touched anyway and the
+mutability is a latent bug (anyone can currently reassign <code>Error.None</code>).</p>
+<p><em>Alternative considered</em>: typed exceptions per category (<code>NotFoundException</code>,
+<code>ConflictException</code>). Rejected — contradicts the project's declared
+<code>Result</code>-only error pattern for business flow.</p>
+<p><em>Alternative considered</em>: a <code>Dictionary&lt;string, int&gt;</code> mapping error codes to
+status codes. Rejected — requires a global registry and couples
+infrastructure to specific domain error codes instead of a stable, closed
+taxonomy.</p>
+<p><strong>Success codes are read from HTTP semantics, not from whether the command
+&quot;worked.&quot;</strong> <code>CommandDefinition</code> gains an optional <code>CreatedRouteName</code>; its
+presence is what triggers <code>201</code> + <code>Location</code>, not the mere presence of a
+result value. No <code>CreatedRouteName</code> + a result value keeps returning <code>200</code>
+(no incorrect <code>204</code> when there's a body to return).</p>
+<p><strong>Migration of <code>UserErrors</code>/<code>TenantErrors</code>/<code>RoleErrors</code> happens in the same
+change</strong>, not deferred, so the acceptance criterion &quot;no <code>*Errors.cs</code> left at
+<code>Failure</code> by omission&quot; is met and existing functional tests exercise the real
+mapping rather than a synthetic one.</p>
+<h2 id="risks--trade-offs">Risks / Trade-offs</h2>
+<p>[Existing functional tests assert <code>400</code> on business-rule failures that will
+now correctly return <code>404</code>/<code>409</code>/<code>403</code>] → Mitigation: full regression pass
+over <code>tests/Raftel.Api.FunctionalTests</code> is a required task, not optional
+cleanup; each changed assertion is a deliberate, reviewed diff.</p>
+<p>[Consumers outside this repo may depend on the current <code>200</code>-always and flat
+<code>Error</code> JSON body] → Mitigation: documented as breaking changes in
+<code>BREAKING_CHANGES.md</code>; this is a pre-1.0 framework where breaking changes are
+expected to be called out per the existing <code>BREAKING_CHANGES.md</code> convention.</p>
+<p>[<code>ErrorType.Failure</code> as the default for the two-arg constructor means a
+forgotten migration silently stays at <code>400</code>] → Mitigation: acceptance
+criterion explicitly checks every framework and demo <code>*Errors.cs</code> for
+unclassified entries; not just &quot;compiles,&quot; but &quot;categorized.&quot;</p>
+<h2 id="migration-plan">Migration Plan</h2>
+<ol>
+<li>Add <code>ErrorType</code> and extend <code>Error</code> (additive, non-breaking on its own).</li>
+<li>Add <code>ErrorResults</code> and wire it into both endpoint mappers.</li>
+<li>Add <code>CreatedRouteName</code> and the new success-code logic.</li>
+<li>Migrate framework <code>*Errors.cs</code> and demo equivalents to typed factories.</li>
+<li>Update <code>Error.None</code>/<code>Error.NullValue</code> to <code>static readonly</code>.</li>
+<li>Run full test suite; fix functional test assertions that expected the old
+<code>400</code>-always / <code>200</code>-always behavior.</li>
+<li>Document breaking changes in <code>BREAKING_CHANGES.md</code>.</li>
+</ol>
+<p>No data migration or runtime rollback concerns — this is a compile-time and
+HTTP-contract change with no persisted state involved.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/error-typed-http-mapping/design.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -148,9 +148,33 @@ var schema = new OpenApiSchema
 <li>For now, you can suppress the warning or continue using it until a replacement is provided</li>
 </ul>
 <hr>
+<hr>
+<h2 id="typed-errorhttp-status-mapping">Typed Error/HTTP Status Mapping</h2>
+<h3 id="errornone-and-errornullvalue-are-now-immutable"><code>Error.None</code> and <code>Error.NullValue</code> are now immutable</h3>
+<p><strong>What changed:</strong> <code>Error.None</code> and <code>Error.NullValue</code> changed from mutable <code>public static</code> fields to <code>static readonly</code> fields.</p>
+<p><strong>Why:</strong> Both were reassignable by any code in the process, which was a latent bug — anything could silently change what &quot;no error&quot; or &quot;null value&quot; meant for the rest of the application's lifetime.</p>
+<p><strong>Impact:</strong> Code that reassigned <code>Error.None</code> or <code>Error.NullValue</code> (unlikely, but technically possible before) no longer compiles.</p>
+<p><strong>Action required:</strong> Remove any code that assigns to <code>Error.None</code> or <code>Error.NullValue</code>. There is no supported replacement — these values are meant to be fixed.</p>
+<h3 id="command-endpoints-no-longer-always-return-200-ok">Command endpoints no longer always return <code>200 OK</code></h3>
+<p><strong>What changed:</strong> Command endpoints (<code>POST</code>/<code>PUT</code>/<code>DELETE</code> mapped via <code>AddCommand</code>) now return status codes based on the outcome instead of a hardcoded <code>200 OK</code>:</p>
+<ul>
+<li>No result value on success → <code>204 No Content</code>.</li>
+<li>A result value on success, with <code>CreatedRouteName</code> configured on the command → <code>201 Created</code> with a <code>Location</code> header.</li>
+<li>A result value on success, with no <code>CreatedRouteName</code> configured → <code>200 OK</code> with the result body (unchanged).</li>
+</ul>
+<p><strong>Why:</strong> A blanket <code>200 OK</code> for every successful command ignored REST conventions and didn't let clients tell &quot;resource created&quot; from &quot;no content to return&quot; from &quot;here's the updated resource.&quot;</p>
+<p><strong>Impact:</strong> Clients that check <code>response.StatusCode == 200</code> on a command endpoint that produces no result value, or that expect a body on such an endpoint, will break.</p>
+<p><strong>Action required:</strong> Update clients to accept <code>204</code> for no-result commands, and <code>201</code> (with <code>Location</code>) for commands whose <code>CommandDefinition</code> declares a <code>CreatedRouteName</code>.</p>
+<h3 id="failed-results-now-return-typed-problemdetails-not-a-flat-error-body-with-a-hardcoded-400">Failed results now return typed <code>ProblemDetails</code>, not a flat <code>Error</code> body with a hardcoded <code>400</code></h3>
+<p><strong>What changed:</strong> Command and query endpoints translate a failed <code>Result</code> to an HTTP response based on the error's <code>ErrorType</code>: <code>Validation</code>/<code>Failure</code> → 400, <code>NotFound</code> → 404, <code>Conflict</code> → 409, <code>Unauthorized</code> → 401, <code>Forbidden</code> → 403, <code>Unexpected</code> → 500. The response body is an RFC 7807 <code>ProblemDetails</code> document with the original <code>Error.Code</code> as a <code>code</code> extension field, instead of a plain serialized <code>Error</code>.</p>
+<p><strong>Why:</strong> Every business-rule failure previously returned <code>400 Bad Request</code> regardless of its actual nature (missing resource, conflict, permission denied, etc.), and used a different error shape than the RFC 7807 <code>ProblemDetails</code> already returned by unhandled-exception handling.</p>
+<p><strong>Impact:</strong> Clients that assume every failed command/query response is <code>400</code> with a flat <code>{ code, message }</code> body will break — status codes now vary by error type, and the body shape is <code>ProblemDetails</code> (<code>title</code>, <code>status</code>, <code>detail</code>, <code>code</code> extension) instead.</p>
+<p><strong>Action required:</strong> Update clients to branch on the actual HTTP status code and to read the <code>ProblemDetails</code> shape, using the <code>code</code> extension field for the machine-readable error code.</p>
+<hr>
 <h2 id="summary">Summary</h2>
 <p>The migration to .NET 10 is primarily focused on framework and dependency updates. The main breaking change that may affect consumers is the Microsoft.OpenApi 2.0 update, which requires namespace and type changes if you're customizing OpenAPI/Swagger configurations.</p>
-<p>All tests pass successfully after migration, confirming that the functional behavior of the library remains unchanged.</p>
+<p>A separate, later change introduced a typed <code>Error</code>/<code>ErrorType</code> taxonomy with corresponding HTTP status code mapping, immutable well-known <code>Error</code> values, and REST-appropriate success codes for command endpoints — see the &quot;Typed Error/HTTP Status Mapping&quot; section above.</p>
+<p>All tests pass successfully after migration, confirming that the functional behavior of the library remains unchanged except where documented above.</p>
 
 </article>
 

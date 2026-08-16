@@ -89,15 +89,15 @@ references:
   commentId: T:Raftel.Api.Server.AutoEndpoints.CommandDefinition
   fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition
   nameWithType: CommandDefinition
-- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor(System.Type,System.Type,System.String,System.Net.Http.HttpMethod)
-  name: CommandDefinition(Type, Type?, string, HttpMethod)
-  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition__ctor_System_Type_System_Type_System_String_System_Net_Http_HttpMethod_
-  commentId: M:Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor(System.Type,System.Type,System.String,System.Net.Http.HttpMethod)
-  name.vb: New(Type, Type, String, HttpMethod)
-  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.CommandDefinition(System.Type, System.Type?, string, System.Net.Http.HttpMethod)
-  fullName.vb: Raftel.Api.Server.AutoEndpoints.CommandDefinition.New(System.Type, System.Type, String, System.Net.Http.HttpMethod)
-  nameWithType: CommandDefinition.CommandDefinition(Type, Type?, string, HttpMethod)
-  nameWithType.vb: CommandDefinition.New(Type, Type, String, HttpMethod)
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor(System.Type,System.Type,System.String,System.Net.Http.HttpMethod,System.String)
+  name: CommandDefinition(Type, Type?, string, HttpMethod, string?)
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition__ctor_System_Type_System_Type_System_String_System_Net_Http_HttpMethod_System_String_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor(System.Type,System.Type,System.String,System.Net.Http.HttpMethod,System.String)
+  name.vb: New(Type, Type, String, HttpMethod, String)
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.CommandDefinition(System.Type, System.Type?, string, System.Net.Http.HttpMethod, string?)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.CommandDefinition.New(System.Type, System.Type, String, System.Net.Http.HttpMethod, String)
+  nameWithType: CommandDefinition.CommandDefinition(Type, Type?, string, HttpMethod, string?)
+  nameWithType.vb: CommandDefinition.New(Type, Type, String, HttpMethod, String)
 - uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor*
   name: CommandDefinition
   href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition__ctor_
@@ -108,6 +108,19 @@ references:
   fullName.vb: Raftel.Api.Server.AutoEndpoints.CommandDefinition.New
   nameWithType: CommandDefinition.CommandDefinition
   nameWithType.vb: CommandDefinition.New
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.CreatedRouteName
+  name: CreatedRouteName
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_CreatedRouteName
+  commentId: P:Raftel.Api.Server.AutoEndpoints.CommandDefinition.CreatedRouteName
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.CreatedRouteName
+  nameWithType: CommandDefinition.CreatedRouteName
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.CreatedRouteName*
+  name: CreatedRouteName
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_CreatedRouteName_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.CommandDefinition.CreatedRouteName
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.CreatedRouteName
+  nameWithType: CommandDefinition.CreatedRouteName
 - uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Method
   name: Method
   href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_Method
@@ -198,6 +211,51 @@ references:
   fullName.vb: Raftel.Api.Server.AutoEndpoints.CommandEndpointMapper.MapCommandEndpoint(Of TCommand)(Microsoft.AspNetCore.Routing.RouteGroupBuilder, Raftel.Api.Server.AutoEndpoints.CommandDefinition)
   nameWithType: CommandEndpointMapper.MapCommandEndpoint<TCommand>(RouteGroupBuilder, CommandDefinition)
   nameWithType.vb: CommandEndpointMapper.MapCommandEndpoint(Of TCommand)(RouteGroupBuilder, CommandDefinition)
+- uid: Raftel.Api.Server.AutoEndpoints.ErrorResults
+  name: ErrorResults
+  href: api/Raftel.Api.Server.AutoEndpoints.ErrorResults.html
+  commentId: T:Raftel.Api.Server.AutoEndpoints.ErrorResults
+  fullName: Raftel.Api.Server.AutoEndpoints.ErrorResults
+  nameWithType: ErrorResults
+- uid: Raftel.Api.Server.AutoEndpoints.ErrorResults.StatusCodeFor(Raftel.Domain.Abstractions.ErrorType)
+  name: StatusCodeFor(ErrorType)
+  href: api/Raftel.Api.Server.AutoEndpoints.ErrorResults.html#Raftel_Api_Server_AutoEndpoints_ErrorResults_StatusCodeFor_Raftel_Domain_Abstractions_ErrorType_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.ErrorResults.StatusCodeFor(Raftel.Domain.Abstractions.ErrorType)
+  fullName: Raftel.Api.Server.AutoEndpoints.ErrorResults.StatusCodeFor(Raftel.Domain.Abstractions.ErrorType)
+  nameWithType: ErrorResults.StatusCodeFor(ErrorType)
+- uid: Raftel.Api.Server.AutoEndpoints.ErrorResults.StatusCodeFor*
+  name: StatusCodeFor
+  href: api/Raftel.Api.Server.AutoEndpoints.ErrorResults.html#Raftel_Api_Server_AutoEndpoints_ErrorResults_StatusCodeFor_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.ErrorResults.StatusCodeFor
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.ErrorResults.StatusCodeFor
+  nameWithType: ErrorResults.StatusCodeFor
+- uid: Raftel.Api.Server.AutoEndpoints.ErrorResults.TitleFor(Raftel.Domain.Abstractions.ErrorType)
+  name: TitleFor(ErrorType)
+  href: api/Raftel.Api.Server.AutoEndpoints.ErrorResults.html#Raftel_Api_Server_AutoEndpoints_ErrorResults_TitleFor_Raftel_Domain_Abstractions_ErrorType_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.ErrorResults.TitleFor(Raftel.Domain.Abstractions.ErrorType)
+  fullName: Raftel.Api.Server.AutoEndpoints.ErrorResults.TitleFor(Raftel.Domain.Abstractions.ErrorType)
+  nameWithType: ErrorResults.TitleFor(ErrorType)
+- uid: Raftel.Api.Server.AutoEndpoints.ErrorResults.TitleFor*
+  name: TitleFor
+  href: api/Raftel.Api.Server.AutoEndpoints.ErrorResults.html#Raftel_Api_Server_AutoEndpoints_ErrorResults_TitleFor_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.ErrorResults.TitleFor
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.ErrorResults.TitleFor
+  nameWithType: ErrorResults.TitleFor
+- uid: Raftel.Api.Server.AutoEndpoints.ErrorResults.ToProblem(Raftel.Domain.Abstractions.Error)
+  name: ToProblem(Error)
+  href: api/Raftel.Api.Server.AutoEndpoints.ErrorResults.html#Raftel_Api_Server_AutoEndpoints_ErrorResults_ToProblem_Raftel_Domain_Abstractions_Error_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.ErrorResults.ToProblem(Raftel.Domain.Abstractions.Error)
+  fullName: Raftel.Api.Server.AutoEndpoints.ErrorResults.ToProblem(Raftel.Domain.Abstractions.Error)
+  nameWithType: ErrorResults.ToProblem(Error)
+- uid: Raftel.Api.Server.AutoEndpoints.ErrorResults.ToProblem*
+  name: ToProblem
+  href: api/Raftel.Api.Server.AutoEndpoints.ErrorResults.html#Raftel_Api_Server_AutoEndpoints_ErrorResults_ToProblem_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.ErrorResults.ToProblem
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.ErrorResults.ToProblem
+  nameWithType: ErrorResults.ToProblem
 - uid: Raftel.Api.Server.AutoEndpoints.QueryDefinition
   name: QueryDefinition
   href: api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.html
@@ -319,15 +377,15 @@ references:
   fullName.vb: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand(Of TRequest)(String, System.Net.Http.HttpMethod)
   nameWithType: RouteOptions.AddCommand<TRequest>(string, HttpMethod)
   nameWithType.vb: RouteOptions.AddCommand(Of TRequest)(String, HttpMethod)
-- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``2(System.String,System.Net.Http.HttpMethod)
-  name: AddCommand<TRequest, TResult>(string, HttpMethod)
-  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__2_System_String_System_Net_Http_HttpMethod_
-  commentId: M:Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``2(System.String,System.Net.Http.HttpMethod)
-  name.vb: AddCommand(Of TRequest, TResult)(String, HttpMethod)
-  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand<TRequest, TResult>(string, System.Net.Http.HttpMethod)
-  fullName.vb: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand(Of TRequest, TResult)(String, System.Net.Http.HttpMethod)
-  nameWithType: RouteOptions.AddCommand<TRequest, TResult>(string, HttpMethod)
-  nameWithType.vb: RouteOptions.AddCommand(Of TRequest, TResult)(String, HttpMethod)
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``2(System.String,System.Net.Http.HttpMethod,System.String)
+  name: AddCommand<TRequest, TResult>(string, HttpMethod, string?)
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__2_System_String_System_Net_Http_HttpMethod_System_String_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``2(System.String,System.Net.Http.HttpMethod,System.String)
+  name.vb: AddCommand(Of TRequest, TResult)(String, HttpMethod, String)
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand<TRequest, TResult>(string, System.Net.Http.HttpMethod, string?)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand(Of TRequest, TResult)(String, System.Net.Http.HttpMethod, String)
+  nameWithType: RouteOptions.AddCommand<TRequest, TResult>(string, HttpMethod, string?)
+  nameWithType.vb: RouteOptions.AddCommand(Of TRequest, TResult)(String, HttpMethod, String)
 - uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddQuery*
   name: AddQuery
   href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddQuery_
@@ -2864,15 +2922,15 @@ references:
   commentId: T:Raftel.Domain.Abstractions.Error
   fullName: Raftel.Domain.Abstractions.Error
   nameWithType: Error
-- uid: Raftel.Domain.Abstractions.Error.#ctor(System.String,System.String)
-  name: Error(string, string)
-  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error__ctor_System_String_System_String_
-  commentId: M:Raftel.Domain.Abstractions.Error.#ctor(System.String,System.String)
-  name.vb: New(String, String)
-  fullName: Raftel.Domain.Abstractions.Error.Error(string, string)
-  fullName.vb: Raftel.Domain.Abstractions.Error.New(String, String)
-  nameWithType: Error.Error(string, string)
-  nameWithType.vb: Error.New(String, String)
+- uid: Raftel.Domain.Abstractions.Error.#ctor(System.String,System.String,Raftel.Domain.Abstractions.ErrorType)
+  name: Error(string, string, ErrorType)
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error__ctor_System_String_System_String_Raftel_Domain_Abstractions_ErrorType_
+  commentId: M:Raftel.Domain.Abstractions.Error.#ctor(System.String,System.String,Raftel.Domain.Abstractions.ErrorType)
+  name.vb: New(String, String, ErrorType)
+  fullName: Raftel.Domain.Abstractions.Error.Error(string, string, Raftel.Domain.Abstractions.ErrorType)
+  fullName.vb: Raftel.Domain.Abstractions.Error.New(String, String, Raftel.Domain.Abstractions.ErrorType)
+  nameWithType: Error.Error(string, string, ErrorType)
+  nameWithType.vb: Error.New(String, String, ErrorType)
 - uid: Raftel.Domain.Abstractions.Error.#ctor*
   name: Error
   href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error__ctor_
@@ -2896,6 +2954,54 @@ references:
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.Error.Code
   nameWithType: Error.Code
+- uid: Raftel.Domain.Abstractions.Error.Conflict(System.String,System.String)
+  name: Conflict(string, string)
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Conflict_System_String_System_String_
+  commentId: M:Raftel.Domain.Abstractions.Error.Conflict(System.String,System.String)
+  name.vb: Conflict(String, String)
+  fullName: Raftel.Domain.Abstractions.Error.Conflict(string, string)
+  fullName.vb: Raftel.Domain.Abstractions.Error.Conflict(String, String)
+  nameWithType: Error.Conflict(string, string)
+  nameWithType.vb: Error.Conflict(String, String)
+- uid: Raftel.Domain.Abstractions.Error.Conflict*
+  name: Conflict
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Conflict_
+  commentId: Overload:Raftel.Domain.Abstractions.Error.Conflict
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.Error.Conflict
+  nameWithType: Error.Conflict
+- uid: Raftel.Domain.Abstractions.Error.Failure(System.String,System.String)
+  name: Failure(string, string)
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Failure_System_String_System_String_
+  commentId: M:Raftel.Domain.Abstractions.Error.Failure(System.String,System.String)
+  name.vb: Failure(String, String)
+  fullName: Raftel.Domain.Abstractions.Error.Failure(string, string)
+  fullName.vb: Raftel.Domain.Abstractions.Error.Failure(String, String)
+  nameWithType: Error.Failure(string, string)
+  nameWithType.vb: Error.Failure(String, String)
+- uid: Raftel.Domain.Abstractions.Error.Failure*
+  name: Failure
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Failure_
+  commentId: Overload:Raftel.Domain.Abstractions.Error.Failure
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.Error.Failure
+  nameWithType: Error.Failure
+- uid: Raftel.Domain.Abstractions.Error.Forbidden(System.String,System.String)
+  name: Forbidden(string, string)
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Forbidden_System_String_System_String_
+  commentId: M:Raftel.Domain.Abstractions.Error.Forbidden(System.String,System.String)
+  name.vb: Forbidden(String, String)
+  fullName: Raftel.Domain.Abstractions.Error.Forbidden(string, string)
+  fullName.vb: Raftel.Domain.Abstractions.Error.Forbidden(String, String)
+  nameWithType: Error.Forbidden(string, string)
+  nameWithType.vb: Error.Forbidden(String, String)
+- uid: Raftel.Domain.Abstractions.Error.Forbidden*
+  name: Forbidden
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Forbidden_
+  commentId: Overload:Raftel.Domain.Abstractions.Error.Forbidden
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.Error.Forbidden
+  nameWithType: Error.Forbidden
 - uid: Raftel.Domain.Abstractions.Error.Message
   name: Message
   href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Message
@@ -2915,12 +3021,121 @@ references:
   commentId: F:Raftel.Domain.Abstractions.Error.None
   fullName: Raftel.Domain.Abstractions.Error.None
   nameWithType: Error.None
+- uid: Raftel.Domain.Abstractions.Error.NotFound(System.String,System.String)
+  name: NotFound(string, string)
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_NotFound_System_String_System_String_
+  commentId: M:Raftel.Domain.Abstractions.Error.NotFound(System.String,System.String)
+  name.vb: NotFound(String, String)
+  fullName: Raftel.Domain.Abstractions.Error.NotFound(string, string)
+  fullName.vb: Raftel.Domain.Abstractions.Error.NotFound(String, String)
+  nameWithType: Error.NotFound(string, string)
+  nameWithType.vb: Error.NotFound(String, String)
+- uid: Raftel.Domain.Abstractions.Error.NotFound*
+  name: NotFound
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_NotFound_
+  commentId: Overload:Raftel.Domain.Abstractions.Error.NotFound
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.Error.NotFound
+  nameWithType: Error.NotFound
 - uid: Raftel.Domain.Abstractions.Error.NullValue
   name: NullValue
   href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_NullValue
   commentId: F:Raftel.Domain.Abstractions.Error.NullValue
   fullName: Raftel.Domain.Abstractions.Error.NullValue
   nameWithType: Error.NullValue
+- uid: Raftel.Domain.Abstractions.Error.Type
+  name: Type
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Type
+  commentId: P:Raftel.Domain.Abstractions.Error.Type
+  fullName: Raftel.Domain.Abstractions.Error.Type
+  nameWithType: Error.Type
+- uid: Raftel.Domain.Abstractions.Error.Type*
+  name: Type
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Type_
+  commentId: Overload:Raftel.Domain.Abstractions.Error.Type
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.Error.Type
+  nameWithType: Error.Type
+- uid: Raftel.Domain.Abstractions.Error.Unauthorized(System.String,System.String)
+  name: Unauthorized(string, string)
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Unauthorized_System_String_System_String_
+  commentId: M:Raftel.Domain.Abstractions.Error.Unauthorized(System.String,System.String)
+  name.vb: Unauthorized(String, String)
+  fullName: Raftel.Domain.Abstractions.Error.Unauthorized(string, string)
+  fullName.vb: Raftel.Domain.Abstractions.Error.Unauthorized(String, String)
+  nameWithType: Error.Unauthorized(string, string)
+  nameWithType.vb: Error.Unauthorized(String, String)
+- uid: Raftel.Domain.Abstractions.Error.Unauthorized*
+  name: Unauthorized
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Unauthorized_
+  commentId: Overload:Raftel.Domain.Abstractions.Error.Unauthorized
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.Error.Unauthorized
+  nameWithType: Error.Unauthorized
+- uid: Raftel.Domain.Abstractions.Error.Validation(System.String,System.String)
+  name: Validation(string, string)
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Validation_System_String_System_String_
+  commentId: M:Raftel.Domain.Abstractions.Error.Validation(System.String,System.String)
+  name.vb: Validation(String, String)
+  fullName: Raftel.Domain.Abstractions.Error.Validation(string, string)
+  fullName.vb: Raftel.Domain.Abstractions.Error.Validation(String, String)
+  nameWithType: Error.Validation(string, string)
+  nameWithType.vb: Error.Validation(String, String)
+- uid: Raftel.Domain.Abstractions.Error.Validation*
+  name: Validation
+  href: api/Raftel.Domain.Abstractions.Error.html#Raftel_Domain_Abstractions_Error_Validation_
+  commentId: Overload:Raftel.Domain.Abstractions.Error.Validation
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.Error.Validation
+  nameWithType: Error.Validation
+- uid: Raftel.Domain.Abstractions.ErrorType
+  name: ErrorType
+  href: api/Raftel.Domain.Abstractions.ErrorType.html
+  commentId: T:Raftel.Domain.Abstractions.ErrorType
+  fullName: Raftel.Domain.Abstractions.ErrorType
+  nameWithType: ErrorType
+- uid: Raftel.Domain.Abstractions.ErrorType.Conflict
+  name: Conflict
+  href: api/Raftel.Domain.Abstractions.ErrorType.html#Raftel_Domain_Abstractions_ErrorType_Conflict
+  commentId: F:Raftel.Domain.Abstractions.ErrorType.Conflict
+  fullName: Raftel.Domain.Abstractions.ErrorType.Conflict
+  nameWithType: ErrorType.Conflict
+- uid: Raftel.Domain.Abstractions.ErrorType.Failure
+  name: Failure
+  href: api/Raftel.Domain.Abstractions.ErrorType.html#Raftel_Domain_Abstractions_ErrorType_Failure
+  commentId: F:Raftel.Domain.Abstractions.ErrorType.Failure
+  fullName: Raftel.Domain.Abstractions.ErrorType.Failure
+  nameWithType: ErrorType.Failure
+- uid: Raftel.Domain.Abstractions.ErrorType.Forbidden
+  name: Forbidden
+  href: api/Raftel.Domain.Abstractions.ErrorType.html#Raftel_Domain_Abstractions_ErrorType_Forbidden
+  commentId: F:Raftel.Domain.Abstractions.ErrorType.Forbidden
+  fullName: Raftel.Domain.Abstractions.ErrorType.Forbidden
+  nameWithType: ErrorType.Forbidden
+- uid: Raftel.Domain.Abstractions.ErrorType.NotFound
+  name: NotFound
+  href: api/Raftel.Domain.Abstractions.ErrorType.html#Raftel_Domain_Abstractions_ErrorType_NotFound
+  commentId: F:Raftel.Domain.Abstractions.ErrorType.NotFound
+  fullName: Raftel.Domain.Abstractions.ErrorType.NotFound
+  nameWithType: ErrorType.NotFound
+- uid: Raftel.Domain.Abstractions.ErrorType.Unauthorized
+  name: Unauthorized
+  href: api/Raftel.Domain.Abstractions.ErrorType.html#Raftel_Domain_Abstractions_ErrorType_Unauthorized
+  commentId: F:Raftel.Domain.Abstractions.ErrorType.Unauthorized
+  fullName: Raftel.Domain.Abstractions.ErrorType.Unauthorized
+  nameWithType: ErrorType.Unauthorized
+- uid: Raftel.Domain.Abstractions.ErrorType.Unexpected
+  name: Unexpected
+  href: api/Raftel.Domain.Abstractions.ErrorType.html#Raftel_Domain_Abstractions_ErrorType_Unexpected
+  commentId: F:Raftel.Domain.Abstractions.ErrorType.Unexpected
+  fullName: Raftel.Domain.Abstractions.ErrorType.Unexpected
+  nameWithType: ErrorType.Unexpected
+- uid: Raftel.Domain.Abstractions.ErrorType.Validation
+  name: Validation
+  href: api/Raftel.Domain.Abstractions.ErrorType.html#Raftel_Domain_Abstractions_ErrorType_Validation
+  commentId: F:Raftel.Domain.Abstractions.ErrorType.Validation
+  fullName: Raftel.Domain.Abstractions.ErrorType.Validation
+  nameWithType: ErrorType.Validation
 - uid: Raftel.Domain.Abstractions.IDomainEvent
   name: IDomainEvent
   href: api/Raftel.Domain.Abstractions.IDomainEvent.html

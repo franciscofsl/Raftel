@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/error-typed-http-mapping/tasks.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="1-errortype-and-typed-error">1. <code>ErrorType</code> and typed <code>Error</code></h2>
+<ul>
+<li>[x] 1.1 Write <code>ErrorTests</code>: two-arg construction defaults to <code>ErrorType.Failure</code>; each typed factory (<code>Validation</code>, <code>NotFound</code>, <code>Conflict</code>, <code>Unauthorized</code>, <code>Forbidden</code>, <code>Failure</code>) produces the matching <code>ErrorType</code>; <code>Error.None</code> is equal by value to a two-arg <code>Error</code> with empty code/message</li>
+<li>[x] 1.2 Add <code>ErrorType</code> enum in <code>src/Raftel.Domain/Abstractions/ErrorType.cs</code> (<code>Failure</code>, <code>Validation</code>, <code>NotFound</code>, <code>Conflict</code>, <code>Unauthorized</code>, <code>Forbidden</code>, <code>Unexpected</code>)</li>
+<li>[x] 1.3 Extend <code>src/Raftel.Domain/Abstractions/Error.cs</code>: add <code>Type</code> with default <code>ErrorType.Failure</code>, add typed factory methods, change <code>None</code>/<code>NullValue</code> to <code>static readonly</code></li>
+<li>[x] 1.4 Build the full solution and confirm no existing call site breaks (default parameter keeps compatibility)</li>
+</ul>
+<h2 id="2-http-translation-errorresults">2. HTTP translation (<code>ErrorResults</code>)</h2>
+<ul>
+<li>[x] 2.1 Write <code>ErrorMappingTests</code> (functional): a handler returning <code>Error.NotFound(...)</code> responds 404 with a Problem Details body containing the <code>code</code> extension; repeat for <code>Conflict</code>→409, <code>Validation</code>→400, <code>Forbidden</code>→403, <code>Unauthorized</code>→401, <code>Failure</code>→400</li>
+<li>[x] 2.2 Implement <code>src/Raftel.Api.Server/AutoEndpoints/ErrorResults.cs</code> with <code>ToProblem(Error)</code>, <code>StatusCodeFor(ErrorType)</code>, <code>TitleFor(ErrorType)</code></li>
+<li>[x] 2.3 Wire <code>ErrorResults.ToProblem</code> into <code>CommandEndpointMapper</code> (both <code>MapCommandEndpoint</code> and <code>MapCommandEndpointWithResult</code>), replacing <code>Results.BadRequest(result.Error)</code></li>
+<li>[x] 2.4 Wire <code>ErrorResults.ToProblem</code> into <code>QueryEndpointMapper</code>, replacing <code>Results.BadRequest(result.Error)</code></li>
+<li>[x] 2.5 Run the new functional tests and confirm all status codes and body shapes match (<code>dotnet test tests/Raftel.Api.FunctionalTests</code> with Docker available: 22/22 passed)</li>
+</ul>
+<h2 id="3-success-status-codes">3. Success status codes</h2>
+<ul>
+<li>[x] 3.1 Write functional tests: command without a result value → 204 empty body; command with a result value and <code>CreatedRouteName</code> set → 201 + <code>Location</code> header; command with a result value and no <code>CreatedRouteName</code> → 200 + body</li>
+<li>[x] 3.2 Add <code>CreatedRouteName</code> (nullable) to <code>src/Raftel.Api.Server/AutoEndpoints/CommandDefinition.cs</code></li>
+<li>[x] 3.3 Update <code>CommandEndpointMapper.MapCommandEndpoint</code> to return 204 on success</li>
+<li>[x] 3.4 Update <code>CommandEndpointMapper.MapCommandEndpointWithResult</code> to return 201+Location when <code>CreatedRouteName</code> is set, else 200+body</li>
+<li>[x] 3.5 Confirm query endpoints are untouched and still return 200 on success (QueryEndpointMapper success path unchanged — only the error branch was rewired to ErrorResults)</li>
+</ul>
+<h2 id="4-migrate-framework-and-demo-errors">4. Migrate framework and demo errors</h2>
+<ul>
+<li>[x] 4.1 Categorize <code>src/Raftel.Domain/Features/Users/UserErrors.cs</code> with typed factories</li>
+<li>[x] 4.2 Categorize <code>src/Raftel.Domain/Features/Tenants/TenantErrors.cs</code> with typed factories</li>
+<li>[x] 4.3 Categorize <code>src/Raftel.Domain/Features/Authorization/RoleErrors.cs</code> with typed factories</li>
+<li>[x] 4.4 Categorize all <code>demo/Raftel.Demo.Domain/**/*Errors.cs</code> with typed factories</li>
+<li>[x] 4.5 Grep the framework and demo source trees for any remaining <code>new Error(...)</code> or <code>Error.Failure(...)</code> call classifiable under a more specific type, and reclassify (also caught <code>CreatePirateErrors.cs</code>, <code>GetTenantQueryHandler</code>, <code>GetPirateByIdQueryHandler</code>, <code>Code.cs</code>, <code>AuthenticationService.cs</code>; the four remaining <code>AuthenticationService</code> Identity-provider failures are explicitly <code>ErrorType.Unexpected</code>, not left at the <code>Failure</code> default by omission)</li>
+</ul>
+<h2 id="5-regression-and-documentation">5. Regression and documentation</h2>
+<ul>
+<li>[x] 5.1 Run the full test suite; update every assertion in <code>tests/Raftel.Api.FunctionalTests</code> that expected the old <code>400</code>-always / <code>200</code>-always behavior to the correct status code (found and fixed <code>AuthenticationTest.Register_NewUser_ShouldReturnOk</code> → <code>..._ShouldReturnNoContent</code>, asserting <code>204</code>; audited every other status-code assertion and body-read in the project, none else were affected)</li>
+<li>[x] 5.2 Confirm <code>dotnet test</code> passes across the whole solution — all 8 test projects pass with Docker available: <code>Raftel.Domain.Tests</code> 76/76, <code>Raftel.Application.UnitTests</code> 80/80, <code>Raftel.Shared.Tests</code> 14/14, <code>Raftel.Api.Client.UnitTests</code> 8/8, <code>Raftel.ArchitectureTests</code> 7/7, <code>Raftel.Api.FunctionalTests</code> 22/22, <code>Raftel.Infrastructure.Tests</code> 143/143, <code>Raftel.Application.IntegrationTests</code> 6/6; <code>dotnet build Raftel.sln</code> succeeds with 0 errors</li>
+<li>[x] 5.3 Document the three breaking changes (immutable <code>Error.None</code>/<code>NullValue</code>, new success codes, <code>ProblemDetails</code> body shape) in <code>BREAKING_CHANGES.md</code></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/error-typed-http-mapping/tasks.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

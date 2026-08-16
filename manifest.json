@@ -112,6 +112,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.AutoEndpoints.ErrorResults.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.AutoEndpoints.ErrorResults.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.AutoEndpoints.ErrorResults",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.AutoEndpoints.ErrorResults.yml\" sourcestartlinenumber=\"1\">Translates a domain <xref href=\"Raftel.Domain.Abstractions.Error\" data-throw-if-not-resolved=\"false\"></xref> into an RFC 7807 Problem Details HTTP response.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Api.Server.AutoEndpoints.QueryDefinition.yml",
       "output": {
         ".html": {
@@ -1467,6 +1481,20 @@
       "IsMRef": true,
       "Title": "Raftel.Domain.Abstractions.Error",
       "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.Error.yml\" sourcestartlinenumber=\"1\">Represents an error with a specific code and message.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Abstractions.ErrorType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Abstractions.ErrorType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Abstractions.ErrorType",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.ErrorType.yml\" sourcestartlinenumber=\"1\">Classifies the semantic category of an <xref href=\"Raftel.Domain.Abstractions.Error\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -3132,6 +3160,46 @@
       "output": {
         ".html": {
           "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/error-typed-http-mapping/design.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/error-typed-http-mapping/design.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/error-typed-http-mapping/proposal.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/error-typed-http-mapping/proposal.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/error-typed-http-mapping/specs/error-handling/spec.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/error-typed-http-mapping/specs/error-handling/spec.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/error-typed-http-mapping/tasks.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/error-typed-http-mapping/tasks.html"
         }
       },
       "version": ""
