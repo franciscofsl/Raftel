@@ -33,7 +33,7 @@ internal sealed class AuthenticationService(
         }
 
         var errorMessage = result.Errors.Select(e => e.Description).FirstOrDefault();
-        return Result<string>.Failure(new Error("User.CantRegister", errorMessage));
+        return Result<string>.Failure(Error.Validation("User.CantRegister", errorMessage));
     }
 
     public async Task<Result<LogInResult>> LogInAsync(string email, string password,
@@ -42,14 +42,14 @@ internal sealed class AuthenticationService(
         var req = httpContextAccessor.HttpContext.GetOpenIddictServerRequest()!;
         if (!req.IsPasswordGrantType())
         {
-            return Result<LogInResult>.Failure(new Error("InvalidGrantType",
+            return Result<LogInResult>.Failure(Error.Validation("InvalidGrantType",
                 "The specified grant type is not supported."));
         }
 
         var user = await userManager.FindByNameAsync(req.Username);
         if (user == null || !await userManager.CheckPasswordAsync(user, req.Password))
         {
-            return Result<LogInResult>.Failure(new Error("User.CantLogin",
+            return Result<LogInResult>.Failure(Error.Unauthorized("User.CantLogin",
                 "The specified username or password is incorrect."));
         }
 
@@ -68,7 +68,7 @@ internal sealed class AuthenticationService(
         var identityUser = await userManager.FindByEmailAsync(user.Email);
         if (identityUser == null)
         {
-            return Result.Failure(new Error("User.NotFound", "The specified user was not found in Identity."));
+            return Result.Failure(Error.NotFound("User.NotFound", "The specified user was not found in Identity."));
         }
 
         var isInRole = await userManager.IsInRoleAsync(identityUser, role.Name);
@@ -84,7 +84,7 @@ internal sealed class AuthenticationService(
         }
 
         var errorMessage = result.Errors.Select(e => e.Description).FirstOrDefault();
-        return Result.Failure(new Error("User.RoleAssignmentFailed", errorMessage ?? "Failed to assign role to user in Identity."));
+        return Result.Failure(new Error("User.RoleAssignmentFailed", errorMessage ?? "Failed to assign role to user in Identity.", ErrorType.Unexpected));
     }
 
     public async Task<Result> UpdateEmailAsync(User user, string newEmail,
@@ -93,21 +93,21 @@ internal sealed class AuthenticationService(
         var identityUser = await userManager.FindByEmailAsync(user.Email);
         if (identityUser == null)
         {
-            return Result.Failure(new Error("User.NotFound", "The specified user was not found in Identity."));
+            return Result.Failure(Error.NotFound("User.NotFound", "The specified user was not found in Identity."));
         }
 
         var emailResult = await userManager.SetEmailAsync(identityUser, newEmail);
         if (!emailResult.Succeeded)
         {
             var errorMessage = emailResult.Errors.Select(e => e.Description).FirstOrDefault();
-            return Result.Failure(new Error("User.UpdateEmailFailed", errorMessage ?? "Failed to update email."));
+            return Result.Failure(new Error("User.UpdateEmailFailed", errorMessage ?? "Failed to update email.", ErrorType.Unexpected));
         }
 
         var usernameResult = await userManager.SetUserNameAsync(identityUser, newEmail);
         if (!usernameResult.Succeeded)
         {
             var errorMessage = usernameResult.Errors.Select(e => e.Description).FirstOrDefault();
-            return Result.Failure(new Error("User.UpdateUserNameFailed", errorMessage ?? "Failed to update username."));
+            return Result.Failure(new Error("User.UpdateUserNameFailed", errorMessage ?? "Failed to update username.", ErrorType.Unexpected));
         }
 
         return Result.Success();
@@ -118,14 +118,14 @@ internal sealed class AuthenticationService(
         var identityUser = await userManager.FindByEmailAsync(user.Email);
         if (identityUser == null)
         {
-            return Result.Failure(new Error("User.NotFound", "The specified user was not found in Identity."));
+            return Result.Failure(Error.NotFound("User.NotFound", "The specified user was not found in Identity."));
         }
 
         var result = await userManager.DeleteAsync(identityUser);
         if (!result.Succeeded)
         {
             var errorMessage = result.Errors.Select(e => e.Description).FirstOrDefault();
-            return Result.Failure(new Error("User.DeleteFailed", errorMessage ?? "Failed to delete user."));
+            return Result.Failure(new Error("User.DeleteFailed", errorMessage ?? "Failed to delete user.", ErrorType.Unexpected));
         }
 
         return Result.Success();

@@ -100,8 +100,46 @@ var schema = new OpenApiSchema
 
 ---
 
+---
+
+## Typed Error/HTTP Status Mapping
+
+### `Error.None` and `Error.NullValue` are now immutable
+**What changed:** `Error.None` and `Error.NullValue` changed from mutable `public static` fields to `static readonly` fields.
+
+**Why:** Both were reassignable by any code in the process, which was a latent bug — anything could silently change what "no error" or "null value" meant for the rest of the application's lifetime.
+
+**Impact:** Code that reassigned `Error.None` or `Error.NullValue` (unlikely, but technically possible before) no longer compiles.
+
+**Action required:** Remove any code that assigns to `Error.None` or `Error.NullValue`. There is no supported replacement — these values are meant to be fixed.
+
+### Command endpoints no longer always return `200 OK`
+**What changed:** Command endpoints (`POST`/`PUT`/`DELETE` mapped via `AddCommand`) now return status codes based on the outcome instead of a hardcoded `200 OK`:
+- No result value on success → `204 No Content`.
+- A result value on success, with `CreatedRouteName` configured on the command → `201 Created` with a `Location` header.
+- A result value on success, with no `CreatedRouteName` configured → `200 OK` with the result body (unchanged).
+
+**Why:** A blanket `200 OK` for every successful command ignored REST conventions and didn't let clients tell "resource created" from "no content to return" from "here's the updated resource."
+
+**Impact:** Clients that check `response.StatusCode == 200` on a command endpoint that produces no result value, or that expect a body on such an endpoint, will break.
+
+**Action required:** Update clients to accept `204` for no-result commands, and `201` (with `Location`) for commands whose `CommandDefinition` declares a `CreatedRouteName`.
+
+### Failed results now return typed `ProblemDetails`, not a flat `Error` body with a hardcoded `400`
+**What changed:** Command and query endpoints translate a failed `Result` to an HTTP response based on the error's `ErrorType`: `Validation`/`Failure` → 400, `NotFound` → 404, `Conflict` → 409, `Unauthorized` → 401, `Forbidden` → 403, `Unexpected` → 500. The response body is an RFC 7807 `ProblemDetails` document with the original `Error.Code` as a `code` extension field, instead of a plain serialized `Error`.
+
+**Why:** Every business-rule failure previously returned `400 Bad Request` regardless of its actual nature (missing resource, conflict, permission denied, etc.), and used a different error shape than the RFC 7807 `ProblemDetails` already returned by unhandled-exception handling.
+
+**Impact:** Clients that assume every failed command/query response is `400` with a flat `{ code, message }` body will break — status codes now vary by error type, and the body shape is `ProblemDetails` (`title`, `status`, `detail`, `code` extension) instead.
+
+**Action required:** Update clients to branch on the actual HTTP status code and to read the `ProblemDetails` shape, using the `code` extension field for the machine-readable error code.
+
+---
+
 ## Summary
 
 The migration to .NET 10 is primarily focused on framework and dependency updates. The main breaking change that may affect consumers is the Microsoft.OpenApi 2.0 update, which requires namespace and type changes if you're customizing OpenAPI/Swagger configurations.
 
-All tests pass successfully after migration, confirming that the functional behavior of the library remains unchanged.
+A separate, later change introduced a typed `Error`/`ErrorType` taxonomy with corresponding HTTP status code mapping, immutable well-known `Error` values, and REST-appropriate success codes for command endpoints — see the "Typed Error/HTTP Status Mapping" section above.
+
+All tests pass successfully after migration, confirming that the functional behavior of the library remains unchanged except where documented above.
