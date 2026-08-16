@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>21 — Flujos de autenticaci&#243;n adicionales | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="21 — Flujos de autenticaci&#243;n adicionales | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/21-flujos-de-autenticacion-adicionales.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="21--flujos-de-autenticación-adicionales">21 — Flujos de autenticación adicionales</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Infrastructure</code>, <code>Raftel.Api.Server</code>
+Rompe API pública: no (aditivo)
+Depende de: <a href="01-error-tipado-y-mapeo-http.html">01</a>, <a href="13-rate-limiting-cors-security-headers.html">13</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>La configuración actual de OpenIddict habilita <strong>solo dos flujos</strong>:</p>
+<pre><code class="lang-csharp">opt.SetTokenEndpointUris(&quot;/connect/token&quot;)
+    .AllowPasswordFlow()
+    .AllowRefreshTokenFlow();
+</code></pre>
+<p>El <strong>password flow (ROPC) está desaconsejado</strong> por OAuth 2.1 y por las buenas
+prácticas de seguridad de la IETF: obliga a que la aplicación cliente maneje las
+credenciales del usuario en claro, impide MFA y federación, y no sirve para
+clientes públicos (SPA, móvil).</p>
+<p>Faltan además:</p>
+<ul>
+<li><strong>Authorization Code + PKCE</strong>: el flujo recomendado para SPAs y apps móviles.</li>
+<li><strong>Client Credentials</strong>: para integraciones máquina-a-máquina.</li>
+<li><strong>API keys</strong>: acceso programático simple, muy pedido en APIs de producto.</li>
+<li>Endpoints de introspección, revocación, userinfo, logout y descubrimiento
+(<code>/.well-known/openid-configuration</code>).</li>
+</ul>
+<p>Otro punto: los certificados son de desarrollo, <strong>sin alternativa configurada</strong>:</p>
+<pre><code class="lang-csharp">opt.AddDevelopmentEncryptionCertificate()
+   .AddDevelopmentSigningCertificate();
+</code></pre>
+<p>Esto en producción es un fallo grave — los certificados de desarrollo son
+efímeros y no compartidos entre instancias, así que los tokens emitidos por una
+réplica no los valida otra.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-flujos-configurables">2.1 Flujos configurables</h3>
+<pre><code class="lang-csharp">public sealed class AuthenticationOptions
+{
+    public bool EnablePasswordFlow { get; set; } = false;        // desactivado por defecto
+    public bool EnableAuthorizationCodeFlow { get; set; } = true;
+    public bool EnableClientCredentialsFlow { get; set; } = false;
+    public bool EnableRefreshTokenFlow { get; set; } = true;
+    public bool EnableDeviceFlow { get; set; } = false;
+    public bool RequirePkce { get; set; } = true;                // obligatorio si hay authorization code
+    public TimeSpan AccessTokenLifetime { get; set; } = TimeSpan.FromMinutes(15);
+    public TimeSpan RefreshTokenLifetime { get; set; } = TimeSpan.FromDays(14);
+    public bool UseReferenceTokens { get; set; } = false;
+}
+</code></pre>
+<p>Cambio de valor por defecto respecto a hoy: <strong>password flow desactivado</strong>, con
+un aviso en el log al activarlo explicando por qué se desaconseja. Es breaking
+para quien lo use, así que se documenta y se ofrece la opción.</p>
+<p><code>RequirePkce = true</code> no negociable cuando hay clientes públicos: sin PKCE, el
+authorization code es interceptable.</p>
+<h3 id="22-endpoints-estándar">2.2 Endpoints estándar</h3>
+<pre><code class="lang-csharp">opt.SetAuthorizationEndpointUris(&quot;/connect/authorize&quot;)
+   .SetTokenEndpointUris(&quot;/connect/token&quot;)
+   .SetUserInfoEndpointUris(&quot;/connect/userinfo&quot;)
+   .SetIntrospectionEndpointUris(&quot;/connect/introspect&quot;)
+   .SetRevocationEndpointUris(&quot;/connect/revoke&quot;)
+   .SetEndSessionEndpointUris(&quot;/connect/logout&quot;);
+</code></pre>
+<p>Con el descubrimiento OIDC que OpenIddict expone automáticamente.</p>
+<h3 id="23-rotación-de-refresh-tokens">2.3 Rotación de refresh tokens</h3>
+<p>Activar rotación con detección de reutilización: si llega un refresh token ya
+consumido, se revoca <strong>toda la cadena</strong> de tokens de esa sesión (indicio de robo
+de token). OpenIddict lo soporta; hay que configurarlo y testearlo.</p>
+<h3 id="24-certificados-en-producción">2.4 Certificados en producción</h3>
+<p>Configuración explícita, con <strong>fallo al arrancar</strong> si el entorno no es
+Development y no hay certificado configurado:</p>
+<pre><code class="lang-csharp">public sealed class CertificateOptions
+{
+    public string? SigningCertificateThumbprint { get; set; }
+    public string? EncryptionCertificateThumbprint { get; set; }
+    public string? SigningCertificatePath { get; set; }        // + password desde secretos
+    public CertificateStoreLocation StoreLocation { get; set; }
+}
+</code></pre>
+<p>Nunca una contraseña de certificado en <code>appsettings.json</code> del repositorio.</p>
+<h3 id="25-api-keys">2.5 API keys</h3>
+<p>Esquema de autenticación propio, complementario a OAuth:</p>
+<pre><code>Authorization: ApiKey rk_live_&lt;id&gt;_&lt;secret&gt;
+</code></pre>
+<p>Modelo:</p>
+<pre><code class="lang-csharp">public sealed class ApiKey : AggregateRoot&lt;ApiKeyId&gt;
+{
+    public string Name { get; private set; }
+    public string Prefix { get; private set; }          // visible, para identificar la clave
+    public string SecretHash { get; private set; }      // hash, nunca el secreto
+    public DateTimeOffset? ExpiresOn { get; private set; }
+    public DateTimeOffset? RevokedOn { get; private set; }
+    public DateTimeOffset? LastUsedOn { get; private set; }
+    public PermissionCollection Permissions { get; private set; }
+    public TenantId? TenantId { get; private set; }
+}
+</code></pre>
+<p>Reglas de seguridad:</p>
+<ul>
+<li>El secreto se genera con <code>RandomNumberGenerator</code> (≥256 bits) y se muestra
+<strong>una sola vez</strong>, al crearlo. Nunca recuperable después.</li>
+<li>Se almacena <strong>hasheado</strong> (PBKDF2/Argon2 con salt por clave; no un hash rápido).</li>
+<li>Comparación en tiempo constante (<code>CryptographicOperations.FixedTimeEquals</code>).</li>
+<li>El <code>Prefix</code> permite localizar la clave sin hashear todo el almacén en cada
+petición: se busca por prefijo y se verifica el hash de la candidata.</li>
+<li>Expiración obligatoria configurable (<code>MaxLifetime</code>), revocación inmediata.</li>
+<li>Rate limiting específico (<a href="13-rate-limiting-cors-security-headers.html">13</a>).</li>
+<li><code>LastUsedOn</code> actualizado de forma <strong>asíncrona y throttled</strong> (no una escritura
+por petición).</li>
+<li>Los permisos de la clave son un <strong>subconjunto</strong> de los de su creador: una API
+key no puede escalar privilegios.</li>
+</ul>
+<p>Las claves se integran con <code>ICurrentUser</code>/<code>PermissionAuthorizationMiddleware</code>
+como cualquier otro principal, así que la autorización existente funciona sin
+cambios.</p>
+<h3 id="26-integración-con-multitenancy">2.6 Integración con multitenancy</h3>
+<p>Un token o API key emitido para el tenant A no puede usarse contra el tenant B.
+El claim de tenant se valida contra <code>ICurrentTenant</code> resuelto por
+<code>TenantMiddleware</code>; discrepancia ⇒ 403. <strong>Test obligatorio.</strong></p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Features/ApiKeys/{ApiKey,ApiKeyErrors,IApiKeysRepository}.cs</code> + value objects</li>
+<li><code>src/Raftel.Application/Features/ApiKeys/{CreateApiKey,RevokeApiKey,ListApiKeys}/**</code></li>
+<li><code>src/Raftel.Infrastructure/Authentication/ApiKeys/{ApiKeyAuthenticationHandler,ApiKeyHasher,ApiKeyGenerator}.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Authentication/AuthenticationOptions.cs</code>, <code>CertificateOptions.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/Configuration/ApiKeyConfiguration.cs</code></li>
+<li><code>tests/Raftel.Infrastructure.Tests/Authentication/ApiKeys/**</code></li>
+<li><code>tests/Raftel.Api.FunctionalTests/Authentication/**</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Infrastructure/DependencyInjection.cs</code> — <code>AddAuthentication</code></li>
+<li><code>src/Raftel.Api.Server/Features/Users/AuthorizationController.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Authentication/{CurrentHttpUser,ClaimsPrincipalFactory,RaftelClaimTypes}.cs</code></li>
+<li><code>BREAKING_CHANGES.md</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li>Extraer <code>AuthenticationOptions</code> y hacer configurables los flujos actuales,
+manteniendo el comportamiento por defecto (paso sin cambio funcional).</li>
+<li><strong>(test funcional)</strong> Authorization code + PKCE completo: <code>/connect/authorize</code>
+⇒ código ⇒ <code>/connect/token</code> ⇒ access + refresh.</li>
+<li><strong>(test)</strong> Sin <code>code_verifier</code> válido, el intercambio falla.</li>
+<li>Habilitar authorization code y PKCE.</li>
+<li><strong>(test)</strong> Reutilizar un refresh token consumido revoca la cadena entera.</li>
+<li>Activar rotación con detección de reutilización.</li>
+<li><strong>(test)</strong> En entorno Production sin certificado configurado, el arranque falla.</li>
+<li>Implementar <code>CertificateOptions</code>.</li>
+<li>Client credentials + tests.</li>
+<li><strong>(test)</strong> API key: el secreto solo se devuelve al crearla; el almacén guarda
+hash; una clave revocada o expirada ⇒ 401; comparación en tiempo constante.</li>
+<li>Implementar el modelo, el handler de autenticación y los comandos de gestión.</li>
+<li><strong>(test)</strong> Una API key no puede tener permisos que su creador no tenga.</li>
+<li><strong>(test)</strong> Token/clave de tenant A contra tenant B ⇒ 403.</li>
+<li>Cambiar el valor por defecto de password flow a <code>false</code> y documentar la
+migración.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Functional</strong>: cada flujo de extremo a extremo.</li>
+<li><strong>Seguridad</strong>: PKCE obligatorio, rotación con detección de reutilización, hash
+y comparación de API keys, escalada de privilegios, cruce de tenants.</li>
+<li><strong>Integration</strong>: certificados, revocación, introspección.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Authorization Code + PKCE disponible y con PKCE obligatorio.</li>
+<li>[ ] Password flow desactivado por defecto, con aviso al habilitarlo.</li>
+<li>[ ] El arranque falla en producción sin certificados configurados.</li>
+<li>[ ] Los secretos de API key nunca se almacenan ni se devuelven en claro tras su
+creación.</li>
+<li>[ ] Una API key no puede escalar privilegios.</li>
+<li>[ ] Ningún credencial cruza el límite de tenant.</li>
+<li>[ ] Rotación de refresh tokens con detección de reutilización.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>Sustituir OpenIddict por IdentityServer/Duende</strong>: Duende es de pago para uso
+comercial; OpenIddict es open source y ya está integrado.</li>
+<li><strong>JWT propio firmado a mano</strong>: reimplementar criptografía y gestión de claves
+es exactamente lo que no hay que hacer.</li>
+<li><strong>API keys sin hash</strong> (comparación directa): una filtración de la base de datos
+entrega todas las claves. Innegociable.</li>
+<li><strong>Mantener el password flow como principal</strong>: desaconsejado por OAuth 2.1;
+se conserva como opción para escenarios legados y de confianza total.</li>
+</ul>
+<h2 id="8-breaking-changes">8. Breaking changes</h2>
+<p>El password flow pasa a estar <strong>desactivado por defecto</strong>. Quien lo use debe
+poner <code>EnablePasswordFlow = true</code> explícitamente. Se documenta con la
+justificación y la ruta de migración a authorization code + PKCE.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/21-flujos-de-autenticacion-adicionales.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

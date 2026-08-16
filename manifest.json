@@ -2774,11 +2774,11 @@
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "api/toc.html"
-        },
         ".json": {
           "relative_path": "api/toc.json"
+        },
+        ".html": {
+          "relative_path": "api/toc.html"
         }
       },
       "version": ""
@@ -2845,6 +2845,226 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/backlog/01-error-tipado-y-mapeo-http.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/01-error-tipado-y-mapeo-http.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/02-propagacion-cancellationtoken.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/02-propagacion-cancellationtoken.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/03-paginacion-y-ordenacion.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/03-paginacion-y-ordenacion.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/04-logging-estructurado.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/04-logging-estructurado.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/05-transacciones-explicitas.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/05-transacciones-explicitas.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/06-result-en-lugar-de-excepciones.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/06-result-en-lugar-de-excepciones.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/07-outbox-domain-events.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/07-outbox-domain-events.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/08-concurrencia-optimista.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/08-concurrencia-optimista.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/09-health-checks.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/09-health-checks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/10-seeding-y-bootstrap.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/10-seeding-y-bootstrap.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/11-caching-de-queries.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/11-caching-de-queries.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/12-specifications-en-repositorio.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/12-specifications-en-repositorio.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/13-rate-limiting-cors-security-headers.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/13-rate-limiting-cors-security-headers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/14-nullable-enable.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/14-nullable-enable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/15-observabilidad-opentelemetry.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/15-observabilidad-opentelemetry.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/16-background-jobs.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/16-background-jobs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/17-integration-events-message-bus.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/17-integration-events-message-bus.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/18-raftel-testing.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/18-raftel-testing.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/19-templates-y-cli.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/19-templates-y-cli.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/20-localizacion-de-errores.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/20-localizacion-de-errores.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/21-flujos-de-autenticacion-adicionales.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/21-flujos-de-autenticacion-adicionales.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/backlog/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/backlog/README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/database-configuration.md",
       "output": {
         ".html": {
@@ -2897,11 +3117,11 @@
       "type": "Toc",
       "source_relative_path": "docs/toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "docs/toc.html"
-        },
         ".json": {
           "relative_path": "docs/toc.json"
+        },
+        ".html": {
+          "relative_path": "docs/toc.html"
         }
       },
       "version": ""
@@ -3060,11 +3280,11 @@
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
-        ".html": {
-          "relative_path": "toc.html"
-        },
         ".json": {
           "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
         }
       },
       "version": ""

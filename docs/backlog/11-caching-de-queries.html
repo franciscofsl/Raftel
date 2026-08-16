@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>11 — Caching de queries | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="11 — Caching de queries | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/11-caching-de-queries.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="11--caching-de-queries">11 — Caching de queries</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Application</code>, <code>Raftel.Infrastructure</code>
+Rompe API pública: no (opt-in por query)
+Depende de: <a href="02-propagacion-cancellationtoken.html">02</a>, <a href="04-logging-estructurado.html">04</a>, <a href="07-outbox-domain-events.html">07</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>Ninguna abstracción de caché en la solución. Toda query golpea la base de datos,
+incluidas las que devuelven datos casi inmutables: catálogo de permisos, roles,
+configuración del tenant, perfil del usuario.</p>
+<p>El pipeline de middlewares es el sitio natural para resolverlo: <code>IQueryMiddleware&lt;,&gt;</code>
+ya existe y se aplica solo a queries.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-abstracción">2.1 Abstracción</h3>
+<pre><code class="lang-csharp">// Raftel.Application/Abstractions/Caching/ICacheService.cs
+public interface ICacheService
+{
+    Task&lt;T?&gt; GetAsync&lt;T&gt;(string key, CancellationToken cancellationToken = default);
+    Task SetAsync&lt;T&gt;(string key, T value, TimeSpan? expiration = null, CancellationToken cancellationToken = default);
+    Task RemoveAsync(string key, CancellationToken cancellationToken = default);
+    Task RemoveByTagAsync(string tag, CancellationToken cancellationToken = default);
+}
+</code></pre>
+<p>Dos implementaciones:</p>
+<ul>
+<li><code>MemoryCacheService</code> sobre <code>IMemoryCache</code> (por defecto, cero configuración).</li>
+<li><code>DistributedCacheService</code> sobre <code>IDistributedCache</code> (Redis, SQL Server) para
+escenarios multi-instancia. Ambas viven en <code>Raftel.Infrastructure</code> y usan solo
+abstracciones de <code>Microsoft.Extensions.Caching.*</code>, sin atar a un proveedor.</li>
+</ul>
+<h3 id="22-query-cacheable">2.2 Query cacheable</h3>
+<pre><code class="lang-csharp">// Raftel.Application/Queries/ICacheableQuery.cs
+public interface ICacheableQuery
+{
+    string CacheKey { get; }
+    TimeSpan? Expiration =&gt; null;          // null ⇒ usar el valor por defecto de opciones
+    IReadOnlyList&lt;string&gt; Tags =&gt; [];      // para invalidación por grupo
+}
+</code></pre>
+<p>Ejemplo:</p>
+<pre><code class="lang-csharp">public sealed record GetUserProfileQuery(Guid UserId) : IQuery&lt;GetUserProfileResponse&gt;, ICacheableQuery
+{
+    public string CacheKey =&gt; $&quot;user-profile:{UserId}&quot;;
+    public IReadOnlyList&lt;string&gt; Tags =&gt; [&quot;users&quot;, $&quot;user:{UserId}&quot;];
+}
+</code></pre>
+<h3 id="23-cachingmiddleware">2.3 <code>CachingMiddleware</code></h3>
+<pre><code class="lang-csharp">public sealed class CachingMiddleware&lt;TQuery, TResponse&gt;(ICacheService cache, ...)
+    : IQueryMiddleware&lt;TQuery, TResponse&gt;
+    where TQuery : IQuery&lt;TResponse&gt;
+{
+    public async Task&lt;Result&lt;TResponse&gt;&gt; HandleAsync(TQuery query, RequestHandlerDelegate&lt;Result&lt;TResponse&gt;&gt; next, CancellationToken cancellationToken)
+    {
+        if (query is not ICacheableQuery cacheable)
+        {
+            return await next(cancellationToken);
+        }
+
+        var key = BuildKey(cacheable);
+        var cached = await cache.GetAsync&lt;TResponse&gt;(key, cancellationToken);
+
+        if (cached is not null)
+        {
+            return Result.Success(cached);
+        }
+
+        var result = await next(cancellationToken);
+
+        if (result.IsSuccess)                                  // nunca cachear fallos
+        {
+            await cache.SetAsync(key, result.Value, cacheable.Expiration ?? options.DefaultExpiration, cancellationToken);
+        }
+
+        return result;
+    }
+}
+</code></pre>
+<h3 id="24-aislamiento-de-la-clave--punto-crítico">2.4 Aislamiento de la clave — punto crítico</h3>
+<p>La clave <strong>debe</strong> incorporar tenant y, cuando la respuesta depende de permisos,
+el usuario. Sin esto, un tenant puede leer datos cacheados de otro. Es la
+vulnerabilidad clásica del caching en aplicaciones multitenant.</p>
+<pre><code class="lang-csharp">private string BuildKey(ICacheableQuery cacheable) =&gt;
+    $&quot;{options.KeyPrefix}:t:{currentTenant.Id?.ToString() ?? &quot;host&quot;}:{cacheable.CacheKey}&quot;;
+</code></pre>
+<p>Para queries cuyo resultado varía según el usuario, marcador adicional:</p>
+<pre><code class="lang-csharp">public interface IUserScopedCacheableQuery : ICacheableQuery;   // añade :u:{userId} a la clave
+</code></pre>
+<p><strong>Test de seguridad obligatorio</strong>: misma query, dos tenants ⇒ dos entradas
+distintas y ningún cruce de datos.</p>
+<h3 id="25-invalidación">2.5 Invalidación</h3>
+<p>Fuente de verdad: los eventos de dominio. Con <a href="07-outbox-domain-events.html">07</a>
+en su sitio, un handler genérico invalida por tag:</p>
+<pre><code class="lang-csharp">public sealed class CacheInvalidationHandler&lt;TEvent&gt;(ICacheService cache) : IDomainEventHandler&lt;TEvent&gt;
+    where TEvent : IDomainEvent, IInvalidatesCache
+{
+    public Task HandleAsync(TEvent domainEvent, CancellationToken cancellationToken) =&gt;
+        Task.WhenAll(domainEvent.CacheTagsToInvalidate.Select(tag =&gt; cache.RemoveByTagAsync(tag, cancellationToken)));
+}
+</code></pre>
+<p><code>IMemoryCache</code> no soporta tags de forma nativa: <code>MemoryCacheService</code> mantiene un
+índice <code>tag → HashSet&lt;key&gt;</code> con su propio lock. En <code>IDistributedCache</code> se usa un
+set por tag (en Redis, un <code>SET</code> real).</p>
+<blockquote>
+<p>Advertencia a documentar: con <code>MemoryCacheService</code> y varias instancias, la
+invalidación es <strong>local</strong>. Multi-instancia exige caché distribuida o un canal
+de invalidación (pub/sub). No prometer coherencia que no se da.</p>
+</blockquote>
+<h3 id="26-opciones">2.6 Opciones</h3>
+<pre><code class="lang-csharp">public sealed class CacheOptions
+{
+    public bool Enabled { get; set; } = true;
+    public string KeyPrefix { get; set; } = &quot;raftel&quot;;
+    public TimeSpan DefaultExpiration { get; set; } = TimeSpan.FromMinutes(5);
+    public TimeSpan MaxExpiration { get; set; } = TimeSpan.FromHours(1);
+}
+</code></pre>
+<h3 id="27-qué-no-cachear">2.7 Qué no cachear</h3>
+<p>Documentar la lista explícitamente:</p>
+<ul>
+<li>Queries que devuelven datos que el usuario acaba de modificar (read-your-writes).</li>
+<li>Resultados fallidos.</li>
+<li>Cualquier cosa con datos de autenticación (tokens, hashes).</li>
+<li>Queries paginadas con orden dinámico y cardinalidad alta (la clave explota).</li>
+</ul>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Application/Abstractions/Caching/{ICacheService,ICacheableQuery,IUserScopedCacheableQuery,IInvalidatesCache}.cs</code></li>
+<li><code>src/Raftel.Application/Middlewares/CachingMiddleware.cs</code></li>
+<li><code>src/Raftel.Application/CacheOptions.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Caching/{MemoryCacheService,DistributedCacheService,TagIndex}.cs</code></li>
+<li><code>tests/Raftel.Application.UnitTests/Middlewares/CachingMiddlewareTests.cs</code></li>
+<li><code>tests/Raftel.Infrastructure.Tests/Caching/**</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Infrastructure/DependencyInjection.cs</code></li>
+<li><code>Directory.Packages.props</code> — <code>Microsoft.Extensions.Caching.Memory</code> / <code>.Abstractions</code></li>
+<li><code>src/Raftel.Application/Features/Users/GetUserProfile/*</code> — ejemplo cacheado</li>
+<li><code>demo/**</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> <code>CachingMiddleware</code>: query no cacheable ⇒ pasa siempre al handler.</li>
+<li><strong>(test)</strong> Segundo hit con la misma clave ⇒ el handler <strong>no</strong> se invoca.</li>
+<li><strong>(test)</strong> <code>Result</code> fallido no se cachea.</li>
+<li>Implementar <code>ICacheService</code> + <code>MemoryCacheService</code> + middleware.</li>
+<li><strong>(test de seguridad)</strong> Misma query en tenant A y tenant B ⇒ resultados
+independientes. Y con <code>IUserScopedCacheableQuery</code>, usuarios distintos ⇒
+entradas distintas.</li>
+<li>Implementar el aislamiento de clave.</li>
+<li><strong>(test)</strong> <code>RemoveByTagAsync</code> invalida todas las claves del tag y ninguna otra.</li>
+<li>Implementar el índice de tags (con test de concurrencia).</li>
+<li><code>DistributedCacheService</code> + tests de integración con Redis en Testcontainers.</li>
+<li>Handler de invalidación por evento de dominio + test end-to-end
+(modificar usuario ⇒ el perfil cacheado se refresca).</li>
+<li>Documentar limitaciones multi-instancia y la lista de &quot;qué no cachear&quot;.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: hit/miss, no cachear fallos, expiración.</li>
+<li><strong>Seguridad</strong>: aislamiento por tenant y por usuario (bloqueante).</li>
+<li><strong>Concurrencia</strong>: el índice de tags bajo carga paralela.</li>
+<li><strong>Integration</strong>: invalidación end-to-end vía evento de dominio.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Ninguna entrada de caché se comparte entre tenants.</li>
+<li>[ ] Los fallos nunca se cachean.</li>
+<li>[ ] La invalidación por tag no borra claves ajenas.</li>
+<li>[ ] <code>Enabled = false</code> desactiva el middleware por completo.</li>
+<li>[ ] Documentada la limitación de invalidación local en memoria.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>Caché de segundo nivel de EF Core</strong>: transparente pero opaco para depurar, y
+ataría el framework a una librería de terceros.</li>
+<li><strong>Cachear por atributo <code>[Cacheable(60)]</code></strong>: más cómodo, pero la clave se
+volvería mágica y el aislamiento por tenant, implícito. La interfaz obliga a
+pensar la clave, que es exactamente donde están los fallos de seguridad.</li>
+<li><strong>Response caching HTTP</strong>: distinto nivel; no invalidable desde el dominio y
+problemático con respuestas por usuario.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/11-caching-de-queries.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

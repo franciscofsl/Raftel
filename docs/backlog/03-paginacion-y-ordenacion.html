@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>03 — Paginaci&#243;n y ordenaci&#243;n | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="03 — Paginaci&#243;n y ordenaci&#243;n | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/03-paginacion-y-ordenacion.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="03--paginación-y-ordenación">03 — Paginación y ordenación</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Domain</code>, <code>Raftel.Application</code>, <code>Raftel.Infrastructure</code>, <code>Raftel.Api.Server</code>, <code>Raftel.Api.Client</code>
+Rompe API pública: no (aditivo)
+Depende de: <a href="01-error-tipado-y-mapeo-http.html">01</a>, <a href="02-propagacion-cancellationtoken.html">02</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p><code>IRepository.ListAllAsync</code> materializa la tabla entera:</p>
+<pre><code class="lang-csharp">Task&lt;List&lt;TEntity&gt;&gt; ListAllAsync(Expression&lt;Func&lt;TEntity, bool&gt;&gt; filter = null, CancellationToken cancellationToken = default);
+</code></pre>
+<p><code>GetAllTenantsQuery</code> devuelve todos los tenants. Con 100.000 filas, la API cae.
+No existe <code>PagedResult</code>, <code>PageRequest</code> ni <code>Sort</code> en toda la solución.</p>
+<p>Asimetría llamativa: <code>Raftel.Api.Client.QueryFilter</code> <strong>sí</strong> sabe construir query
+strings desde un objeto (<code>FromObject</code>), pero no hay nada del lado servidor que
+consuma <code>page</code>, <code>pageSize</code> ni <code>sort</code>. La mitad cliente del contrato existe sin
+su contraparte.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-tipos-de-dominio">2.1 Tipos de dominio</h3>
+<p>En <code>Raftel.Domain.Abstractions</code> (sin dependencia de EF ni HTTP).</p>
+<pre><code class="lang-csharp">public sealed record PageRequest
+{
+    public const int DefaultPageSize = 20;
+    public const int MaxPageSize = 200;
+
+    public int Page { get; }       // 1-based
+    public int PageSize { get; }
+
+    private PageRequest(int page, int pageSize) { Page = page; PageSize = pageSize; }
+
+    public static Result&lt;PageRequest&gt; Create(int page = 1, int pageSize = DefaultPageSize)
+    {
+        if (page &lt; 1)
+            return Result.Failure&lt;PageRequest&gt;(Error.Validation(&quot;Page.Invalid&quot;, &quot;Page must be greater than zero.&quot;));
+        if (pageSize is &lt; 1 or &gt; MaxPageSize)
+            return Result.Failure&lt;PageRequest&gt;(Error.Validation(&quot;PageSize.Invalid&quot;, $&quot;Page size must be between 1 and {MaxPageSize}.&quot;));
+
+        return Result.Success(new PageRequest(page, pageSize));
+    }
+
+    public int Skip =&gt; (Page - 1) * PageSize;
+}
+</code></pre>
+<p><code>MaxPageSize</code> es la defensa contra <code>?pageSize=999999</code>. Valor por defecto
+sobrescribible vía opciones (§2.5).</p>
+<pre><code class="lang-csharp">public sealed record PagedResult&lt;T&gt;
+{
+    public IReadOnlyList&lt;T&gt; Items { get; }
+    public int Page { get; }
+    public int PageSize { get; }
+    public long TotalCount { get; }
+
+    public int TotalPages =&gt; (int)Math.Ceiling(TotalCount / (double)PageSize);
+    public bool HasPrevious =&gt; Page &gt; 1;
+    public bool HasNext =&gt; Page &lt; TotalPages;
+
+    public PagedResult(IReadOnlyList&lt;T&gt; items, int page, int pageSize, long totalCount) { ... }
+
+    public static PagedResult&lt;T&gt; Empty(PageRequest request) =&gt; new([], request.Page, request.PageSize, 0);
+
+    public PagedResult&lt;TOut&gt; Map&lt;TOut&gt;(Func&lt;T, TOut&gt; selector) =&gt;
+        new(Items.Select(selector).ToList(), Page, PageSize, TotalCount);
+}
+</code></pre>
+<p><code>Map</code> evita que cada handler repita la conversión entidad → response.</p>
+<h3 id="22-ordenación">2.2 Ordenación</h3>
+<pre><code class="lang-csharp">public enum SortDirection { Ascending, Descending }
+
+public sealed record SortRequest(string Field, SortDirection Direction = SortDirection.Ascending)
+{
+    // &quot;name&quot;, &quot;-createdAt&quot;, &quot;name,-createdAt&quot;
+    public static Result&lt;IReadOnlyList&lt;SortRequest&gt;&gt; Parse(string? raw) { ... }
+}
+</code></pre>
+<p>Sintaxis elegida: prefijo <code>-</code> para descendente (convención JSON:API). Compacta y
+sin necesidad de un segundo parámetro <code>sortDirection</code>.</p>
+<p><strong>Seguridad</strong>: <code>SortRequest.Field</code> viene del cliente. Nunca construir la
+expresión con string interpolation. Resolución por reflexión con <strong>lista blanca</strong>
+por entidad:</p>
+<pre><code class="lang-csharp">public sealed class SortMap&lt;TEntity&gt;
+{
+    private readonly Dictionary&lt;string, Expression&lt;Func&lt;TEntity, object&gt;&gt;&gt; _allowed;
+
+    public SortMap&lt;TEntity&gt; Allow(string field, Expression&lt;Func&lt;TEntity, object&gt;&gt; selector);
+    public Result&lt;Expression&lt;Func&lt;TEntity, object&gt;&gt;&gt; Resolve(string field);   // NotFound ⇒ Error.Validation
+}
+</code></pre>
+<p>Un campo no declarado devuelve <code>Error.Validation(&quot;Sort.UnknownField&quot;, ...)</code>, no
+una excepción ni un orden silenciosamente ignorado.</p>
+<h3 id="23-repositorio">2.3 Repositorio</h3>
+<p>Método nuevo, <code>ListAllAsync</code> se conserva (útil para catálogos pequeños) pero se
+marca <code>[Obsolete]</code> en su forma sin filtro cuando el conjunto puede crecer — o al
+menos se documenta el riesgo.</p>
+<pre><code class="lang-csharp">// Raftel.Domain/Abstractions/IRepository.cs
+Task&lt;PagedResult&lt;TEntity&gt;&gt; ListPagedAsync(
+    PageRequest page,
+    Expression&lt;Func&lt;TEntity, bool&gt;&gt;? filter = null,
+    IReadOnlyList&lt;SortRequest&gt;? sort = null,
+    CancellationToken cancellationToken = default);
+</code></pre>
+<p>Implementación en <code>EfRepository</code>:</p>
+<pre><code class="lang-csharp">public async Task&lt;PagedResult&lt;TEntity&gt;&gt; ListPagedAsync(
+    PageRequest page,
+    Expression&lt;Func&lt;TEntity, bool&gt;&gt;? filter = null,
+    IReadOnlyList&lt;SortRequest&gt;? sort = null,
+    CancellationToken cancellationToken = default)
+{
+    var query = dbContext.Set&lt;TEntity&gt;().WhereIf(filter is not null, filter);
+
+    var totalCount = await query.LongCountAsync(cancellationToken);
+    if (totalCount == 0) return PagedResult&lt;TEntity&gt;.Empty(page);
+
+    query = ApplySort(query, sort);          // orden estable: siempre termina por Id
+
+    var items = await query
+        .Skip(page.Skip)
+        .Take(page.PageSize)
+        .ToListAsync(cancellationToken);
+
+    return new PagedResult&lt;TEntity&gt;(items, page.Page, page.PageSize, totalCount);
+}
+</code></pre>
+<p><strong>Orden estable obligatorio.</strong> Sin <code>ORDER BY</code> determinista, <code>Skip/Take</code> puede
+repetir u omitir filas entre páginas. <code>ApplySort</code> siempre añade
+<code>ThenBy(e =&gt; e.Id)</code> como desempate final, incluso si el cliente no pidió orden.</p>
+<p><strong>Dos consultas</strong> (count + page) en vez de una con window function: portable
+entre SqlServer y PostgreSQL sin SQL específico de proveedor. Se ejecutan dentro
+del mismo <code>DbContext</code>, así que comparten filtros globales (soft delete, tenant).</p>
+<h3 id="24-query-base-y-endpoints">2.4 Query base y endpoints</h3>
+<pre><code class="lang-csharp">// Raftel.Application/Queries/IPagedQuery.cs
+public interface IPagedQuery&lt;TItem&gt; : IQuery&lt;PagedResult&lt;TItem&gt;&gt;
+{
+    int? Page { get; }
+    int? PageSize { get; }
+    string? Sort { get; }
+}
+</code></pre>
+<p><code>QueryEndpointMapper.BuildRequestFromRouteAndQuery</code> ya resuelve parámetros del
+constructor desde ruta y query string, así que <code>page</code>, <code>pageSize</code> y <code>sort</code> se
+enlazan sin cambios si el record los declara. Lo que sí hay que añadir:</p>
+<ul>
+<li><code>ApiParametersBuilder</code> debe documentar <code>page</code>/<code>pageSize</code>/<code>sort</code> en OpenAPI
+cuando el request implemente <code>IPagedQuery&lt;&gt;</code>.</li>
+<li>Cabeceras de respuesta opcionales <code>X-Total-Count</code> y <code>X-Total-Pages</code>, además
+del cuerpo.</li>
+</ul>
+<h3 id="25-opciones">2.5 Opciones</h3>
+<pre><code class="lang-csharp">public sealed class PaginationOptions
+{
+    public int DefaultPageSize { get; set; } = 20;
+    public int MaxPageSize { get; set; } = 200;
+}
+</code></pre>
+<p>Registradas en <code>AddRaftelApplication</code> vía <code>IRaftelApplicationBuilder</code>.</p>
+<h3 id="26-cliente">2.6 Cliente</h3>
+<p><code>Raftel.Api.Client</code> gana un helper simétrico:</p>
+<pre><code class="lang-csharp">public static QueryFilter Paged(this QueryFilter filter, int page, int pageSize, string? sort = null);
+</code></pre>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Abstractions/PageRequest.cs</code></li>
+<li><code>src/Raftel.Domain/Abstractions/PagedResult.cs</code></li>
+<li><code>src/Raftel.Domain/Abstractions/SortRequest.cs</code></li>
+<li><code>src/Raftel.Domain/Abstractions/SortDirection.cs</code></li>
+<li><code>src/Raftel.Domain/Specifications/SortMap.cs</code></li>
+<li><code>src/Raftel.Application/Queries/IPagedQuery.cs</code></li>
+<li><code>src/Raftel.Application/PaginationOptions.cs</code></li>
+<li><code>tests/Raftel.Domain.Tests/Abstractions/{PageRequestTests,PagedResultTests,SortRequestTests}.cs</code></li>
+<li><code>tests/Raftel.Infrastructure.Tests/Data/EfRepositoryPagingTests.cs</code></li>
+<li><code>tests/Raftel.Api.FunctionalTests/PaginationTests.cs</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Abstractions/IRepository.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/EfRepository.cs</code></li>
+<li><code>src/Raftel.Api.Server/AutoEndpoints/ApiParametersBuilder.cs</code></li>
+<li><code>src/Raftel.Api.Server/AutoEndpoints/QueryEndpointMapper.cs</code></li>
+<li><code>src/Raftel.Application/Features/Tenants/GetAllTenants/*</code> — migrar a paginado</li>
+<li><code>src/Raftel.Api.Client/QueryFilter.cs</code></li>
+<li><code>demo/**</code> — al menos una query paginada como ejemplo documentado</li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> <code>PageRequest.Create</code> rechaza página 0, negativa, tamaño 0 y tamaño
+<blockquote>
+<p><code>MaxPageSize</code>, devolviendo <code>Error.Validation</code>.</p>
+</blockquote>
+</li>
+<li>Implementar <code>PageRequest</code>, <code>PagedResult</code>, <code>SortRequest</code>, <code>SortDirection</code>.</li>
+<li><strong>(test)</strong> <code>PagedResult.TotalPages</code> con resto (11 elementos, tamaño 5 ⇒ 3
+páginas), <code>HasNext</code>/<code>HasPrevious</code> en primera, intermedia y última página.</li>
+<li><strong>(test)</strong> <code>SortRequest.Parse</code> con <code>&quot;name&quot;</code>, <code>&quot;-createdAt&quot;</code>, <code>&quot;a,-b&quot;</code>, cadena
+vacía y campo desconocido.</li>
+<li>Implementar <code>SortMap</code> con lista blanca.</li>
+<li><strong>(test integración, Testcontainers)</strong> <code>ListPagedAsync</code> devuelve la página
+correcta, <code>TotalCount</code> correcto, y <strong>páginas disjuntas</strong> (recorrer todas las
+páginas y comprobar que la unión no tiene duplicados) — cubre el orden estable.</li>
+<li>Implementar <code>ListPagedAsync</code> en <code>EfRepository</code>.</li>
+<li><strong>(test integración)</strong> Los filtros globales de soft delete y tenant se aplican
+también al <code>LongCountAsync</code>.</li>
+<li>Migrar <code>GetAllTenantsQuery</code> a <code>IPagedQuery&lt;TenantResponse&gt;</code>.</li>
+<li><strong>(test funcional)</strong> <code>GET /api/tenants?page=2&amp;pageSize=5&amp;sort=-name</code> devuelve
+la página correcta y <code>X-Total-Count</code>.</li>
+<li>OpenAPI: parámetros documentados.</li>
+<li>Helper en <code>Raftel.Api.Client</code> + tests.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit (Domain)</strong>: validación, cálculo de páginas, <code>Map</code>, parseo de sort.</li>
+<li><strong>Unit</strong>: <code>SortMap</code> rechaza campos no declarados (test de seguridad).</li>
+<li><strong>Integration</strong>: paginación real contra SqlServer y PostgreSQL, páginas
+disjuntas, interacción con filtros globales.</li>
+<li><strong>Functional</strong>: contrato HTTP, cabeceras, OpenAPI.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Ninguna query del framework devuelve colecciones sin límite.</li>
+<li>[ ] <code>pageSize</code> por encima del máximo devuelve <code>400</code> con <code>Error.Validation</code>, no
+se recorta en silencio.</li>
+<li>[ ] Un campo de orden no permitido devuelve <code>400</code>, no se ignora.</li>
+<li>[ ] Recorrer todas las páginas devuelve exactamente el conjunto completo, sin
+duplicados ni huecos.</li>
+<li>[ ] OpenAPI documenta <code>page</code>, <code>pageSize</code> y <code>sort</code>.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>Paginación por cursor (keyset)</strong>: más eficiente en tablas grandes y sin el
+problema de deriva entre páginas, pero no permite salto directo a página N ni
+<code>TotalCount</code>, que es lo que espera una UI con paginador numérico. Candidata a
+feature futura <strong>adicional</strong>, no sustitutiva.</li>
+<li><strong><code>IQueryable&lt;T&gt;</code> expuesto desde el repositorio</strong>: filtra el detalle de EF
+Core hacia la capa de aplicación y rompe la regla de dependencias.</li>
+<li><strong>Sort por string interpolado en <code>OrderBy</code></strong>: superficie de inyección.</li>
+<li><strong>Una sola consulta con <code>COUNT(*) OVER()</code></strong>: ata el repositorio a SQL
+específico del proveedor.</li>
+</ul>
+<h2 id="8-breaking-changes">8. Breaking changes</h2>
+<p>Ninguno. <code>ListAllAsync</code> se conserva. La migración de <code>GetAllTenantsQuery</code> sí
+cambia el contrato de ese endpoint concreto: documentar en <code>BREAKING_CHANGES.md</code>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/03-paginacion-y-ordenacion.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

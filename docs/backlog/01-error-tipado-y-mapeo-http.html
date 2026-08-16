@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>01 — Error tipado y mapeo Result → status HTTP | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="01 — Error tipado y mapeo Result → status HTTP | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/01-error-tipado-y-mapeo-http.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="01--error-tipado-y-mapeo-result--status-http">01 — <code>Error</code> tipado y mapeo <code>Result</code> → status HTTP</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Domain</code>, <code>Raftel.Api.Server</code>
+Rompe API pública: <strong>sí</strong> (ver §8)
+Depende de: nada</p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>Hoy <code>Error</code> es <code>record Error(string Code, string Message)</code> sin categoría
+semántica, y los mappers de endpoint colapsan <strong>cualquier</strong> fallo a <code>400 Bad Request</code>:</p>
+<pre><code class="lang-csharp">// src/Raftel.Api.Server/AutoEndpoints/CommandEndpointMapper.cs
+return result.IsSuccess
+    ? Results.Ok()
+    : Results.BadRequest(result.Error);
+</code></pre>
+<p>Consecuencias:</p>
+<ul>
+<li>Un agregado no encontrado devuelve <code>400</code> en vez de <code>404</code>.</li>
+<li>Un conflicto de unicidad devuelve <code>400</code> en vez de <code>409</code>.</li>
+<li>El cliente no puede distinguir &quot;petición mal formada&quot; de &quot;regla de negocio violada&quot;.</li>
+<li>El body de error no es <code>ProblemDetails</code> (RFC 7807), pero
+<code>ExceptionHandlingMiddleware</code> sí lo es → <strong>dos formatos de error distintos</strong> en la misma API.</li>
+</ul>
+<p>Esta es la primera feature del backlog porque el resto (paginación, validación
+por <code>Result</code>, caching) devuelve errores y necesita la taxonomía ya estable.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-errortype">2.1 <code>ErrorType</code></h3>
+<p>Enum en <code>Raftel.Domain.Abstractions</code>. Semántico, <strong>sin</strong> referencias HTTP: el
+dominio no conoce el transporte.</p>
+<pre><code class="lang-csharp">public enum ErrorType
+{
+    Failure = 0,     // fallo genérico no clasificado
+    Validation,      // datos de entrada inválidos
+    NotFound,        // recurso inexistente
+    Conflict,        // choque de estado (unicidad, concurrencia)
+    Unauthorized,    // sin autenticar
+    Forbidden,       // autenticado pero sin permiso
+    Unexpected       // fallo no controlado
+}
+</code></pre>
+<h3 id="22-error-extendido">2.2 <code>Error</code> extendido</h3>
+<p><code>Error</code> pasa a llevar <code>Type</code> y expone factorías por categoría. Se conserva el
+constructor posicional de dos parámetros para no romper todos los <code>*Errors.cs</code>
+existentes (<code>UserErrors</code>, <code>TenantErrors</code>, <code>RoleErrors</code>), que quedarían en
+<code>ErrorType.Failure</code> hasta migrarse.</p>
+<pre><code class="lang-csharp">public record Error(string Code, string Message, ErrorType Type = ErrorType.Failure)
+{
+    public static readonly Error None = new(string.Empty, string.Empty);
+    public static readonly Error NullValue = new(&quot;Error.NullValue&quot;, &quot;Null value was provided&quot;, ErrorType.Validation);
+
+    public static Error Validation(string code, string message) =&gt; new(code, message, ErrorType.Validation);
+    public static Error NotFound(string code, string message)   =&gt; new(code, message, ErrorType.NotFound);
+    public static Error Conflict(string code, string message)   =&gt; new(code, message, ErrorType.Conflict);
+    public static Error Forbidden(string code, string message)  =&gt; new(code, message, ErrorType.Forbidden);
+    public static Error Unauthorized(string code, string message) =&gt; new(code, message, ErrorType.Unauthorized);
+    public static Error Failure(string code, string message)    =&gt; new(code, message, ErrorType.Failure);
+}
+</code></pre>
+<blockquote>
+<p>Nota: hoy <code>Error.None</code> y <code>Error.NullValue</code> son <strong>campos mutables</strong>
+(<code>public static Error None = ...</code>). Pasan a <code>static readonly</code> en el mismo
+cambio; es un bug latente (cualquiera puede reasignar <code>Error.None</code>).</p>
+</blockquote>
+<h3 id="23-errorresults--traducción-a-http">2.3 <code>ErrorResults</code> — traducción a HTTP</h3>
+<p>Vive en <code>Raftel.Api.Server</code>, no en el dominio. Un único punto de traducción,
+salida siempre <code>ProblemDetails</code>.</p>
+<pre><code class="lang-csharp">namespace Raftel.Api.Server.AutoEndpoints;
+
+internal static class ErrorResults
+{
+    public static IResult ToProblem(Error error) =&gt;
+        Results.Problem(
+            title: TitleFor(error.Type),
+            detail: error.Message,
+            statusCode: StatusCodeFor(error.Type),
+            extensions: new Dictionary&lt;string, object?&gt; { [&quot;code&quot;] = error.Code });
+
+    private static int StatusCodeFor(ErrorType type) =&gt; type switch
+    {
+        ErrorType.Validation   =&gt; StatusCodes.Status400BadRequest,
+        ErrorType.NotFound     =&gt; StatusCodes.Status404NotFound,
+        ErrorType.Conflict     =&gt; StatusCodes.Status409Conflict,
+        ErrorType.Unauthorized =&gt; StatusCodes.Status401Unauthorized,
+        ErrorType.Forbidden    =&gt; StatusCodes.Status403Forbidden,
+        ErrorType.Unexpected   =&gt; StatusCodes.Status500InternalServerError,
+        _                      =&gt; StatusCodes.Status400BadRequest
+    };
+
+    private static string TitleFor(ErrorType type) =&gt; type switch { ... };
+}
+</code></pre>
+<h3 id="24-códigos-de-éxito">2.4 Códigos de éxito</h3>
+<p>Aprovechar el cambio para afinar los éxitos, hoy siempre <code>200 OK</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Hoy</th>
+<th>Propuesto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code> command sin resultado</td>
+<td><code>200</code></td>
+<td><code>204 No Content</code></td>
+</tr>
+<tr>
+<td><code>POST</code> command con resultado</td>
+<td><code>200</code></td>
+<td><code>201 Created</code> + header <code>Location</code> si <code>CommandDefinition</code> declara <code>CreatedRoute</code></td>
+</tr>
+<tr>
+<td><code>PUT</code> command sin resultado</td>
+<td><code>200</code></td>
+<td><code>204 No Content</code></td>
+</tr>
+<tr>
+<td><code>DELETE</code> command</td>
+<td><code>200</code></td>
+<td><code>204 No Content</code></td>
+</tr>
+<tr>
+<td>Query</td>
+<td><code>200</code></td>
+<td><code>200</code> (sin cambio)</td>
+</tr>
+</tbody>
+</table>
+<p><code>201 Created</code> requiere un campo opcional nuevo en <code>CommandDefinition</code>:</p>
+<pre><code class="lang-csharp">public sealed record CommandDefinition
+{
+    // ...existente
+    public string? CreatedRouteName { get; init; }  // null ⇒ 200/204
+}
+</code></pre>
+<p>Si es <code>null</code>, comportamiento <code>204</code>. Sin ruta declarada no se inventa <code>Location</code>.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Abstractions/ErrorType.cs</code></li>
+<li><code>src/Raftel.Api.Server/AutoEndpoints/ErrorResults.cs</code></li>
+<li><code>tests/Raftel.Domain.Tests/Abstractions/ErrorTests.cs</code></li>
+<li><code>tests/Raftel.Api.FunctionalTests/ErrorMappingTests.cs</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Abstractions/Error.cs</code> — <code>Type</code> + factorías + <code>static readonly</code></li>
+<li><code>src/Raftel.Api.Server/AutoEndpoints/CommandEndpointMapper.cs</code> — usar <code>ErrorResults</code>, códigos de éxito</li>
+<li><code>src/Raftel.Api.Server/AutoEndpoints/QueryEndpointMapper.cs</code> — ídem</li>
+<li><code>src/Raftel.Api.Server/AutoEndpoints/CommandDefinition.cs</code> — <code>CreatedRouteName</code></li>
+<li><code>src/Raftel.Domain/Features/Users/UserErrors.cs</code> — categorizar</li>
+<li><code>src/Raftel.Domain/Features/Tenants/TenantErrors.cs</code> — categorizar</li>
+<li><code>src/Raftel.Domain/Features/Authorization/RoleErrors.cs</code> — categorizar</li>
+<li><code>demo/Raftel.Demo.Domain/**/*Errors.cs</code> — categorizar</li>
+<li><code>BREAKING_CHANGES.md</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> <code>ErrorTests</code>: cada factoría produce el <code>ErrorType</code> correcto;
+<code>Error.None</code> sigue siendo igual por valor al construido con dos argumentos.</li>
+<li>Añadir <code>ErrorType</code> y extender <code>Error</code>. Compilar toda la solución: no debe
+romper nada gracias al parámetro con valor por defecto.</li>
+<li><strong>(test)</strong> <code>ErrorMappingTests</code> funcional: un handler que devuelve
+<code>Error.NotFound(...)</code> responde <code>404</code> con <code>ProblemDetails</code> y extensión <code>code</code>.</li>
+<li>Implementar <code>ErrorResults</code> y cablearlo en ambos mappers.</li>
+<li><strong>(test)</strong> Códigos de éxito: <code>POST</code> sin resultado ⇒ <code>204</code>; con
+<code>CreatedRouteName</code> ⇒ <code>201</code> + <code>Location</code>.</li>
+<li>Implementar <code>CreatedRouteName</code> y los códigos de éxito.</li>
+<li>Migrar <code>UserErrors</code>, <code>TenantErrors</code>, <code>RoleErrors</code> y los de la demo a las
+factorías tipadas. Ajustar los tests funcionales existentes que esperaban <code>400</code>.</li>
+<li>Documentar en <code>BREAKING_CHANGES.md</code> y en <code>docs/</code>.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit (Domain)</strong>: factorías, igualdad por valor, inmutabilidad de <code>None</code>.</li>
+<li><strong>Unit (Api.Server)</strong>: <code>ErrorResults.ToProblem</code> por cada <code>ErrorType</code>.</li>
+<li><strong>Functional</strong>: recorrido HTTP completo por cada categoría, verificando
+<code>Content-Type: application/problem+json</code>, status y cuerpo.</li>
+<li><strong>Regresión</strong>: revisar todos los <code>Assert</code>/<code>ShouldBe</code> de
+<code>tests/Raftel.Api.FunctionalTests</code> que fijaban <code>400</code>.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Todo fallo de API sale como <code>ProblemDetails</code>, tanto por <code>Result</code> como por excepción.</li>
+<li>[ ] <code>NotFound</code> ⇒ 404, <code>Conflict</code> ⇒ 409, <code>Forbidden</code> ⇒ 403, <code>Validation</code> ⇒ 400.</li>
+<li>[ ] <code>Error.None</code> y <code>Error.NullValue</code> son <code>static readonly</code>.</li>
+<li>[ ] Ningún <code>*Errors.cs</code> del framework ni de la demo queda en <code>ErrorType.Failure</code> por omisión.</li>
+<li>[ ] <code>dotnet test</code> en verde.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>Excepciones tipadas por categoría</strong> (<code>NotFoundException</code>, etc.): contradice
+&quot;Result/Result<t> pattern for errors; no exceptions for business-logic flow&quot;
+del <code>CLAUDE.md</code> raíz.</t></li>
+<li><strong>Mapa <code>Dictionary&lt;string, int&gt;</code> por código de error</strong>: obliga a mantener un
+registro global y acopla infraestructura a códigos de dominio concretos.</li>
+<li><strong><code>Error</code> con <code>int HttpStatusCode</code></strong>: mete HTTP en <code>Raftel.Domain</code>, viola la
+regla de dependencias.</li>
+</ul>
+<h2 id="8-breaking-changes">8. Breaking changes</h2>
+<ol>
+<li><code>Error.None</code> / <code>Error.NullValue</code> dejan de ser reasignables.</li>
+<li>Endpoints de comando devuelven <code>204</code>/<code>201</code> donde antes devolvían <code>200</code>.
+Clientes que comprobaran <code>== 200</code> deben aceptar <code>2xx</code>.</li>
+<li>El cuerpo de error pasa de <code>Error</code> serializado plano a <code>ProblemDetails</code>. El
+código sigue accesible en la extensión <code>code</code>.</li>
+</ol>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/01-error-tipado-y-mapeo-http.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

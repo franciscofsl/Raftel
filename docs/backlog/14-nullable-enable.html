@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>14 — Nullable enable en toda la soluci&#243;n | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="14 — Nullable enable en toda la soluci&#243;n | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/14-nullable-enable.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="14--nullable-enable-en-toda-la-solución">14 — <code>Nullable enable</code> en toda la solución</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: todos los proyectos
+Rompe API pública: <strong>sí</strong> (anotaciones de nulabilidad)
+Depende de: <a href="01-error-tipado-y-mapeo-http.html">01</a> … <a href="13-rate-limiting-cors-security-headers.html">13</a> — hacerlo al final de una fase, no a mitad</p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p><strong>Los diez <code>csproj</code> de <code>src/</code>, <code>tools/</code> y <code>demo/</code> llevan <code>&lt;Nullable&gt;disable&lt;/Nullable&gt;</code>.</strong>
+Un framework .NET 10 renunciando por completo al análisis de nulabilidad.</p>
+<p>Efectos visibles hoy en el propio código:</p>
+<pre><code class="lang-csharp">// IRepository — el ? no significa nada con nullable disabled
+Task&lt;TEntity?&gt; GetByIdAsync(TId id, CancellationToken cancellationToken = default);
+
+// EfRepository
+Task&lt;List&lt;TEntity&gt;&gt; ListAllAsync(Expression&lt;Func&lt;TEntity, bool&gt;&gt; filter = null, ...)
+//                                                                        ^^^^^ null a un tipo no anotado
+
+// Result&lt;TValue&gt;
+[NotNull] public TValue Value =&gt; IsSuccess ? _value! : throw new InvalidOperationException(...);
+//        ^^^^^^^^ atributo de un análisis que está apagado
+</code></pre>
+<p>Es decir: el código <strong>ya está escrito</strong> con la intención de nulabilidad
+(<code>?</code>, <code>!</code>, <code>[NotNull]</code>) pero el compilador no comprueba nada. Lo peor de ambos
+mundos — ruido sintáctico sin garantía.</p>
+<p>Para el consumidor del framework el impacto es directo: al referenciar
+<code>Raftel.Domain</code> desde un proyecto con <code>nullable enable</code>, todos los tipos del
+framework aparecen como &quot;oblivious&quot; y no aportan ninguna información al análisis.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<p>Migración <strong>por proyecto, en orden de dependencia</strong>, no de golpe. Un PR por
+proyecto.</p>
+<h3 id="21-orden">2.1 Orden</h3>
+<ol>
+<li><code>Raftel.Shared</code> (sin dependencias, ~4 archivos)</li>
+<li><code>Raftel.Domain</code></li>
+<li><code>Raftel.Application</code></li>
+<li><code>Raftel.Api.Client</code></li>
+<li><code>Raftel.Infrastructure</code></li>
+<li><code>Raftel.Api.Server</code></li>
+<li><code>Raftel.Cli</code></li>
+<li><code>demo/**</code></li>
+<li><code>tests/**</code> (opcional, menor prioridad)</li>
+</ol>
+<h3 id="22-estrategia-por-proyecto">2.2 Estrategia por proyecto</h3>
+<p>Paso intermedio para no ahogarse en avisos:</p>
+<pre><code class="lang-xml">&lt;Nullable&gt;enable&lt;/Nullable&gt;
+&lt;WarningsNotAsErrors&gt;CS8600;CS8602;CS8603;CS8604;CS8618;CS8625&lt;/WarningsNotAsErrors&gt;
+</code></pre>
+<p>Se activa, se cuentan los avisos, se corrigen por categoría, y al terminar el
+proyecto se quita <code>WarningsNotAsErrors</code> y se añade:</p>
+<pre><code class="lang-xml">&lt;TreatWarningsAsErrors&gt;true&lt;/TreatWarningsAsErrors&gt;
+</code></pre>
+<p>Así el proyecto ya migrado no puede regresar.</p>
+<h3 id="23-decisiones-de-anotación">2.3 Decisiones de anotación</h3>
+<p>Puntos donde hay que decidir el contrato, no solo callar avisos:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Decisión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>IRepository.GetByIdAsync</code></td>
+<td><code>Task&lt;TEntity?&gt;</code> — ausencia esperada, ya está bien</td>
+</tr>
+<tr>
+<td><code>ListAllAsync(filter = null)</code></td>
+<td><code>Expression&lt;Func&lt;TEntity,bool&gt;&gt;? filter = null</code></td>
+</tr>
+<tr>
+<td><code>Entity.Id</code></td>
+<td><code>TId</code> no nulo; el constructor sin parámetros (para EF) usa <code>= null!</code> con comentario</td>
+</tr>
+<tr>
+<td><code>Result&lt;T&gt;.Value</code></td>
+<td>Mantener <code>[NotNull]</code> + <code>!</code>; el contrato es &quot;no nulo si <code>IsSuccess</code>&quot;</td>
+</tr>
+<tr>
+<td><code>Error.Message</code>, <code>Error.Code</code></td>
+<td>No nulos</td>
+</tr>
+<tr>
+<td><code>ICurrentUser.Id</code></td>
+<td><code>Guid?</code> — puede no haber usuario</td>
+</tr>
+<tr>
+<td><code>ICurrentTenant.Id</code></td>
+<td><code>TenantId?</code> — modo host sin tenant</td>
+</tr>
+<tr>
+<td>Propiedades de entidades EF</td>
+<td><code>= null!</code> en navegaciones requeridas, <code>?</code> en opcionales</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-anti-patrón-a-evitar">2.4 Anti-patrón a evitar</h3>
+<p>Prohibido &quot;migrar&quot; a base de <code>!</code> o <code>#nullable disable</code> local. Cada <code>!</code> debe
+tener justificación: constructor de EF, o invariante garantizada por el flujo. Se
+revisa en el PR.</p>
+<h3 id="25-constructores-para-ef-core">2.5 Constructores para EF Core</h3>
+<p><code>Entity</code> y <code>AggregateRoot</code> tienen constructores sin parámetros vacíos para el
+materializador de EF. Con nullable activo generan CS8618. Patrón:</p>
+<pre><code class="lang-csharp">#pragma warning disable CS8618 // EF Core materialization constructor
+protected Entity() { }
+#pragma warning restore CS8618
+</code></pre>
+<p>Preferible al <code>= null!</code> disperso por cada propiedad.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p>Todos los <code>csproj</code> y, potencialmente, todo archivo <code>.cs</code>. Estimación por el
+tamaño actual (~5.650 líneas en <code>src/</code> + <code>tools/</code>): trabajo mecánico
+concentrado en <code>Raftel.Infrastructure</code> (el proyecto con más interacción con EF).</p>
+<p>Añadir al final en <code>Directory.Build.props</code> para que aplique a proyectos nuevos:</p>
+<pre><code class="lang-xml">&lt;Project&gt;
+  &lt;PropertyGroup&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+    &lt;TreatWarningsAsErrors&gt;true&lt;/TreatWarningsAsErrors&gt;
+  &lt;/PropertyGroup&gt;
+&lt;/Project&gt;
+</code></pre>
+<blockquote>
+<p>Nota: hoy <strong>no existe</strong> <code>Directory.Build.props</code> en la raíz (solo
+<code>Directory.Packages.props</code>). Crearlo es parte de esta feature y sirve para
+centralizar <code>TargetFramework</code>, <code>ImplicitUsings</code> y <code>LangVersion</code>, hoy repetidos
+en los diez <code>csproj</code>.</p>
+</blockquote>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<p>Por cada proyecto de la lista §2.1:</p>
+<ol>
+<li>Activar <code>&lt;Nullable&gt;enable&lt;/Nullable&gt;</code> con <code>WarningsNotAsErrors</code> temporal.</li>
+<li><code>dotnet build</code> y contar avisos por código (<code>CS86xx</code>).</li>
+<li>Corregir por categoría, empezando por CS8618 (campos no inicializados) que
+suele arrastrar el resto.</li>
+<li>Revisar cada <code>!</code> introducido; sustituir por comprobación real donde se pueda.</li>
+<li>Quitar <code>WarningsNotAsErrors</code>, añadir <code>TreatWarningsAsErrors</code>.</li>
+<li><code>dotnet test</code> completo — la nulabilidad puede cambiar comportamiento en
+serialización JSON y en el binding de <code>QueryEndpointMapper</code>.</li>
+<li>Commit por proyecto.</li>
+</ol>
+<p>Al final:</p>
+<ol start="8">
+<li>Crear <code>Directory.Build.props</code> con la configuración común.</li>
+<li>Limpiar de los <code>csproj</code> las propiedades ya centralizadas.</li>
+<li>Documentar en <code>BREAKING_CHANGES.md</code>.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li>La suite existente (258 tests) es la red de seguridad; debe pasar tras cada
+proyecto.</li>
+<li>Atención especial a <code>QueryEndpointMapper.BuildRequestFromRouteAndQuery</code>, que
+construye requests por reflexión con <code>ConvertSimpleType</code>: las anotaciones
+cambian qué se considera parámetro opcional.</li>
+<li>Test nuevo: un proyecto de prueba con <code>nullable enable</code> que consume
+<code>Raftel.Domain</code> y comprueba que el análisis fluye (por ejemplo, que
+<code>GetByIdAsync</code> obliga a comprobar null).</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Ningún <code>csproj</code> de <code>src/</code>, <code>tools/</code> ni <code>demo/</code> con <code>Nullable disable</code>.</li>
+<li>[ ] <code>TreatWarningsAsErrors</code> activo en <code>src/</code>.</li>
+<li>[ ] Ningún <code>#nullable disable</code> en el código.</li>
+<li>[ ] Los <code>!</code> restantes están justificados con comentario.</li>
+<li>[ ] <code>Directory.Build.props</code> centraliza la configuración común.</li>
+<li>[ ] Los 258 tests siguen en verde.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>Migrar toda la solución en un solo PR</strong>: cientos de avisos a la vez,
+imposible de revisar, alta probabilidad de silenciar con <code>!</code>.</li>
+<li><strong><code>&lt;Nullable&gt;annotations&lt;/Nullable&gt;</code></strong> (anotar sin avisar): da información al
+consumidor pero no detecta bugs propios. Paso intermedio válido si la migración
+completa se atasca.</li>
+<li><strong>Dejarlo como está</strong>: cada feature nueva del backlog añade código sin red de
+nulabilidad; el coste de migrar solo crece.</li>
+</ul>
+<h2 id="8-breaking-changes">8. Breaking changes</h2>
+<p>Las anotaciones cambian la superficie pública: un consumidor con
+<code>TreatWarningsAsErrors</code> puede empezar a ver errores donde antes no los había.
+Es el objetivo de la feature, pero hay que anunciarlo como cambio mayor.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/14-nullable-enable.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

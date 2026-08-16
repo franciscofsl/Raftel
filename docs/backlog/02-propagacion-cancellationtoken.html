@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>02 — Propagaci&#243;n de CancellationToken en el pipeline | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="02 — Propagaci&#243;n de CancellationToken en el pipeline | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/02-propagacion-cancellationtoken.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="02--propagación-de-cancellationtoken-en-el-pipeline">02 — Propagación de <code>CancellationToken</code> en el pipeline</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Application</code>, <code>Raftel.Api.Server</code>, <code>Raftel.Infrastructure</code>
+Rompe API pública: <strong>sí</strong> (firma de <code>IGlobalMiddleware</code> y <code>RequestHandlerDelegate</code>)
+Depende de: nada (independiente de 01, pero se recomienda hacerla después)</p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>El token existe en los extremos pero <strong>se pierde por el camino</strong>:</p>
+<pre><code class="lang-csharp">// IRequestHandler SÍ lo acepta
+Task&lt;TResponse&gt; HandleAsync(TRequest request, CancellationToken token = default);
+
+// ICommandDispatcher SÍ lo acepta... y lo descarta
+public Task&lt;Result&gt; DispatchAsync&lt;TCommand&gt;(TCommand command, CancellationToken token = default)
+    =&gt; dispatcher.DispatchAsync&lt;TCommand, Result&gt;(command);   // ← token perdido
+
+// IRequestDispatcher NO lo tiene
+Task&lt;TResponse&gt; DispatchAsync&lt;TRequest, TResponse&gt;(TRequest request);
+
+// RequestHandlerDelegate NO lo tiene
+public delegate Task&lt;TResponse&gt; RequestHandlerDelegate&lt;TResponse&gt;();
+
+// IGlobalMiddleware NO lo tiene
+Task&lt;TResponse&gt; HandleAsync(TRequest request, RequestHandlerDelegate&lt;TResponse&gt; next);
+</code></pre>
+<p>Resultado: <strong>ninguna operación es cancelable</strong>. Si el cliente aborta la petición
+HTTP, la query sigue golpeando la base de datos hasta terminar. En endpoints
+lentos o bajo carga esto es consumo puro de conexiones.</p>
+<p><code>IQueryDispatcher.DispatchAsync</code> ni siquiera declara el parámetro.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<p>Un único <code>CancellationToken</code> fluye endpoint → dispatcher → middlewares →
+handler → repositorio → EF Core.</p>
+<h3 id="21-firmas-nuevas">2.1 Firmas nuevas</h3>
+<pre><code class="lang-csharp">// Raftel.Application/Abstractions/RequestHandlerDelegate.cs
+public delegate Task&lt;TResponse&gt; RequestHandlerDelegate&lt;TResponse&gt;(CancellationToken cancellationToken);
+
+// Raftel.Application/Abstractions/IRequestDispatcher.cs
+Task&lt;TResponse&gt; DispatchAsync&lt;TRequest, TResponse&gt;(TRequest request, CancellationToken cancellationToken = default)
+    where TRequest : IRequest&lt;TResponse&gt;;
+
+// Raftel.Application/Middlewares/IGlobalMiddleware.cs
+Task&lt;TResponse&gt; HandleAsync(TRequest request, RequestHandlerDelegate&lt;TResponse&gt; next, CancellationToken cancellationToken);
+
+// Raftel.Application/Queries/IQueryDispatcher.cs
+Task&lt;Result&lt;TResult&gt;&gt; DispatchAsync&lt;TQuery, TResult&gt;(TQuery query, CancellationToken cancellationToken = default)
+    where TQuery : IQuery&lt;TResult&gt;;
+</code></pre>
+<p><code>ICommandMiddleware&lt;T&gt;</code>, <code>ICommandMiddleware&lt;T,R&gt;</code> e <code>IQueryMiddleware&lt;T,R&gt;</code>
+heredan de <code>IGlobalMiddleware</code>, así que el cambio se propaga solo.</p>
+<h3 id="22-composición-del-pipeline">2.2 Composición del pipeline</h3>
+<p><code>RequestDispatcher.DispatchAsync</code> reconstruye la cadena pasando el token:</p>
+<pre><code class="lang-csharp">var handlerDelegate = new RequestHandlerDelegate&lt;TResponse&gt;(
+    token =&gt; handler.HandleAsync(request, token));
+
+var pipeline = allMiddlewares
+    .Reverse&lt;IGlobalMiddleware&lt;TRequest, TResponse&gt;&gt;()
+    .Aggregate(handlerDelegate,
+        (next, middleware) =&gt; token =&gt; middleware.HandleAsync(request, next, token));
+
+return await pipeline(cancellationToken);
+</code></pre>
+<blockquote>
+<p>Cuidado con la captura de variables en el <code>Aggregate</code>: <code>next</code> debe capturarse
+por valor en cada iteración (lo hace el lambda del <code>Aggregate</code>, pero conviene
+un test que registre 3 middlewares y verifique el orden de ejecución).</p>
+</blockquote>
+<h3 id="23-origen-del-token-en-los-endpoints">2.3 Origen del token en los endpoints</h3>
+<p>Minimal API inyecta <code>CancellationToken</code> como parámetro del handler y lo enlaza a
+<code>HttpContext.RequestAborted</code>. Los mappers pasan a:</p>
+<pre><code class="lang-csharp">async Task&lt;IResult&gt; Handler(HttpContext context, ICommandDispatcher dispatcher, CancellationToken cancellationToken)
+{
+    // ...
+    var result = await dispatcher.DispatchAsync(parsedCommand, cancellationToken);
+    // ...
+}
+</code></pre>
+<h3 id="24-repositorios-y-handlers">2.4 Repositorios y handlers</h3>
+<p><code>IRepository</code> ya acepta token en todos sus métodos. Lo que falta es que los
+handlers lo <strong>pasen</strong>: hoy la mayoría llama <code>GetByIdAsync(id)</code> sin token.
+Barrido en <code>src/Raftel.Application/Features/**</code> y <code>demo/Raftel.Demo.Application/**</code>.</p>
+<h3 id="25-cancelación-en-el-commit">2.5 Cancelación en el commit</h3>
+<p>Regla: <strong><code>UnitOfWorkMiddleware</code> NO propaga el token al commit.</strong> Cancelar a
+mitad de un <code>SaveChanges</code> deja la transacción en estado indeterminado y aborta
+el despacho de eventos de dominio. El commit se ejecuta con
+<code>CancellationToken.None</code> y se documenta en el XML doc del middleware.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Application/Abstractions/RequestHandlerDelegate.cs</code></li>
+<li><code>src/Raftel.Application/Abstractions/IRequestDispatcher.cs</code></li>
+<li><code>src/Raftel.Application/Abstractions/RequestDispatcher.cs</code></li>
+<li><code>src/Raftel.Application/Commands/ICommandDispatcher.cs</code> + <code>CommandDispatcher.cs</code></li>
+<li><code>src/Raftel.Application/Queries/IQueryDispatcher.cs</code> + <code>QueryDispatcher.cs</code></li>
+<li><code>src/Raftel.Application/Middlewares/IGlobalMiddleware.cs</code></li>
+<li><code>src/Raftel.Application/Middlewares/ICommandMiddleware.cs</code>, <code>IQueryMiddleware.cs</code></li>
+<li><code>src/Raftel.Application/Middlewares/{Validation,UnitOfWork,PermissionAuthorization,AuditLog}Middleware.cs</code></li>
+<li><code>src/Raftel.Application/Features/**</code> — todos los handlers</li>
+<li><code>src/Raftel.Api.Server/AutoEndpoints/{Command,Query}EndpointMapper.cs</code></li>
+<li><code>src/Raftel.Application/Abstractions/DomainEvents/IDomainEventsDispatcher.cs</code> (ya lo tiene, verificar propagación)</li>
+<li><code>demo/**</code> y <code>tests/**</code> afectados</li>
+<li><code>BREAKING_CHANGES.md</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> <code>RequestDispatcherTests</code>: con un token ya cancelado, el handler
+recibe <code>token.IsCancellationRequested == true</code>.</li>
+<li><strong>(test)</strong> Orden de middlewares preservado tras el cambio de firma (3
+middlewares que escriben en una lista compartida).</li>
+<li>Cambiar <code>RequestHandlerDelegate</code> e <code>IGlobalMiddleware</code>. La solución deja de
+compilar: es la guía de trabajo.</li>
+<li>Actualizar los 4 middlewares del framework.</li>
+<li>Actualizar los 3 dispatchers.</li>
+<li>Actualizar mappers de endpoint (añadir <code>CancellationToken</code> al <code>Handler</code>).</li>
+<li>Barrido de handlers: pasar el token a cada llamada de repositorio.</li>
+<li>Actualizar demo y tests.</li>
+<li><strong>(test funcional)</strong> Petición abortada por el cliente ⇒ la operación no
+completa (verificable con un handler de prueba que espere sobre el token).</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: propagación a través de una cadena de 3 middlewares.</li>
+<li><strong>Unit</strong>: <code>UnitOfWorkMiddleware</code> commitea aun con token cancelado tras un
+<code>Result</code> exitoso (decisión §2.5).</li>
+<li><strong>Integration</strong>: cancelar el token durante una query larga lanza
+<code>OperationCanceledException</code> desde EF Core.</li>
+<li><strong>Architecture test</strong> (nuevo, útil como red permanente): todo método público
+<code>*Async</code> en <code>Raftel.Application</code> y <code>Raftel.Domain</code> declara un parámetro
+<code>CancellationToken</code>.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Ninguna llamada a repositorio en <code>src/</code> ni <code>demo/</code> omite el token.</li>
+<li>[ ] <code>IQueryDispatcher.DispatchAsync</code> acepta token.</li>
+<li>[ ] Middlewares personalizados de terceros compilan tras ajustar la firma (documentado).</li>
+<li>[ ] Test de arquitectura que impide regresiones.</li>
+<li>[ ] <code>dotnet test</code> en verde.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong><code>CancellationToken</code> dentro del objeto request</strong>: contamina el contrato del
+comando/query, que es un DTO serializable desde JSON.</li>
+<li><strong><code>AsyncLocal&lt;CancellationToken&gt;</code> ambiental</strong>: implícito, difícil de testear,
+problemático con el pooling de hilos.</li>
+<li><strong>Sobrecargas nuevas conservando las viejas</strong>: duplica todo el pipeline y deja
+el camino sin token vivo indefinidamente.</li>
+</ul>
+<h2 id="8-breaking-changes">8. Breaking changes</h2>
+<ul>
+<li><code>IGlobalMiddleware.HandleAsync</code> gana un tercer parámetro.</li>
+<li><code>RequestHandlerDelegate&lt;T&gt;</code> pasa a aceptar <code>CancellationToken</code>.</li>
+<li>Cualquier middleware definido fuera del framework debe actualizar su firma.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/02-propagacion-cancellationtoken.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

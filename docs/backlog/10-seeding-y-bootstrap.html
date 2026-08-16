@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>10 — Seeding y bootstrap de datos iniciales | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="10 — Seeding y bootstrap de datos iniciales | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/10-seeding-y-bootstrap.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="10--seeding-y-bootstrap-de-datos-iniciales">10 — Seeding y bootstrap de datos iniciales</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Application</code>, <code>Raftel.Infrastructure</code>
+Rompe API pública: no (aditivo)
+Depende de: <a href="05-transacciones-explicitas.html">05</a>, <a href="09-health-checks.html">09</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>El framework trae un modelo de autorización (<code>Role</code>, <code>Permission</code>,
+<code>PermissionCollection</code>, <code>UsersPermissions</code>, <code>TenantsPermissions</code>) pero <strong>no hay
+nada que lo inicialice</strong>. Al arrancar contra una base vacía:</p>
+<ul>
+<li>No existe ningún rol.</li>
+<li>No existe ningún permiso persistido, aunque las constantes estén declaradas en
+código (<code>UsersPermissions</code>, <code>TenantsPermissions</code>).</li>
+<li>No hay usuario administrador, así que no hay forma de asignar permisos vía API
+— problema del huevo y la gallina.</li>
+<li>No hay tenant por defecto en escenarios single-tenant.</li>
+</ul>
+<p>Cada consumidor del framework acaba escribiendo su propio script SQL ad hoc.
+Tampoco hay ejecución automática de migraciones.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-idataseeder">2.1 <code>IDataSeeder</code></h3>
+<pre><code class="lang-csharp">// Raftel.Application/Abstractions/Seeding/IDataSeeder.cs
+public interface IDataSeeder
+{
+    int Order { get; }                    // menor primero
+    string Name { get; }
+    Task&lt;Result&gt; SeedAsync(CancellationToken cancellationToken = default);
+}
+</code></pre>
+<p>Autodescubrimiento por ensamblado, igual que handlers y validadores (reutilizar
+el escaneo de <code>DependencyInjection.RegisterHandlers</code>).</p>
+<h3 id="22-idempotencia">2.2 Idempotencia</h3>
+<p>Regla dura: <strong>todo seeder debe poder ejecutarse N veces sin efecto adicional.</strong>
+Se comprueba de dos formas complementarias:</p>
+<ol>
+<li>El seeder consulta antes de insertar (<code>if (await repository.ExistsAsync(...)) return Result.Success();</code>).</li>
+<li>Registro de ejecuciones en tabla <code>SeedHistory(Name, AppliedOn, Version)</code>. Un
+seeder con <code>RunOnce = true</code> no se reejecuta nunca; uno idempotente sí puede
+reejecutarse para reconciliar.</li>
+</ol>
+<p>Los seeders de <strong>permisos</strong> deben ser reconciliadores, no <code>RunOnce</code>: al añadir un
+permiso nuevo al código hay que persistirlo en una base existente.</p>
+<h3 id="23-seeders-incluidos">2.3 Seeders incluidos</h3>
+<ul>
+<li><strong><code>PermissionsSeeder</code></strong> (Order 100): descubre por reflexión todas las
+constantes <code>string</code> de las clases marcadas como colección de permisos
+(<code>UsersPermissions</code>, <code>TenantsPermissions</code> y las del consumidor) y las
+sincroniza con la tabla <code>Permissions</code>. Los permisos que desaparecen del código
+<strong>no se borran</strong> por defecto (podrían estar asignados); se marcan como
+obsoletos y se reporta en el log.</li>
+<li><strong><code>DefaultRolesSeeder</code></strong> (Order 200): crea los roles configurados y les asigna
+permisos.</li>
+<li><strong><code>AdminUserSeeder</code></strong> (Order 300): crea el usuario administrador inicial.</li>
+<li><strong><code>DefaultTenantSeeder</code></strong> (Order 50): tenant por defecto en modo single-tenant.</li>
+</ul>
+<h3 id="24-credenciales-del-administrador">2.4 Credenciales del administrador</h3>
+<p>Punto crítico de seguridad. Reglas:</p>
+<ol>
+<li><strong>Nunca</strong> una contraseña por defecto en código ni en <code>appsettings.json</code> del
+repositorio.</li>
+<li>La contraseña se lee de configuración (<code>Raftel:Seed:AdminPassword</code>), que en
+producción debe venir de variable de entorno, user-secrets o key vault.</li>
+<li>Si no se ha proporcionado y el entorno <strong>no</strong> es Development, el seeder
+<strong>falla el arranque</strong> con un mensaje claro. No genera una contraseña
+aleatoria silenciosa ni deja al usuario sin contraseña.</li>
+<li>En Development se puede generar una aleatoria y <strong>escribirla en el log</strong> una
+sola vez, marcado explícitamente como solo-desarrollo.</li>
+<li>El usuario administrador se crea con <code>MustChangePassword = true</code> si el
+proveedor de identidad lo soporta.</li>
+</ol>
+<h3 id="25-ejecución">2.5 Ejecución</h3>
+<pre><code class="lang-csharp">public sealed class SeedRunner(IEnumerable&lt;IDataSeeder&gt; seeders, IUnitOfWork unitOfWork, ...)
+{
+    public async Task&lt;Result&gt; RunAsync(CancellationToken cancellationToken = default);
+}
+</code></pre>
+<p>Cada seeder corre en <strong>su propia transacción</strong> (<a href="05-transacciones-explicitas.html">05</a>):
+un fallo en el seeder 300 no revierte los seeders 100 y 200 ya aplicados.</p>
+<p>Punto de entrada:</p>
+<pre><code class="lang-csharp">await app.MigrateAndSeedAsync();     // extensión sobre IHost
+</code></pre>
+<p>Con opciones:</p>
+<pre><code class="lang-csharp">public sealed class SeedOptions
+{
+    public bool ApplyMigrationsOnStartup { get; set; } = false;   // false en producción
+    public bool RunSeedersOnStartup { get; set; } = true;
+    public bool FailFastOnError { get; set; } = true;
+}
+</code></pre>
+<p><code>ApplyMigrationsOnStartup = false</code> por defecto: aplicar migraciones desde la app
+en un despliegue con varias réplicas provoca carreras. La recomendación
+documentada es un job de migración separado; la opción existe para desarrollo y
+despliegues de instancia única.</p>
+<h3 id="26-multitenancy">2.6 Multitenancy</h3>
+<p>Un seeder puede ser global o por tenant:</p>
+<pre><code class="lang-csharp">public interface ITenantDataSeeder : IDataSeeder
+{
+    Task&lt;Result&gt; SeedForTenantAsync(TenantId tenantId, CancellationToken cancellationToken = default);
+}
+</code></pre>
+<p>El runner recorre los tenants activos fijando <code>ICurrentTenant</code> en cada iteración.
+Al crear un tenant nuevo (<code>CreateTenantCommandHandler</code>) se disparan sus seeders
+— vía evento de dominio, encaja con <a href="07-outbox-domain-events.html">07</a>.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Application/Abstractions/Seeding/{IDataSeeder,ITenantDataSeeder,ISeedRunner}.cs</code></li>
+<li><code>src/Raftel.Application/SeedOptions.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Seeding/SeedRunner.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Seeding/SeedHistory.cs</code> + configuración EF</li>
+<li><code>src/Raftel.Infrastructure/Seeding/Seeders/{Permissions,DefaultRoles,AdminUser,DefaultTenant}Seeder.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Seeding/HostSeedingExtensions.cs</code></li>
+<li><code>tests/Raftel.Infrastructure.Tests/Seeding/**</code></li>
+<li><code>tests/Raftel.Application.IntegrationTests/SeedingTests.cs</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Infrastructure/DependencyInjection.cs</code></li>
+<li><code>src/Raftel.Application/DependencyInjection.cs</code> — escaneo de seeders</li>
+<li><code>demo/**/Program.cs</code></li>
+<li><code>docs/getting-started.md</code> (hoy vacío — buen momento para escribirlo)</li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> <code>SeedRunner</code> ejecuta en orden ascendente de <code>Order</code>.</li>
+<li><strong>(test)</strong> Un seeder que falla no impide los anteriores ya aplicados y, con
+<code>FailFastOnError = true</code>, detiene los siguientes.</li>
+<li>Implementar <code>SeedRunner</code> + <code>SeedHistory</code>.</li>
+<li><strong>(test integración)</strong> <code>PermissionsSeeder</code> sobre base vacía inserta todos los
+permisos; segunda ejecución no inserta duplicados; permiso nuevo en código se
+añade sin tocar los existentes.</li>
+<li>Implementar <code>PermissionsSeeder</code>.</li>
+<li><strong>(test)</strong> <code>AdminUserSeeder</code> <strong>falla</strong> en entorno Production sin contraseña
+configurada. Test explícito de seguridad.</li>
+<li>Implementar <code>AdminUserSeeder</code> y <code>DefaultRolesSeeder</code>.</li>
+<li><strong>(test integración)</strong> <code>ITenantDataSeeder</code> corre una vez por tenant con el
+<code>ICurrentTenant</code> correcto.</li>
+<li><code>MigrateAndSeedAsync</code> + integración con health checks (no &quot;ready&quot; hasta
+terminar el seeding).</li>
+<li>Escribir <code>docs/getting-started.md</code> con el flujo de arranque completo.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: orden, aislamiento de fallos, historial.</li>
+<li><strong>Integration</strong>: idempotencia (ejecutar dos veces y comparar el estado),
+reconciliación de permisos, seeding por tenant.</li>
+<li><strong>Seguridad</strong>: sin contraseña en Production ⇒ arranque abortado.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Base vacía + arranque ⇒ sistema utilizable (permisos, rol admin, usuario admin).</li>
+<li>[ ] Ejecutar el seeding dos veces deja el mismo estado.</li>
+<li>[ ] Ninguna contraseña por defecto en el repositorio.</li>
+<li>[ ] Un permiso nuevo en código aparece en una base existente sin intervención manual.</li>
+<li>[ ] La app no se marca &quot;ready&quot; hasta que el seeding termina.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong><code>HasData</code> de EF Core</strong>: los datos van dentro de la migración, no se pueden
+calcular en tiempo de ejecución (imposible reconciliar permisos por reflexión)
+y complican mucho el diff de migraciones.</li>
+<li><strong>Scripts SQL sueltos</strong>: no portables entre SqlServer y PostgreSQL, fuera del
+alcance de los tests.</li>
+<li><strong>Endpoint de bootstrap</strong> (<code>POST /setup</code>): superficie de ataque abierta al
+arrancar; una carrera y cualquiera crea el admin.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/10-seeding-y-bootstrap.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

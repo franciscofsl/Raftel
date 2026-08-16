@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>08 — Concurrencia optimista | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="08 — Concurrencia optimista | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/08-concurrencia-optimista.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="08--concurrencia-optimista">08 — Concurrencia optimista</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Domain</code>, <code>Raftel.Infrastructure</code>, <code>Raftel.Api.Server</code>
+Rompe API pública: no (opt-in por entidad)
+Depende de: <a href="01-error-tipado-y-mapeo-http.html">01</a>, <a href="05-transacciones-explicitas.html">05</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>No existe ningún token de concurrencia en el modelo. <code>Entity&lt;TId&gt;</code> tiene solo
+<code>Id</code>, y ninguna configuración EF declara <code>IsRowVersion()</code> ni <code>IsConcurrencyToken()</code>.</p>
+<p>Escenario de pérdida de actualización (lost update), hoy silencioso:</p>
+<pre><code>t0  Usuario A lee Tenant{Name=&quot;Acme&quot;, Plan=&quot;Free&quot;}
+t1  Usuario B lee Tenant{Name=&quot;Acme&quot;, Plan=&quot;Free&quot;}
+t2  A ejecuta EditTenant{Plan=&quot;Pro&quot;}       → guardado
+t3  B ejecuta EditTenant{Name=&quot;Acme Corp&quot;} → guardado, sobrescribe Plan=&quot;Free&quot;
+</code></pre>
+<p>El cambio de A se pierde sin aviso. En un framework con <code>EditUser</code>,
+<code>AssignRoleToUser</code> y multitenancy esto es un problema real, no teórico.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-ihasversion">2.1 <code>IHasVersion</code></h3>
+<p>Opt-in por agregado, no obligatorio: no todo agregado lo necesita y la columna
+tiene coste.</p>
+<pre><code class="lang-csharp">// Raftel.Domain/Abstractions/IHasVersion.cs
+public interface IHasVersion
+{
+    byte[] Version { get; }
+}
+</code></pre>
+<p>Alternativa considerada para portabilidad: <code>uint Version</code> incremental. Ver §7.
+Se elige <code>byte[]</code> con mapeo por proveedor:</p>
+<table>
+<thead>
+<tr>
+<th>Proveedor</th>
+<th>Mapeo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SqlServer</td>
+<td><code>rowversion</code> nativo (<code>IsRowVersion()</code>)</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>columna de sistema <code>xmin</code> (<code>UseXminAsConcurrencyToken()</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Ambos los gestiona el motor: no hay que incrementar nada a mano.</p>
+<h3 id="22-configuración">2.2 Configuración</h3>
+<p>Extensión simétrica a la ya existente <code>HasSoftDelete()</code>:</p>
+<pre><code class="lang-csharp">// Raftel.Infrastructure/Data/IEntityTypeConfigurationExtensions.cs
+public static void HasOptimisticConcurrency&lt;TEntity&gt;(this EntityTypeBuilder&lt;TEntity&gt; builder, DatabaseProvider provider)
+    where TEntity : class
+{
+    switch (provider)
+    {
+        case DatabaseProvider.SqlServer:
+            builder.Property&lt;byte[]&gt;(ShadowPropertyNames.Version).IsRowVersion();
+            break;
+        case DatabaseProvider.PostgreSql:
+            builder.UseXminAsConcurrencyToken();
+            break;
+    }
+}
+</code></pre>
+<p>Se usa <strong>shadow property</strong>, igual que <code>IsDeleted</code>, para no contaminar el
+agregado con una preocupación de persistencia. <code>IHasVersion</code> queda como marcador
+opcional para los agregados que sí quieran exponer la versión al cliente
+(ver §2.4).</p>
+<p><code>ShadowPropertyNames</code> gana <code>public const string Version = nameof(Version);</code>.</p>
+<h3 id="23-traducir-el-fallo-a-result">2.3 Traducir el fallo a <code>Result</code></h3>
+<p><code>DbUpdateConcurrencyException</code> no debe llegar a la capa de aplicación como
+excepción de EF. Se captura en <code>RaftelDbContext.SaveChangesAsync</code> y se convierte:</p>
+<pre><code class="lang-csharp">public override async Task&lt;int&gt; SaveChangesAsync(CancellationToken cancellationToken = default)
+{
+    try
+    {
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+    catch (DbUpdateConcurrencyException exception)
+    {
+        throw new ConcurrencyConflictException(ExtractEntityNames(exception), exception);
+    }
+}
+</code></pre>
+<p>Y en el pipeline, un <code>ConcurrencyMiddleware</code> de comando lo convierte a
+<code>Result.Failure(Error.Conflict(&quot;Concurrency.Conflict&quot;, ...))</code> ⇒ <strong>HTTP 409</strong>
+gracias a <a href="01-error-tipado-y-mapeo-http.html">01</a>.</p>
+<blockquote>
+<p>Se mantiene una excepción interna (<code>ConcurrencyConflictException</code>) porque el
+fallo nace dentro de EF Core, fuera del alcance del patrón <code>Result</code>. La
+conversión ocurre en el borde del pipeline, no se propaga a los handlers.</p>
+</blockquote>
+<h3 id="24-etags-http-opcional-misma-feature">2.4 ETags HTTP (opcional, misma feature)</h3>
+<p>Para agregados que implementen <code>IHasVersion</code>, los endpoints pueden exponer
+concurrencia optimista de extremo a extremo:</p>
+<ul>
+<li><code>GET</code> devuelve <code>ETag: &quot;base64(version)&quot;</code>.</li>
+<li><code>PUT</code>/<code>PATCH</code> acepta <code>If-Match</code>; si no coincide ⇒ <code>412 Precondition Failed</code>.</li>
+<li>Sin <code>If-Match</code> ⇒ comportamiento actual (último gana), configurable a
+<code>428 Precondition Required</code>.</li>
+</ul>
+<p>Implementado en <code>QueryEndpointMapper</code> / <code>CommandEndpointMapper</code>, activable con
+<code>ConcurrencyOptions.EnableETags</code>.</p>
+<h3 id="25-política-de-reintento">2.5 Política de reintento</h3>
+<p>Para comandos idempotentes se ofrece <code>[RetryOnConcurrencyConflict(MaxAttempts = 3)]</code>.
+El <code>ConcurrencyMiddleware</code> reejecuta el handler con estado recargado. <strong>No</strong> se
+aplica por defecto: reintentar un comando no idempotente duplica efectos.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Abstractions/IHasVersion.cs</code></li>
+<li><code>src/Raftel.Application/Exceptions/ConcurrencyConflictException.cs</code></li>
+<li><code>src/Raftel.Application/Middlewares/ConcurrencyMiddleware.cs</code></li>
+<li><code>src/Raftel.Application/ConcurrencyOptions.cs</code></li>
+<li><code>src/Raftel.Application/Authorization/RetryOnConcurrencyConflictAttribute.cs</code></li>
+<li><code>tests/Raftel.Infrastructure.Tests/Data/ConcurrencyTests.cs</code></li>
+<li><code>tests/Raftel.Application.IntegrationTests/LostUpdateTests.cs</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Infrastructure/Data/ShadowPropertyNames.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/IEntityTypeConfigurationExtensions.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/RaftelDbContext.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/Configuration/{User,Tenant,Role}Configuration.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/Auditing/ChangeSnapshotExtractor.cs</code> — excluir
+<code>Version</code> de la auditoría (hoy ya excluye <code>IsDeleted</code>)</li>
+<li><code>src/Raftel.Api.Server/AutoEndpoints/*</code> — ETags</li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test integración)</strong> Reproducir el lost update <strong>antes</strong> de arreglarlo: dos
+<code>DbContext</code>, lectura simultánea, dos escrituras ⇒ el test demuestra la pérdida.</li>
+<li>Añadir <code>ShadowPropertyNames.Version</code> y <code>HasOptimisticConcurrency</code>.</li>
+<li>Aplicarlo a <code>User</code>, <code>Tenant</code>, <code>Role</code>.</li>
+<li><strong>(test integración)</strong> El mismo escenario ahora lanza
+<code>DbUpdateConcurrencyException</code> en la segunda escritura.</li>
+<li>Traducir en <code>RaftelDbContext</code> a <code>ConcurrencyConflictException</code>.</li>
+<li><strong>(test)</strong> <code>ConcurrencyMiddleware</code> convierte a <code>Error.Conflict</code>.</li>
+<li>Implementar el middleware.</li>
+<li><strong>(test funcional)</strong> El endpoint responde <code>409</code> con <code>ProblemDetails</code>.</li>
+<li><strong>(test)</strong> La auditoría no registra cambios en la columna <code>Version</code>.</li>
+<li>ETags: tests funcionales de <code>If-Match</code> correcto, incorrecto y ausente.</li>
+<li>Reintento opt-in + test.</li>
+<li>Migraciones y nota en <code>docs/database-configuration.md</code>.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Integration</strong>: lost update antes/después, en SqlServer y PostgreSQL (el
+mapeo difiere, hay que cubrir ambos).</li>
+<li><strong>Integration</strong>: interacción con soft delete y filtros de tenant.</li>
+<li><strong>Functional</strong>: 409 y flujo completo de ETag.</li>
+<li><strong>Unit</strong>: middleware y política de reintento.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Dos escrituras concurrentes sobre el mismo agregado: la segunda falla con 409.</li>
+<li>[ ] Funciona en SqlServer y PostgreSQL.</li>
+<li>[ ] La versión no aparece en los logs de auditoría.</li>
+<li>[ ] Los agregados sin <code>HasOptimisticConcurrency</code> mantienen el comportamiento actual.</li>
+<li>[ ] Ningún handler de aplicación captura excepciones de EF Core.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong><code>uint Version</code> incrementado a mano en el agregado</strong>: portable entre motores,
+pero obliga a que cada método de negocio recuerde incrementarlo — error humano
+garantizado. Se puede automatizar en un interceptor, quedando como plan B si
+aparece un tercer proveedor sin token nativo.</li>
+<li><strong>Bloqueo pesimista (<code>SELECT ... FOR UPDATE</code>)</strong>: serializa el acceso y degrada
+el rendimiento; solo justificable en casos puntuales.</li>
+<li><strong>Comparar todas las columnas como token de concurrencia</strong>: consultas <code>UPDATE</code>
+enormes y frágiles ante cambios de esquema.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/08-concurrencia-optimista.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>09 — Health checks | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="09 — Health checks | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/09-health-checks.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="09--health-checks">09 — Health checks</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Infrastructure</code>, <code>Raftel.Api.Server</code>
+Rompe API pública: no (aditivo)
+Depende de: <a href="04-logging-estructurado.html">04</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>Cero health checks en la solución. Consecuencias operativas:</p>
+<ul>
+<li>Kubernetes / App Service no pueden decidir si reiniciar o retirar del balanceo
+una instancia. Sin <code>readiness</code>, el tráfico entra antes de que las migraciones
+terminen.</li>
+<li>No hay forma automática de detectar que la base de datos se ha caído; se
+descubre por errores 500 de usuario.</li>
+<li>Con <a href="07-outbox-domain-events.html">07</a>, un <code>OutboxProcessor</code> atascado es
+invisible hasta que alguien nota que no llegan emails.</li>
+</ul>
+<h2 id="2-diseño">2. Diseño</h2>
+<p>Sobre <code>Microsoft.Extensions.Diagnostics.HealthChecks</code>, incluido en el framework
+compartido de ASP.NET Core (sin dependencia externa nueva).</p>
+<h3 id="21-endpoints">2.1 Endpoints</h3>
+<p>Tres endpoints con propósitos distintos — la distinción importa:</p>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Tags</th>
+<th>Significado</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/health/live</code></td>
+<td>ninguno</td>
+<td>El proceso responde</td>
+<td><code>livenessProbe</code>. Fallo ⇒ reiniciar</td>
+</tr>
+<tr>
+<td><code>/health/ready</code></td>
+<td><code>ready</code></td>
+<td>Dependencias listas</td>
+<td><code>readinessProbe</code>. Fallo ⇒ sacar del balanceo</td>
+</tr>
+<tr>
+<td><code>/health</code></td>
+<td>todos</td>
+<td>Diagnóstico completo</td>
+<td>Humanos / monitorización</td>
+</tr>
+</tbody>
+</table>
+<p><code>/health/live</code> <strong>no</strong> debe tocar la base de datos: si la base cae, el pod no debe
+reiniciarse en bucle — debe salir del balanceo, que es lo que hace <code>ready</code>.</p>
+<h3 id="22-checks-incluidos">2.2 Checks incluidos</h3>
+<pre><code class="lang-csharp">services.AddRaftelHealthChecks(options =&gt; { ... });
+</code></pre>
+<ul>
+<li><strong><code>DatabaseHealthCheck</code></strong> (<code>ready</code>): <code>dbContext.Database.CanConnectAsync()</code>
+con timeout corto. Degraded si tarda más de <code>SlowThreshold</code>.</li>
+<li><strong><code>PendingMigrationsHealthCheck</code></strong> (<code>ready</code>): <code>GetPendingMigrationsAsync()</code>
+vacío. Evita servir tráfico con esquema desactualizado.</li>
+<li><strong><code>OutboxHealthCheck</code></strong> (<code>ready</code>, solo si el outbox está activo): degraded si
+hay mensajes sin procesar más antiguos que <code>OutboxLagThreshold</code>; unhealthy si
+hay dead letters por encima de <code>DeadLetterThreshold</code>.</li>
+<li><strong><code>TenantResolutionHealthCheck</code></strong> (<code>ready</code>, opcional): el almacén de tenants
+responde.</li>
+</ul>
+<p>Cada check con su propio <code>CancellationToken</code> y timeout: un check colgado no debe
+colgar el endpoint.</p>
+<h3 id="23-formato-de-respuesta">2.3 Formato de respuesta</h3>
+<p><code>ResponseWriter</code> propio en JSON:</p>
+<pre><code class="lang-json">{
+  &quot;status&quot;: &quot;Degraded&quot;,
+  &quot;totalDurationMs&quot;: 42,
+  &quot;entries&quot;: {
+    &quot;database&quot;: { &quot;status&quot;: &quot;Healthy&quot;, &quot;durationMs&quot;: 12 },
+    &quot;outbox&quot;:   { &quot;status&quot;: &quot;Degraded&quot;, &quot;durationMs&quot;: 8, &quot;description&quot;: &quot;34 messages pending older than 00:05:00&quot; }
+  }
+}
+</code></pre>
+<blockquote>
+<p><strong>Seguridad</strong>: <code>/health</code> detallado expone estructura interna (nombres de
+dependencias, estados, a veces mensajes de excepción). Por defecto:
+<code>/health/live</code> y <code>/health/ready</code> anónimos y <strong>sin detalle</strong> (solo el status);
+<code>/health</code> detallado requiere autorización (<code>HealthOptions.RequireAuthorization</code>,
+por defecto <code>true</code>) o queda restringido a red interna. Nunca incluir el mensaje
+de excepción en la respuesta pública.</p>
+</blockquote>
+<h3 id="24-opciones">2.4 Opciones</h3>
+<pre><code class="lang-csharp">public sealed class HealthOptions
+{
+    public bool RequireAuthorizationForDetails { get; set; } = true;
+    public string? DetailsPolicy { get; set; }
+    public TimeSpan CheckTimeout { get; set; } = TimeSpan.FromSeconds(3);
+    public TimeSpan DatabaseSlowThreshold { get; set; } = TimeSpan.FromSeconds(1);
+    public TimeSpan OutboxLagThreshold { get; set; } = TimeSpan.FromMinutes(5);
+    public int DeadLetterThreshold { get; set; } = 10;
+}
+</code></pre>
+<h3 id="25-startup-y-migraciones">2.5 Startup y migraciones</h3>
+<p>Complemento: <code>IHostedService</code> de arranque que marca la app como &quot;no lista&quot; hasta
+que las migraciones terminan (<code>StartupHealthCheck</code> con flag en memoria). Evita
+la ventana en la que el proceso responde pero el esquema aún no está.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Infrastructure/Health/DatabaseHealthCheck.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Health/PendingMigrationsHealthCheck.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Health/OutboxHealthCheck.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Health/StartupHealthCheck.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Health/HealthOptions.cs</code></li>
+<li><code>src/Raftel.Api.Server/Health/HealthEndpointExtensions.cs</code></li>
+<li><code>src/Raftel.Api.Server/Health/HealthResponseWriter.cs</code></li>
+<li><code>tests/Raftel.Infrastructure.Tests/Health/**</code></li>
+<li><code>tests/Raftel.Api.FunctionalTests/HealthCheckTests.cs</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Infrastructure/DependencyInjection.cs</code></li>
+<li><code>demo/**/Program.cs</code></li>
+<li><code>docs/database-configuration.md</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> <code>DatabaseHealthCheck</code> devuelve <code>Healthy</code> con conexión válida y
+<code>Unhealthy</code> con cadena de conexión rota, sin lanzar.</li>
+<li>Implementar <code>DatabaseHealthCheck</code> con timeout.</li>
+<li><strong>(test)</strong> <code>PendingMigrationsHealthCheck</code> ⇒ <code>Unhealthy</code> con migraciones pendientes.</li>
+<li>Implementar.</li>
+<li><strong>(test funcional)</strong> <code>/health/live</code> responde 200 aun con la base caída;
+<code>/health/ready</code> responde 503.</li>
+<li>Implementar los endpoints, tags y writer.</li>
+<li><strong>(test funcional)</strong> <code>/health</code> sin autenticar ⇒ 401 con la opción por defecto;
+la respuesta de <code>/health/ready</code> no incluye mensajes de excepción.</li>
+<li><code>OutboxHealthCheck</code> (si <a href="07-outbox-domain-events.html">07</a> ya está) + tests.</li>
+<li><code>StartupHealthCheck</code> + test.</li>
+<li>Documentar sondas de Kubernetes de ejemplo en <code>docs/</code>.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: cada check en healthy / degraded / unhealthy.</li>
+<li><strong>Integration (Testcontainers)</strong>: parar el contenedor de base de datos y ver el
+cambio de estado.</li>
+<li><strong>Functional</strong>: códigos de estado, autorización del endpoint detallado,
+ausencia de datos sensibles en la respuesta pública.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] <code>/health/live</code> no toca la base de datos.</li>
+<li>[ ] <code>/health/ready</code> devuelve 503 cuando la base no responde o hay migraciones pendientes.</li>
+<li>[ ] El endpoint detallado exige autorización por defecto.</li>
+<li>[ ] Ninguna respuesta pública incluye stack traces ni cadenas de conexión.</li>
+<li>[ ] Un check colgado no cuelga el endpoint (timeout).</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong><code>AspNetCore.HealthChecks.*</code> (AspNetCore.Diagnostics.HealthChecks)</strong>: catálogo
+enorme y muy útil, pero es dependencia externa y el proyecto la evita
+deliberadamente. Los checks necesarios son cuatro y triviales.</li>
+<li><strong>Un único endpoint <code>/health</code></strong>: mezcla liveness y readiness; una base caída
+provocaría reinicios en bucle del pod.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/09-health-checks.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

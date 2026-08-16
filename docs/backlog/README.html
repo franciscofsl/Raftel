@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Backlog de evoluci&#243;n de Raftel | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Backlog de evoluci&#243;n de Raftel | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/README.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="backlog-de-evolución-de-raftel">Backlog de evolución de Raftel</h1>
+
+<p>Ruta ordenada desde el estado actual (micro-framework funcional, ~5.650 líneas
+en <code>src/</code> + <code>tools/</code>, 258 tests) hasta un framework completo listo para
+producción.</p>
+<p>Cada archivo de esta carpeta describe <strong>una feature completa</strong>: motivación,
+diseño, superficie de API, archivos a tocar, plan de implementación por pasos,
+tests y criterios de aceptación.</p>
+<h2 id="cómo-usar-este-backlog">Cómo usar este backlog</h2>
+<ul>
+<li>Los números marcan el <strong>orden recomendado de implementación</strong>. Las features
+posteriores asumen que las anteriores están hechas.</li>
+<li>Cada archivo es autocontenido: se puede abrir una rama por archivo.</li>
+<li>Antes de tocar código, leer el <code>CLAUDE.md</code> más cercano a la carpeta afectada.</li>
+<li>TDD: test antes que implementación. Commits con Conventional Commits.</li>
+<li>Toda feature que rompa la API pública debe añadir entrada en
+<code>BREAKING_CHANGES.md</code>.</li>
+</ul>
+<h2 id="orden">Orden</h2>
+<h3 id="fase-1--base-de-producción-bloqueante">Fase 1 — Base de producción (bloqueante)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Feature</th>
+<th>Capas</th>
+<th>Rompe API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="01-error-tipado-y-mapeo-http.html">01</a></td>
+<td><code>Error</code> tipado y mapeo <code>Result</code> → status HTTP</td>
+<td>Domain, Api.Server</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><a href="02-propagacion-cancellationtoken.html">02</a></td>
+<td>Propagación de <code>CancellationToken</code> en el pipeline</td>
+<td>Application, Api.Server</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><a href="03-paginacion-y-ordenacion.html">03</a></td>
+<td>Paginación y ordenación (<code>PagedResult</code>, <code>PageRequest</code>)</td>
+<td>Domain, Application, Infrastructure, Api</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="04-logging-estructurado.html">04</a></td>
+<td>Logging estructurado y correlation ID</td>
+<td>Application, Api.Server</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="05-transacciones-explicitas.html">05</a></td>
+<td>Transacciones explícitas en <code>IUnitOfWork</code></td>
+<td>Application, Infrastructure</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fase-2--robustez">Fase 2 — Robustez</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Feature</th>
+<th>Capas</th>
+<th>Rompe API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="06-result-en-lugar-de-excepciones.html">06</a></td>
+<td><code>Result</code> en lugar de excepciones en el pipeline</td>
+<td>Application, Api.Server</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><a href="07-outbox-domain-events.html">07</a></td>
+<td>Outbox para eventos de dominio</td>
+<td>Domain, Application, Infrastructure</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="08-concurrencia-optimista.html">08</a></td>
+<td>Concurrencia optimista (<code>RowVersion</code>)</td>
+<td>Domain, Infrastructure</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="09-health-checks.html">09</a></td>
+<td>Health checks</td>
+<td>Infrastructure, Api.Server</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="10-seeding-y-bootstrap.html">10</a></td>
+<td>Seeding y bootstrap de datos iniciales</td>
+<td>Application, Infrastructure</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fase-3--ergonomía-y-rendimiento">Fase 3 — Ergonomía y rendimiento</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Feature</th>
+<th>Capas</th>
+<th>Rompe API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="11-caching-de-queries.html">11</a></td>
+<td>Caching de queries</td>
+<td>Application, Infrastructure</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="12-specifications-en-repositorio.html">12</a></td>
+<td>Specifications en el repositorio e <code>IRepository</code> genérico</td>
+<td>Domain, Infrastructure</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td><a href="13-rate-limiting-cors-security-headers.html">13</a></td>
+<td>Rate limiting, CORS y cabeceras de seguridad</td>
+<td>Api.Server</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="14-nullable-enable.html">14</a></td>
+<td><code>Nullable enable</code> en toda la solución</td>
+<td>Todas</td>
+<td>Sí</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fase-4--plataforma">Fase 4 — Plataforma</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Feature</th>
+<th>Capas</th>
+<th>Rompe API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="15-observabilidad-opentelemetry.html">15</a></td>
+<td>Observabilidad con OpenTelemetry</td>
+<td>Infrastructure, Api.Server</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="16-background-jobs.html">16</a></td>
+<td>Background jobs y tareas recurrentes</td>
+<td>Application, Infrastructure</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="17-integration-events-message-bus.html">17</a></td>
+<td>Integration events y message bus</td>
+<td>Application, Infrastructure</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="18-raftel-testing.html">18</a></td>
+<td>Paquete <code>Raftel.Testing</code></td>
+<td>Nuevo proyecto</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="19-templates-y-cli.html">19</a></td>
+<td>Templates <code>dotnet new</code> y CLI extendido</td>
+<td>tools, templates</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="20-localizacion-de-errores.html">20</a></td>
+<td>Localización de mensajes de error</td>
+<td>Domain, Application, Api.Server</td>
+<td>No</td>
+</tr>
+<tr>
+<td><a href="21-flujos-de-autenticacion-adicionales.html">21</a></td>
+<td>Flujos de autenticación adicionales</td>
+<td>Infrastructure, Api.Server</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h2 id="estado">Estado</h2>
+<p>Ninguna feature implementada. Marcar el estado en la cabecera de cada archivo al
+empezar (<code>Pendiente</code> → <code>En curso</code> → <code>Implementado</code>).</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/README.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

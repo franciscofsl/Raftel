@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>12 — Specifications en el repositorio e IRepository gen&#233;rico | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="12 — Specifications en el repositorio e IRepository gen&#233;rico | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/12-specifications-en-repositorio.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="12--specifications-en-el-repositorio-e-irepository-genérico">12 — Specifications en el repositorio e <code>IRepository</code> genérico</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Domain</code>, <code>Raftel.Infrastructure</code>
+Rompe API pública: <strong>sí</strong> (restricción genérica de <code>IRepository</code>)
+Depende de: <a href="03-paginacion-y-ordenacion.html">03</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>Dos problemas relacionados.</p>
+<p><strong>(a) Las specifications son una feature huérfana.</strong> Existen
+<code>Specification&lt;TModel&gt;</code>, <code>AndSpecification</code>, <code>OrSpecification</code> con <code>ToExpression()</code>
+e <code>IsSatisfiedBy()</code>, pero <strong>el repositorio no las acepta</strong>: solo recibe
+<code>Expression&lt;Func&lt;TEntity, bool&gt;&gt;</code> cruda. El patrón está implementado a medias:
+sirve para validar en memoria, no para consultar.</p>
+<p>Falta además <code>NotSpecification</code> — hay <code>And</code> y <code>Or</code>, no negación.</p>
+<p>Y <code>IsSatisfiedBy</code> compila la expresión <strong>en cada llamada</strong>:</p>
+<pre><code class="lang-csharp">public bool IsSatisfiedBy(TModel model)
+{
+    var expression = ToExpression();
+    var compiledExpression = expression.Compile();   // ← coste alto, sin caché
+    return compiledExpression(model);
+}
+</code></pre>
+<p><strong>(b) <code>IRepository</code> está sobre-restringido.</strong></p>
+<pre><code class="lang-csharp">public interface IRepository&lt;TEntity, in TId&gt;
+    where TEntity : AggregateRoot&lt;TId&gt; where TId : TypedId&lt;Guid&gt;
+</code></pre>
+<p><code>TId : TypedId&lt;Guid&gt;</code> obliga a que <strong>toda</strong> clave sea un GUID. Imposible modelar
+un agregado con clave <code>int</code> (secuencial, típico en tablas de catálogo), <code>long</code>
+(snowflake) o <code>string</code> (código natural). Para un framework de propósito general
+es una limitación seria; <code>TypedId&lt;T&gt;</code> ya es genérico, la restricción lo desperdicia.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-relajar-la-restricción-de-tid">2.1 Relajar la restricción de <code>TId</code></h3>
+<pre><code class="lang-csharp">public interface IRepository&lt;TEntity, in TId&gt;
+    where TEntity : AggregateRoot&lt;TId&gt;
+    where TId : TypedId
+</code></pre>
+<p>Introduciendo un marcador no genérico:</p>
+<pre><code class="lang-csharp">public abstract class TypedId
+{
+    public abstract object Value { get; }
+}
+
+public abstract class TypedId&lt;TValue&gt; : TypedId, IEquatable&lt;TypedId&lt;TValue&gt;&gt;
+    where TValue : notnull
+{
+    public TValue TypedValue { get; }
+    public override object Value =&gt; TypedValue;
+}
+
+public abstract class TypedGuidId : TypedId&lt;Guid&gt;;    // el existente, ahora un caso más
+</code></pre>
+<p><code>Entity&lt;TId&gt;</code> y <code>AggregateRoot&lt;TId&gt;</code> cambian su restricción de <code>TypedId&lt;Guid&gt;</code> a
+<code>TypedId</code>. Es el cambio que rompe: el código existente sigue compilando porque
+<code>TypedGuidId : TypedId&lt;Guid&gt; : TypedId</code>, pero cualquier restricción explícita
+<code>where TId : TypedId&lt;Guid&gt;</code> en código de consumidor hay que revisarla.</p>
+<p><code>EfRepository</code> necesita ajuste en <code>GetByIdAsync</code>: hoy usa <code>e.Id.Equals(id)</code>, que
+EF traduce mal en algunos casos. Pasar a comparación por el valor primitivo
+mediante conversión de valor configurada por entidad.</p>
+<h3 id="22-completar-las-specifications">2.2 Completar las specifications</h3>
+<pre><code class="lang-csharp">public abstract class Specification&lt;TModel&gt;
+{
+    private Func&lt;TModel, bool&gt;? _compiled;    // caché
+
+    public abstract Expression&lt;Func&lt;TModel, bool&gt;&gt; ToExpression();
+
+    public bool IsSatisfiedBy(TModel model)
+    {
+        _compiled ??= ToExpression().Compile();
+        return _compiled(model);
+    }
+
+    public Specification&lt;TModel&gt; And(Specification&lt;TModel&gt; other);
+    public Specification&lt;TModel&gt; Or(Specification&lt;TModel&gt; other);
+    public Specification&lt;TModel&gt; Not();                       // nuevo
+    public static Specification&lt;TModel&gt; All { get; }          // siempre true, elemento neutro
+    public static Specification&lt;TModel&gt; None { get; }
+
+    public static Specification&lt;TModel&gt; operator &amp;(...);      // azúcar opcional
+    public static Specification&lt;TModel&gt; operator |(...);
+    public static Specification&lt;TModel&gt; operator !(...);
+}
+</code></pre>
+<p><strong>Bug confirmado en <code>And</code>/<code>Or</code>.</strong> La implementación actual combina las
+expresiones con <code>Expression.Invoke</code>:</p>
+<pre><code class="lang-csharp">// AndSpecification.ToExpression()
+var body = Expression.AndAlso(
+    Expression.Invoke(leftExpr, parameter),
+    Expression.Invoke(rightExpr, parameter));
+</code></pre>
+<p>Funciona en memoria (<code>IsSatisfiedBy</code> compila y ejecuta), pero <strong>EF Core no sabe
+traducir <code>InvocationExpression</code> a SQL</strong>: en cuanto la specification compuesta
+llegue a un <code>Where</code>, la consulta falla con &quot;The LINQ expression could not be
+translated&quot;. Es decir, las specifications compuestas son inservibles justo en el
+escenario para el que existen.</p>
+<p>Solución: reescribir el árbol unificando el parámetro en lugar de invocar.</p>
+<pre><code class="lang-csharp">internal sealed class ExpressionParameterRebinder(ParameterExpression parameter) : ExpressionVisitor
+{
+    protected override Expression VisitParameter(ParameterExpression node) =&gt; parameter;
+}
+
+// AndSpecification
+var parameter = Expression.Parameter(typeof(TModel), &quot;entity&quot;);
+var rebinder = new ExpressionParameterRebinder(parameter);
+var body = Expression.AndAlso(
+    rebinder.Visit(leftExpr.Body),
+    rebinder.Visit(rightExpr.Body));
+return Expression.Lambda&lt;Func&lt;TModel, bool&gt;&gt;(body, parameter);
+</code></pre>
+<p>El test que lo demuestra debe ejecutar la specification compuesta <strong>contra la
+base de datos</strong>, no solo en memoria: en memoria el código actual pasa.</p>
+<h3 id="23-specifications-en-el-repositorio">2.3 Specifications en el repositorio</h3>
+<pre><code class="lang-csharp">Task&lt;TEntity?&gt; FirstOrDefaultAsync(Specification&lt;TEntity&gt; specification, CancellationToken cancellationToken = default);
+Task&lt;List&lt;TEntity&gt;&gt; ListAsync(Specification&lt;TEntity&gt; specification, CancellationToken cancellationToken = default);
+Task&lt;PagedResult&lt;TEntity&gt;&gt; ListPagedAsync(Specification&lt;TEntity&gt; specification, PageRequest page, IReadOnlyList&lt;SortRequest&gt;? sort = null, CancellationToken cancellationToken = default);
+Task&lt;bool&gt; AnyAsync(Specification&lt;TEntity&gt; specification, CancellationToken cancellationToken = default);
+Task&lt;long&gt; CountAsync(Specification&lt;TEntity&gt; specification, CancellationToken cancellationToken = default);
+</code></pre>
+<p>Las sobrecargas con <code>Expression&lt;Func&lt;TEntity,bool&gt;&gt;</code> se conservan.</p>
+<p>Implementación: <code>dbContext.Set&lt;TEntity&gt;().Where(specification.ToExpression())</code>.
+Los filtros globales (soft delete, tenant) siguen aplicándose porque son query
+filters de EF, no parte de la specification.</p>
+<h3 id="24-composición-de-includes-opcional-valorar-alcance">2.4 Composición de includes (opcional, valorar alcance)</h3>
+<p>Extensión habitual del patrón: que la specification declare <code>Include</code>s. Se deja
+<strong>fuera</strong> de esta feature — arrastra <code>Microsoft.EntityFrameworkCore</code> hacia
+<code>Raftel.Domain</code>, prohibido por la regla de dependencias. Alternativa futura:
+declarar los includes como <code>Expression&lt;Func&lt;TEntity, object&gt;&gt;[]</code> en el dominio y
+traducirlos en infraestructura.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Specifications/NotSpecification.cs</code></li>
+<li><code>src/Raftel.Domain/Specifications/AllSpecification.cs</code>, <code>NoneSpecification.cs</code></li>
+<li><code>src/Raftel.Domain/Specifications/ExpressionParameterRebinder.cs</code></li>
+<li><code>tests/Raftel.Domain.Tests/Specifications/SpecificationCompositionTests.cs</code></li>
+<li><code>tests/Raftel.Infrastructure.Tests/Data/SpecificationQueryTests.cs</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/BaseTypes/TypedId.cs</code>, <code>TypedGuidId.cs</code></li>
+<li><code>src/Raftel.Domain/BaseTypes/Entity.cs</code>, <code>AggregateRoot.cs</code></li>
+<li><code>src/Raftel.Domain/Abstractions/IRepository.cs</code></li>
+<li><code>src/Raftel.Domain/Specifications/{Specification,And,Or}Specification.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/EfRepository.cs</code></li>
+<li><code>BREAKING_CHANGES.md</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> Componer <code>A.And(B)</code> y ejecutarla <strong>contra la base de datos</strong> (no
+solo <code>IsSatisfiedBy</code>). Si falla por parámetros, el bug está confirmado.</li>
+<li>Implementar <code>ExpressionParameterRebinder</code> y corregir <code>And</code>/<code>Or</code>.</li>
+<li><strong>(test)</strong> <code>Not()</code>, <code>All</code>, <code>None</code>, leyes básicas (<code>A.And(All) ≡ A</code>,
+<code>A.Or(None) ≡ A</code>, <code>A.Not().Not() ≡ A</code> semánticamente).</li>
+<li>Implementar las specifications que faltan y la caché de compilación.</li>
+<li><strong>(test)</strong> <code>IsSatisfiedBy</code> llamado 1.000 veces compila una sola vez
+(verificable con un contador en un <code>ToExpression</code> instrumentado).</li>
+<li><strong>(test)</strong> Un agregado con <code>TypedId&lt;int&gt;</code> se persiste y recupera.</li>
+<li>Introducir <code>TypedId</code> no genérico, relajar restricciones, ajustar <code>EfRepository</code>.</li>
+<li>Compilar toda la solución y la demo; ajustar restricciones explícitas.</li>
+<li><strong>(test integración)</strong> Métodos nuevos del repositorio con specifications,
+comprobando que los filtros globales siguen aplicándose.</li>
+<li>Implementar los métodos y migrar al menos un repositorio concreto
+(<code>UsersRepository</code>) como ejemplo.</li>
+<li>Documentar en <code>BREAKING_CHANGES.md</code>.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: álgebra de specifications, caché de compilación.</li>
+<li><strong>Integration</strong>: specifications traducidas a SQL correctamente (el test que
+detecta el bug de parámetros solo se manifiesta contra base real).</li>
+<li><strong>Integration</strong>: agregado con clave <code>int</code> y con clave <code>string</code>.</li>
+<li><strong>Architecture test</strong>: <code>Raftel.Domain</code> sigue sin referenciar EF Core.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Una specification compuesta se traduce a SQL sin lanzar.</li>
+<li>[ ] <code>IsSatisfiedBy</code> no recompila en cada llamada.</li>
+<li>[ ] Un agregado con clave no-GUID funciona de extremo a extremo.</li>
+<li>[ ] Los filtros globales se aplican también en las consultas por specification.</li>
+<li>[ ] <code>Raftel.Domain</code> sin dependencias nuevas.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>Exponer <code>IQueryable&lt;T&gt;</code> desde el repositorio</strong>: soluciona todo de golpe pero
+filtra EF Core a la capa de aplicación, permite consultas arbitrarias desde
+handlers y hace imposible testear el repositorio de forma aislada. Contradice
+la regla de dependencias del proyecto.</li>
+<li><strong>Specifications con <code>Include</code> en el dominio</strong>: arrastraría EF Core a <code>Domain</code>.</li>
+<li><strong>Mantener <code>TypedId&lt;Guid&gt;</code> obligatorio</strong>: simplifica, pero deja fuera casos de
+uso legítimos y desperdicia que <code>TypedId&lt;T&gt;</code> ya sea genérico.</li>
+</ul>
+<h2 id="8-breaking-changes">8. Breaking changes</h2>
+<ul>
+<li><code>Entity&lt;TId&gt;</code> y <code>AggregateRoot&lt;TId&gt;</code> relajan la restricción de <code>TId</code>. Código de
+consumidor con <code>where TId : TypedId&lt;Guid&gt;</code> explícito debe revisarse.</li>
+<li><code>TypedId&lt;TValue&gt;</code> gana una clase base. Serialización personalizada de IDs
+puede requerir ajuste.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/12-specifications-en-repositorio.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

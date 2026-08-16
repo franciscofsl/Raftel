@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>15 — Observabilidad con OpenTelemetry | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="15 — Observabilidad con OpenTelemetry | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/15-observabilidad-opentelemetry.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="15--observabilidad-con-opentelemetry">15 — Observabilidad con OpenTelemetry</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Application</code>, <code>Raftel.Infrastructure</code>, <code>Raftel.Api.Server</code>
+Rompe API pública: no (aditivo, opt-in)
+Depende de: <a href="04-logging-estructurado.html">04</a>, <a href="09-health-checks.html">09</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>Con <a href="04-logging-estructurado.html">04</a> hay logs, pero siguen faltando las otras dos
+patas: <strong>trazas</strong> y <strong>métricas</strong>. Preguntas que hoy no tienen respuesta:</p>
+<ul>
+<li>¿Cuánto tarda <code>CreateUserCommand</code> en el percentil 95?</li>
+<li>De los 800 ms de una petición, ¿cuánto es base de datos y cuánto handler?</li>
+<li>¿Cuántos comandos fallan por validación vs. por permisos?</li>
+<li>¿Cuánto lag acumula el outbox?</li>
+</ul>
+<p>El pipeline de middlewares vuelve a ser el sitio ideal: instrumentando una vez,
+se instrumentan todos los comandos y queries del consumidor.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<p>Solo <code>System.Diagnostics</code> (<code>ActivitySource</code>, <code>Meter</code>) en <code>src/</code>. <strong>No</strong> se
+referencia el SDK de OpenTelemetry desde el framework: <code>ActivitySource</code> y <code>Meter</code>
+son API del BCL, y el consumidor decide si exporta a OTLP, Prometheus,
+Application Insights o nada.</p>
+<h3 id="21-trazas">2.1 Trazas</h3>
+<pre><code class="lang-csharp">// Raftel.Application/Diagnostics/RaftelDiagnostics.cs
+public static class RaftelDiagnostics
+{
+    public const string ActivitySourceName = &quot;Raftel&quot;;
+    public static readonly ActivitySource ActivitySource = new(ActivitySourceName, Version);
+}
+</code></pre>
+<p><code>TracingMiddleware</code> global, justo por dentro de <code>LoggingMiddleware</code>:</p>
+<pre><code class="lang-csharp">using var activity = RaftelDiagnostics.ActivitySource.StartActivity(
+    $&quot;{requestType}/{requestName}&quot;, ActivityKind.Internal);
+
+activity?.SetTag(&quot;raftel.request.name&quot;, requestName);
+activity?.SetTag(&quot;raftel.request.type&quot;, requestType);      // Command | Query
+activity?.SetTag(&quot;raftel.tenant.id&quot;, currentTenant.Id?.ToString());
+
+var response = await next(cancellationToken);
+
+if (response is Result { IsFailure: true } failure)
+{
+    activity?.SetStatus(ActivityStatusCode.Error, failure.Error.Code);
+    activity?.SetTag(&quot;raftel.error.code&quot;, failure.Error.Code);
+    activity?.SetTag(&quot;raftel.error.type&quot;, failure.Error.Type.ToString());
+}
+</code></pre>
+<p>Reglas de atributos:</p>
+<ul>
+<li><strong>Nunca</strong> el payload del request, por lo mismo que en logging.</li>
+<li><code>Error.Code</code> sí (es un identificador estable); <code>Error.Message</code> no
+necesariamente (puede llevar datos del usuario).</li>
+<li>IDs de usuario y tenant: son datos personales en algunos marcos regulatorios.
+Opción <code>IncludeUserId</code>, por defecto <code>false</code>; <code>tenant.id</code> sí por defecto (es
+operativo, no personal).</li>
+</ul>
+<h3 id="22-propagación-de-contexto">2.2 Propagación de contexto</h3>
+<p>El <code>traceparent</code> de W3C lo maneja <code>Activity</code> automáticamente en HTTP entrante y
+saliente. Los dos puntos donde hay que propagarlo a mano:</p>
+<ul>
+<li><strong>Outbox</strong> (<a href="07-outbox-domain-events.html">07</a>): guardar <code>TraceId</code>/<code>SpanId</code> en el
+<code>OutboxMessage</code> y restaurarlos como <code>ActivityContext</code> padre al procesarlo. Sin
+esto, el side-effect aparece como traza huérfana desconectada del comando.</li>
+<li><strong>Background jobs</strong> (<a href="16-background-jobs.html">16</a>): cada ejecución abre su
+propia traza raíz.</li>
+</ul>
+<p><code>CorrelationId</code> de <a href="04-logging-estructurado.html">04</a> y <code>TraceId</code> conviven: se
+añade el correlation ID como tag de la actividad para poder saltar entre logs y
+trazas.</p>
+<h3 id="23-métricas">2.3 Métricas</h3>
+<pre><code class="lang-csharp">public static readonly Meter Meter = new(&quot;Raftel&quot;, Version);
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Instrumento</th>
+<th>Tipo</th>
+<th>Tags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>raftel.requests.count</code></td>
+<td>Counter</td>
+<td><code>request_name</code>, <code>request_type</code>, <code>outcome</code> (success/failure/exception)</td>
+</tr>
+<tr>
+<td><code>raftel.requests.duration</code></td>
+<td>Histogram (ms)</td>
+<td><code>request_name</code>, <code>request_type</code></td>
+</tr>
+<tr>
+<td><code>raftel.requests.active</code></td>
+<td>UpDownCounter</td>
+<td><code>request_type</code></td>
+</tr>
+<tr>
+<td><code>raftel.validation.failures</code></td>
+<td>Counter</td>
+<td><code>request_name</code></td>
+</tr>
+<tr>
+<td><code>raftel.authorization.denied</code></td>
+<td>Counter</td>
+<td><code>permission</code></td>
+</tr>
+<tr>
+<td><code>raftel.outbox.pending</code></td>
+<td>ObservableGauge</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>raftel.outbox.dead_letter</code></td>
+<td>ObservableGauge</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>raftel.cache.hits</code> / <code>.misses</code></td>
+<td>Counter</td>
+<td><code>query_name</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Cardinalidad</strong>: <code>request_name</code> es acotado (número de comandos del sistema),
+seguro como tag. Prohibido usar como tag cualquier ID de entidad, de usuario o
+de tenant en métricas: multiplica series y revienta el backend. Documentarlo.</p>
+</blockquote>
+<h3 id="24-instrumentación-de-infraestructura">2.4 Instrumentación de infraestructura</h3>
+<p>EF Core, ASP.NET Core y <code>HttpClient</code> ya emiten <code>ActivitySource</code> propios. El
+framework solo documenta cómo registrarlos:</p>
+<pre><code class="lang-csharp">// en la app del consumidor, no en el framework
+builder.Services.AddOpenTelemetry()
+    .WithTracing(t =&gt; t
+        .AddSource(RaftelDiagnostics.ActivitySourceName)
+        .AddAspNetCoreInstrumentation()
+        .AddEntityFrameworkCoreInstrumentation()
+        .AddOtlpExporter())
+    .WithMetrics(m =&gt; m
+        .AddMeter(RaftelDiagnostics.MeterName)
+        .AddAspNetCoreInstrumentation()
+        .AddOtlpExporter());
+</code></pre>
+<p>Se ofrece un helper opcional en un paquete aparte
+<code>Raftel.Infrastructure.OpenTelemetry</code> para no meter el SDK en el core.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Application/Diagnostics/RaftelDiagnostics.cs</code></li>
+<li><code>src/Raftel.Application/Diagnostics/RaftelMetrics.cs</code></li>
+<li><code>src/Raftel.Application/Middlewares/TracingMiddleware.cs</code></li>
+<li><code>src/Raftel.Application/Middlewares/MetricsMiddleware.cs</code></li>
+<li><code>src/Raftel.Application/DiagnosticsOptions.cs</code></li>
+<li><code>tests/Raftel.Application.UnitTests/Diagnostics/**</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Infrastructure/Outbox/*</code> — propagar contexto de traza</li>
+<li><code>src/Raftel.Infrastructure/Caching/*</code> — contadores de hit/miss</li>
+<li><code>demo/**/Program.cs</code> + <code>docs/</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> Con un <code>ActivityListener</code> de prueba, ejecutar un comando produce una
+actividad con nombre y tags esperados.</li>
+<li>Implementar <code>RaftelDiagnostics</code> y <code>TracingMiddleware</code>.</li>
+<li><strong>(test)</strong> Un <code>Result</code> fallido marca la actividad como <code>Error</code> con el código.</li>
+<li><strong>(test)</strong> El payload del request no aparece en ningún tag.</li>
+<li><strong>(test)</strong> Con <code>MeterListener</code>, un comando incrementa contador y registra duración.</li>
+<li>Implementar <code>RaftelMetrics</code> y <code>MetricsMiddleware</code>.</li>
+<li>Instrumentar caché y outbox.</li>
+<li><strong>(test)</strong> Traza del outbox enlazada como hija de la del comando original.</li>
+<li>Paquete opcional con los helpers del SDK + ejemplo en la demo.</li>
+<li>Documentar la política de cardinalidad y de datos personales.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: <code>ActivityListener</code> y <code>MeterListener</code> (permiten testear observabilidad
+sin exportador).</li>
+<li><strong>Unit</strong>: ausencia de payload y de IDs personales con la configuración por defecto.</li>
+<li><strong>Integration</strong>: correlación traza-comando-outbox.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] <code>src/</code> no referencia el SDK de OpenTelemetry, solo <code>System.Diagnostics</code>.</li>
+<li>[ ] Cada comando y query genera una actividad con duración y resultado.</li>
+<li>[ ] Ningún tag lleva payload ni, por defecto, ID de usuario.</li>
+<li>[ ] Las trazas del outbox enlazan con el comando que las originó.</li>
+<li>[ ] Documentada la política de cardinalidad de métricas.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>Referenciar el SDK de OpenTelemetry desde <code>Raftel.Application</code></strong>: ata al
+consumidor a una versión concreta del SDK y contradice la política de mínimas
+dependencias. <code>ActivitySource</code>/<code>Meter</code> son BCL y las consume cualquier backend.</li>
+<li><strong>Métricas propias con <code>IMetricsCollector</code> a medida</strong>: reinventar un estándar
+ya resuelto y perder la integración con todo el ecosistema.</li>
+<li><strong>Instrumentar en cada handler a mano</strong>: repetitivo y se olvida; el pipeline
+lo hace una vez para todos.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/15-observabilidad-opentelemetry.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

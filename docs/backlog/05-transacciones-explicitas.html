@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>05 — Transacciones expl&#237;citas en IUnitOfWork | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="05 — Transacciones expl&#237;citas en IUnitOfWork | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/05-transacciones-explicitas.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="05--transacciones-explícitas-en-iunitofwork">05 — Transacciones explícitas en <code>IUnitOfWork</code></h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Application</code>, <code>Raftel.Infrastructure</code>
+Rompe API pública: no (aditivo, con cambio de comportamiento interno)
+Depende de: <a href="02-propagacion-cancellationtoken.html">02</a>, <a href="04-logging-estructurado.html">04</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p><code>UnitOfWorkMiddleware</code> hace:</p>
+<pre><code class="lang-csharp">var response = await next();
+if (response.IsSuccess)
+{
+    await unitOfWork.CommitAsync();
+}
+return response;
+</code></pre>
+<p>Esto <strong>no es una transacción</strong>, es un <code>SaveChanges</code>. EF Core envuelve un
+<code>SaveChanges</code> en su propia transacción implícita, así que el caso simple funciona.
+Pero se rompe en cuanto:</p>
+<ul>
+<li>Un handler llama a <code>CommitAsync</code> a mitad (por necesitar el ID generado) y luego
+sigue mutando: dos transacciones independientes, atomicidad perdida.</li>
+<li>Un handler de evento de dominio escribe en la base (<code>DomainEventsDispatchInterceptor</code>
+despacha en <code>SavedChanges</code>, o sea <strong>después</strong> del commit): sus cambios quedan
+fuera de la transacción del comando.</li>
+<li>La auditoría (<code>AuditStore</code>) persiste por separado.</li>
+</ul>
+<p>No existe rollback. Si el paso 2 de un comando falla tras un commit intermedio,
+el sistema queda en estado inconsistente.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-iunitofwork-extendido">2.1 <code>IUnitOfWork</code> extendido</h3>
+<pre><code class="lang-csharp">public interface IUnitOfWork
+{
+    Task&lt;int&gt; CommitAsync(CancellationToken cancellationToken = default);
+
+    // nuevos
+    Task&lt;ITransaction&gt; BeginTransactionAsync(CancellationToken cancellationToken = default);
+    bool HasActiveTransaction { get; }
+}
+
+public interface ITransaction : IAsyncDisposable
+{
+    Task CommitAsync(CancellationToken cancellationToken = default);
+    Task RollbackAsync(CancellationToken cancellationToken = default);
+}
+</code></pre>
+<p><code>ITransaction</code> vive en <code>Raftel.Application</code> (no expone tipos de EF Core). La
+implementación envuelve <code>IDbContextTransaction</code>.</p>
+<h3 id="22-transacciones-anidadas">2.2 Transacciones anidadas</h3>
+<p>Regla: <strong>una sola transacción física por petición</strong>. Si ya hay una activa,
+<code>BeginTransactionAsync</code> devuelve un envoltorio no-op (<code>NestedTransaction</code>) cuyo
+<code>CommitAsync</code> no hace nada y cuyo <code>RollbackAsync</code> marca la transacción raíz como
+&quot;solo rollback&quot;. Esto evita el error clásico de commits parciales anidados.</p>
+<pre><code class="lang-csharp">internal sealed class NestedTransaction(RaftelTransaction root) : ITransaction
+{
+    public Task CommitAsync(CancellationToken ct = default) =&gt; Task.CompletedTask;
+    public Task RollbackAsync(CancellationToken ct = default) { root.MarkRollbackOnly(); return Task.CompletedTask; }
+    public ValueTask DisposeAsync() =&gt; ValueTask.CompletedTask;
+}
+</code></pre>
+<p>Si la raíz está marcada como rollback-only, su <code>CommitAsync</code> lanza
+<code>InvalidOperationException</code> y hace rollback.</p>
+<h3 id="23-transactionmiddleware">2.3 <code>TransactionMiddleware</code></h3>
+<p>Middleware de comando nuevo, colocado <strong>por fuera</strong> de <code>UnitOfWorkMiddleware</code>:</p>
+<pre><code>LoggingMiddleware
+  └ ValidationMiddleware
+      └ PermissionAuthorizationMiddleware
+          └ TransactionMiddleware      ← abre/commitea/rollback
+              └ UnitOfWorkMiddleware   ← SaveChanges
+                  └ Handler
+</code></pre>
+<pre><code class="lang-csharp">public sealed class TransactionMiddleware&lt;TRequest&gt;(IUnitOfWork unitOfWork, ILogger&lt;...&gt; logger)
+    : ICommandMiddleware&lt;TRequest&gt; where TRequest : ICommand
+{
+    public async Task&lt;Result&gt; HandleAsync(TRequest request, RequestHandlerDelegate&lt;Result&gt; next, CancellationToken cancellationToken)
+    {
+        if (unitOfWork.HasActiveTransaction)
+        {
+            return await next(cancellationToken);
+        }
+
+        await using var transaction = await unitOfWork.BeginTransactionAsync(cancellationToken);
+
+        try
+        {
+            var result = await next(cancellationToken);
+
+            if (result.IsFailure)
+            {
+                await transaction.RollbackAsync(CancellationToken.None);
+                return result;
+            }
+
+            await transaction.CommitAsync(CancellationToken.None);
+            return result;
+        }
+        catch
+        {
+            await transaction.RollbackAsync(CancellationToken.None);
+            throw;
+        }
+    }
+}
+</code></pre>
+<p>Variante genérica <code>TransactionMiddleware&lt;TRequest, TResult&gt;</code> para <code>ICommand&lt;T&gt;</code>.</p>
+<p><strong>Commit y rollback con <code>CancellationToken.None</code></strong>: cancelar durante el commit
+deja la transacción en estado indeterminado (coherente con la decisión §2.5 de
+<a href="02-propagacion-cancellationtoken.html">02</a>).</p>
+<h3 id="24-solo-comandos">2.4 Solo comandos</h3>
+<p>Las queries no abren transacción. Si alguna necesita lectura consistente
+multi-tabla, lo declara explícitamente. Abrir transacción en toda query es coste
+puro.</p>
+<h3 id="25-interacción-con-eventos-de-dominio">2.5 Interacción con eventos de dominio</h3>
+<p>Con <code>TransactionMiddleware</code> activo, <code>DomainEventsDispatchInterceptor</code> sigue
+despachando en <code>SavedChanges</code> (dentro de la transacción, antes del commit real).
+Los handlers de evento que escriben en base <strong>sí</strong> entran ahora en la
+transacción del comando. Esto mejora la consistencia pero <strong>no</strong> resuelve los
+side-effects externos (email, HTTP): eso es <a href="07-outbox-domain-events.html">07</a>.</p>
+<p>Documentar explícitamente en el XML doc de <code>IDomainEventHandler</code> qué garantía
+transaccional se ofrece.</p>
+<h3 id="26-nivel-de-aislamiento">2.6 Nivel de aislamiento</h3>
+<p>Por defecto el del proveedor (<code>READ COMMITTED</code>). Configurable:</p>
+<pre><code class="lang-csharp">public sealed class TransactionOptions
+{
+    public IsolationLevel IsolationLevel { get; set; } = IsolationLevel.ReadCommitted;
+}
+</code></pre>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Application/ITransaction.cs</code></li>
+<li><code>src/Raftel.Application/TransactionOptions.cs</code></li>
+<li><code>src/Raftel.Application/Middlewares/TransactionMiddleware.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/RaftelTransaction.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/NestedTransaction.cs</code></li>
+<li><code>tests/Raftel.Application.UnitTests/Middlewares/TransactionMiddlewareTests.cs</code></li>
+<li><code>tests/Raftel.Infrastructure.Tests/Data/TransactionTests.cs</code></li>
+<li><code>tests/Raftel.Application.IntegrationTests/TransactionRollbackTests.cs</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Application/IUnitOfWork.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/RaftelDbContext.cs</code> — implementar los métodos nuevos</li>
+<li><code>src/Raftel.Infrastructure/DependencyInjection.cs</code></li>
+<li><code>demo/**/Program.cs</code> — registrar el middleware</li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> <code>TransactionMiddlewareTests</code> con <code>IUnitOfWork</code> sustituido: éxito ⇒
+<code>CommitAsync</code> una vez, <code>RollbackAsync</code> cero; <code>Result</code> fallido ⇒ rollback;
+excepción ⇒ rollback y la excepción se relanza.</li>
+<li><strong>(test)</strong> Con <code>HasActiveTransaction == true</code>, no se abre una segunda.</li>
+<li>Definir <code>ITransaction</code>, extender <code>IUnitOfWork</code>.</li>
+<li>Implementar <code>RaftelTransaction</code> y <code>NestedTransaction</code> en <code>RaftelDbContext</code>.</li>
+<li>Implementar <code>TransactionMiddleware</code> (ambas variantes).</li>
+<li><strong>(test integración, Testcontainers)</strong> Comando que escribe en dos agregados y
+falla en el segundo ⇒ <strong>ninguna</strong> fila persistida.</li>
+<li><strong>(test integración)</strong> Handler de evento de dominio que escribe en base: sus
+cambios se revierten si la transacción hace rollback.</li>
+<li>Registrar en la demo, documentar el orden de middlewares.</li>
+<li><strong>(test integración)</strong> Rollback-only anidado impide el commit de la raíz.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: matriz éxito / fallo / excepción / anidada.</li>
+<li><strong>Integration</strong>: atomicidad real contra SqlServer y PostgreSQL.</li>
+<li><strong>Integration</strong>: interacción con auditoría y eventos de dominio.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Un comando que falla a mitad no deja ninguna escritura parcial.</li>
+<li>[ ] No se abren transacciones anidadas físicas.</li>
+<li>[ ] Las queries no abren transacción.</li>
+<li>[ ] Commit y rollback no son cancelables.</li>
+<li>[ ] Documentada la garantía transaccional de los handlers de evento de dominio.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong><code>TransactionScope</code> / <code>System.Transactions</code></strong>: escalada a transacción
+distribuida en escenarios multi-conexión, mal soporte multiplataforma y coste
+alto para lo que se necesita.</li>
+<li><strong>Transacción abierta siempre en el <code>DbContext</code> scoped</strong>: bloquea recursos
+durante toda la petición, incluidas las queries.</li>
+<li><strong>Meter el <code>BeginTransaction</code> dentro de <code>UnitOfWorkMiddleware</code></strong>: mezcla dos
+responsabilidades (persistir vs. delimitar la unidad atómica) y complica
+reutilizar el UoW sin transacción.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/05-transacciones-explicitas.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

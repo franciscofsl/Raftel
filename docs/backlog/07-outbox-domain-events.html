@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>07 — Outbox para eventos de dominio | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="07 — Outbox para eventos de dominio | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/07-outbox-domain-events.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="07--outbox-para-eventos-de-dominio">07 — Outbox para eventos de dominio</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Domain</code>, <code>Raftel.Application</code>, <code>Raftel.Infrastructure</code>
+Rompe API pública: no (aditivo, opt-in)
+Depende de: <a href="04-logging-estructurado.html">04</a>, <a href="05-transacciones-explicitas.html">05</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>El despacho actual está en <code>DomainEventsDispatchInterceptor</code>:</p>
+<pre><code class="lang-csharp">public override async ValueTask&lt;int&gt; SavedChangesAsync(...)
+{
+    await DispatchDomainEventsAsync(eventData.Context, cancellationToken);
+    return await base.SavedChangesAsync(eventData, result, cancellationToken);
+}
+</code></pre>
+<p>Es decir: <strong>in-process, síncrono, después del <code>SaveChanges</code></strong>. Riesgos:</p>
+<ol>
+<li><strong>Evento perdido.</strong> Si el handler lanza, el evento desaparece. No hay
+reintento ni registro de lo ocurrido. Si además el proceso muere entre el
+commit y el despacho, igual.</li>
+<li><strong>Excepción del handler contamina el comando.</strong> La excepción sube por
+<code>SaveChangesAsync</code> y hace fallar un comando que <strong>ya persistió</strong>. El cliente
+recibe 500 sobre una operación que sí ocurrió.</li>
+<li><strong>Latencia acoplada.</strong> Un handler que manda un email añade su latencia a la
+respuesta HTTP.</li>
+<li><strong>Sin trazabilidad.</strong> No se puede responder a &quot;¿se procesó el evento X?&quot;.</li>
+</ol>
+<p>El propio <code>docs/domain-events-plan.md</code> menciona outbox como evolución natural.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<p>Patrón <strong>Transactional Outbox</strong>: el evento se persiste en la misma transacción
+que el cambio de estado; un procesador lo despacha después con reintentos.</p>
+<pre><code>Comando ─┬─ muta agregado
+         └─ eventos → tabla OutboxMessages   } una sola transacción
+                              │
+                              ▼
+                    OutboxProcessor (BackgroundService)
+                              │
+                              ▼
+                    IDomainEventHandler&lt;T&gt;   (con reintentos)
+</code></pre>
+<h3 id="21-modelo">2.1 Modelo</h3>
+<pre><code class="lang-csharp">// Raftel.Domain/Outbox/OutboxMessage.cs
+public sealed class OutboxMessage : Entity&lt;OutboxMessageId&gt;
+{
+    public string Type { get; private set; }          // AssemblyQualifiedName acotado
+    public string Content { get; private set; }       // JSON del evento
+    public DateTimeOffset OccurredOn { get; private set; }
+    public DateTimeOffset? ProcessedOn { get; private set; }
+    public int AttemptCount { get; private set; }
+    public string? Error { get; private set; }
+    public Guid? TenantId { get; private set; }       // el handler debe correr en el tenant correcto
+    public string? CorrelationId { get; private set; }
+
+    public void MarkProcessed(DateTimeOffset now);
+    public void MarkFailed(DateTimeOffset now, string error);
+}
+</code></pre>
+<p>Guardar <code>TenantId</code> y <code>CorrelationId</code> es esencial: el procesador corre fuera de la
+petición HTTP, sin <code>HttpContext</code>, así que no hay tenant ni correlación ambiental.</p>
+<h3 id="22-escritura-cambiar-el-interceptor">2.2 Escritura: cambiar el interceptor</h3>
+<p><code>DomainEventsDispatchInterceptor</code> pasa a <code>OutboxWriteInterceptor</code> y actúa en
+<strong><code>SavingChanges</code></strong> (antes del commit), no en <code>SavedChanges</code>:</p>
+<pre><code class="lang-csharp">public override ValueTask&lt;InterceptionResult&lt;int&gt;&gt; SavingChangesAsync(
+    DbContextEventData eventData, InterceptionResult&lt;int&gt; result, CancellationToken cancellationToken)
+{
+    var context = eventData.Context;
+    var messages = context.ChangeTracker
+        .Entries&lt;IHasDomainEvents&gt;()
+        .SelectMany(entry =&gt; Drain(entry.Entity))
+        .Select(ToOutboxMessage)
+        .ToList();
+
+    context.Set&lt;OutboxMessage&gt;().AddRange(messages);   // misma transacción
+    return base.SavingChangesAsync(eventData, result, cancellationToken);
+}
+</code></pre>
+<p>Detalle: añadir entidades durante <code>SavingChanges</code> es válido en EF Core; los
+<code>OutboxMessage</code> entran en el mismo <code>SaveChanges</code>.</p>
+<h3 id="23-serialización">2.3 Serialización</h3>
+<p><code>System.Text.Json</code> con <code>JsonSerializerOptions</code> propias del outbox. El <code>Type</code> se
+guarda como <code>&quot;Namespace.EventName, Assembly&quot;</code> (sin versión ni token) para
+sobrevivir a actualizaciones de versión del ensamblado.</p>
+<p>Resolución de tipo con <strong>lista blanca</strong>: solo tipos que implementen <code>IDomainEvent</code>
+en los ensamblados registrados. Deserializar un tipo arbitrario desde la base es
+un vector de ejecución si alguien puede escribir en la tabla.</p>
+<h3 id="24-procesador">2.4 Procesador</h3>
+<pre><code class="lang-csharp">public sealed class OutboxProcessor(
+    IServiceScopeFactory scopeFactory,
+    IOptions&lt;OutboxOptions&gt; options,
+    TimeProvider timeProvider,
+    ILogger&lt;OutboxProcessor&gt; logger) : BackgroundService
+</code></pre>
+<p>Bucle:</p>
+<ol>
+<li>Tomar hasta <code>BatchSize</code> mensajes con <code>ProcessedOn IS NULL</code> y
+<code>AttemptCount &lt; MaxAttempts</code>, ordenados por <code>OccurredOn</code>.</li>
+<li>Bloqueo para evitar doble procesado con varias instancias:
+<code>UPDATE ... SET LockedUntil = ... OUTPUT INSERTED.*</code> (SqlServer) /
+<code>SELECT ... FOR UPDATE SKIP LOCKED</code> (PostgreSQL). Abstraído tras
+<code>IOutboxStore</code> con implementación por proveedor.</li>
+<li>Por cada mensaje: crear scope de DI, fijar el tenant (<code>ICurrentTenant</code>) y la
+correlación, deserializar, resolver <code>IDomainEventHandler&lt;T&gt;</code>, ejecutar.</li>
+<li>Éxito ⇒ <code>MarkProcessed</code>. Fallo ⇒ <code>MarkFailed</code>, incrementar <code>AttemptCount</code>,
+backoff exponencial (<code>Delay = Base * 2^Attempt</code>, con tope).</li>
+<li>Agotados los intentos ⇒ el mensaje queda como dead letter (consultable).</li>
+</ol>
+<p><strong>Idempotencia</strong>: la entrega es <em>at-least-once</em>. Documentar que los handlers
+deben ser idempotentes. Ofrecer <code>IIdempotencyStore</code> opcional que registre
+<code>(MessageId, HandlerType)</code> procesados.</p>
+<h3 id="25-opciones-y-modo-de-compatibilidad">2.5 Opciones y modo de compatibilidad</h3>
+<pre><code class="lang-csharp">public sealed class OutboxOptions
+{
+    public bool Enabled { get; set; } = false;                       // opt-in
+    public int BatchSize { get; set; } = 50;
+    public TimeSpan PollingInterval { get; set; } = TimeSpan.FromSeconds(5);
+    public int MaxAttempts { get; set; } = 5;
+    public TimeSpan BaseRetryDelay { get; set; } = TimeSpan.FromSeconds(10);
+    public TimeSpan RetentionPeriod { get; set; } = TimeSpan.FromDays(7);  // limpieza de procesados
+}
+</code></pre>
+<p><code>Enabled = false</code> mantiene el comportamiento in-process actual. Migración sin
+sorpresas para quien ya use eventos de dominio.</p>
+<h3 id="26-limpieza">2.6 Limpieza</h3>
+<p>Job de retención que borra <code>ProcessedOn &lt; now - RetentionPeriod</code>. Sin él la tabla
+crece sin límite. Se apoya en <a href="16-background-jobs.html">16</a> si ya existe; si no,
+un <code>BackgroundService</code> propio.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Outbox/OutboxMessage.cs</code></li>
+<li><code>src/Raftel.Domain/Outbox/ValueObjects/OutboxMessageId.cs</code></li>
+<li><code>src/Raftel.Application/Abstractions/Outbox/{IOutboxStore,IOutboxSerializer,IIdempotencyStore}.cs</code></li>
+<li><code>src/Raftel.Application/OutboxOptions.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Outbox/{OutboxProcessor,OutboxStore,OutboxSerializer,OutboxCleanupService}.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/Interceptors/OutboxWriteInterceptor.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Data/Configuration/Outbox/OutboxMessageConfiguration.cs</code></li>
+<li><code>tests/Raftel.Infrastructure.Tests/Outbox/**</code></li>
+<li><code>tests/Raftel.Application.IntegrationTests/OutboxTests.cs</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Infrastructure/Data/RaftelDbContext.cs</code> — <code>DbSet&lt;OutboxMessage&gt;</code></li>
+<li><code>src/Raftel.Infrastructure/Data/Interceptors/DomainEventsDispatchInterceptor.cs</code> — condicionar a <code>!Outbox.Enabled</code></li>
+<li><code>src/Raftel.Infrastructure/DependencyInjection.cs</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> <code>OutboxMessage</code> transiciona correctamente (procesado, fallido,
+contador de intentos).</li>
+<li>Modelo + configuración EF + índice
+<code>(ProcessedOn, OccurredOn) WHERE ProcessedOn IS NULL</code> (filtrado).</li>
+<li><strong>(test)</strong> Serializador: round-trip de un evento; tipo desconocido ⇒ error
+controlado, no excepción de deserialización.</li>
+<li>Implementar serializador con lista blanca.</li>
+<li><strong>(test integración)</strong> Comando con evento y <code>Outbox.Enabled = true</code> ⇒ fila en
+<code>OutboxMessages</code> dentro de la misma transacción; rollback ⇒ <strong>sin</strong> fila.</li>
+<li>Implementar <code>OutboxWriteInterceptor</code>.</li>
+<li><strong>(test integración)</strong> Procesador despacha, marca procesado y no repite.</li>
+<li><strong>(test integración)</strong> Handler que lanza ⇒ <code>AttemptCount</code> sube, <code>Error</code>
+registrado, reintento tras el backoff, dead letter al agotar intentos.</li>
+<li>Implementar <code>OutboxProcessor</code> + <code>IOutboxStore</code> por proveedor.</li>
+<li><strong>(test integración)</strong> Tenant y correlación restaurados en el handler.</li>
+<li>Servicio de limpieza + test.</li>
+<li>Documentar garantías (at-least-once, idempotencia requerida).</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: modelo, serializador, cálculo de backoff.</li>
+<li><strong>Integration (Testcontainers)</strong>: atomicidad, reintentos, dead letter,
+restauración de tenant, bloqueo con dos procesadores concurrentes.</li>
+<li><strong>Integration</strong>: con <code>Enabled = false</code>, comportamiento idéntico al actual
+(test de no regresión).</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Un evento nunca se pierde si la transacción commitea.</li>
+<li>[ ] Un handler que falla no hace fallar el comando.</li>
+<li>[ ] Los eventos se despachan en el tenant correcto.</li>
+<li>[ ] Los mensajes agotados quedan consultables como dead letter.</li>
+<li>[ ] Dos instancias del procesador no despachan el mismo mensaje.</li>
+<li>[ ] <code>Enabled = false</code> reproduce el comportamiento actual.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>Change Data Capture / Debezium</strong>: potente pero mete infraestructura externa,
+contra la filosofía &quot;sin dependencias externas&quot;.</li>
+<li><strong>Cola en memoria (<code>Channel&lt;T&gt;</code>)</strong>: pierde mensajes al reiniciar el proceso.
+Resuelve la latencia, no la durabilidad.</li>
+<li><strong>Despachar en <code>SavedChanges</code> dentro de la transacción de <a href="05-transacciones-explicitas.html">05</a></strong>:
+mejora la consistencia de escrituras en base pero no protege de side-effects
+externos ni da reintentos.</li>
+<li><strong>Publicar directo a un broker desde el interceptor</strong>: escritura dual sin
+atomicidad, el problema clásico que el outbox existe para resolver.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/07-outbox-domain-events.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

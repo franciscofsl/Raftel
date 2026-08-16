@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>17 — Integration events y message bus | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="17 — Integration events y message bus | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/17-integration-events-message-bus.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="17--integration-events-y-message-bus">17 — Integration events y message bus</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Application</code>, <code>Raftel.Infrastructure</code>
+Rompe API pública: no (aditivo, opt-in)
+Depende de: <a href="07-outbox-domain-events.html">07</a>, <a href="15-observabilidad-opentelemetry.html">15</a>, <a href="16-background-jobs.html">16</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>Los eventos de dominio actuales son <strong>in-process</strong>: <code>DomainEventsDispatcher</code>
+resuelve <code>IDomainEventHandler&lt;T&gt;</code> del contenedor de DI y lo invoca. No hay forma
+de que otro servicio se entere de nada.</p>
+<p>Distinción que el framework aún no hace:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Domain event</th>
+<th>Integration event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alcance</td>
+<td>Dentro del mismo proceso y transacción</td>
+<td>Entre servicios</td>
+</tr>
+<tr>
+<td>Contrato</td>
+<td>Interno, puede cambiar libremente</td>
+<td><strong>Público y versionado</strong></td>
+</tr>
+<tr>
+<td>Contenido</td>
+<td>Puede llevar el agregado</td>
+<td>Solo datos primitivos serializables</td>
+</tr>
+<tr>
+<td>Entrega</td>
+<td>Inmediata</td>
+<td>Asíncrona, at-least-once</td>
+</tr>
+</tbody>
+</table>
+<p>Publicar el domain event tal cual al exterior es el error habitual: acopla el
+modelo interno al contrato público y cualquier refactor rompe consumidores.</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-contratos">2.1 Contratos</h3>
+<pre><code class="lang-csharp">// Raftel.Application/Abstractions/Messaging/IIntegrationEvent.cs
+public interface IIntegrationEvent
+{
+    Guid EventId { get; }
+    DateTimeOffset OccurredOn { get; }
+    string EventType { get; }     // nombre estable y versionado: &quot;raftel.users.created.v1&quot;
+}
+</code></pre>
+<p>El nombre lleva versión explícita desde el día uno. Añadir un campo ⇒ misma
+versión; quitar o cambiar el significado de uno ⇒ <code>.v2</code>, publicando ambas
+durante la transición.</p>
+<pre><code class="lang-csharp">public interface IEventPublisher
+{
+    Task PublishAsync(IIntegrationEvent @event, CancellationToken cancellationToken = default);
+}
+
+public interface IIntegrationEventHandler&lt;in TEvent&gt; where TEvent : IIntegrationEvent
+{
+    Task&lt;Result&gt; HandleAsync(TEvent @event, CancellationToken cancellationToken = default);
+}
+</code></pre>
+<h3 id="22-traducción-domain--integration">2.2 Traducción domain → integration</h3>
+<p>Explícita, nunca automática:</p>
+<pre><code class="lang-csharp">public interface IIntegrationEventFactory&lt;in TDomainEvent&gt; where TDomainEvent : IDomainEvent
+{
+    IIntegrationEvent Create(TDomainEvent domainEvent);
+}
+</code></pre>
+<p>Así el autor decide qué se publica. Un <code>UserCreatedDomainEvent</code> con el agregado
+completo se traduce a <code>UserCreatedIntegrationEvent(UserId, Email, TenantId)</code>.</p>
+<h3 id="23-publicación-vía-outbox">2.3 Publicación vía outbox</h3>
+<p>Se <strong>reutiliza</strong> el outbox de <a href="07-outbox-domain-events.html">07</a>. No se construye
+un segundo mecanismo: <code>OutboxMessage</code> gana una columna <code>Destination</code>
+(<code>InProcess</code> | <code>Broker</code>), y el procesador enruta según el valor.</p>
+<p>Garantía: el integration event se persiste en la misma transacción que el cambio
+de estado, y se publica al broker con reintentos. Nunca escritura dual.</p>
+<h3 id="24-transporte">2.4 Transporte</h3>
+<pre><code class="lang-csharp">public interface IMessageTransport
+{
+    Task SendAsync(TransportMessage message, CancellationToken cancellationToken = default);
+    Task StartConsumingAsync(Func&lt;TransportMessage, CancellationToken, Task&lt;Result&gt;&gt; handler, CancellationToken cancellationToken = default);
+}
+</code></pre>
+<p>En el core: <strong>solo la abstracción</strong> y una implementación <code>InMemoryTransport</code>
+(útil para tests y monolitos modulares). Los transportes reales van en paquetes
+separados para no arrastrar dependencias:</p>
+<ul>
+<li><code>Raftel.Messaging.RabbitMQ</code></li>
+<li><code>Raftel.Messaging.AzureServiceBus</code></li>
+</ul>
+<p>Cada paquete es opcional, con su propio ciclo de versiones.</p>
+<h3 id="25-consumo">2.5 Consumo</h3>
+<p>Servicio de fondo que consume del transporte, deserializa y despacha al
+<code>IIntegrationEventHandler&lt;T&gt;</code> correspondiente.</p>
+<p>Puntos obligatorios:</p>
+<ul>
+<li><strong>Idempotencia</strong>: entrega at-least-once ⇒ tabla <code>ProcessedMessages(EventId, HandlerType)</code>
+con clave única. Un evento ya procesado se descarta.</li>
+<li><strong>Dead letter</strong>: tras <code>MaxAttempts</code>, el mensaje va a una cola de descarte, no
+se pierde ni bloquea la cola.</li>
+<li><strong>Ordenación</strong>: <strong>no se garantiza</strong>. Documentarlo explícitamente; los handlers
+deben tolerar desorden (por ejemplo, ignorar un evento más antiguo que el
+estado actual).</li>
+<li><strong>Envenenamiento</strong>: un mensaje que siempre falla no debe bloquear el consumo
+del resto.</li>
+</ul>
+<h3 id="26-seguridad">2.6 Seguridad</h3>
+<ul>
+<li>El <code>EventType</code> recibido resuelve el tipo CLR contra una <strong>lista blanca</strong> de
+eventos registrados. Nunca <code>Type.GetType</code> sobre una cadena del broker.</li>
+<li>Límite de tamaño de mensaje; por encima, dead letter directo.</li>
+<li>Los mensajes entrantes son <strong>datos no confiables</strong>: se validan como cualquier
+entrada externa antes de tocar el dominio.</li>
+<li>Tenant: el evento lleva <code>TenantId</code> y el consumidor fija <code>ICurrentTenant</code> antes
+de despachar. Un evento sin tenant en un sistema multitenant se rechaza.</li>
+</ul>
+<h3 id="27-trazas">2.7 Trazas</h3>
+<p><code>traceparent</code> viaja en las cabeceras del <code>TransportMessage</code>. El consumidor abre
+la actividad con el contexto remoto como padre, de modo que la traza cruza el
+límite del servicio (<a href="15-observabilidad-opentelemetry.html">15</a>).</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Application/Abstractions/Messaging/{IIntegrationEvent,IEventPublisher,IIntegrationEventHandler,IIntegrationEventFactory,IMessageTransport,TransportMessage}.cs</code></li>
+<li><code>src/Raftel.Application/MessagingOptions.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Messaging/{EventPublisher,InMemoryTransport,IntegrationEventConsumer,ProcessedMessageStore,EventTypeRegistry}.cs</code></li>
+<li><code>tests/Raftel.Application.IntegrationTests/IntegrationEventsTests.cs</code></li>
+<li>(paquetes separados) <code>src/Raftel.Messaging.RabbitMQ/**</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Outbox/OutboxMessage.cs</code> — columna <code>Destination</code></li>
+<li><code>src/Raftel.Infrastructure/Outbox/OutboxProcessor.cs</code> — enrutado</li>
+<li><code>src/Raftel.Infrastructure/DependencyInjection.cs</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li>Definir contratos y <code>EventTypeRegistry</code> con lista blanca.</li>
+<li><strong>(test)</strong> Un <code>EventType</code> desconocido se rechaza sin intentar resolver el tipo.</li>
+<li>Extender <code>OutboxMessage</code> con <code>Destination</code> y enrutar en el procesador.</li>
+<li><strong>(test integración)</strong> Un comando que levanta un domain event con factory
+asociada produce una fila de outbox con destino <code>Broker</code>.</li>
+<li>Implementar <code>IEventPublisher</code> sobre outbox.</li>
+<li><code>InMemoryTransport</code> + <strong>(test)</strong> publicar y consumir extremo a extremo.</li>
+<li><strong>(test)</strong> Entrega duplicada del mismo <code>EventId</code> ⇒ el handler se ejecuta una
+sola vez.</li>
+<li>Implementar <code>ProcessedMessageStore</code> con clave única.</li>
+<li><strong>(test)</strong> Mensaje envenenado va a dead letter sin bloquear la cola.</li>
+<li><strong>(test)</strong> Tenant restaurado en el consumidor; evento sin tenant rechazado.</li>
+<li>Propagación de <code>traceparent</code> + test de traza distribuida.</li>
+<li>Paquete de RabbitMQ con tests de integración (Testcontainers) — fuera del
+core, PR aparte.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: registro de tipos, serialización, idempotencia.</li>
+<li><strong>Integration</strong>: publicación transaccional, consumo, duplicados, dead letter,
+aislamiento por tenant.</li>
+<li><strong>Integration (Testcontainers RabbitMQ)</strong>: solo en el paquete del transporte.</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] El core no depende de ningún broker.</li>
+<li>[ ] Un integration event se publica solo si la transacción commitea.</li>
+<li>[ ] Un evento entregado dos veces se procesa una sola vez.</li>
+<li>[ ] Los tipos se resuelven contra lista blanca.</li>
+<li>[ ] Los eventos se procesan en el tenant correcto.</li>
+<li>[ ] La traza cruza el límite del servicio.</li>
+<li>[ ] Documentado que no hay garantía de orden.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>MassTransit / NServiceBus</strong>: resuelven todo esto y mucho más, pero son
+dependencias pesadas con su propio modelo mental. Se documenta cómo usarlos en
+lugar de esta feature para quien los prefiera.</li>
+<li><strong>Publicar los domain events directamente al broker</strong>: acopla el contrato
+público al modelo interno; cualquier refactor del agregado rompe consumidores.</li>
+<li><strong>Mecanismo de publicación separado del outbox</strong>: duplicaría la lógica de
+reintentos y perdería la atomicidad.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/17-integration-events-message-bus.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

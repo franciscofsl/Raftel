@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>06 — Result en lugar de excepciones en el pipeline | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="06 — Result en lugar de excepciones en el pipeline | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/06-result-en-lugar-de-excepciones.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="06--result-en-lugar-de-excepciones-en-el-pipeline">06 — <code>Result</code> en lugar de excepciones en el pipeline</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Application</code>, <code>Raftel.Api.Server</code>
+Rompe API pública: <strong>sí</strong>
+Depende de: <a href="01-error-tipado-y-mapeo-http.html">01</a>, <a href="02-propagacion-cancellationtoken.html">02</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p>El <code>CLAUDE.md</code> raíz es explícito:</p>
+<blockquote>
+<p><strong>Result/Result<t></t></strong> pattern for errors; no exceptions for business-logic flow.</p>
+</blockquote>
+<p>Pero el propio framework lo incumple en dos middlewares:</p>
+<pre><code class="lang-csharp">// ValidationMiddleware
+if (allErrors.Any()) throw new ValidationException(allErrors);
+
+// PermissionAuthorizationMiddleware
+currentUser.EnsureHasPermission(permission);   // lanza UnauthorizedException
+</code></pre>
+<p>Problemas concretos:</p>
+<ol>
+<li><strong>Coste</strong>: lanzar una excepción para un formulario mal rellenado es el camino
+caro para el caso frecuente.</li>
+<li><strong>Doble camino de error</strong>: los fallos de negocio salen por <code>Result</code> y los de
+validación/permiso por excepción, y <code>ExceptionHandlingMiddleware</code> los formatea
+por separado. Dos formatos, dos sitios donde tocar.</li>
+<li><strong>Rompe el pipeline</strong>: una excepción salta por encima de los middlewares
+externos. Con <a href="05-transacciones-explicitas.html">05</a>, obliga a <code>catch</code> para
+hacer rollback correcto.</li>
+<li><strong>Predicar con el ejemplo</strong>: es un framework didáctico; el consumidor copia
+los patrones que ve.</li>
+</ol>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-validationerror">2.1 <code>ValidationError</code></h3>
+<p>Agregar múltiples errores en un solo <code>Error</code> sin perder detalle:</p>
+<pre><code class="lang-csharp">// Raftel.Domain/Abstractions/ValidationError.cs
+public sealed record ValidationError(IReadOnlyList&lt;Error&gt; Errors)
+    : Error(&quot;Validation.General&quot;, &quot;One or more validation errors occurred.&quot;, ErrorType.Validation)
+{
+    public static ValidationError FromResults(IEnumerable&lt;Result&gt; results) =&gt; ...
+}
+</code></pre>
+<p>Requiere que <code>Error</code> deje de ser <code>sealed</code> (hoy no lo es) y que la herencia de
+records posicionales se mantenga bien con la igualdad por valor: añadir test.</p>
+<h3 id="22-validationmiddleware-sin-excepción">2.2 <code>ValidationMiddleware</code> sin excepción</h3>
+<pre><code class="lang-csharp">public async Task&lt;TResponse&gt; HandleAsync(TRequest request, RequestHandlerDelegate&lt;TResponse&gt; next, CancellationToken cancellationToken)
+{
+    var errors = validators
+        .Select(validator =&gt; validator.Validate(request))
+        .SelectMany(validationResult =&gt; validationResult.Errors)
+        .ToList();
+
+    if (errors.Count == 0)
+    {
+        return await next(cancellationToken);
+    }
+
+    return CreateValidationResult&lt;TResponse&gt;(new ValidationError(errors));
+}
+</code></pre>
+<p>El punto delicado: <code>TResponse</code> es genérico (<code>Result</code> o <code>Result&lt;T&gt;</code>) y hay que
+construir el fallo sin conocer <code>T</code> en tiempo de compilación.</p>
+<pre><code class="lang-csharp">private static TResponse CreateValidationResult&lt;TResponse&gt;(ValidationError error)
+{
+    if (typeof(TResponse) == typeof(Result))
+    {
+        return (TResponse)(object)Result.Failure(error);
+    }
+
+    // Result&lt;TValue&gt;
+    var valueType = typeof(TResponse).GetGenericArguments()[0];
+    var failureMethod = typeof(Result)
+        .GetMethod(nameof(Result.Failure), 1, [typeof(Error)])!
+        .MakeGenericMethod(valueType);
+
+    return (TResponse)failureMethod.Invoke(null, [error])!;
+}
+</code></pre>
+<p><strong>Cachear el <code>MethodInfo</code> por tipo</strong> en un <code>ConcurrentDictionary&lt;Type, Func&lt;Error, object&gt;&gt;</code>
+compilado con expression trees: el middleware corre en cada petición y la
+reflexión sin cachear se nota.</p>
+<p>Restricción a añadir en el middleware: <code>where TResponse : Result</code>. Hoy
+<code>IGlobalMiddleware</code> no la impone; <code>ValidationMiddleware</code> sí puede hacerlo porque
+todo <code>ICommand</code>/<code>IQuery</code> devuelve <code>Result</code> o <code>Result&lt;T&gt;</code>.</p>
+<h3 id="23-permissionauthorizationmiddleware-sin-excepción">2.3 <code>PermissionAuthorizationMiddleware</code> sin excepción</h3>
+<p><code>ICurrentUser</code> gana un método que no lanza:</p>
+<pre><code class="lang-csharp">public interface ICurrentUser
+{
+    // existente
+    void EnsureHasPermission(string permission);   // [Obsolete] → eliminar
+
+    // nuevo
+    bool HasPermission(string permission);
+}
+</code></pre>
+<pre><code class="lang-csharp">var missing = requiredPermissions.Where(p =&gt; !currentUser.HasPermission(p)).ToArray();
+
+if (missing.Length &gt; 0)
+{
+    return CreateFailure&lt;TResponse&gt;(
+        Error.Forbidden(&quot;Authorization.Forbidden&quot;, $&quot;Missing permission: {string.Join(&quot;, &quot;, missing)}&quot;));
+}
+
+return await next(cancellationToken);
+</code></pre>
+<blockquote>
+<p>Decisión de seguridad: el mensaje enumera los permisos que faltan. Es útil en
+desarrollo y en APIs internas, pero filtra el modelo de permisos a un atacante.
+Hacerlo configurable con <code>AuthorizationOptions.IncludeMissingPermissionsInError</code>,
+<strong>por defecto <code>false</code></strong> en Release y <code>true</code> en Development.</p>
+</blockquote>
+<h3 id="24-retirada-de-las-excepciones">2.4 Retirada de las excepciones</h3>
+<p><code>ValidationException</code> y <code>UnauthorizedException</code> se marcan <code>[Obsolete]</code> en esta
+versión y se eliminan en la siguiente. <code>ExceptionHandlingMiddleware</code> conserva sus
+<code>catch</code> durante el periodo de deprecación (código de consumidor puede lanzarlas)
+y luego queda solo con el <code>catch (Exception)</code> genérico.</p>
+<p>Con el mapeo de <a href="01-error-tipado-y-mapeo-http.html">01</a> ya en su sitio,
+<code>ErrorType.Validation</code> ⇒ 400 y <code>ErrorType.Forbidden</code> ⇒ 403 se obtienen sin
+código nuevo: el comportamiento HTTP observable <strong>no cambia</strong>.</p>
+<h3 id="25-detalle-por-campo-en-problemdetails">2.5 Detalle por campo en <code>ProblemDetails</code></h3>
+<p><code>ErrorResults.ToProblem</code> detecta <code>ValidationError</code> y expande la extensión
+<code>errors</code> como <code>Dictionary&lt;string, string[]&gt;</code> (formato que ya entienden los
+clientes de ASP.NET Core):</p>
+<pre><code class="lang-json">{
+  &quot;type&quot;: &quot;...&quot;, &quot;title&quot;: &quot;Validation Error&quot;, &quot;status&quot;: 400,
+  &quot;code&quot;: &quot;Validation.General&quot;,
+  &quot;errors&quot;: { &quot;Email&quot;: [&quot;Email is not valid.&quot;], &quot;Name&quot;: [&quot;Name is required.&quot;] }
+}
+</code></pre>
+<p>Esto exige que <code>Error.Code</code> de los validadores lleve el nombre del campo como
+prefijo (<code>&quot;Email.Invalid&quot;</code>). Convención a documentar en <code>Validator&lt;T&gt;</code>.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Abstractions/ValidationError.cs</code></li>
+<li><code>src/Raftel.Application/AuthorizationOptions.cs</code></li>
+<li><code>src/Raftel.Application/Abstractions/ResultFactory.cs</code> (fábrica cacheada §2.2)</li>
+<li><code>tests/Raftel.Application.UnitTests/Abstractions/ResultFactoryTests.cs</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Domain/Abstractions/Error.cs</code> — permitir herencia</li>
+<li><code>src/Raftel.Application/Middlewares/ValidationMiddleware.cs</code></li>
+<li><code>src/Raftel.Application/Middlewares/PermissionAuthorizationMiddleware.cs</code></li>
+<li><code>src/Raftel.Application/Abstractions/Authentication/ICurrentUser.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Authentication/CurrentHttpUser.cs</code></li>
+<li><code>src/Raftel.Application/Exceptions/{Validation,Unauthorized}Exception.cs</code> — <code>[Obsolete]</code></li>
+<li><code>src/Raftel.Api.Server/Middlewares/ExceptionHandlingMiddleware.cs</code></li>
+<li><code>src/Raftel.Api.Server/AutoEndpoints/ErrorResults.cs</code></li>
+<li><code>tests/**</code> — los que hoy hacen <code>Should.Throw&lt;ValidationException&gt;()</code></li>
+<li><code>BREAKING_CHANGES.md</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li><strong>(test)</strong> <code>ResultFactory</code> construye <code>Result.Failure</code> y <code>Result&lt;T&gt;.Failure</code>
+para <code>T</code> = <code>Guid</code>, <code>string</code>, un record y un tipo genérico anidado.</li>
+<li>Implementar <code>ResultFactory</code> con caché de delegados compilados.</li>
+<li><strong>(test)</strong> <code>ValidationError</code> agrega N errores y conserva igualdad por valor.</li>
+<li>Implementar <code>ValidationError</code>.</li>
+<li><strong>(test)</strong> <code>ValidationMiddleware</code> devuelve <code>Result</code> fallido (no lanza) y <strong>no</strong>
+invoca <code>next</code>.</li>
+<li>Reescribir <code>ValidationMiddleware</code>.</li>
+<li><strong>(test)</strong> <code>HasPermission</code> en <code>CurrentHttpUser</code> no lanza y devuelve <code>false</code>
+para usuario anónimo.</li>
+<li>Añadir <code>HasPermission</code>, reescribir <code>PermissionAuthorizationMiddleware</code>.</li>
+<li><strong>(test)</strong> Con <code>IncludeMissingPermissionsInError = false</code>, el mensaje no
+enumera permisos.</li>
+<li><strong>(test funcional)</strong> Contrato HTTP idéntico al anterior: 400 con <code>errors</code>,
+403 sin cuerpo revelador.</li>
+<li>Marcar excepciones obsoletas, actualizar tests, documentar.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: fábrica de resultados (el punto de mayor riesgo de la feature).</li>
+<li><strong>Unit</strong>: ambos middlewares, camino feliz y fallido, verificando que <code>next</code>
+no se llama cuando hay fallo.</li>
+<li><strong>Functional</strong>: <strong>regresión de contrato</strong> — mismos status y misma forma de
+cuerpo que antes del cambio.</li>
+<li><strong>Benchmark opcional</strong>: comparar el coste del camino de validación fallida
+antes/después (justifica la feature con números).</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Ningún middleware del framework lanza excepciones para flujo de negocio.</li>
+<li>[ ] El contrato HTTP no cambia respecto a la versión anterior.</li>
+<li>[ ] La construcción de <code>Result&lt;T&gt;</code> por reflexión está cacheada.</li>
+<li>[ ] Los mensajes de permiso no filtran el modelo de autorización en Release.</li>
+<li>[ ] Test de arquitectura: ningún tipo en <code>Raftel.Application.Middlewares</code>
+lanza <code>ValidationException</code> ni <code>UnauthorizedException</code>.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>Mantener las excepciones</strong>: incumple la regla declarada del proyecto.</li>
+<li><strong>Hacer que todo devuelva <code>Result</code> sin genéricos</strong> (un <code>Result</code> no tipado):
+pierde el valor de retorno de las queries.</li>
+<li><strong><code>IGlobalMiddleware</code> con restricción <code>where TResponse : Result</code> global</strong>:
+cerraría la puerta a middlewares sobre requests que no devuelvan <code>Result</code>,
+útiles a futuro (p. ej. streaming).</li>
+</ul>
+<h2 id="8-breaking-changes">8. Breaking changes</h2>
+<ol>
+<li><code>ICurrentUser.EnsureHasPermission</code> queda obsoleto (eliminación en la siguiente versión).</li>
+<li><code>ValidationException</code> y <code>UnauthorizedException</code> obsoletas.</li>
+<li>Consumidores que capturaban <code>ValidationException</code> deben pasar a inspeccionar
+el <code>Result</code>.</li>
+</ol>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/06-result-en-lugar-de-excepciones.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>04 — Logging estructurado y correlation ID | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="04 — Logging estructurado y correlation ID | Raftel ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/04-logging-estructurado.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="04--logging-estructurado-y-correlation-id">04 — Logging estructurado y correlation ID</h1>
+
+<blockquote>
+<p>Estado: <strong>Pendiente</strong>
+Ámbito: <code>Raftel.Application</code>, <code>Raftel.Api.Server</code>, <code>Raftel.Infrastructure</code>
+Rompe API pública: no (aditivo)
+Depende de: <a href="01-error-tipado-y-mapeo-http.html">01</a>, <a href="02-propagacion-cancellationtoken.html">02</a></p>
+</blockquote>
+<h2 id="1-motivación">1. Motivación</h2>
+<p><strong>No hay una sola referencia a <code>ILogger</code> en todo <code>src/</code>.</strong> El framework es
+completamente mudo.</p>
+<p>El caso más grave está en <code>ExceptionHandlingMiddleware</code>:</p>
+<pre><code class="lang-csharp">catch (Exception)
+{
+    await HandleInternalServerErrorAsync(context);   // ← excepción tragada, sin registrar
+}
+</code></pre>
+<p>Un <code>500</code> en producción no deja rastro: ni tipo de excepción, ni stack trace, ni
+qué comando lo provocó. Diagnóstico imposible.</p>
+<p>Además no hay forma de correlacionar la petición HTTP con los eventos que genera
+(comando ejecutado, eventos de dominio despachados, auditoría escrita).</p>
+<h2 id="2-diseño">2. Diseño</h2>
+<h3 id="21-dependencia">2.1 Dependencia</h3>
+<p><code>Raftel.Application</code> añade <code>Microsoft.Extensions.Logging.Abstractions</code> (solo
+abstracciones, sin implementación — coherente con &quot;sin dependencias externas&quot;:
+<code>Microsoft.Extensions.*</code> ya se usa para DI).</p>
+<h3 id="22-loggingmiddleware">2.2 <code>LoggingMiddleware</code></h3>
+<p>Middleware global, <strong>el primero</strong> de la cadena para envolver a todos los demás.</p>
+<pre><code class="lang-csharp">public sealed class LoggingMiddleware&lt;TRequest, TResponse&gt;(ILogger&lt;LoggingMiddleware&lt;TRequest, TResponse&gt;&gt; logger)
+    : IGlobalMiddleware&lt;TRequest, TResponse&gt;
+    where TRequest : IRequest&lt;TResponse&gt;
+{
+    public async Task&lt;TResponse&gt; HandleAsync(TRequest request, RequestHandlerDelegate&lt;TResponse&gt; next, CancellationToken cancellationToken)
+    {
+        var requestName = typeof(TRequest).Name;
+        var timestamp = Stopwatch.GetTimestamp();
+
+        using var scope = logger.BeginScope(new Dictionary&lt;string, object&gt;
+        {
+            [&quot;RequestName&quot;] = requestName,
+            [&quot;RequestType&quot;] = request is ICommand or ICommand&lt;object&gt; ? &quot;Command&quot; : &quot;Query&quot;
+        });
+
+        logger.LogInformation(&quot;Handling {RequestName}&quot;, requestName);
+
+        try
+        {
+            var response = await next(cancellationToken);
+            var elapsed = Stopwatch.GetElapsedTime(timestamp);
+
+            if (response is Result { IsFailure: true } failure)
+            {
+                logger.LogWarning(&quot;{RequestName} failed with {ErrorCode}: {ErrorMessage} in {ElapsedMs}ms&quot;,
+                    requestName, failure.Error.Code, failure.Error.Message, elapsed.TotalMilliseconds);
+            }
+            else
+            {
+                logger.LogInformation(&quot;{RequestName} handled in {ElapsedMs}ms&quot;, requestName, elapsed.TotalMilliseconds);
+            }
+
+            return response;
+        }
+        catch (Exception exception)
+        {
+            logger.LogError(exception, &quot;{RequestName} threw {ExceptionType}&quot;, requestName, exception.GetType().Name);
+            throw;
+        }
+    }
+}
+</code></pre>
+<p>Puntos de diseño:</p>
+<ul>
+<li><strong>Nunca se loguea el contenido del request.</strong> Un <code>RegisterUserCommand</code> lleva
+contraseña, un <code>LogInUserQuery</code> también. Solo el nombre del tipo. Si en el
+futuro se quiere el payload, será opt-in por atributo <code>[LogPayload]</code> con lista
+de propiedades a redactar.</li>
+<li><code>Result</code> fallido ⇒ <code>Warning</code>, no <code>Error</code>: es flujo de negocio esperado.</li>
+<li>Excepción ⇒ <code>Error</code> + rethrow. No cambia el flujo.</li>
+<li>Message templates con placeholders nombrados (logging estructurado real, no
+interpolación de strings).</li>
+</ul>
+<h3 id="23-correlation-id">2.3 Correlation ID</h3>
+<pre><code class="lang-csharp">// Raftel.Application/Abstractions/ICorrelationContext.cs
+public interface ICorrelationContext
+{
+    string CorrelationId { get; }
+}
+</code></pre>
+<p>Implementación en <code>Raftel.Infrastructure</code> sobre <code>IHttpContextAccessor</code>:</p>
+<ul>
+<li>Lee la cabecera <code>X-Correlation-Id</code> de la petición entrante.</li>
+<li>Si no existe, genera un <code>Guid</code> nuevo.</li>
+<li>La escribe en la respuesta como <code>X-Correlation-Id</code>.</li>
+<li>Se registra como scope de logging en el middleware ASP.NET, de modo que
+<strong>todos</strong> los eventos de la petición lo llevan.</li>
+</ul>
+<p>Middleware ASP.NET <code>CorrelationIdMiddleware</code>, colocado antes de
+<code>ExceptionHandlingMiddleware</code>.</p>
+<blockquote>
+<p>Sanear la cabecera entrante: máximo 128 caracteres, solo alfanuméricos, guion y
+guion bajo. Una cabecera arbitraria del cliente acaba en los logs; sin filtro
+es una vía de log injection / forging de líneas.</p>
+</blockquote>
+<h3 id="24-corregir-exceptionhandlingmiddleware">2.4 Corregir <code>ExceptionHandlingMiddleware</code></h3>
+<pre><code class="lang-csharp">public sealed class ExceptionHandlingMiddleware(RequestDelegate next, ILogger&lt;ExceptionHandlingMiddleware&gt; logger)
+{
+    // ...
+    catch (Exception exception)
+    {
+        logger.LogError(exception,
+            &quot;Unhandled exception on {Method} {Path}&quot;,
+            context.Request.Method, context.Request.Path);
+        await HandleInternalServerErrorAsync(context);
+    }
+}
+</code></pre>
+<p>Se mantiene la garantía actual: <strong>el stack trace nunca sale en la respuesta</strong>,
+solo al log.</p>
+<p><code>ValidationException</code> ⇒ <code>LogDebug</code>. <code>UnauthorizedException</code> ⇒ <code>LogWarning</code> con
+el permiso requerido (útil para detectar escaladas de privilegio).</p>
+<h3 id="25-registro">2.5 Registro</h3>
+<pre><code class="lang-csharp">services.AddRaftelApplication(builder =&gt;
+{
+    builder.RegisterServicesFromAssembly(typeof(Program).Assembly);
+    builder.AddGlobalMiddleware(typeof(LoggingMiddleware&lt;,&gt;));    // primero
+    builder.AddGlobalMiddleware(typeof(ValidationMiddleware&lt;,&gt;));
+    // ...
+});
+</code></pre>
+<p>El orden lo determina el consumidor (<code>RaftelApplicationBuilder</code> respeta el orden
+de registro). Documentar que <code>LoggingMiddleware</code> va primero.</p>
+<h2 id="3-archivos-a-tocar">3. Archivos a tocar</h2>
+<p><strong>Nuevos</strong></p>
+<ul>
+<li><code>src/Raftel.Application/Middlewares/LoggingMiddleware.cs</code></li>
+<li><code>src/Raftel.Application/Abstractions/ICorrelationContext.cs</code></li>
+<li><code>src/Raftel.Infrastructure/Correlation/CorrelationContext.cs</code></li>
+<li><code>src/Raftel.Api.Server/Middlewares/CorrelationIdMiddleware.cs</code></li>
+<li><code>src/Raftel.Api.Server/Middlewares/CorrelationIdMiddlewareExtensions.cs</code></li>
+<li><code>tests/Raftel.Application.UnitTests/Middlewares/LoggingMiddlewareTests.cs</code></li>
+<li><code>tests/Raftel.Api.FunctionalTests/CorrelationIdTests.cs</code></li>
+</ul>
+<p><strong>Modificados</strong></p>
+<ul>
+<li><code>src/Raftel.Application/Raftel.Application.csproj</code> — <code>Microsoft.Extensions.Logging.Abstractions</code></li>
+<li><code>Directory.Packages.props</code></li>
+<li><code>src/Raftel.Api.Server/Middlewares/ExceptionHandlingMiddleware.cs</code></li>
+<li><code>src/Raftel.Infrastructure/DependencyInjection.cs</code></li>
+<li><code>demo/**/Program.cs</code></li>
+</ul>
+<h2 id="4-plan-de-implementación">4. Plan de implementación</h2>
+<ol>
+<li>Añadir el paquete de abstracciones de logging.</li>
+<li><strong>(test)</strong> <code>LoggingMiddlewareTests</code> con un <code>ILogger</code> sustituido (NSubstitute):
+éxito ⇒ <code>Information</code>; <code>Result</code> fallido ⇒ <code>Warning</code> con el código de error;
+excepción ⇒ <code>Error</code> y la excepción se relanza.</li>
+<li><strong>(test)</strong> El middleware <strong>no</strong> registra ninguna propiedad del request
+(verificar que el payload no aparece en los argumentos del log).</li>
+<li>Implementar <code>LoggingMiddleware</code>.</li>
+<li><strong>(test)</strong> <code>ExceptionHandlingMiddleware</code> registra en <code>Error</code> y sigue sin
+exponer stack trace en el cuerpo.</li>
+<li>Corregir <code>ExceptionHandlingMiddleware</code>.</li>
+<li><strong>(test funcional)</strong> Petición con <code>X-Correlation-Id</code> conocido ⇒ misma
+cabecera en la respuesta. Sin cabecera ⇒ se genera una.</li>
+<li><strong>(test)</strong> Cabecera maliciosa (200 chars, saltos de línea) queda saneada.</li>
+<li>Implementar <code>CorrelationIdMiddleware</code> y <code>CorrelationContext</code>.</li>
+<li>Cablear en la demo, documentar el orden de middlewares.</li>
+</ol>
+<h2 id="5-tests">5. Tests</h2>
+<ul>
+<li><strong>Unit</strong>: niveles de log por escenario, no filtrado de payload, rethrow.</li>
+<li><strong>Unit</strong>: saneado de la cabecera de correlación.</li>
+<li><strong>Functional</strong>: propagación de la cabecera ida y vuelta; un <code>500</code> provocado
+deja entrada de log (capturable con un <code>ILoggerProvider</code> de test).</li>
+</ul>
+<h2 id="6-criterios-de-aceptación">6. Criterios de aceptación</h2>
+<ul>
+<li>[ ] Ninguna excepción se traga sin registrar.</li>
+<li>[ ] El stack trace no aparece en ninguna respuesta HTTP.</li>
+<li>[ ] Ningún log contiene contraseñas ni tokens.</li>
+<li>[ ] Todos los eventos de una petición comparten <code>CorrelationId</code>.</li>
+<li>[ ] <code>X-Correlation-Id</code> presente en toda respuesta.</li>
+</ul>
+<h2 id="7-alternativas-descartadas">7. Alternativas descartadas</h2>
+<ul>
+<li><strong>Serilog directo en el framework</strong>: ata al consumidor a un sink concreto.
+Con <code>ILogger</code> el consumidor elige (Serilog, NLog, OpenTelemetry — ver
+<a href="15-observabilidad-opentelemetry.html">15</a>).</li>
+<li><strong>Loguear el payload completo por defecto</strong>: fuga de credenciales garantizada.</li>
+<li><strong><code>Activity.Current.Id</code> como correlation ID sin cabecera propia</strong>: válido, pero
+se cubre en la feature de OpenTelemetry; aquí interesa una cabecera explícita
+e independiente de que haya tracing configurado.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/backlog/04-logging-estructurado.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
