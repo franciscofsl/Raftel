@@ -23,6 +23,7 @@ public static class DependencyInjection
         RegisterHandlers(services, assemblies: builder.Assemblies);
         RegisterMiddlewares(services, builder);
 
+        services.AddSingleton(builder.PaginationOptions);
         services.AddScoped<IRequestDispatcher, RequestDispatcher>();
         services.AddScoped<ICommandDispatcher, CommandDispatcher>();
         services.AddScoped<IQueryDispatcher, QueryDispatcher>();

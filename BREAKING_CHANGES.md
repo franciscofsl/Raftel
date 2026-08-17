@@ -136,6 +136,21 @@ var schema = new OpenApiSchema
 
 ---
 
+---
+
+## Pagination and Sorting
+
+### `GET /api/tenants` now returns a paged envelope instead of a bare array
+**What changed:** `GetAllTenantsQuery` now implements `IPagedQuery<GetAllTenantsResponse>`. The endpoint accepts optional `page`, `pageSize`, and `sort` query parameters (`sort` supports `name` and `code`, with a leading `-` for descending order) and returns a paged envelope (`items`, `page`, `pageSize`, `totalCount`, `totalPages`, `hasPrevious`, `hasNext`) instead of a bare JSON array of tenants. The response also carries `X-Total-Count` and `X-Total-Pages` headers.
+
+**Why:** The previous endpoint returned every tenant unbounded; with a large number of tenants this would materialize the entire table on every call. This is the first framework consumer of the new paging/sorting primitives (`PageRequest`, `PagedResult<T>`, `SortRequest`, `SortMap<TEntity>`, `IRepository.ListPagedAsync`, `IPagedQuery<TItem>`).
+
+**Impact:** Clients that deserialize the response of `GET /api/tenants` as a JSON array will break — the payload is now a JSON object with an `items` array. A `pageSize` above 200 (the default configured maximum) now returns `400` instead of returning every tenant. A `sort` value referencing a field other than `name`/`code` now returns `400` instead of being ignored.
+
+**Action required:** Update clients to read `response.items` instead of the top-level array, and to page through results using `page`/`pageSize`/`totalPages` (or the `X-Total-Count`/`X-Total-Pages` headers) instead of assuming a single unbounded response.
+
+---
+
 ## Summary
 
 The migration to .NET 10 is primarily focused on framework and dependency updates. The main breaking change that may affect consumers is the Microsoft.OpenApi 2.0 update, which requires namespace and type changes if you're customizing OpenAPI/Swagger configurations.
