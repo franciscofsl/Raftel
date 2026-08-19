@@ -8,6 +8,17 @@ namespace Raftel.Domain.Specifications;
 /// <typeparam name="TModel">The type of the model to which the specification is applied.</typeparam>
 public abstract class Specification<TModel>
 {
+    // Compiled delegate is cached lazily per instance to avoid recompiling the expression tree on every call.
+    private readonly Lazy<Func<TModel, bool>> _compiledExpression;
+
+    /// <summary>
+    /// Initialises the lazy compiled expression cache for this specification instance.
+    /// </summary>
+    protected Specification()
+    {
+        _compiledExpression = new Lazy<Func<TModel, bool>>(() => ToExpression().Compile());
+    }
+
     /// <summary>
     /// Converts the specification to an expression that can be evaluated against a model.
     /// </summary>
@@ -21,9 +32,7 @@ public abstract class Specification<TModel>
     /// <returns>True if the model satisfies the specification, otherwise false.</returns>
     public bool IsSatisfiedBy(TModel model)
     {
-        var expression = ToExpression();
-        var compiledExpression = expression.Compile();
-        return compiledExpression(model);
+        return _compiledExpression.Value(model);
     }
 
     /// <summary>

@@ -115,4 +115,19 @@ public class SpecificationTests
         orSpecification.IsSatisfiedBy(MugiwaraCrew.Chopper()).ShouldBeFalse();
         orSpecification.IsSatisfiedBy(MugiwaraCrew.Nami()).ShouldBeFalse();
     }
+
+    [Fact]
+    public void IsSatisfiedBy_ShouldReuseCompiledExpression_AcrossMultipleCalls()
+    {
+        // Verifies that the cached compiled delegate returns consistent, correct results
+        // across multiple calls to IsSatisfiedBy on the same specification instance.
+        var spec = new IsKingSpecification();
+        var luffy = MugiwaraCrew.Luffy();
+        luffy.FoundOnePiece();
+
+        spec.IsSatisfiedBy(luffy).ShouldBeTrue();
+        spec.IsSatisfiedBy(luffy).ShouldBeTrue();
+        spec.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+        spec.IsSatisfiedBy(MugiwaraCrew.Zoro()).ShouldBeFalse();
+    }
 }
