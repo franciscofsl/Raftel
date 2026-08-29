@@ -209,9 +209,9 @@ If any validation rule fails, a <a class="xref" href="Raftel.Application.Excepti
 
   <a id="Raftel_Application_Middlewares_ValidationMiddleware_2_HandleAsync_" data-uid="Raftel.Application.Middlewares.ValidationMiddleware`2.HandleAsync*"></a>
 
-  <h3 id="Raftel_Application_Middlewares_ValidationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__" data-uid="Raftel.Application.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})">
-  HandleAsync(TRequest, RequestHandlerDelegate&lt;TResponse&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/ValidationMiddleware.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Application_Middlewares_ValidationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__System_Threading_CancellationToken_" data-uid="Raftel.Application.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)">
+  HandleAsync(TRequest, RequestHandlerDelegate&lt;TResponse&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/ValidationMiddleware.cs/#L28"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Handles the request by validating it before invoking the next delegate in the pipeline.
@@ -221,7 +221,7 @@ If validation fails, a <a class="xref" href="Raftel.Application.Exceptions.Valid
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;TResponse&gt; HandleAsync(TRequest request, RequestHandlerDelegate&lt;TResponse&gt; next)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;TResponse&gt; HandleAsync(TRequest request, RequestHandlerDelegate&lt;TResponse&gt; next, CancellationToken cancellationToken)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -231,6 +231,9 @@ If validation fails, a <a class="xref" href="Raftel.Application.Exceptions.Valid
 </dd>
     <dt><code>next</code> <a class="xref" href="Raftel.Application.Abstractions.RequestHandlerDelegate-1.html">RequestHandlerDelegate</a>&lt;TResponse&gt;</dt>
     <dd><p>The delegate representing the next middleware or handler in the pipeline.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>A token to monitor for cancellation requests.</p>
 </dd>
   </dl>
 

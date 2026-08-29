@@ -199,8 +199,8 @@ the request handler and middleware pipeline from the dependency injection contai
 
   <a id="Raftel_Application_Abstractions_RequestDispatcher_DispatchAsync_" data-uid="Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync*"></a>
 
-  <h3 id="Raftel_Application_Abstractions_RequestDispatcher_DispatchAsync__2___0_" data-uid="Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync``2(``0)">
-  DispatchAsync&lt;TRequest, TResponse&gt;(TRequest)
+  <h3 id="Raftel_Application_Abstractions_RequestDispatcher_DispatchAsync__2___0_System_Threading_CancellationToken_" data-uid="Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)">
+  DispatchAsync&lt;TRequest, TResponse&gt;(TRequest, CancellationToken)
   <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/RequestDispatcher.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -209,13 +209,16 @@ the request handler and middleware pipeline from the dependency injection contai
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;TResponse&gt; DispatchAsync&lt;TRequest, TResponse&gt;(TRequest request) where TRequest : IRequest&lt;TResponse&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;TResponse&gt; DispatchAsync&lt;TRequest, TResponse&gt;(TRequest request, CancellationToken cancellationToken = default) where TRequest : IRequest&lt;TResponse&gt;</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>request</code> <span class="xref">TRequest</span></dt>
     <dd><p>The request to dispatch.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>A token to monitor for cancellation requests.</p>
 </dd>
   </dl>
 

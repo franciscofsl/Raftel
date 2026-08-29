@@ -199,8 +199,8 @@ to the <a class="xref" href="Raftel.Application.Abstractions.IRequestDispatcher.
 
   <a id="Raftel_Application_Queries_QueryDispatcher_DispatchAsync_" data-uid="Raftel.Application.Queries.QueryDispatcher.DispatchAsync*"></a>
 
-  <h3 id="Raftel_Application_Queries_QueryDispatcher_DispatchAsync__2___0_" data-uid="Raftel.Application.Queries.QueryDispatcher.DispatchAsync``2(``0)">
-  DispatchAsync&lt;TQuery, TResult&gt;(TQuery)
+  <h3 id="Raftel_Application_Queries_QueryDispatcher_DispatchAsync__2___0_System_Threading_CancellationToken_" data-uid="Raftel.Application.Queries.QueryDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)">
+  DispatchAsync&lt;TQuery, TResult&gt;(TQuery, CancellationToken)
   <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Queries/QueryDispatcher.cs/#L24"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -209,13 +209,16 @@ to the <a class="xref" href="Raftel.Application.Abstractions.IRequestDispatcher.
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Result&lt;TResult&gt;&gt; DispatchAsync&lt;TQuery, TResult&gt;(TQuery query) where TQuery : IQuery&lt;TResult&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Result&lt;TResult&gt;&gt; DispatchAsync&lt;TQuery, TResult&gt;(TQuery query, CancellationToken cancellationToken = default) where TQuery : IQuery&lt;TResult&gt;</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>query</code> <span class="xref">TQuery</span></dt>
     <dd><p>The query instance to process.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>A token to monitor for cancellation requests.</p>
 </dd>
   </dl>
 

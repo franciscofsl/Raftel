@@ -3206,6 +3206,46 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "openspec/changes/propagacion-cancellationtoken/design.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/propagacion-cancellationtoken/design.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/propagacion-cancellationtoken/proposal.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/propagacion-cancellationtoken/proposal.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/propagacion-cancellationtoken/specs/cancellation-propagation/spec.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/propagacion-cancellationtoken/specs/cancellation-propagation/spec.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/propagacion-cancellationtoken/tasks.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/propagacion-cancellationtoken/tasks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "src/Raftel.Api.Client/CLAUDE.md",
       "output": {
         ".html": {

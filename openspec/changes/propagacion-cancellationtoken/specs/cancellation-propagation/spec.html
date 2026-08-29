@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/propagacion-cancellationtoken/specs/cancellation-propagation/spec.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../../index.html">
+            <img id="logo" class="svg" src="../../../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="purpose">Purpose</h2>
+<p>Ensures a caller's <code>CancellationToken</code> flows unbroken from the HTTP endpoint through the command/query dispatch pipeline, every middleware, the handler, and into repository/database calls, so aborted or timed-out requests actually stop doing work instead of running to completion unattended.</p>
+<h2 id="added-requirements">ADDED Requirements</h2>
+<h3 id="requirement-token-flows-from-endpoint-to-handler">Requirement: Token flows from endpoint to handler</h3>
+<p>Every command and query dispatch SHALL accept a <code>CancellationToken</code> and propagate the same token, unmodified, to the resolved handler.</p>
+<h4 id="scenario-client-aborts-an-in-flight-request">Scenario: Client aborts an in-flight request</h4>
+<ul>
+<li><strong>WHEN</strong> the HTTP client aborts a request while a query is executing</li>
+<li><strong>THEN</strong> the <code>CancellationToken</code> observed by the query handler and its repository call transitions to <code>IsCancellationRequested == true</code>, and the underlying database call is cancelled rather than run to completion</li>
+</ul>
+<h4 id="scenario-dispatch-with-an-already-cancelled-token">Scenario: Dispatch with an already-cancelled token</h4>
+<ul>
+<li><strong>WHEN</strong> a command or query is dispatched with a token that is already cancelled</li>
+<li><strong>THEN</strong> the handler receives that same cancelled token (<code>IsCancellationRequested == true</code>) instead of a fresh, uncancelled one</li>
+</ul>
+<h3 id="requirement-middleware-pipeline-preserves-cancellation-and-ordering">Requirement: Middleware pipeline preserves cancellation and ordering</h3>
+<p>Every middleware in the pipeline SHALL receive the <code>CancellationToken</code> and forward it to the next stage, without altering middleware execution order.</p>
+<h4 id="scenario-multiple-middlewares-registered">Scenario: Multiple middlewares registered</h4>
+<ul>
+<li><strong>WHEN</strong> three middlewares are registered for a request and the pipeline executes</li>
+<li><strong>THEN</strong> they execute in their registered order and each one receives the same <code>CancellationToken</code> instance passed to the dispatcher</li>
+</ul>
+<h3 id="requirement-commit-is-not-interrupted-by-cancellation">Requirement: Commit is not interrupted by cancellation</h3>
+<p>The unit-of-work commit stage SHALL execute with <code>CancellationToken.None</code>, regardless of the cancellation state of the token used for the rest of the request.</p>
+<h4 id="scenario-token-cancelled-after-handler-succeeds-but-before-commit">Scenario: Token cancelled after handler succeeds but before commit</h4>
+<ul>
+<li><strong>WHEN</strong> the caller cancels the request's token after the handler has produced a successful <code>Result</code> but before the unit of work commits</li>
+<li><strong>THEN</strong> the commit still runs to completion (not cancelled) and domain events dispatched as part of that commit are not aborted</li>
+</ul>
+<h3 id="requirement-public-async-operations-declare-a-cancellation-token">Requirement: Public async operations declare a cancellation token</h3>
+<p>Every public method whose name ends in <code>Async</code> in <code>Raftel.Application</code> and <code>Raftel.Domain</code> SHALL declare a <code>CancellationToken</code> parameter.</p>
+<h4 id="scenario-new-public-async-method-added-without-a-token">Scenario: New public async method added without a token</h4>
+<ul>
+<li><strong>WHEN</strong> a new public <code>*Async</code> method is added to <code>Raftel.Application</code> or <code>Raftel.Domain</code> without a <code>CancellationToken</code> parameter</li>
+<li><strong>THEN</strong> the architecture test suite fails, flagging the method as missing cancellation support</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/propagacion-cancellationtoken/specs/cancellation-propagation/spec.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -89,7 +89,7 @@
 
 
   <h1 id="Raftel_Application_Middlewares_UnitOfWorkMiddleware_1" data-uid="Raftel.Application.Middlewares.UnitOfWorkMiddleware`1" class="text-break">
-Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L13"><i class="bi bi-code-slash"></i></a>
+Class UnitOfWorkMiddleware&lt;TRequest&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L19"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -161,6 +161,12 @@ only if the preceding operation was successful.</p>
 
 
 
+  <h2 id="Raftel_Application_Middlewares_UnitOfWorkMiddleware_1_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>The commit always runs with <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken.none">None</a>, regardless of the request's
+cancellation token. Cancelling mid-<code>SaveChanges</code> would leave the transaction in an
+indeterminate state and can abort in-flight domain event dispatch, so once the handler has
+produced a successful result the commit is deliberately not cancellable.</p>
+</div>
 
 
   <h2 class="section" id="constructors">Constructors
@@ -171,7 +177,7 @@ only if the preceding operation was successful.</p>
 
   <h3 id="Raftel_Application_Middlewares_UnitOfWorkMiddleware_1__ctor_Raftel_Application_IUnitOfWork_" data-uid="Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.#ctor(Raftel.Application.IUnitOfWork)">
   UnitOfWorkMiddleware(IUnitOfWork)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L19"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Middleware that ensures a unit of work is committed
@@ -197,6 +203,12 @@ only if the preceding operation was successful.</p>
 
 
 
+  <h4 class="section" id="Raftel_Application_Middlewares_UnitOfWorkMiddleware_1__ctor_Raftel_Application_IUnitOfWork__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The commit always runs with <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken.none">None</a>, regardless of the request's
+cancellation token. Cancelling mid-<code>SaveChanges</code> would leave the transaction in an
+indeterminate state and can abort in-flight domain event dispatch, so once the handler has
+produced a successful result the commit is deliberately not cancellable.</p>
+</div>
 
 
 
@@ -207,9 +219,9 @@ only if the preceding operation was successful.</p>
 
   <a id="Raftel_Application_Middlewares_UnitOfWorkMiddleware_1_HandleAsync_" data-uid="Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.HandleAsync*"></a>
 
-  <h3 id="Raftel_Application_Middlewares_UnitOfWorkMiddleware_1_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate_Raftel_Domain_Abstractions_Result__" data-uid="Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result})">
-  HandleAsync(TRequest, RequestHandlerDelegate&lt;Result&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Application_Middlewares_UnitOfWorkMiddleware_1_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate_Raftel_Domain_Abstractions_Result__System_Threading_CancellationToken_" data-uid="Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result},System.Threading.CancellationToken)">
+  HandleAsync(TRequest, RequestHandlerDelegate&lt;Result&gt;, CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L30"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Handles the request by executing the next delegate in the middleware pipeline
@@ -218,7 +230,7 @@ and commits the unit of work if the result is successful.</p>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;Result&gt; HandleAsync(TRequest request, RequestHandlerDelegate&lt;Result&gt; next)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;Result&gt; HandleAsync(TRequest request, RequestHandlerDelegate&lt;Result&gt; next, CancellationToken cancellationToken)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -228,6 +240,9 @@ and commits the unit of work if the result is successful.</p>
 </dd>
     <dt><code>next</code> <a class="xref" href="Raftel.Application.Abstractions.RequestHandlerDelegate-1.html">RequestHandlerDelegate</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a>&gt;</dt>
     <dd><p>The delegate representing the next middleware or handler in the pipeline.</p>
+</dd>
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>A token to monitor for cancellation requests.</p>
 </dd>
   </dl>
 
@@ -252,7 +267,7 @@ and commits the unit of work if the result is successful.</p>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L13" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/UnitOfWorkMiddleware.cs/#L19" class="edit-link">Edit this page</a>
         </div>
 
 

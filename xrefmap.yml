@@ -900,15 +900,15 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync
   nameWithType: IRequestDispatcher.DispatchAsync
-- uid: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync``2(``0)
-  name: DispatchAsync<TRequest, TResponse>(TRequest)
-  href: api/Raftel.Application.Abstractions.IRequestDispatcher.html#Raftel_Application_Abstractions_IRequestDispatcher_DispatchAsync__2___0_
-  commentId: M:Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync``2(``0)
-  name.vb: DispatchAsync(Of TRequest, TResponse)(TRequest)
-  fullName: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest)
-  fullName.vb: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest)
-  nameWithType: IRequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest)
-  nameWithType.vb: IRequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest)
+- uid: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)
+  name: DispatchAsync<TRequest, TResponse>(TRequest, CancellationToken)
+  href: api/Raftel.Application.Abstractions.IRequestDispatcher.html#Raftel_Application_Abstractions_IRequestDispatcher_DispatchAsync__2___0_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)
+  name.vb: DispatchAsync(Of TRequest, TResponse)(TRequest, CancellationToken)
+  fullName: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest, System.Threading.CancellationToken)
+  nameWithType: IRequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest, CancellationToken)
+  nameWithType.vb: IRequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest, CancellationToken)
 - uid: Raftel.Application.Abstractions.IRequestHandler`2
   name: IRequestHandler<TRequest, TResponse>
   href: api/Raftel.Application.Abstractions.IRequestHandler-2.html
@@ -1014,15 +1014,15 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync
   nameWithType: RequestDispatcher.DispatchAsync
-- uid: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync``2(``0)
-  name: DispatchAsync<TRequest, TResponse>(TRequest)
-  href: api/Raftel.Application.Abstractions.RequestDispatcher.html#Raftel_Application_Abstractions_RequestDispatcher_DispatchAsync__2___0_
-  commentId: M:Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync``2(``0)
-  name.vb: DispatchAsync(Of TRequest, TResponse)(TRequest)
-  fullName: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest)
-  fullName.vb: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest)
-  nameWithType: RequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest)
-  nameWithType.vb: RequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest)
+- uid: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)
+  name: DispatchAsync<TRequest, TResponse>(TRequest, CancellationToken)
+  href: api/Raftel.Application.Abstractions.RequestDispatcher.html#Raftel_Application_Abstractions_RequestDispatcher_DispatchAsync__2___0_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)
+  name.vb: DispatchAsync(Of TRequest, TResponse)(TRequest, CancellationToken)
+  fullName: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest, System.Threading.CancellationToken)
+  nameWithType: RequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest, CancellationToken)
+  nameWithType.vb: RequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest, CancellationToken)
 - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
   name: RequestHandlerDelegate<TResponse>
   href: api/Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
@@ -2457,15 +2457,15 @@ references:
   fullName.vb: Raftel.Application.Middlewares.AuditLogMiddleware(Of TRequest, TResponse).New
   nameWithType: AuditLogMiddleware<TRequest, TResponse>.AuditLogMiddleware
   nameWithType.vb: AuditLogMiddleware(Of TRequest, TResponse).New
-- uid: Raftel.Application.Middlewares.AuditLogMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  href: api/Raftel.Application.Middlewares.AuditLogMiddleware-2.html#Raftel_Application_Middlewares_AuditLogMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
-  commentId: M:Raftel.Application.Middlewares.AuditLogMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
-  fullName: Raftel.Application.Middlewares.AuditLogMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
-  fullName.vb: Raftel.Application.Middlewares.AuditLogMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
-  nameWithType: AuditLogMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  nameWithType.vb: AuditLogMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+- uid: Raftel.Application.Middlewares.AuditLogMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>, CancellationToken)
+  href: api/Raftel.Application.Middlewares.AuditLogMiddleware-2.html#Raftel_Application_Middlewares_AuditLogMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Middlewares.AuditLogMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse), CancellationToken)
+  fullName: Raftel.Application.Middlewares.AuditLogMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Middlewares.AuditLogMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse), System.Threading.CancellationToken)
+  nameWithType: AuditLogMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>, CancellationToken)
+  nameWithType.vb: AuditLogMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse), CancellationToken)
 - uid: Raftel.Application.Middlewares.AuditLogMiddleware`2.HandleAsync*
   name: HandleAsync
   href: api/Raftel.Application.Middlewares.AuditLogMiddleware-2.html#Raftel_Application_Middlewares_AuditLogMiddleware_2_HandleAsync_
@@ -2502,15 +2502,15 @@ references:
   fullName.vb: Raftel.Application.Middlewares.IGlobalMiddleware(Of TRequest, TResponse)
   nameWithType: IGlobalMiddleware<TRequest, TResponse>
   nameWithType.vb: IGlobalMiddleware(Of TRequest, TResponse)
-- uid: Raftel.Application.Middlewares.IGlobalMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  href: api/Raftel.Application.Middlewares.IGlobalMiddleware-2.html#Raftel_Application_Middlewares_IGlobalMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
-  commentId: M:Raftel.Application.Middlewares.IGlobalMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
-  fullName: Raftel.Application.Middlewares.IGlobalMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
-  fullName.vb: Raftel.Application.Middlewares.IGlobalMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
-  nameWithType: IGlobalMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  nameWithType.vb: IGlobalMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+- uid: Raftel.Application.Middlewares.IGlobalMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>, CancellationToken)
+  href: api/Raftel.Application.Middlewares.IGlobalMiddleware-2.html#Raftel_Application_Middlewares_IGlobalMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Middlewares.IGlobalMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse), CancellationToken)
+  fullName: Raftel.Application.Middlewares.IGlobalMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Middlewares.IGlobalMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse), System.Threading.CancellationToken)
+  nameWithType: IGlobalMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>, CancellationToken)
+  nameWithType.vb: IGlobalMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse), CancellationToken)
 - uid: Raftel.Application.Middlewares.IGlobalMiddleware`2.HandleAsync*
   name: HandleAsync
   href: api/Raftel.Application.Middlewares.IGlobalMiddleware-2.html#Raftel_Application_Middlewares_IGlobalMiddleware_2_HandleAsync_
@@ -2557,15 +2557,15 @@ references:
   fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse).New
   nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>.PermissionAuthorizationMiddleware
   nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse).New
-- uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html#Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
-  commentId: M:Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
-  fullName: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
-  fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
-  nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+- uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>, CancellationToken)
+  href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html#Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse), CancellationToken)
+  fullName: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse), System.Threading.CancellationToken)
+  nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>, CancellationToken)
+  nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse), CancellationToken)
 - uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.HandleAsync*
   name: HandleAsync
   href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html#Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2_HandleAsync_
@@ -2603,15 +2603,15 @@ references:
   fullName.vb: Raftel.Application.Middlewares.UnitOfWorkMiddleware(Of TRequest).New
   nameWithType: UnitOfWorkMiddleware<TRequest>.UnitOfWorkMiddleware
   nameWithType.vb: UnitOfWorkMiddleware(Of TRequest).New
-- uid: Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result})
-  name: HandleAsync(TRequest, RequestHandlerDelegate<Result>)
-  href: api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-1.html#Raftel_Application_Middlewares_UnitOfWorkMiddleware_1_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate_Raftel_Domain_Abstractions_Result__
-  commentId: M:Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result})
-  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of Result))
-  fullName: Raftel.Application.Middlewares.UnitOfWorkMiddleware<TRequest>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<Raftel.Domain.Abstractions.Result>)
-  fullName.vb: Raftel.Application.Middlewares.UnitOfWorkMiddleware(Of TRequest).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of Raftel.Domain.Abstractions.Result))
-  nameWithType: UnitOfWorkMiddleware<TRequest>.HandleAsync(TRequest, RequestHandlerDelegate<Result>)
-  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest).HandleAsync(TRequest, RequestHandlerDelegate(Of Result))
+- uid: Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result},System.Threading.CancellationToken)
+  name: HandleAsync(TRequest, RequestHandlerDelegate<Result>, CancellationToken)
+  href: api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-1.html#Raftel_Application_Middlewares_UnitOfWorkMiddleware_1_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate_Raftel_Domain_Abstractions_Result__System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result},System.Threading.CancellationToken)
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of Result), CancellationToken)
+  fullName: Raftel.Application.Middlewares.UnitOfWorkMiddleware<TRequest>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<Raftel.Domain.Abstractions.Result>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Middlewares.UnitOfWorkMiddleware(Of TRequest).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of Raftel.Domain.Abstractions.Result), System.Threading.CancellationToken)
+  nameWithType: UnitOfWorkMiddleware<TRequest>.HandleAsync(TRequest, RequestHandlerDelegate<Result>, CancellationToken)
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest).HandleAsync(TRequest, RequestHandlerDelegate(Of Result), CancellationToken)
 - uid: Raftel.Application.Middlewares.UnitOfWorkMiddleware`1.HandleAsync*
   name: HandleAsync
   href: api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-1.html#Raftel_Application_Middlewares_UnitOfWorkMiddleware_1_HandleAsync_
@@ -2649,15 +2649,15 @@ references:
   fullName.vb: Raftel.Application.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResult).New
   nameWithType: UnitOfWorkMiddleware<TRequest, TResult>.UnitOfWorkMiddleware
   nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResult).New
-- uid: Raftel.Application.Middlewares.UnitOfWorkMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result{`1}})
-  name: HandleAsync(TRequest, RequestHandlerDelegate<Result<TResult>>)
-  href: api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-2.html#Raftel_Application_Middlewares_UnitOfWorkMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate_Raftel_Domain_Abstractions_Result__1___
-  commentId: M:Raftel.Application.Middlewares.UnitOfWorkMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result{`1}})
-  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of Result(Of TResult)))
-  fullName: Raftel.Application.Middlewares.UnitOfWorkMiddleware<TRequest, TResult>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<Raftel.Domain.Abstractions.Result<TResult>>)
-  fullName.vb: Raftel.Application.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResult).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of Raftel.Domain.Abstractions.Result(Of TResult)))
-  nameWithType: UnitOfWorkMiddleware<TRequest, TResult>.HandleAsync(TRequest, RequestHandlerDelegate<Result<TResult>>)
-  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResult).HandleAsync(TRequest, RequestHandlerDelegate(Of Result(Of TResult)))
+- uid: Raftel.Application.Middlewares.UnitOfWorkMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result{`1}},System.Threading.CancellationToken)
+  name: HandleAsync(TRequest, RequestHandlerDelegate<Result<TResult>>, CancellationToken)
+  href: api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-2.html#Raftel_Application_Middlewares_UnitOfWorkMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate_Raftel_Domain_Abstractions_Result__1___System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Middlewares.UnitOfWorkMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result{`1}},System.Threading.CancellationToken)
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of Result(Of TResult)), CancellationToken)
+  fullName: Raftel.Application.Middlewares.UnitOfWorkMiddleware<TRequest, TResult>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<Raftel.Domain.Abstractions.Result<TResult>>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Middlewares.UnitOfWorkMiddleware(Of TRequest, TResult).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of Raftel.Domain.Abstractions.Result(Of TResult)), System.Threading.CancellationToken)
+  nameWithType: UnitOfWorkMiddleware<TRequest, TResult>.HandleAsync(TRequest, RequestHandlerDelegate<Result<TResult>>, CancellationToken)
+  nameWithType.vb: UnitOfWorkMiddleware(Of TRequest, TResult).HandleAsync(TRequest, RequestHandlerDelegate(Of Result(Of TResult)), CancellationToken)
 - uid: Raftel.Application.Middlewares.UnitOfWorkMiddleware`2.HandleAsync*
   name: HandleAsync
   href: api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-2.html#Raftel_Application_Middlewares_UnitOfWorkMiddleware_2_HandleAsync_
@@ -2695,15 +2695,15 @@ references:
   fullName.vb: Raftel.Application.Middlewares.ValidationMiddleware(Of TRequest, TResponse).New
   nameWithType: ValidationMiddleware<TRequest, TResponse>.ValidationMiddleware
   nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).New
-- uid: Raftel.Application.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  href: api/Raftel.Application.Middlewares.ValidationMiddleware-2.html#Raftel_Application_Middlewares_ValidationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__
-  commentId: M:Raftel.Application.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1})
-  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
-  fullName: Raftel.Application.Middlewares.ValidationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>)
-  fullName.vb: Raftel.Application.Middlewares.ValidationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse))
-  nameWithType: ValidationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>)
-  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse))
+- uid: Raftel.Application.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>, CancellationToken)
+  href: api/Raftel.Application.Middlewares.ValidationMiddleware-2.html#Raftel_Application_Middlewares_ValidationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Middlewares.ValidationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse), CancellationToken)
+  fullName: Raftel.Application.Middlewares.ValidationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Middlewares.ValidationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse), System.Threading.CancellationToken)
+  nameWithType: ValidationMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>, CancellationToken)
+  nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse), CancellationToken)
 - uid: Raftel.Application.Middlewares.ValidationMiddleware`2.HandleAsync*
   name: HandleAsync
   href: api/Raftel.Application.Middlewares.ValidationMiddleware-2.html#Raftel_Application_Middlewares_ValidationMiddleware_2_HandleAsync_
@@ -2732,15 +2732,15 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync
   nameWithType: IQueryDispatcher.DispatchAsync
-- uid: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync``2(``0)
-  name: DispatchAsync<TQuery, TResult>(TQuery)
-  href: api/Raftel.Application.Queries.IQueryDispatcher.html#Raftel_Application_Queries_IQueryDispatcher_DispatchAsync__2___0_
-  commentId: M:Raftel.Application.Queries.IQueryDispatcher.DispatchAsync``2(``0)
-  name.vb: DispatchAsync(Of TQuery, TResult)(TQuery)
-  fullName: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery)
-  fullName.vb: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery)
-  nameWithType: IQueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery)
-  nameWithType.vb: IQueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery)
+- uid: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)
+  name: DispatchAsync<TQuery, TResult>(TQuery, CancellationToken)
+  href: api/Raftel.Application.Queries.IQueryDispatcher.html#Raftel_Application_Queries_IQueryDispatcher_DispatchAsync__2___0_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Queries.IQueryDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)
+  name.vb: DispatchAsync(Of TQuery, TResult)(TQuery, CancellationToken)
+  fullName: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Queries.IQueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery, System.Threading.CancellationToken)
+  nameWithType: IQueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery, CancellationToken)
+  nameWithType.vb: IQueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery, CancellationToken)
 - uid: Raftel.Application.Queries.IQueryHandler`2
   name: IQueryHandler<TQuery, TResult>
   href: api/Raftel.Application.Queries.IQueryHandler-2.html
@@ -2791,15 +2791,15 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Queries.QueryDispatcher.DispatchAsync
   nameWithType: QueryDispatcher.DispatchAsync
-- uid: Raftel.Application.Queries.QueryDispatcher.DispatchAsync``2(``0)
-  name: DispatchAsync<TQuery, TResult>(TQuery)
-  href: api/Raftel.Application.Queries.QueryDispatcher.html#Raftel_Application_Queries_QueryDispatcher_DispatchAsync__2___0_
-  commentId: M:Raftel.Application.Queries.QueryDispatcher.DispatchAsync``2(``0)
-  name.vb: DispatchAsync(Of TQuery, TResult)(TQuery)
-  fullName: Raftel.Application.Queries.QueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery)
-  fullName.vb: Raftel.Application.Queries.QueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery)
-  nameWithType: QueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery)
-  nameWithType.vb: QueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery)
+- uid: Raftel.Application.Queries.QueryDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)
+  name: DispatchAsync<TQuery, TResult>(TQuery, CancellationToken)
+  href: api/Raftel.Application.Queries.QueryDispatcher.html#Raftel_Application_Queries_QueryDispatcher_DispatchAsync__2___0_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Queries.QueryDispatcher.DispatchAsync``2(``0,System.Threading.CancellationToken)
+  name.vb: DispatchAsync(Of TQuery, TResult)(TQuery, CancellationToken)
+  fullName: Raftel.Application.Queries.QueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Queries.QueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery, System.Threading.CancellationToken)
+  nameWithType: QueryDispatcher.DispatchAsync<TQuery, TResult>(TQuery, CancellationToken)
+  nameWithType.vb: QueryDispatcher.DispatchAsync(Of TQuery, TResult)(TQuery, CancellationToken)
 - uid: Raftel.Application.RaftelApplicationBuilder
   name: RaftelApplicationBuilder
   href: api/Raftel.Application.RaftelApplicationBuilder.html
