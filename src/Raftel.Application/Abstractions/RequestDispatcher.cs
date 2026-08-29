@@ -13,7 +13,8 @@ namespace Raftel.Application.Abstractions;
 public class RequestDispatcher(IServiceProvider serviceProvider) : IRequestDispatcher
 {
     /// <inheritdoc />
-    public async Task<TResponse> DispatchAsync<TRequest, TResponse>(TRequest request)
+    public async Task<TResponse> DispatchAsync<TRequest, TResponse>(TRequest request,
+        CancellationToken cancellationToken = default)
         where TRequest : IRequest<TResponse>
     {
         var handler = serviceProvider.GetRequiredService<IRequestHandler<TRequest, TResponse>>();
@@ -23,13 +24,15 @@ public class RequestDispatcher(IServiceProvider serviceProvider) : IRequestDispa
         allMiddlewares.AddRange(GetCommandMiddlewares<TRequest, TResponse>(request));
         allMiddlewares.AddRange(GetQueriesMiddlewares<TRequest, TResponse>(request));
 
-        var handlerDelegate = new RequestHandlerDelegate<TResponse>(() => handler.HandleAsync(request));
+        var handlerDelegate = new RequestHandlerDelegate<TResponse>(
+            token => handler.HandleAsync(request, token));
 
         var pipeline = allMiddlewares
             .Reverse<IGlobalMiddleware<TRequest, TResponse>>()
-            .Aggregate(handlerDelegate, (next, middleware) => () => middleware.HandleAsync(request, next));
+            .Aggregate(handlerDelegate,
+                (next, middleware) => token => middleware.HandleAsync(request, next, token));
 
-        return await pipeline();
+        return await pipeline(cancellationToken);
     }
 
     private IGlobalMiddleware<TRequest, TResponse>[] GetCommandMiddlewares<TRequest, TResponse>(TRequest request)

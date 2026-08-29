@@ -9,9 +9,10 @@ public class CommandMiddleware2<TRequest, TResponse> : IGlobalMiddleware<TReques
     private readonly List<string> _log;
     public CommandMiddleware2(List<string> log) => _log = log;
 
-    public async Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         _log.Add("Command2");
-        return await next();
+        return await next(cancellationToken);
     }
 }

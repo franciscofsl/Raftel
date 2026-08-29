@@ -76,6 +76,14 @@ app.AddEndpointGroup(group =>
     }
 );
 
+app.AddEndpointGroup(group =>
+    {
+        group.Name = "TestCancellation";
+        group.BaseUri = "/api/test/cancellation";
+        group.AddCommand<AwaitCancellationCommand>("", HttpMethod.Post);
+    }
+);
+
 app.MapGet("/api/test/throw", () => { throw new InvalidOperationException("Test unhandled exception."); });
 
 app.MapGet("/api/test/error/{type}", (string type) => ErrorResults.ToProblem(type switch

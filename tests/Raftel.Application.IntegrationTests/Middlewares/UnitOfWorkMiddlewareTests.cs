@@ -34,4 +34,27 @@ public class UnitOfWorkMiddlewareTests : IntegrationTestBase
             loaded.ShouldContain(_ => _.Name == command.Name && _.Bounty == command.Bounty);
         });
     }
+
+    [Fact]
+    public async Task CommitAsync_ShouldStillPersistData_WhenCallerTokenIsCancelledAfterHandlerSucceeds()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            CurrentUser.AddPermission(PiratesPermissions.Management);
+            var commandDispatcher = sp.GetService<ICommandDispatcher>();
+
+            using var cts = new CancellationTokenSource();
+            await cts.CancelAsync();
+
+            var command = new CreatePirateCommand("Sabo", 602000000);
+            var result = await commandDispatcher!.DispatchAsync<CreatePirateCommand, Guid>(command, cts.Token);
+            result.IsSuccess.ShouldBeTrue();
+
+            var repository = sp.GetRequiredService<IPirateRepository>();
+
+            var loaded = await repository.ListAllAsync();
+            loaded.ShouldHaveSingleItem();
+            loaded.ShouldContain(_ => _.Name == command.Name && _.Bounty == command.Bounty);
+        });
+    }
 }
