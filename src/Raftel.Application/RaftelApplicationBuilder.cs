@@ -28,6 +28,11 @@ public sealed class RaftelApplicationBuilder : IRaftelApplicationBuilder
     public List<Type> QueryMiddlewares { get; } = new();
 
     /// <summary>
+    /// Gets the pagination options configured for the application.
+    /// </summary>
+    public PaginationOptions PaginationOptions { get; } = new();
+
+    /// <summary>
     /// Registers all services from the specified assembly if it has not already been registered.
     /// </summary>
     /// <param name="assembly">The assembly to register services from.</param>
@@ -64,5 +69,14 @@ public sealed class RaftelApplicationBuilder : IRaftelApplicationBuilder
     public void AddQueryMiddleware(Type openMiddleware)
     {
         QueryMiddlewares.Add(openMiddleware);
+    }
+
+    /// <summary>
+    /// Configures the default and maximum page size applied by paged queries.
+    /// </summary>
+    /// <param name="configure">A callback that mutates the pagination options.</param>
+    public void ConfigurePagination(Action<PaginationOptions> configure)
+    {
+        configure(PaginationOptions);
     }
 }

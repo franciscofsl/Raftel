@@ -41,9 +41,18 @@ public static class QueryEndpointMapper
             var request = BuildRequestFromRouteAndQuery<TRequest>(context);
             var result = await dispatcher.DispatchAsync<TRequest, Result<TResult>>(request, cancellationToken);
 
-            return result.IsSuccess
-                ? Results.Ok(result.Value)
-                : ErrorResults.ToProblem(result.Error);
+            if (result.IsFailure)
+            {
+                return ErrorResults.ToProblem(result.Error);
+            }
+
+            if (result.Value is IPagedResult pagedResult)
+            {
+                context.Response.Headers["X-Total-Count"] = pagedResult.TotalCount.ToString();
+                context.Response.Headers["X-Total-Pages"] = pagedResult.TotalPages.ToString();
+            }
+
+            return Results.Ok(result.Value);
         }
     }
 

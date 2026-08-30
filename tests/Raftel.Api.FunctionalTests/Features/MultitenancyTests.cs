@@ -50,15 +50,15 @@ public class MultitenancyTests
         });
         createTenantResponse.EnsureSuccessStatusCode();
 
-        var getAllTenantsResponse = await _client.GetAsync("/api/tenants");
+        var getAllTenantsResponse = await _client.GetAsync("/api/tenants?pageSize=200");
         getAllTenantsResponse.EnsureSuccessStatusCode();
 
-        var allTenants = await getAllTenantsResponse.Content.ReadFromJsonAsync<List<TenantDto>>();
-        allTenants.ShouldNotBeNull();
-        allTenants.Count.ShouldBeGreaterThan(0);
+        var page = await getAllTenantsResponse.Content.ReadFromJsonAsync<PagedTenantsDto>();
+        page.ShouldNotBeNull();
+        page.Items.Count.ShouldBeGreaterThan(0);
 
         var random = new Random();
-        var randomTenant = allTenants[random.Next(allTenants.Count)];
+        var randomTenant = page.Items[random.Next(page.Items.Count)];
 
         var requestWithTenant = new HttpRequestMessage(HttpMethod.Get, "/api/tenants/current");
         requestWithTenant.Headers.Add("X-Tenant-Id", randomTenant.Id.ToString());
@@ -88,6 +88,11 @@ public class MultitenancyTests
         public string Name { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
+    }
+
+    private class PagedTenantsDto
+    {
+        public List<TenantDto> Items { get; set; }
     }
 
     private class CurrentTenantDto

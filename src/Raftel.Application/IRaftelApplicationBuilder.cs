@@ -31,4 +31,10 @@ public interface IRaftelApplicationBuilder
     /// </summary>
     /// <param name="openMiddleware">The type of the middleware to add.</param>
     void AddQueryMiddleware(Type openMiddleware);
+
+    /// <summary>
+    /// Configures the default and maximum page size applied by paged queries.
+    /// </summary>
+    /// <param name="configure">A callback that mutates the pagination options.</param>
+    void ConfigurePagination(Action<PaginationOptions> configure);
 }
