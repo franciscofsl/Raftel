@@ -19,9 +19,11 @@ public class PermissionAuthorizationMiddleware<TRequest, TResponse>(ICurrentUser
     /// </summary>
     /// <param name="request">The request to process.</param>
     /// <param name="next">The next middleware or handler in the pipeline.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     /// <returns>The response from the next handler if authorization succeeds.</returns>
     /// <exception cref="UnauthorizedException">Thrown when the user does not have the required permissions.</exception>
-    public Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next)
+    public Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         var requiredPermissions = typeof(TRequest)
             .GetCustomAttributes<RequiresPermissionAttribute>(true)
@@ -30,7 +32,7 @@ public class PermissionAuthorizationMiddleware<TRequest, TResponse>(ICurrentUser
 
         if (requiredPermissions.Length == 0)
         {
-            return next();
+            return next(cancellationToken);
         }
 
         foreach (var permission in requiredPermissions)
@@ -38,6 +40,6 @@ public class PermissionAuthorizationMiddleware<TRequest, TResponse>(ICurrentUser
             currentUser.EnsureHasPermission(permission);
         }
 
-        return next();
+        return next(cancellationToken);
     }
 }

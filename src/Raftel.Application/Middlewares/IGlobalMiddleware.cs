@@ -16,6 +16,8 @@ public interface IGlobalMiddleware<TRequest, TResponse>
     /// </summary>
     /// <param name="request">The request instance.</param>
     /// <param name="next">The next handler in the pipeline.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     /// <returns>A task containing the result of the request.</returns>
-    Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next);
+    Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken);
 }

@@ -35,10 +35,11 @@ public static class QueryEndpointMapper
 
         return;
 
-        async Task<IResult> Handler(HttpContext context, IRequestDispatcher dispatcher)
+        async Task<IResult> Handler(HttpContext context, IRequestDispatcher dispatcher,
+            CancellationToken cancellationToken)
         {
             var request = BuildRequestFromRouteAndQuery<TRequest>(context);
-            var result = await dispatcher.DispatchAsync<TRequest, Result<TResult>>(request);
+            var result = await dispatcher.DispatchAsync<TRequest, Result<TResult>>(request, cancellationToken);
 
             if (result.IsFailure)
             {

@@ -7,10 +7,11 @@ public class GlobalMiddleware2<TRequest, TResponse>(ISpy spy) : IGlobalMiddlewar
     where TRequest : IRequest<TResponse>
 { 
 
-    public async Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         spy.Intercept("Hi Global 2");
-        var result = await next();
+        var result = await next(cancellationToken);
         spy.Intercept("By Global 2");
         return result;
     }

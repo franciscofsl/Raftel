@@ -10,10 +10,10 @@ public class CommandWithResultMiddleware1<TRequest, TResult>(ISpy spy)
     where TRequest : ICommand<TResult>
 {
     public async Task<Result<TResult>> HandleAsync(TRequest request,
-        RequestHandlerDelegate<Result<TResult>> next)
+        RequestHandlerDelegate<Result<TResult>> next, CancellationToken cancellationToken)
     {
         spy.Intercept("Hi CommandResult 1");
-        var result = await next();
+        var result = await next(cancellationToken);
         spy.Intercept("By CommandResult 1");
         return result;
     }

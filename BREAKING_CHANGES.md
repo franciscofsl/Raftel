@@ -151,6 +151,58 @@ var schema = new OpenApiSchema
 
 ---
 
+## CancellationToken Propagation
+
+### `IGlobalMiddleware.HandleAsync` gains a `CancellationToken` parameter
+**What changed:** `IGlobalMiddleware<TRequest, TResponse>.HandleAsync` now takes a third parameter, `CancellationToken cancellationToken`. This propagates to `ICommandMiddleware<T>`, `ICommandMiddleware<T,R>`, and `IQueryMiddleware<T,R>`, which inherit from `IGlobalMiddleware`.
+
+**Why:** The token existed at the endpoint and at `IRequestHandler`/`IRepository`, but was dropped everywhere in between — no dispatched operation could actually be cancelled. An aborted HTTP request kept hitting the database until it finished.
+
+**Impact:** Any custom middleware implementing `IGlobalMiddleware`/`ICommandMiddleware`/`IQueryMiddleware` no longer compiles.
+
+**Action required:** Add the `CancellationToken cancellationToken` parameter to your `HandleAsync` implementation and forward it to `next(cancellationToken)`.
+
+**Example:**
+```csharp
+// Before
+public Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next)
+    => next();
+
+// After
+public Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next,
+    CancellationToken cancellationToken)
+    => next(cancellationToken);
+```
+
+### `RequestHandlerDelegate<TResponse>` gains a `CancellationToken` parameter
+**What changed:** `RequestHandlerDelegate<TResponse>` changed from `delegate Task<TResponse> RequestHandlerDelegate<TResponse>()` to `delegate Task<TResponse> RequestHandlerDelegate<TResponse>(CancellationToken cancellationToken)`.
+
+**Why:** This is the `next` delegate middleware calls to continue the pipeline; it needed to carry the token forward alongside the change to `IGlobalMiddleware`.
+
+**Impact:** Any code invoking `next()` with no arguments no longer compiles.
+
+**Action required:** Call `next(cancellationToken)`, passing through the token your middleware received.
+
+### `IRequestDispatcher.DispatchAsync` and `IQueryDispatcher.DispatchAsync` accept a `CancellationToken`
+**What changed:** Both gain a `CancellationToken cancellationToken = default` parameter. `ICommandDispatcher.DispatchAsync` already declared the parameter but silently discarded it — it now actually propagates it.
+
+**Why:** Without it, `IQueryDispatcher` had no way to pass a token to the pipeline at all, and `ICommandDispatcher` accepted one only to throw it away.
+
+**Impact:** Custom `IRequestDispatcher`/`IQueryDispatcher` implementations no longer compile. Callers relying on the (previously no-op) `ICommandDispatcher` token now get real cancellation.
+
+**Action required:** Add the parameter to custom implementations and forward it to the underlying pipeline call.
+
+### `UnitOfWorkMiddleware` always commits with `CancellationToken.None`
+**What changed:** `UnitOfWorkMiddleware` no longer forwards the request's `CancellationToken` to `IUnitOfWork.CommitAsync` — it always commits with `CancellationToken.None`.
+
+**Why:** Cancelling mid-`SaveChanges` leaves the transaction in an indeterminate state and can abort in-flight domain event dispatch. Once a handler has returned a successful `Result`, the commit is deliberately not cancellable.
+
+**Impact:** A request whose token is cancelled after its handler succeeds but before the commit will still persist its changes, rather than rolling back. This is intentional; see the type's XML doc.
+
+**Action required:** None, unless you had (incorrectly) relied on late cancellation aborting an already-successful command's commit.
+
+---
+
 ## Summary
 
 The migration to .NET 10 is primarily focused on framework and dependency updates. The main breaking change that may affect consumers is the Microsoft.OpenApi 2.0 update, which requires namespace and type changes if you're customizing OpenAPI/Swagger configurations.
