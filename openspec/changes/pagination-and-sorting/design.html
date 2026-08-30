@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/pagination-and-sorting/design.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="context">Context</h2>
+<p>See proposal.md - Why. Key constraints from the backlog write-up (<code>docs/backlog/03-paginacion-y-ordenacion.md</code>):</p>
+<ul>
+<li><code>Raftel.Domain</code> cannot depend on EF Core or HTTP — paging/sort primitives must be plain records.</li>
+<li><code>Raftel.Api.Client.QueryFilter.FromObject</code> already builds query strings from an object; the server side has nothing that consumes <code>page</code>/<code>pageSize</code>/<code>sort</code> yet.</li>
+<li><code>QueryEndpointMapper.BuildRequestFromRouteAndQuery</code> already binds constructor parameters from route/query string, so a query record that declares <code>Page</code>/<code>PageSize</code>/<code>Sort</code> gets them bound with no mapper changes.</li>
+<li>Must support both SqlServer and PostgreSQL without provider-specific SQL.</li>
+</ul>
+<h2 id="goals--non-goals">Goals / Non-Goals</h2>
+<p><strong>Goals:</strong></p>
+<ul>
+<li>Deterministic, duplicate-free, gap-free paging under concurrent inserts/deletes between page fetches (best-effort via stable tie-break, not full snapshot isolation).</li>
+<li>Reject invalid/oversized/unknown-field input at the boundary (<code>400</code> + <code>Error.Validation</code>), never silently clamp or ignore.</li>
+<li>Zero new provider-specific SQL in the repository layer.</li>
+<li>One migrated example consumer (<code>GetAllTenantsQuery</code>) so the pattern is proven end-to-end, not just added as unused library code.</li>
+</ul>
+<p><strong>Non-Goals:</strong></p>
+<ul>
+<li>Keyset/cursor pagination (noted as a possible future <em>additional</em> capability in the proposal's alternatives, not built here).</li>
+<li>Migrating every existing unbounded query — only <code>GetAllTenantsQuery</code>.</li>
+<li>Full snapshot isolation across page fetches (out of scope; two-query count+page approach can still observe concurrent writes between the count and the page query — see Risks).</li>
+</ul>
+<h2 id="decisions">Decisions</h2>
+<p><strong>Two queries (count + page) instead of <code>COUNT(*) OVER()</code> window function.</strong>
+Rationale: window functions require provider-specific SQL dialects to translate identically well; two plain LINQ queries (<code>LongCountAsync</code> + <code>Skip/Take</code>) translate portably to both SqlServer and PostgreSQL through EF Core. Both queries run against the same <code>DbContext</code>, so they share the same global query filters (soft delete, tenant). Trade-off: two round-trips instead of one, and a small window where count and page can disagree under concurrent writes (see Risks).</p>
+<p><strong>Mandatory stable tie-break (<code>ThenBy(Id)</code>) appended to every paged query, regardless of client-requested sort.</strong>
+Rationale: <code>Skip/Take</code> without a fully deterministic <code>ORDER BY</code> can repeat or omit rows across page fetches when the natural row order isn't stable (common on both SqlServer and PostgreSQL without an explicit order). Appending the primary key as the final sort key guarantees a total order. Alternative considered: trust the database's default order — rejected, it's an implementation detail that isn't guaranteed stable across pages.</p>
+<p><strong>Sort field resolution via an explicit per-entity allow-list (<code>SortMap&lt;TEntity&gt;</code>) rather than reflection-driven dynamic sorting.</strong>
+Rationale: <code>SortRequest.Field</code> is client-controlled input. Building <code>OrderBy</code> via string interpolation or unrestricted reflection is an injection surface and also leaks internal property names as a public sort contract. An allow-list makes the sortable surface an explicit, reviewable declaration per entity and gives a clean <code>Error.Validation</code> path for unknown fields. Alternative considered: allow sorting by any public property via reflection — rejected for the injection/surface-area reasons above.</p>
+<p><strong><code>-field</code> prefix convention for descending sort (JSON:API-style) instead of a separate <code>sortDirection</code> parameter.</strong>
+Rationale: keeps the query string to one parameter (<code>sort=-createdAt,name</code>) instead of two parallel arrays that must be kept in sync client-side. Trade-off: field names starting with a literal <code>-</code> are impossible to express, which is acceptable since field names are identifiers, not arbitrary strings.</p>
+<p><strong><code>ListAllAsync</code> is kept, not removed or renamed.</strong>
+Rationale: still useful for small, bounded catalogs where paging is overhead. Only <code>ListPagedAsync</code> is added as a new, separate repository method. The backlog's suggestion to mark the no-filter overload <code>[Obsolete]</code> is left as a documentation note rather than an attribute, to avoid a breaking compiler warning across the whole solution as part of this change.</p>
+<p><strong><code>IPagedQuery&lt;TItem&gt;</code> extends the existing <code>IQuery&lt;PagedResult&lt;TItem&gt;&gt;</code> with nullable <code>Page</code>/<code>PageSize</code>/<code>Sort</code> properties</strong>, relying on <code>QueryEndpointMapper</code>'s existing constructor-parameter binding from route/query string rather than introducing new binding infrastructure.
+Rationale: minimizes new surface in <code>Raftel.Api.Server</code>; the mapper already does the work needed. <code>ApiParametersBuilder</code> only needs to special-case <code>IPagedQuery&lt;&gt;</code> to document the three parameters in OpenAPI.</p>
+<p><strong><code>GetAllTenantsQuery</code> migration is a genuine breaking change to that one endpoint's response shape</strong> (bare array → paged envelope), not hidden behind a compatibility shim.
+Rationale: per CLAUDE.md, no backwards-compatibility hacks; the change is small in scope (one endpoint) and is explicitly documented in <code>BREAKING_CHANGES.md</code> rather than papered over.</p>
+<h2 id="risks--trade-offs">Risks / Trade-offs</h2>
+<ul>
+<li><strong>[Risk]</strong> Two separate queries (count, then page) can observe different snapshots under concurrent writes — a row inserted between the count and the page query can shift page boundaries. → <strong>Mitigation</strong>: acceptable for a numbered-pager UI (not a real-time feed); documented as a known limitation, not solved by this change. Cursor/keyset pagination (deferred, see proposal's Alternatives) would close this gap for high-churn tables.</li>
+<li><strong>[Risk]</strong> <code>MaxPageSize</code> set too low by an application via <code>PaginationOptions</code> could break existing UIs that expect larger pages. → <strong>Mitigation</strong>: configurable per-application with a sane framework default (200); enforced consistently so violations surface as <code>400</code> during development, not silently.</li>
+<li><strong>[Risk]</strong> <code>SortMap&lt;TEntity&gt;</code> allow-lists must be authored per entity; a forgotten entity means sorting simply isn't available for it (fails safe) but requires a developer to remember to add the map. → <strong>Mitigation</strong>: unknown-field resolution returns a clear <code>Error.Validation</code>, not a silent no-op, making the gap discoverable immediately during integration/functional testing.</li>
+<li><strong>[Trade-off]</strong> Response headers (<code>X-Total-Count</code>, <code>X-Total-Pages</code>) duplicate information already in the paged body. → <strong>Mitigation</strong>: kept optional/additive so clients that only read the body are unaffected; useful for clients doing HEAD-style total lookups or generic paging UI components.</li>
+</ul>
+<h2 id="migration-plan">Migration Plan</h2>
+<ol>
+<li>Add domain/application types first (<code>PageRequest</code>, <code>PagedResult&lt;T&gt;</code>, <code>SortRequest</code>, <code>SortDirection</code>, <code>SortMap&lt;TEntity&gt;</code>, <code>IPagedQuery&lt;TItem&gt;</code>, <code>PaginationOptions</code>) — purely additive, no existing code touched.</li>
+<li>Add <code>IRepository.ListPagedAsync</code> and its <code>EfRepository</code> implementation — additive; <code>ListAllAsync</code> untouched.</li>
+<li>Wire <code>ApiParametersBuilder</code>/<code>QueryEndpointMapper</code> support for <code>IPagedQuery&lt;&gt;</code> — additive to the endpoint pipeline.</li>
+<li>Migrate <code>GetAllTenantsQuery</code> to <code>IPagedQuery&lt;TenantResponse&gt;</code> last, once the underlying primitives are tested — this is the one breaking step; document the response-shape change in <code>BREAKING_CHANGES.md</code> in the same commit.</li>
+<li>No rollback tooling needed beyond standard git revert — no data migration, no schema change, purely code-level.</li>
+</ol>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/pagination-and-sorting/design.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

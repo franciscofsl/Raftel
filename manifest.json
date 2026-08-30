@@ -1372,6 +1372,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.PaginationOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.PaginationOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.PaginationOptions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Queries.IPagedQuery-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Queries.IPagedQuery-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Queries.IPagedQuery<TItem>",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Queries.IQuery-1.yml",
       "output": {
         ".html": {
@@ -1526,6 +1554,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Abstractions.IPagedResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Abstractions.IPagedResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Abstractions.IPagedResult",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Domain.Abstractions.IRepository-2.yml",
       "output": {
         ".html": {
@@ -1537,6 +1579,34 @@
       "IsMRef": true,
       "Title": "Raftel.Domain.Abstractions.IRepository<TEntity, TId>",
       "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.IRepository-2.yml\" sourcestartlinenumber=\"1\">Defines a generic repository interface for managing aggregate root entities.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Abstractions.PageRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Abstractions.PageRequest.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Abstractions.PageRequest",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.PageRequest.yml\" sourcestartlinenumber=\"1\">Represents a validated, 1-based page request with a bounded page size.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Abstractions.PagedResult-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Abstractions.PagedResult-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Abstractions.PagedResult<T>",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.PagedResult-1.yml\" sourcestartlinenumber=\"1\">Represents a page of results along with the paging metadata needed to navigate the full set.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1565,6 +1635,34 @@
       "IsMRef": true,
       "Title": "Raftel.Domain.Abstractions.Result",
       "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.Result.yml\" sourcestartlinenumber=\"1\">Represents the result of an operation, encapsulating success or failure information.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Abstractions.SortDirection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Abstractions.SortDirection.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Abstractions.SortDirection",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.SortDirection.yml\" sourcestartlinenumber=\"1\">Represents the direction a sort field is applied in.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Abstractions.SortRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Abstractions.SortRequest.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Abstractions.SortRequest",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.SortRequest.yml\" sourcestartlinenumber=\"1\">Represents a single client-requested sort field and direction.\nA leading <code>-</code> on the field name indicates descending order (e.g. &quot;-createdAt&quot;).</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -2097,6 +2195,34 @@
       "IsMRef": true,
       "Title": "Raftel.Domain.Specifications.OrSpecification<TModel>",
       "Summary": "<p sourcefile=\"api/Raftel.Domain.Specifications.OrSpecification-1.yml\" sourcestartlinenumber=\"1\">Represents a logical OR specification that combines two other specifications.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Specifications.SortMap-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Specifications.SortMap-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Specifications.SortMap<TEntity>",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Specifications.SortMap-1.yml\" sourcestartlinenumber=\"1\">Declares the explicit allow-list of fields an entity can be sorted by, resolving a\nclient-supplied field name to the expression to sort with. Fields not declared here\nare rejected rather than resolved via reflection, so client input never reaches\nquery construction unvalidated.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Specifications.SortSelector-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Specifications.SortSelector-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Specifications.SortSelector<TEntity>",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Specifications.SortSelector-1.yml\" sourcestartlinenumber=\"1\">Represents an already-resolved, safe-to-use sort expression paired with its direction,\nproduced by <xref href=\"Raftel.Domain.Specifications.SortMap%601\" data-throw-if-not-resolved=\"false\"></xref> from a client-supplied <xref href=\"Raftel.Domain.Abstractions.SortRequest\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -3200,6 +3326,46 @@
       "output": {
         ".html": {
           "relative_path": "openspec/changes/error-typed-http-mapping/tasks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/pagination-and-sorting/design.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/pagination-and-sorting/design.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/pagination-and-sorting/proposal.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/pagination-and-sorting/proposal.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/pagination-and-sorting/specs/pagination-and-sorting/spec.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/pagination-and-sorting/specs/pagination-and-sorting/spec.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/pagination-and-sorting/tasks.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/pagination-and-sorting/tasks.html"
         }
       },
       "version": ""

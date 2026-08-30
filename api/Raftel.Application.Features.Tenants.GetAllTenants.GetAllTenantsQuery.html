@@ -102,7 +102,7 @@ Class GetAllTenantsQuery  <a class="header-action link-secondary" title="View so
 
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[RequiresPermission(&quot;Tenants.View&quot;)]
-public sealed record GetAllTenantsQuery : IQuery&lt;List&lt;GetAllTenantsResponse&gt;&gt;, IRequest&lt;Result&lt;List&lt;GetAllTenantsResponse&gt;&gt;&gt;, IEquatable&lt;GetAllTenantsQuery&gt;</code></pre>
+public sealed record GetAllTenantsQuery : IPagedQuery&lt;GetAllTenantsResponse&gt;, IQuery&lt;PagedResult&lt;GetAllTenantsResponse&gt;&gt;, IRequest&lt;Result&lt;PagedResult&lt;GetAllTenantsResponse&gt;&gt;&gt;, IEquatable&lt;GetAllTenantsQuery&gt;</code></pre>
   </div>
 
 
@@ -119,8 +119,9 @@ public sealed record GetAllTenantsQuery : IQuery&lt;List&lt;GetAllTenantsRespons
   <dl class="typelist implements">
     <dt>Implements</dt>
     <dd>
-      <div><a class="xref" href="Raftel.Application.Queries.IQuery-1.html">IQuery</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html">GetAllTenantsResponse</a>&gt;&gt;</div>
-      <div><a class="xref" href="Raftel.Application.Abstractions.IRequest-1.html">IRequest</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html">GetAllTenantsResponse</a>&gt;&gt;&gt;</div>
+      <div><a class="xref" href="Raftel.Application.Queries.IPagedQuery-1.html">IPagedQuery</a>&lt;<a class="xref" href="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html">GetAllTenantsResponse</a>&gt;</div>
+      <div><a class="xref" href="Raftel.Application.Queries.IQuery-1.html">IQuery</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.PagedResult-1.html">PagedResult</a>&lt;<a class="xref" href="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html">GetAllTenantsResponse</a>&gt;&gt;</div>
+      <div><a class="xref" href="Raftel.Application.Abstractions.IRequest-1.html">IRequest</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result</a>&lt;<a class="xref" href="Raftel.Domain.Abstractions.PagedResult-1.html">PagedResult</a>&lt;<a class="xref" href="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html">GetAllTenantsResponse</a>&gt;&gt;&gt;</div>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html">GetAllTenantsQuery</a>&gt;</div>
     </dd>
   </dl>
@@ -160,8 +161,8 @@ public sealed record GetAllTenantsQuery : IQuery&lt;List&lt;GetAllTenantsRespons
 
   <a id="Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery__ctor_" data-uid="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor*"></a>
 
-  <h3 id="Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery__ctor" data-uid="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor">
-  GetAllTenantsQuery()
+  <h3 id="Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery__ctor_System_Nullable_System_Int32__System_Nullable_System_Int32__System_String_" data-uid="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+  GetAllTenantsQuery(int?, int?, string)
   <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/GetAllTenants/GetAllTenantsQuery.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -169,13 +170,119 @@ public sealed record GetAllTenantsQuery : IQuery&lt;List&lt;GetAllTenantsRespons
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GetAllTenantsQuery()</code></pre>
+    <pre><code class="lang-csharp hljs">public GetAllTenantsQuery(int? Page, int? PageSize, string Sort)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>Page</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+    <dt><code>PageSize</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+    <dt><code>Sort</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_Page_" data-uid="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Page*"></a>
+
+  <h3 id="Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_Page" data-uid="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Page">
+  Page
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/GetAllTenants/GetAllTenantsQuery.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Page { get; init; }</code></pre>
   </div>
 
 
 
 
 
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_PageSize_" data-uid="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.PageSize*"></a>
+
+  <h3 id="Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_PageSize" data-uid="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.PageSize">
+  PageSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/GetAllTenants/GetAllTenantsQuery.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? PageSize { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_Sort_" data-uid="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Sort*"></a>
+
+  <h3 id="Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_Sort" data-uid="Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Sort">
+  Sort
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Features/Tenants/GetAllTenants/GetAllTenantsQuery.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Sort { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 

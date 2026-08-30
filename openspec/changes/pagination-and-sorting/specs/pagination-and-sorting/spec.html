@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/pagination-and-sorting/specs/pagination-and-sorting/spec.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../../index.html">
+            <img id="logo" class="svg" src="../../../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="purpose">Purpose</h2>
+<p>Gives the framework a bounded, deterministic way to page and sort collections end-to-end — from repository query through query handler to HTTP response and back into the typed client — so no framework query can silently return an unbounded result set.</p>
+<h2 id="added-requirements">ADDED Requirements</h2>
+<h3 id="requirement-page-request-validation">Requirement: Page request validation</h3>
+<p>The system SHALL validate page and page-size inputs before they reach any query, rejecting invalid values with a validation error rather than silently clamping or ignoring them.</p>
+<h4 id="scenario-page-below-one-is-rejected">Scenario: Page below one is rejected</h4>
+<ul>
+<li><strong>WHEN</strong> a page request is created with <code>page = 0</code> or a negative page</li>
+<li><strong>THEN</strong> the system returns a validation failure and does not execute a query</li>
+</ul>
+<h4 id="scenario-page-size-out-of-bounds-is-rejected">Scenario: Page size out of bounds is rejected</h4>
+<ul>
+<li><strong>WHEN</strong> a page request is created with <code>pageSize &lt; 1</code> or <code>pageSize</code> greater than the configured maximum</li>
+<li><strong>THEN</strong> the system returns a validation failure and does not silently clamp the value</li>
+</ul>
+<h4 id="scenario-valid-page-request-is-accepted">Scenario: Valid page request is accepted</h4>
+<ul>
+<li><strong>WHEN</strong> a page request is created with <code>page &gt;= 1</code> and <code>1 &lt;= pageSize &lt;= MaxPageSize</code></li>
+<li><strong>THEN</strong> the system produces a usable page request with the given page and page size</li>
+</ul>
+<h3 id="requirement-paged-result-shape">Requirement: Paged result shape</h3>
+<p>The system SHALL represent a page of results with the items returned, the requesting page and page size, and the total count of matching items across all pages.</p>
+<h4 id="scenario-total-pages-computed-from-total-count">Scenario: Total pages computed from total count</h4>
+<ul>
+<li><strong>WHEN</strong> a paged result is built with 11 total matching items and a page size of 5</li>
+<li><strong>THEN</strong> the reported total page count is 3</li>
+</ul>
+<h4 id="scenario-previousnext-availability-at-boundaries">Scenario: Previous/next availability at boundaries</h4>
+<ul>
+<li><strong>WHEN</strong> a paged result is on the first page</li>
+<li><strong>THEN</strong> it reports no previous page available</li>
+<li><strong>WHEN</strong> a paged result is on the last page</li>
+<li><strong>THEN</strong> it reports no next page available</li>
+<li><strong>WHEN</strong> a paged result is on an intermediate page</li>
+<li><strong>THEN</strong> it reports both a previous and a next page available</li>
+</ul>
+<h4 id="scenario-empty-result-set">Scenario: Empty result set</h4>
+<ul>
+<li><strong>WHEN</strong> a query matches zero items</li>
+<li><strong>THEN</strong> the system returns a paged result with an empty item list and a total count of zero, without querying for items</li>
+</ul>
+<h3 id="requirement-sort-expression-parsing">Requirement: Sort expression parsing</h3>
+<p>The system SHALL parse a client-supplied sort string into an ordered list of field/direction pairs, using a leading <code>-</code> on a field name to indicate descending order and its absence to indicate ascending order.</p>
+<h4 id="scenario-single-ascending-field">Scenario: Single ascending field</h4>
+<ul>
+<li><strong>WHEN</strong> the sort string is <code>&quot;name&quot;</code></li>
+<li><strong>THEN</strong> the system parses one sort entry for field <code>name</code> in ascending order</li>
+</ul>
+<h4 id="scenario-single-descending-field">Scenario: Single descending field</h4>
+<ul>
+<li><strong>WHEN</strong> the sort string is <code>&quot;-createdAt&quot;</code></li>
+<li><strong>THEN</strong> the system parses one sort entry for field <code>createdAt</code> in descending order</li>
+</ul>
+<h4 id="scenario-multiple-comma-separated-fields">Scenario: Multiple comma-separated fields</h4>
+<ul>
+<li><strong>WHEN</strong> the sort string is <code>&quot;a,-b&quot;</code></li>
+<li><strong>THEN</strong> the system parses two sort entries, in order: field <code>a</code> ascending, field <code>b</code> descending</li>
+</ul>
+<h4 id="scenario-empty-or-absent-sort-string">Scenario: Empty or absent sort string</h4>
+<ul>
+<li><strong>WHEN</strong> the sort string is empty or not provided</li>
+<li><strong>THEN</strong> the system parses to an empty ordered list and applies no client-requested ordering</li>
+</ul>
+<h3 id="requirement-sortable-field-allow-listing">Requirement: Sortable field allow-listing</h3>
+<p>The system SHALL restrict which fields a client can sort by to an explicit, per-entity allow-list, and SHALL reject any sort field not on that list with a validation error rather than ignoring it or building an unvalidated dynamic expression.</p>
+<h4 id="scenario-allowed-field-resolves">Scenario: Allowed field resolves</h4>
+<ul>
+<li><strong>WHEN</strong> a sort field that has been explicitly allowed for an entity is resolved</li>
+<li><strong>THEN</strong> the system produces the expression to sort by, without string-interpolating client input into a query</li>
+</ul>
+<h4 id="scenario-unknown-field-is-rejected">Scenario: Unknown field is rejected</h4>
+<ul>
+<li><strong>WHEN</strong> a sort field that has not been declared allowed for an entity is resolved</li>
+<li><strong>THEN</strong> the system returns a validation error and does not perform an unordered or silently-ignored sort</li>
+</ul>
+<h3 id="requirement-repository-paged-listing">Requirement: Repository paged listing</h3>
+<p>The system SHALL provide a repository operation that returns a page of entities matching an optional filter, ordered by an optional client-requested sort, alongside the total count of matching entities — without ever materializing the full unfiltered/unpaged result set into memory.</p>
+<h4 id="scenario-correct-page-and-total-count">Scenario: Correct page and total count</h4>
+<ul>
+<li><strong>WHEN</strong> a paged listing is requested for a given page, page size, and optional filter</li>
+<li><strong>THEN</strong> the returned page contains at most <code>pageSize</code> items belonging to that page, and the total count reflects all matching entities, not just the returned page</li>
+</ul>
+<h4 id="scenario-stable-ordering-across-pages">Scenario: Stable ordering across pages</h4>
+<ul>
+<li><strong>WHEN</strong> every page of a paged listing is retrieved in sequence, with or without a client-requested sort</li>
+<li><strong>THEN</strong> the union of all pages' items equals the full matching set exactly once each, with no duplicates and no omissions</li>
+</ul>
+<h4 id="scenario-global-filters-apply-to-both-count-and-page">Scenario: Global filters apply to both count and page</h4>
+<ul>
+<li><strong>WHEN</strong> a paged listing is requested against an entity subject to soft-delete and/or multitenancy filters</li>
+<li><strong>THEN</strong> both the reported total count and the returned page reflect those global filters</li>
+</ul>
+<h3 id="requirement-query-level-paging-contract">Requirement: Query-level paging contract</h3>
+<p>The system SHALL let a query declare that it returns a paged result and accepts <code>page</code>, <code>pageSize</code>, and <code>sort</code> inputs, binding those inputs from the incoming request without additional per-endpoint wiring.</p>
+<h4 id="scenario-paged-query-bound-from-request">Scenario: Paged query bound from request</h4>
+<ul>
+<li><strong>WHEN</strong> an HTTP request for a paged query includes <code>page</code>, <code>pageSize</code>, and <code>sort</code> values</li>
+<li><strong>THEN</strong> the query handler receives those values and returns a paged result reflecting them</li>
+</ul>
+<h4 id="scenario-paged-query-defaults-when-inputs-omitted">Scenario: Paged query defaults when inputs omitted</h4>
+<ul>
+<li><strong>WHEN</strong> an HTTP request for a paged query omits <code>page</code>, <code>pageSize</code>, or <code>sort</code></li>
+<li><strong>THEN</strong> the system applies the configured default page size, defaults to the first page, and applies no additional client-requested ordering</li>
+</ul>
+<h3 id="requirement-configurable-pagination-limits">Requirement: Configurable pagination limits</h3>
+<p>The system SHALL allow the default page size and the maximum allowed page size to be configured at the application level, and SHALL enforce the configured maximum for every paged query.</p>
+<h4 id="scenario-request-exceeding-configured-maximum-page-size-is-rejected">Scenario: Request exceeding configured maximum page size is rejected</h4>
+<ul>
+<li><strong>WHEN</strong> a client requests a page size greater than the configured maximum</li>
+<li><strong>THEN</strong> the system returns a validation error rather than serving a larger page or silently truncating the requested size</li>
+</ul>
+<h3 id="requirement-paging-and-sort-parameters-documented-in-openapi">Requirement: Paging and sort parameters documented in OpenAPI</h3>
+<p>The system SHALL document <code>page</code>, <code>pageSize</code>, and <code>sort</code> as parameters in the generated OpenAPI description of any endpoint backed by a paged query.</p>
+<h4 id="scenario-openapi-describes-paging-parameters">Scenario: OpenAPI describes paging parameters</h4>
+<ul>
+<li><strong>WHEN</strong> the OpenAPI description is generated for an endpoint backed by a paged query</li>
+<li><strong>THEN</strong> it includes <code>page</code>, <code>pageSize</code>, and <code>sort</code> as documented parameters for that endpoint</li>
+</ul>
+<h3 id="requirement-total-count-exposed-on-paged-http-responses">Requirement: Total count exposed on paged HTTP responses</h3>
+<p>The system SHALL make the total matching count and total page count available on the HTTP response of a paged endpoint, in addition to the response body.</p>
+<h4 id="scenario-total-count-header-present-on-paged-response">Scenario: Total count header present on paged response</h4>
+<ul>
+<li><strong>WHEN</strong> a client calls an endpoint backed by a paged query</li>
+<li><strong>THEN</strong> the HTTP response includes the total matching count and total page count as response headers, alongside the paged body</li>
+</ul>
+<h3 id="requirement-client-side-paging-request-construction">Requirement: Client-side paging request construction</h3>
+<p>The system SHALL let API client callers build a query filter for <code>page</code>, <code>pageSize</code>, and <code>sort</code> symmetrically with the existing client-side query-filter construction from an object.</p>
+<h4 id="scenario-client-builds-a-paged-query-filter">Scenario: Client builds a paged query filter</h4>
+<ul>
+<li><strong>WHEN</strong> a client constructs a query filter with a page, a page size, and an optional sort string</li>
+<li><strong>THEN</strong> the resulting query filter serializes <code>page</code>, <code>pageSize</code>, and <code>sort</code> as it would for any other query-filter parameter</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/pagination-and-sorting/specs/pagination-and-sorting/spec.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

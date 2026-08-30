@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Namespace Raftel.Domain.Specifications | Raftel </title>
+      <title>Interface IPagedResult | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Namespace Raftel.Domain.Specifications | Raftel ">
+      <meta name="title" content="Interface IPagedResult | Raftel ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Abstractions_IPagedResult.md&amp;value=---%0Auid%3A%20Raftel.Domain.Abstractions.IPagedResult%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,50 +84,109 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Domain.Specifications">
+        <article data-uid="Raftel.Domain.Abstractions.IPagedResult">
 
-  <h1 id="Raftel_Domain_Specifications" data-uid="Raftel.Domain.Specifications" class="text-break">Namespace Raftel.Domain.Specifications</h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
 
-    <h3 id="classes">
-Classes
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Specifications.AndSpecification-1.html">AndSpecification&lt;TModel&gt;</a></dt>
-      <dd><p>Represents a logical AND specification that combines two other specifications.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Specifications.OrSpecification-1.html">OrSpecification&lt;TModel&gt;</a></dt>
-      <dd><p>Represents a logical OR specification that combines two other specifications.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Specifications.SortMap-1.html">SortMap&lt;TEntity&gt;</a></dt>
-      <dd><p>Declares the explicit allow-list of fields an entity can be sorted by, resolving a
-client-supplied field name to the expression to sort with. Fields not declared here
-are rejected rather than resolved via reflection, so client input never reaches
-query construction unvalidated.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Specifications.SortSelector-1.html">SortSelector&lt;TEntity&gt;</a></dt>
-      <dd><p>Represents an already-resolved, safe-to-use sort expression paired with its direction,
-produced by <a class="xref" href="Raftel.Domain.Specifications.SortMap-1.html">SortMap&lt;TEntity&gt;</a> from a client-supplied <a class="xref" href="Raftel.Domain.Abstractions.SortRequest.html">SortRequest</a>.</p>
-</dd>
-    </dl>
-    <dl class="jumplist">
-      <dt><a class="xref" href="Raftel.Domain.Specifications.Specification-1.html">Specification&lt;TModel&gt;</a></dt>
-      <dd><p>Represents a base class for specifications that defines a condition for a given model.</p>
-</dd>
-    </dl>
+
+  <h1 id="Raftel_Domain_Abstractions_IPagedResult" data-uid="Raftel.Domain.Abstractions.IPagedResult" class="text-break">
+Interface IPagedResult  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IPagedResult.cs/#L3"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Domain.html">Domain</a>.<a class="xref" href="Raftel.Domain.Abstractions.html">Abstractions</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Raftel.Domain.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IPagedResult</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Raftel_Domain_Abstractions_IPagedResult_TotalCount_" data-uid="Raftel.Domain.Abstractions.IPagedResult.TotalCount*"></a>
+
+  <h3 id="Raftel_Domain_Abstractions_IPagedResult_TotalCount" data-uid="Raftel.Domain.Abstractions.IPagedResult.TotalCount">
+  TotalCount
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IPagedResult.cs/#L5"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">long TotalCount { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Raftel_Domain_Abstractions_IPagedResult_TotalPages_" data-uid="Raftel.Domain.Abstractions.IPagedResult.TotalPages*"></a>
+
+  <h3 id="Raftel_Domain_Abstractions_IPagedResult_TotalPages" data-uid="Raftel.Domain.Abstractions.IPagedResult.TotalPages">
+  TotalPages
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IPagedResult.cs/#L7"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int TotalPages { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
 
 
 </article>
 
         <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Abstractions/IPagedResult.cs/#L3" class="edit-link">Edit this page</a>
         </div>
 
 

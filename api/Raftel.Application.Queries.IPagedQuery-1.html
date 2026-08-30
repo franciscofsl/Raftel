@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class TenantsDependencyInjection | Raftel </title>
+      <title>Interface IPagedQuery&lt;TItem&gt; | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class TenantsDependencyInjection | Raftel ">
+      <meta name="title" content="Interface IPagedQuery&lt;TItem&gt; | Raftel ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Api_Server_Features_Tenants_TenantsDependencyInjection.md&amp;value=---%0Auid%3A%20Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_Queries_IPagedQuery_1.md&amp;value=---%0Auid%3A%20Raftel.Application.Queries.IPagedQuery%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,102 +84,132 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection">
+        <article data-uid="Raftel.Application.Queries.IPagedQuery`1">
 
 
 
-  <h1 id="Raftel_Api_Server_Features_Tenants_TenantsDependencyInjection" data-uid="Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection" class="text-break">
-Class TenantsDependencyInjection  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Tenants/TenantsDependencyInjection.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Application_Queries_IPagedQuery_1" data-uid="Raftel.Application.Queries.IPagedQuery`1" class="text-break">
+Interface IPagedQuery&lt;TItem&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Queries/IPagedQuery.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Api.html">Api</a>.<a class="xref" href="Raftel.Api.Server.html">Server</a>.<a class="xref" href="Raftel.Api.Server.Features.html">Features</a>.<a class="xref" href="Raftel.Api.Server.Features.Tenants.html">Tenants</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>Raftel.Api.Server.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Application.html">Application</a>.<a class="xref" href="Raftel.Application.Queries.html">Queries</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Raftel.Application.dll</dd></dl>
   </div>
 
   <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class TenantsDependencyInjection</code></pre>
+    <pre><code class="lang-csharp hljs">public interface IPagedQuery&lt;TItem&gt; : IQuery&lt;PagedResult&lt;TItem&gt;&gt;, IRequest&lt;Result&lt;PagedResult&lt;TItem&gt;&gt;&gt;</code></pre>
   </div>
 
 
 
-
-  <dl class="typelist inheritance">
-    <dt>Inheritance</dt>
-    <dd>
-      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
-      <div><span class="xref">TenantsDependencyInjection</span></div>
-    </dd>
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TItem</code></dt>
+    <dd></dd>
   </dl>
 
 
 
-  <dl class="typelist inheritedMembers">
-    <dt>Inherited Members</dt>
-    <dd>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
-    </div>
-  </dd></dl>
 
 
 
 
 
 
-  <h2 class="section" id="methods">Methods
+
+  <h2 class="section" id="properties">Properties
 </h2>
 
 
-  <a id="Raftel_Api_Server_Features_Tenants_TenantsDependencyInjection_AddRaftelTenants_" data-uid="Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.AddRaftelTenants*"></a>
+  <a id="Raftel_Application_Queries_IPagedQuery_1_Page_" data-uid="Raftel.Application.Queries.IPagedQuery`1.Page*"></a>
 
-  <h3 id="Raftel_Api_Server_Features_Tenants_TenantsDependencyInjection_AddRaftelTenants_Microsoft_AspNetCore_Routing_IEndpointRouteBuilder_" data-uid="Raftel.Api.Server.Features.Tenants.TenantsDependencyInjection.AddRaftelTenants(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)">
-  AddRaftelTenants(IEndpointRouteBuilder)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Tenants/TenantsDependencyInjection.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Application_Queries_IPagedQuery_1_Page" data-uid="Raftel.Application.Queries.IPagedQuery`1.Page">
+  Page
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Queries/IPagedQuery.cs/#L7"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IEndpointRouteBuilder AddRaftelTenants(this IEndpointRouteBuilder app)</code></pre>
+    <pre><code class="lang-csharp hljs">int? Page { get; }</code></pre>
   </div>
 
-  <h4 class="section">Parameters</h4>
+
+
+
+
+  <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><code>app</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.routing.iendpointroutebuilder">IEndpointRouteBuilder</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
     <dd></dd>
   </dl>
 
-  <h4 class="section">Returns</h4>
+
+
+
+
+
+
+
+  <a id="Raftel_Application_Queries_IPagedQuery_1_PageSize_" data-uid="Raftel.Application.Queries.IPagedQuery`1.PageSize*"></a>
+
+  <h3 id="Raftel_Application_Queries_IPagedQuery_1_PageSize" data-uid="Raftel.Application.Queries.IPagedQuery`1.PageSize">
+  PageSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Queries/IPagedQuery.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int? PageSize { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.routing.iendpointroutebuilder">IEndpointRouteBuilder</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
     <dd></dd>
   </dl>
 
 
 
+
+
+
+
+
+  <a id="Raftel_Application_Queries_IPagedQuery_1_Sort_" data-uid="Raftel.Application.Queries.IPagedQuery`1.Sort*"></a>
+
+  <h3 id="Raftel_Application_Queries_IPagedQuery_1_Sort" data-uid="Raftel.Application.Queries.IPagedQuery`1.Sort">
+  Sort
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Queries/IPagedQuery.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Sort { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -192,7 +222,7 @@ Class TenantsDependencyInjection  <a class="header-action link-secondary" title=
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Tenants/TenantsDependencyInjection.cs/#L11" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Queries/IPagedQuery.cs/#L5" class="edit-link">Edit this page</a>
         </div>
 
 

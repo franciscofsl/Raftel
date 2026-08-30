@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Interface IUsersRepository | Raftel </title>
+      <title>Class PaginationOptions | Raftel </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Interface IUsersRepository | Raftel ">
+      <meta name="title" content="Class PaginationOptions | Raftel ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Domain_Features_Users_IUsersRepository.md&amp;value=---%0Auid%3A%20Raftel.Domain.Features.Users.IUsersRepository%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/new/main/apiSpec/new?filename=Raftel_Application_PaginationOptions.md&amp;value=---%0Auid%3A%20Raftel.Application.PaginationOptions%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -84,29 +84,36 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="Raftel.Domain.Features.Users.IUsersRepository">
+        <article data-uid="Raftel.Application.PaginationOptions">
 
 
 
-  <h1 id="Raftel_Domain_Features_Users_IUsersRepository" data-uid="Raftel.Domain.Features.Users.IUsersRepository" class="text-break">
-Interface IUsersRepository  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Users/IUsersRepository.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  <h1 id="Raftel_Application_PaginationOptions" data-uid="Raftel.Application.PaginationOptions" class="text-break">
+Class PaginationOptions  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/PaginationOptions.cs/#L5"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Domain.html">Domain</a>.<a class="xref" href="Raftel.Domain.Features.html">Features</a>.<a class="xref" href="Raftel.Domain.Features.Users.html">Users</a></dd></dl>
-  <dl><dt>Assembly</dt><dd>Raftel.Domain.dll</dd></dl>
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Application.html">Application</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Raftel.Application.dll</dd></dl>
   </div>
 
   <div class="markdown summary"></div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IUsersRepository : IRepository&lt;User, UserId&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class PaginationOptions</code></pre>
   </div>
 
 
 
 
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">PaginationOptions</span></div>
+    </dd>
+  </dl>
 
 
 
@@ -114,22 +121,22 @@ Interface IUsersRepository  <a class="header-action link-secondary" title="View 
     <dt>Inherited Members</dt>
     <dd>
     <div>
-      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_GetByIdAsync__1_System_Threading_CancellationToken_">IRepository&lt;User, UserId&gt;.GetByIdAsync(UserId, CancellationToken)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
     </div>
     <div>
-      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListAllAsync_System_Linq_Expressions_Expression_System_Func__0_System_Boolean___System_Threading_CancellationToken_">IRepository&lt;User, UserId&gt;.ListAllAsync(Expression&lt;Func&lt;User, bool&gt;&gt;, CancellationToken)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListPagedAsync_Raftel_Domain_Abstractions_PageRequest_System_Linq_Expressions_Expression_System_Func__0_System_Boolean___System_Collections_Generic_IReadOnlyList_Raftel_Domain_Specifications_SortSelector__0___System_Threading_CancellationToken_">IRepository&lt;User, UserId&gt;.ListPagedAsync(PageRequest, Expression&lt;Func&lt;User, bool&gt;&gt;, IReadOnlyList&lt;SortSelector&lt;User&gt;&gt;, CancellationToken)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
     </div>
     <div>
-      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_AddAsync__0_System_Threading_CancellationToken_">IRepository&lt;User, UserId&gt;.AddAsync(User, CancellationToken)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
     </div>
     <div>
-      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Update__0_">IRepository&lt;User, UserId&gt;.Update(User)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
     <div>
-      <a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Remove__0_">IRepository&lt;User, UserId&gt;.Remove(User)</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
     </div>
   </dd></dl>
 
@@ -138,40 +145,64 @@ Interface IUsersRepository  <a class="header-action link-secondary" title="View 
 
 
 
-  <h2 class="section" id="methods">Methods
+  <h2 class="section" id="properties">Properties
 </h2>
 
 
-  <a id="Raftel_Domain_Features_Users_IUsersRepository_EmailIsUniqueAsync_" data-uid="Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync*"></a>
+  <a id="Raftel_Application_PaginationOptions_DefaultPageSize_" data-uid="Raftel.Application.PaginationOptions.DefaultPageSize*"></a>
 
-  <h3 id="Raftel_Domain_Features_Users_IUsersRepository_EmailIsUniqueAsync_System_String_System_Threading_CancellationToken_" data-uid="Raftel.Domain.Features.Users.IUsersRepository.EmailIsUniqueAsync(System.String,System.Threading.CancellationToken)">
-  EmailIsUniqueAsync(string, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Users/IUsersRepository.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Application_PaginationOptions_DefaultPageSize" data-uid="Raftel.Application.PaginationOptions.DefaultPageSize">
+  DefaultPageSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/PaginationOptions.cs/#L7"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;bool&gt; EmailIsUniqueAsync(string email, CancellationToken token)</code></pre>
+    <pre><code class="lang-csharp hljs">public int DefaultPageSize { get; set; }</code></pre>
   </div>
 
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>email</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
-    <dt><code>token</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
-    <dd></dd>
-  </dl>
 
-  <h4 class="section">Returns</h4>
+
+
+
+  <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
     <dd></dd>
   </dl>
 
 
 
+
+
+
+
+
+  <a id="Raftel_Application_PaginationOptions_MaxPageSize_" data-uid="Raftel.Application.PaginationOptions.MaxPageSize*"></a>
+
+  <h3 id="Raftel_Application_PaginationOptions_MaxPageSize" data-uid="Raftel.Application.PaginationOptions.MaxPageSize">
+  MaxPageSize
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/PaginationOptions.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxPageSize { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
 
 
 
@@ -184,7 +215,7 @@ Interface IUsersRepository  <a class="header-action link-secondary" title="View 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Features/Users/IUsersRepository.cs/#L6" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/PaginationOptions.cs/#L5" class="edit-link">Edit this page</a>
         </div>
 
 

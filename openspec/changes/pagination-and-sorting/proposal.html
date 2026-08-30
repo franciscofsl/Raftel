@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/pagination-and-sorting/proposal.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="why">Why</h2>
+<p><code>IRepository.ListAllAsync</code> materializes the entire table with no limit — <code>GetAllTenantsQuery</code> returns every tenant, and with 100k rows the API falls over. The solution has no <code>PagedResult</code>, <code>PageRequest</code>, or <code>Sort</code> types anywhere. <code>Raftel.Api.Client.QueryFilter</code> already knows how to build query strings from an object (<code>FromObject</code>), but nothing server-side consumes <code>page</code>, <code>pageSize</code>, or <code>sort</code> — the client half of the contract exists without its server counterpart.</p>
+<h2 id="what-changes">What Changes</h2>
+<ul>
+<li>Add <code>PageRequest</code> (validated, 1-based page, bounded page size) and <code>PagedResult&lt;T&gt;</code> (with <code>Map</code>) to <code>Raftel.Domain.Abstractions</code>.</li>
+<li>Add <code>SortRequest</code>/<code>SortDirection</code> with a JSON:API-style <code>-field</code> parsing convention, and <code>SortMap&lt;TEntity&gt;</code> — a per-entity allow-list that resolves a client-supplied field name to an <code>Expression&lt;Func&lt;TEntity, object&gt;&gt;</code>, rejecting unknown fields with <code>Error.Validation</code> instead of building unsafe dynamic expressions.</li>
+<li>Add <code>IRepository.ListPagedAsync(PageRequest, filter?, sort?, cancellationToken)</code> and implement it in <code>EfRepository</code>: count + page in two queries (portable across SqlServer/PostgreSQL), with a mandatory stable tie-break (<code>ThenBy(Id)</code>) so <code>Skip/Take</code> never drifts across pages.</li>
+<li>Add <code>IPagedQuery&lt;TItem&gt;</code> to <code>Raftel.Application</code> so queries can declare <code>Page</code>/<code>PageSize</code>/<code>Sort</code> and get them bound automatically from route/query string via the existing <code>QueryEndpointMapper</code>.</li>
+<li>Add <code>PaginationOptions</code> (<code>DefaultPageSize</code>, <code>MaxPageSize</code>) registered through <code>IRaftelApplicationBuilder</code>.</li>
+<li>Document <code>page</code>/<code>pageSize</code>/<code>sort</code> in OpenAPI for <code>IPagedQuery&lt;&gt;</code> requests, and emit optional <code>X-Total-Count</code>/<code>X-Total-Pages</code> response headers.</li>
+<li>Add a <code>Raftel.Api.Client.QueryFilter.Paged(...)</code> helper symmetric with the existing <code>FromObject</code>.</li>
+<li><strong>BREAKING</strong> (endpoint contract only, not the framework): migrate <code>GetAllTenantsQuery</code> from an unbounded list response to <code>IPagedQuery&lt;TenantResponse&gt;</code> — the <code>GET /api/tenants</code> response shape changes from a bare array to a paged envelope.</li>
+<li><code>ListAllAsync</code> is kept as-is for small catalogs; no framework-level breaking change.</li>
+</ul>
+<h2 id="capabilities">Capabilities</h2>
+<h3 id="new-capabilities">New Capabilities</h3>
+<ul>
+<li><code>pagination-and-sorting</code>: Framework-level paging (<code>PageRequest</code>, <code>PagedResult&lt;T&gt;</code>), sorting (<code>SortRequest</code>, <code>SortMap&lt;TEntity&gt;</code>), the <code>IRepository.ListPagedAsync</code> contract, <code>IPagedQuery&lt;TItem&gt;</code> query binding, <code>PaginationOptions</code>, OpenAPI documentation of paging/sort parameters, and the client-side <code>QueryFilter.Paged</code> helper.</li>
+</ul>
+<h3 id="modified-capabilities">Modified Capabilities</h3>
+<p>(none — no existing specs describe <code>GetAllTenantsQuery</code>'s current unbounded behavior; its migration is covered as part of the new capability's acceptance criteria and as an example consumer, not as a delta to a pre-existing spec.)</p>
+<h2 id="impact">Impact</h2>
+<ul>
+<li><strong>New</strong>: <code>src/Raftel.Domain/Abstractions/{PageRequest,PagedResult,SortRequest,SortDirection}.cs</code>, <code>src/Raftel.Domain/Specifications/SortMap.cs</code>, <code>src/Raftel.Application/Queries/IPagedQuery.cs</code>, <code>src/Raftel.Application/PaginationOptions.cs</code>.</li>
+<li><strong>Modified</strong>: <code>src/Raftel.Domain/Abstractions/IRepository.cs</code>, <code>src/Raftel.Infrastructure/Data/EfRepository.cs</code>, <code>src/Raftel.Api.Server/AutoEndpoints/{ApiParametersBuilder,QueryEndpointMapper}.cs</code>, <code>src/Raftel.Application/Features/Tenants/GetAllTenants/*</code>, <code>src/Raftel.Api.Client/QueryFilter.cs</code>, <code>demo/**</code> (one paginated example query).</li>
+<li><strong>Tests</strong>: new unit tests (<code>Raftel.Domain.Tests</code>), integration tests against Testcontainers (<code>Raftel.Infrastructure.Tests</code>), and functional HTTP contract tests (<code>Raftel.Api.FunctionalTests</code>).</li>
+<li><strong>Depends on</strong>: change <code>error-typed-http-mapping</code> (typed <code>Error</code>/<code>Result</code> used for validation failures) and cancellation-token propagation (backlog item 02) — paging queries must accept and forward a <code>CancellationToken</code>.</li>
+<li><strong>Consumers</strong>: any endpoint returning unbounded collections should eventually migrate to <code>IPagedQuery&lt;&gt;</code>; only <code>GetAllTenantsQuery</code> is migrated as part of this change, documented in <code>BREAKING_CHANGES.md</code>.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/pagination-and-sorting/proposal.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -100,6 +100,16 @@ Classes
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Domain.Abstractions.PageRequest.html">PageRequest</a></dt>
+      <dd><p>Represents a validated, 1-based page request with a bounded page size.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Domain.Abstractions.PagedResult-1.html">PagedResult&lt;T&gt;</a></dt>
+      <dd><p>Represents a page of results along with the paging metadata needed to navigate the full set.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Raftel.Domain.Abstractions.Result.html">Result</a></dt>
       <dd><p>Represents the result of an operation, encapsulating success or failure information.</p>
 </dd>
@@ -107,6 +117,12 @@ Classes
     <dl class="jumplist">
       <dt><a class="xref" href="Raftel.Domain.Abstractions.Result-1.html">Result&lt;TValue&gt;</a></dt>
       <dd><p>Represents the result of an operation with a value.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Domain.Abstractions.SortRequest.html">SortRequest</a></dt>
+      <dd><p>Represents a single client-requested sort field and direction.
+A leading <code>-</code> on the field name indicates descending order (e.g. &quot;-createdAt&quot;).</p>
 </dd>
     </dl>
     <h3 id="interfaces">
@@ -125,6 +141,10 @@ Interfaces
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Domain.Abstractions.IPagedResult.html">IPagedResult</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Raftel.Domain.Abstractions.IRepository-2.html">IRepository&lt;TEntity, TId&gt;</a></dt>
       <dd><p>Defines a generic repository interface for managing aggregate root entities.</p>
 </dd>
@@ -135,6 +155,11 @@ Enums
     <dl class="jumplist">
       <dt><a class="xref" href="Raftel.Domain.Abstractions.ErrorType.html">ErrorType</a></dt>
       <dd><p>Classifies the semantic category of an <a class="xref" href="Raftel.Domain.Abstractions.Error.html">Error</a>.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Domain.Abstractions.SortDirection.html">SortDirection</a></dt>
+      <dd><p>Represents the direction a sort field is applied in.</p>
 </dd>
     </dl>
 

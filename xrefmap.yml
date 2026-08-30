@@ -42,6 +42,22 @@ references:
   isSpec: "True"
   fullName: Raftel.Api.Client.QueryFilter.FromObject
   nameWithType: QueryFilter.FromObject
+- uid: Raftel.Api.Client.QueryFilter.Paged(System.Int32,System.Int32,System.String)
+  name: Paged(int, int, string)
+  href: api/Raftel.Api.Client.QueryFilter.html#Raftel_Api_Client_QueryFilter_Paged_System_Int32_System_Int32_System_String_
+  commentId: M:Raftel.Api.Client.QueryFilter.Paged(System.Int32,System.Int32,System.String)
+  name.vb: Paged(Integer, Integer, String)
+  fullName: Raftel.Api.Client.QueryFilter.Paged(int, int, string)
+  fullName.vb: Raftel.Api.Client.QueryFilter.Paged(Integer, Integer, String)
+  nameWithType: QueryFilter.Paged(int, int, string)
+  nameWithType.vb: QueryFilter.Paged(Integer, Integer, String)
+- uid: Raftel.Api.Client.QueryFilter.Paged*
+  name: Paged
+  href: api/Raftel.Api.Client.QueryFilter.html#Raftel_Api_Client_QueryFilter_Paged_
+  commentId: Overload:Raftel.Api.Client.QueryFilter.Paged
+  isSpec: "True"
+  fullName: Raftel.Api.Client.QueryFilter.Paged
+  nameWithType: QueryFilter.Paged
 - uid: Raftel.Api.Client.QueryFilter.ToString
   name: ToString()
   href: api/Raftel.Api.Client.QueryFilter.html#Raftel_Api_Client_QueryFilter_ToString
@@ -1422,15 +1438,15 @@ references:
   commentId: T:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery
   fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery
   nameWithType: GetAllTenantsQuery
-- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor
-  name: GetAllTenantsQuery()
-  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery__ctor
-  commentId: M:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor
-  name.vb: New()
-  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.GetAllTenantsQuery()
-  fullName.vb: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.New()
-  nameWithType: GetAllTenantsQuery.GetAllTenantsQuery()
-  nameWithType.vb: GetAllTenantsQuery.New()
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)
+  name: GetAllTenantsQuery(int?, int?, string)
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery__ctor_System_Nullable_System_Int32__System_Nullable_System_Int32__System_String_
+  commentId: M:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)
+  name.vb: New(Integer?, Integer?, String)
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.GetAllTenantsQuery(int?, int?, string)
+  fullName.vb: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.New(Integer?, Integer?, String)
+  nameWithType: GetAllTenantsQuery.GetAllTenantsQuery(int?, int?, string)
+  nameWithType.vb: GetAllTenantsQuery.New(Integer?, Integer?, String)
 - uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.#ctor*
   name: GetAllTenantsQuery
   href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery__ctor_
@@ -1441,6 +1457,45 @@ references:
   fullName.vb: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.New
   nameWithType: GetAllTenantsQuery.GetAllTenantsQuery
   nameWithType.vb: GetAllTenantsQuery.New
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Page
+  name: Page
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_Page
+  commentId: P:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Page
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Page
+  nameWithType: GetAllTenantsQuery.Page
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Page*
+  name: Page
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_Page_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Page
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Page
+  nameWithType: GetAllTenantsQuery.Page
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.PageSize
+  name: PageSize
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_PageSize
+  commentId: P:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.PageSize
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.PageSize
+  nameWithType: GetAllTenantsQuery.PageSize
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.PageSize*
+  name: PageSize
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_PageSize_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.PageSize
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.PageSize
+  nameWithType: GetAllTenantsQuery.PageSize
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Sort
+  name: Sort
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_Sort
+  commentId: P:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Sort
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Sort
+  nameWithType: GetAllTenantsQuery.Sort
+- uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Sort*
+  name: Sort
+  href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.html#Raftel_Application_Features_Tenants_GetAllTenants_GetAllTenantsQuery_Sort_
+  commentId: Overload:Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Sort
+  isSpec: "True"
+  fullName: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsQuery.Sort
+  nameWithType: GetAllTenantsQuery.Sort
 - uid: Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse
   name: GetAllTenantsResponse
   href: api/Raftel.Application.Features.Tenants.GetAllTenants.GetAllTenantsResponse.html
@@ -2391,6 +2446,22 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.IRaftelApplicationBuilder.AddQueryMiddleware
   nameWithType: IRaftelApplicationBuilder.AddQueryMiddleware
+- uid: Raftel.Application.IRaftelApplicationBuilder.ConfigurePagination(System.Action{Raftel.Application.PaginationOptions})
+  name: ConfigurePagination(Action<PaginationOptions>)
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_ConfigurePagination_System_Action_Raftel_Application_PaginationOptions__
+  commentId: M:Raftel.Application.IRaftelApplicationBuilder.ConfigurePagination(System.Action{Raftel.Application.PaginationOptions})
+  name.vb: ConfigurePagination(Action(Of PaginationOptions))
+  fullName: Raftel.Application.IRaftelApplicationBuilder.ConfigurePagination(System.Action<Raftel.Application.PaginationOptions>)
+  fullName.vb: Raftel.Application.IRaftelApplicationBuilder.ConfigurePagination(System.Action(Of Raftel.Application.PaginationOptions))
+  nameWithType: IRaftelApplicationBuilder.ConfigurePagination(Action<PaginationOptions>)
+  nameWithType.vb: IRaftelApplicationBuilder.ConfigurePagination(Action(Of PaginationOptions))
+- uid: Raftel.Application.IRaftelApplicationBuilder.ConfigurePagination*
+  name: ConfigurePagination
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_ConfigurePagination_
+  commentId: Overload:Raftel.Application.IRaftelApplicationBuilder.ConfigurePagination
+  isSpec: "True"
+  fullName: Raftel.Application.IRaftelApplicationBuilder.ConfigurePagination
+  nameWithType: IRaftelApplicationBuilder.ConfigurePagination
 - uid: Raftel.Application.IRaftelApplicationBuilder.RegisterServicesFromAssembly(System.Reflection.Assembly)
   name: RegisterServicesFromAssembly(Assembly)
   href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_RegisterServicesFromAssembly_System_Reflection_Assembly_
@@ -2713,12 +2784,104 @@ references:
   fullName.vb: Raftel.Application.Middlewares.ValidationMiddleware(Of TRequest, TResponse).HandleAsync
   nameWithType: ValidationMiddleware<TRequest, TResponse>.HandleAsync
   nameWithType.vb: ValidationMiddleware(Of TRequest, TResponse).HandleAsync
+- uid: Raftel.Application.PaginationOptions
+  name: PaginationOptions
+  href: api/Raftel.Application.PaginationOptions.html
+  commentId: T:Raftel.Application.PaginationOptions
+  fullName: Raftel.Application.PaginationOptions
+  nameWithType: PaginationOptions
+- uid: Raftel.Application.PaginationOptions.DefaultPageSize
+  name: DefaultPageSize
+  href: api/Raftel.Application.PaginationOptions.html#Raftel_Application_PaginationOptions_DefaultPageSize
+  commentId: P:Raftel.Application.PaginationOptions.DefaultPageSize
+  fullName: Raftel.Application.PaginationOptions.DefaultPageSize
+  nameWithType: PaginationOptions.DefaultPageSize
+- uid: Raftel.Application.PaginationOptions.DefaultPageSize*
+  name: DefaultPageSize
+  href: api/Raftel.Application.PaginationOptions.html#Raftel_Application_PaginationOptions_DefaultPageSize_
+  commentId: Overload:Raftel.Application.PaginationOptions.DefaultPageSize
+  isSpec: "True"
+  fullName: Raftel.Application.PaginationOptions.DefaultPageSize
+  nameWithType: PaginationOptions.DefaultPageSize
+- uid: Raftel.Application.PaginationOptions.MaxPageSize
+  name: MaxPageSize
+  href: api/Raftel.Application.PaginationOptions.html#Raftel_Application_PaginationOptions_MaxPageSize
+  commentId: P:Raftel.Application.PaginationOptions.MaxPageSize
+  fullName: Raftel.Application.PaginationOptions.MaxPageSize
+  nameWithType: PaginationOptions.MaxPageSize
+- uid: Raftel.Application.PaginationOptions.MaxPageSize*
+  name: MaxPageSize
+  href: api/Raftel.Application.PaginationOptions.html#Raftel_Application_PaginationOptions_MaxPageSize_
+  commentId: Overload:Raftel.Application.PaginationOptions.MaxPageSize
+  isSpec: "True"
+  fullName: Raftel.Application.PaginationOptions.MaxPageSize
+  nameWithType: PaginationOptions.MaxPageSize
 - uid: Raftel.Application.Queries
   name: Raftel.Application.Queries
   href: api/Raftel.Application.Queries.html
   commentId: N:Raftel.Application.Queries
   fullName: Raftel.Application.Queries
   nameWithType: Raftel.Application.Queries
+- uid: Raftel.Application.Queries.IPagedQuery`1
+  name: IPagedQuery<TItem>
+  href: api/Raftel.Application.Queries.IPagedQuery-1.html
+  commentId: T:Raftel.Application.Queries.IPagedQuery`1
+  name.vb: IPagedQuery(Of TItem)
+  fullName: Raftel.Application.Queries.IPagedQuery<TItem>
+  fullName.vb: Raftel.Application.Queries.IPagedQuery(Of TItem)
+  nameWithType: IPagedQuery<TItem>
+  nameWithType.vb: IPagedQuery(Of TItem)
+- uid: Raftel.Application.Queries.IPagedQuery`1.Page
+  name: Page
+  href: api/Raftel.Application.Queries.IPagedQuery-1.html#Raftel_Application_Queries_IPagedQuery_1_Page
+  commentId: P:Raftel.Application.Queries.IPagedQuery`1.Page
+  fullName: Raftel.Application.Queries.IPagedQuery<TItem>.Page
+  fullName.vb: Raftel.Application.Queries.IPagedQuery(Of TItem).Page
+  nameWithType: IPagedQuery<TItem>.Page
+  nameWithType.vb: IPagedQuery(Of TItem).Page
+- uid: Raftel.Application.Queries.IPagedQuery`1.Page*
+  name: Page
+  href: api/Raftel.Application.Queries.IPagedQuery-1.html#Raftel_Application_Queries_IPagedQuery_1_Page_
+  commentId: Overload:Raftel.Application.Queries.IPagedQuery`1.Page
+  isSpec: "True"
+  fullName: Raftel.Application.Queries.IPagedQuery<TItem>.Page
+  fullName.vb: Raftel.Application.Queries.IPagedQuery(Of TItem).Page
+  nameWithType: IPagedQuery<TItem>.Page
+  nameWithType.vb: IPagedQuery(Of TItem).Page
+- uid: Raftel.Application.Queries.IPagedQuery`1.PageSize
+  name: PageSize
+  href: api/Raftel.Application.Queries.IPagedQuery-1.html#Raftel_Application_Queries_IPagedQuery_1_PageSize
+  commentId: P:Raftel.Application.Queries.IPagedQuery`1.PageSize
+  fullName: Raftel.Application.Queries.IPagedQuery<TItem>.PageSize
+  fullName.vb: Raftel.Application.Queries.IPagedQuery(Of TItem).PageSize
+  nameWithType: IPagedQuery<TItem>.PageSize
+  nameWithType.vb: IPagedQuery(Of TItem).PageSize
+- uid: Raftel.Application.Queries.IPagedQuery`1.PageSize*
+  name: PageSize
+  href: api/Raftel.Application.Queries.IPagedQuery-1.html#Raftel_Application_Queries_IPagedQuery_1_PageSize_
+  commentId: Overload:Raftel.Application.Queries.IPagedQuery`1.PageSize
+  isSpec: "True"
+  fullName: Raftel.Application.Queries.IPagedQuery<TItem>.PageSize
+  fullName.vb: Raftel.Application.Queries.IPagedQuery(Of TItem).PageSize
+  nameWithType: IPagedQuery<TItem>.PageSize
+  nameWithType.vb: IPagedQuery(Of TItem).PageSize
+- uid: Raftel.Application.Queries.IPagedQuery`1.Sort
+  name: Sort
+  href: api/Raftel.Application.Queries.IPagedQuery-1.html#Raftel_Application_Queries_IPagedQuery_1_Sort
+  commentId: P:Raftel.Application.Queries.IPagedQuery`1.Sort
+  fullName: Raftel.Application.Queries.IPagedQuery<TItem>.Sort
+  fullName.vb: Raftel.Application.Queries.IPagedQuery(Of TItem).Sort
+  nameWithType: IPagedQuery<TItem>.Sort
+  nameWithType.vb: IPagedQuery(Of TItem).Sort
+- uid: Raftel.Application.Queries.IPagedQuery`1.Sort*
+  name: Sort
+  href: api/Raftel.Application.Queries.IPagedQuery-1.html#Raftel_Application_Queries_IPagedQuery_1_Sort_
+  commentId: Overload:Raftel.Application.Queries.IPagedQuery`1.Sort
+  isSpec: "True"
+  fullName: Raftel.Application.Queries.IPagedQuery<TItem>.Sort
+  fullName.vb: Raftel.Application.Queries.IPagedQuery(Of TItem).Sort
+  nameWithType: IPagedQuery<TItem>.Sort
+  nameWithType.vb: IPagedQuery(Of TItem).Sort
 - uid: Raftel.Application.Queries.IQueryDispatcher
   name: IQueryDispatcher
   href: api/Raftel.Application.Queries.IQueryDispatcher.html
@@ -2871,6 +3034,22 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.RaftelApplicationBuilder.CommandMiddlewares
   nameWithType: RaftelApplicationBuilder.CommandMiddlewares
+- uid: Raftel.Application.RaftelApplicationBuilder.ConfigurePagination(System.Action{Raftel.Application.PaginationOptions})
+  name: ConfigurePagination(Action<PaginationOptions>)
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_ConfigurePagination_System_Action_Raftel_Application_PaginationOptions__
+  commentId: M:Raftel.Application.RaftelApplicationBuilder.ConfigurePagination(System.Action{Raftel.Application.PaginationOptions})
+  name.vb: ConfigurePagination(Action(Of PaginationOptions))
+  fullName: Raftel.Application.RaftelApplicationBuilder.ConfigurePagination(System.Action<Raftel.Application.PaginationOptions>)
+  fullName.vb: Raftel.Application.RaftelApplicationBuilder.ConfigurePagination(System.Action(Of Raftel.Application.PaginationOptions))
+  nameWithType: RaftelApplicationBuilder.ConfigurePagination(Action<PaginationOptions>)
+  nameWithType.vb: RaftelApplicationBuilder.ConfigurePagination(Action(Of PaginationOptions))
+- uid: Raftel.Application.RaftelApplicationBuilder.ConfigurePagination*
+  name: ConfigurePagination
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_ConfigurePagination_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.ConfigurePagination
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.ConfigurePagination
+  nameWithType: RaftelApplicationBuilder.ConfigurePagination
 - uid: Raftel.Application.RaftelApplicationBuilder.GlobalMiddlewares
   name: GlobalMiddlewares
   href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_GlobalMiddlewares
@@ -2884,6 +3063,19 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.RaftelApplicationBuilder.GlobalMiddlewares
   nameWithType: RaftelApplicationBuilder.GlobalMiddlewares
+- uid: Raftel.Application.RaftelApplicationBuilder.PaginationOptions
+  name: PaginationOptions
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_PaginationOptions
+  commentId: P:Raftel.Application.RaftelApplicationBuilder.PaginationOptions
+  fullName: Raftel.Application.RaftelApplicationBuilder.PaginationOptions
+  nameWithType: RaftelApplicationBuilder.PaginationOptions
+- uid: Raftel.Application.RaftelApplicationBuilder.PaginationOptions*
+  name: PaginationOptions
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_PaginationOptions_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.PaginationOptions
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.PaginationOptions
+  nameWithType: RaftelApplicationBuilder.PaginationOptions
 - uid: Raftel.Application.RaftelApplicationBuilder.QueryMiddlewares
   name: QueryMiddlewares
   href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_QueryMiddlewares
@@ -3187,6 +3379,38 @@ references:
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.IHasDomainEvents.DomainEvents
   nameWithType: IHasDomainEvents.DomainEvents
+- uid: Raftel.Domain.Abstractions.IPagedResult
+  name: IPagedResult
+  href: api/Raftel.Domain.Abstractions.IPagedResult.html
+  commentId: T:Raftel.Domain.Abstractions.IPagedResult
+  fullName: Raftel.Domain.Abstractions.IPagedResult
+  nameWithType: IPagedResult
+- uid: Raftel.Domain.Abstractions.IPagedResult.TotalCount
+  name: TotalCount
+  href: api/Raftel.Domain.Abstractions.IPagedResult.html#Raftel_Domain_Abstractions_IPagedResult_TotalCount
+  commentId: P:Raftel.Domain.Abstractions.IPagedResult.TotalCount
+  fullName: Raftel.Domain.Abstractions.IPagedResult.TotalCount
+  nameWithType: IPagedResult.TotalCount
+- uid: Raftel.Domain.Abstractions.IPagedResult.TotalCount*
+  name: TotalCount
+  href: api/Raftel.Domain.Abstractions.IPagedResult.html#Raftel_Domain_Abstractions_IPagedResult_TotalCount_
+  commentId: Overload:Raftel.Domain.Abstractions.IPagedResult.TotalCount
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IPagedResult.TotalCount
+  nameWithType: IPagedResult.TotalCount
+- uid: Raftel.Domain.Abstractions.IPagedResult.TotalPages
+  name: TotalPages
+  href: api/Raftel.Domain.Abstractions.IPagedResult.html#Raftel_Domain_Abstractions_IPagedResult_TotalPages
+  commentId: P:Raftel.Domain.Abstractions.IPagedResult.TotalPages
+  fullName: Raftel.Domain.Abstractions.IPagedResult.TotalPages
+  nameWithType: IPagedResult.TotalPages
+- uid: Raftel.Domain.Abstractions.IPagedResult.TotalPages*
+  name: TotalPages
+  href: api/Raftel.Domain.Abstractions.IPagedResult.html#Raftel_Domain_Abstractions_IPagedResult_TotalPages_
+  commentId: Overload:Raftel.Domain.Abstractions.IPagedResult.TotalPages
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IPagedResult.TotalPages
+  nameWithType: IPagedResult.TotalPages
 - uid: Raftel.Domain.Abstractions.IRepository`2
   name: IRepository<TEntity, TId>
   href: api/Raftel.Domain.Abstractions.IRepository-2.html
@@ -3248,6 +3472,24 @@ references:
   fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).ListAllAsync
   nameWithType: IRepository<TEntity, TId>.ListAllAsync
   nameWithType.vb: IRepository(Of TEntity, TId).ListAllAsync
+- uid: Raftel.Domain.Abstractions.IRepository`2.ListPagedAsync(Raftel.Domain.Abstractions.PageRequest,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Collections.Generic.IReadOnlyList{Raftel.Domain.Specifications.SortSelector{`0}},System.Threading.CancellationToken)
+  name: ListPagedAsync(PageRequest, Expression<Func<TEntity, bool>>, IReadOnlyList<SortSelector<TEntity>>, CancellationToken)
+  href: api/Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListPagedAsync_Raftel_Domain_Abstractions_PageRequest_System_Linq_Expressions_Expression_System_Func__0_System_Boolean___System_Collections_Generic_IReadOnlyList_Raftel_Domain_Specifications_SortSelector__0___System_Threading_CancellationToken_
+  commentId: M:Raftel.Domain.Abstractions.IRepository`2.ListPagedAsync(Raftel.Domain.Abstractions.PageRequest,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Collections.Generic.IReadOnlyList{Raftel.Domain.Specifications.SortSelector{`0}},System.Threading.CancellationToken)
+  name.vb: ListPagedAsync(PageRequest, Expression(Of Func(Of TEntity, Boolean)), IReadOnlyList(Of SortSelector(Of TEntity)), CancellationToken)
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.ListPagedAsync(Raftel.Domain.Abstractions.PageRequest, System.Linq.Expressions.Expression<System.Func<TEntity, bool>>, System.Collections.Generic.IReadOnlyList<Raftel.Domain.Specifications.SortSelector<TEntity>>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).ListPagedAsync(Raftel.Domain.Abstractions.PageRequest, System.Linq.Expressions.Expression(Of System.Func(Of TEntity, Boolean)), System.Collections.Generic.IReadOnlyList(Of Raftel.Domain.Specifications.SortSelector(Of TEntity)), System.Threading.CancellationToken)
+  nameWithType: IRepository<TEntity, TId>.ListPagedAsync(PageRequest, Expression<Func<TEntity, bool>>, IReadOnlyList<SortSelector<TEntity>>, CancellationToken)
+  nameWithType.vb: IRepository(Of TEntity, TId).ListPagedAsync(PageRequest, Expression(Of Func(Of TEntity, Boolean)), IReadOnlyList(Of SortSelector(Of TEntity)), CancellationToken)
+- uid: Raftel.Domain.Abstractions.IRepository`2.ListPagedAsync*
+  name: ListPagedAsync
+  href: api/Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_ListPagedAsync_
+  commentId: Overload:Raftel.Domain.Abstractions.IRepository`2.ListPagedAsync
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.IRepository<TEntity, TId>.ListPagedAsync
+  fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).ListPagedAsync
+  nameWithType: IRepository<TEntity, TId>.ListPagedAsync
+  nameWithType.vb: IRepository(Of TEntity, TId).ListPagedAsync
 - uid: Raftel.Domain.Abstractions.IRepository`2.Remove(`0)
   name: Remove(TEntity)
   href: api/Raftel.Domain.Abstractions.IRepository-2.html#Raftel_Domain_Abstractions_IRepository_2_Remove__0_
@@ -3282,6 +3524,261 @@ references:
   fullName.vb: Raftel.Domain.Abstractions.IRepository(Of TEntity, TId).Update
   nameWithType: IRepository<TEntity, TId>.Update
   nameWithType.vb: IRepository(Of TEntity, TId).Update
+- uid: Raftel.Domain.Abstractions.PageRequest
+  name: PageRequest
+  href: api/Raftel.Domain.Abstractions.PageRequest.html
+  commentId: T:Raftel.Domain.Abstractions.PageRequest
+  fullName: Raftel.Domain.Abstractions.PageRequest
+  nameWithType: PageRequest
+- uid: Raftel.Domain.Abstractions.PageRequest.Create(System.Int32,System.Int32)
+  name: Create(int, int)
+  href: api/Raftel.Domain.Abstractions.PageRequest.html#Raftel_Domain_Abstractions_PageRequest_Create_System_Int32_System_Int32_
+  commentId: M:Raftel.Domain.Abstractions.PageRequest.Create(System.Int32,System.Int32)
+  name.vb: Create(Integer, Integer)
+  fullName: Raftel.Domain.Abstractions.PageRequest.Create(int, int)
+  fullName.vb: Raftel.Domain.Abstractions.PageRequest.Create(Integer, Integer)
+  nameWithType: PageRequest.Create(int, int)
+  nameWithType.vb: PageRequest.Create(Integer, Integer)
+- uid: Raftel.Domain.Abstractions.PageRequest.Create*
+  name: Create
+  href: api/Raftel.Domain.Abstractions.PageRequest.html#Raftel_Domain_Abstractions_PageRequest_Create_
+  commentId: Overload:Raftel.Domain.Abstractions.PageRequest.Create
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PageRequest.Create
+  nameWithType: PageRequest.Create
+- uid: Raftel.Domain.Abstractions.PageRequest.DefaultPageSize
+  name: DefaultPageSize
+  href: api/Raftel.Domain.Abstractions.PageRequest.html#Raftel_Domain_Abstractions_PageRequest_DefaultPageSize
+  commentId: F:Raftel.Domain.Abstractions.PageRequest.DefaultPageSize
+  fullName: Raftel.Domain.Abstractions.PageRequest.DefaultPageSize
+  nameWithType: PageRequest.DefaultPageSize
+- uid: Raftel.Domain.Abstractions.PageRequest.MaxPageSize
+  name: MaxPageSize
+  href: api/Raftel.Domain.Abstractions.PageRequest.html#Raftel_Domain_Abstractions_PageRequest_MaxPageSize
+  commentId: F:Raftel.Domain.Abstractions.PageRequest.MaxPageSize
+  fullName: Raftel.Domain.Abstractions.PageRequest.MaxPageSize
+  nameWithType: PageRequest.MaxPageSize
+- uid: Raftel.Domain.Abstractions.PageRequest.Page
+  name: Page
+  href: api/Raftel.Domain.Abstractions.PageRequest.html#Raftel_Domain_Abstractions_PageRequest_Page
+  commentId: P:Raftel.Domain.Abstractions.PageRequest.Page
+  fullName: Raftel.Domain.Abstractions.PageRequest.Page
+  nameWithType: PageRequest.Page
+- uid: Raftel.Domain.Abstractions.PageRequest.Page*
+  name: Page
+  href: api/Raftel.Domain.Abstractions.PageRequest.html#Raftel_Domain_Abstractions_PageRequest_Page_
+  commentId: Overload:Raftel.Domain.Abstractions.PageRequest.Page
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PageRequest.Page
+  nameWithType: PageRequest.Page
+- uid: Raftel.Domain.Abstractions.PageRequest.PageSize
+  name: PageSize
+  href: api/Raftel.Domain.Abstractions.PageRequest.html#Raftel_Domain_Abstractions_PageRequest_PageSize
+  commentId: P:Raftel.Domain.Abstractions.PageRequest.PageSize
+  fullName: Raftel.Domain.Abstractions.PageRequest.PageSize
+  nameWithType: PageRequest.PageSize
+- uid: Raftel.Domain.Abstractions.PageRequest.PageSize*
+  name: PageSize
+  href: api/Raftel.Domain.Abstractions.PageRequest.html#Raftel_Domain_Abstractions_PageRequest_PageSize_
+  commentId: Overload:Raftel.Domain.Abstractions.PageRequest.PageSize
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PageRequest.PageSize
+  nameWithType: PageRequest.PageSize
+- uid: Raftel.Domain.Abstractions.PageRequest.Skip
+  name: Skip
+  href: api/Raftel.Domain.Abstractions.PageRequest.html#Raftel_Domain_Abstractions_PageRequest_Skip
+  commentId: P:Raftel.Domain.Abstractions.PageRequest.Skip
+  fullName: Raftel.Domain.Abstractions.PageRequest.Skip
+  nameWithType: PageRequest.Skip
+- uid: Raftel.Domain.Abstractions.PageRequest.Skip*
+  name: Skip
+  href: api/Raftel.Domain.Abstractions.PageRequest.html#Raftel_Domain_Abstractions_PageRequest_Skip_
+  commentId: Overload:Raftel.Domain.Abstractions.PageRequest.Skip
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PageRequest.Skip
+  nameWithType: PageRequest.Skip
+- uid: Raftel.Domain.Abstractions.PagedResult`1
+  name: PagedResult<T>
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html
+  commentId: T:Raftel.Domain.Abstractions.PagedResult`1
+  name.vb: PagedResult(Of T)
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T)
+  nameWithType: PagedResult<T>
+  nameWithType.vb: PagedResult(Of T)
+- uid: Raftel.Domain.Abstractions.PagedResult`1.#ctor(System.Collections.Generic.IReadOnlyList{`0},System.Int32,System.Int32,System.Int64)
+  name: PagedResult(IReadOnlyList<T>, int, int, long)
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1__ctor_System_Collections_Generic_IReadOnlyList__0__System_Int32_System_Int32_System_Int64_
+  commentId: M:Raftel.Domain.Abstractions.PagedResult`1.#ctor(System.Collections.Generic.IReadOnlyList{`0},System.Int32,System.Int32,System.Int64)
+  name.vb: New(IReadOnlyList(Of T), Integer, Integer, Long)
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.PagedResult(System.Collections.Generic.IReadOnlyList<T>, int, int, long)
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).New(System.Collections.Generic.IReadOnlyList(Of T), Integer, Integer, Long)
+  nameWithType: PagedResult<T>.PagedResult(IReadOnlyList<T>, int, int, long)
+  nameWithType.vb: PagedResult(Of T).New(IReadOnlyList(Of T), Integer, Integer, Long)
+- uid: Raftel.Domain.Abstractions.PagedResult`1.#ctor*
+  name: PagedResult
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1__ctor_
+  commentId: Overload:Raftel.Domain.Abstractions.PagedResult`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.PagedResult
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).New
+  nameWithType: PagedResult<T>.PagedResult
+  nameWithType.vb: PagedResult(Of T).New
+- uid: Raftel.Domain.Abstractions.PagedResult`1.Empty(Raftel.Domain.Abstractions.PageRequest)
+  name: Empty(PageRequest)
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_Empty_Raftel_Domain_Abstractions_PageRequest_
+  commentId: M:Raftel.Domain.Abstractions.PagedResult`1.Empty(Raftel.Domain.Abstractions.PageRequest)
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.Empty(Raftel.Domain.Abstractions.PageRequest)
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).Empty(Raftel.Domain.Abstractions.PageRequest)
+  nameWithType: PagedResult<T>.Empty(PageRequest)
+  nameWithType.vb: PagedResult(Of T).Empty(PageRequest)
+- uid: Raftel.Domain.Abstractions.PagedResult`1.Empty*
+  name: Empty
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_Empty_
+  commentId: Overload:Raftel.Domain.Abstractions.PagedResult`1.Empty
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.Empty
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).Empty
+  nameWithType: PagedResult<T>.Empty
+  nameWithType.vb: PagedResult(Of T).Empty
+- uid: Raftel.Domain.Abstractions.PagedResult`1.HasNext
+  name: HasNext
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_HasNext
+  commentId: P:Raftel.Domain.Abstractions.PagedResult`1.HasNext
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.HasNext
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).HasNext
+  nameWithType: PagedResult<T>.HasNext
+  nameWithType.vb: PagedResult(Of T).HasNext
+- uid: Raftel.Domain.Abstractions.PagedResult`1.HasNext*
+  name: HasNext
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_HasNext_
+  commentId: Overload:Raftel.Domain.Abstractions.PagedResult`1.HasNext
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.HasNext
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).HasNext
+  nameWithType: PagedResult<T>.HasNext
+  nameWithType.vb: PagedResult(Of T).HasNext
+- uid: Raftel.Domain.Abstractions.PagedResult`1.HasPrevious
+  name: HasPrevious
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_HasPrevious
+  commentId: P:Raftel.Domain.Abstractions.PagedResult`1.HasPrevious
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.HasPrevious
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).HasPrevious
+  nameWithType: PagedResult<T>.HasPrevious
+  nameWithType.vb: PagedResult(Of T).HasPrevious
+- uid: Raftel.Domain.Abstractions.PagedResult`1.HasPrevious*
+  name: HasPrevious
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_HasPrevious_
+  commentId: Overload:Raftel.Domain.Abstractions.PagedResult`1.HasPrevious
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.HasPrevious
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).HasPrevious
+  nameWithType: PagedResult<T>.HasPrevious
+  nameWithType.vb: PagedResult(Of T).HasPrevious
+- uid: Raftel.Domain.Abstractions.PagedResult`1.Items
+  name: Items
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_Items
+  commentId: P:Raftel.Domain.Abstractions.PagedResult`1.Items
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.Items
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).Items
+  nameWithType: PagedResult<T>.Items
+  nameWithType.vb: PagedResult(Of T).Items
+- uid: Raftel.Domain.Abstractions.PagedResult`1.Items*
+  name: Items
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_Items_
+  commentId: Overload:Raftel.Domain.Abstractions.PagedResult`1.Items
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.Items
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).Items
+  nameWithType: PagedResult<T>.Items
+  nameWithType.vb: PagedResult(Of T).Items
+- uid: Raftel.Domain.Abstractions.PagedResult`1.Map*
+  name: Map
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_Map_
+  commentId: Overload:Raftel.Domain.Abstractions.PagedResult`1.Map
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.Map
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).Map
+  nameWithType: PagedResult<T>.Map
+  nameWithType.vb: PagedResult(Of T).Map
+- uid: Raftel.Domain.Abstractions.PagedResult`1.Map``1(System.Func{`0,``0})
+  name: Map<TOut>(Func<T, TOut>)
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_Map__1_System_Func__0___0__
+  commentId: M:Raftel.Domain.Abstractions.PagedResult`1.Map``1(System.Func{`0,``0})
+  name.vb: Map(Of TOut)(Func(Of T, TOut))
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.Map<TOut>(System.Func<T, TOut>)
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).Map(Of TOut)(System.Func(Of T, TOut))
+  nameWithType: PagedResult<T>.Map<TOut>(Func<T, TOut>)
+  nameWithType.vb: PagedResult(Of T).Map(Of TOut)(Func(Of T, TOut))
+- uid: Raftel.Domain.Abstractions.PagedResult`1.Page
+  name: Page
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_Page
+  commentId: P:Raftel.Domain.Abstractions.PagedResult`1.Page
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.Page
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).Page
+  nameWithType: PagedResult<T>.Page
+  nameWithType.vb: PagedResult(Of T).Page
+- uid: Raftel.Domain.Abstractions.PagedResult`1.Page*
+  name: Page
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_Page_
+  commentId: Overload:Raftel.Domain.Abstractions.PagedResult`1.Page
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.Page
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).Page
+  nameWithType: PagedResult<T>.Page
+  nameWithType.vb: PagedResult(Of T).Page
+- uid: Raftel.Domain.Abstractions.PagedResult`1.PageSize
+  name: PageSize
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_PageSize
+  commentId: P:Raftel.Domain.Abstractions.PagedResult`1.PageSize
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.PageSize
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).PageSize
+  nameWithType: PagedResult<T>.PageSize
+  nameWithType.vb: PagedResult(Of T).PageSize
+- uid: Raftel.Domain.Abstractions.PagedResult`1.PageSize*
+  name: PageSize
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_PageSize_
+  commentId: Overload:Raftel.Domain.Abstractions.PagedResult`1.PageSize
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.PageSize
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).PageSize
+  nameWithType: PagedResult<T>.PageSize
+  nameWithType.vb: PagedResult(Of T).PageSize
+- uid: Raftel.Domain.Abstractions.PagedResult`1.TotalCount
+  name: TotalCount
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_TotalCount
+  commentId: P:Raftel.Domain.Abstractions.PagedResult`1.TotalCount
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.TotalCount
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).TotalCount
+  nameWithType: PagedResult<T>.TotalCount
+  nameWithType.vb: PagedResult(Of T).TotalCount
+- uid: Raftel.Domain.Abstractions.PagedResult`1.TotalCount*
+  name: TotalCount
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_TotalCount_
+  commentId: Overload:Raftel.Domain.Abstractions.PagedResult`1.TotalCount
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.TotalCount
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).TotalCount
+  nameWithType: PagedResult<T>.TotalCount
+  nameWithType.vb: PagedResult(Of T).TotalCount
+- uid: Raftel.Domain.Abstractions.PagedResult`1.TotalPages
+  name: TotalPages
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_TotalPages
+  commentId: P:Raftel.Domain.Abstractions.PagedResult`1.TotalPages
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.TotalPages
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).TotalPages
+  nameWithType: PagedResult<T>.TotalPages
+  nameWithType.vb: PagedResult(Of T).TotalPages
+- uid: Raftel.Domain.Abstractions.PagedResult`1.TotalPages*
+  name: TotalPages
+  href: api/Raftel.Domain.Abstractions.PagedResult-1.html#Raftel_Domain_Abstractions_PagedResult_1_TotalPages_
+  commentId: Overload:Raftel.Domain.Abstractions.PagedResult`1.TotalPages
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.PagedResult<T>.TotalPages
+  fullName.vb: Raftel.Domain.Abstractions.PagedResult(Of T).TotalPages
+  nameWithType: PagedResult<T>.TotalPages
+  nameWithType.vb: PagedResult(Of T).TotalPages
 - uid: Raftel.Domain.Abstractions.Result
   name: Result
   href: api/Raftel.Domain.Abstractions.Result.html
@@ -3504,6 +4001,91 @@ references:
   fullName.vb: Raftel.Domain.Abstractions.Result(Of TValue).CType
   nameWithType: Result<TValue>.implicit operator
   nameWithType.vb: Result(Of TValue).CType
+- uid: Raftel.Domain.Abstractions.SortDirection
+  name: SortDirection
+  href: api/Raftel.Domain.Abstractions.SortDirection.html
+  commentId: T:Raftel.Domain.Abstractions.SortDirection
+  fullName: Raftel.Domain.Abstractions.SortDirection
+  nameWithType: SortDirection
+- uid: Raftel.Domain.Abstractions.SortDirection.Ascending
+  name: Ascending
+  href: api/Raftel.Domain.Abstractions.SortDirection.html#Raftel_Domain_Abstractions_SortDirection_Ascending
+  commentId: F:Raftel.Domain.Abstractions.SortDirection.Ascending
+  fullName: Raftel.Domain.Abstractions.SortDirection.Ascending
+  nameWithType: SortDirection.Ascending
+- uid: Raftel.Domain.Abstractions.SortDirection.Descending
+  name: Descending
+  href: api/Raftel.Domain.Abstractions.SortDirection.html#Raftel_Domain_Abstractions_SortDirection_Descending
+  commentId: F:Raftel.Domain.Abstractions.SortDirection.Descending
+  fullName: Raftel.Domain.Abstractions.SortDirection.Descending
+  nameWithType: SortDirection.Descending
+- uid: Raftel.Domain.Abstractions.SortRequest
+  name: SortRequest
+  href: api/Raftel.Domain.Abstractions.SortRequest.html
+  commentId: T:Raftel.Domain.Abstractions.SortRequest
+  fullName: Raftel.Domain.Abstractions.SortRequest
+  nameWithType: SortRequest
+- uid: Raftel.Domain.Abstractions.SortRequest.#ctor(System.String,Raftel.Domain.Abstractions.SortDirection)
+  name: SortRequest(string, SortDirection)
+  href: api/Raftel.Domain.Abstractions.SortRequest.html#Raftel_Domain_Abstractions_SortRequest__ctor_System_String_Raftel_Domain_Abstractions_SortDirection_
+  commentId: M:Raftel.Domain.Abstractions.SortRequest.#ctor(System.String,Raftel.Domain.Abstractions.SortDirection)
+  name.vb: New(String, SortDirection)
+  fullName: Raftel.Domain.Abstractions.SortRequest.SortRequest(string, Raftel.Domain.Abstractions.SortDirection)
+  fullName.vb: Raftel.Domain.Abstractions.SortRequest.New(String, Raftel.Domain.Abstractions.SortDirection)
+  nameWithType: SortRequest.SortRequest(string, SortDirection)
+  nameWithType.vb: SortRequest.New(String, SortDirection)
+- uid: Raftel.Domain.Abstractions.SortRequest.#ctor*
+  name: SortRequest
+  href: api/Raftel.Domain.Abstractions.SortRequest.html#Raftel_Domain_Abstractions_SortRequest__ctor_
+  commentId: Overload:Raftel.Domain.Abstractions.SortRequest.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Abstractions.SortRequest.SortRequest
+  fullName.vb: Raftel.Domain.Abstractions.SortRequest.New
+  nameWithType: SortRequest.SortRequest
+  nameWithType.vb: SortRequest.New
+- uid: Raftel.Domain.Abstractions.SortRequest.Direction
+  name: Direction
+  href: api/Raftel.Domain.Abstractions.SortRequest.html#Raftel_Domain_Abstractions_SortRequest_Direction
+  commentId: P:Raftel.Domain.Abstractions.SortRequest.Direction
+  fullName: Raftel.Domain.Abstractions.SortRequest.Direction
+  nameWithType: SortRequest.Direction
+- uid: Raftel.Domain.Abstractions.SortRequest.Direction*
+  name: Direction
+  href: api/Raftel.Domain.Abstractions.SortRequest.html#Raftel_Domain_Abstractions_SortRequest_Direction_
+  commentId: Overload:Raftel.Domain.Abstractions.SortRequest.Direction
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.SortRequest.Direction
+  nameWithType: SortRequest.Direction
+- uid: Raftel.Domain.Abstractions.SortRequest.Field
+  name: Field
+  href: api/Raftel.Domain.Abstractions.SortRequest.html#Raftel_Domain_Abstractions_SortRequest_Field
+  commentId: P:Raftel.Domain.Abstractions.SortRequest.Field
+  fullName: Raftel.Domain.Abstractions.SortRequest.Field
+  nameWithType: SortRequest.Field
+- uid: Raftel.Domain.Abstractions.SortRequest.Field*
+  name: Field
+  href: api/Raftel.Domain.Abstractions.SortRequest.html#Raftel_Domain_Abstractions_SortRequest_Field_
+  commentId: Overload:Raftel.Domain.Abstractions.SortRequest.Field
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.SortRequest.Field
+  nameWithType: SortRequest.Field
+- uid: Raftel.Domain.Abstractions.SortRequest.Parse(System.String)
+  name: Parse(string?)
+  href: api/Raftel.Domain.Abstractions.SortRequest.html#Raftel_Domain_Abstractions_SortRequest_Parse_System_String_
+  commentId: M:Raftel.Domain.Abstractions.SortRequest.Parse(System.String)
+  name.vb: Parse(String)
+  fullName: Raftel.Domain.Abstractions.SortRequest.Parse(string?)
+  fullName.vb: Raftel.Domain.Abstractions.SortRequest.Parse(String)
+  nameWithType: SortRequest.Parse(string?)
+  nameWithType.vb: SortRequest.Parse(String)
+- uid: Raftel.Domain.Abstractions.SortRequest.Parse*
+  name: Parse
+  href: api/Raftel.Domain.Abstractions.SortRequest.html#Raftel_Domain_Abstractions_SortRequest_Parse_
+  commentId: Overload:Raftel.Domain.Abstractions.SortRequest.Parse
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.SortRequest.Parse
+  nameWithType: SortRequest.Parse
 - uid: Raftel.Domain.Auditing
   name: Raftel.Domain.Auditing
   href: api/Raftel.Domain.Auditing.html
@@ -5210,6 +5792,131 @@ references:
   fullName.vb: Raftel.Domain.Specifications.OrSpecification(Of TModel).ToExpression
   nameWithType: OrSpecification<TModel>.ToExpression
   nameWithType.vb: OrSpecification(Of TModel).ToExpression
+- uid: Raftel.Domain.Specifications.SortMap`1
+  name: SortMap<TEntity>
+  href: api/Raftel.Domain.Specifications.SortMap-1.html
+  commentId: T:Raftel.Domain.Specifications.SortMap`1
+  name.vb: SortMap(Of TEntity)
+  fullName: Raftel.Domain.Specifications.SortMap<TEntity>
+  fullName.vb: Raftel.Domain.Specifications.SortMap(Of TEntity)
+  nameWithType: SortMap<TEntity>
+  nameWithType.vb: SortMap(Of TEntity)
+- uid: Raftel.Domain.Specifications.SortMap`1.Allow(System.String,System.Linq.Expressions.Expression{System.Func{`0,System.Object}})
+  name: Allow(string, Expression<Func<TEntity, object>>)
+  href: api/Raftel.Domain.Specifications.SortMap-1.html#Raftel_Domain_Specifications_SortMap_1_Allow_System_String_System_Linq_Expressions_Expression_System_Func__0_System_Object___
+  commentId: M:Raftel.Domain.Specifications.SortMap`1.Allow(System.String,System.Linq.Expressions.Expression{System.Func{`0,System.Object}})
+  name.vb: Allow(String, Expression(Of Func(Of TEntity, Object)))
+  fullName: Raftel.Domain.Specifications.SortMap<TEntity>.Allow(string, System.Linq.Expressions.Expression<System.Func<TEntity, object>>)
+  fullName.vb: Raftel.Domain.Specifications.SortMap(Of TEntity).Allow(String, System.Linq.Expressions.Expression(Of System.Func(Of TEntity, Object)))
+  nameWithType: SortMap<TEntity>.Allow(string, Expression<Func<TEntity, object>>)
+  nameWithType.vb: SortMap(Of TEntity).Allow(String, Expression(Of Func(Of TEntity, Object)))
+- uid: Raftel.Domain.Specifications.SortMap`1.Allow*
+  name: Allow
+  href: api/Raftel.Domain.Specifications.SortMap-1.html#Raftel_Domain_Specifications_SortMap_1_Allow_
+  commentId: Overload:Raftel.Domain.Specifications.SortMap`1.Allow
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.SortMap<TEntity>.Allow
+  fullName.vb: Raftel.Domain.Specifications.SortMap(Of TEntity).Allow
+  nameWithType: SortMap<TEntity>.Allow
+  nameWithType.vb: SortMap(Of TEntity).Allow
+- uid: Raftel.Domain.Specifications.SortMap`1.Resolve(System.String)
+  name: Resolve(string)
+  href: api/Raftel.Domain.Specifications.SortMap-1.html#Raftel_Domain_Specifications_SortMap_1_Resolve_System_String_
+  commentId: M:Raftel.Domain.Specifications.SortMap`1.Resolve(System.String)
+  name.vb: Resolve(String)
+  fullName: Raftel.Domain.Specifications.SortMap<TEntity>.Resolve(string)
+  fullName.vb: Raftel.Domain.Specifications.SortMap(Of TEntity).Resolve(String)
+  nameWithType: SortMap<TEntity>.Resolve(string)
+  nameWithType.vb: SortMap(Of TEntity).Resolve(String)
+- uid: Raftel.Domain.Specifications.SortMap`1.Resolve*
+  name: Resolve
+  href: api/Raftel.Domain.Specifications.SortMap-1.html#Raftel_Domain_Specifications_SortMap_1_Resolve_
+  commentId: Overload:Raftel.Domain.Specifications.SortMap`1.Resolve
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.SortMap<TEntity>.Resolve
+  fullName.vb: Raftel.Domain.Specifications.SortMap(Of TEntity).Resolve
+  nameWithType: SortMap<TEntity>.Resolve
+  nameWithType.vb: SortMap(Of TEntity).Resolve
+- uid: Raftel.Domain.Specifications.SortMap`1.ResolveAll(System.Collections.Generic.IReadOnlyList{Raftel.Domain.Abstractions.SortRequest})
+  name: ResolveAll(IReadOnlyList<SortRequest>)
+  href: api/Raftel.Domain.Specifications.SortMap-1.html#Raftel_Domain_Specifications_SortMap_1_ResolveAll_System_Collections_Generic_IReadOnlyList_Raftel_Domain_Abstractions_SortRequest__
+  commentId: M:Raftel.Domain.Specifications.SortMap`1.ResolveAll(System.Collections.Generic.IReadOnlyList{Raftel.Domain.Abstractions.SortRequest})
+  name.vb: ResolveAll(IReadOnlyList(Of SortRequest))
+  fullName: Raftel.Domain.Specifications.SortMap<TEntity>.ResolveAll(System.Collections.Generic.IReadOnlyList<Raftel.Domain.Abstractions.SortRequest>)
+  fullName.vb: Raftel.Domain.Specifications.SortMap(Of TEntity).ResolveAll(System.Collections.Generic.IReadOnlyList(Of Raftel.Domain.Abstractions.SortRequest))
+  nameWithType: SortMap<TEntity>.ResolveAll(IReadOnlyList<SortRequest>)
+  nameWithType.vb: SortMap(Of TEntity).ResolveAll(IReadOnlyList(Of SortRequest))
+- uid: Raftel.Domain.Specifications.SortMap`1.ResolveAll*
+  name: ResolveAll
+  href: api/Raftel.Domain.Specifications.SortMap-1.html#Raftel_Domain_Specifications_SortMap_1_ResolveAll_
+  commentId: Overload:Raftel.Domain.Specifications.SortMap`1.ResolveAll
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.SortMap<TEntity>.ResolveAll
+  fullName.vb: Raftel.Domain.Specifications.SortMap(Of TEntity).ResolveAll
+  nameWithType: SortMap<TEntity>.ResolveAll
+  nameWithType.vb: SortMap(Of TEntity).ResolveAll
+- uid: Raftel.Domain.Specifications.SortSelector`1
+  name: SortSelector<TEntity>
+  href: api/Raftel.Domain.Specifications.SortSelector-1.html
+  commentId: T:Raftel.Domain.Specifications.SortSelector`1
+  name.vb: SortSelector(Of TEntity)
+  fullName: Raftel.Domain.Specifications.SortSelector<TEntity>
+  fullName.vb: Raftel.Domain.Specifications.SortSelector(Of TEntity)
+  nameWithType: SortSelector<TEntity>
+  nameWithType.vb: SortSelector(Of TEntity)
+- uid: Raftel.Domain.Specifications.SortSelector`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Raftel.Domain.Abstractions.SortDirection)
+  name: SortSelector(Expression<Func<TEntity, object>>, SortDirection)
+  href: api/Raftel.Domain.Specifications.SortSelector-1.html#Raftel_Domain_Specifications_SortSelector_1__ctor_System_Linq_Expressions_Expression_System_Func__0_System_Object___Raftel_Domain_Abstractions_SortDirection_
+  commentId: M:Raftel.Domain.Specifications.SortSelector`1.#ctor(System.Linq.Expressions.Expression{System.Func{`0,System.Object}},Raftel.Domain.Abstractions.SortDirection)
+  name.vb: New(Expression(Of Func(Of TEntity, Object)), SortDirection)
+  fullName: Raftel.Domain.Specifications.SortSelector<TEntity>.SortSelector(System.Linq.Expressions.Expression<System.Func<TEntity, object>>, Raftel.Domain.Abstractions.SortDirection)
+  fullName.vb: Raftel.Domain.Specifications.SortSelector(Of TEntity).New(System.Linq.Expressions.Expression(Of System.Func(Of TEntity, Object)), Raftel.Domain.Abstractions.SortDirection)
+  nameWithType: SortSelector<TEntity>.SortSelector(Expression<Func<TEntity, object>>, SortDirection)
+  nameWithType.vb: SortSelector(Of TEntity).New(Expression(Of Func(Of TEntity, Object)), SortDirection)
+- uid: Raftel.Domain.Specifications.SortSelector`1.#ctor*
+  name: SortSelector
+  href: api/Raftel.Domain.Specifications.SortSelector-1.html#Raftel_Domain_Specifications_SortSelector_1__ctor_
+  commentId: Overload:Raftel.Domain.Specifications.SortSelector`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Specifications.SortSelector<TEntity>.SortSelector
+  fullName.vb: Raftel.Domain.Specifications.SortSelector(Of TEntity).New
+  nameWithType: SortSelector<TEntity>.SortSelector
+  nameWithType.vb: SortSelector(Of TEntity).New
+- uid: Raftel.Domain.Specifications.SortSelector`1.Direction
+  name: Direction
+  href: api/Raftel.Domain.Specifications.SortSelector-1.html#Raftel_Domain_Specifications_SortSelector_1_Direction
+  commentId: P:Raftel.Domain.Specifications.SortSelector`1.Direction
+  fullName: Raftel.Domain.Specifications.SortSelector<TEntity>.Direction
+  fullName.vb: Raftel.Domain.Specifications.SortSelector(Of TEntity).Direction
+  nameWithType: SortSelector<TEntity>.Direction
+  nameWithType.vb: SortSelector(Of TEntity).Direction
+- uid: Raftel.Domain.Specifications.SortSelector`1.Direction*
+  name: Direction
+  href: api/Raftel.Domain.Specifications.SortSelector-1.html#Raftel_Domain_Specifications_SortSelector_1_Direction_
+  commentId: Overload:Raftel.Domain.Specifications.SortSelector`1.Direction
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.SortSelector<TEntity>.Direction
+  fullName.vb: Raftel.Domain.Specifications.SortSelector(Of TEntity).Direction
+  nameWithType: SortSelector<TEntity>.Direction
+  nameWithType.vb: SortSelector(Of TEntity).Direction
+- uid: Raftel.Domain.Specifications.SortSelector`1.Selector
+  name: Selector
+  href: api/Raftel.Domain.Specifications.SortSelector-1.html#Raftel_Domain_Specifications_SortSelector_1_Selector
+  commentId: P:Raftel.Domain.Specifications.SortSelector`1.Selector
+  fullName: Raftel.Domain.Specifications.SortSelector<TEntity>.Selector
+  fullName.vb: Raftel.Domain.Specifications.SortSelector(Of TEntity).Selector
+  nameWithType: SortSelector<TEntity>.Selector
+  nameWithType.vb: SortSelector(Of TEntity).Selector
+- uid: Raftel.Domain.Specifications.SortSelector`1.Selector*
+  name: Selector
+  href: api/Raftel.Domain.Specifications.SortSelector-1.html#Raftel_Domain_Specifications_SortSelector_1_Selector_
+  commentId: Overload:Raftel.Domain.Specifications.SortSelector`1.Selector
+  isSpec: "True"
+  fullName: Raftel.Domain.Specifications.SortSelector<TEntity>.Selector
+  fullName.vb: Raftel.Domain.Specifications.SortSelector(Of TEntity).Selector
+  nameWithType: SortSelector<TEntity>.Selector
+  nameWithType.vb: SortSelector(Of TEntity).Selector
 - uid: Raftel.Domain.Specifications.Specification`1
   name: Specification<TModel>
   href: api/Raftel.Domain.Specifications.Specification-1.html
@@ -6076,6 +6783,24 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).ListAllAsync
   nameWithType: EfRepository<TDbContext, TEntity, TId>.ListAllAsync
   nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).ListAllAsync
+- uid: Raftel.Infrastructure.Data.EfRepository`3.ListPagedAsync(Raftel.Domain.Abstractions.PageRequest,System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Collections.Generic.IReadOnlyList{Raftel.Domain.Specifications.SortSelector{`1}},System.Threading.CancellationToken)
+  name: ListPagedAsync(PageRequest, Expression<Func<TEntity, bool>>, IReadOnlyList<SortSelector<TEntity>>, CancellationToken)
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.html#Raftel_Infrastructure_Data_EfRepository_3_ListPagedAsync_Raftel_Domain_Abstractions_PageRequest_System_Linq_Expressions_Expression_System_Func__1_System_Boolean___System_Collections_Generic_IReadOnlyList_Raftel_Domain_Specifications_SortSelector__1___System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Data.EfRepository`3.ListPagedAsync(Raftel.Domain.Abstractions.PageRequest,System.Linq.Expressions.Expression{System.Func{`1,System.Boolean}},System.Collections.Generic.IReadOnlyList{Raftel.Domain.Specifications.SortSelector{`1}},System.Threading.CancellationToken)
+  name.vb: ListPagedAsync(PageRequest, Expression(Of Func(Of TEntity, Boolean)), IReadOnlyList(Of SortSelector(Of TEntity)), CancellationToken)
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.ListPagedAsync(Raftel.Domain.Abstractions.PageRequest, System.Linq.Expressions.Expression<System.Func<TEntity, bool>>, System.Collections.Generic.IReadOnlyList<Raftel.Domain.Specifications.SortSelector<TEntity>>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).ListPagedAsync(Raftel.Domain.Abstractions.PageRequest, System.Linq.Expressions.Expression(Of System.Func(Of TEntity, Boolean)), System.Collections.Generic.IReadOnlyList(Of Raftel.Domain.Specifications.SortSelector(Of TEntity)), System.Threading.CancellationToken)
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.ListPagedAsync(PageRequest, Expression<Func<TEntity, bool>>, IReadOnlyList<SortSelector<TEntity>>, CancellationToken)
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).ListPagedAsync(PageRequest, Expression(Of Func(Of TEntity, Boolean)), IReadOnlyList(Of SortSelector(Of TEntity)), CancellationToken)
+- uid: Raftel.Infrastructure.Data.EfRepository`3.ListPagedAsync*
+  name: ListPagedAsync
+  href: api/Raftel.Infrastructure.Data.EfRepository-3.html#Raftel_Infrastructure_Data_EfRepository_3_ListPagedAsync_
+  commentId: Overload:Raftel.Infrastructure.Data.EfRepository`3.ListPagedAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.EfRepository<TDbContext, TEntity, TId>.ListPagedAsync
+  fullName.vb: Raftel.Infrastructure.Data.EfRepository(Of TDbContext, TEntity, TId).ListPagedAsync
+  nameWithType: EfRepository<TDbContext, TEntity, TId>.ListPagedAsync
+  nameWithType.vb: EfRepository(Of TDbContext, TEntity, TId).ListPagedAsync
 - uid: Raftel.Infrastructure.Data.EfRepository`3.Remove(`1)
   name: Remove(TEntity)
   href: api/Raftel.Infrastructure.Data.EfRepository-3.html#Raftel_Infrastructure_Data_EfRepository_3_Remove__1_
