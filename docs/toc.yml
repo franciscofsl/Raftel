@@ -4,3 +4,5 @@
   href: getting-started.md
 - name: Database Configuration
   href: database-configuration.md
+- name: Health Checks
+  href: health-checks.md
