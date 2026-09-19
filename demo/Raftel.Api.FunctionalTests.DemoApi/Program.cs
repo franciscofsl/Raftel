@@ -5,6 +5,7 @@ using Raftel.Api.Server.Features.Tenants;
 using Raftel.Api.Server.Features.Users;
 using Raftel.Api.Server.Middlewares;
 using Raftel.Application;
+using Raftel.Application.Exceptions;
 using Raftel.Application.Features.Users.RegisterUser;
 using Raftel.Application.Middlewares;
 using Raftel.Demo.Application.Pirates.CreatePirate;
@@ -27,6 +28,7 @@ builder.Services.AddRaftelApplication(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommand).Assembly);
     cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
     cfg.RegisterServicesFromAssembly(typeof(CreateTestResourceCommand).Assembly);
+    cfg.AddGlobalMiddleware(typeof(LoggingMiddleware<,>));
     cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
     cfg.AddGlobalMiddleware(typeof(AuditLogMiddleware<,>));
     cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
@@ -46,6 +48,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCorrelationId();
 app.UseRaftelExceptionHandling();
 app.UseHttpsRedirection();
 app.UseRouting();
@@ -87,6 +90,12 @@ app.AddEndpointGroup(group =>
 );
 
 app.MapGet("/api/test/throw", () => { throw new InvalidOperationException("Test unhandled exception."); });
+
+app.MapGet("/api/test/throw/validation",
+    () => { throw new ValidationException([Error.Validation("Test.Field", "Field is required")]); });
+
+app.MapGet("/api/test/throw/unauthorized",
+    () => { throw new UnauthorizedException("User does not have the required permission: test.permission"); });
 
 app.MapGet("/api/test/error/{type}", (string type) => ErrorResults.ToProblem(type switch
 {

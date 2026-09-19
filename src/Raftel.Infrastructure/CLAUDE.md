@@ -17,6 +17,7 @@ Data/
     Repositories/<Feature>/          UsersRepository, TenantsRepository, RolesRepository
 Authentication/                      AuthenticationService, CurrentHttpUser, ClaimsPrincipalFactory, RaftelClaimTypes
 Multitenancy/                        CurrentTenant (AsyncLocal) + Middleware/TenantMiddleware
+Correlation/                         CorrelationContext (ICorrelationContext impl., IHttpContextAccessor-backed) + CorrelationIdSanitizer
 DependencyInjection.cs               AddRaftelData<TDbContext>(configuration, connectionStringName)
 ```
 

@@ -1,16 +1,21 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Raftel.Application.Abstractions;
 using Raftel.Application.Exceptions;
 
 namespace Raftel.Api.Server.Middlewares;
 
 /// <summary>
 /// Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses.
-/// Stack traces are never exposed in responses.
+/// Stack traces are never exposed in responses. Enriches the current request's
+/// <see cref="IRequestEvent"/> with the exception and its type-derived severity instead of
+/// logging directly — a single component further out in the pipeline emits the request's wide
+/// event exactly once.
 /// </summary>
 public sealed class ExceptionHandlingMiddleware(RequestDelegate next)
 {
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, IRequestEvent requestEvent)
     {
         try
         {
@@ -18,14 +23,20 @@ public sealed class ExceptionHandlingMiddleware(RequestDelegate next)
         }
         catch (ValidationException exception)
         {
+            requestEvent.Set(RequestEventFields.Level, LogLevel.Debug);
+            requestEvent.Set(RequestEventFields.Exception, exception);
             await HandleValidationExceptionAsync(context, exception);
         }
         catch (UnauthorizedException exception)
         {
+            requestEvent.Set(RequestEventFields.Level, LogLevel.Warning);
+            requestEvent.Set(RequestEventFields.Exception, exception);
             await HandleUnauthorizedExceptionAsync(context, exception);
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            requestEvent.Set(RequestEventFields.Level, LogLevel.Error);
+            requestEvent.Set(RequestEventFields.Exception, exception);
             await HandleInternalServerErrorAsync(context);
         }
     }

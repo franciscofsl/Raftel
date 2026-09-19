@@ -7,6 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL;
 using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
 using Raftel.Application;
+using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.Authentication;
 using Raftel.Application.Abstractions.Auditing;
 using Raftel.Application.Abstractions.Multitenancy;
@@ -15,6 +16,7 @@ using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Users;
 using Raftel.Infrastructure.Auditing;
 using Raftel.Infrastructure.Authentication;
+using Raftel.Infrastructure.Correlation;
 using Raftel.Infrastructure.Data;
 using Raftel.Infrastructure.Data.Auditing;
 using Raftel.Infrastructure.Data.Filters;
@@ -41,6 +43,7 @@ public static class DependencyInjection
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
         services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
         services.AddScoped<ICurrentTenant, CurrentTenant>();
+        services.AddScoped<ICorrelationContext, CorrelationContext>();
 
         return services;
     }

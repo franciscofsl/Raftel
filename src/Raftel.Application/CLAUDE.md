@@ -8,6 +8,8 @@ Application layer (CQRS). Implements a **custom mediator** (no MediatR) that res
 Abstractions/
     IRequest / IRequestHandler / IRequestDispatcher / RequestDispatcher   base mediator
     RequestHandlerDelegate                                                pipeline link
+    IRequestEvent / RequestEventFields / RequestEvent                     request-scoped wide event (see below)
+    ICorrelationContext                                                   correlation id for the current request (impl. in Infrastructure)
     Authentication/   ICurrentUser, IAuthenticationService (interfaces, impl. in Infrastructure)
     Multitenancy/     ICurrentTenant
     DomainEvents/     IDomainEventHandler<TEvent>, IDomainEventsDispatcher + DomainEventsDispatcher impl.
@@ -35,8 +37,18 @@ Each use case is a folder `Features/<Feature>/<UseCase>/` grouping everything:
 ## Pipeline and Mediator
 
 - `RequestDispatcher` reflects to detect if request is `ICommand`/`ICommand<T>`/`IQuery<T>` and chains: `IGlobalMiddleware` + command/query-specific middlewares, ending with handler.
-- Included middlewares: `ValidationMiddleware` (runs `Validator<T>`), `PermissionAuthorizationMiddleware` (via `[RequiresPermission]`), `UnitOfWorkMiddleware` (commits **only if result succeeds**).
+- Included middlewares: `ValidationMiddleware` (runs `Validator<T>`), `PermissionAuthorizationMiddleware` (via `[RequiresPermission]`), `UnitOfWorkMiddleware` (commits **only if result succeeds**), `LoggingMiddleware` (wide-event enrichment — see below).
 - To add new cross-cutting behavior (caching, logging…), create a middleware of the appropriate type and register it in `AddRaftelApplication`.
+- Global middleware order is caller-defined by the order of `AddGlobalMiddleware` calls. **`LoggingMiddleware<,>` must be registered first** so it wraps every other global middleware and captures their outcome too.
+
+## Wide Events (Structured Logging)
+
+Raftel logs one structured "wide event" (canonical log line) per HTTP request, not scattered per-line logs — see [GitHub issue #115](https://github.com/franciscofsl/Raftel/issues/115). The event is a request-scoped field bag (`IRequestEvent`), enriched throughout the request and emitted **exactly once** by `CorrelationIdMiddleware` in `Raftel.Api.Server` (the outermost middleware, so it also covers requests that never reach the command/query pipeline).
+
+- **`LoggingMiddleware<TRequest, TResponse>`** enriches the event with `request_name` (`typeof(TRequest).Name`, never request property values — commands routinely carry passwords/tokens) and the outcome: nothing extra on success, `level = Warning` + `error.code`/`error.message` on a failed `Result` (expected business flow, not a defect), or `level = Error` + the exception on a thrown exception (which is then rethrown unchanged). It never logs directly.
+- **Enriching from a handler**: inject `IRequestEvent` and call `Set("field.name", value)` / `Increment("field.name")` for domain context worth debugging with (e.g. `pirate.id`, `db.query_count`). Expose field names as a `<Feature>EventFields` constants class (mirroring `<Feature>Permissions`) rather than inline string literals, so additions are reviewable in a PR diff.
+- **Deny-list**: `IRequestEvent.Set`/`Increment` silently drop any field whose name contains `password`, `token`, `secret`, `apikey`, or `authorization` (case-insensitive) — never throws, never breaks the request. This is a safety net, not a substitute for not enriching with sensitive data in the first place.
+- Do not add ad hoc logging elsewhere in the pipeline, and do not serialize a request/command object into the event — enrichment is always explicit, field by field.
 
 ## Domain Events
 
