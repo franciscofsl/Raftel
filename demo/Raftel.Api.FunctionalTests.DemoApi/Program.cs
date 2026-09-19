@@ -3,6 +3,7 @@ using Raftel.Api.FunctionalTests.DemoApi.TestSupport;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Api.Server.Features.Tenants;
 using Raftel.Api.Server.Features.Users;
+using Raftel.Api.Server.Health;
 using Raftel.Api.Server.Middlewares;
 using Raftel.Application;
 using Raftel.Application.Exceptions;
@@ -13,8 +14,10 @@ using Raftel.Demo.Application.Pirates.GetPirateByFilter;
 using Raftel.Demo.Application.Pirates.GetPirateById;
 using Raftel.Demo.Application.Pirates.ListPirates;
 using Raftel.Demo.Infrastructure;
+using Raftel.Demo.Infrastructure.Data;
 using Raftel.Domain.Abstractions;
 using Raftel.Infrastructure;
+using Raftel.Infrastructure.Health;
 using Raftel.Infrastructure.Multitenancy.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +41,14 @@ builder.Services.AddRaftelApplication(cfg =>
 builder.Services.AddSampleInfrastructure(builder.Configuration.GetConnectionString("Default")!);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddRaftelHealthChecks(options => options.EnableTenantResolutionCheck = true);
+builder.Services.AddSingleton<DatabaseFailureSwitch>();
+builder.Services.AddScoped<IDatabaseProbe>(sp =>
+{
+    var inner = new DatabaseProbe<TestingRaftelDbContext>(sp.GetRequiredService<TestingRaftelDbContext>());
+    return new SwitchableDatabaseProbe(inner, sp.GetRequiredService<DatabaseFailureSwitch>());
+});
 
 var app = builder.Build();
 
@@ -107,6 +118,20 @@ app.MapGet("/api/test/error/{type}", (string type) => ErrorResults.ToProblem(typ
     "failure" => Error.Failure("Test.Failure", "Unclassified failure"),
     _ => throw new NotSupportedException($"Unknown error type '{type}'")
 }));
+
+app.MapPost("/api/test/database-failure/enable", (DatabaseFailureSwitch databaseFailureSwitch) =>
+{
+    databaseFailureSwitch.Enable();
+    return Results.NoContent();
+});
+
+app.MapPost("/api/test/database-failure/disable", (DatabaseFailureSwitch databaseFailureSwitch) =>
+{
+    databaseFailureSwitch.Disable();
+    return Results.NoContent();
+});
+
+app.MapRaftelHealthChecks();
 
 using var scope = app.Services.CreateScope();
 await SeedData.InitializeAsync(scope.ServiceProvider);

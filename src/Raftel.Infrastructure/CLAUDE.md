@@ -18,6 +18,9 @@ Data/
 Authentication/                      AuthenticationService, CurrentHttpUser, ClaimsPrincipalFactory, RaftelClaimTypes
 Multitenancy/                        CurrentTenant (AsyncLocal) + Middleware/TenantMiddleware
 Correlation/                         CorrelationContext (ICorrelationContext impl., IHttpContextAccessor-backed) + CorrelationIdSanitizer
+Health/                              DatabaseHealthCheck, PendingMigrationsHealthCheck, StartupHealthCheck(+StartupHostedService),
+                                      TenantResolutionHealthCheck, OutboxHealthCheck, IDatabaseProbe(+DatabaseProbe<TDbContext>),
+                                      HealthCheckNames, HealthDependencyInjection.AddRaftelHealthChecks(options)
 DependencyInjection.cs               AddRaftelData<TDbContext>(configuration, connectionStringName)
 ```
 
@@ -31,6 +34,7 @@ DependencyInjection.cs               AddRaftelData<TDbContext>(configuration, co
 - **End-to-end multitenancy**: header `X-Tenant-Id` → `TenantMiddleware` → `ICurrentTenant` (AsyncLocal) → `TenantInterceptor` (writes) → query filter (reads).
 - **Auth**: ASP.NET Identity + OpenIddict (password flow + refresh token), self-hosted. Token endpoint at `/connect/token`.
 - **Multi-provider**: SQL Server and PostgreSQL selected via `DatabaseOptions.Provider`.
+- **Health checks**: `AddRaftelHealthChecks(options)` registers the mandatory `database`/`migrations`/`startup` checks (tagged `ready`) plus opt-in `tenants`/`outbox` checks; endpoint mapping lives in `Raftel.Api.Server/Health` (see `docs/health-checks.md`). `HealthOptions` and the `ready` tag live in `Raftel.Application.Abstractions.Health` — not here — so `Raftel.Api.Server` can read them without depending on `Raftel.Infrastructure` (the architecture tests forbid that dependency). Every check must honor its `CancellationToken` (so `HealthOptions.CheckTimeout` actually bounds it) and must never put an exception message, stack trace, or connection string into its `Description`/`Data` — catch internally and return `HealthCheckResult.Unhealthy("<safe text>")` instead; the real exception belongs in structured logs, not the health response body.
 
 ## Conventions
 
