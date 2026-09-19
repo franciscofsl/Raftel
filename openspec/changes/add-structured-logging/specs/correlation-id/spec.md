@@ -27,12 +27,12 @@ The system SHALL reject or discard an incoming `X-Correlation-Id` value that doe
 - **THEN** the header value is discarded and a new correlation ID is generated
 
 ### Requirement: Correlation ID propagation
-The system SHALL echo the resolved correlation ID back to the caller and make it available as a logging scope value for every log entry written while handling the request.
+The system SHALL echo the resolved correlation ID back to the caller and make it available as structured context on every log entry produced while handling the request.
 
 #### Scenario: Response includes the correlation ID
 - **WHEN** an HTTP request has been assigned a correlation ID (supplied or generated)
 - **THEN** the HTTP response includes an `X-Correlation-Id` header with that value
 
-#### Scenario: Logs during the request carry the correlation ID
-- **WHEN** any log entry is written while handling an HTTP request that has a resolved correlation ID
-- **THEN** that log entry includes the correlation ID as structured context
+#### Scenario: The request's wide event carries the correlation ID
+- **WHEN** an HTTP request has been assigned a correlation ID (supplied or generated)
+- **THEN** the request's emitted wide event (see the `structured-logging` capability) includes that correlation ID

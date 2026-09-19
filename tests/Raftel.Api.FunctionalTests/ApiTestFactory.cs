@@ -4,6 +4,8 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Raftel.Api.FunctionalTests.TestSupport;
 using Raftel.Demo.Infrastructure.Data;
 using Testcontainers.MsSql;
 
@@ -17,16 +19,21 @@ public sealed class ApiTestFactory : WebApplicationFactory<DemoApi.Program>
         .WithCleanUp(true)
         .Build();
 
+    public TestLogCapture LogCapture { get; } = new();
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         _container.StartAsync().GetAwaiter().GetResult();
         WaitForDatabaseReady(_container.GetConnectionString()).GetAwaiter().GetResult();
 
+        builder.ConfigureLogging(logging => logging.AddProvider(new TestLoggerProvider(LogCapture)));
+
         builder.ConfigureAppConfiguration((_, configBuilder) =>
         {
             var inMemorySettings = new Dictionary<string, string?>
             {
-                ["ConnectionStrings:Default"] = _container.GetConnectionString()
+                ["ConnectionStrings:Default"] = _container.GetConnectionString(),
+                ["Logging:LogLevel:Default"] = "Trace"
             };
 
             configBuilder.AddInMemoryCollection(inMemorySettings);

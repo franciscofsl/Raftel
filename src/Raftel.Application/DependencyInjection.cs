@@ -27,6 +27,7 @@ public static class DependencyInjection
         services.AddScoped<ICommandDispatcher, CommandDispatcher>();
         services.AddScoped<IQueryDispatcher, QueryDispatcher>();
         services.AddScoped<IDomainEventsDispatcher, DomainEventsDispatcher>();
+        services.AddScoped<IRequestEvent, RequestEvent>();
     }
 
     private static void RegisterHandlers(IServiceCollection services, IEnumerable<Assembly> assemblies)
