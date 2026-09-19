@@ -37,4 +37,10 @@ public interface IRaftelApplicationBuilder
     /// </summary>
     /// <param name="configure">A callback that mutates the pagination options.</param>
     void ConfigurePagination(Action<PaginationOptions> configure);
+
+    /// <summary>
+    /// Configures how the permission-authorization pipeline reports failures.
+    /// </summary>
+    /// <param name="configure">A callback that mutates the authorization options.</param>
+    void ConfigureAuthorization(Action<AuthorizationOptions> configure);
 }

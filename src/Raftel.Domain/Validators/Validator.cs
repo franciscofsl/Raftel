@@ -7,6 +7,12 @@ namespace Raftel.Domain.Validators;
 /// Allows registering validation rules through the <see cref="EnsureThat"/> method,
 /// and executing them via the <see cref="Validate"/> method.
 /// </summary>
+/// <remarks>
+/// Convention: give each rule's <see cref="Error"/> a <c>Code</c> prefixed with the name of the
+/// field it validates, e.g. <c>"Email.Invalid"</c>. <c>ValidationMiddleware</c> and
+/// <c>ErrorResults.ToProblem</c> split the code on its first <c>.</c> to group failures by field in
+/// the HTTP response; a code with no <c>.</c> still works but is grouped under an empty field key.
+/// </remarks>
 /// <typeparam name="TModel">The type of the model to validate.</typeparam>
 public abstract class Validator<TModel>
 {

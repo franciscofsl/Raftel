@@ -3,6 +3,8 @@ namespace Raftel.Application.Exceptions;
 /// <summary>
 /// Exception thrown when a user attempts to perform an operation without proper authorization.
 /// </summary>
+[Obsolete("The framework's own pipeline no longer throws this; PermissionAuthorizationMiddleware returns a " +
+          "failed Result. Inspect Result instead of catching this. Will be removed in a future version.")]
 public class UnauthorizedException : Exception
 {
     /// <summary>

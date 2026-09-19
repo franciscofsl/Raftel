@@ -33,6 +33,11 @@ public sealed class RaftelApplicationBuilder : IRaftelApplicationBuilder
     public PaginationOptions PaginationOptions { get; } = new();
 
     /// <summary>
+    /// Gets the authorization options configured for the application.
+    /// </summary>
+    public AuthorizationOptions AuthorizationOptions { get; } = new();
+
+    /// <summary>
     /// Registers all services from the specified assembly if it has not already been registered.
     /// </summary>
     /// <param name="assembly">The assembly to register services from.</param>
@@ -78,5 +83,14 @@ public sealed class RaftelApplicationBuilder : IRaftelApplicationBuilder
     public void ConfigurePagination(Action<PaginationOptions> configure)
     {
         configure(PaginationOptions);
+    }
+
+    /// <summary>
+    /// Configures how the permission-authorization pipeline reports failures.
+    /// </summary>
+    /// <param name="configure">A callback that mutates the authorization options.</param>
+    public void ConfigureAuthorization(Action<AuthorizationOptions> configure)
+    {
+        configure(AuthorizationOptions);
     }
 }
