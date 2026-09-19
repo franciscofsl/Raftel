@@ -19,7 +19,8 @@ public class LoggingMiddlewareTests
     [Fact]
     public async Task HandleAsync_ShouldSetRequestName()
     {
-        await _middleware.HandleAsync(new SampleCommand("secret"), () => Task.FromResult(Result.Success()));
+        await _middleware.HandleAsync(new SampleCommand("secret"), _ => Task.FromResult(Result.Success()),
+            CancellationToken.None);
 
         _requestEvent.Fields[RequestEventFields.RequestName].ShouldBe(nameof(SampleCommand));
     }
@@ -27,7 +28,8 @@ public class LoggingMiddlewareTests
     [Fact]
     public async Task HandleAsync_ShouldNotSetLevelOrErrorFields_WhenRequestSucceeds()
     {
-        await _middleware.HandleAsync(new SampleCommand("secret"), () => Task.FromResult(Result.Success()));
+        await _middleware.HandleAsync(new SampleCommand("secret"), _ => Task.FromResult(Result.Success()),
+            CancellationToken.None);
 
         _requestEvent.Fields.ShouldNotContainKey(RequestEventFields.Level);
         _requestEvent.Fields.ShouldNotContainKey(RequestEventFields.ErrorCode);
@@ -39,7 +41,8 @@ public class LoggingMiddlewareTests
     {
         var error = Error.Validation("Sample.Invalid", "The sample was invalid");
 
-        await _middleware.HandleAsync(new SampleCommand("secret"), () => Task.FromResult(Result.Failure(error)));
+        await _middleware.HandleAsync(new SampleCommand("secret"), _ => Task.FromResult(Result.Failure(error)),
+            CancellationToken.None);
 
         _requestEvent.Fields[RequestEventFields.Level].ShouldBe(LogLevel.Warning);
         _requestEvent.Fields[RequestEventFields.ErrorCode].ShouldBe(error.Code);
@@ -54,7 +57,7 @@ public class LoggingMiddlewareTests
 
         var thrown = await Should.ThrowAsync<InvalidOperationException>(async () =>
             await _middleware.HandleAsync(new SampleCommand("secret"),
-                () => throw exception));
+                _ => throw exception, CancellationToken.None));
 
         thrown.ShouldBeSameAs(exception);
         _requestEvent.Fields[RequestEventFields.Level].ShouldBe(LogLevel.Error);
@@ -67,7 +70,8 @@ public class LoggingMiddlewareTests
         const string password = "super-secret-password";
         var error = Error.Validation("Sample.Invalid", "The sample was invalid");
 
-        await _middleware.HandleAsync(new SampleCommand(password), () => Task.FromResult(Result.Failure(error)));
+        await _middleware.HandleAsync(new SampleCommand(password), _ => Task.FromResult(Result.Failure(error)),
+            CancellationToken.None);
 
         _requestEvent.Fields.Values.ShouldNotContain(password);
     }
@@ -79,7 +83,7 @@ public class LoggingMiddlewareTests
 
         await Should.ThrowAsync<InvalidOperationException>(async () =>
             await _middleware.HandleAsync(new SampleCommand(password),
-                () => throw new InvalidOperationException("Handler failed")));
+                _ => throw new InvalidOperationException("Handler failed"), CancellationToken.None));
 
         _requestEvent.Fields.Values.ShouldNotContain(password);
     }
