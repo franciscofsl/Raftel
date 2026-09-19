@@ -31,6 +31,8 @@ builder.Services.AddRaftelApplication(cfg =>
     cfg.AddGlobalMiddleware(typeof(LoggingMiddleware<,>));
     cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
     cfg.AddGlobalMiddleware(typeof(AuditLogMiddleware<,>));
+    cfg.AddCommandMiddleware(typeof(TransactionMiddleware<>));
+    cfg.AddCommandMiddleware(typeof(TransactionMiddleware<,>));
     cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
     cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<,>));
 });
