@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/add-structured-logging/design.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="context">Context</h2>
+<p>See proposal.md - Why. <code>src/</code> currently has no <code>ILogger</code> usage anywhere and no request correlation mechanism. The command/query pipeline already supports global middleware (<code>IGlobalMiddleware&lt;TRequest, TResponse&gt;</code>, registered via <code>RaftelApplicationBuilder.AddGlobalMiddleware</code>) in a consumer-defined order, and the ASP.NET layer already has an <code>ExceptionHandlingMiddleware</code> that must not leak stack traces to the response body. This design adds logging on top of both without changing either's existing external contracts.</p>
+<p>This design follows the &quot;wide events&quot; / canonical-log-line model described in <a href="https://github.com/franciscofsl/Raftel/issues/115">GitHub issue #115</a>: one structured event per request carrying high-cardinality, high-dimensionality context, rather than many scattered log lines. Every AutoEndpoints-mapped route (commands, queries, and the one hand-written <code>AuthorizationController</code> action) performs exactly one dispatch, so &quot;one event per HTTP request&quot; and &quot;one event per command/query dispatch&quot; coincide for every request that reaches the pipeline — but not every request does (a malformed JSON body, a 401/403 from ASP.NET's own authorization, or an exception in unrelated middleware never reach a dispatch), so the emission point cannot live inside the command/query pipeline alone.</p>
+<h2 id="goals--non-goals">Goals / Non-Goals</h2>
+<p><strong>Goals:</strong></p>
+<ul>
+<li>Exactly one structured log entry (&quot;wide event&quot;) per HTTP request, regardless of which layer produced its outcome.</li>
+<li>Let request-handling code (handlers, auth context, dependency wrappers) enrich that event with explicitly-named fields.</li>
+<li>A correlation ID that ties every request's wide event back to it, sourced from <code>X-Correlation-Id</code> when the client supplies one.</li>
+<li>Guarantee no request payload (potential PII/credentials) ever reaches a log sink by default, and that explicitly enriched fields can't smuggle known-sensitive names in either.</li>
+</ul>
+<p><strong>Non-Goals:</strong></p>
+<ul>
+<li>Choosing or configuring a concrete logging sink/provider (Serilog, OpenTelemetry, a columnar store, etc.) — left to the consumer, as today for DI.</li>
+<li>Distributed tracing / <code>Activity</code>-based correlation (<code>trace_id</code>) — tracked separately under the OpenTelemetry backlog item (<a href="../../../docs/backlog/15-observabilidad-opentelemetry.html">15</a>); issue #115 argues OTel alone doesn't solve this problem, but adding a second identifier is deferred to that change rather than duplicated here.</li>
+<li>Tail sampling / cost-control sampling strategy — every request's wide event is emitted for now; sampling rules (issue #115's &quot;always keep 5xx/exceptions/VIP users, sample the happy path&quot;) are a follow-up once there's a concrete sink to sample for.</li>
+<li>A generic <code>Set</code>/<code>Increment</code> API richer than what's needed to prove the model (e.g. nested object graphs, typed schemas per feature) — start with a flat string-keyed bag; richer shapes are additive later.</li>
+</ul>
+<h2 id="decisions">Decisions</h2>
+<h3 id="a-single-emission-point-at-the-aspnet-boundary">A single emission point, at the ASP.NET boundary</h3>
+<p>Request-scoped <code>IRequestEvent</code> (declared in <code>Raftel.Application</code>, since handlers need it) accumulates fields throughout the request. Exactly one component — the outermost ASP.NET middleware, wrapping <code>ExceptionHandlingMiddleware</code> — calls <code>next()</code>, then emits the event once via <code>ILogger</code> after the response outcome (including HTTP status code) is known.</p>
+<ul>
+<li><strong>Alternative considered</strong>: keep emission inside <code>Raftel.Application</code>'s <code>LoggingMiddleware</code>, as originally designed. Rejected — <code>LoggingMiddleware</code> only runs for requests that reach command/query dispatch. A malformed JSON body, an ASP.NET-level 401/403, or an exception thrown before routing never reach it, so those requests would go completely unlogged under the &quot;one entry per request&quot; goal. The emission point must be the outermost layer that sees every request.</li>
+</ul>
+<h3 id="loggingmiddleware-becomes-an-enricher-not-an-emitter"><code>LoggingMiddleware</code> becomes an enricher, not an emitter</h3>
+<p><code>LoggingMiddleware&lt;TRequest, TResponse&gt;</code> stays first in the global middleware chain and still observes the outcome (success, failed <code>Result</code>, or thrown exception), but now writes those into <code>IRequestEvent</code> (<code>request_name</code>, <code>level</code>, <code>error.code</code>, <code>error.message</code>, or the exception) instead of calling <code>ILogger</code> directly. It does <strong>not</strong> set <code>duration_ms</code> — that field has exactly one owner, the outermost middleware (see below), since it should measure the whole HTTP request, not just command/query dispatch. It no longer logs a &quot;handling started&quot; line — that line is exactly the &quot;log statements as a debugging diary&quot; anti-pattern issue #115 calls out, and it's incompatible with &quot;exactly one entry per request.&quot;</p>
+<ul>
+<li><strong>Alternative considered</strong>: keep the start-of-request <code>Information</code> line for liveness/tracing during long-running requests. Rejected — that's what request-scoped APM/tracing tools are for; a canonical log line's value comes from being singular and complete, not from mid-flight breadcrumbs.</li>
+</ul>
+<h3 id="exceptionhandlingmiddleware-becomes-an-enricher-for-exception-fields"><code>ExceptionHandlingMiddleware</code> becomes an enricher for exception fields</h3>
+<p>It keeps producing the ProblemDetails response and keeps the guarantee that stack traces never reach the response body, but stops calling <code>ILogger</code> itself. Instead it writes the exception and its type-derived <code>level</code> (<code>Debug</code>/<code>Warning</code>/<code>Error</code>) into <code>IRequestEvent</code> — the required permission for an <code>UnauthorizedException</code> is already part of that exception's message, so no separate field is needed for it — for the outer middleware to emit.</p>
+<ul>
+<li><strong>Alternative considered</strong>: leave <code>ExceptionHandlingMiddleware</code> logging independently (the original design). Rejected — that produces a second log line for any request that both goes through <code>LoggingMiddleware</code> and throws, violating &quot;exactly one entry.&quot;</li>
+</ul>
+<h3 id="correlationidmiddleware-is-extended-into-the-single-emission-point"><code>CorrelationIdMiddleware</code> is extended into the single emission point</h3>
+<p>Rather than adding a third ASP.NET middleware, <code>CorrelationIdMiddleware</code> — already positioned first, already resolving <code>ICorrelationContext</code> — is extended to own the request's <code>IRequestEvent</code> lifecycle: initialize it, call <code>next()</code> inside a <code>try</code>/<code>finally</code>, set <code>request_id</code> (from <code>ICorrelationContext.CorrelationId</code>), <code>method</code>, <code>path</code>, <code>status_code</code>, and <code>duration_ms</code>, and emit the single log entry at the level <code>LoggingMiddleware</code>/<code>ExceptionHandlingMiddleware</code> recorded (defaulting to <code>Information</code> if nothing set a level, e.g. a 404 from routing with no matching endpoint).</p>
+<ul>
+<li><strong>Alternative considered</strong>: a brand-new middleware dedicated to wide-event emission. Rejected for now — <code>CorrelationIdMiddleware</code> already sits at the right position in the pipeline and already depends on the same request-scoped state; splitting the responsibility into two middlewares that must stay adjacent adds ordering risk without a clear benefit. Revisit if the emission logic outgrows this middleware.</li>
+<li>This replaces the earlier design's use of <code>logger.BeginScope</code> to propagate the correlation id — the id is now just another field set directly on <code>IRequestEvent</code>, consistent with everything else in the event.</li>
+</ul>
+<h3 id="field-naming-convention-with-an-enforced-deny-list">Field naming convention with an enforced deny-list</h3>
+<p>Fields use dotted, lower-case names (<code>user.id</code>, <code>pirate.crew</code>, <code>db.query_count</code>), and feature code is expected to expose them as <code>&lt;Feature&gt;EventFields</code> constants (mirroring the existing <code>&lt;Feature&gt;Permissions</code> convention) rather than inline string literals, so field names are reviewable in a PR diff. Separately — because convention alone doesn't stop a mistake — <code>IRequestEvent.Set</code> refuses (silently drops) any field whose name matches a documented deny-list (<code>password</code>, <code>token</code>, <code>secret</code>, <code>apikey</code>, <code>authorization</code>, case-insensitive substring match).</p>
+<ul>
+<li><strong>Alternative considered</strong>: rely on code review / the naming convention alone, with no runtime enforcement. Rejected — the whole point of the earlier &quot;never log the payload&quot; guarantee was to not depend on every future contributor remembering the rule; enrichment reopens exactly that risk, so it needs the same default-safe posture.</li>
+<li><strong>Alternative considered</strong>: throw on a denied field name instead of silently dropping it. Rejected — a logging concern should never be able to fail a production request; same rationale as the correlation sanitizer generating a fresh id instead of rejecting the request.</li>
+</ul>
+<h3 id="enrichment-stays-explicit-never-automatic-reflection">Enrichment stays explicit, never automatic reflection</h3>
+<p><code>IRequestEvent</code> is populated by named <code>Set</code>/<code>Increment</code> calls; nothing in the framework reflects over a request/command object to auto-populate fields. This reaffirms the original &quot;no request payload in logs&quot; decision, now framed as the necessary default alongside opt-in enrichment rather than the whole story.</p>
+<h2 id="risks--trade-offs">Risks / Trade-offs</h2>
+<ul>
+<li><strong>[Risk]</strong> A shared, ambient field bag (<code>IRequestEvent</code>) can become a dumping ground if enrichment isn't disciplined, eroding the low-cardinality/high-signal intent of the model. → <strong>Mitigation</strong>: the <code>&lt;Feature&gt;EventFields</code> constant convention plus the enforced deny-list keep additions visible and reviewable; this is a documentation/convention risk, not something the type system alone can prevent.</li>
+<li><strong>[Risk]</strong> Emitting 100% of requests (no tail sampling yet) means volume scales linearly with traffic and dimensionality — a cost risk once real sinks are wired up at scale. → <strong>Mitigation</strong>: explicitly out of scope for this change (see Non-Goals); tracked as a natural follow-up once a concrete sink exists to sample for.</li>
+<li><strong>[Risk]</strong> Centralizing emission in <code>CorrelationIdMiddleware</code> means a bug there silently loses the <em>entire</em> observability signal for a request (previously, <code>LoggingMiddleware</code> and <code>ExceptionHandlingMiddleware</code> logged independently, so a bug in one didn't erase the other). → <strong>Mitigation</strong>: this is the direct trade-off for guaranteeing &quot;exactly one entry, covering every path including pre-dispatch failures&quot; — the previous design couldn't make that guarantee at all. Cover the emission path itself with tests exercising every outcome (success, business failure, in-pipeline exception, pre-dispatch exception, no matching route).</li>
+<li><strong>[Risk]</strong> A high-cardinality or malicious correlation ID value still reaches the wide event if it passes the character/length allow-list. → <strong>Mitigation</strong>: unchanged from the original design — sanitization only guarantees no injection/line-forging; the correlation id is a diagnostic hint, not an authenticated identifier.</li>
+<li><strong>[Risk]</strong> Consumers who forget to register <code>LoggingMiddleware</code> first, or who reorder <code>CorrelationIdMiddleware</code>/<code>ExceptionHandlingMiddleware</code>, silently lose fields or the whole event. → <strong>Mitigation</strong>: documented explicitly in the middleware-order documentation; demo app wiring serves as the reference example.</li>
+</ul>
+<h2 id="migration-plan">Migration Plan</h2>
+<p>This change already has a first implementation on the <code>add-structured-logging</code> branch (<a href="https://github.com/franciscofsl/Raftel/pull/148">PR #148</a>) built to the <em>original</em> design (per-line logging, <code>ILogger.BeginScope</code> for correlation). This revision changes the target architecture; the existing code needs rework, not a from-scratch build:</p>
+<ol>
+<li>Add <code>IRequestEvent</code> + its deny-list-enforcing implementation, with unit tests.</li>
+<li>Rework <code>LoggingMiddleware</code> to enrich <code>IRequestEvent</code> instead of calling <code>ILogger</code>; update its tests accordingly.</li>
+<li>Rework <code>ExceptionHandlingMiddleware</code> to enrich <code>IRequestEvent</code> instead of calling <code>ILogger</code>; update its tests accordingly.</li>
+<li>Extend <code>CorrelationIdMiddleware</code> to own <code>IRequestEvent</code>'s lifecycle and perform the single emission; update/replace the correlation functional tests to also assert &quot;exactly one log entry per request&quot; across every outcome.</li>
+<li>Update the demo app and layer <code>CLAUDE.md</code> docs to describe the new model.</li>
+</ol>
+<p>Still purely additive at the public-API level — no consumer-facing type is removed, only <code>LoggingMiddleware</code>'s and <code>ExceptionHandlingMiddleware</code>'s internal logging behavior changes. No feature flag needed.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/add-structured-logging/design.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

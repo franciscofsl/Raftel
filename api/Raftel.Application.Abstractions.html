@@ -100,12 +100,33 @@ Classes
 the request handler and middleware pipeline from the dependency injection container.</p>
 </dd>
     </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Application.Abstractions.RequestEventFields.html">RequestEventFields</a></dt>
+      <dd><p>Well-known field names written to <a class="xref" href="Raftel.Application.Abstractions.IRequestEvent.html">IRequestEvent</a> by framework middleware, so
+every component agrees on the same keys. Feature code enriching the event with domain fields
+should follow the same convention with its own <code>&lt;Feature&gt;EventFields</code> constants
+class rather than inline string literals.</p>
+</dd>
+    </dl>
     <h3 id="interfaces">
 Interfaces
 </h3>
     <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Application.Abstractions.ICorrelationContext.html">ICorrelationContext</a></dt>
+      <dd><p>Exposes the correlation identifier resolved for the current HTTP request, so that any
+component in the pipeline can tag work (e.g. audit entries, domain events) with it.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Raftel.Application.Abstractions.IRequestDispatcher.html">IRequestDispatcher</a></dt>
       <dd><p>Dispatches requests through the pipeline and to their associated handler.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Application.Abstractions.IRequestEvent.html">IRequestEvent</a></dt>
+      <dd><p>A request-scoped bag of named fields describing the current HTTP request's lifecycle — the
+&quot;wide event&quot; / canonical log line emitted once when the request finishes. Framework middleware
+and application code enrich it throughout the request; exactly one component emits it.</p>
 </dd>
     </dl>
     <dl class="jumplist">

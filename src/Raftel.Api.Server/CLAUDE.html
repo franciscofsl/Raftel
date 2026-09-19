@@ -83,6 +83,7 @@
 Features/&lt;Feature&gt;/   &lt;Feature&gt;DependencyInjection.cs (feature endpoint registration) and exceptional controllers
     Users/AuthorizationController.cs   classic controller for OpenIddict flow (/connect/token)
 Middlewares/          ExceptionHandlingMiddleware (+ extensions) → errors in ProblemDetails (RFC 7807)
+                       CorrelationIdMiddleware (+ extensions) → resolves/echoes X-Correlation-Id
 </code></pre>
 <h2 id="patterns-and-practices">Patterns and Practices</h2>
 <ul>
@@ -101,7 +102,8 @@ Middlewares/          ExceptionHandlingMiddleware (+ extensions) → errors in P
 </ul>
 </li>
 <li><strong>Controllers</strong>: only as exception when AutoEndpoints doesn't fit (e.g., <code>AuthorizationController</code> for OpenIddict handshake). Always use Commands/Queries for business CRUD.</li>
-<li><strong>Errors</strong>: <code>ExceptionHandlingMiddleware</code> centralizes everything in <code>ProblemDetails</code>, no stack traces leaked. ⚠️ Currently swallows the real exception without logging — this is the point to enhance if you add observability.</li>
+<li><strong>Errors</strong>: <code>ExceptionHandlingMiddleware</code> centralizes everything in <code>ProblemDetails</code>, no stack traces leaked. It no longer logs directly — it enriches the current request's <code>IRequestEvent</code> with the exception and a type-derived <code>level</code> (<code>Debug</code> for <code>ValidationException</code>, <code>Warning</code> for <code>UnauthorizedException</code>, <code>Error</code> otherwise) before producing the response.</li>
+<li><strong>Correlation &amp; wide events</strong>: <code>CorrelationIdMiddleware</code> must be registered <strong>before</strong> <code>ExceptionHandlingMiddleware</code> (<code>app.UseCorrelationId(); app.UseRaftelExceptionHandling();</code>), since it wraps everything else. It resolves/echoes <code>X-Correlation-Id</code>, sets <code>request_id</code>/<code>method</code>/<code>path</code>/<code>status_code</code>/<code>duration_ms</code> on <code>IRequestEvent</code>, and is the <strong>single point that emits the request's wide event</strong> — exactly once per request, at whatever <code>level</code> was recorded (defaulting to <code>Information</code>). This is what guarantees &quot;exactly one log entry per request&quot; holds even for requests that never reach command/query dispatch (malformed JSON body, a 404 with no matching route, an ASP.NET-level 401/403). Never add a competing <code>ILogger</code> call in another middleware — enrich <code>IRequestEvent</code> instead (see <code>Raftel.Application/CLAUDE.md</code>'s &quot;Wide Events&quot; section).</li>
 </ul>
 <h2 id="conventions">Conventions</h2>
 <ul>

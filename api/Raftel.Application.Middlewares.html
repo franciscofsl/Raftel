@@ -102,6 +102,14 @@ identifying the command or query that is being processed so that infrastructure 
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Application.Middlewares.LoggingMiddleware-2.html">LoggingMiddleware&lt;TRequest, TResponse&gt;</a></dt>
+      <dd><p>Global middleware that enriches the current request's <a class="xref" href="Raftel.Application.Abstractions.IRequestEvent.html">IRequestEvent</a> with the
+request name and outcome. It never logs directly — a single component further out in the
+pipeline emits the request's wide event exactly once — and never includes request property
+values, so credentials or other sensitive request payloads never reach a log sink.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html">PermissionAuthorizationMiddleware&lt;TRequest, TResponse&gt;</a></dt>
       <dd><p>Middleware that enforces permission-based authorization for requests decorated with <a class="xref" href="Raftel.Application.Authorization.RequiresPermissionAttribute.html">RequiresPermissionAttribute</a>.</p>
 </dd>

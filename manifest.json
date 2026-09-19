@@ -252,6 +252,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Middlewares.CorrelationIdMiddleware",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.yml\" sourcestartlinenumber=\"1\">Middleware that resolves the request's correlation id via <xref href=\"Raftel.Application.Abstractions.ICorrelationContext\" data-throw-if-not-resolved=\"false\"></xref>,\nechoes it back on the response, and owns the current request's <xref href=\"Raftel.Application.Abstractions.IRequestEvent\" data-throw-if-not-resolved=\"false\"></xref>\nlifecycle: it is the single point that emits the request's wide event, exactly once, after\nevery other middleware (including <xref href=\"Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware\" data-throw-if-not-resolved=\"false\"></xref>) has run — so it\ncovers every outcome, including requests that never reach command/query dispatch.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.yml",
       "output": {
         ".html": {
@@ -262,7 +290,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware",
-      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.yml\" sourcestartlinenumber=\"1\">Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses.\nStack traces are never exposed in responses.</p>\n"
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.yml\" sourcestartlinenumber=\"1\">Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses.\nStack traces are never exposed in responses. Enriches the current request's\n<xref href=\"Raftel.Application.Abstractions.IRequestEvent\" data-throw-if-not-resolved=\"false\"></xref> with the exception and its type-derived severity instead of\nlogging directly — a single component further out in the pipeline emits the request's wide\nevent exactly once.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -420,6 +448,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.ICorrelationContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.ICorrelationContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.ICorrelationContext",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.ICorrelationContext.yml\" sourcestartlinenumber=\"1\">Exposes the correlation identifier resolved for the current HTTP request, so that any\ncomponent in the pipeline can tag work (e.g. audit entries, domain events) with it.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Abstractions.IRequest-1.yml",
       "output": {
         ".html": {
@@ -445,6 +487,20 @@
       "IsMRef": true,
       "Title": "Raftel.Application.Abstractions.IRequestDispatcher",
       "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.IRequestDispatcher.yml\" sourcestartlinenumber=\"1\">Dispatches requests through the pipeline and to their associated handler.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.IRequestEvent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.IRequestEvent.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.IRequestEvent",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.IRequestEvent.yml\" sourcestartlinenumber=\"1\">A request-scoped bag of named fields describing the current HTTP request's lifecycle — the\n&quot;wide event&quot; / canonical log line emitted once when the request finishes. Framework middleware\nand application code enrich it throughout the request; exactly one component emits it.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -501,6 +557,20 @@
       "IsMRef": true,
       "Title": "Raftel.Application.Abstractions.RequestDispatcher",
       "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.RequestDispatcher.yml\" sourcestartlinenumber=\"1\">Default implementation of <xref href=\"Raftel.Application.Abstractions.IRequestDispatcher\" data-throw-if-not-resolved=\"false\"></xref> that resolves\nthe request handler and middleware pipeline from the dependency injection container.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.RequestEventFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.RequestEventFields.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.RequestEventFields",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.RequestEventFields.yml\" sourcestartlinenumber=\"1\">Well-known field names written to <xref href=\"Raftel.Application.Abstractions.IRequestEvent\" data-throw-if-not-resolved=\"false\"></xref> by framework middleware, so\nevery component agrees on the same keys. Feature code enriching the event with domain fields\nshould follow the same convention with its own <code>&lt;Feature&gt;EventFields</code> constants\nclass rather than inline string literals.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1299,6 +1369,20 @@
       "IsMRef": true,
       "Title": "Raftel.Application.Middlewares.IQueryMiddleware<TRequest, TResponse>",
       "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.IQueryMiddleware-2.yml\" sourcestartlinenumber=\"1\">Represents a middleware specific to query handling in the request pipeline.\nInherits from <xref href=\"Raftel.Application.Middlewares.IGlobalMiddleware%602\" data-throw-if-not-resolved=\"false\"></xref> with a response type of <xref href=\"Raftel.Domain.Abstractions.Result%601\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Middlewares.LoggingMiddleware-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Middlewares.LoggingMiddleware-2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Middlewares.LoggingMiddleware<TRequest, TResponse>",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.LoggingMiddleware-2.yml\" sourcestartlinenumber=\"1\">Global middleware that enriches the current request's <xref href=\"Raftel.Application.Abstractions.IRequestEvent\" data-throw-if-not-resolved=\"false\"></xref> with the\nrequest name and outcome. It never logs directly — a single component further out in the\npipeline emits the request's wide event exactly once — and never includes request property\nvalues, so credentials or other sensitive request payloads never reach a log sink.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -2928,11 +3012,11 @@
       "type": "Toc",
       "source_relative_path": "api/toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "api/toc.json"
-        },
         ".html": {
           "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
         }
       },
       "version": ""
@@ -3271,11 +3355,11 @@
       "type": "Toc",
       "source_relative_path": "docs/toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "docs/toc.json"
-        },
         ".html": {
           "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
         }
       },
       "version": ""
@@ -3286,6 +3370,56 @@
       "output": {
         ".html": {
           "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/add-structured-logging/design.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/add-structured-logging/design.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/add-structured-logging/proposal.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/add-structured-logging/proposal.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/add-structured-logging/specs/correlation-id/spec.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/add-structured-logging/specs/correlation-id/spec.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/add-structured-logging/specs/structured-logging/spec.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/add-structured-logging/specs/structured-logging/spec.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/add-structured-logging/tasks.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/add-structured-logging/tasks.html"
         }
       },
       "version": ""
@@ -3554,11 +3688,11 @@
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
-        ".json": {
-          "relative_path": "toc.json"
-        },
         ".html": {
           "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
         }
       },
       "version": ""

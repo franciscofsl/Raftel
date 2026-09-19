@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/add-structured-logging/specs/structured-logging/spec.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../../index.html">
+            <img id="logo" class="svg" src="../../../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="purpose">Purpose</h2>
+<p>Gives every HTTP request a single, structured, high-dimensionality log event (a &quot;wide event&quot; / canonical log line) describing everything relevant to that request's lifecycle — so a production incident can be diagnosed from one query instead of correlating scattered log lines, without ever leaking request payloads.</p>
+<h2 id="added-requirements">ADDED Requirements</h2>
+<h3 id="requirement-one-wide-event-per-request">Requirement: One wide event per request</h3>
+<p>The system SHALL emit exactly one structured log entry per HTTP request, capturing that request's outcome, instead of multiple log entries scattered across its lifecycle.</p>
+<h4 id="scenario-successful-request">Scenario: Successful request</h4>
+<ul>
+<li><strong>WHEN</strong> an HTTP request is handled and completes without a failed <code>Result</code> or an unhandled exception</li>
+<li><strong>THEN</strong> exactly one <code>Information</code> log entry is emitted for that request, including the request name and elapsed time</li>
+</ul>
+<h4 id="scenario-request-fails-with-a-business-error">Scenario: Request fails with a business error</h4>
+<ul>
+<li><strong>WHEN</strong> a command or query handler returns a failed <code>Result</code></li>
+<li><strong>THEN</strong> exactly one <code>Warning</code> log entry is emitted for that request, including the request name, elapsed time, error code, and error message</li>
+<li><strong>THEN</strong> no additional log entry is emitted for the same request</li>
+</ul>
+<h4 id="scenario-request-throws-an-unhandled-exception">Scenario: Request throws an unhandled exception</h4>
+<ul>
+<li><strong>WHEN</strong> handling a request throws an exception, whether inside or outside the command/query pipeline</li>
+<li><strong>THEN</strong> exactly one log entry is emitted for that request, including the request name (when known), elapsed time, and the exception</li>
+<li><strong>THEN</strong> no additional log entry is emitted for the same request</li>
+</ul>
+<h3 id="requirement-exception-severity-reflects-its-type">Requirement: Exception severity reflects its type</h3>
+<p>The system SHALL choose the wide event's log level for an unhandled exception based on its type: <code>Debug</code> for a validation exception, <code>Warning</code> for an authorization exception (including the required permission), and <code>Error</code> for any other exception.</p>
+<h4 id="scenario-validation-exception">Scenario: Validation exception</h4>
+<ul>
+<li><strong>WHEN</strong> a validation exception propagates while handling a request</li>
+<li><strong>THEN</strong> the request's wide event is emitted at <code>Debug</code> level</li>
+</ul>
+<h4 id="scenario-authorization-exception">Scenario: Authorization exception</h4>
+<ul>
+<li><strong>WHEN</strong> an authorization exception propagates while handling a request</li>
+<li><strong>THEN</strong> the request's wide event is emitted at <code>Warning</code> level and includes the required permission</li>
+</ul>
+<h4 id="scenario-any-other-exception">Scenario: Any other exception</h4>
+<ul>
+<li><strong>WHEN</strong> any other exception propagates while handling a request</li>
+<li><strong>THEN</strong> the request's wide event is emitted at <code>Error</code> level</li>
+</ul>
+<h3 id="requirement-stack-traces-never-reach-the-http-response">Requirement: Stack traces never reach the HTTP response</h3>
+<p>The system SHALL NOT include an exception's stack trace in the HTTP response body, regardless of the wide event's log level.</p>
+<h4 id="scenario-any-exception-produces-an-error-response">Scenario: Any exception produces an error response</h4>
+<ul>
+<li><strong>WHEN</strong> an exception is translated into an HTTP error response</li>
+<li><strong>THEN</strong> the response body does not contain the exception's stack trace</li>
+</ul>
+<h3 id="requirement-explicit-event-enrichment">Requirement: Explicit event enrichment</h3>
+<p>The system SHALL let request-handling code add named fields to the current request's wide event; every field added this way SHALL appear in that request's single emitted log entry.</p>
+<h4 id="scenario-a-handler-enriches-the-event">Scenario: A handler enriches the event</h4>
+<ul>
+<li><strong>WHEN</strong> a command or query handler adds a field to the current request's event</li>
+<li><strong>THEN</strong> the emitted log entry for that request includes that field</li>
+</ul>
+<h4 id="scenario-multiple-components-enrich-the-same-event">Scenario: Multiple components enrich the same event</h4>
+<ul>
+<li><strong>WHEN</strong> more than one component (e.g. authentication context and a handler) adds fields to the current request's event</li>
+<li><strong>THEN</strong> all of those fields appear together in the single emitted log entry for that request</li>
+</ul>
+<h3 id="requirement-no-request-payload-in-logs-by-default">Requirement: No request payload in logs by default</h3>
+<p>The system SHALL NOT automatically include the content (property values) of a command or query request in its wide event; only explicitly enriched fields and framework-owned metadata (request name, timing, outcome) are included.</p>
+<h4 id="scenario-request-carries-sensitive-data">Scenario: Request carries sensitive data</h4>
+<ul>
+<li><strong>WHEN</strong> a command containing a password, token, or other sensitive property is handled and no field is explicitly added for it</li>
+<li><strong>THEN</strong> the emitted log entry for that request does not contain that property's value</li>
+</ul>
+<h3 id="requirement-sensitive-field-names-are-refused">Requirement: Sensitive field names are refused</h3>
+<p>The system SHALL refuse to include a field in the wide event when its name matches a documented deny-list of sensitive names (e.g. <code>password</code>, <code>token</code>, <code>secret</code>, <code>apikey</code>, <code>authorization</code>), even when explicitly set by request-handling code.</p>
+<h4 id="scenario-code-attempts-to-enrich-with-a-denied-field-name">Scenario: Code attempts to enrich with a denied field name</h4>
+<ul>
+<li><strong>WHEN</strong> request-handling code adds a field whose name matches the deny-list</li>
+<li><strong>THEN</strong> that field does not appear in the emitted log entry for that request</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/add-structured-logging/specs/structured-logging/spec.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

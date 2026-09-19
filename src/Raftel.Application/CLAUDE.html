@@ -78,6 +78,8 @@
 <pre><code>Abstractions/
     IRequest / IRequestHandler / IRequestDispatcher / RequestDispatcher   base mediator
     RequestHandlerDelegate                                                pipeline link
+    IRequestEvent / RequestEventFields / RequestEvent                     request-scoped wide event (see below)
+    ICorrelationContext                                                   correlation id for the current request (impl. in Infrastructure)
     Authentication/   ICurrentUser, IAuthenticationService (interfaces, impl. in Infrastructure)
     Multitenancy/     ICurrentTenant
     DomainEvents/     IDomainEventHandler&lt;TEvent&gt;, IDomainEventsDispatcher + DomainEventsDispatcher impl.
@@ -103,8 +105,17 @@ RaftelApplicationBuilder.cs     assembly and middleware registration
 <h2 id="pipeline-and-mediator">Pipeline and Mediator</h2>
 <ul>
 <li><code>RequestDispatcher</code> reflects to detect if request is <code>ICommand</code>/<code>ICommand&lt;T&gt;</code>/<code>IQuery&lt;T&gt;</code> and chains: <code>IGlobalMiddleware</code> + command/query-specific middlewares, ending with handler.</li>
-<li>Included middlewares: <code>ValidationMiddleware</code> (runs <code>Validator&lt;T&gt;</code>), <code>PermissionAuthorizationMiddleware</code> (via <code>[RequiresPermission]</code>), <code>UnitOfWorkMiddleware</code> (commits <strong>only if result succeeds</strong>).</li>
+<li>Included middlewares: <code>ValidationMiddleware</code> (runs <code>Validator&lt;T&gt;</code>), <code>PermissionAuthorizationMiddleware</code> (via <code>[RequiresPermission]</code>), <code>UnitOfWorkMiddleware</code> (commits <strong>only if result succeeds</strong>), <code>LoggingMiddleware</code> (wide-event enrichment — see below).</li>
 <li>To add new cross-cutting behavior (caching, logging…), create a middleware of the appropriate type and register it in <code>AddRaftelApplication</code>.</li>
+<li>Global middleware order is caller-defined by the order of <code>AddGlobalMiddleware</code> calls. <strong><code>LoggingMiddleware&lt;,&gt;</code> must be registered first</strong> so it wraps every other global middleware and captures their outcome too.</li>
+</ul>
+<h2 id="wide-events-structured-logging">Wide Events (Structured Logging)</h2>
+<p>Raftel logs one structured &quot;wide event&quot; (canonical log line) per HTTP request, not scattered per-line logs — see <a href="https://github.com/franciscofsl/Raftel/issues/115">GitHub issue #115</a>. The event is a request-scoped field bag (<code>IRequestEvent</code>), enriched throughout the request and emitted <strong>exactly once</strong> by <code>CorrelationIdMiddleware</code> in <code>Raftel.Api.Server</code> (the outermost middleware, so it also covers requests that never reach the command/query pipeline).</p>
+<ul>
+<li><strong><code>LoggingMiddleware&lt;TRequest, TResponse&gt;</code></strong> enriches the event with <code>request_name</code> (<code>typeof(TRequest).Name</code>, never request property values — commands routinely carry passwords/tokens) and the outcome: nothing extra on success, <code>level = Warning</code> + <code>error.code</code>/<code>error.message</code> on a failed <code>Result</code> (expected business flow, not a defect), or <code>level = Error</code> + the exception on a thrown exception (which is then rethrown unchanged). It never logs directly.</li>
+<li><strong>Enriching from a handler</strong>: inject <code>IRequestEvent</code> and call <code>Set(&quot;field.name&quot;, value)</code> / <code>Increment(&quot;field.name&quot;)</code> for domain context worth debugging with (e.g. <code>pirate.id</code>, <code>db.query_count</code>). Expose field names as a <code>&lt;Feature&gt;EventFields</code> constants class (mirroring <code>&lt;Feature&gt;Permissions</code>) rather than inline string literals, so additions are reviewable in a PR diff.</li>
+<li><strong>Deny-list</strong>: <code>IRequestEvent.Set</code>/<code>Increment</code> silently drop any field whose name contains <code>password</code>, <code>token</code>, <code>secret</code>, <code>apikey</code>, or <code>authorization</code> (case-insensitive) — never throws, never breaks the request. This is a safety net, not a substitute for not enriching with sensitive data in the first place.</li>
+<li>Do not add ad hoc logging elsewhere in the pipeline, and do not serialize a request/command object into the event — enrichment is always explicit, field by field.</li>
 </ul>
 <h2 id="domain-events">Domain Events</h2>
 <ul>

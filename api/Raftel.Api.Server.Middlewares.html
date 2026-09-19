@@ -95,9 +95,25 @@
 Classes
 </h3>
     <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.html">CorrelationIdMiddleware</a></dt>
+      <dd><p>Middleware that resolves the request's correlation id via <a class="xref" href="Raftel.Application.Abstractions.ICorrelationContext.html">ICorrelationContext</a>,
+echoes it back on the response, and owns the current request's <a class="xref" href="Raftel.Application.Abstractions.IRequestEvent.html">IRequestEvent</a>
+lifecycle: it is the single point that emits the request's wide event, exactly once, after
+every other middleware (including <a class="xref" href="Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.html">ExceptionHandlingMiddleware</a>) has run — so it
+covers every outcome, including requests that never reach command/query dispatch.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.html">CorrelationIdMiddlewareExtensions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.html">ExceptionHandlingMiddleware</a></dt>
       <dd><p>Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses.
-Stack traces are never exposed in responses.</p>
+Stack traces are never exposed in responses. Enriches the current request's
+<a class="xref" href="Raftel.Application.Abstractions.IRequestEvent.html">IRequestEvent</a> with the exception and its type-derived severity instead of
+logging directly — a single component further out in the pipeline emits the request's wide
+event exactly once.</p>
 </dd>
     </dl>
     <dl class="jumplist">

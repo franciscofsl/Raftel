@@ -538,6 +538,66 @@ references:
   commentId: N:Raftel.Api.Server.Middlewares
   fullName: Raftel.Api.Server.Middlewares
   nameWithType: Raftel.Api.Server.Middlewares
+- uid: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware
+  name: CorrelationIdMiddleware
+  href: api/Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.html
+  commentId: T:Raftel.Api.Server.Middlewares.CorrelationIdMiddleware
+  fullName: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware
+  nameWithType: CorrelationIdMiddleware
+- uid: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)
+  name: CorrelationIdMiddleware(RequestDelegate)
+  href: api/Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.html#Raftel_Api_Server_Middlewares_CorrelationIdMiddleware__ctor_Microsoft_AspNetCore_Http_RequestDelegate_
+  commentId: M:Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)
+  name.vb: New(RequestDelegate)
+  fullName: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.CorrelationIdMiddleware(Microsoft.AspNetCore.Http.RequestDelegate)
+  fullName.vb: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.New(Microsoft.AspNetCore.Http.RequestDelegate)
+  nameWithType: CorrelationIdMiddleware.CorrelationIdMiddleware(RequestDelegate)
+  nameWithType.vb: CorrelationIdMiddleware.New(RequestDelegate)
+- uid: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.#ctor*
+  name: CorrelationIdMiddleware
+  href: api/Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.html#Raftel_Api_Server_Middlewares_CorrelationIdMiddleware__ctor_
+  commentId: Overload:Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.CorrelationIdMiddleware
+  fullName.vb: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.New
+  nameWithType: CorrelationIdMiddleware.CorrelationIdMiddleware
+  nameWithType.vb: CorrelationIdMiddleware.New
+- uid: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,Raftel.Application.Abstractions.ICorrelationContext,Raftel.Application.Abstractions.IRequestEvent,Microsoft.Extensions.Logging.ILogger{Raftel.Api.Server.Middlewares.CorrelationIdMiddleware})
+  name: InvokeAsync(HttpContext, ICorrelationContext, IRequestEvent, ILogger<CorrelationIdMiddleware>)
+  href: api/Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.html#Raftel_Api_Server_Middlewares_CorrelationIdMiddleware_InvokeAsync_Microsoft_AspNetCore_Http_HttpContext_Raftel_Application_Abstractions_ICorrelationContext_Raftel_Application_Abstractions_IRequestEvent_Microsoft_Extensions_Logging_ILogger_Raftel_Api_Server_Middlewares_CorrelationIdMiddleware__
+  commentId: M:Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,Raftel.Application.Abstractions.ICorrelationContext,Raftel.Application.Abstractions.IRequestEvent,Microsoft.Extensions.Logging.ILogger{Raftel.Api.Server.Middlewares.CorrelationIdMiddleware})
+  name.vb: InvokeAsync(HttpContext, ICorrelationContext, IRequestEvent, ILogger(Of CorrelationIdMiddleware))
+  fullName: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext, Raftel.Application.Abstractions.ICorrelationContext, Raftel.Application.Abstractions.IRequestEvent, Microsoft.Extensions.Logging.ILogger<Raftel.Api.Server.Middlewares.CorrelationIdMiddleware>)
+  fullName.vb: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext, Raftel.Application.Abstractions.ICorrelationContext, Raftel.Application.Abstractions.IRequestEvent, Microsoft.Extensions.Logging.ILogger(Of Raftel.Api.Server.Middlewares.CorrelationIdMiddleware))
+  nameWithType: CorrelationIdMiddleware.InvokeAsync(HttpContext, ICorrelationContext, IRequestEvent, ILogger<CorrelationIdMiddleware>)
+  nameWithType.vb: CorrelationIdMiddleware.InvokeAsync(HttpContext, ICorrelationContext, IRequestEvent, ILogger(Of CorrelationIdMiddleware))
+- uid: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.InvokeAsync*
+  name: InvokeAsync
+  href: api/Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.html#Raftel_Api_Server_Middlewares_CorrelationIdMiddleware_InvokeAsync_
+  commentId: Overload:Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.InvokeAsync
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.InvokeAsync
+  nameWithType: CorrelationIdMiddleware.InvokeAsync
+- uid: Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions
+  name: CorrelationIdMiddlewareExtensions
+  href: api/Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.html
+  commentId: T:Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions
+  fullName: Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions
+  nameWithType: CorrelationIdMiddlewareExtensions
+- uid: Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.UseCorrelationId(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  name: UseCorrelationId(IApplicationBuilder)
+  href: api/Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.html#Raftel_Api_Server_Middlewares_CorrelationIdMiddlewareExtensions_UseCorrelationId_Microsoft_AspNetCore_Builder_IApplicationBuilder_
+  commentId: M:Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.UseCorrelationId(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  fullName: Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.UseCorrelationId(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  nameWithType: CorrelationIdMiddlewareExtensions.UseCorrelationId(IApplicationBuilder)
+- uid: Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.UseCorrelationId*
+  name: UseCorrelationId
+  href: api/Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.html#Raftel_Api_Server_Middlewares_CorrelationIdMiddlewareExtensions_UseCorrelationId_
+  commentId: Overload:Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.UseCorrelationId
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Middlewares.CorrelationIdMiddlewareExtensions.UseCorrelationId
+  nameWithType: CorrelationIdMiddlewareExtensions.UseCorrelationId
 - uid: Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware
   name: ExceptionHandlingMiddleware
   href: api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.html
@@ -563,12 +623,12 @@ references:
   fullName.vb: Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.New
   nameWithType: ExceptionHandlingMiddleware.ExceptionHandlingMiddleware
   nameWithType.vb: ExceptionHandlingMiddleware.New
-- uid: Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)
-  name: InvokeAsync(HttpContext)
-  href: api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.html#Raftel_Api_Server_Middlewares_ExceptionHandlingMiddleware_InvokeAsync_Microsoft_AspNetCore_Http_HttpContext_
-  commentId: M:Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)
-  fullName: Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)
-  nameWithType: ExceptionHandlingMiddleware.InvokeAsync(HttpContext)
+- uid: Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,Raftel.Application.Abstractions.IRequestEvent)
+  name: InvokeAsync(HttpContext, IRequestEvent)
+  href: api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.html#Raftel_Api_Server_Middlewares_ExceptionHandlingMiddleware_InvokeAsync_Microsoft_AspNetCore_Http_HttpContext_Raftel_Application_Abstractions_IRequestEvent_
+  commentId: M:Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,Raftel.Application.Abstractions.IRequestEvent)
+  fullName: Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext, Raftel.Application.Abstractions.IRequestEvent)
+  nameWithType: ExceptionHandlingMiddleware.InvokeAsync(HttpContext, IRequestEvent)
 - uid: Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.InvokeAsync*
   name: InvokeAsync
   href: api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.html#Raftel_Api_Server_Middlewares_ExceptionHandlingMiddleware_InvokeAsync_
@@ -903,6 +963,25 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.DispatchAsync
   nameWithType: IDomainEventsDispatcher.DispatchAsync
+- uid: Raftel.Application.Abstractions.ICorrelationContext
+  name: ICorrelationContext
+  href: api/Raftel.Application.Abstractions.ICorrelationContext.html
+  commentId: T:Raftel.Application.Abstractions.ICorrelationContext
+  fullName: Raftel.Application.Abstractions.ICorrelationContext
+  nameWithType: ICorrelationContext
+- uid: Raftel.Application.Abstractions.ICorrelationContext.CorrelationId
+  name: CorrelationId
+  href: api/Raftel.Application.Abstractions.ICorrelationContext.html#Raftel_Application_Abstractions_ICorrelationContext_CorrelationId
+  commentId: P:Raftel.Application.Abstractions.ICorrelationContext.CorrelationId
+  fullName: Raftel.Application.Abstractions.ICorrelationContext.CorrelationId
+  nameWithType: ICorrelationContext.CorrelationId
+- uid: Raftel.Application.Abstractions.ICorrelationContext.CorrelationId*
+  name: CorrelationId
+  href: api/Raftel.Application.Abstractions.ICorrelationContext.html#Raftel_Application_Abstractions_ICorrelationContext_CorrelationId_
+  commentId: Overload:Raftel.Application.Abstractions.ICorrelationContext.CorrelationId
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.ICorrelationContext.CorrelationId
+  nameWithType: ICorrelationContext.CorrelationId
 - uid: Raftel.Application.Abstractions.IRequestDispatcher
   name: IRequestDispatcher
   href: api/Raftel.Application.Abstractions.IRequestDispatcher.html
@@ -925,6 +1004,57 @@ references:
   fullName.vb: Raftel.Application.Abstractions.IRequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest, System.Threading.CancellationToken)
   nameWithType: IRequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest, CancellationToken)
   nameWithType.vb: IRequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest, CancellationToken)
+- uid: Raftel.Application.Abstractions.IRequestEvent
+  name: IRequestEvent
+  href: api/Raftel.Application.Abstractions.IRequestEvent.html
+  commentId: T:Raftel.Application.Abstractions.IRequestEvent
+  fullName: Raftel.Application.Abstractions.IRequestEvent
+  nameWithType: IRequestEvent
+- uid: Raftel.Application.Abstractions.IRequestEvent.Fields
+  name: Fields
+  href: api/Raftel.Application.Abstractions.IRequestEvent.html#Raftel_Application_Abstractions_IRequestEvent_Fields
+  commentId: P:Raftel.Application.Abstractions.IRequestEvent.Fields
+  fullName: Raftel.Application.Abstractions.IRequestEvent.Fields
+  nameWithType: IRequestEvent.Fields
+- uid: Raftel.Application.Abstractions.IRequestEvent.Fields*
+  name: Fields
+  href: api/Raftel.Application.Abstractions.IRequestEvent.html#Raftel_Application_Abstractions_IRequestEvent_Fields_
+  commentId: Overload:Raftel.Application.Abstractions.IRequestEvent.Fields
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.IRequestEvent.Fields
+  nameWithType: IRequestEvent.Fields
+- uid: Raftel.Application.Abstractions.IRequestEvent.Increment(System.String,System.Int64)
+  name: Increment(string, long)
+  href: api/Raftel.Application.Abstractions.IRequestEvent.html#Raftel_Application_Abstractions_IRequestEvent_Increment_System_String_System_Int64_
+  commentId: M:Raftel.Application.Abstractions.IRequestEvent.Increment(System.String,System.Int64)
+  name.vb: Increment(String, Long)
+  fullName: Raftel.Application.Abstractions.IRequestEvent.Increment(string, long)
+  fullName.vb: Raftel.Application.Abstractions.IRequestEvent.Increment(String, Long)
+  nameWithType: IRequestEvent.Increment(string, long)
+  nameWithType.vb: IRequestEvent.Increment(String, Long)
+- uid: Raftel.Application.Abstractions.IRequestEvent.Increment*
+  name: Increment
+  href: api/Raftel.Application.Abstractions.IRequestEvent.html#Raftel_Application_Abstractions_IRequestEvent_Increment_
+  commentId: Overload:Raftel.Application.Abstractions.IRequestEvent.Increment
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.IRequestEvent.Increment
+  nameWithType: IRequestEvent.Increment
+- uid: Raftel.Application.Abstractions.IRequestEvent.Set(System.String,System.Object)
+  name: Set(string, object)
+  href: api/Raftel.Application.Abstractions.IRequestEvent.html#Raftel_Application_Abstractions_IRequestEvent_Set_System_String_System_Object_
+  commentId: M:Raftel.Application.Abstractions.IRequestEvent.Set(System.String,System.Object)
+  name.vb: Set(String, Object)
+  fullName: Raftel.Application.Abstractions.IRequestEvent.Set(string, object)
+  fullName.vb: Raftel.Application.Abstractions.IRequestEvent.Set(String, Object)
+  nameWithType: IRequestEvent.Set(string, object)
+  nameWithType.vb: IRequestEvent.Set(String, Object)
+- uid: Raftel.Application.Abstractions.IRequestEvent.Set*
+  name: Set
+  href: api/Raftel.Application.Abstractions.IRequestEvent.html#Raftel_Application_Abstractions_IRequestEvent_Set_
+  commentId: Overload:Raftel.Application.Abstractions.IRequestEvent.Set
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.IRequestEvent.Set
+  nameWithType: IRequestEvent.Set
 - uid: Raftel.Application.Abstractions.IRequestHandler`2
   name: IRequestHandler<TRequest, TResponse>
   href: api/Raftel.Application.Abstractions.IRequestHandler-2.html
@@ -1039,6 +1169,42 @@ references:
   fullName.vb: Raftel.Application.Abstractions.RequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest, System.Threading.CancellationToken)
   nameWithType: RequestDispatcher.DispatchAsync<TRequest, TResponse>(TRequest, CancellationToken)
   nameWithType.vb: RequestDispatcher.DispatchAsync(Of TRequest, TResponse)(TRequest, CancellationToken)
+- uid: Raftel.Application.Abstractions.RequestEventFields
+  name: RequestEventFields
+  href: api/Raftel.Application.Abstractions.RequestEventFields.html
+  commentId: T:Raftel.Application.Abstractions.RequestEventFields
+  fullName: Raftel.Application.Abstractions.RequestEventFields
+  nameWithType: RequestEventFields
+- uid: Raftel.Application.Abstractions.RequestEventFields.ErrorCode
+  name: ErrorCode
+  href: api/Raftel.Application.Abstractions.RequestEventFields.html#Raftel_Application_Abstractions_RequestEventFields_ErrorCode
+  commentId: F:Raftel.Application.Abstractions.RequestEventFields.ErrorCode
+  fullName: Raftel.Application.Abstractions.RequestEventFields.ErrorCode
+  nameWithType: RequestEventFields.ErrorCode
+- uid: Raftel.Application.Abstractions.RequestEventFields.ErrorMessage
+  name: ErrorMessage
+  href: api/Raftel.Application.Abstractions.RequestEventFields.html#Raftel_Application_Abstractions_RequestEventFields_ErrorMessage
+  commentId: F:Raftel.Application.Abstractions.RequestEventFields.ErrorMessage
+  fullName: Raftel.Application.Abstractions.RequestEventFields.ErrorMessage
+  nameWithType: RequestEventFields.ErrorMessage
+- uid: Raftel.Application.Abstractions.RequestEventFields.Exception
+  name: Exception
+  href: api/Raftel.Application.Abstractions.RequestEventFields.html#Raftel_Application_Abstractions_RequestEventFields_Exception
+  commentId: F:Raftel.Application.Abstractions.RequestEventFields.Exception
+  fullName: Raftel.Application.Abstractions.RequestEventFields.Exception
+  nameWithType: RequestEventFields.Exception
+- uid: Raftel.Application.Abstractions.RequestEventFields.Level
+  name: Level
+  href: api/Raftel.Application.Abstractions.RequestEventFields.html#Raftel_Application_Abstractions_RequestEventFields_Level
+  commentId: F:Raftel.Application.Abstractions.RequestEventFields.Level
+  fullName: Raftel.Application.Abstractions.RequestEventFields.Level
+  nameWithType: RequestEventFields.Level
+- uid: Raftel.Application.Abstractions.RequestEventFields.RequestName
+  name: RequestName
+  href: api/Raftel.Application.Abstractions.RequestEventFields.html#Raftel_Application_Abstractions_RequestEventFields_RequestName
+  commentId: F:Raftel.Application.Abstractions.RequestEventFields.RequestName
+  fullName: Raftel.Application.Abstractions.RequestEventFields.RequestName
+  nameWithType: RequestEventFields.RequestName
 - uid: Raftel.Application.Abstractions.RequestHandlerDelegate`1
   name: RequestHandlerDelegate<TResponse>
   href: api/Raftel.Application.Abstractions.RequestHandlerDelegate-1.html
@@ -2600,6 +2766,52 @@ references:
   fullName.vb: Raftel.Application.Middlewares.IQueryMiddleware(Of TRequest, TResponse)
   nameWithType: IQueryMiddleware<TRequest, TResponse>
   nameWithType.vb: IQueryMiddleware(Of TRequest, TResponse)
+- uid: Raftel.Application.Middlewares.LoggingMiddleware`2
+  name: LoggingMiddleware<TRequest, TResponse>
+  href: api/Raftel.Application.Middlewares.LoggingMiddleware-2.html
+  commentId: T:Raftel.Application.Middlewares.LoggingMiddleware`2
+  name.vb: LoggingMiddleware(Of TRequest, TResponse)
+  fullName: Raftel.Application.Middlewares.LoggingMiddleware<TRequest, TResponse>
+  fullName.vb: Raftel.Application.Middlewares.LoggingMiddleware(Of TRequest, TResponse)
+  nameWithType: LoggingMiddleware<TRequest, TResponse>
+  nameWithType.vb: LoggingMiddleware(Of TRequest, TResponse)
+- uid: Raftel.Application.Middlewares.LoggingMiddleware`2.#ctor(Raftel.Application.Abstractions.IRequestEvent)
+  name: LoggingMiddleware(IRequestEvent)
+  href: api/Raftel.Application.Middlewares.LoggingMiddleware-2.html#Raftel_Application_Middlewares_LoggingMiddleware_2__ctor_Raftel_Application_Abstractions_IRequestEvent_
+  commentId: M:Raftel.Application.Middlewares.LoggingMiddleware`2.#ctor(Raftel.Application.Abstractions.IRequestEvent)
+  name.vb: New(IRequestEvent)
+  fullName: Raftel.Application.Middlewares.LoggingMiddleware<TRequest, TResponse>.LoggingMiddleware(Raftel.Application.Abstractions.IRequestEvent)
+  fullName.vb: Raftel.Application.Middlewares.LoggingMiddleware(Of TRequest, TResponse).New(Raftel.Application.Abstractions.IRequestEvent)
+  nameWithType: LoggingMiddleware<TRequest, TResponse>.LoggingMiddleware(IRequestEvent)
+  nameWithType.vb: LoggingMiddleware(Of TRequest, TResponse).New(IRequestEvent)
+- uid: Raftel.Application.Middlewares.LoggingMiddleware`2.#ctor*
+  name: LoggingMiddleware
+  href: api/Raftel.Application.Middlewares.LoggingMiddleware-2.html#Raftel_Application_Middlewares_LoggingMiddleware_2__ctor_
+  commentId: Overload:Raftel.Application.Middlewares.LoggingMiddleware`2.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Middlewares.LoggingMiddleware<TRequest, TResponse>.LoggingMiddleware
+  fullName.vb: Raftel.Application.Middlewares.LoggingMiddleware(Of TRequest, TResponse).New
+  nameWithType: LoggingMiddleware<TRequest, TResponse>.LoggingMiddleware
+  nameWithType.vb: LoggingMiddleware(Of TRequest, TResponse).New
+- uid: Raftel.Application.Middlewares.LoggingMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)
+  name: HandleAsync(TRequest, RequestHandlerDelegate<TResponse>, CancellationToken)
+  href: api/Raftel.Application.Middlewares.LoggingMiddleware-2.html#Raftel_Application_Middlewares_LoggingMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Middlewares.LoggingMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse), CancellationToken)
+  fullName: Raftel.Application.Middlewares.LoggingMiddleware<TRequest, TResponse>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<TResponse>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Middlewares.LoggingMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of TResponse), System.Threading.CancellationToken)
+  nameWithType: LoggingMiddleware<TRequest, TResponse>.HandleAsync(TRequest, RequestHandlerDelegate<TResponse>, CancellationToken)
+  nameWithType.vb: LoggingMiddleware(Of TRequest, TResponse).HandleAsync(TRequest, RequestHandlerDelegate(Of TResponse), CancellationToken)
+- uid: Raftel.Application.Middlewares.LoggingMiddleware`2.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Middlewares.LoggingMiddleware-2.html#Raftel_Application_Middlewares_LoggingMiddleware_2_HandleAsync_
+  commentId: Overload:Raftel.Application.Middlewares.LoggingMiddleware`2.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Middlewares.LoggingMiddleware<TRequest, TResponse>.HandleAsync
+  fullName.vb: Raftel.Application.Middlewares.LoggingMiddleware(Of TRequest, TResponse).HandleAsync
+  nameWithType: LoggingMiddleware<TRequest, TResponse>.HandleAsync
+  nameWithType.vb: LoggingMiddleware(Of TRequest, TResponse).HandleAsync
 - uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2
   name: PermissionAuthorizationMiddleware<TRequest, TResponse>
   href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html
