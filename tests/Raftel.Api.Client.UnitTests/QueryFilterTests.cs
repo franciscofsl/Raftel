@@ -129,4 +129,20 @@ public class QueryFilterTests
 
         filter.ShouldContain("encapsulatedName=Zoro");
     }
+
+    [Fact]
+    public void Paged_ShouldSerialize_PageAndPageSizeAndSort()
+    {
+        var filter = QueryFilter.Empty().Paged(page: 2, pageSize: 10, sort: "-name").ToString();
+
+        filter.ShouldBe("?page=2&pageSize=10&sort=-name");
+    }
+
+    [Fact]
+    public void Paged_WhenSortIsNotProvided_ShouldOmitSort()
+    {
+        var filter = QueryFilter.Empty().Paged(page: 1, pageSize: 20).ToString();
+
+        filter.ShouldBe("?page=1&pageSize=20");
+    }
 }

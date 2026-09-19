@@ -21,7 +21,8 @@ public class QueryDispatcher : IQueryDispatcher
     }
 
     /// <inheritdoc />
-    public Task<Result<TResult>> DispatchAsync<TQuery, TResult>(TQuery query)
+    public Task<Result<TResult>> DispatchAsync<TQuery, TResult>(TQuery query,
+        CancellationToken cancellationToken = default)
         where TQuery : IQuery<TResult>
-        => _dispatcher.DispatchAsync<TQuery, Result<TResult>>(query);
+        => _dispatcher.DispatchAsync<TQuery, Result<TResult>>(query, cancellationToken);
 }

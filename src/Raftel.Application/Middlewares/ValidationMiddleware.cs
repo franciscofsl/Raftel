@@ -22,9 +22,11 @@ public class ValidationMiddleware<TRequest, TResponse>(IEnumerable<Validator<TRe
     /// </summary>
     /// <param name="request">The request to validate.</param>
     /// <param name="next">The delegate representing the next middleware or handler in the pipeline.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     /// <returns>The response returned by the next handler, if validation succeeds.</returns>
     /// <exception cref="ValidationException">Thrown when one or more validation rules fail.</exception>
-    public Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next)
+    public Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         var allErrors = validators
             .Select(_ => _.Validate(request))
@@ -36,6 +38,6 @@ public class ValidationMiddleware<TRequest, TResponse>(IEnumerable<Validator<TRe
             throw new ValidationException(allErrors);
         }
 
-        return next();
+        return next(cancellationToken);
     }
 }

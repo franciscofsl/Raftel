@@ -36,6 +36,13 @@ public sealed class QueryFilter
             });
     }
 
+    public QueryFilter Paged(int page, int pageSize, string sort = null)
+    {
+        return AddFilter("Page", page)
+            .AddFilter("PageSize", pageSize)
+            .AddFilter("Sort", sort);
+    }
+
     private QueryFilter AddFilter(string name, object? value)
     {
         if (value == null)

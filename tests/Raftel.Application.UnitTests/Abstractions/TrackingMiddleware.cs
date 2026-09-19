@@ -15,9 +15,10 @@ public class TrackingMiddleware<TRequest, TResponse> : IGlobalMiddleware<TReques
         _name = name;
     }
 
-    public async Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         _executionLog.Add(_name);
-        return await next();
+        return await next(cancellationToken);
     }
 }

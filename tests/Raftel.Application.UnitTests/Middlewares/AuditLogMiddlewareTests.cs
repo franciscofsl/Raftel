@@ -23,7 +23,7 @@ public class AuditLogMiddlewareTests
         var scope = Substitute.For<IDisposable>();
         _auditLogScope.Begin(Arg.Any<string>()).Returns(scope);
 
-        await _middleware.HandleAsync(new SampleCommand(), () => Task.FromResult("Result"));
+        await _middleware.HandleAsync(new SampleCommand(), _ => Task.FromResult("Result"), CancellationToken.None);
 
         _auditLogScope.Received(1).Begin(typeof(SampleCommand).FullName!);
     }
@@ -33,7 +33,8 @@ public class AuditLogMiddlewareTests
     {
         _auditLogScope.Begin(Arg.Any<string>()).Returns(Substitute.For<IDisposable>());
 
-        var result = await _middleware.HandleAsync(new SampleCommand(), () => Task.FromResult("Result"));
+        var result = await _middleware.HandleAsync(new SampleCommand(), _ => Task.FromResult("Result"),
+            CancellationToken.None);
 
         result.ShouldBe("Result");
     }
@@ -44,7 +45,7 @@ public class AuditLogMiddlewareTests
         var scope = Substitute.For<IDisposable>();
         _auditLogScope.Begin(Arg.Any<string>()).Returns(scope);
 
-        await _middleware.HandleAsync(new SampleCommand(), () => Task.FromResult("Result"));
+        await _middleware.HandleAsync(new SampleCommand(), _ => Task.FromResult("Result"), CancellationToken.None);
 
         scope.Received(1).Dispose();
     }
@@ -57,7 +58,7 @@ public class AuditLogMiddlewareTests
 
         await Should.ThrowAsync<InvalidOperationException>(async () =>
             await _middleware.HandleAsync(new SampleCommand(),
-                () => throw new InvalidOperationException("Handler failed")));
+                _ => throw new InvalidOperationException("Handler failed"), CancellationToken.None));
 
         scope.Received(1).Dispose();
     }

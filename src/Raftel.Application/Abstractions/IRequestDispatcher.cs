@@ -11,7 +11,9 @@ public interface IRequestDispatcher
     /// <typeparam name="TRequest">The type of the request.</typeparam>
     /// <typeparam name="TResponse">The type of the response.</typeparam>
     /// <param name="request">The request to dispatch.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     /// <returns>The result returned from the request handler or middleware.</returns>
-    Task<TResponse> DispatchAsync<TRequest, TResponse>(TRequest request)
+    Task<TResponse> DispatchAsync<TRequest, TResponse>(TRequest request,
+        CancellationToken cancellationToken = default)
         where TRequest : IRequest<TResponse>;
 }

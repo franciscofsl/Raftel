@@ -21,9 +21,9 @@ public sealed class UnitOfWorkMiddlewareTests
     public async Task HandleAsync_WhenCommandSucceeds_ShouldCommitUnitOfWork()
     {
         var command = new TestCommand();
-        RequestHandlerDelegate<Result> next = () => Task.FromResult(Result.Success());
+        RequestHandlerDelegate<Result> next = _ => Task.FromResult(Result.Success());
 
-        var result = await _handler.HandleAsync(command, next);
+        var result = await _handler.HandleAsync(command, next, CancellationToken.None);
 
         result.IsSuccess.ShouldBeTrue();
         await _unitOfWork.Received(1).CommitAsync();
@@ -34,9 +34,9 @@ public sealed class UnitOfWorkMiddlewareTests
     {
         var command = new TestCommand();
         var error = new Error("BOMB_FAILURE", "Buggy broke the command into pieces.");
-        RequestHandlerDelegate<Result> next = () => Task.FromResult(Result.Failure(error));
+        RequestHandlerDelegate<Result> next = _ => Task.FromResult(Result.Failure(error));
 
-        var result = await _handler.HandleAsync(command, next);
+        var result = await _handler.HandleAsync(command, next, CancellationToken.None);
 
         result.IsSuccess.ShouldBeFalse();
         await _unitOfWork.DidNotReceive().CommitAsync();

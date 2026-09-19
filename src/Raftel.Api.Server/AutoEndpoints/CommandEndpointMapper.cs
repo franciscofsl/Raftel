@@ -26,12 +26,13 @@ public static class CommandEndpointMapper
 
         return;
 
-        async Task<IResult> Handler(HttpContext context, ICommandDispatcher dispatcher)
+        async Task<IResult> Handler(HttpContext context, ICommandDispatcher dispatcher,
+            CancellationToken cancellationToken)
         {
             TCommand parsedCommand;
             try
             {
-                parsedCommand = await context.Request.ReadFromJsonAsync<TCommand>();
+                parsedCommand = await context.Request.ReadFromJsonAsync<TCommand>(cancellationToken);
             }
             catch (JsonException)
             {
@@ -49,7 +50,7 @@ public static class CommandEndpointMapper
                     title: "Invalid JSON payload");
             }
 
-            var result = await dispatcher.DispatchAsync(parsedCommand);
+            var result = await dispatcher.DispatchAsync(parsedCommand, cancellationToken);
 
             return result.IsSuccess
                 ? Results.NoContent()
@@ -75,12 +76,13 @@ public static class CommandEndpointMapper
 
         return;
 
-        async Task<IResult> Handler(HttpContext context, ICommandDispatcher dispatcher)
+        async Task<IResult> Handler(HttpContext context, ICommandDispatcher dispatcher,
+            CancellationToken cancellationToken)
         {
             TCommand parsedCommand;
             try
             {
-                parsedCommand = await context.Request.ReadFromJsonAsync<TCommand>();
+                parsedCommand = await context.Request.ReadFromJsonAsync<TCommand>(cancellationToken);
             }
             catch (JsonException)
             {
@@ -98,7 +100,7 @@ public static class CommandEndpointMapper
                     title: "Invalid JSON payload");
             }
 
-            var result = await dispatcher.DispatchAsync<TCommand, TResult>(parsedCommand);
+            var result = await dispatcher.DispatchAsync<TCommand, TResult>(parsedCommand, cancellationToken);
 
             if (!result.IsSuccess)
             {

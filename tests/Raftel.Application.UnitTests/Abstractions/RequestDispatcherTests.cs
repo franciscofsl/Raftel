@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NSubstitute;
+using Raftel.Application.Abstractions;
 using Raftel.Application.Commands;
 using Raftel.Application.Queries;
 using Raftel.Domain.Abstractions;
@@ -8,6 +10,29 @@ namespace Raftel.Application.UnitTests.Abstractions;
 
 public sealed class RequestDispatcherTests
 {
+    [Fact]
+    public async Task DispatchAsync_WithAlreadyCancelledToken_ShouldPropagateItToHandler()
+    {
+        var handler = Substitute.For<IRequestHandler<TestCommand, Result>>();
+        handler
+            .HandleAsync(Arg.Any<TestCommand>(), Arg.Any<CancellationToken>())
+            .Returns(Task.FromResult(Result.Success()));
+
+        var services = new ServiceCollection();
+        services.AddSingleton(handler);
+        var provider = services.BuildServiceProvider();
+        var dispatcher = new RequestDispatcher(provider);
+
+        using var cts = new CancellationTokenSource();
+        await cts.CancelAsync();
+
+        await dispatcher.DispatchAsync<TestCommand, Result>(new TestCommand(), cts.Token);
+
+        await handler.Received(1).HandleAsync(
+            Arg.Any<TestCommand>(),
+            Arg.Is<CancellationToken>(token => token.IsCancellationRequested));
+    }
+
     [Fact]
     public async Task DispatchAsync_Command_ShouldExecuteMiddlewaresInExpectedOrder()
     {

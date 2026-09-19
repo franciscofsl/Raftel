@@ -20,14 +20,16 @@ public class AuditLogMiddleware<TRequest, TResponse>(IAuditLogScope auditLogScop
     /// </summary>
     /// <param name="request">The request being processed.</param>
     /// <param name="next">The delegate representing the next middleware or handler in the pipeline.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     /// <returns>The response returned by the next handler.</returns>
-    public async Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next)
+    public async Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         var commandName = request.GetType().FullName ?? request.GetType().Name;
 
         using (auditLogScope.Begin(commandName))
         {
-            return await next();
+            return await next(cancellationToken);
         }
     }
 }

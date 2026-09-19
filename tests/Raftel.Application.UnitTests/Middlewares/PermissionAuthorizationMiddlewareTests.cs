@@ -19,7 +19,7 @@ public class PermissionAuthorizationMiddlewareTests
     public PermissionAuthorizationMiddlewareTests()
     {
         _currentUser = Substitute.For<ICurrentUser>();
-        _next = () => Task.FromResult("Result");
+        _next = _ => Task.FromResult("Result");
 
         _middlewareWithoutPermission = new PermissionAuthorizationMiddleware<CommandWithoutPermission, string>(_currentUser);
         _middlewareWithPermission = new PermissionAuthorizationMiddleware<CommandWithPermission, string>(_currentUser);
@@ -31,7 +31,7 @@ public class PermissionAuthorizationMiddlewareTests
     {
         _currentUser.IsAuthenticated.Returns(false);
 
-        var result = await _middlewareWithoutPermission.HandleAsync(new CommandWithoutPermission(), _next);
+        var result = await _middlewareWithoutPermission.HandleAsync(new CommandWithoutPermission(), _next, CancellationToken.None);
 
         result.ShouldBe("Result");
     }
@@ -43,7 +43,7 @@ public class PermissionAuthorizationMiddlewareTests
             .Do(_ => throw new UnauthorizedException("User is not authenticated"));
 
         await Should.ThrowAsync<UnauthorizedException>(
-            async () => await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next)
+            async () => await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next, CancellationToken.None)
         );
     }
 
@@ -54,14 +54,14 @@ public class PermissionAuthorizationMiddlewareTests
             .Do(_ => throw new UnauthorizedException("User does not have the required permission: test.permission"));
 
         await Should.ThrowAsync<UnauthorizedException>(
-            async () => await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next)
+            async () => await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next, CancellationToken.None)
         );
     }
 
     [Fact]
     public async Task HandleAsync_WhenCommandHasPermissionAndUserIsAuthenticatedAndHasPermission_ShouldAllowAccess()
     {
-        var result = await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next);
+        var result = await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next, CancellationToken.None);
 
         result.ShouldBe("Result");
     }
@@ -69,7 +69,7 @@ public class PermissionAuthorizationMiddlewareTests
     [Fact]
     public async Task HandleAsync_WhenCommandHasMultiplePermissionsAndUserHasAllPermissions_ShouldAllowAccess()
     {
-        var result = await _middlewareWithMultiplePermissions.HandleAsync(new CommandWithMultiplePermissions(), _next);
+        var result = await _middlewareWithMultiplePermissions.HandleAsync(new CommandWithMultiplePermissions(), _next, CancellationToken.None);
 
         result.ShouldBe("Result");
     }
@@ -84,7 +84,7 @@ public class PermissionAuthorizationMiddlewareTests
             .Do(_ => throw new UnauthorizedException("User does not have the required permission: test.permission2"));
 
         await Should.ThrowAsync<UnauthorizedException>(
-            async () => await _middlewareWithMultiplePermissions.HandleAsync(new CommandWithMultiplePermissions(), _next)
+            async () => await _middlewareWithMultiplePermissions.HandleAsync(new CommandWithMultiplePermissions(), _next, CancellationToken.None)
         );
     }
 

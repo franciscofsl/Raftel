@@ -12,11 +12,11 @@ public class CommandDispatcher(IRequestDispatcher dispatcher) : ICommandDispatch
     /// <inheritdoc />
     public Task<Result> DispatchAsync<TCommand>(TCommand command, CancellationToken token = default)
         where TCommand : ICommand
-        => dispatcher.DispatchAsync<TCommand, Result>(command);
+        => dispatcher.DispatchAsync<TCommand, Result>(command, token);
 
     /// <inheritdoc />
     public Task<Result<TResult>> DispatchAsync<TCommand, TResult>(TCommand command,
         CancellationToken token = default)
         where TCommand : ICommand<TResult>
-        => dispatcher.DispatchAsync<TCommand, Result<TResult>>(command);
+        => dispatcher.DispatchAsync<TCommand, Result<TResult>>(command, token);
 }
