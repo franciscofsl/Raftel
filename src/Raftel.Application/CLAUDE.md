@@ -37,9 +37,10 @@ Each use case is a folder `Features/<Feature>/<UseCase>/` grouping everything:
 ## Pipeline and Mediator
 
 - `RequestDispatcher` reflects to detect if request is `ICommand`/`ICommand<T>`/`IQuery<T>` and chains: `IGlobalMiddleware` + command/query-specific middlewares, ending with handler.
-- Included middlewares: `ValidationMiddleware` (runs `Validator<T>`), `PermissionAuthorizationMiddleware` (via `[RequiresPermission]`), `UnitOfWorkMiddleware` (commits **only if result succeeds**), `LoggingMiddleware` (wide-event enrichment — see below).
+- Included middlewares: `ValidationMiddleware` (runs `Validator<T>`), `PermissionAuthorizationMiddleware` (via `[RequiresPermission]`), `TransactionMiddleware` (command-only, opens/commits/rolls back an explicit transaction — see below), `UnitOfWorkMiddleware` (commits **only if result succeeds**), `LoggingMiddleware` (wide-event enrichment — see below).
 - To add new cross-cutting behavior (caching, logging…), create a middleware of the appropriate type and register it in `AddRaftelApplication`.
 - Global middleware order is caller-defined by the order of `AddGlobalMiddleware` calls. **`LoggingMiddleware<,>` must be registered first** so it wraps every other global middleware and captures their outcome too.
+- Command middleware order is likewise caller-defined by `AddCommandMiddleware` call order, outermost first. **`TransactionMiddleware<>`/`TransactionMiddleware<,>` must be registered before `UnitOfWorkMiddleware<>`/`UnitOfWorkMiddleware<,>`** so the transaction wraps the commit (and, through it, auditing and domain event dispatch — both ride on `SaveChanges`). `TransactionMiddleware` is opt-in, like `UnitOfWorkMiddleware`: an app registers it explicitly if it wants command handling wrapped in an explicit, rollback-capable transaction instead of a bare `SaveChanges`.
 
 ## Wide Events (Structured Logging)
 
@@ -55,6 +56,7 @@ Raftel logs one structured "wide event" (canonical log line) per HTTP request, n
 - `IDomainEventHandler<TEvent>` is a side-effect handler for one `IDomainEvent`; implement one per use case, e.g. `Features/<Feature>/Events/<EventName>Handler.cs`.
 - `DomainEventsDispatcher` resolves all `IDomainEventHandler<TConcrete>` for a given event from `IServiceProvider` and invokes them — zero handlers is a no-op, multiple handlers all run.
 - Dispatch itself is triggered by Infrastructure (`DomainEventsDispatchInterceptor`, post-commit), never by a command handler directly — handlers stay thin and don't know about events being raised.
+- With `TransactionMiddleware` registered, a domain event handler's own database writes (repository call + `IUnitOfWork.CommitAsync()`) join the command's still-open transaction and roll back with it — see the XML doc on `IDomainEventHandler` for the exact guarantee and its limits.
 
 ## Conventions
 
