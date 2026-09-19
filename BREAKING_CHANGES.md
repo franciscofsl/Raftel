@@ -203,6 +203,28 @@ public Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TRes
 
 ---
 
+## Result Instead Of Exceptions
+
+### `ValidationMiddleware` and `PermissionAuthorizationMiddleware` no longer throw
+**What changed:** `ValidationMiddleware<TRequest, TResponse>` and `PermissionAuthorizationMiddleware<TRequest, TResponse>` now return a failed `Result`/`Result<T>` instead of throwing `ValidationException`/`UnauthorizedException`. Both gain a `where TResponse : Result` constraint. `ICurrentUser` gains a non-throwing `HasPermission(string permission)`. `ICurrentUser.EnsureHasPermission`, `ValidationException`, and `UnauthorizedException` are marked `[Obsolete]` (still functional, removed in a future version).
+
+**Why:** The framework's own `CLAUDE.md` mandates `Result`/`Result<T>` for business-logic errors; these two middlewares were the only place the framework itself violated that rule, forcing a separate exception-based error channel through `ExceptionHandlingMiddleware`.
+
+**Impact:** Code that caught `ValidationException`/`UnauthorizedException` around a command/query dispatch to detect validation or permission failures will no longer see those exceptions thrown by the framework's own middlewares — the failure now comes back as `Result.IsFailure` with `ErrorType.Validation`/`ErrorType.Forbidden`. A custom `where TResponse : X` constraint incompatible with `Result` on a type registered as `ValidationMiddleware`/`PermissionAuthorizationMiddleware` no longer compiles (only relevant to a hand-rolled `IRequest<T>` that doesn't return `Result`/`Result<T>`, which `ICommand`/`IQuery<T>` never produce).
+
+**Action required:** Replace `catch (ValidationException)`/`catch (UnauthorizedException)` around dispatch calls with a check on the returned `Result`'s `Error.Type`. Replace direct calls to `ICurrentUser.EnsureHasPermission` with `HasPermission`.
+
+### Validation failure `errors` body changes from an array to a field-keyed dictionary
+**What changed:** A `400` validation-failure `ProblemDetails` response's `errors` extension changes from a flat array of `{ code, message, type }` objects to a `Dictionary<string, string[]>` keyed by field name (matching ASP.NET Core's own validation-error convention), e.g. `{ "Email": ["Email is not valid."] }`. The field name is the part of the failing `Error.Code` before its first `.` (documented on `Validator<T>`); a code without a `.` groups under an empty-string key.
+
+**Why:** The prior shape (a flat array) didn't let a client associate an error with the field that caused it. Grouping by field is both more useful and matches the shape ASP.NET Core's own model validation already produces.
+
+**Impact:** Clients that parse `errors` as an array will break. Existing `Error.Code`s that don't follow the `"<Field>.<Reason>"` convention (e.g. some demo-app codes prefixed by feature name instead of field name) still work but group under a key that isn't a real field name.
+
+**Action required:** Update clients to read `errors` as an object keyed by field name. If you author custom validators, prefix each rule's `Error.Code` with the field name it validates.
+
+---
+
 ## Summary
 
 The migration to .NET 10 is primarily focused on framework and dependency updates. The main breaking change that may affect consumers is the Microsoft.OpenApi 2.0 update, which requires namespace and type changes if you're customizing OpenAPI/Swagger configurations.

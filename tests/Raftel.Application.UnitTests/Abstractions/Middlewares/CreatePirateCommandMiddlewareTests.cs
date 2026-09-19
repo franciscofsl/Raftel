@@ -1,5 +1,4 @@
-﻿using Raftel.Application.Exceptions;
-using Raftel.Application.Middlewares;
+﻿using Raftel.Application.Middlewares;
 using Raftel.Demo.Application.Pirates;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Domain.Abstractions;
@@ -10,19 +9,20 @@ namespace Raftel.Application.UnitTests.Abstractions.Middlewares;
 public class CreatePirateCommandMiddlewareTests
 {
     [Fact]
-    public async Task Should_ThrowValidationException_If_CommandIsInvalid()
+    public async Task Should_ReturnFailedResult_If_CommandIsInvalid()
     {
         var validator = new CreatePirateCommandValidator();
         var middleware = new ValidationMiddleware<CreatePirateCommand, Result<Guid>>([validator]);
 
         var invalidCommand = new CreatePirateCommand(string.Empty, 1, true);
 
-        var exception = await Should.ThrowAsync<ValidationException>(() =>
-            middleware.HandleAsync(invalidCommand, _ => Task.FromResult(Result.Success(Guid.NewGuid())),
-                CancellationToken.None));
+        var result = await middleware.HandleAsync(invalidCommand,
+            _ => Task.FromResult(Result.Success(Guid.NewGuid())), CancellationToken.None);
 
-        exception.Errors.ShouldContain(CreatePirateErrors.NameRequired);
-        exception.Errors.ShouldContain(CreatePirateErrors.KingMustBeLuffy);
+        result.IsFailure.ShouldBeTrue();
+        var validationError = result.Error.ShouldBeOfType<ValidationError>();
+        validationError.Errors.ShouldContain(CreatePirateErrors.NameRequired);
+        validationError.Errors.ShouldContain(CreatePirateErrors.KingMustBeLuffy);
     }
 
     [Fact]
