@@ -42,14 +42,14 @@ Keeps the field-detail expansion (`Dictionary<string, string[]>`) local to the o
 - **[Risk]** Splitting a field name out of `Error.Code` by convention (`"Email.Invalid"`) is stringly-typed and can silently produce a malformed `errors` map if a validator doesn't follow the convention. → Mitigation: document the convention prominently on `Validator<T>` and cover it with a `ResultFactory`/`ValidationError` unit test asserting the split; a missing `.` falls back to putting the whole code under a single `""`-keyed bucket rather than throwing.
 - **[Risk]** The expression-tree-compiled delegate cache is a new piece of reflection-adjacent infrastructure; a bug there fails every request going through validation or authorization, not just an edge case. → Mitigation: `ResultFactoryTests` covers `Result`, `Result<Guid>`, `Result<string>`, a record `T`, and a generic nested `T`, per proposal.md's test plan; functional regression tests assert the HTTP contract is unchanged end-to-end.
 - **[Risk]** `where TResponse : Result` on the two middlewares is a compile-time breaking change for any consumer who registered them against a non-`Result` `TResponse` (unlikely, since `ICommand`/`IQuery<T>` already constrain this, but not impossible with a hand-rolled `IRequest<T>`). → Mitigation: called out explicitly in proposal.md's breaking-changes list and `BREAKING_CHANGES.md`.
-- **[Trade-off]** Keeping `ValidationException`/`UnauthorizedException` `[Obsolete]` rather than deleting them means `ExceptionHandlingMiddleware` still carries two dead-ish `catch` blocks for this release. Accepted deliberately as the deprecation window proposal.md commits to.
+- **[Superseded]** The original trade-off here — keeping `ValidationException`/`UnauthorizedException` `[Obsolete]` for a deprecation window instead of deleting them — assumed a released version would exist where they were obsolete-but-present. Since this whole change ships unreleased, that window never mattered to any real consumer; the exception types, `ICurrentUser.EnsureHasPermission`, and `ExceptionHandlingMiddleware`'s two now-dead `catch` blocks were removed outright before release. See the updated Migration Plan below.
 
 ## Migration Plan
 
 1. Ship `ValidationError`, `ResultFactory`, `AuthorizationOptions`, and the rewritten middlewares together (they're only meaningful as a set).
-2. Mark `ValidationException`, `UnauthorizedException`, and `ICurrentUser.EnsureHasPermission` `[Obsolete]` in the same release — no separate deprecation-only release, since nothing consumes the new members yet that would conflict.
+2. ~~Mark `ValidationException`, `UnauthorizedException`, and `ICurrentUser.EnsureHasPermission` `[Obsolete]`~~ — superseded: removed outright, since no released version ever shipped with them merely obsolete (see Risks/Trade-offs above).
 3. Functional regression tests must pass unchanged (same status codes/body shape) before merge — this is the release gate, not a follow-up.
 4. Document the breaking changes and the field-name-prefix validator convention in `BREAKING_CHANGES.md` and `Validator<T>`'s doc comments.
-5. Removal of the obsoleted members is out of scope for this change and tracked for a later major version.
+5. ~~Removal of the obsoleted members is out of scope for this change~~ — superseded: done in this change (see step 2).
 
 Rollback: revert the change wholesale (it's additive-plus-rewrite within a single release, no data migration involved); consumers who already adopted `HasPermission`/`ValidationError` would need to revert alongside.

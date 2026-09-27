@@ -17,7 +17,6 @@ Commands/             ICommand, ICommand<TResult>, ICommandHandler<,>, ICommandD
 Queries/              IQuery<TResult>, IQueryHandler<,>, IQueryDispatcher, QueryDispatcher
 Middlewares/          IGlobalMiddleware / ICommandMiddleware / IQueryMiddleware + implementations + MiddlewareRegistry
 Authorization/        RequiresPermissionAttribute
-Exceptions/           ValidationException, UnauthorizedException ([Obsolete] — the pipeline itself no longer throws them, see below)
 Features/<Feature>/<UseCase>/   one use case per folder (see below)
 DependencyInjection.cs          AddRaftelApplication(cfg => ...)
 RaftelApplicationBuilder.cs     assembly and middleware registration

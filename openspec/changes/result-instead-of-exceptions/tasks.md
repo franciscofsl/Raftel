@@ -37,9 +37,9 @@
 
 ## 6. Deprecate the exception-based path
 
-- [x] 6.1 Mark `ICurrentUser.EnsureHasPermission` `[Obsolete]`
-- [x] 6.2 Mark `src/Raftel.Application/Exceptions/ValidationException.cs` and `UnauthorizedException.cs` `[Obsolete]`
-- [x] 6.3 Confirm `ExceptionHandlingMiddleware` keeps its existing `catch (ValidationException)` / `catch (UnauthorizedException)` blocks unchanged for the deprecation window
+- [x] 6.1 ~~Mark `ICurrentUser.EnsureHasPermission` `[Obsolete]`~~ — superseded: removed outright (no released version ever shipped it merely obsolete)
+- [x] 6.2 ~~Mark `ValidationException.cs`/`UnauthorizedException.cs` `[Obsolete]`~~ — superseded: both files deleted
+- [x] 6.3 ~~Confirm `ExceptionHandlingMiddleware` keeps its `catch` blocks for the deprecation window~~ — superseded: those `catch` blocks removed along with the exception types
 
 ## 7. `ProblemDetails` field-level validation detail
 

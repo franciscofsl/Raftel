@@ -12,7 +12,4 @@ public interface ICurrentUser
     /// An unauthenticated user always returns <see langword="false"/>.
     /// </summary>
     bool HasPermission(string permission);
-
-    [Obsolete("Throws for business-logic flow. Use HasPermission instead. Will be removed in a future version.")]
-    void EnsureHasPermission(string permission);
 }
