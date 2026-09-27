@@ -11,12 +11,35 @@ public static class ErrorResults
     public static IResult ToProblem(Error error)
     {
         var statusCode = StatusCodeFor(error.Type);
+        var extensions = new Dictionary<string, object?> { ["code"] = error.Code };
+
+        if (error is ValidationError validationError)
+        {
+            extensions["errors"] = FieldErrorsOf(validationError);
+        }
 
         return Results.Problem(
             detail: error.Message,
             statusCode: statusCode,
             title: TitleFor(error.Type),
-            extensions: new Dictionary<string, object?> { ["code"] = error.Code });
+            extensions: extensions);
+    }
+
+    /// <summary>
+    /// Groups a <see cref="ValidationError"/>'s aggregated errors by field name, splitting each
+    /// <see cref="Error.Code"/> on its first '.' (see the convention documented on
+    /// <see cref="Raftel.Domain.Validators.Validator{TModel}"/>). A code without a '.' groups under
+    /// an empty field key rather than throwing.
+    /// </summary>
+    private static Dictionary<string, string[]> FieldErrorsOf(ValidationError validationError) =>
+        validationError.Errors
+            .GroupBy(FieldNameOf)
+            .ToDictionary(group => group.Key, group => group.Select(error => error.Message).ToArray());
+
+    private static string FieldNameOf(Error error)
+    {
+        var separatorIndex = error.Code.IndexOf('.');
+        return separatorIndex < 0 ? string.Empty : error.Code[..separatorIndex];
     }
 
     public static int StatusCodeFor(ErrorType type) => type switch

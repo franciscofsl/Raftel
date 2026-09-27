@@ -17,7 +17,6 @@ Commands/             ICommand, ICommand<TResult>, ICommandHandler<,>, ICommandD
 Queries/              IQuery<TResult>, IQueryHandler<,>, IQueryDispatcher, QueryDispatcher
 Middlewares/          IGlobalMiddleware / ICommandMiddleware / IQueryMiddleware + implementations + MiddlewareRegistry
 Authorization/        RequiresPermissionAttribute
-Exceptions/           ValidationException, UnauthorizedException
 Features/<Feature>/<UseCase>/   one use case per folder (see below)
 DependencyInjection.cs          AddRaftelApplication(cfg => ...)
 RaftelApplicationBuilder.cs     assembly and middleware registration
@@ -37,7 +36,7 @@ Each use case is a folder `Features/<Feature>/<UseCase>/` grouping everything:
 ## Pipeline and Mediator
 
 - `RequestDispatcher` reflects to detect if request is `ICommand`/`ICommand<T>`/`IQuery<T>` and chains: `IGlobalMiddleware` + command/query-specific middlewares, ending with handler.
-- Included middlewares: `ValidationMiddleware` (runs `Validator<T>`), `PermissionAuthorizationMiddleware` (via `[RequiresPermission]`), `TransactionMiddleware` (command-only, opens/commits/rolls back an explicit transaction — see below), `UnitOfWorkMiddleware` (commits **only if result succeeds**), `LoggingMiddleware` (wide-event enrichment — see below).
+- Included middlewares: `ValidationMiddleware` (runs `Validator<T>`), `PermissionAuthorizationMiddleware` (via `[RequiresPermission]`), `TransactionMiddleware` (command-only, opens/commits/rolls back an explicit transaction — see below), `UnitOfWorkMiddleware` (commits **only if result succeeds**), `LoggingMiddleware` (wide-event enrichment — see below). Both `ValidationMiddleware` and `PermissionAuthorizationMiddleware` communicate failure exclusively through a failed `Result`/`Result<T>` (`ErrorType.Validation` / `ErrorType.Forbidden`) — they never throw, and both require `TResponse : Result`.
 - To add new cross-cutting behavior (caching, logging…), create a middleware of the appropriate type and register it in `AddRaftelApplication`.
 - Global middleware order is caller-defined by the order of `AddGlobalMiddleware` calls. **`LoggingMiddleware<,>` must be registered first** so it wraps every other global middleware and captures their outcome too.
 - Command middleware order is likewise caller-defined by `AddCommandMiddleware` call order, outermost first. **`TransactionMiddleware<>`/`TransactionMiddleware<,>` must be registered before `UnitOfWorkMiddleware<>`/`UnitOfWorkMiddleware<,>`** so the transaction wraps the commit (and, through it, auditing and domain event dispatch — both ride on `SaveChanges`). `TransactionMiddleware` is opt-in, like `UnitOfWorkMiddleware`: an app registers it explicitly if it wants command handling wrapped in an explicit, rollback-capable transaction instead of a bare `SaveChanges`.

@@ -1,10 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Commands;
-using Raftel.Application.Exceptions;
 using Raftel.Application.Queries;
 using Raftel.Demo.Application.Pirates;
 using Raftel.Demo.Application.Pirates.CreatePirate;
 using Raftel.Demo.Application.Pirates.GetPirateByFilter;
+using Raftel.Domain.Abstractions;
 using Raftel.Infrastructure.Tests;
 using Shouldly;
 
@@ -33,14 +33,17 @@ public class PermissionAuthorizationMiddlewareTests : IntegrationTestBase
     }
     
     [Fact]
-    public async Task CreatePirateCommand_WhenUserDoesNotHaveManagementPermission_ShouldThrowUnauthorizedException()
+    public async Task CreatePirateCommand_WhenUserDoesNotHaveManagementPermission_ShouldReturnForbiddenResult()
     {
         await ExecuteScopedAsync(async sp =>
         {
             var commandDispatcher = sp.GetRequiredService<ICommandDispatcher>();
-            
-            await Should.ThrowAsync<UnauthorizedException>(async () => 
-                await commandDispatcher.DispatchAsync<CreatePirateCommand, Guid>(new CreatePirateCommand("Zoro", 320000000)));
+
+            var result = await commandDispatcher.DispatchAsync<CreatePirateCommand, Guid>(
+                new CreatePirateCommand("Zoro", 320000000));
+
+            result.IsFailure.ShouldBeTrue();
+            result.Error.Type.ShouldBe(ErrorType.Forbidden);
         });
     }
     
@@ -60,15 +63,17 @@ public class PermissionAuthorizationMiddlewareTests : IntegrationTestBase
     }
     
     [Fact]
-    public async Task GetPirateByFilterQuery_WhenUserDoesNotHaveViewPermission_ShouldThrowUnauthorizedException()
+    public async Task GetPirateByFilterQuery_WhenUserDoesNotHaveViewPermission_ShouldReturnForbiddenResult()
     {
         await ExecuteScopedAsync(async sp =>
         {
             var queryDispatcher = sp.GetRequiredService<IQueryDispatcher>();
-            
-            await Should.ThrowAsync<UnauthorizedException>(async () => 
-                await queryDispatcher.DispatchAsync<GetPirateByFilterQuery, GetPirateByFilterResponse>(
-                    new GetPirateByFilterQuery(string.Empty, null)));
+
+            var result = await queryDispatcher.DispatchAsync<GetPirateByFilterQuery, GetPirateByFilterResponse>(
+                new GetPirateByFilterQuery(string.Empty, null));
+
+            result.IsFailure.ShouldBeTrue();
+            result.Error.Type.ShouldBe(ErrorType.Forbidden);
         });
     }
     

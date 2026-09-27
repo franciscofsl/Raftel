@@ -2,16 +2,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Raftel.Application.Abstractions;
-using Raftel.Application.Exceptions;
 
 namespace Raftel.Api.Server.Middlewares;
 
 /// <summary>
 /// Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses.
 /// Stack traces are never exposed in responses. Enriches the current request's
-/// <see cref="IRequestEvent"/> with the exception and its type-derived severity instead of
-/// logging directly — a single component further out in the pipeline emits the request's wide
-/// event exactly once.
+/// <see cref="IRequestEvent"/> with the exception instead of logging directly — a single
+/// component further out in the pipeline emits the request's wide event exactly once.
 /// </summary>
 public sealed class ExceptionHandlingMiddleware(RequestDelegate next)
 {
@@ -21,51 +19,12 @@ public sealed class ExceptionHandlingMiddleware(RequestDelegate next)
         {
             await next(context);
         }
-        catch (ValidationException exception)
-        {
-            requestEvent.Set(RequestEventFields.Level, LogLevel.Debug);
-            requestEvent.Set(RequestEventFields.Exception, exception);
-            await HandleValidationExceptionAsync(context, exception);
-        }
-        catch (UnauthorizedException exception)
-        {
-            requestEvent.Set(RequestEventFields.Level, LogLevel.Warning);
-            requestEvent.Set(RequestEventFields.Exception, exception);
-            await HandleUnauthorizedExceptionAsync(context, exception);
-        }
         catch (Exception exception)
         {
             requestEvent.Set(RequestEventFields.Level, LogLevel.Error);
             requestEvent.Set(RequestEventFields.Exception, exception);
             await HandleInternalServerErrorAsync(context);
         }
-    }
-
-    private static Task HandleValidationExceptionAsync(HttpContext context, ValidationException exception)
-    {
-        var problemDetails = new ProblemDetails
-        {
-            Status = StatusCodes.Status400BadRequest,
-            Title = "Validation Error",
-            Detail = exception.Message,
-            Extensions = { ["errors"] = exception.Errors }
-        };
-
-        context.Response.StatusCode = StatusCodes.Status400BadRequest;
-        return context.Response.WriteAsJsonAsync(problemDetails);
-    }
-
-    private static Task HandleUnauthorizedExceptionAsync(HttpContext context, UnauthorizedException exception)
-    {
-        var problemDetails = new ProblemDetails
-        {
-            Status = StatusCodes.Status403Forbidden,
-            Title = "Forbidden",
-            Detail = exception.Message
-        };
-
-        context.Response.StatusCode = StatusCodes.Status403Forbidden;
-        return context.Response.WriteAsJsonAsync(problemDetails);
     }
 
     private static Task HandleInternalServerErrorAsync(HttpContext context)
