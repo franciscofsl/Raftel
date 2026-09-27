@@ -118,10 +118,7 @@ public abstract class UserAuditingTestsBase : InfrastructureTestBase
         public string? UserName => "TestUser";
         public IEnumerable<string> Roles => new List<string>();
 
-        public void EnsureHasPermission(string permission)
-        {
-            // No-op for testing
-        }
+        public bool HasPermission(string permission) => true;
     }
 }
 

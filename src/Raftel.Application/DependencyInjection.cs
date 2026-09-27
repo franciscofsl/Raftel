@@ -24,6 +24,7 @@ public static class DependencyInjection
         RegisterMiddlewares(services, builder);
 
         services.AddSingleton(builder.PaginationOptions);
+        services.AddSingleton(builder.AuthorizationOptions);
         services.AddScoped<IRequestDispatcher, RequestDispatcher>();
         services.AddScoped<ICommandDispatcher, CommandDispatcher>();
         services.AddScoped<IQueryDispatcher, QueryDispatcher>();

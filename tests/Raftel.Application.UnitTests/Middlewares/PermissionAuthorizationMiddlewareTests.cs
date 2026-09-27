@@ -1,9 +1,10 @@
 using NSubstitute;
+using Raftel.Application;
 using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.Authentication;
 using Raftel.Application.Authorization;
-using Raftel.Application.Exceptions;
 using Raftel.Application.Middlewares;
+using Raftel.Domain.Abstractions;
 using Shouldly;
 
 namespace Raftel.Application.UnitTests.Middlewares;
@@ -11,95 +12,119 @@ namespace Raftel.Application.UnitTests.Middlewares;
 public class PermissionAuthorizationMiddlewareTests
 {
     private readonly ICurrentUser _currentUser;
-    private readonly RequestHandlerDelegate<string> _next;
-    private readonly PermissionAuthorizationMiddleware<CommandWithoutPermission, string> _middlewareWithoutPermission;
-    private readonly PermissionAuthorizationMiddleware<CommandWithPermission, string> _middlewareWithPermission;
-    private readonly PermissionAuthorizationMiddleware<CommandWithMultiplePermissions, string> _middlewareWithMultiplePermissions;
+    private readonly AuthorizationOptions _authorizationOptions;
+    private readonly RequestHandlerDelegate<Result> _next;
+    private readonly PermissionAuthorizationMiddleware<CommandWithoutPermission, Result> _middlewareWithoutPermission;
+    private readonly PermissionAuthorizationMiddleware<CommandWithPermission, Result> _middlewareWithPermission;
+    private readonly PermissionAuthorizationMiddleware<CommandWithMultiplePermissions, Result> _middlewareWithMultiplePermissions;
 
     public PermissionAuthorizationMiddlewareTests()
     {
         _currentUser = Substitute.For<ICurrentUser>();
-        _next = _ => Task.FromResult("Result");
+        _authorizationOptions = new AuthorizationOptions();
+        _next = _ => Task.FromResult(Result.Success());
 
-        _middlewareWithoutPermission = new PermissionAuthorizationMiddleware<CommandWithoutPermission, string>(_currentUser);
-        _middlewareWithPermission = new PermissionAuthorizationMiddleware<CommandWithPermission, string>(_currentUser);
-        _middlewareWithMultiplePermissions = new PermissionAuthorizationMiddleware<CommandWithMultiplePermissions, string>(_currentUser);
+        _middlewareWithoutPermission =
+            new PermissionAuthorizationMiddleware<CommandWithoutPermission, Result>(_currentUser, _authorizationOptions);
+        _middlewareWithPermission =
+            new PermissionAuthorizationMiddleware<CommandWithPermission, Result>(_currentUser, _authorizationOptions);
+        _middlewareWithMultiplePermissions =
+            new PermissionAuthorizationMiddleware<CommandWithMultiplePermissions, Result>(_currentUser, _authorizationOptions);
     }
 
     [Fact]
     public async Task HandleAsync_WhenCommandHasNoPermissionRequirements_ShouldAllowAccess()
     {
-        _currentUser.IsAuthenticated.Returns(false);
-
         var result = await _middlewareWithoutPermission.HandleAsync(new CommandWithoutPermission(), _next, CancellationToken.None);
 
-        result.ShouldBe("Result");
+        result.IsSuccess.ShouldBeTrue();
     }
 
     [Fact]
-    public async Task HandleAsync_WhenCommandHasPermissionButUserIsNotAuthenticated_ShouldThrowUnauthorizedException()
+    public async Task HandleAsync_WhenUserLacksTheRequiredPermission_ShouldReturnForbiddenResultWithoutInvokingNext()
     {
-        _currentUser.When(c => c.EnsureHasPermission("test.permission"))
-            .Do(_ => throw new UnauthorizedException("User is not authenticated"));
+        _currentUser.HasPermission("test.permission").Returns(false);
+        var nextInvoked = false;
+        RequestHandlerDelegate<Result> next = _ =>
+        {
+            nextInvoked = true;
+            return Task.FromResult(Result.Success());
+        };
 
-        await Should.ThrowAsync<UnauthorizedException>(
-            async () => await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next, CancellationToken.None)
-        );
+        var result = await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), next, CancellationToken.None);
+
+        nextInvoked.ShouldBeFalse();
+        result.IsFailure.ShouldBeTrue();
+        result.Error.Type.ShouldBe(ErrorType.Forbidden);
     }
 
     [Fact]
-    public async Task HandleAsync_WhenCommandHasPermissionAndUserIsAuthenticatedButLacksPermission_ShouldThrowUnauthorizedException()
+    public async Task HandleAsync_WhenUserHasTheRequiredPermission_ShouldAllowAccess()
     {
-        _currentUser.When(c => c.EnsureHasPermission("test.permission"))
-            .Do(_ => throw new UnauthorizedException("User does not have the required permission: test.permission"));
+        _currentUser.HasPermission("test.permission").Returns(true);
 
-        await Should.ThrowAsync<UnauthorizedException>(
-            async () => await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next, CancellationToken.None)
-        );
-    }
-
-    [Fact]
-    public async Task HandleAsync_WhenCommandHasPermissionAndUserIsAuthenticatedAndHasPermission_ShouldAllowAccess()
-    {
         var result = await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next, CancellationToken.None);
 
-        result.ShouldBe("Result");
+        result.IsSuccess.ShouldBeTrue();
     }
 
     [Fact]
-    public async Task HandleAsync_WhenCommandHasMultiplePermissionsAndUserHasAllPermissions_ShouldAllowAccess()
+    public async Task HandleAsync_WhenUserHasAllRequiredPermissions_ShouldAllowAccess()
     {
+        _currentUser.HasPermission("test.permission1").Returns(true);
+        _currentUser.HasPermission("test.permission2").Returns(true);
+
         var result = await _middlewareWithMultiplePermissions.HandleAsync(new CommandWithMultiplePermissions(), _next, CancellationToken.None);
 
-        result.ShouldBe("Result");
+        result.IsSuccess.ShouldBeTrue();
     }
 
     [Fact]
-    public async Task HandleAsync_WhenCommandHasMultiplePermissionsAndUserLacksSomePermission_ShouldThrowUnauthorizedException()
+    public async Task HandleAsync_WhenUserLacksSomeRequiredPermission_ShouldReturnForbiddenResult()
     {
-        _currentUser.When(c => c.EnsureHasPermission("test.permission1"))
-            .Do(_ => { });
-        
-        _currentUser.When(c => c.EnsureHasPermission("test.permission2"))
-            .Do(_ => throw new UnauthorizedException("User does not have the required permission: test.permission2"));
+        _currentUser.HasPermission("test.permission1").Returns(true);
+        _currentUser.HasPermission("test.permission2").Returns(false);
 
-        await Should.ThrowAsync<UnauthorizedException>(
-            async () => await _middlewareWithMultiplePermissions.HandleAsync(new CommandWithMultiplePermissions(), _next, CancellationToken.None)
-        );
+        var result = await _middlewareWithMultiplePermissions.HandleAsync(new CommandWithMultiplePermissions(), _next, CancellationToken.None);
+
+        result.IsFailure.ShouldBeTrue();
+        result.Error.Type.ShouldBe(ErrorType.Forbidden);
     }
 
-    private class CommandWithoutPermission : IRequest<string>
+    [Fact]
+    public async Task HandleAsync_WhenIncludeMissingPermissionsInErrorIsFalse_ShouldNotListMissingPermissions()
+    {
+        _authorizationOptions.IncludeMissingPermissionsInError = false;
+        _currentUser.HasPermission("test.permission").Returns(false);
+
+        var result = await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next, CancellationToken.None);
+
+        result.Error.Message.ShouldNotContain("test.permission");
+    }
+
+    [Fact]
+    public async Task HandleAsync_WhenIncludeMissingPermissionsInErrorIsTrue_ShouldListMissingPermissions()
+    {
+        _authorizationOptions.IncludeMissingPermissionsInError = true;
+        _currentUser.HasPermission("test.permission").Returns(false);
+
+        var result = await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next, CancellationToken.None);
+
+        result.Error.Message.ShouldContain("test.permission");
+    }
+
+    private class CommandWithoutPermission : IRequest<Result>
     {
     }
 
     [RequiresPermission("test.permission")]
-    private class CommandWithPermission : IRequest<string>
+    private class CommandWithPermission : IRequest<Result>
     {
     }
 
     [RequiresPermission("test.permission1")]
     [RequiresPermission("test.permission2")]
-    private class CommandWithMultiplePermissions : IRequest<string>
+    private class CommandWithMultiplePermissions : IRequest<Result>
     {
     }
 }

@@ -6,5 +6,10 @@ public interface ICurrentUser
     Guid? UserId { get; }
     string? UserName { get; }
     IEnumerable<string> Roles { get; }
-    void EnsureHasPermission(string permission);
+
+    /// <summary>
+    /// Returns whether the current user holds <paramref name="permission"/>, without throwing.
+    /// An unauthenticated user always returns <see langword="false"/>.
+    /// </summary>
+    bool HasPermission(string permission);
 }

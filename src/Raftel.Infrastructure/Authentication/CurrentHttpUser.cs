@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using OpenIddict.Abstractions;
 using Raftel.Application.Abstractions.Authentication;
-using Raftel.Application.Exceptions;
 
 namespace Raftel.Infrastructure.Authentication;
 
@@ -27,16 +26,5 @@ internal sealed class CurrentHttpUser(IHttpContextAccessor accessor) : ICurrentU
             .Select(c => c.Value)
         ?? Enumerable.Empty<string>();
  
-    public void EnsureHasPermission(string permission)
-    {
-        if (!IsAuthenticated)
-        {
-            throw new UnauthorizedException("User is not authenticated");
-        }
-        
-        if (!Permissions.Contains(permission))
-        {
-            throw new UnauthorizedException($"User does not have the required permission: {permission}");
-        }
-    }
+    public bool HasPermission(string permission) => IsAuthenticated && Permissions.Contains(permission);
 }

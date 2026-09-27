@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Raftel.Api.Client;
 using Raftel.Api.FunctionalTests.Extensions;
@@ -75,5 +77,27 @@ public class PiratesEndpointsTests
         var response = await _client.PostAsync("/api/pirates", content);
 
         response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task PostPirate_WithEmptyName_ShouldReturnBadRequest_WithFieldKeyedErrorsBody()
+    {
+        await _client.AuthenticateAsync();
+
+        var response = await _client.PostAsJsonAsync("/api/pirates", new
+        {
+            Name = string.Empty,
+            Bounty = 100,
+            IsKing = false
+        });
+
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+
+        var problemDetails = await response.Content.ReadFromJsonAsync<ProblemDetails>();
+        problemDetails.ShouldNotBeNull();
+
+        var errorsJson = (JsonElement)problemDetails.Extensions["errors"]!;
+        errorsJson.TryGetProperty("CreatePirate", out var fieldErrors).ShouldBeTrue();
+        fieldErrors.EnumerateArray().ShouldContain(e => e.GetString() == "Pirate name is required.");
     }
 }

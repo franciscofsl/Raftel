@@ -61,27 +61,6 @@ public class ExceptionHandlingTests
         wideEvents[0].Exception.ShouldBeOfType<InvalidOperationException>();
     }
 
-    [Fact]
-    public async Task ValidationException_ShouldEmitWideEvent_AtDebugLevel()
-    {
-        await _client.GetAsync("/api/test/throw/validation");
-
-        var wideEvents = WideEventEntries();
-        wideEvents.Count.ShouldBe(1);
-        wideEvents[0].Level.ShouldBe(LogLevel.Debug);
-    }
-
-    [Fact]
-    public async Task UnauthorizedException_ShouldEmitWideEvent_AtWarningLevel_WithRequiredPermission()
-    {
-        await _client.GetAsync("/api/test/throw/unauthorized");
-
-        var wideEvents = WideEventEntries();
-        wideEvents.Count.ShouldBe(1);
-        wideEvents[0].Level.ShouldBe(LogLevel.Warning);
-        wideEvents[0].Exception.Message.ShouldContain("test.permission");
-    }
-
     private List<TestSupport.CapturedLogEntry> WideEventEntries() =>
         _factory.LogCapture.Entries.Where(e => e.Category == WideEventCategory).ToList();
 }

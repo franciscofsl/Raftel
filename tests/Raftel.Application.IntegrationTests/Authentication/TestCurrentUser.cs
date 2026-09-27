@@ -1,5 +1,4 @@
 using Raftel.Application.Abstractions.Authentication;
-using Raftel.Application.Exceptions;
 
 namespace Raftel.Application.IntegrationTests.Authentication;
 
@@ -22,17 +21,4 @@ public class TestCurrentUser : ICurrentUser
     {
         return _permissions.Contains(permission);
     }
-
-    public void EnsureHasPermission(string permission)
-    {
-        if (!IsAuthenticated)
-        {
-            throw new UnauthorizedException("User is not authenticated");
-        }
-
-        if (!HasPermission(permission))
-        {
-            throw new UnauthorizedException($"User does not have the required permission: {permission}");
-        }
-    }
-} 
+}
