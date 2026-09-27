@@ -24,6 +24,7 @@ using Raftel.Infrastructure.Data.Interceptors;
 using Raftel.Infrastructure.Data.Repositories.Authorization;
 using Raftel.Infrastructure.Data.Repositories.Tenants;
 using Raftel.Infrastructure.Data.Repositories.Users;
+using Raftel.Infrastructure.Health;
 using Raftel.Infrastructure.Multitenancy;
 
 namespace Raftel.Infrastructure;
@@ -81,6 +82,7 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TDbContext>());
+        services.AddScoped<IDatabaseProbe, DatabaseProbe<TDbContext>>();
 
         services.AddScoped(typeof(IDataFilter), typeof(DataFilter));
         services.AddSingleton(TimeProvider.System);
