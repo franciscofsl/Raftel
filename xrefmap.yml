@@ -800,22 +800,22 @@ references:
   commentId: T:Raftel.Application.Abstractions.Authentication.ICurrentUser
   fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser
   nameWithType: ICurrentUser
-- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission(System.String)
-  name: EnsureHasPermission(string)
-  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_EnsureHasPermission_System_String_
-  commentId: M:Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission(System.String)
-  name.vb: EnsureHasPermission(String)
-  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission(string)
-  fullName.vb: Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission(String)
-  nameWithType: ICurrentUser.EnsureHasPermission(string)
-  nameWithType.vb: ICurrentUser.EnsureHasPermission(String)
-- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission*
-  name: EnsureHasPermission
-  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_EnsureHasPermission_
-  commentId: Overload:Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.HasPermission(System.String)
+  name: HasPermission(string)
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_HasPermission_System_String_
+  commentId: M:Raftel.Application.Abstractions.Authentication.ICurrentUser.HasPermission(System.String)
+  name.vb: HasPermission(String)
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.HasPermission(string)
+  fullName.vb: Raftel.Application.Abstractions.Authentication.ICurrentUser.HasPermission(String)
+  nameWithType: ICurrentUser.HasPermission(string)
+  nameWithType.vb: ICurrentUser.HasPermission(String)
+- uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.HasPermission*
+  name: HasPermission
+  href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_HasPermission_
+  commentId: Overload:Raftel.Application.Abstractions.Authentication.ICurrentUser.HasPermission
   isSpec: "True"
-  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.EnsureHasPermission
-  nameWithType: ICurrentUser.EnsureHasPermission
+  fullName: Raftel.Application.Abstractions.Authentication.ICurrentUser.HasPermission
+  nameWithType: ICurrentUser.HasPermission
 - uid: Raftel.Application.Abstractions.Authentication.ICurrentUser.IsAuthenticated
   name: IsAuthenticated
   href: api/Raftel.Application.Abstractions.Authentication.ICurrentUser.html#Raftel_Application_Abstractions_Authentication_ICurrentUser_IsAuthenticated
@@ -1258,6 +1258,25 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Authorization.RequiresPermissionAttribute.Permission
   nameWithType: RequiresPermissionAttribute.Permission
+- uid: Raftel.Application.AuthorizationOptions
+  name: AuthorizationOptions
+  href: api/Raftel.Application.AuthorizationOptions.html
+  commentId: T:Raftel.Application.AuthorizationOptions
+  fullName: Raftel.Application.AuthorizationOptions
+  nameWithType: AuthorizationOptions
+- uid: Raftel.Application.AuthorizationOptions.IncludeMissingPermissionsInError
+  name: IncludeMissingPermissionsInError
+  href: api/Raftel.Application.AuthorizationOptions.html#Raftel_Application_AuthorizationOptions_IncludeMissingPermissionsInError
+  commentId: P:Raftel.Application.AuthorizationOptions.IncludeMissingPermissionsInError
+  fullName: Raftel.Application.AuthorizationOptions.IncludeMissingPermissionsInError
+  nameWithType: AuthorizationOptions.IncludeMissingPermissionsInError
+- uid: Raftel.Application.AuthorizationOptions.IncludeMissingPermissionsInError*
+  name: IncludeMissingPermissionsInError
+  href: api/Raftel.Application.AuthorizationOptions.html#Raftel_Application_AuthorizationOptions_IncludeMissingPermissionsInError_
+  commentId: Overload:Raftel.Application.AuthorizationOptions.IncludeMissingPermissionsInError
+  isSpec: "True"
+  fullName: Raftel.Application.AuthorizationOptions.IncludeMissingPermissionsInError
+  nameWithType: AuthorizationOptions.IncludeMissingPermissionsInError
 - uid: Raftel.Application.Commands
   name: Raftel.Application.Commands
   href: api/Raftel.Application.Commands.html
@@ -1400,97 +1419,6 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.DependencyInjection.AddRaftelApplication
   nameWithType: DependencyInjection.AddRaftelApplication
-- uid: Raftel.Application.Exceptions
-  name: Raftel.Application.Exceptions
-  href: api/Raftel.Application.Exceptions.html
-  commentId: N:Raftel.Application.Exceptions
-  fullName: Raftel.Application.Exceptions
-  nameWithType: Raftel.Application.Exceptions
-- uid: Raftel.Application.Exceptions.UnauthorizedException
-  name: UnauthorizedException
-  href: api/Raftel.Application.Exceptions.UnauthorizedException.html
-  commentId: T:Raftel.Application.Exceptions.UnauthorizedException
-  fullName: Raftel.Application.Exceptions.UnauthorizedException
-  nameWithType: UnauthorizedException
-- uid: Raftel.Application.Exceptions.UnauthorizedException.#ctor(System.String)
-  name: UnauthorizedException(string)
-  href: api/Raftel.Application.Exceptions.UnauthorizedException.html#Raftel_Application_Exceptions_UnauthorizedException__ctor_System_String_
-  commentId: M:Raftel.Application.Exceptions.UnauthorizedException.#ctor(System.String)
-  name.vb: New(String)
-  fullName: Raftel.Application.Exceptions.UnauthorizedException.UnauthorizedException(string)
-  fullName.vb: Raftel.Application.Exceptions.UnauthorizedException.New(String)
-  nameWithType: UnauthorizedException.UnauthorizedException(string)
-  nameWithType.vb: UnauthorizedException.New(String)
-- uid: Raftel.Application.Exceptions.UnauthorizedException.#ctor(System.String,System.Exception)
-  name: UnauthorizedException(string, Exception)
-  href: api/Raftel.Application.Exceptions.UnauthorizedException.html#Raftel_Application_Exceptions_UnauthorizedException__ctor_System_String_System_Exception_
-  commentId: M:Raftel.Application.Exceptions.UnauthorizedException.#ctor(System.String,System.Exception)
-  name.vb: New(String, Exception)
-  fullName: Raftel.Application.Exceptions.UnauthorizedException.UnauthorizedException(string, System.Exception)
-  fullName.vb: Raftel.Application.Exceptions.UnauthorizedException.New(String, System.Exception)
-  nameWithType: UnauthorizedException.UnauthorizedException(string, Exception)
-  nameWithType.vb: UnauthorizedException.New(String, Exception)
-- uid: Raftel.Application.Exceptions.UnauthorizedException.#ctor*
-  name: UnauthorizedException
-  href: api/Raftel.Application.Exceptions.UnauthorizedException.html#Raftel_Application_Exceptions_UnauthorizedException__ctor_
-  commentId: Overload:Raftel.Application.Exceptions.UnauthorizedException.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: Raftel.Application.Exceptions.UnauthorizedException.UnauthorizedException
-  fullName.vb: Raftel.Application.Exceptions.UnauthorizedException.New
-  nameWithType: UnauthorizedException.UnauthorizedException
-  nameWithType.vb: UnauthorizedException.New
-- uid: Raftel.Application.Exceptions.ValidationException
-  name: ValidationException
-  href: api/Raftel.Application.Exceptions.ValidationException.html
-  commentId: T:Raftel.Application.Exceptions.ValidationException
-  fullName: Raftel.Application.Exceptions.ValidationException
-  nameWithType: ValidationException
-- uid: Raftel.Application.Exceptions.ValidationException.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
-  name: ValidationException(IEnumerable<Error>)
-  href: api/Raftel.Application.Exceptions.ValidationException.html#Raftel_Application_Exceptions_ValidationException__ctor_System_Collections_Generic_IEnumerable_Raftel_Domain_Abstractions_Error__
-  commentId: M:Raftel.Application.Exceptions.ValidationException.#ctor(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
-  name.vb: New(IEnumerable(Of Error))
-  fullName: Raftel.Application.Exceptions.ValidationException.ValidationException(System.Collections.Generic.IEnumerable<Raftel.Domain.Abstractions.Error>)
-  fullName.vb: Raftel.Application.Exceptions.ValidationException.New(System.Collections.Generic.IEnumerable(Of Raftel.Domain.Abstractions.Error))
-  nameWithType: ValidationException.ValidationException(IEnumerable<Error>)
-  nameWithType.vb: ValidationException.New(IEnumerable(Of Error))
-- uid: Raftel.Application.Exceptions.ValidationException.#ctor*
-  name: ValidationException
-  href: api/Raftel.Application.Exceptions.ValidationException.html#Raftel_Application_Exceptions_ValidationException__ctor_
-  commentId: Overload:Raftel.Application.Exceptions.ValidationException.#ctor
-  isSpec: "True"
-  name.vb: New
-  fullName: Raftel.Application.Exceptions.ValidationException.ValidationException
-  fullName.vb: Raftel.Application.Exceptions.ValidationException.New
-  nameWithType: ValidationException.ValidationException
-  nameWithType.vb: ValidationException.New
-- uid: Raftel.Application.Exceptions.ValidationException.Errors
-  name: Errors
-  href: api/Raftel.Application.Exceptions.ValidationException.html#Raftel_Application_Exceptions_ValidationException_Errors
-  commentId: P:Raftel.Application.Exceptions.ValidationException.Errors
-  fullName: Raftel.Application.Exceptions.ValidationException.Errors
-  nameWithType: ValidationException.Errors
-- uid: Raftel.Application.Exceptions.ValidationException.Errors*
-  name: Errors
-  href: api/Raftel.Application.Exceptions.ValidationException.html#Raftel_Application_Exceptions_ValidationException_Errors_
-  commentId: Overload:Raftel.Application.Exceptions.ValidationException.Errors
-  isSpec: "True"
-  fullName: Raftel.Application.Exceptions.ValidationException.Errors
-  nameWithType: ValidationException.Errors
-- uid: Raftel.Application.Exceptions.ValidationException.ToString
-  name: ToString()
-  href: api/Raftel.Application.Exceptions.ValidationException.html#Raftel_Application_Exceptions_ValidationException_ToString
-  commentId: M:Raftel.Application.Exceptions.ValidationException.ToString
-  fullName: Raftel.Application.Exceptions.ValidationException.ToString()
-  nameWithType: ValidationException.ToString()
-- uid: Raftel.Application.Exceptions.ValidationException.ToString*
-  name: ToString
-  href: api/Raftel.Application.Exceptions.ValidationException.html#Raftel_Application_Exceptions_ValidationException_ToString_
-  commentId: Overload:Raftel.Application.Exceptions.ValidationException.ToString
-  isSpec: "True"
-  fullName: Raftel.Application.Exceptions.ValidationException.ToString
-  nameWithType: ValidationException.ToString
 - uid: Raftel.Application.Features.Tenants
   name: Raftel.Application.Features.Tenants
   href: api/Raftel.Application.Features.Tenants.html
@@ -2612,6 +2540,22 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.IRaftelApplicationBuilder.AddQueryMiddleware
   nameWithType: IRaftelApplicationBuilder.AddQueryMiddleware
+- uid: Raftel.Application.IRaftelApplicationBuilder.ConfigureAuthorization(System.Action{Raftel.Application.AuthorizationOptions})
+  name: ConfigureAuthorization(Action<AuthorizationOptions>)
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_ConfigureAuthorization_System_Action_Raftel_Application_AuthorizationOptions__
+  commentId: M:Raftel.Application.IRaftelApplicationBuilder.ConfigureAuthorization(System.Action{Raftel.Application.AuthorizationOptions})
+  name.vb: ConfigureAuthorization(Action(Of AuthorizationOptions))
+  fullName: Raftel.Application.IRaftelApplicationBuilder.ConfigureAuthorization(System.Action<Raftel.Application.AuthorizationOptions>)
+  fullName.vb: Raftel.Application.IRaftelApplicationBuilder.ConfigureAuthorization(System.Action(Of Raftel.Application.AuthorizationOptions))
+  nameWithType: IRaftelApplicationBuilder.ConfigureAuthorization(Action<AuthorizationOptions>)
+  nameWithType.vb: IRaftelApplicationBuilder.ConfigureAuthorization(Action(Of AuthorizationOptions))
+- uid: Raftel.Application.IRaftelApplicationBuilder.ConfigureAuthorization*
+  name: ConfigureAuthorization
+  href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_ConfigureAuthorization_
+  commentId: Overload:Raftel.Application.IRaftelApplicationBuilder.ConfigureAuthorization
+  isSpec: "True"
+  fullName: Raftel.Application.IRaftelApplicationBuilder.ConfigureAuthorization
+  nameWithType: IRaftelApplicationBuilder.ConfigureAuthorization
 - uid: Raftel.Application.IRaftelApplicationBuilder.ConfigurePagination(System.Action{Raftel.Application.PaginationOptions})
   name: ConfigurePagination(Action<PaginationOptions>)
   href: api/Raftel.Application.IRaftelApplicationBuilder.html#Raftel_Application_IRaftelApplicationBuilder_ConfigurePagination_System_Action_Raftel_Application_PaginationOptions__
@@ -2821,15 +2765,15 @@ references:
   fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse)
   nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>
   nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse)
-- uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.#ctor(Raftel.Application.Abstractions.Authentication.ICurrentUser)
-  name: PermissionAuthorizationMiddleware(ICurrentUser)
-  href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html#Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2__ctor_Raftel_Application_Abstractions_Authentication_ICurrentUser_
-  commentId: M:Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.#ctor(Raftel.Application.Abstractions.Authentication.ICurrentUser)
-  name.vb: New(ICurrentUser)
-  fullName: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware<TRequest, TResponse>.PermissionAuthorizationMiddleware(Raftel.Application.Abstractions.Authentication.ICurrentUser)
-  fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse).New(Raftel.Application.Abstractions.Authentication.ICurrentUser)
-  nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>.PermissionAuthorizationMiddleware(ICurrentUser)
-  nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse).New(ICurrentUser)
+- uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.#ctor(Raftel.Application.Abstractions.Authentication.ICurrentUser,Raftel.Application.AuthorizationOptions)
+  name: PermissionAuthorizationMiddleware(ICurrentUser, AuthorizationOptions)
+  href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html#Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2__ctor_Raftel_Application_Abstractions_Authentication_ICurrentUser_Raftel_Application_AuthorizationOptions_
+  commentId: M:Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.#ctor(Raftel.Application.Abstractions.Authentication.ICurrentUser,Raftel.Application.AuthorizationOptions)
+  name.vb: New(ICurrentUser, AuthorizationOptions)
+  fullName: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware<TRequest, TResponse>.PermissionAuthorizationMiddleware(Raftel.Application.Abstractions.Authentication.ICurrentUser, Raftel.Application.AuthorizationOptions)
+  fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse).New(Raftel.Application.Abstractions.Authentication.ICurrentUser, Raftel.Application.AuthorizationOptions)
+  nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>.PermissionAuthorizationMiddleware(ICurrentUser, AuthorizationOptions)
+  nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse).New(ICurrentUser, AuthorizationOptions)
 - uid: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.#ctor*
   name: PermissionAuthorizationMiddleware
   href: api/Raftel.Application.Middlewares.PermissionAuthorizationMiddleware-2.html#Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2__ctor_
@@ -3233,6 +3177,19 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.RaftelApplicationBuilder.Assemblies
   nameWithType: RaftelApplicationBuilder.Assemblies
+- uid: Raftel.Application.RaftelApplicationBuilder.AuthorizationOptions
+  name: AuthorizationOptions
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_AuthorizationOptions
+  commentId: P:Raftel.Application.RaftelApplicationBuilder.AuthorizationOptions
+  fullName: Raftel.Application.RaftelApplicationBuilder.AuthorizationOptions
+  nameWithType: RaftelApplicationBuilder.AuthorizationOptions
+- uid: Raftel.Application.RaftelApplicationBuilder.AuthorizationOptions*
+  name: AuthorizationOptions
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_AuthorizationOptions_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.AuthorizationOptions
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.AuthorizationOptions
+  nameWithType: RaftelApplicationBuilder.AuthorizationOptions
 - uid: Raftel.Application.RaftelApplicationBuilder.CommandMiddlewares
   name: CommandMiddlewares
   href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_CommandMiddlewares
@@ -3246,6 +3203,22 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.RaftelApplicationBuilder.CommandMiddlewares
   nameWithType: RaftelApplicationBuilder.CommandMiddlewares
+- uid: Raftel.Application.RaftelApplicationBuilder.ConfigureAuthorization(System.Action{Raftel.Application.AuthorizationOptions})
+  name: ConfigureAuthorization(Action<AuthorizationOptions>)
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_ConfigureAuthorization_System_Action_Raftel_Application_AuthorizationOptions__
+  commentId: M:Raftel.Application.RaftelApplicationBuilder.ConfigureAuthorization(System.Action{Raftel.Application.AuthorizationOptions})
+  name.vb: ConfigureAuthorization(Action(Of AuthorizationOptions))
+  fullName: Raftel.Application.RaftelApplicationBuilder.ConfigureAuthorization(System.Action<Raftel.Application.AuthorizationOptions>)
+  fullName.vb: Raftel.Application.RaftelApplicationBuilder.ConfigureAuthorization(System.Action(Of Raftel.Application.AuthorizationOptions))
+  nameWithType: RaftelApplicationBuilder.ConfigureAuthorization(Action<AuthorizationOptions>)
+  nameWithType.vb: RaftelApplicationBuilder.ConfigureAuthorization(Action(Of AuthorizationOptions))
+- uid: Raftel.Application.RaftelApplicationBuilder.ConfigureAuthorization*
+  name: ConfigureAuthorization
+  href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_ConfigureAuthorization_
+  commentId: Overload:Raftel.Application.RaftelApplicationBuilder.ConfigureAuthorization
+  isSpec: "True"
+  fullName: Raftel.Application.RaftelApplicationBuilder.ConfigureAuthorization
+  nameWithType: RaftelApplicationBuilder.ConfigureAuthorization
 - uid: Raftel.Application.RaftelApplicationBuilder.ConfigurePagination(System.Action{Raftel.Application.PaginationOptions})
   name: ConfigurePagination(Action<PaginationOptions>)
   href: api/Raftel.Application.RaftelApplicationBuilder.html#Raftel_Application_RaftelApplicationBuilder_ConfigurePagination_System_Action_Raftel_Application_PaginationOptions__
@@ -4298,6 +4271,89 @@ references:
   isSpec: "True"
   fullName: Raftel.Domain.Abstractions.SortRequest.Parse
   nameWithType: SortRequest.Parse
+- uid: Raftel.Domain.Abstractions.ValidationError
+  name: ValidationError
+  href: api/Raftel.Domain.Abstractions.ValidationError.html
+  commentId: T:Raftel.Domain.Abstractions.ValidationError
+  fullName: Raftel.Domain.Abstractions.ValidationError
+  nameWithType: ValidationError
+- uid: Raftel.Domain.Abstractions.ValidationError.#ctor(System.Collections.Generic.IReadOnlyList{Raftel.Domain.Abstractions.Error})
+  name: ValidationError(IReadOnlyList<Error>)
+  href: api/Raftel.Domain.Abstractions.ValidationError.html#Raftel_Domain_Abstractions_ValidationError__ctor_System_Collections_Generic_IReadOnlyList_Raftel_Domain_Abstractions_Error__
+  commentId: M:Raftel.Domain.Abstractions.ValidationError.#ctor(System.Collections.Generic.IReadOnlyList{Raftel.Domain.Abstractions.Error})
+  name.vb: New(IReadOnlyList(Of Error))
+  fullName: Raftel.Domain.Abstractions.ValidationError.ValidationError(System.Collections.Generic.IReadOnlyList<Raftel.Domain.Abstractions.Error>)
+  fullName.vb: Raftel.Domain.Abstractions.ValidationError.New(System.Collections.Generic.IReadOnlyList(Of Raftel.Domain.Abstractions.Error))
+  nameWithType: ValidationError.ValidationError(IReadOnlyList<Error>)
+  nameWithType.vb: ValidationError.New(IReadOnlyList(Of Error))
+- uid: Raftel.Domain.Abstractions.ValidationError.#ctor*
+  name: ValidationError
+  href: api/Raftel.Domain.Abstractions.ValidationError.html#Raftel_Domain_Abstractions_ValidationError__ctor_
+  commentId: Overload:Raftel.Domain.Abstractions.ValidationError.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Domain.Abstractions.ValidationError.ValidationError
+  fullName.vb: Raftel.Domain.Abstractions.ValidationError.New
+  nameWithType: ValidationError.ValidationError
+  nameWithType.vb: ValidationError.New
+- uid: Raftel.Domain.Abstractions.ValidationError.Equals(Raftel.Domain.Abstractions.ValidationError)
+  name: Equals(ValidationError?)
+  href: api/Raftel.Domain.Abstractions.ValidationError.html#Raftel_Domain_Abstractions_ValidationError_Equals_Raftel_Domain_Abstractions_ValidationError_
+  commentId: M:Raftel.Domain.Abstractions.ValidationError.Equals(Raftel.Domain.Abstractions.ValidationError)
+  name.vb: Equals(ValidationError)
+  fullName: Raftel.Domain.Abstractions.ValidationError.Equals(Raftel.Domain.Abstractions.ValidationError?)
+  fullName.vb: Raftel.Domain.Abstractions.ValidationError.Equals(Raftel.Domain.Abstractions.ValidationError)
+  nameWithType: ValidationError.Equals(ValidationError?)
+  nameWithType.vb: ValidationError.Equals(ValidationError)
+- uid: Raftel.Domain.Abstractions.ValidationError.Equals*
+  name: Equals
+  href: api/Raftel.Domain.Abstractions.ValidationError.html#Raftel_Domain_Abstractions_ValidationError_Equals_
+  commentId: Overload:Raftel.Domain.Abstractions.ValidationError.Equals
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.ValidationError.Equals
+  nameWithType: ValidationError.Equals
+- uid: Raftel.Domain.Abstractions.ValidationError.Errors
+  name: Errors
+  href: api/Raftel.Domain.Abstractions.ValidationError.html#Raftel_Domain_Abstractions_ValidationError_Errors
+  commentId: P:Raftel.Domain.Abstractions.ValidationError.Errors
+  fullName: Raftel.Domain.Abstractions.ValidationError.Errors
+  nameWithType: ValidationError.Errors
+- uid: Raftel.Domain.Abstractions.ValidationError.Errors*
+  name: Errors
+  href: api/Raftel.Domain.Abstractions.ValidationError.html#Raftel_Domain_Abstractions_ValidationError_Errors_
+  commentId: Overload:Raftel.Domain.Abstractions.ValidationError.Errors
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.ValidationError.Errors
+  nameWithType: ValidationError.Errors
+- uid: Raftel.Domain.Abstractions.ValidationError.FromErrors(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
+  name: FromErrors(IEnumerable<Error>)
+  href: api/Raftel.Domain.Abstractions.ValidationError.html#Raftel_Domain_Abstractions_ValidationError_FromErrors_System_Collections_Generic_IEnumerable_Raftel_Domain_Abstractions_Error__
+  commentId: M:Raftel.Domain.Abstractions.ValidationError.FromErrors(System.Collections.Generic.IEnumerable{Raftel.Domain.Abstractions.Error})
+  name.vb: FromErrors(IEnumerable(Of Error))
+  fullName: Raftel.Domain.Abstractions.ValidationError.FromErrors(System.Collections.Generic.IEnumerable<Raftel.Domain.Abstractions.Error>)
+  fullName.vb: Raftel.Domain.Abstractions.ValidationError.FromErrors(System.Collections.Generic.IEnumerable(Of Raftel.Domain.Abstractions.Error))
+  nameWithType: ValidationError.FromErrors(IEnumerable<Error>)
+  nameWithType.vb: ValidationError.FromErrors(IEnumerable(Of Error))
+- uid: Raftel.Domain.Abstractions.ValidationError.FromErrors*
+  name: FromErrors
+  href: api/Raftel.Domain.Abstractions.ValidationError.html#Raftel_Domain_Abstractions_ValidationError_FromErrors_
+  commentId: Overload:Raftel.Domain.Abstractions.ValidationError.FromErrors
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.ValidationError.FromErrors
+  nameWithType: ValidationError.FromErrors
+- uid: Raftel.Domain.Abstractions.ValidationError.GetHashCode
+  name: GetHashCode()
+  href: api/Raftel.Domain.Abstractions.ValidationError.html#Raftel_Domain_Abstractions_ValidationError_GetHashCode
+  commentId: M:Raftel.Domain.Abstractions.ValidationError.GetHashCode
+  fullName: Raftel.Domain.Abstractions.ValidationError.GetHashCode()
+  nameWithType: ValidationError.GetHashCode()
+- uid: Raftel.Domain.Abstractions.ValidationError.GetHashCode*
+  name: GetHashCode
+  href: api/Raftel.Domain.Abstractions.ValidationError.html#Raftel_Domain_Abstractions_ValidationError_GetHashCode_
+  commentId: Overload:Raftel.Domain.Abstractions.ValidationError.GetHashCode
+  isSpec: "True"
+  fullName: Raftel.Domain.Abstractions.ValidationError.GetHashCode
+  nameWithType: ValidationError.GetHashCode
 - uid: Raftel.Domain.Auditing
   name: Raftel.Domain.Auditing
   href: api/Raftel.Domain.Auditing.html

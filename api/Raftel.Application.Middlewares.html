@@ -129,7 +129,8 @@ only if the preceding operation was successful, for commands that return a typed
     <dl class="jumplist">
       <dt><a class="xref" href="Raftel.Application.Middlewares.ValidationMiddleware-2.html">ValidationMiddleware&lt;TRequest, TResponse&gt;</a></dt>
       <dd><p>Middleware that performs validation on the incoming request using all registered <a class="xref" href="Raftel.Domain.Validators.Validator-1.html">Validator&lt;TModel&gt;</a> instances.
-If any validation rule fails, a <a class="xref" href="Raftel.Application.Exceptions.ValidationException.html">ValidationException</a> is thrown and the request pipeline is halted.</p>
+If any validation rule fails, a failed <code class="typeparamref">TResponse</code> carrying a <a class="xref" href="Raftel.Domain.Abstractions.ValidationError.html">ValidationError</a> is
+returned and the request pipeline is short-circuited.</p>
 </dd>
     </dl>
     <h3 id="interfaces">

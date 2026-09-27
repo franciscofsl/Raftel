@@ -93,7 +93,7 @@ Class RaftelApplicationBuilder  <a class="header-action link-secondary" title="V
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Application.html">Application</a></dd></dl>
+    <dl><dt>Namespace</dt><dd><span class="xref">Raftel</span>.<a class="xref" href="Raftel.Application.html">Application</a></dd></dl>
   <dl><dt>Assembly</dt><dd>Raftel.Application.dll</dd></dl>
   </div>
 
@@ -178,6 +178,38 @@ Class RaftelApplicationBuilder  <a class="header-action link-secondary" title="V
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.reflection.assembly">Assembly</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Raftel_Application_RaftelApplicationBuilder_AuthorizationOptions_" data-uid="Raftel.Application.RaftelApplicationBuilder.AuthorizationOptions*"></a>
+
+  <h3 id="Raftel_Application_RaftelApplicationBuilder_AuthorizationOptions" data-uid="Raftel.Application.RaftelApplicationBuilder.AuthorizationOptions">
+  AuthorizationOptions
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the authorization options configured for the application.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AuthorizationOptions AuthorizationOptions { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Raftel.Application.AuthorizationOptions.html">AuthorizationOptions</a></dt>
     <dd></dd>
   </dl>
 
@@ -324,7 +356,7 @@ Class RaftelApplicationBuilder  <a class="header-action link-secondary" title="V
 
   <h3 id="Raftel_Application_RaftelApplicationBuilder_AddCommandMiddleware_System_Type_" data-uid="Raftel.Application.RaftelApplicationBuilder.AddCommandMiddleware(System.Type)">
   AddCommandMiddleware(Type)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L65"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds a middleware type specific to command handling to the application.</p>
@@ -357,7 +389,7 @@ Class RaftelApplicationBuilder  <a class="header-action link-secondary" title="V
 
   <h3 id="Raftel_Application_RaftelApplicationBuilder_AddGlobalMiddleware_System_Type_" data-uid="Raftel.Application.RaftelApplicationBuilder.AddGlobalMiddleware(System.Type)">
   AddGlobalMiddleware(Type)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L51"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L56"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds a global middleware type to the application.</p>
@@ -390,7 +422,7 @@ Class RaftelApplicationBuilder  <a class="header-action link-secondary" title="V
 
   <h3 id="Raftel_Application_RaftelApplicationBuilder_AddQueryMiddleware_System_Type_" data-uid="Raftel.Application.RaftelApplicationBuilder.AddQueryMiddleware(System.Type)">
   AddQueryMiddleware(Type)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L74"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Adds a middleware type specific to query handling to the application.</p>
@@ -419,11 +451,44 @@ Class RaftelApplicationBuilder  <a class="header-action link-secondary" title="V
 
 
 
+  <a id="Raftel_Application_RaftelApplicationBuilder_ConfigureAuthorization_" data-uid="Raftel.Application.RaftelApplicationBuilder.ConfigureAuthorization*"></a>
+
+  <h3 id="Raftel_Application_RaftelApplicationBuilder_ConfigureAuthorization_System_Action_Raftel_Application_AuthorizationOptions__" data-uid="Raftel.Application.RaftelApplicationBuilder.ConfigureAuthorization(System.Action{Raftel.Application.AuthorizationOptions})">
+  ConfigureAuthorization(Action&lt;AuthorizationOptions&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L92"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Configures how the permission-authorization pipeline reports failures.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ConfigureAuthorization(Action&lt;AuthorizationOptions&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Raftel.Application.AuthorizationOptions.html">AuthorizationOptions</a>&gt;</dt>
+    <dd><p>A callback that mutates the authorization options.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
   <a id="Raftel_Application_RaftelApplicationBuilder_ConfigurePagination_" data-uid="Raftel.Application.RaftelApplicationBuilder.ConfigurePagination*"></a>
 
   <h3 id="Raftel_Application_RaftelApplicationBuilder_ConfigurePagination_System_Action_Raftel_Application_PaginationOptions__" data-uid="Raftel.Application.RaftelApplicationBuilder.ConfigurePagination(System.Action{Raftel.Application.PaginationOptions})">
   ConfigurePagination(Action&lt;PaginationOptions&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L83"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Configures the default and maximum page size applied by paged queries.</p>
@@ -456,7 +521,7 @@ Class RaftelApplicationBuilder  <a class="header-action link-secondary" title="V
 
   <h3 id="Raftel_Application_RaftelApplicationBuilder_RegisterServicesFromAssembly_System_Reflection_Assembly_" data-uid="Raftel.Application.RaftelApplicationBuilder.RegisterServicesFromAssembly(System.Reflection.Assembly)">
   RegisterServicesFromAssembly(Assembly)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L39"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/RaftelApplicationBuilder.cs/#L44"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Registers all services from the specified assembly if it has not already been registered.</p>

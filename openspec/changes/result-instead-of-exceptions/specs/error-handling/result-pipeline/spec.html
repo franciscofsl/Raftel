@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/result-instead-of-exceptions/specs/error-handling/result-pipeline/spec.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../../../index.html">
+            <img id="logo" class="svg" src="../../../../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="purpose">Purpose</h2>
+<p>Guarantees that a request rejected by the command/query middleware pipeline — for a validation failure or a missing permission — is always reported to the caller as a failed <code>Result</code>, with the same HTTP contract as any other business-rule failure, never as a thrown exception that bypasses the pipeline.</p>
+<h2 id="added-requirements">ADDED Requirements</h2>
+<h3 id="requirement-validation-failures-produce-a-failed-result">Requirement: Validation failures produce a failed Result</h3>
+<p>When one or more registered <code>Validator&lt;TRequest&gt;</code> instances report errors for an incoming command or query, the pipeline SHALL short-circuit and return a failed <code>Result</code> (or <code>Result&lt;T&gt;</code>) carrying a single aggregated validation error, without invoking the next handler in the chain and without throwing an exception.</p>
+<h4 id="scenario-single-invalid-field">Scenario: Single invalid field</h4>
+<ul>
+<li><strong>WHEN</strong> a command fails one validation rule (e.g. an empty required field)</li>
+<li><strong>THEN</strong> the pipeline returns a failed <code>Result</code> whose error has <code>ErrorType.Validation</code>, and the handler is never invoked</li>
+</ul>
+<h4 id="scenario-multiple-invalid-fields">Scenario: Multiple invalid fields</h4>
+<ul>
+<li><strong>WHEN</strong> a command fails validation rules on more than one field</li>
+<li><strong>THEN</strong> the pipeline returns a single failed <code>Result</code> whose error aggregates every failed rule without dropping any of them, and the handler is never invoked</li>
+</ul>
+<h4 id="scenario-valid-request">Scenario: Valid request</h4>
+<ul>
+<li><strong>WHEN</strong> a command or query passes every registered validation rule</li>
+<li><strong>THEN</strong> the pipeline invokes the next handler and returns its result unchanged</li>
+</ul>
+<h3 id="requirement-permission-checks-produce-a-failed-result">Requirement: Permission checks produce a failed Result</h3>
+<p>When the current caller is missing one or more permissions required by <code>[RequiresPermission]</code> on the request type, the pipeline SHALL short-circuit and return a failed <code>Result</code> with <code>ErrorType.Forbidden</code>, without invoking the next handler and without throwing an exception.</p>
+<h4 id="scenario-missing-required-permission">Scenario: Missing required permission</h4>
+<ul>
+<li><strong>WHEN</strong> a request decorated with <code>[RequiresPermission]</code> is dispatched by a caller lacking that permission</li>
+<li><strong>THEN</strong> the pipeline returns a failed <code>Result</code> whose error has <code>ErrorType.Forbidden</code>, and the handler is never invoked</li>
+</ul>
+<h4 id="scenario-caller-has-every-required-permission">Scenario: Caller has every required permission</h4>
+<ul>
+<li><strong>WHEN</strong> a request decorated with <code>[RequiresPermission]</code> is dispatched by a caller holding all required permissions</li>
+<li><strong>THEN</strong> the pipeline invokes the next handler and returns its result unchanged</li>
+</ul>
+<h4 id="scenario-request-has-no-permission-requirement">Scenario: Request has no permission requirement</h4>
+<ul>
+<li><strong>WHEN</strong> a request carries no <code>[RequiresPermission]</code> attribute</li>
+<li><strong>THEN</strong> the pipeline invokes the next handler without performing any permission check</li>
+</ul>
+<h3 id="requirement-missing-permission-detail-is-configurable-and-safe-by-default">Requirement: Missing-permission detail is configurable and safe by default</h3>
+<p>The error message for a <code>Forbidden</code> failure SHALL only enumerate the specific missing permissions when explicitly enabled by configuration; by default it SHALL NOT reveal which permissions were required or missing.</p>
+<h4 id="scenario-default-configuration-in-a-release-style-deployment">Scenario: Default configuration in a Release-style deployment</h4>
+<ul>
+<li><strong>WHEN</strong> a permission check fails and permission-detail disclosure is not explicitly enabled</li>
+<li><strong>THEN</strong> the resulting error message does not list the required or missing permission names</li>
+</ul>
+<h4 id="scenario-permission-detail-disclosure-explicitly-enabled">Scenario: Permission-detail disclosure explicitly enabled</h4>
+<ul>
+<li><strong>WHEN</strong> a permission check fails and permission-detail disclosure is explicitly enabled</li>
+<li><strong>THEN</strong> the resulting error message lists the specific missing permissions</li>
+</ul>
+<h3 id="requirement-http-status-codes-are-unchanged">Requirement: HTTP status codes are unchanged</h3>
+<p>The HTTP status code produced for a validation or permission failure SHALL be the same as before this capability existed: 400 for validation failures, 403 for authorization failures.</p>
+<h4 id="scenario-validation-failure-over-http">Scenario: Validation failure over HTTP</h4>
+<ul>
+<li><strong>WHEN</strong> a request that fails validation is submitted over HTTP</li>
+<li><strong>THEN</strong> the response has status 400</li>
+</ul>
+<h4 id="scenario-authorization-failure-over-http">Scenario: Authorization failure over HTTP</h4>
+<ul>
+<li><strong>WHEN</strong> a request from a caller missing a required permission is submitted over HTTP</li>
+<li><strong>THEN</strong> the response has status 403</li>
+</ul>
+<h3 id="requirement-validation-failure-body-reports-errors-per-field">Requirement: Validation failure body reports errors per field</h3>
+<p>The <code>ProblemDetails</code> body for a validation failure SHALL include an <code>errors</code> extension mapping each field name to the array of error messages for that field, replacing the prior flat array-of-<code>Error</code> shape.</p>
+<h4 id="scenario-single-invalid-field-over-http">Scenario: Single invalid field over HTTP</h4>
+<ul>
+<li><strong>WHEN</strong> a request fails validation on exactly one field</li>
+<li><strong>THEN</strong> the response body's <code>errors</code> object has one entry keyed by that field's name, containing its error message(s)</li>
+</ul>
+<h4 id="scenario-multiple-invalid-fields-over-http">Scenario: Multiple invalid fields over HTTP</h4>
+<ul>
+<li><strong>WHEN</strong> a request fails validation on more than one field</li>
+<li><strong>THEN</strong> the response body's <code>errors</code> object has one entry per distinct failed field</li>
+</ul>
+<h3 id="requirement-authorization-failure-body-is-unchanged">Requirement: Authorization failure body is unchanged</h3>
+<p>The <code>ProblemDetails</code> body for an authorization failure SHALL have the same shape as before this capability existed: no permission-revealing detail by default.</p>
+<h4 id="scenario-authorization-failure-body-over-http">Scenario: Authorization failure body over HTTP</h4>
+<ul>
+<li><strong>WHEN</strong> a request from a caller missing a required permission is submitted over HTTP</li>
+<li><strong>THEN</strong>, unless permission-detail disclosure is explicitly enabled, the response body does not enumerate the missing permissions</li>
+</ul>
+<h3 id="requirement-no-framework-middleware-throws-for-business-validation-or-authorization-failure">Requirement: No framework middleware throws for business, validation, or authorization failure</h3>
+<p>No type in the command/query middleware pipeline SHALL throw an exception to signal a validation or authorization failure; such failures SHALL be communicated exclusively through a failed <code>Result</code>.</p>
+<h4 id="scenario-static-check-of-the-middleware-pipeline">Scenario: Static check of the middleware pipeline</h4>
+<ul>
+<li><strong>WHEN</strong> the middleware pipeline is inspected for validation- or authorization-failure signaling</li>
+<li><strong>THEN</strong> no middleware type throws an exception for either case</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/result-instead-of-exceptions/specs/error-handling/result-pipeline/spec.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

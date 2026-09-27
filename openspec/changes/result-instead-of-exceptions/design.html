@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/result-instead-of-exceptions/design.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="context">Context</h2>
+<p>See proposal.md - Why. Two framework middlewares (<code>ValidationMiddleware</code>, <code>PermissionAuthorizationMiddleware</code> in <code>src/Raftel.Application/Middlewares/</code>) throw (<code>ValidationException</code>, <code>UnauthorizedException</code> in <code>src/Raftel.Application/Exceptions/</code>) instead of returning a failed <code>Result</code>, and <code>ExceptionHandlingMiddleware</code>/<code>ErrorResults</code> (<code>Raftel.Api.Server</code>) already map <code>Error</code>/<code>ErrorType</code> to HTTP status via #125's typed-error work. <code>TResponse</code> in the middleware pipeline is generic over <code>Result</code> and <code>Result&lt;T&gt;</code> (per use case), so constructing a typed failure without knowing <code>T</code> at compile time is the central technical problem this design solves.</p>
+<h2 id="goals--non-goals">Goals / Non-Goals</h2>
+<p><strong>Goals:</strong></p>
+<ul>
+<li>Build a failed <code>Result</code> or <code>Result&lt;T&gt;</code> for an arbitrary closed generic <code>TResponse</code> without per-<code>T</code> boilerplate, and without a reflection cost that shows up per-request.</li>
+<li>Preserve the current HTTP status codes for both failure paths, and the current body shape for the authorization path. The validation failure body deliberately changes shape (array → field-keyed dictionary) — see proposal.md's breaking-changes list; this is the one intentional break.</li>
+<li>Keep <code>ValidationException</code>/<code>UnauthorizedException</code> usable during a deprecation window for consumer code that throws them directly (they aren't removed by this change, only obsoleted).</li>
+</ul>
+<p><strong>Non-Goals:</strong></p>
+<ul>
+<li>Removing <code>ValidationException</code>/<code>UnauthorizedException</code> outright (scheduled for a later version per proposal.md).</li>
+<li>Changing anything about explicit transactions/rollback (tracked separately; this change only removes one of the reasons a <code>catch</code> would be needed there).</li>
+<li>Any change to <code>Error</code>/<code>ErrorType</code>/HTTP-mapping behavior itself (already delivered by #125).</li>
+</ul>
+<h2 id="decisions">Decisions</h2>
+<h3 id="resultfactory-cached-compiled-delegate-per-tresponse-not-raw-reflection-per-call"><code>ResultFactory</code>: cached compiled delegate per <code>TResponse</code>, not raw reflection per call</h3>
+<p><code>ValidationMiddleware</code>/<code>PermissionAuthorizationMiddleware</code> know <code>TResponse</code> as a generic parameter but must produce <code>Result.Failure(error)</code> for <code>TResponse = Result</code> or <code>Result&lt;T&gt;.Failure(error)</code> for <code>TResponse = Result&lt;T&gt;</code>, without a <code>case</code> per possible <code>T</code>. A <code>ConcurrentDictionary&lt;Type, Func&lt;Error, object&gt;&gt;</code> builds one expression-tree-compiled delegate the first time a given <code>TResponse</code> is seen (via <code>Result.Failure</code> or <code>Result&lt;T&gt;.Failure</code> through reflection once, <code>Expression.Lambda(...).Compile()</code>), then reuses it on every subsequent request for that <code>TResponse</code>. This keeps steady-state cost to a dictionary lookup + delegate invoke, which is what justifies moving off exceptions for a per-request path in the first place (exceptions are also not free, but the old code paid that cost only on the failure path — the new code must not regress the success path, and must keep the failure path cheap too).</p>
+<ul>
+<li><strong>Alternative considered</strong>: call <code>MethodInfo.Invoke</code> via reflection on every failure. Rejected — no caching means the reflection cost recurs each time, undermining the motivation (existing spec doc already flags this as &quot;se nota&quot;).</li>
+<li><strong>Alternative considered</strong>: make every command/query handler return a common non-generic <code>Result</code> (drop <code>Result&lt;T&gt;</code>). Rejected — loses typed return values for queries, a much larger and unrelated API change.</li>
+</ul>
+<h3 id="validationmiddlewaretrequest-tresponse-gains-where-tresponse--result"><code>ValidationMiddleware&lt;TRequest, TResponse&gt;</code> gains <code>where TResponse : Result</code></h3>
+<p><code>IGlobalMiddleware&lt;TRequest, TResponse&gt;</code> itself stays unconstrained (some future middleware might operate over non-<code>Result</code> responses, e.g. streaming) but <code>ValidationMiddleware</code> and <code>PermissionAuthorizationMiddleware</code> specifically add <code>where TResponse : Result</code> since they only make sense for CQRS requests, which always return <code>Result</code>/<code>Result&lt;T&gt;</code>. This is a source-compatible constraint for existing registrations, since every <code>ICommand</code>/<code>ICommand&lt;T&gt;</code>/<code>IQuery&lt;T&gt;</code> already resolves to a <code>Result</code>-derived <code>TResponse</code>.</p>
+<h3 id="validationerror-as-a-subtype-of-error-not-a-new-parallel-error-kind"><code>ValidationError</code> as a subtype of <code>Error</code>, not a new parallel error kind</h3>
+<p>Aggregating N validator failures into the single <code>Error</code> a <code>Result.Failure</code> expects requires either a new field on <code>Error</code> (<code>IReadOnlyList&lt;Error&gt;? Errors</code>) or a subtype. A subtype (<code>ValidationError : Error</code>) keeps <code>Error</code> itself simple for the common single-error case and matches the domain layer's existing pattern of typed errors. Requires unsealing <code>Error</code> (implicitly sealed today as a plain <code>record</code> with no <code>sealed</code> keyword — actually already unsealed; only inheritance-safety needs a value-equality test, since positional records generate <code>Equals</code> based on the declared type).</p>
+<ul>
+<li><strong>Alternative considered</strong>: add <code>Errors</code> list directly to <code>Error</code>. Rejected — forces every <code>Error</code> consumer to handle a case that's only meaningful for validation.</li>
+</ul>
+<h3 id="icurrentuserhaspermission-added-alongside-not-replacing-ensurehaspermission"><code>ICurrentUser.HasPermission</code> added alongside, not replacing, <code>EnsureHasPermission</code></h3>
+<p>Adding a non-throwing query method and obsoleting the throwing one (rather than changing <code>EnsureHasPermission</code>'s behavior) keeps existing direct callers of <code>EnsureHasPermission</code> compiling (with a warning) through the deprecation window, per proposal.md's breaking-change list.</p>
+<h3 id="authorizationoptionsincludemissingpermissionsinerror-defaults-to-false-set-by-the-consumer"><code>AuthorizationOptions.IncludeMissingPermissionsInError</code> defaults to <code>false</code>, set by the consumer</h3>
+<p>Default <code>false</code> (safe by default, matching the spec's &quot;Default configuration&quot; scenario). <code>RaftelApplicationBuilder</code> gains <code>ConfigureAuthorization(Action&lt;AuthorizationOptions&gt; configure)</code> (mirroring <code>ConfigurePagination</code>) so a consumer can opt in, e.g. <code>builder.ConfigureAuthorization(o =&gt; o.IncludeMissingPermissionsInError = env.IsDevelopment())</code>. The framework itself does not read <code>IHostEnvironment</code> — <code>Raftel.Application</code> has no ASP.NET Core/Hosting dependency today (enforced by <code>Application_Should_Not_DependOn_AspNetCore</code> in <code>Raftel.ArchitectureTests</code>) and proposal.md commits to no new dependencies; auto-detecting Development is therefore the consuming application's responsibility, not the framework's.</p>
+<h3 id="errorresultstoproblem-pattern-matches-on-validationerror-to-shape-the-errors-extension"><code>ErrorResults.ToProblem</code> pattern-matches on <code>ValidationError</code> to shape the <code>errors</code> extension</h3>
+<p>Keeps the field-detail expansion (<code>Dictionary&lt;string, string[]&gt;</code>) local to the one place that already turns <code>Error</code> into <code>ProblemDetails</code>, rather than teaching <code>ValidationMiddleware</code> about HTTP. Requires validators' <code>Error.Code</code> to carry a <code>&quot;&lt;Field&gt;.&lt;Reason&gt;&quot;</code> convention so the field name can be split out; this is documented on <code>Validator&lt;T&gt;</code>, not enforced by a type.</p>
+<h2 id="risks--trade-offs">Risks / Trade-offs</h2>
+<ul>
+<li><strong>[Risk]</strong> Splitting a field name out of <code>Error.Code</code> by convention (<code>&quot;Email.Invalid&quot;</code>) is stringly-typed and can silently produce a malformed <code>errors</code> map if a validator doesn't follow the convention. → Mitigation: document the convention prominently on <code>Validator&lt;T&gt;</code> and cover it with a <code>ResultFactory</code>/<code>ValidationError</code> unit test asserting the split; a missing <code>.</code> falls back to putting the whole code under a single <code>&quot;&quot;</code>-keyed bucket rather than throwing.</li>
+<li><strong>[Risk]</strong> The expression-tree-compiled delegate cache is a new piece of reflection-adjacent infrastructure; a bug there fails every request going through validation or authorization, not just an edge case. → Mitigation: <code>ResultFactoryTests</code> covers <code>Result</code>, <code>Result&lt;Guid&gt;</code>, <code>Result&lt;string&gt;</code>, a record <code>T</code>, and a generic nested <code>T</code>, per proposal.md's test plan; functional regression tests assert the HTTP contract is unchanged end-to-end.</li>
+<li><strong>[Risk]</strong> <code>where TResponse : Result</code> on the two middlewares is a compile-time breaking change for any consumer who registered them against a non-<code>Result</code> <code>TResponse</code> (unlikely, since <code>ICommand</code>/<code>IQuery&lt;T&gt;</code> already constrain this, but not impossible with a hand-rolled <code>IRequest&lt;T&gt;</code>). → Mitigation: called out explicitly in proposal.md's breaking-changes list and <code>BREAKING_CHANGES.md</code>.</li>
+<li><strong>[Superseded]</strong> The original trade-off here — keeping <code>ValidationException</code>/<code>UnauthorizedException</code> <code>[Obsolete]</code> for a deprecation window instead of deleting them — assumed a released version would exist where they were obsolete-but-present. Since this whole change ships unreleased, that window never mattered to any real consumer; the exception types, <code>ICurrentUser.EnsureHasPermission</code>, and <code>ExceptionHandlingMiddleware</code>'s two now-dead <code>catch</code> blocks were removed outright before release. See the updated Migration Plan below.</li>
+</ul>
+<h2 id="migration-plan">Migration Plan</h2>
+<ol>
+<li>Ship <code>ValidationError</code>, <code>ResultFactory</code>, <code>AuthorizationOptions</code>, and the rewritten middlewares together (they're only meaningful as a set).</li>
+<li><del>Mark <code>ValidationException</code>, <code>UnauthorizedException</code>, and <code>ICurrentUser.EnsureHasPermission</code> <code>[Obsolete]</code></del> — superseded: removed outright, since no released version ever shipped with them merely obsolete (see Risks/Trade-offs above).</li>
+<li>Functional regression tests must pass unchanged (same status codes/body shape) before merge — this is the release gate, not a follow-up.</li>
+<li>Document the breaking changes and the field-name-prefix validator convention in <code>BREAKING_CHANGES.md</code> and <code>Validator&lt;T&gt;</code>'s doc comments.</li>
+<li><del>Removal of the obsoleted members is out of scope for this change</del> — superseded: done in this change (see step 2).</li>
+</ol>
+<p>Rollback: revert the change wholesale (it's additive-plus-rewrite within a single release, no data migration involved); consumers who already adopted <code>HasPermission</code>/<code>ValidationError</code> would need to revert alongside.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/result-instead-of-exceptions/design.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

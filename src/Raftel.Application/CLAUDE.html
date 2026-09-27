@@ -87,7 +87,6 @@ Commands/             ICommand, ICommand&lt;TResult&gt;, ICommandHandler&lt;,&gt
 Queries/              IQuery&lt;TResult&gt;, IQueryHandler&lt;,&gt;, IQueryDispatcher, QueryDispatcher
 Middlewares/          IGlobalMiddleware / ICommandMiddleware / IQueryMiddleware + implementations + MiddlewareRegistry
 Authorization/        RequiresPermissionAttribute
-Exceptions/           ValidationException, UnauthorizedException
 Features/&lt;Feature&gt;/&lt;UseCase&gt;/   one use case per folder (see below)
 DependencyInjection.cs          AddRaftelApplication(cfg =&gt; ...)
 RaftelApplicationBuilder.cs     assembly and middleware registration
@@ -105,7 +104,7 @@ RaftelApplicationBuilder.cs     assembly and middleware registration
 <h2 id="pipeline-and-mediator">Pipeline and Mediator</h2>
 <ul>
 <li><code>RequestDispatcher</code> reflects to detect if request is <code>ICommand</code>/<code>ICommand&lt;T&gt;</code>/<code>IQuery&lt;T&gt;</code> and chains: <code>IGlobalMiddleware</code> + command/query-specific middlewares, ending with handler.</li>
-<li>Included middlewares: <code>ValidationMiddleware</code> (runs <code>Validator&lt;T&gt;</code>), <code>PermissionAuthorizationMiddleware</code> (via <code>[RequiresPermission]</code>), <code>UnitOfWorkMiddleware</code> (commits <strong>only if result succeeds</strong>), <code>LoggingMiddleware</code> (wide-event enrichment — see below).</li>
+<li>Included middlewares: <code>ValidationMiddleware</code> (runs <code>Validator&lt;T&gt;</code>), <code>PermissionAuthorizationMiddleware</code> (via <code>[RequiresPermission]</code>), <code>UnitOfWorkMiddleware</code> (commits <strong>only if result succeeds</strong>), <code>LoggingMiddleware</code> (wide-event enrichment — see below). Both <code>ValidationMiddleware</code> and <code>PermissionAuthorizationMiddleware</code> communicate failure exclusively through a failed <code>Result</code>/<code>Result&lt;T&gt;</code> (<code>ErrorType.Validation</code> / <code>ErrorType.Forbidden</code>) — they never throw, and both require <code>TResponse : Result</code>.</li>
 <li>To add new cross-cutting behavior (caching, logging…), create a middleware of the appropriate type and register it in <code>AddRaftelApplication</code>.</li>
 <li>Global middleware order is caller-defined by the order of <code>AddGlobalMiddleware</code> calls. <strong><code>LoggingMiddleware&lt;,&gt;</code> must be registered first</strong> so it wraps every other global middleware and captures their outcome too.</li>
 </ul>

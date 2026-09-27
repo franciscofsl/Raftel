@@ -89,11 +89,11 @@
 
 
   <h1 id="Raftel_Domain_Validators_Validator_1" data-uid="Raftel.Domain.Validators.Validator`1" class="text-break">
-Class Validator&lt;TModel&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Validators/Validator.cs/#L11"><i class="bi bi-code-slash"></i></a>
+Class Validator&lt;TModel&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Validators/Validator.cs/#L17"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
-    <dl><dt>Namespace</dt><dd><a class="xref" href="Raftel.html">Raftel</a>.<a class="xref" href="Raftel.Domain.html">Domain</a>.<a class="xref" href="Raftel.Domain.Validators.html">Validators</a></dd></dl>
+    <dl><dt>Namespace</dt><dd><span class="xref">Raftel</span>.<span class="xref">Domain</span>.<a class="xref" href="Raftel.Domain.Validators.html">Validators</a></dd></dl>
   <dl><dt>Assembly</dt><dd>Raftel.Domain.dll</dd></dl>
   </div>
 
@@ -163,6 +163,12 @@ and executing them via the <a class="xref" href="Raftel.Domain.Validators.Valida
 
 
 
+  <h2 id="Raftel_Domain_Validators_Validator_1_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Convention: give each rule's <a class="xref" href="Raftel.Domain.Abstractions.Error.html">Error</a> a <code>Code</code> prefixed with the name of the
+field it validates, e.g. <code>&quot;Email.Invalid&quot;</code>. <code>ValidationMiddleware</code> and
+<code>ErrorResults.ToProblem</code> split the code on its first <code>.</code> to group failures by field in
+the HTTP response; a code with no <code>.</code> still works but is grouped under an empty field key.</p>
+</div>
 
 
   <h2 class="section" id="methods">Methods
@@ -173,7 +179,7 @@ and executing them via the <a class="xref" href="Raftel.Domain.Validators.Valida
 
   <h3 id="Raftel_Domain_Validators_Validator_1_EnsureThat_System_Func__0_System_Boolean__Raftel_Domain_Abstractions_Error_" data-uid="Raftel.Domain.Validators.Validator`1.EnsureThat(System.Func{`0,System.Boolean},Raftel.Domain.Abstractions.Error)">
   EnsureThat(Func&lt;TModel, bool&gt;, Error)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Validators/Validator.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Validators/Validator.cs/#L52"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Registers a validation rule for the model.
@@ -210,7 +216,7 @@ The rule is executed when <a class="xref" href="Raftel.Domain.Validators.Validat
 
   <h3 id="Raftel_Domain_Validators_Validator_1_Validate__0_" data-uid="Raftel.Domain.Validators.Validator`1.Validate(`0)">
   Validate(TModel)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Validators/Validator.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Validators/Validator.cs/#L29"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Validates the specified model against all registered rules.</p>
@@ -250,7 +256,7 @@ Returns success if no errors are found, otherwise returns a failure result with 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Validators/Validator.cs/#L11" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Domain/Validators/Validator.cs/#L17" class="edit-link">Edit this page</a>
         </div>
 
 

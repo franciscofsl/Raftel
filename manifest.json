@@ -1,4 +1,5 @@
 {
+  "docfx_version": "2.81.0+ba844df625370a6bd7c1ecab0d0ec4d1d9128ac4",
   "source_base_path": "/home/runner/work/Raftel/Raftel",
   "xrefmap": "xrefmap.yml",
   "files": [
@@ -290,7 +291,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware",
-      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.yml\" sourcestartlinenumber=\"1\">Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses.\nStack traces are never exposed in responses. Enriches the current request's\n<xref href=\"Raftel.Application.Abstractions.IRequestEvent\" data-throw-if-not-resolved=\"false\"></xref> with the exception and its type-derived severity instead of\nlogging directly — a single component further out in the pipeline emits the request's wide\nevent exactly once.</p>\n"
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Middlewares.ExceptionHandlingMiddleware.yml\" sourcestartlinenumber=\"1\">Middleware that catches unhandled exceptions and returns RFC 7807 ProblemDetails responses.\nStack traces are never exposed in responses. Enriches the current request's\n<xref href=\"Raftel.Application.Abstractions.IRequestEvent\" data-throw-if-not-resolved=\"false\"></xref> with the exception instead of logging directly — a single\ncomponent further out in the pipeline emits the request's wide event exactly once.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -630,6 +631,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.AuthorizationOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.AuthorizationOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.AuthorizationOptions",
+      "Summary": "<p sourcefile=\"api/Raftel.Application.AuthorizationOptions.yml\" sourcestartlinenumber=\"1\">Configures how the permission-authorization pipeline reports failures.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Commands.CommandDispatcher.yml",
       "output": {
         ".html": {
@@ -738,48 +753,6 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Application.DependencyInjection",
-      "Summary": null
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Exceptions.UnauthorizedException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Exceptions.UnauthorizedException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Exceptions.UnauthorizedException",
-      "Summary": "<p sourcefile=\"api/Raftel.Application.Exceptions.UnauthorizedException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a user attempts to perform an operation without proper authorization.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Exceptions.ValidationException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Exceptions.ValidationException.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Exceptions.ValidationException",
-      "Summary": "<p sourcefile=\"api/Raftel.Application.Exceptions.ValidationException.yml\" sourcestartlinenumber=\"1\">Exception thrown when a validation process fails.</p>\n"
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Raftel.Application.Exceptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Raftel.Application.Exceptions.html"
-        }
-      },
-      "version": "",
-      "Uid": null,
-      "IsMRef": true,
-      "Title": "Raftel.Application.Exceptions",
       "Summary": null
     },
     {
@@ -1438,7 +1411,7 @@
       "Uid": null,
       "IsMRef": true,
       "Title": "Raftel.Application.Middlewares.ValidationMiddleware<TRequest, TResponse>",
-      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.ValidationMiddleware-2.yml\" sourcestartlinenumber=\"1\">Middleware that performs validation on the incoming request using all registered <xref href=\"Raftel.Domain.Validators.Validator%601\" data-throw-if-not-resolved=\"false\"></xref> instances.\nIf any validation rule fails, a <xref href=\"Raftel.Application.Exceptions.ValidationException\" data-throw-if-not-resolved=\"false\"></xref> is thrown and the request pipeline is halted.</p>\n"
+      "Summary": "<p sourcefile=\"api/Raftel.Application.Middlewares.ValidationMiddleware-2.yml\" sourcestartlinenumber=\"1\">Middleware that performs validation on the incoming request using all registered <xref href=\"Raftel.Domain.Validators.Validator%601\" data-throw-if-not-resolved=\"false\"></xref> instances.\nIf any validation rule fails, a failed <code class=\"typeparamref\">TResponse</code> carrying a <xref href=\"Raftel.Domain.Abstractions.ValidationError\" data-throw-if-not-resolved=\"false\"></xref> is\nreturned and the request pipeline is short-circuited.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -1747,6 +1720,20 @@
       "IsMRef": true,
       "Title": "Raftel.Domain.Abstractions.SortRequest",
       "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.SortRequest.yml\" sourcestartlinenumber=\"1\">Represents a single client-requested sort field and direction.\nA leading <code>-</code> on the field name indicates descending order (e.g. &quot;-createdAt&quot;).</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Domain.Abstractions.ValidationError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Domain.Abstractions.ValidationError.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Domain.Abstractions.ValidationError",
+      "Summary": "<p sourcefile=\"api/Raftel.Domain.Abstractions.ValidationError.yml\" sourcestartlinenumber=\"1\">Aggregates every failed <xref href=\"Raftel.Domain.Validators.Validator%601\" data-throw-if-not-resolved=\"false\"></xref> rule for a single request into\none <xref href=\"Raftel.Domain.Abstractions.Error\" data-throw-if-not-resolved=\"false\"></xref>, without losing per-rule detail.</p>\n"
     },
     {
       "type": "ManagedReference",
@@ -3540,6 +3527,46 @@
       "output": {
         ".html": {
           "relative_path": "openspec/changes/propagacion-cancellationtoken/tasks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/result-instead-of-exceptions/design.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/result-instead-of-exceptions/design.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/result-instead-of-exceptions/proposal.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/result-instead-of-exceptions/proposal.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/result-instead-of-exceptions/specs/error-handling/result-pipeline/spec.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/result-instead-of-exceptions/specs/error-handling/result-pipeline/spec.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/result-instead-of-exceptions/tasks.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/result-instead-of-exceptions/tasks.html"
         }
       },
       "version": ""

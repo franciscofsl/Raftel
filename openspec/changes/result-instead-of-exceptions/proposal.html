@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/result-instead-of-exceptions/proposal.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="why">Why</h2>
+<p><code>Raftel.Application</code>'s own middleware pipeline violates the framework's declared rule (&quot;<code>Result</code>/<code>Result&lt;T&gt;</code> pattern for errors; no exceptions for business-logic flow&quot;, <code>CLAUDE.md</code>): <code>ValidationMiddleware</code> throws <code>ValidationException</code> and <code>PermissionAuthorizationMiddleware</code> throws <code>UnauthorizedException</code> (via <code>ICurrentUser.EnsureHasPermission</code>). This gives the framework two competing error channels (<code>Result</code> for business failures, exceptions for validation/authorization), forces <code>ExceptionHandlingMiddleware</code> to special-case both, breaks out of the pipeline in a way that will force <code>catch</code>-based rollback once explicit transactions land, and — being a didactic framework — teaches consumers the wrong pattern by example. Now that typed <code>Error</code>/<code>ErrorType</code> → HTTP mapping (#125) and <code>CancellationToken</code> propagation (#126) are both in place, the pipeline can return <code>Result</code> end-to-end without losing HTTP-contract fidelity.</p>
+<h2 id="what-changes">What Changes</h2>
+<ul>
+<li>Add <code>ValidationError : Error</code>, aggregating every failed <code>Validator&lt;T&gt;</code> rule into a single <code>Error</code> without losing per-field detail. Requires <code>Error</code> to stop being implicitly sealed (record inheritance).</li>
+<li><strong>BREAKING</strong>: Rewrite <code>ValidationMiddleware&lt;TRequest, TResponse&gt;</code> to return a failed <code>Result</code>/<code>Result&lt;T&gt;</code> (built via a cached <code>ResultFactory</code>) instead of throwing <code>ValidationException</code>, and constrain it to <code>where TResponse : Result</code>.</li>
+<li><strong>BREAKING</strong>: Add <code>ICurrentUser.HasPermission(string permission) : bool</code> (non-throwing). Rewrite <code>PermissionAuthorizationMiddleware&lt;TRequest, TResponse&gt;</code> to return a failed <code>Result</code> with <code>ErrorType.Forbidden</code> instead of throwing <code>UnauthorizedException</code>.</li>
+<li><strong>BREAKING</strong>: Remove <code>ICurrentUser.EnsureHasPermission</code>, <code>ValidationException</code>, and <code>UnauthorizedException</code> outright, along with <code>ExceptionHandlingMiddleware</code>'s <code>catch</code> blocks for them (they were briefly <code>[Obsolete]</code> earlier in this same unreleased change; since no release ever shipped with them merely obsolete, there is no deprecation window to preserve).</li>
+<li>Add <code>AuthorizationOptions.IncludeMissingPermissionsInError</code> (default <code>false</code> in Release, <code>true</code> in Development) controlling whether the <code>Forbidden</code> error message enumerates the missing permissions.</li>
+<li><strong>BREAKING</strong>: Extend <code>ErrorResults.ToProblem</code> to detect <code>ValidationError</code> and expand it into a <code>Dictionary&lt;string, string[]&gt;</code> <code>errors</code> extension on the <code>ProblemDetails</code> response, matching ASP.NET Core's own validation-error shape. Today a real pipeline validation failure produces <code>errors: [{code, message, type}, ...]</code> (a flat array of <code>Error</code>, via <code>ExceptionHandlingMiddleware</code>'s <code>ValidationException</code> catch); this change replaces that with <code>errors: { &quot;&lt;Field&gt;&quot;: [&quot;&lt;message&gt;&quot;, ...] }</code>. Requires validators' <code>Error.Code</code> to be prefixed with the field name (e.g. <code>&quot;Email.Invalid&quot;</code>) — a convention to document on <code>Validator&lt;T&gt;</code>; existing <code>Error.Code</code>s that don't follow it (e.g. demo app codes like <code>&quot;CreatePirate.NameRequired&quot;</code>) still work but bucket under their code's prefix rather than a real field name.</li>
+<li>Add an architecture test asserting no type in <code>Raftel.Application.Middlewares</code> throws <code>ValidationException</code> or <code>UnauthorizedException</code>.</li>
+<li>Status codes are unchanged (400 for validation, 403 for authorization). The 403 body shape is unchanged. The 400 validation body's <code>errors</code> shape changes from an array to a field-keyed dictionary (see above) — this is the one deliberate, intentional break in the otherwise-preserved HTTP contract.</li>
+</ul>
+<h2 id="capabilities">Capabilities</h2>
+<h3 id="new-capabilities">New Capabilities</h3>
+<ul>
+<li><code>error-handling/result-pipeline</code>: framework-wide requirement that the command/query middleware pipeline communicates business, validation, and authorization failures exclusively through <code>Result</code>/<code>Result&lt;T&gt;</code>, never through thrown exceptions.</li>
+</ul>
+<h3 id="modified-capabilities">Modified Capabilities</h3>
+<p>(none — no existing capability under <code>openspec/specs/</code> covers this behavior yet)</p>
+<h2 id="impact">Impact</h2>
+<ul>
+<li><strong>Affected code</strong>: <code>src/Raftel.Domain/Abstractions/Error.cs</code>, new <code>ValidationError.cs</code>; <code>src/Raftel.Application/Middlewares/{ValidationMiddleware,PermissionAuthorizationMiddleware}.cs</code>; new <code>src/Raftel.Application/Abstractions/ResultFactory.cs</code>; new <code>src/Raftel.Application/AuthorizationOptions.cs</code>; <code>src/Raftel.Application/Abstractions/Authentication/ICurrentUser.cs</code>; <code>src/Raftel.Infrastructure/Authentication/CurrentHttpUser.cs</code>; <code>src/Raftel.Application/Exceptions/{ValidationException,UnauthorizedException}.cs</code>; <code>src/Raftel.Api.Server/Middlewares/ExceptionHandlingMiddleware.cs</code>; <code>src/Raftel.Api.Server/AutoEndpoints/ErrorResults.cs</code>.</li>
+<li><strong>Public API</strong>: breaking — <code>ICurrentUser</code> gains a member and obsoletes another; <code>ValidationMiddleware</code>/<code>PermissionAuthorizationMiddleware</code> change their failure signaling mechanism (still source-compatible for consumers who only depend on the <code>IGlobalMiddleware</code> contract and <code>Result</code>, not on catching the exceptions); the validation failure <code>errors</code> body shape changes from an array to a field-keyed dictionary. Tracked in <code>BREAKING_CHANGES.md</code>.</li>
+<li><strong>Tests</strong>: unit tests for <code>ResultFactory</code>, <code>ValidationError</code>, both rewritten middlewares (happy/failure path, <code>next</code> not invoked on failure), <code>CurrentHttpUser.HasPermission</code>; functional regression tests asserting identical HTTP status/body shape pre- and post-change; architecture test forbidding the two exception types in <code>Middlewares</code>.</li>
+<li><strong>Dependencies</strong>: none new. Depends on already-merged #125 (typed <code>Error</code>/HTTP mapping) and #126 (<code>CancellationToken</code> propagation).</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/result-instead-of-exceptions/proposal.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
