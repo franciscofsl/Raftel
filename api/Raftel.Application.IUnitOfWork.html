@@ -118,8 +118,85 @@ to be committed as a single transaction.</p>
 
 
 
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Raftel_Application_IUnitOfWork_HasActiveTransaction_" data-uid="Raftel.Application.IUnitOfWork.HasActiveTransaction*"></a>
+
+  <h3 id="Raftel_Application_IUnitOfWork_HasActiveTransaction" data-uid="Raftel.Application.IUnitOfWork.HasActiveTransaction">
+  HasActiveTransaction
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/IUnitOfWork.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a value indicating whether a transaction is currently active on this unit of work.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool HasActiveTransaction { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <h2 class="section" id="methods">Methods
 </h2>
+
+
+  <a id="Raftel_Application_IUnitOfWork_BeginTransactionAsync_" data-uid="Raftel.Application.IUnitOfWork.BeginTransactionAsync*"></a>
+
+  <h3 id="Raftel_Application_IUnitOfWork_BeginTransactionAsync_System_Threading_CancellationToken_" data-uid="Raftel.Application.IUnitOfWork.BeginTransactionAsync(System.Threading.CancellationToken)">
+  BeginTransactionAsync(CancellationToken)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/IUnitOfWork.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Begins an explicit transaction, opening a new physical transaction if none is active,
+or a no-op nested transaction if one already is.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task&lt;ITransaction&gt; BeginTransactionAsync(CancellationToken cancellationToken = default)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>A token to monitor for cancellation requests.
+Defaults to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken.none">None</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="Raftel.Application.ITransaction.html">ITransaction</a>&gt;</dt>
+    <dd><p>A transaction handle scoped to this unit of work.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
 
 
   <a id="Raftel_Application_IUnitOfWork_CommitAsync_" data-uid="Raftel.Application.IUnitOfWork.CommitAsync*"></a>

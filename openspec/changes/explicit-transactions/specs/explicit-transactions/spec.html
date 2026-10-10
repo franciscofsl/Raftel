@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/explicit-transactions/specs/explicit-transactions/spec.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../../index.html">
+            <img id="logo" class="svg" src="../../../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="purpose">Purpose</h2>
+<p>Gives every command a single, explicit atomic boundary: all database writes made while handling one command — including those made by domain event handlers and auditing — either all persist or none do.</p>
+<h2 id="added-requirements">ADDED Requirements</h2>
+<h3 id="requirement-unit-of-work-exposes-an-explicit-transaction-boundary">Requirement: Unit of work exposes an explicit transaction boundary</h3>
+<p>The unit of work SHALL be able to begin an explicit transaction and report whether one is already active. The transaction handle SHALL expose commit, rollback and asynchronous disposal, and SHALL NOT expose any persistence-framework type to consumers in the application layer.</p>
+<h4 id="scenario-beginning-a-transaction-when-none-is-active">Scenario: Beginning a transaction when none is active</h4>
+<ul>
+<li><strong>WHEN</strong> a caller begins a transaction on a unit of work with no active transaction</li>
+<li><strong>THEN</strong> a transaction handle is returned</li>
+<li><strong>AND</strong> the unit of work reports that a transaction is active</li>
+</ul>
+<h4 id="scenario-no-transaction-active-by-default">Scenario: No transaction active by default</h4>
+<ul>
+<li><strong>WHEN</strong> a unit of work has not begun a transaction</li>
+<li><strong>THEN</strong> it reports that no transaction is active</li>
+</ul>
+<h4 id="scenario-disposing-the-transaction-handle">Scenario: Disposing the transaction handle</h4>
+<ul>
+<li><strong>WHEN</strong> a transaction handle is disposed after being committed or rolled back</li>
+<li><strong>THEN</strong> disposal completes without error</li>
+<li><strong>AND</strong> the unit of work reports that no transaction is active</li>
+</ul>
+<h4 id="scenario-disposing-an-uncommitted-transaction">Scenario: Disposing an uncommitted transaction</h4>
+<ul>
+<li><strong>WHEN</strong> a transaction handle is disposed without having been committed or rolled back</li>
+<li><strong>THEN</strong> the transaction is rolled back and no writes made within it are persisted</li>
+</ul>
+<h3 id="requirement-commands-execute-inside-a-single-atomic-boundary">Requirement: Commands execute inside a single atomic boundary</h3>
+<p>Command handling SHALL run inside one transaction that is committed only when the command produces a successful result. A failed result SHALL roll the transaction back, and an exception SHALL roll it back and propagate unchanged.</p>
+<h4 id="scenario-successful-command-commits-once">Scenario: Successful command commits once</h4>
+<ul>
+<li><strong>WHEN</strong> a command completes with a successful result</li>
+<li><strong>THEN</strong> the transaction is committed exactly once</li>
+<li><strong>AND</strong> no rollback occurs</li>
+</ul>
+<h4 id="scenario-failed-result-rolls-back">Scenario: Failed result rolls back</h4>
+<ul>
+<li><strong>WHEN</strong> a command completes with a failed result</li>
+<li><strong>THEN</strong> the transaction is rolled back</li>
+<li><strong>AND</strong> the failed result is returned to the caller unchanged</li>
+</ul>
+<h4 id="scenario-exception-rolls-back-and-propagates">Scenario: Exception rolls back and propagates</h4>
+<ul>
+<li><strong>WHEN</strong> an exception is thrown while handling a command</li>
+<li><strong>THEN</strong> the transaction is rolled back</li>
+<li><strong>AND</strong> the original exception propagates to the caller</li>
+</ul>
+<h4 id="scenario-partial-writes-are-never-persisted">Scenario: Partial writes are never persisted</h4>
+<ul>
+<li><strong>WHEN</strong> a command writes one aggregate, persists it, then fails while writing a second aggregate</li>
+<li><strong>THEN</strong> no rows written by that command are persisted</li>
+</ul>
+<h4 id="scenario-typed-command-results">Scenario: Typed command results</h4>
+<ul>
+<li><strong>WHEN</strong> a command that returns a typed result completes successfully</li>
+<li><strong>THEN</strong> the transaction is committed and the typed value is returned unchanged</li>
+</ul>
+<h3 id="requirement-one-physical-transaction-per-request">Requirement: One physical transaction per request</h3>
+<p>Only one physical transaction SHALL exist at a time for a given unit of work. Beginning a transaction while one is already active SHALL return a nested handle that does not commit or roll back the physical transaction. Rolling back a nested handle SHALL mark the outermost transaction rollback-only; committing a rollback-only outermost transaction SHALL fail and roll back instead.</p>
+<h4 id="scenario-nested-begin-does-not-open-a-second-physical-transaction">Scenario: Nested begin does not open a second physical transaction</h4>
+<ul>
+<li><strong>WHEN</strong> a transaction is begun while another is already active</li>
+<li><strong>THEN</strong> no second physical transaction is opened</li>
+<li><strong>AND</strong> the returned handle's commit has no effect on the outermost transaction</li>
+</ul>
+<h4 id="scenario-command-dispatched-from-inside-an-active-transaction">Scenario: Command dispatched from inside an active transaction</h4>
+<ul>
+<li><strong>WHEN</strong> a command is handled while a transaction is already active</li>
+<li><strong>THEN</strong> the command executes within the existing transaction</li>
+<li><strong>AND</strong> that transaction is neither committed nor rolled back on the command's behalf</li>
+</ul>
+<h4 id="scenario-nested-rollback-poisons-the-outermost-transaction">Scenario: Nested rollback poisons the outermost transaction</h4>
+<ul>
+<li><strong>WHEN</strong> a nested transaction handle is rolled back</li>
+<li><strong>AND</strong> the outermost transaction is subsequently committed</li>
+<li><strong>THEN</strong> the commit fails with an error</li>
+<li><strong>AND</strong> the transaction is rolled back so that no writes are persisted</li>
+</ul>
+<h3 id="requirement-queries-do-not-open-transactions">Requirement: Queries do not open transactions</h3>
+<p>Query handling SHALL NOT open a transaction. A query that needs a multi-statement consistent read SHALL declare that explicitly at the call site.</p>
+<h4 id="scenario-query-executes-without-a-transaction">Scenario: Query executes without a transaction</h4>
+<ul>
+<li><strong>WHEN</strong> a query is handled</li>
+<li><strong>THEN</strong> no transaction is opened for it</li>
+</ul>
+<h3 id="requirement-commit-and-rollback-are-not-cancellable">Requirement: Commit and rollback are not cancellable</h3>
+<p>Committing or rolling back a transaction SHALL ignore the request's cancellation token, because cancelling mid-commit would leave the transaction in an indeterminate state.</p>
+<h4 id="scenario-cancellation-requested-before-commit">Scenario: Cancellation requested before commit</h4>
+<ul>
+<li><strong>WHEN</strong> the request's cancellation token is already cancelled and the command produced a successful result</li>
+<li><strong>THEN</strong> the commit still runs to completion and the writes are persisted</li>
+</ul>
+<h4 id="scenario-cancellation-requested-before-rollback">Scenario: Cancellation requested before rollback</h4>
+<ul>
+<li><strong>WHEN</strong> the request's cancellation token is already cancelled and the command failed</li>
+<li><strong>THEN</strong> the rollback still runs to completion</li>
+</ul>
+<h3 id="requirement-domain-event-handler-writes-join-the-command-transaction">Requirement: Domain event handler writes join the command transaction</h3>
+<p>Database writes performed by domain event handlers dispatched during a command SHALL be part of that command's transaction, and SHALL be reverted when the transaction is rolled back. The transactional guarantee — and its limit, that non-database side effects such as email or outbound HTTP are not covered — SHALL be documented on the domain event handler contract.</p>
+<h4 id="scenario-domain-event-handler-write-is-committed-with-the-command">Scenario: Domain event handler write is committed with the command</h4>
+<ul>
+<li><strong>WHEN</strong> a command succeeds and a domain event handler wrote to the database during its dispatch</li>
+<li><strong>THEN</strong> both the command's writes and the handler's writes are persisted</li>
+</ul>
+<h4 id="scenario-domain-event-handler-write-is-reverted-on-rollback">Scenario: Domain event handler write is reverted on rollback</h4>
+<ul>
+<li><strong>WHEN</strong> a domain event handler writes to the database and the command's transaction is subsequently rolled back</li>
+<li><strong>THEN</strong> the handler's writes are not persisted</li>
+</ul>
+<h3 id="requirement-configurable-isolation-level">Requirement: Configurable isolation level</h3>
+<p>The isolation level used for command transactions SHALL be configurable, defaulting to read-committed.</p>
+<h4 id="scenario-default-isolation-level">Scenario: Default isolation level</h4>
+<ul>
+<li><strong>WHEN</strong> no isolation level is configured</li>
+<li><strong>THEN</strong> transactions are started with the read-committed isolation level</li>
+</ul>
+<h4 id="scenario-configured-isolation-level">Scenario: Configured isolation level</h4>
+<ul>
+<li><strong>WHEN</strong> an isolation level is configured</li>
+<li><strong>THEN</strong> transactions are started with the configured isolation level</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/explicit-transactions/specs/explicit-transactions/spec.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

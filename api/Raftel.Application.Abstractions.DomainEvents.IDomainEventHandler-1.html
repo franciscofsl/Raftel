@@ -89,7 +89,7 @@
 
 
   <h1 id="Raftel_Application_Abstractions_DomainEvents_IDomainEventHandler_1" data-uid="Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1" class="text-break">
-Interface IDomainEventHandler&lt;TEvent&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/DomainEvents/IDomainEventHandler.cs/#L9"><i class="bi bi-code-slash"></i></a>
+Interface IDomainEventHandler&lt;TEvent&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/DomainEvents/IDomainEventHandler.cs/#L23"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -121,6 +121,19 @@ Interface IDomainEventHandler&lt;TEvent&gt;  <a class="header-action link-second
 
 
 
+  <h2 id="Raftel_Application_Abstractions_DomainEvents_IDomainEventHandler_1_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>Dispatch happens from <code>SavedChanges</code>/<code>SavedChangesAsync</code>, after the <code>SaveChanges</code>
+call that raised the event has flushed. If the command pipeline has <code>TransactionMiddleware</code>
+registered, that <code>SaveChanges</code> call runs inside the command's still-open transaction, so any
+database write this handler performs (via a repository, followed by its own
+<a class="xref" href="Raftel.Application.IUnitOfWork.html#Raftel_Application_IUnitOfWork_CommitAsync_System_Threading_CancellationToken_">CommitAsync(CancellationToken)</a>) joins that same transaction: it is rolled back together
+with the rest of the command if the command later fails, and persists only once the command's
+transaction commits. Without <code>TransactionMiddleware</code> registered, such a write lands in its
+own separate, already-committed transaction instead.
+This guarantee covers database writes only. Non-database side effects performed here - sending
+an email, calling an external HTTP API - are not transactional and are not rolled back if the
+command subsequently fails.</p>
+</div>
 
 
   <h2 class="section" id="methods">Methods
@@ -131,10 +144,11 @@ Interface IDomainEventHandler&lt;TEvent&gt;  <a class="header-action link-second
 
   <h3 id="Raftel_Application_Abstractions_DomainEvents_IDomainEventHandler_1_HandleAsync__0_System_Threading_CancellationToken_" data-uid="Raftel.Application.Abstractions.DomainEvents.IDomainEventHandler`1.HandleAsync(`0,System.Threading.CancellationToken)">
   HandleAsync(TEvent, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/DomainEvents/IDomainEventHandler.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/DomainEvents/IDomainEventHandler.cs/#L30"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Handles the domain event.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -144,9 +158,11 @@ Interface IDomainEventHandler&lt;TEvent&gt;  <a class="header-action link-second
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>domainEvent</code> <span class="xref">TEvent</span></dt>
-    <dd></dd>
+    <dd><p>The domain event instance.</p>
+</dd>
     <dt><code>cancellationToken</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
-    <dd></dd>
+    <dd><p>A token to monitor for cancellation requests.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
@@ -169,7 +185,7 @@ Interface IDomainEventHandler&lt;TEvent&gt;  <a class="header-action link-second
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/DomainEvents/IDomainEventHandler.cs/#L9" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Abstractions/DomainEvents/IDomainEventHandler.cs/#L23" class="edit-link">Edit this page</a>
         </div>
 
 

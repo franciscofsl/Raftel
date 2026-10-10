@@ -154,8 +154,8 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
 
   <a id="Raftel_Infrastructure_DependencyInjection_AddRaftelData_" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData*"></a>
 
-  <h3 id="Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_System_Action_Raftel_Infrastructure_Data_Auditing_AuditOptions__" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions})">
-  AddRaftelData&lt;TDbContext&gt;(IServiceCollection, IConfiguration, string, Action&lt;AuditOptions&gt;?)
+  <h3 id="Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_System_Action_Raftel_Infrastructure_Data_Auditing_AuditOptions__System_Action_Raftel_Application_TransactionOptions__" data-uid="Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions},System.Action{Raftel.Application.TransactionOptions})">
+  AddRaftelData&lt;TDbContext&gt;(IServiceCollection, IConfiguration, string, Action&lt;AuditOptions&gt;?, Action&lt;TransactionOptions&gt;?)
   <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Infrastructure/DependencyInjection.cs/#L33"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -163,7 +163,7 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IServiceCollection AddRaftelData&lt;TDbContext&gt;(this IServiceCollection services, IConfiguration configuration, string connectionStringName = &quot;Default&quot;, Action&lt;AuditOptions&gt;? configureAudit = null) where TDbContext : RaftelDbContext&lt;TDbContext&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public static IServiceCollection AddRaftelData&lt;TDbContext&gt;(this IServiceCollection services, IConfiguration configuration, string connectionStringName = &quot;Default&quot;, Action&lt;AuditOptions&gt;? configureAudit = null, Action&lt;TransactionOptions&gt;? configureTransaction = null) where TDbContext : RaftelDbContext&lt;TDbContext&gt;</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -175,6 +175,8 @@ Class DependencyInjection  <a class="header-action link-secondary" title="View s
     <dt><code>connectionStringName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
     <dt><code>configureAudit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Raftel.Infrastructure.Data.Auditing.AuditOptions.html">AuditOptions</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>configureTransaction</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Raftel.Application.TransactionOptions.html">TransactionOptions</a>&gt;</dt>
     <dd></dd>
   </dl>
 

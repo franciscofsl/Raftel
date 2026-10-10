@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/explicit-transactions/proposal.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="why">Why</h2>
+<p><code>UnitOfWorkMiddleware</code> commits with <code>SaveChanges</code>, not with an explicit transaction. EF Core wraps a single <code>SaveChanges</code> in its own implicit transaction, so the trivial case works, but atomicity is lost the moment a request produces more than one <code>SaveChanges</code>: a handler that commits mid-way to obtain a generated id and then keeps mutating, a domain event handler that writes to the database (dispatch happens in <code>SavedChanges</code>, i.e. after the command's commit), or the audit store persisting separately. There is no rollback at all, so a failure after an intermediate commit leaves the system in an inconsistent state.</p>
+<h2 id="what-changes">What Changes</h2>
+<ul>
+<li>Add <code>ITransaction</code> to <code>Raftel.Application</code> — an EF-free abstraction with <code>CommitAsync</code>, <code>RollbackAsync</code> and <code>IAsyncDisposable</code>.</li>
+<li>Extend <code>IUnitOfWork</code> with <code>BeginTransactionAsync(CancellationToken)</code> and <code>HasActiveTransaction</code>. Additive: existing <code>CommitAsync</code> signature is unchanged.</li>
+<li>Add <code>TransactionMiddleware&lt;TRequest&gt;</code> and <code>TransactionMiddleware&lt;TRequest, TResult&gt;</code> — command-only middleware sitting outside <code>UnitOfWorkMiddleware</code>, which opens a transaction, commits it on a successful <code>Result</code> and rolls it back on a failed <code>Result</code> or an exception (exception rethrown).</li>
+<li>One physical transaction per request: a nested <code>BeginTransactionAsync</code> returns a no-op wrapper whose <code>RollbackAsync</code> marks the root transaction rollback-only. A rollback-only root refuses to commit and rolls back instead.</li>
+<li>Commit and rollback always run with <code>CancellationToken.None</code> — consistent with the existing decision in the cancellation-token propagation change.</li>
+<li>Queries never open a transaction.</li>
+<li>Add <code>TransactionOptions</code> with a configurable <code>IsolationLevel</code> (default: the provider's, <code>ReadCommitted</code>).</li>
+<li>Document the transactional guarantee offered to <code>IDomainEventHandler</code> implementations.</li>
+</ul>
+<p>Not breaking: all additions are additive and the middleware is opt-in at registration time, like <code>UnitOfWorkMiddleware</code>.</p>
+<h2 id="capabilities">Capabilities</h2>
+<h3 id="new-capabilities">New Capabilities</h3>
+<ul>
+<li><code>explicit-transactions</code>: request-scoped atomic boundary for commands — transaction lifecycle on <code>IUnitOfWork</code>, nesting rules, middleware behaviour on success/failure/exception, isolation level configuration, and the guarantee extended to domain event handlers.</li>
+</ul>
+<h3 id="modified-capabilities">Modified Capabilities</h3>
+<!-- None: openspec/specs/ has no existing capability whose requirements change. -->
+<h2 id="impact">Impact</h2>
+<ul>
+<li><code>src/Raftel.Application</code>: new <code>ITransaction.cs</code>, <code>TransactionOptions.cs</code>, <code>Middlewares/TransactionMiddleware.cs</code>; modified <code>IUnitOfWork.cs</code>; XML doc on <code>IDomainEventHandler</code>.</li>
+<li><code>src/Raftel.Infrastructure</code>: new <code>Data/RaftelTransaction.cs</code>, <code>Data/NestedTransaction.cs</code>; <code>Data/RaftelDbContext.cs</code> implements the new <code>IUnitOfWork</code> members; <code>DependencyInjection.cs</code> binds <code>TransactionOptions</code>.</li>
+<li><code>demo/Raftel.Api.FunctionalTests.DemoApi/Program.cs</code>: register the middleware ahead of <code>UnitOfWorkMiddleware</code>.</li>
+<li>Behaviour change for existing apps that register the new middleware: domain event handler writes now participate in the command transaction. External side effects (email, HTTP) remain unprotected — that is the outbox change (backlog 07).</li>
+<li>Tests: unit (<code>Raftel.Application.UnitTests</code>), infrastructure (<code>Raftel.Infrastructure.Tests</code>, Testcontainers SQL Server + PostgreSQL) and integration (<code>Raftel.Application.IntegrationTests</code>).</li>
+<li>Tracks GitHub issue #129 / <code>docs/backlog/05-transacciones-explicitas.md</code>.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/explicit-transactions/proposal.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

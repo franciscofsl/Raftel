@@ -115,6 +115,19 @@ values, so credentials or other sensitive request payloads never reach a log sin
 </dd>
     </dl>
     <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Application.Middlewares.TransactionMiddleware-1.html">TransactionMiddleware&lt;TRequest&gt;</a></dt>
+      <dd><p>Middleware that wraps command handling in a single explicit transaction: committed when the
+result succeeds, rolled back when it fails or the handler throws.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Raftel.Application.Middlewares.TransactionMiddleware-2.html">TransactionMiddleware&lt;TRequest, TResult&gt;</a></dt>
+      <dd><p>Middleware that wraps command handling in a single explicit transaction, for commands that
+return a typed result: committed when the result succeeds, rolled back when it fails or the
+handler throws.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
       <dt><a class="xref" href="Raftel.Application.Middlewares.UnitOfWorkMiddleware-1.html">UnitOfWorkMiddleware&lt;TRequest&gt;</a></dt>
       <dd><p>Middleware that ensures a unit of work is committed
 only if the preceding operation was successful.</p>

@@ -2585,12 +2585,57 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.IRaftelApplicationBuilder.RegisterServicesFromAssembly
   nameWithType: IRaftelApplicationBuilder.RegisterServicesFromAssembly
+- uid: Raftel.Application.ITransaction
+  name: ITransaction
+  href: api/Raftel.Application.ITransaction.html
+  commentId: T:Raftel.Application.ITransaction
+  fullName: Raftel.Application.ITransaction
+  nameWithType: ITransaction
+- uid: Raftel.Application.ITransaction.CommitAsync(System.Threading.CancellationToken)
+  name: CommitAsync(CancellationToken)
+  href: api/Raftel.Application.ITransaction.html#Raftel_Application_ITransaction_CommitAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.ITransaction.CommitAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Application.ITransaction.CommitAsync(System.Threading.CancellationToken)
+  nameWithType: ITransaction.CommitAsync(CancellationToken)
+- uid: Raftel.Application.ITransaction.CommitAsync*
+  name: CommitAsync
+  href: api/Raftel.Application.ITransaction.html#Raftel_Application_ITransaction_CommitAsync_
+  commentId: Overload:Raftel.Application.ITransaction.CommitAsync
+  isSpec: "True"
+  fullName: Raftel.Application.ITransaction.CommitAsync
+  nameWithType: ITransaction.CommitAsync
+- uid: Raftel.Application.ITransaction.RollbackAsync(System.Threading.CancellationToken)
+  name: RollbackAsync(CancellationToken)
+  href: api/Raftel.Application.ITransaction.html#Raftel_Application_ITransaction_RollbackAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.ITransaction.RollbackAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Application.ITransaction.RollbackAsync(System.Threading.CancellationToken)
+  nameWithType: ITransaction.RollbackAsync(CancellationToken)
+- uid: Raftel.Application.ITransaction.RollbackAsync*
+  name: RollbackAsync
+  href: api/Raftel.Application.ITransaction.html#Raftel_Application_ITransaction_RollbackAsync_
+  commentId: Overload:Raftel.Application.ITransaction.RollbackAsync
+  isSpec: "True"
+  fullName: Raftel.Application.ITransaction.RollbackAsync
+  nameWithType: ITransaction.RollbackAsync
 - uid: Raftel.Application.IUnitOfWork
   name: IUnitOfWork
   href: api/Raftel.Application.IUnitOfWork.html
   commentId: T:Raftel.Application.IUnitOfWork
   fullName: Raftel.Application.IUnitOfWork
   nameWithType: IUnitOfWork
+- uid: Raftel.Application.IUnitOfWork.BeginTransactionAsync(System.Threading.CancellationToken)
+  name: BeginTransactionAsync(CancellationToken)
+  href: api/Raftel.Application.IUnitOfWork.html#Raftel_Application_IUnitOfWork_BeginTransactionAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.IUnitOfWork.BeginTransactionAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Application.IUnitOfWork.BeginTransactionAsync(System.Threading.CancellationToken)
+  nameWithType: IUnitOfWork.BeginTransactionAsync(CancellationToken)
+- uid: Raftel.Application.IUnitOfWork.BeginTransactionAsync*
+  name: BeginTransactionAsync
+  href: api/Raftel.Application.IUnitOfWork.html#Raftel_Application_IUnitOfWork_BeginTransactionAsync_
+  commentId: Overload:Raftel.Application.IUnitOfWork.BeginTransactionAsync
+  isSpec: "True"
+  fullName: Raftel.Application.IUnitOfWork.BeginTransactionAsync
+  nameWithType: IUnitOfWork.BeginTransactionAsync
 - uid: Raftel.Application.IUnitOfWork.CommitAsync(System.Threading.CancellationToken)
   name: CommitAsync(CancellationToken)
   href: api/Raftel.Application.IUnitOfWork.html#Raftel_Application_IUnitOfWork_CommitAsync_System_Threading_CancellationToken_
@@ -2604,6 +2649,19 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.IUnitOfWork.CommitAsync
   nameWithType: IUnitOfWork.CommitAsync
+- uid: Raftel.Application.IUnitOfWork.HasActiveTransaction
+  name: HasActiveTransaction
+  href: api/Raftel.Application.IUnitOfWork.html#Raftel_Application_IUnitOfWork_HasActiveTransaction
+  commentId: P:Raftel.Application.IUnitOfWork.HasActiveTransaction
+  fullName: Raftel.Application.IUnitOfWork.HasActiveTransaction
+  nameWithType: IUnitOfWork.HasActiveTransaction
+- uid: Raftel.Application.IUnitOfWork.HasActiveTransaction*
+  name: HasActiveTransaction
+  href: api/Raftel.Application.IUnitOfWork.html#Raftel_Application_IUnitOfWork_HasActiveTransaction_
+  commentId: Overload:Raftel.Application.IUnitOfWork.HasActiveTransaction
+  isSpec: "True"
+  fullName: Raftel.Application.IUnitOfWork.HasActiveTransaction
+  nameWithType: IUnitOfWork.HasActiveTransaction
 - uid: Raftel.Application.Middlewares
   name: Raftel.Application.Middlewares
   href: api/Raftel.Application.Middlewares.html
@@ -2802,6 +2860,98 @@ references:
   fullName.vb: Raftel.Application.Middlewares.PermissionAuthorizationMiddleware(Of TRequest, TResponse).HandleAsync
   nameWithType: PermissionAuthorizationMiddleware<TRequest, TResponse>.HandleAsync
   nameWithType.vb: PermissionAuthorizationMiddleware(Of TRequest, TResponse).HandleAsync
+- uid: Raftel.Application.Middlewares.TransactionMiddleware`1
+  name: TransactionMiddleware<TRequest>
+  href: api/Raftel.Application.Middlewares.TransactionMiddleware-1.html
+  commentId: T:Raftel.Application.Middlewares.TransactionMiddleware`1
+  name.vb: TransactionMiddleware(Of TRequest)
+  fullName: Raftel.Application.Middlewares.TransactionMiddleware<TRequest>
+  fullName.vb: Raftel.Application.Middlewares.TransactionMiddleware(Of TRequest)
+  nameWithType: TransactionMiddleware<TRequest>
+  nameWithType.vb: TransactionMiddleware(Of TRequest)
+- uid: Raftel.Application.Middlewares.TransactionMiddleware`1.#ctor(Raftel.Application.IUnitOfWork)
+  name: TransactionMiddleware(IUnitOfWork)
+  href: api/Raftel.Application.Middlewares.TransactionMiddleware-1.html#Raftel_Application_Middlewares_TransactionMiddleware_1__ctor_Raftel_Application_IUnitOfWork_
+  commentId: M:Raftel.Application.Middlewares.TransactionMiddleware`1.#ctor(Raftel.Application.IUnitOfWork)
+  name.vb: New(IUnitOfWork)
+  fullName: Raftel.Application.Middlewares.TransactionMiddleware<TRequest>.TransactionMiddleware(Raftel.Application.IUnitOfWork)
+  fullName.vb: Raftel.Application.Middlewares.TransactionMiddleware(Of TRequest).New(Raftel.Application.IUnitOfWork)
+  nameWithType: TransactionMiddleware<TRequest>.TransactionMiddleware(IUnitOfWork)
+  nameWithType.vb: TransactionMiddleware(Of TRequest).New(IUnitOfWork)
+- uid: Raftel.Application.Middlewares.TransactionMiddleware`1.#ctor*
+  name: TransactionMiddleware
+  href: api/Raftel.Application.Middlewares.TransactionMiddleware-1.html#Raftel_Application_Middlewares_TransactionMiddleware_1__ctor_
+  commentId: Overload:Raftel.Application.Middlewares.TransactionMiddleware`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Middlewares.TransactionMiddleware<TRequest>.TransactionMiddleware
+  fullName.vb: Raftel.Application.Middlewares.TransactionMiddleware(Of TRequest).New
+  nameWithType: TransactionMiddleware<TRequest>.TransactionMiddleware
+  nameWithType.vb: TransactionMiddleware(Of TRequest).New
+- uid: Raftel.Application.Middlewares.TransactionMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result},System.Threading.CancellationToken)
+  name: HandleAsync(TRequest, RequestHandlerDelegate<Result>, CancellationToken)
+  href: api/Raftel.Application.Middlewares.TransactionMiddleware-1.html#Raftel_Application_Middlewares_TransactionMiddleware_1_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate_Raftel_Domain_Abstractions_Result__System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Middlewares.TransactionMiddleware`1.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result},System.Threading.CancellationToken)
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of Result), CancellationToken)
+  fullName: Raftel.Application.Middlewares.TransactionMiddleware<TRequest>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<Raftel.Domain.Abstractions.Result>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Middlewares.TransactionMiddleware(Of TRequest).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of Raftel.Domain.Abstractions.Result), System.Threading.CancellationToken)
+  nameWithType: TransactionMiddleware<TRequest>.HandleAsync(TRequest, RequestHandlerDelegate<Result>, CancellationToken)
+  nameWithType.vb: TransactionMiddleware(Of TRequest).HandleAsync(TRequest, RequestHandlerDelegate(Of Result), CancellationToken)
+- uid: Raftel.Application.Middlewares.TransactionMiddleware`1.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Middlewares.TransactionMiddleware-1.html#Raftel_Application_Middlewares_TransactionMiddleware_1_HandleAsync_
+  commentId: Overload:Raftel.Application.Middlewares.TransactionMiddleware`1.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Middlewares.TransactionMiddleware<TRequest>.HandleAsync
+  fullName.vb: Raftel.Application.Middlewares.TransactionMiddleware(Of TRequest).HandleAsync
+  nameWithType: TransactionMiddleware<TRequest>.HandleAsync
+  nameWithType.vb: TransactionMiddleware(Of TRequest).HandleAsync
+- uid: Raftel.Application.Middlewares.TransactionMiddleware`2
+  name: TransactionMiddleware<TRequest, TResult>
+  href: api/Raftel.Application.Middlewares.TransactionMiddleware-2.html
+  commentId: T:Raftel.Application.Middlewares.TransactionMiddleware`2
+  name.vb: TransactionMiddleware(Of TRequest, TResult)
+  fullName: Raftel.Application.Middlewares.TransactionMiddleware<TRequest, TResult>
+  fullName.vb: Raftel.Application.Middlewares.TransactionMiddleware(Of TRequest, TResult)
+  nameWithType: TransactionMiddleware<TRequest, TResult>
+  nameWithType.vb: TransactionMiddleware(Of TRequest, TResult)
+- uid: Raftel.Application.Middlewares.TransactionMiddleware`2.#ctor(Raftel.Application.IUnitOfWork)
+  name: TransactionMiddleware(IUnitOfWork)
+  href: api/Raftel.Application.Middlewares.TransactionMiddleware-2.html#Raftel_Application_Middlewares_TransactionMiddleware_2__ctor_Raftel_Application_IUnitOfWork_
+  commentId: M:Raftel.Application.Middlewares.TransactionMiddleware`2.#ctor(Raftel.Application.IUnitOfWork)
+  name.vb: New(IUnitOfWork)
+  fullName: Raftel.Application.Middlewares.TransactionMiddleware<TRequest, TResult>.TransactionMiddleware(Raftel.Application.IUnitOfWork)
+  fullName.vb: Raftel.Application.Middlewares.TransactionMiddleware(Of TRequest, TResult).New(Raftel.Application.IUnitOfWork)
+  nameWithType: TransactionMiddleware<TRequest, TResult>.TransactionMiddleware(IUnitOfWork)
+  nameWithType.vb: TransactionMiddleware(Of TRequest, TResult).New(IUnitOfWork)
+- uid: Raftel.Application.Middlewares.TransactionMiddleware`2.#ctor*
+  name: TransactionMiddleware
+  href: api/Raftel.Application.Middlewares.TransactionMiddleware-2.html#Raftel_Application_Middlewares_TransactionMiddleware_2__ctor_
+  commentId: Overload:Raftel.Application.Middlewares.TransactionMiddleware`2.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Application.Middlewares.TransactionMiddleware<TRequest, TResult>.TransactionMiddleware
+  fullName.vb: Raftel.Application.Middlewares.TransactionMiddleware(Of TRequest, TResult).New
+  nameWithType: TransactionMiddleware<TRequest, TResult>.TransactionMiddleware
+  nameWithType.vb: TransactionMiddleware(Of TRequest, TResult).New
+- uid: Raftel.Application.Middlewares.TransactionMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result{`1}},System.Threading.CancellationToken)
+  name: HandleAsync(TRequest, RequestHandlerDelegate<Result<TResult>>, CancellationToken)
+  href: api/Raftel.Application.Middlewares.TransactionMiddleware-2.html#Raftel_Application_Middlewares_TransactionMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate_Raftel_Domain_Abstractions_Result__1___System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Middlewares.TransactionMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{Raftel.Domain.Abstractions.Result{`1}},System.Threading.CancellationToken)
+  name.vb: HandleAsync(TRequest, RequestHandlerDelegate(Of Result(Of TResult)), CancellationToken)
+  fullName: Raftel.Application.Middlewares.TransactionMiddleware<TRequest, TResult>.HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate<Raftel.Domain.Abstractions.Result<TResult>>, System.Threading.CancellationToken)
+  fullName.vb: Raftel.Application.Middlewares.TransactionMiddleware(Of TRequest, TResult).HandleAsync(TRequest, Raftel.Application.Abstractions.RequestHandlerDelegate(Of Raftel.Domain.Abstractions.Result(Of TResult)), System.Threading.CancellationToken)
+  nameWithType: TransactionMiddleware<TRequest, TResult>.HandleAsync(TRequest, RequestHandlerDelegate<Result<TResult>>, CancellationToken)
+  nameWithType.vb: TransactionMiddleware(Of TRequest, TResult).HandleAsync(TRequest, RequestHandlerDelegate(Of Result(Of TResult)), CancellationToken)
+- uid: Raftel.Application.Middlewares.TransactionMiddleware`2.HandleAsync*
+  name: HandleAsync
+  href: api/Raftel.Application.Middlewares.TransactionMiddleware-2.html#Raftel_Application_Middlewares_TransactionMiddleware_2_HandleAsync_
+  commentId: Overload:Raftel.Application.Middlewares.TransactionMiddleware`2.HandleAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Middlewares.TransactionMiddleware<TRequest, TResult>.HandleAsync
+  fullName.vb: Raftel.Application.Middlewares.TransactionMiddleware(Of TRequest, TResult).HandleAsync
+  nameWithType: TransactionMiddleware<TRequest, TResult>.HandleAsync
+  nameWithType.vb: TransactionMiddleware(Of TRequest, TResult).HandleAsync
 - uid: Raftel.Application.Middlewares.UnitOfWorkMiddleware`1
   name: UnitOfWorkMiddleware<TRequest>
   href: api/Raftel.Application.Middlewares.UnitOfWorkMiddleware-1.html
@@ -3287,6 +3437,25 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.RaftelApplicationBuilder.RegisterServicesFromAssembly
   nameWithType: RaftelApplicationBuilder.RegisterServicesFromAssembly
+- uid: Raftel.Application.TransactionOptions
+  name: TransactionOptions
+  href: api/Raftel.Application.TransactionOptions.html
+  commentId: T:Raftel.Application.TransactionOptions
+  fullName: Raftel.Application.TransactionOptions
+  nameWithType: TransactionOptions
+- uid: Raftel.Application.TransactionOptions.IsolationLevel
+  name: IsolationLevel
+  href: api/Raftel.Application.TransactionOptions.html#Raftel_Application_TransactionOptions_IsolationLevel
+  commentId: P:Raftel.Application.TransactionOptions.IsolationLevel
+  fullName: Raftel.Application.TransactionOptions.IsolationLevel
+  nameWithType: TransactionOptions.IsolationLevel
+- uid: Raftel.Application.TransactionOptions.IsolationLevel*
+  name: IsolationLevel
+  href: api/Raftel.Application.TransactionOptions.html#Raftel_Application_TransactionOptions_IsolationLevel_
+  commentId: Overload:Raftel.Application.TransactionOptions.IsolationLevel
+  isSpec: "True"
+  fullName: Raftel.Application.TransactionOptions.IsolationLevel
+  nameWithType: TransactionOptions.IsolationLevel
 - uid: Raftel.Domain.Abstractions
   name: Raftel.Domain.Abstractions
   href: api/Raftel.Domain.Abstractions.html
@@ -7258,6 +7427,15 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New(Microsoft.EntityFrameworkCore.DbContextOptions(Of TDbContext), Raftel.Infrastructure.Data.Filters.IDataFilter, Raftel.Application.Abstractions.Multitenancy.ICurrentTenant)
   nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter, ICurrentTenant)
   nameWithType.vb: RaftelDbContext(Of TDbContext).New(DbContextOptions(Of TDbContext), IDataFilter, ICurrentTenant)
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0},Raftel.Infrastructure.Data.Filters.IDataFilter,Raftel.Application.Abstractions.Multitenancy.ICurrentTenant,Raftel.Application.TransactionOptions)
+  name: RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter, ICurrentTenant, TransactionOptions)
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_Microsoft_EntityFrameworkCore_DbContextOptions__0__Raftel_Infrastructure_Data_Filters_IDataFilter_Raftel_Application_Abstractions_Multitenancy_ICurrentTenant_Raftel_Application_TransactionOptions_
+  commentId: M:Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{`0},Raftel.Infrastructure.Data.Filters.IDataFilter,Raftel.Application.Abstractions.Multitenancy.ICurrentTenant,Raftel.Application.TransactionOptions)
+  name.vb: New(DbContextOptions(Of TDbContext), IDataFilter, ICurrentTenant, TransactionOptions)
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.RaftelDbContext(Microsoft.EntityFrameworkCore.DbContextOptions<TDbContext>, Raftel.Infrastructure.Data.Filters.IDataFilter, Raftel.Application.Abstractions.Multitenancy.ICurrentTenant, Raftel.Application.TransactionOptions)
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).New(Microsoft.EntityFrameworkCore.DbContextOptions(Of TDbContext), Raftel.Infrastructure.Data.Filters.IDataFilter, Raftel.Application.Abstractions.Multitenancy.ICurrentTenant, Raftel.Application.TransactionOptions)
+  nameWithType: RaftelDbContext<TDbContext>.RaftelDbContext(DbContextOptions<TDbContext>, IDataFilter, ICurrentTenant, TransactionOptions)
+  nameWithType.vb: RaftelDbContext(Of TDbContext).New(DbContextOptions(Of TDbContext), IDataFilter, ICurrentTenant, TransactionOptions)
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.#ctor*
   name: RaftelDbContext
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1__ctor_
@@ -7285,6 +7463,23 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).AuditLog
   nameWithType: RaftelDbContext<TDbContext>.AuditLog
   nameWithType.vb: RaftelDbContext(Of TDbContext).AuditLog
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.BeginTransactionAsync(System.Threading.CancellationToken)
+  name: BeginTransactionAsync(CancellationToken)
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_BeginTransactionAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Data.RaftelDbContext`1.BeginTransactionAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.BeginTransactionAsync(System.Threading.CancellationToken)
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).BeginTransactionAsync(System.Threading.CancellationToken)
+  nameWithType: RaftelDbContext<TDbContext>.BeginTransactionAsync(CancellationToken)
+  nameWithType.vb: RaftelDbContext(Of TDbContext).BeginTransactionAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.BeginTransactionAsync*
+  name: BeginTransactionAsync
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_BeginTransactionAsync_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.BeginTransactionAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.BeginTransactionAsync
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).BeginTransactionAsync
+  nameWithType: RaftelDbContext<TDbContext>.BeginTransactionAsync
+  nameWithType.vb: RaftelDbContext(Of TDbContext).BeginTransactionAsync
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.CommitAsync(System.Threading.CancellationToken)
   name: CommitAsync(CancellationToken)
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_CommitAsync_System_Threading_CancellationToken_
@@ -7319,6 +7514,23 @@ references:
   fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).CurrentTenantId
   nameWithType: RaftelDbContext<TDbContext>.CurrentTenantId
   nameWithType.vb: RaftelDbContext(Of TDbContext).CurrentTenantId
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.HasActiveTransaction
+  name: HasActiveTransaction
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_HasActiveTransaction
+  commentId: P:Raftel.Infrastructure.Data.RaftelDbContext`1.HasActiveTransaction
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.HasActiveTransaction
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).HasActiveTransaction
+  nameWithType: RaftelDbContext<TDbContext>.HasActiveTransaction
+  nameWithType.vb: RaftelDbContext(Of TDbContext).HasActiveTransaction
+- uid: Raftel.Infrastructure.Data.RaftelDbContext`1.HasActiveTransaction*
+  name: HasActiveTransaction
+  href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_HasActiveTransaction_
+  commentId: Overload:Raftel.Infrastructure.Data.RaftelDbContext`1.HasActiveTransaction
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Data.RaftelDbContext<TDbContext>.HasActiveTransaction
+  fullName.vb: Raftel.Infrastructure.Data.RaftelDbContext(Of TDbContext).HasActiveTransaction
+  nameWithType: RaftelDbContext<TDbContext>.HasActiveTransaction
+  nameWithType.vb: RaftelDbContext(Of TDbContext).HasActiveTransaction
 - uid: Raftel.Infrastructure.Data.RaftelDbContext`1.IsSoftDeleteFilterEnabled
   name: IsSoftDeleteFilterEnabled
   href: api/Raftel.Infrastructure.Data.RaftelDbContext-1.html#Raftel_Infrastructure_Data_RaftelDbContext_1_IsSoftDeleteFilterEnabled
@@ -7493,15 +7705,15 @@ references:
   isSpec: "True"
   fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData
   nameWithType: DependencyInjection.AddRaftelData
-- uid: Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions})
-  name: AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?)
-  href: api/Raftel.Infrastructure.DependencyInjection.html#Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_System_Action_Raftel_Infrastructure_Data_Auditing_AuditOptions__
-  commentId: M:Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions})
-  name.vb: AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions))
-  fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData<TDbContext>(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, string, System.Action<Raftel.Infrastructure.Data.Auditing.AuditOptions>?)
-  fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String, System.Action(Of Raftel.Infrastructure.Data.Auditing.AuditOptions))
-  nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?)
-  nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions))
+- uid: Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions},System.Action{Raftel.Application.TransactionOptions})
+  name: AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?, Action<TransactionOptions>?)
+  href: api/Raftel.Infrastructure.DependencyInjection.html#Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_System_Action_Raftel_Infrastructure_Data_Auditing_AuditOptions__System_Action_Raftel_Application_TransactionOptions__
+  commentId: M:Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions},System.Action{Raftel.Application.TransactionOptions})
+  name.vb: AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions), Action(Of TransactionOptions))
+  fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData<TDbContext>(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, string, System.Action<Raftel.Infrastructure.Data.Auditing.AuditOptions>?, System.Action<Raftel.Application.TransactionOptions>?)
+  fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String, System.Action(Of Raftel.Infrastructure.Data.Auditing.AuditOptions), System.Action(Of Raftel.Application.TransactionOptions))
+  nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?, Action<TransactionOptions>?)
+  nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions), Action(Of TransactionOptions))
 - uid: Raftel.Infrastructure.Multitenancy.Middleware
   name: Raftel.Infrastructure.Multitenancy.Middleware
   href: api/Raftel.Infrastructure.Multitenancy.Middleware.html
