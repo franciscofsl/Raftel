@@ -34,10 +34,11 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration,
         string connectionStringName = "Default",
-        Action<AuditOptions>? configureAudit = null)
+        Action<AuditOptions>? configureAudit = null,
+        Action<TransactionOptions>? configureTransaction = null)
         where TDbContext : RaftelDbContext<TDbContext>
     {
-        services.AddDataAccess<TDbContext>(configuration, connectionStringName, configureAudit);
+        services.AddDataAccess<TDbContext>(configuration, connectionStringName, configureAudit, configureTransaction);
         services.AddAuthentication<TDbContext>();
 
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
@@ -52,7 +53,8 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration,
         string connectionStringName,
-        Action<AuditOptions>? configureAudit)
+        Action<AuditOptions>? configureAudit,
+        Action<TransactionOptions>? configureTransaction)
         where TDbContext : RaftelDbContext<TDbContext>
     {
         var connectionString = configuration.GetConnectionString(connectionStringName)
@@ -60,6 +62,10 @@ public static class DependencyInjection
                                    $"Connection string '{connectionStringName}' not found.");
 
         services.Configure<Data.DatabaseOptions>(configuration.GetSection("Database"));
+
+        var transactionOptions = new TransactionOptions();
+        configureTransaction?.Invoke(transactionOptions);
+        services.AddSingleton(transactionOptions);
 
         services.AddDbContext<TDbContext>((serviceProvider, options) =>
         {

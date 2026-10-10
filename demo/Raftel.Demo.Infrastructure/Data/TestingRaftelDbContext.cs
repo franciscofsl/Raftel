@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Raftel.Application;
 using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Demo.Domain.Pirates;
 using Raftel.Demo.Domain.Pirates.DevilFruits;
@@ -34,6 +35,15 @@ public class TestingRaftelDbContext
 
     public TestingRaftelDbContext(DbContextOptions<TestingRaftelDbContext> options, IDataFilter dataFilter, ICurrentTenant currentTenant)
         : base(options, dataFilter, currentTenant)
+    {
+    }
+
+    public TestingRaftelDbContext(
+        DbContextOptions<TestingRaftelDbContext> options,
+        IDataFilter dataFilter,
+        ICurrentTenant currentTenant,
+        TransactionOptions transactionOptions)
+        : base(options, dataFilter, currentTenant, transactionOptions)
     {
     }
 

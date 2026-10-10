@@ -23,6 +23,8 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
 {
     private readonly IDataFilter _dataFilter;
     private readonly ICurrentTenant _currentTenant;
+    private readonly TransactionOptions _transactionOptions;
+    private RaftelTransaction _activeTransaction;
 
     protected RaftelDbContext()
     {
@@ -43,6 +45,17 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
         _currentTenant = currentTenant;
     }
 
+    protected RaftelDbContext(
+        DbContextOptions<TDbContext> options,
+        IDataFilter dataFilter,
+        ICurrentTenant currentTenant,
+        TransactionOptions transactionOptions) : base(options)
+    {
+        _dataFilter = dataFilter;
+        _currentTenant = currentTenant;
+        _transactionOptions = transactionOptions;
+    }
+
     public DbSet<User> User { get; set; }
     public DbSet<Tenant> Tenant { get; set; }
     public DbSet<Role> Role { get; set; }
@@ -56,6 +69,21 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
     public Task CommitAsync(CancellationToken cancellationToken = default)
     {
         return base.SaveChangesAsync(cancellationToken);
+    }
+
+    public bool HasActiveTransaction => _activeTransaction is not null;
+
+    public async Task<ITransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        if (_activeTransaction is not null)
+        {
+            return new NestedTransaction(_activeTransaction);
+        }
+
+        var isolationLevel = (_transactionOptions ?? new TransactionOptions()).IsolationLevel;
+        var dbTransaction = await Database.BeginTransactionAsync(isolationLevel, cancellationToken);
+        _activeTransaction = new RaftelTransaction(dbTransaction, () => _activeTransaction = null);
+        return _activeTransaction;
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

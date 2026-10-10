@@ -13,7 +13,7 @@ WeatherForecast.cs / Controllers/WeatherForecastController.cs   ⚠️ ASP.NET t
 
 ## What It Demonstrates (use as template)
 
-- **Application registration**: `AddRaftelApplication(cfg => { RegisterServicesFromAssembly(...); AddGlobalMiddleware(typeof(LoggingMiddleware<,>)); AddGlobalMiddleware(typeof(ValidationMiddleware<,>)); AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>)); })`. `LoggingMiddleware<,>` must be registered **first** so it wraps every other global middleware.
+- **Application registration**: `AddRaftelApplication(cfg => { RegisterServicesFromAssembly(...); AddGlobalMiddleware(typeof(LoggingMiddleware<,>)); AddGlobalMiddleware(typeof(ValidationMiddleware<,>)); AddCommandMiddleware(typeof(TransactionMiddleware<>)); AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>)); })`. `LoggingMiddleware<,>` must be registered **first** so it wraps every other global middleware. `TransactionMiddleware<>`/`TransactionMiddleware<,>` must be registered **before** `UnitOfWorkMiddleware<>`/`UnitOfWorkMiddleware<,>` so the explicit transaction wraps the commit (and, through it, auditing and domain event dispatch).
 - **Infrastructure registration**: `AddSampleInfrastructure(connectionString)`.
 - **Endpoints**: `app.AddEndpointGroup(group => { group.AddQuery<...>(...); group.AddCommand<...>(...); })` — no controllers.
 - HTTP pipeline order: `UseCorrelationId()` → `UseRaftelExceptionHandling()` → `UseHttpsRedirection()` → `UseRouting()` → `UseTenantMiddleware()` → `UseAuthentication()` → `UseAuthorization()` → endpoints. `UseCorrelationId()` must come before `UseRaftelExceptionHandling()` so the correlation id is already in the logging scope when an exception gets logged.
