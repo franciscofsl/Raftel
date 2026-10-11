@@ -30,6 +30,8 @@ public sealed class Tenant : AggregateRoot<TenantId>
             return Result.Failure<Tenant>(codeResult.Error);
         }
 
-        return Result.Success(new Tenant(name, codeResult.Value, description));
+        var tenant = new Tenant(name, codeResult.Value, description);
+        tenant.RaiseDomainEvent(new TenantCreated(tenant.Id));
+        return Result.Success(tenant);
     }
 } 

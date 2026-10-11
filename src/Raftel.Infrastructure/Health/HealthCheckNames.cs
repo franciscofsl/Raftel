@@ -7,4 +7,5 @@ public static class HealthCheckNames
     public const string Startup = "startup";
     public const string Tenants = "tenants";
     public const string Outbox = "outbox";
+    public const string Seeding = "seeding";
 }

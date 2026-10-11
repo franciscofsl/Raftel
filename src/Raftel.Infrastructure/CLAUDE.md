@@ -11,7 +11,7 @@ Data/
     AuditStore.cs                    entity change log persistence
     ShadowPropertyNames.cs           shadow property names (TenantId, IsDeleted, audit...)
     DatabaseOptions / DatabaseProvider   SqlServer | PostgreSql
-    Configuration/                   IEntityTypeConfiguration per framework entity (User, Role, Tenant, Permission)
+    Configuration/                   IEntityTypeConfiguration per framework entity (User, Role, Tenant, Permission, PermissionDefinition)
     Filters/                         IDataFilter + ISoftDeleteFilter/ITenantFilter + QueryFilterExtensions
     Interceptors/                    AuditPropertiesInterceptor, TenantInterceptor, EntityChangesTrackerInterceptor, DomainEventsDispatchInterceptor
     Repositories/<Feature>/          UsersRepository, TenantsRepository, RolesRepository
@@ -21,6 +21,8 @@ Correlation/                         CorrelationContext (ICorrelationContext imp
 Health/                              DatabaseHealthCheck, PendingMigrationsHealthCheck, StartupHealthCheck(+StartupHostedService),
                                       TenantResolutionHealthCheck, OutboxHealthCheck, IDatabaseProbe(+DatabaseProbe<TDbContext>),
                                       HealthCheckNames, HealthDependencyInjection.AddRaftelHealthChecks(options)
+Seeding/                             SeedRunner (per-seeder scope + transaction), SeedHistory(+Store), SeedingState, DatabaseMigrator<T>,
+                                      HostSeedingExtensions.MigrateAndSeedAsync, Seeders/ (DefaultTenant, Permissions, DefaultRoles, AdminUser)
 DependencyInjection.cs               AddRaftelData<TDbContext>(configuration, connectionStringName)
 ```
 
@@ -34,7 +36,9 @@ DependencyInjection.cs               AddRaftelData<TDbContext>(configuration, co
 - **End-to-end multitenancy**: header `X-Tenant-Id` → `TenantMiddleware` → `ICurrentTenant` (AsyncLocal) → `TenantInterceptor` (writes) → query filter (reads).
 - **Auth**: ASP.NET Identity + OpenIddict (password flow + refresh token), self-hosted. Token endpoint at `/connect/token`.
 - **Multi-provider**: SQL Server and PostgreSQL selected via `DatabaseOptions.Provider`.
-- **Health checks**: `AddRaftelHealthChecks(options)` registers the mandatory `database`/`migrations`/`startup` checks (tagged `ready`) plus opt-in `tenants`/`outbox` checks; endpoint mapping lives in `Raftel.Api.Server/Health` (see `docs/health-checks.md`). `HealthOptions` and the `ready` tag live in `Raftel.Application.Abstractions.Health` — not here — so `Raftel.Api.Server` can read them without depending on `Raftel.Infrastructure` (the architecture tests forbid that dependency). Every check must honor its `CancellationToken` (so `HealthOptions.CheckTimeout` actually bounds it) and must never put an exception message, stack trace, or connection string into its `Description`/`Data` — catch internally and return `HealthCheckResult.Unhealthy("<safe text>")` instead; the real exception belongs in structured logs, not the health response body.
+- **Seeding**: `SeedRunner` runs each `IDataSeeder` in its **own DI scope and transaction** (a fresh scope matters: a failed seeder leaves entities in the change tracker). Global seeders run first, then each `ITenantDataSeeder` once per tenant under `ICurrentTenant.Change`. `RunForTenantAsync` runs in the *ambient* scope so it joins the caller's transaction (used by `TenantCreatedHandler`). Built-in seeders run in host context (no tenant). The administrator password is never defaulted or logged; outside Development a missing password/email fails the seeder. `MigrateAndSeedAsync` throws `SeedingFailedException` (not an `IStartupTask`: `StartupHostedService` swallows exceptions). See `docs/getting-started.md`.
+- **Role permissions** are persisted through the `Permission` child entity (`RoleConfiguration` maps `Role._permissionItems` with an `AutoInclude` one-to-many; `Permission` is hard-deleted, not soft-deleted, so a removed permission can be granted again). `PermissionDefinition` is the separate code-derived catalog.
+- **Health checks**: `AddRaftelHealthChecks(options)` registers the mandatory `database`/`migrations`/`startup`/`seeding` checks (tagged `ready`) plus opt-in `tenants`/`outbox` checks; endpoint mapping lives in `Raftel.Api.Server/Health` (see `docs/health-checks.md`). `HealthOptions` and the `ready` tag live in `Raftel.Application.Abstractions.Health` — not here — so `Raftel.Api.Server` can read them without depending on `Raftel.Infrastructure` (the architecture tests forbid that dependency). Every check must honor its `CancellationToken` (so `HealthOptions.CheckTimeout` actually bounds it) and must never put an exception message, stack trace, or connection string into its `Description`/`Data` — catch internally and return `HealthCheckResult.Unhealthy("<safe text>")` instead; the real exception belongs in structured logs, not the health response body.
 
 ## Conventions
 

@@ -3,6 +3,8 @@ using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.DomainEvents;
+using Raftel.Application.Abstractions.Seeding;
+using Raftel.Application.Authorization;
 using Raftel.Application.Commands;
 using Raftel.Application.Middlewares;
 using Raftel.Application.Queries;
@@ -22,6 +24,7 @@ public static class DependencyInjection
 
         RegisterHandlers(services, assemblies: builder.Assemblies);
         RegisterMiddlewares(services, builder);
+        RegisterPermissionSets(services, builder.Assemblies);
 
         services.AddSingleton(builder.PaginationOptions);
         services.AddSingleton(builder.AuthorizationOptions);
@@ -46,6 +49,7 @@ public static class DependencyInjection
             {
                 RegisterHandlers(services, type, handlerTypes);
                 RegisterValidators(services, type);
+                RegisterSeeders(services, type);
             }
         }
     }
@@ -64,6 +68,22 @@ public static class DependencyInjection
                 services.AddTransient(iface, type);
             }
         }
+    }
+
+    private static void RegisterSeeders(IServiceCollection services, Type type)
+    {
+        if (type.IsAbstract || type.IsInterface || !typeof(IDataSeeder).IsAssignableFrom(type))
+        {
+            return;
+        }
+
+        services.AddScoped(typeof(IDataSeeder), type);
+    }
+
+    private static void RegisterPermissionSets(IServiceCollection services, IEnumerable<Assembly> assemblies)
+    {
+        var scanned = assemblies.Append(typeof(PermissionSetAttribute).Assembly);
+        services.AddSingleton<IPermissionSetProvider>(new PermissionSetProvider(scanned));
     }
 
     private static void RegisterValidators(IServiceCollection services, Type type)

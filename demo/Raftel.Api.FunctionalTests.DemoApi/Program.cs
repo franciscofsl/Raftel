@@ -1,4 +1,4 @@
-using Raftel.Api.FunctionalTests.DemoApi;
+﻿using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.FunctionalTests.DemoApi.TestSupport;
 using Raftel.Api.Server.AutoEndpoints;
 using Raftel.Api.Server.Features.Tenants;
@@ -6,6 +6,7 @@ using Raftel.Api.Server.Features.Users;
 using Raftel.Api.Server.Health;
 using Raftel.Api.Server.Middlewares;
 using Raftel.Application;
+using Raftel.Application.Abstractions.Authentication;
 using Raftel.Application.Features.Users.RegisterUser;
 using Raftel.Application.Middlewares;
 using Raftel.Demo.Application.Pirates.CreatePirate;
@@ -18,6 +19,7 @@ using Raftel.Domain.Abstractions;
 using Raftel.Infrastructure;
 using Raftel.Infrastructure.Health;
 using Raftel.Infrastructure.Multitenancy.Middleware;
+using Raftel.Infrastructure.Seeding;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +42,8 @@ builder.Services.AddRaftelApplication(cfg =>
 });
 
 builder.Services.AddSampleInfrastructure(builder.Configuration.GetConnectionString("Default")!);
+builder.Services.Configure<SeedOptions>(builder.Configuration.GetSection(SeedOptions.SectionName));
+builder.Services.Configure<SeedOptions>(options => options.ApplyMigrationsOnStartup = true);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -114,6 +118,10 @@ app.MapGet("/api/test/error/{type}", (string type) => ErrorResults.ToProblem(typ
     _ => throw new NotSupportedException($"Unknown error type '{type}'")
 }));
 
+app.MapGet("/api/test/permissions/{permission}",
+    (string permission, ICurrentUser currentUser) => Results.Ok(currentUser.HasPermission(permission)))
+    .RequireAuthorization();
+
 app.MapPost("/api/test/database-failure/enable", (DatabaseFailureSwitch databaseFailureSwitch) =>
 {
     databaseFailureSwitch.Enable();
@@ -128,8 +136,7 @@ app.MapPost("/api/test/database-failure/disable", (DatabaseFailureSwitch databas
 
 app.MapRaftelHealthChecks();
 
-using var scope = app.Services.CreateScope();
-await SeedData.InitializeAsync(scope.ServiceProvider);
+await app.MigrateAndSeedAsync();
 
 app.Run();
 

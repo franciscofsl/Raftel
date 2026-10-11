@@ -6,7 +6,7 @@ Executable web host of the "Pirates" example app. It's the `Program.cs` that **w
 
 ```
 Program.cs        root composition: AddRaftelApplication + AddSampleInfrastructure + AddEndpointGroup(...)
-SeedData.cs       bootstrap data for test environment
+OpenIddictClientSeeder.cs   example consumer IDataSeeder: registers the `web-app` OAuth client (auto-discovered)
 GlobalUsings.cs   global usings
 WeatherForecast.cs / Controllers/WeatherForecastController.cs   ⚠️ ASP.NET template boilerplate — removable, adds no value
 ```
@@ -15,6 +15,7 @@ WeatherForecast.cs / Controllers/WeatherForecastController.cs   ⚠️ ASP.NET t
 
 - **Application registration**: `AddRaftelApplication(cfg => { RegisterServicesFromAssembly(...); AddGlobalMiddleware(typeof(LoggingMiddleware<,>)); AddGlobalMiddleware(typeof(ValidationMiddleware<,>)); AddCommandMiddleware(typeof(TransactionMiddleware<>)); AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>)); })`. `LoggingMiddleware<,>` must be registered **first** so it wraps every other global middleware. `TransactionMiddleware<>`/`TransactionMiddleware<,>` must be registered **before** `UnitOfWorkMiddleware<>`/`UnitOfWorkMiddleware<,>` so the explicit transaction wraps the commit (and, through it, auditing and domain event dispatch).
 - **Infrastructure registration**: `AddSampleInfrastructure(connectionString)`.
+- **Startup seeding**: `await app.MigrateAndSeedAsync()` before `app.Run()`; `Raftel:Seed` settings come from configuration (the functional-test factory injects a random admin password, nothing is committed) and `ApplyMigrationsOnStartup` is enabled for this single-instance demo. `GET /api/test/permissions/{permission}` reports whether the caller holds a permission (the demo pipeline does not register `PermissionAuthorizationMiddleware`).
 - **Endpoints**: `app.AddEndpointGroup(group => { group.AddQuery<...>(...); group.AddCommand<...>(...); })` — no controllers.
 - HTTP pipeline order: `UseCorrelationId()` → `UseRaftelExceptionHandling()` → `UseHttpsRedirection()` → `UseRouting()` → `UseTenantMiddleware()` → `UseAuthentication()` → `UseAuthorization()` → endpoints. `UseCorrelationId()` must come before `UseRaftelExceptionHandling()` so the correlation id is already in the logging scope when an exception gets logged.
 
