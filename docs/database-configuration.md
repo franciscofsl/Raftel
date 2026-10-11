@@ -75,3 +75,8 @@ dotnet ef migrations add InitialCreate
 ```
 
 Note: Some database-specific features may require separate migration files for each provider.
+
+## Related
+
+See [Health Checks](health-checks.md) for the `PendingMigrationsHealthCheck`, which reports
+unhealthy while the schema has migrations that have not been applied.

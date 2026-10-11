@@ -13,7 +13,7 @@ public static class SeedData
     public static async Task InitializeAsync(IServiceProvider services)
     {
         var dbContext = services.GetRequiredService<TestingRaftelDbContext>();
-        await dbContext.Database.EnsureCreatedAsync();
+        await dbContext.Database.MigrateAsync();
             
         await SetupOpenIddict(services);
 
