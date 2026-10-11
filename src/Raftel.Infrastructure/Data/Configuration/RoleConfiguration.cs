@@ -30,5 +30,7 @@ public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.HasTenantId();
 
         builder.HasSoftDelete();
+
+        builder.HasOptimisticConcurrency();
     }
 } 

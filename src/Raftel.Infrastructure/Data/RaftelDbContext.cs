@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Raftel.Application;
+using Raftel.Application.Exceptions;
 using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Domain.Auditing;
 using Raftel.Domain.Features.Users;
@@ -68,8 +69,47 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
 
     public Task CommitAsync(CancellationToken cancellationToken = default)
     {
-        return base.SaveChangesAsync(cancellationToken);
+        return SaveChangesAsync(cancellationToken);
     }
+
+    /// <inheritdoc />
+    /// <exception cref="ConcurrencyConflictException">
+    /// A version-tracked entity was changed by another writer since it was read.
+    /// </exception>
+    public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+        catch (DbUpdateConcurrencyException exception)
+        {
+            throw new ConcurrencyConflictException(ExtractEntityNames(exception), exception);
+        }
+    }
+
+    /// <inheritdoc />
+    /// <exception cref="ConcurrencyConflictException">
+    /// A version-tracked entity was changed by another writer since it was read.
+    /// </exception>
+    public override int SaveChanges(bool acceptAllChangesOnSuccess)
+    {
+        try
+        {
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+        catch (DbUpdateConcurrencyException exception)
+        {
+            throw new ConcurrencyConflictException(ExtractEntityNames(exception), exception);
+        }
+    }
+
+    private static IReadOnlyCollection<string> ExtractEntityNames(DbUpdateConcurrencyException exception) =>
+        exception.Entries
+            .Select(entry => entry.Metadata.ClrType.Name)
+            .Distinct()
+            .ToList();
 
     public bool HasActiveTransaction => _activeTransaction is not null;
 
@@ -92,6 +132,8 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
         modelBuilder.UseOpenIddict();
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(RaftelDbContext<TDbContext>).Assembly);
 
+        ConfigureOptimisticConcurrency(modelBuilder);
+
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
             var method = typeof(RaftelDbContext<TDbContext>)
@@ -99,6 +141,28 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
                 .MakeGenericMethod(entityType.ClrType);
 
             method.Invoke(this, new object[] { modelBuilder, entityType });
+        }
+    }
+
+    private void ConfigureOptimisticConcurrency(ModelBuilder modelBuilder)
+    {
+        var versionTracked = modelBuilder.Model.GetEntityTypes()
+            .Where(entityType => entityType.BaseType is null &&
+                                 entityType.FindAnnotation(IEntityTypeConfigurationExtensions.OptimisticConcurrencyAnnotation) is not null)
+            .ToList();
+
+        foreach (var entityType in versionTracked)
+        {
+            var entity = modelBuilder.Entity(entityType.ClrType);
+
+            if (Database.IsNpgsql())
+            {
+                entity.Property(typeof(uint), ShadowPropertyNames.Version).IsRowVersion();
+            }
+            else
+            {
+                entity.Property(typeof(byte[]), ShadowPropertyNames.Version).IsRowVersion();
+            }
         }
     }
 

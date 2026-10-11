@@ -20,7 +20,8 @@ internal sealed class ChangeSnapshotExtractor(AuditOptions auditOptions, IAuditV
         ShadowPropertyNames.CreatorId,
         ShadowPropertyNames.CreationTime,
         ShadowPropertyNames.LastModifierId,
-        ShadowPropertyNames.LastModificationTime
+        ShadowPropertyNames.LastModificationTime,
+        ShadowPropertyNames.Version
     ];
 
     public IReadOnlyList<EntityChangeSnapshot> Extract(DbContext context)

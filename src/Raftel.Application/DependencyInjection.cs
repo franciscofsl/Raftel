@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Raftel.Application.Abstractions;
+using Raftel.Application.Abstractions.Concurrency;
 using Raftel.Application.Abstractions.DomainEvents;
 using Raftel.Application.Commands;
 using Raftel.Application.Middlewares;
@@ -25,6 +27,8 @@ public static class DependencyInjection
 
         services.AddSingleton(builder.PaginationOptions);
         services.AddSingleton(builder.AuthorizationOptions);
+        services.AddSingleton(builder.ConcurrencyOptions);
+        services.TryAddScoped<IExpectedVersion, ExpectedVersion>();
         services.AddScoped<IRequestDispatcher, RequestDispatcher>();
         services.AddScoped<ICommandDispatcher, CommandDispatcher>();
         services.AddScoped<IQueryDispatcher, QueryDispatcher>();

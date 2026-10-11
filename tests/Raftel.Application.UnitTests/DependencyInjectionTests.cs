@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Raftel.Application.Abstractions.Concurrency;
 using Raftel.Application.Abstractions.DomainEvents;
 using Raftel.Application.Commands;
 using Raftel.Application.Middlewares;
@@ -91,6 +92,37 @@ public class DependencyInjectionTests
 
         dispatcher.ShouldNotBeNull();
         dispatcher.ShouldBeOfType<DomainEventsDispatcher>();
+    }
+
+    [Fact]
+    public void AddRaftelApplication_ShouldRegisterConcurrencyOptions_WithETagsDisabledByDefault()
+    {
+        var provider = BuildServiceProvider();
+
+        provider.GetRequiredService<ConcurrencyOptions>().EnableETags.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void ConfigureConcurrency_ShouldApplyTheOptions()
+    {
+        var services = new ServiceCollection();
+        services.AddRaftelApplication(cfg => cfg.ConfigureConcurrency(options => options.EnableETags = true));
+
+        services.BuildServiceProvider().GetRequiredService<ConcurrencyOptions>().EnableETags.ShouldBeTrue();
+    }
+
+    [Fact]
+    public void AddRaftelApplication_ShouldRegisterExpectedVersion_AsScoped()
+    {
+        var provider = BuildServiceProvider();
+
+        using var firstScope = provider.CreateScope();
+        using var secondScope = provider.CreateScope();
+        var first = firstScope.ServiceProvider.GetRequiredService<IExpectedVersion>();
+        first.Expect("v1");
+
+        first.ShouldBeSameAs(firstScope.ServiceProvider.GetRequiredService<IExpectedVersion>());
+        secondScope.ServiceProvider.GetRequiredService<IExpectedVersion>().Value.ShouldBeNull();
     }
 
     private static ServiceProvider BuildServiceProvider()

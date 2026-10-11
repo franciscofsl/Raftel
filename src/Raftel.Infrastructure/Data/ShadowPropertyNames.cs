@@ -35,4 +35,9 @@ public static class ShadowPropertyNames
     /// The name of the shadow property that indicates when the entity was last modified.
     /// </summary>
     public const string LastModificationTime = nameof(LastModificationTime);
+
+    /// <summary>
+    /// The name of the shadow property that holds the optimistic concurrency token of an entity.
+    /// </summary>
+    public const string Version = nameof(Version);
 }

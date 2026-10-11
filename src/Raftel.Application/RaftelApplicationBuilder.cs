@@ -38,6 +38,11 @@ public sealed class RaftelApplicationBuilder : IRaftelApplicationBuilder
     public AuthorizationOptions AuthorizationOptions { get; } = new();
 
     /// <summary>
+    /// Gets the concurrency options configured for the application.
+    /// </summary>
+    public ConcurrencyOptions ConcurrencyOptions { get; } = new();
+
+    /// <summary>
     /// Registers all services from the specified assembly if it has not already been registered.
     /// </summary>
     /// <param name="assembly">The assembly to register services from.</param>
@@ -92,5 +97,14 @@ public sealed class RaftelApplicationBuilder : IRaftelApplicationBuilder
     public void ConfigureAuthorization(Action<AuthorizationOptions> configure)
     {
         configure(AuthorizationOptions);
+    }
+
+    /// <summary>
+    /// Configures how optimistic concurrency is exposed over HTTP (ETag / If-Match).
+    /// </summary>
+    /// <param name="configure">A callback that mutates the concurrency options.</param>
+    public void ConfigureConcurrency(Action<ConcurrencyOptions> configure)
+    {
+        configure(ConcurrencyOptions);
     }
 }

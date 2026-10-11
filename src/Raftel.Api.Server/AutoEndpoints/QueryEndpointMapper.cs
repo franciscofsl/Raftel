@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
+using Raftel.Application;
 using Raftel.Application.Abstractions;
+using Raftel.Application.Abstractions.Concurrency;
 using Raftel.Application.Queries;
 using Raftel.Domain.Abstractions;
 using Raftel.Shared.Extensions;
@@ -52,8 +55,21 @@ public static class QueryEndpointMapper
                 context.Response.Headers["X-Total-Pages"] = pagedResult.TotalPages.ToString();
             }
 
+            AddETagHeader(context, result.Value);
+
             return Results.Ok(result.Value);
         }
+    }
+
+    private static void AddETagHeader(HttpContext context, object value)
+    {
+        if (value is not IVersionedResult { Version: { Length: > 0 } version } ||
+            !context.RequestServices.GetRequiredService<ConcurrencyOptions>().EnableETags)
+        {
+            return;
+        }
+
+        context.Response.Headers.ETag = $"\"{version}\"";
     }
 
     private static TRequest BuildRequestFromRouteAndQuery<TRequest>(HttpContext context)

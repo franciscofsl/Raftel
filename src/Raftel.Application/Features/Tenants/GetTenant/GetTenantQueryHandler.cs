@@ -1,3 +1,4 @@
+using Raftel.Application.Abstractions.Concurrency;
 using Raftel.Application.Queries;
 using Raftel.Domain.Abstractions;
 using Raftel.Domain.Features.Tenants;
@@ -5,7 +6,9 @@ using Raftel.Domain.Features.Tenants.ValueObjects;
 
 namespace Raftel.Application.Features.Tenants.GetTenant;
 
-internal sealed class GetTenantQueryHandler(ITenantsRepository tenantsRepository)
+internal sealed class GetTenantQueryHandler(
+    ITenantsRepository tenantsRepository,
+    IEntityVersionReader versionReader)
     : IQueryHandler<GetTenantQuery, GetTenantResponse>
 {
     public async Task<Result<GetTenantResponse>> HandleAsync(GetTenantQuery request, CancellationToken token = default)
@@ -22,7 +25,8 @@ internal sealed class GetTenantQueryHandler(ITenantsRepository tenantsRepository
             Id = tenant.Id,
             Name = tenant.Name,
             Code = tenant.Code,
-            Description = tenant.Description
+            Description = tenant.Description,
+            Version = versionReader.VersionOf(tenant)
         };
     }
 } 

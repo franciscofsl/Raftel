@@ -1,6 +1,6 @@
 # 08 — Concurrencia optimista
 
-> Estado: **Pendiente**
+> Estado: **Implementado** (cambio OpenSpec `optimistic-concurrency`; el reintento de §2.5 queda diferido)
 > Ámbito: `Raftel.Domain`, `Raftel.Infrastructure`, `Raftel.Api.Server`
 > Rompe API pública: no (opt-in por entidad)
 > Depende de: [01](01-error-tipado-y-mapeo-http.md), [05](05-transacciones-explicitas.md)
@@ -121,6 +121,14 @@ Para comandos idempotentes se ofrece `[RetryOnConcurrencyConflict(MaxAttempts = 
 El `ConcurrencyMiddleware` reejecuta el handler con estado recargado. **No** se
 aplica por defecto: reintentar un comando no idempotente duplica efectos.
 
+> **Desviaciones respecto a este diseño** (justificadas en el `design.md` del cambio OpenSpec):
+> `HasOptimisticConcurrency()` no recibe `DatabaseProvider` (el proveedor se resuelve en
+> `RaftelDbContext.OnModelCreating`); no existe `IHasVersion` en `Raftel.Domain` (la versión es una cadena
+> opaca en el borde de aplicación: `IVersionedResult`, `IEntityVersionReader`, `IExpectedVersion`);
+> en PostgreSQL se usa un shadow `uint` con `IsRowVersion()` porque `UseXminAsConcurrencyToken()` está
+> obsoleto; `If-Match` se aplica de forma atómica en el `SaveChanges` y 428 se activa por comando con
+> `[RequiresExpectedVersion]`. `[RetryOnConcurrencyConflict]` (§2.5) no se implementa en este cambio.
+
 ## 3. Archivos a tocar
 
 **Nuevos**
@@ -168,11 +176,11 @@ aplica por defecto: reintentar un comando no idempotente duplica efectos.
 
 ## 6. Criterios de aceptación
 
-- [ ] Dos escrituras concurrentes sobre el mismo agregado: la segunda falla con 409.
-- [ ] Funciona en SqlServer y PostgreSQL.
-- [ ] La versión no aparece en los logs de auditoría.
-- [ ] Los agregados sin `HasOptimisticConcurrency` mantienen el comportamiento actual.
-- [ ] Ningún handler de aplicación captura excepciones de EF Core.
+- [x] Dos escrituras concurrentes sobre el mismo agregado: la segunda falla con 409. (`ConcurrencyTests.StaleWrite_*`, `LostUpdateTests`, `Raftel.Api.FunctionalTests.ConcurrencyTests`, `ETagTests.Put_WithStaleIfMatch_*` para 412)
+- [x] Funciona en SqlServer y PostgreSQL. (`SqlServerConcurrencyTests` / `PostgreSqlConcurrencyTests`)
+- [x] La versión no aparece en los logs de auditoría. (`VersionAuditingTests`)
+- [x] Los agregados sin `HasOptimisticConcurrency` mantienen el comportamiento actual. (`EntityWithoutOptimisticConcurrency_KeepsLastWriteWins`)
+- [x] Ningún handler de aplicación captura excepciones de EF Core. (`Application_Should_Not_DependOn_EntityFrameworkCore`)
 
 ## 7. Alternativas descartadas
 
