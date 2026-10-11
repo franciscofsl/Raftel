@@ -11,6 +11,7 @@ Specifications/      Specification<T> + And/OrSpecification (Expression<Func<T,b
 Validators/          Validator<T>, ValidationRule, ValidationResult (EnsureThat DSL)
 ValueObjects/        Cross-cutting Value Objects (Code)
 Auditing/            AuditLog (entity change model)
+Outbox/              OutboxMessage (+ OutboxMessageId): a domain event stored for asynchronous delivery; lease/attempt/dead-letter state lives on the entity
 Features/<Feature>/  One folder per aggregate:
     <Aggregate>.cs           the aggregate / root entity
     <Aggregate>Errors.cs     strongly-typed errors (static class of Error)
@@ -29,7 +30,7 @@ Features/<Feature>/  One folder per aggregate:
 - **Specifications**: encapsulate filters as `Expression<Func<T,bool>>` combinable with `And`/`Or`; translatable to SQL by EF Core. Use them for reusable query rules.
 - **Validators**: `Validator<TCommand>` with `EnsureThat(predicate, error)` in constructor. Live in Application alongside their command, but use this DSL.
 - **Repositories**: interface here, implementation in Infrastructure. Only for aggregate roots.
-- **Domain events**: `AggregateRoot<TId>` exposes `DomainEvents` (read-only) and `ClearDomainEvents()`, and implements `IHasDomainEvents` so Infrastructure can collect them without knowing the generic type. Business methods call the `protected RaiseDomainEvent(IDomainEvent)` to register an event — never expose it publicly. Events are `sealed record`, named in the past tense (`PirateCrownedKing`), implement `IDomainEvent` (`OccurredOn`), and live in `Features/<Feature>/Events/`. Dispatch is post-commit and owned by Infrastructure (`DomainEventsDispatchInterceptor`); Domain only tracks pending events.
+- **Domain events**: `AggregateRoot<TId>` exposes `DomainEvents` (read-only) and `ClearDomainEvents()`, and implements `IHasDomainEvents` so Infrastructure can collect them without knowing the generic type. Business methods call the `protected RaiseDomainEvent(IDomainEvent)` to register an event — never expose it publicly. Events are `sealed record`, named in the past tense (`PirateCrownedKing`), implement `IDomainEvent` (`OccurredOn`), and live in `Features/<Feature>/Events/`. Dispatch is owned by Infrastructure: post-commit and in-process by default (`DomainEventsDispatchInterceptor`), or stored as `OutboxMessage` rows in the same transaction and delivered later when the outbox is enabled (`OutboxWriteInterceptor`). Domain only tracks pending events. Because outbox delivery deserializes events, give every event a `sealed record` shape `System.Text.Json` can rebuild (primary-constructor parameters for the payload; typed ids are handled).
 
 ## Conventions
 

@@ -49,6 +49,7 @@ See `proposal.md` — Why. Constraints from the current code that shape the appr
 
 - `IDomainEventTypeRegistry` (Application) is built in `AddRaftelApplication` during the existing handler scan. It maps each handled event type ⇄ its stored name `"{FullName}, {AssemblyName}"` (no version, culture or key token) and lists the handler implementation types per event type.
 - `IOutboxSerializer` (Application; implementation in Infrastructure) returns `Result<IDomainEvent>` on read. A name absent from the registry is a failure — `Type.GetType` is never called on database content.
+- A `JsonConverterFactory` for `TypedGuidId` subclasses: their value is private, so by default they serialize as `{}`. They are written as plain GUID strings.
 - Dedicated `JsonSerializerOptions` with a contract modifier that assigns get-only auto-properties through their compiler-generated backing field, so `OccurredOn { get; } = UtcNow` round-trips to the original instant instead of silently becoming "time of deserialization".
 
 *Alternatives:* allow-list = every `IDomainEvent` in the scanned assemblies (backlog wording) — wider than necessary given D2, and "has a handler" is already computed. Requiring events to use `init` setters — rejected: existing events would deserialize with wrong timestamps without any error.
@@ -70,7 +71,9 @@ Claimed messages are tracked entities in a store-owned DI scope separate from ev
 - SQL Server: CTE with `TOP (@n) … ORDER BY OccurredOn` over `WITH (UPDLOCK, READPAST, ROWLOCK)`, `UPDATE … OUTPUT inserted.*`.
 - PostgreSQL: `UPDATE … WHERE Id IN (SELECT … ORDER BY "OccurredOn" LIMIT @n FOR UPDATE SKIP LOCKED) RETURNING *`.
 
-Eligible = `ProcessedOn IS NULL AND AttemptCount < MaxAttempts AND (NextAttemptOn IS NULL OR NextAttemptOn <= now) AND (LockedUntil IS NULL OR LockedUntil < now)`. Table and column identifiers come from the EF model metadata, not string literals, so consumer naming conventions are respected. The result is materialised with `FromSqlRaw(...).IgnoreQueryFilters()` without further composition.
+Eligible = `ProcessedOn IS NULL AND AttemptCount < MaxAttempts AND (NextAttemptOn IS NULL OR NextAttemptOn <= now) AND (LockedUntil IS NULL OR LockedUntil < now)`. Table and column identifiers come from the EF model metadata, not string literals, so consumer naming conventions are respected. The statement runs as raw ADO.NET on the context's connection and returns only the claimed ids; the entities are then loaded tracked with `IgnoreQueryFilters()`. (`FromSql` is not usable: EF wraps raw SQL in a subquery, and `UPDATE ... OUTPUT` / `RETURNING` must be the outermost statement.)
+
+`LockedUntil` is also the EF **concurrency token**. If a lease expired and another processor re-claimed the message, the first processor's later `SaveAsync` fails the concurrency check, its outcome is discarded and `SaveAsync` returns `false` — it cannot overwrite the new owner's state.
 
 *Why increment at claim rather than in `MarkFailed` (backlog sketch):* a message that kills the process never reaches `MarkFailed`; counting at claim time is what lets a crash-looping "poison" message reach the dead-letter state.
 
@@ -95,7 +98,7 @@ For each handler implementation type listed by the registry for the event:
 5. `IIdempotencyStore.MarkCompletedAsync` — inserts a receipt through the same `DbContext` and saves.
 6. Commit. Any exception ⇒ rollback, the message is failed, remaining handlers are not attempted this round.
 
-Receipts are an internal Infrastructure entity (`OutboxHandlerReceipt`, key `(MessageId, Handler)`, FK to the message with cascade delete). The composite key also stops two instances that both hold a (stale) lease from both committing the same handler. After all handlers complete the message is `MarkProcessed`.
+Handlers are resolved from the scope by their `IDomainEventHandler<T>` service (the n-th registration per fresh scope) and named by their type's full name; this also covers handlers registered by hand. Receipts are an internal Infrastructure entity (`OutboxHandlerReceipt`, key `(MessageId, Handler)`, FK to the message with cascade delete). The composite key also stops two instances that both hold a (stale) lease from both committing the same handler. After all handlers complete the message is `MarkProcessed`.
 
 *Why per-handler scope:* a failed handler leaves dirty tracked entities; a fresh `DbContext` per handler avoids leaking them into the next one. *Why always on rather than optional (backlog: "optional `IIdempotencyStore`"):* without it, a message with two handlers re-runs the first whenever the second fails — a correctness trap that should not be the default. The abstraction stays public so it can be replaced.
 
@@ -118,7 +121,7 @@ The entities are mapped regardless of `Enabled`, so the model — and consumer m
 
 ### D10. Configuration and cleanup
 
-`OutboxOptions` in `Raftel.Application`, registered as a singleton instance via a new trailing optional parameter `Action<OutboxOptions>? configureOutbox` on `AddRaftelData`. `Validate()` runs at registration when enabled and throws `InvalidOperationException` naming the offending setting. Enabling without `AddRaftelApplication` (no registry) fails at startup rather than silently dropping events.
+`OutboxOptions` in `Raftel.Application`, registered as a singleton instance via a new trailing optional parameter `Action<OutboxOptions>? configureOutbox` on `AddRaftelData`. `Validate()` runs at registration when enabled and throws `InvalidOperationException` naming the offending setting. Enabling without `AddRaftelApplication` (no registry) fails when the host builds its hosted services — `IOutboxSerializer` is created through a factory that throws a message naming `AddRaftelApplication` — rather than silently dropping events.
 
 `OutboxCleanupService` (own `BackgroundService`, hourly — backlog 16 does not exist yet) calls `IOutboxStore.DeleteProcessedBeforeAsync(now − RetentionPeriod)` using `ExecuteDeleteAsync`; receipts go with the cascade.
 

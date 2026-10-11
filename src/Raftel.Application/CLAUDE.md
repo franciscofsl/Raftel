@@ -9,10 +9,12 @@ Abstractions/
     IRequest / IRequestHandler / IRequestDispatcher / RequestDispatcher   base mediator
     RequestHandlerDelegate                                                pipeline link
     IRequestEvent / RequestEventFields / RequestEvent                     request-scoped wide event (see below)
-    ICorrelationContext                                                   correlation id for the current request (impl. in Infrastructure)
+    ICorrelationContext / ICorrelationScope                               correlation id for the current request / explicit override for non-HTTP work (impl. in Infrastructure)
     Authentication/   ICurrentUser, IAuthenticationService (interfaces, impl. in Infrastructure)
     Multitenancy/     ICurrentTenant
     DomainEvents/     IDomainEventHandler<TEvent>, IDomainEventsDispatcher + DomainEventsDispatcher impl.
+    Outbox/           IOutboxStore, IOutboxSerializer, IIdempotencyStore, IDomainEventTypeRegistry (allow-list built from the handler scan), OutboxRetrySchedule — EF-free contracts; impl. in Infrastructure
+OutboxOptions.cs     opt-in transactional outbox settings (`Enabled = false` keeps in-process dispatch)
 Commands/             ICommand, ICommand<TResult>, ICommandHandler<,>, ICommandDispatcher, CommandDispatcher
 Queries/              IQuery<TResult>, IQueryHandler<,>, IQueryDispatcher, QueryDispatcher
 Middlewares/          IGlobalMiddleware / ICommandMiddleware / IQueryMiddleware + implementations + MiddlewareRegistry

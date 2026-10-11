@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.DomainEvents;
+using Raftel.Application.Abstractions.Outbox;
 using Raftel.Application.Commands;
 using Raftel.Application.Middlewares;
 using Raftel.Application.Queries;
@@ -20,7 +21,9 @@ public static class DependencyInjection
         var builder = new RaftelApplicationBuilder();
         configure(builder);
 
-        RegisterHandlers(services, assemblies: builder.Assemblies);
+        var eventTypeRegistry = new DomainEventTypeRegistry();
+        RegisterHandlers(services, eventTypeRegistry, assemblies: builder.Assemblies);
+        services.AddSingleton<IDomainEventTypeRegistry>(eventTypeRegistry);
         RegisterMiddlewares(services, builder);
 
         services.AddSingleton(builder.PaginationOptions);
@@ -32,7 +35,8 @@ public static class DependencyInjection
         services.AddScoped<IRequestEvent, RequestEvent>();
     }
 
-    private static void RegisterHandlers(IServiceCollection services, IEnumerable<Assembly> assemblies)
+    private static void RegisterHandlers(IServiceCollection services, DomainEventTypeRegistry eventTypeRegistry,
+        IEnumerable<Assembly> assemblies)
     {
         var handlerTypes = new[]
         {
@@ -44,13 +48,14 @@ public static class DependencyInjection
         {
             foreach (var type in assembly.GetTypes())
             {
-                RegisterHandlers(services, type, handlerTypes);
+                RegisterHandlers(services, eventTypeRegistry, type, handlerTypes);
                 RegisterValidators(services, type);
             }
         }
     }
 
-    private static void RegisterHandlers(IServiceCollection services, Type type, Type[] handlerTypes)
+    private static void RegisterHandlers(IServiceCollection services, DomainEventTypeRegistry eventTypeRegistry,
+        Type type, Type[] handlerTypes)
     {
         if (type.IsAbstract || type.IsInterface)
         {
@@ -62,6 +67,11 @@ public static class DependencyInjection
             if (iface.IsGenericType && handlerTypes.Contains(iface.GetGenericTypeDefinition()))
             {
                 services.AddTransient(iface, type);
+
+                if (iface.GetGenericTypeDefinition() == typeof(IDomainEventHandler<>))
+                {
+                    eventTypeRegistry.Register(iface.GetGenericArguments()[0], type);
+                }
             }
         }
     }

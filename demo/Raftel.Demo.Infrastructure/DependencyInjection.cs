@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Raftel.Application;
 using Raftel.Demo.Domain.Pirates;
 using Raftel.Demo.Domain.Ships;
 using Raftel.Demo.Infrastructure.Data;
@@ -21,7 +22,8 @@ public static class DependencyInjection
     }
 
     public static void AddSampleInfrastructure(this IServiceCollection services,
-        string connectionString, DatabaseProvider databaseProvider)
+        string connectionString, DatabaseProvider databaseProvider,
+        Action<OutboxOptions>? configureOutbox = null)
     {
         var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(new Dictionary<string, string?>
@@ -34,7 +36,7 @@ public static class DependencyInjection
         {
             audit.Audit<Pirate>();
             audit.Audit<Ship>();
-        });
+        }, configureOutbox: configureOutbox);
         services.AddScoped(typeof(IPirateRepository), typeof(PirateRepository));
         services.AddScoped(typeof(IShipRepository), typeof(ShipRepository));
     }

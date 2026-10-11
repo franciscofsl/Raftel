@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Raftel.Domain.Auditing;
+using Raftel.Domain.Outbox;
+using Raftel.Infrastructure.Outbox;
 
 namespace Raftel.Infrastructure.Data.Auditing;
 
@@ -11,7 +13,7 @@ namespace Raftel.Infrastructure.Data.Auditing;
 internal sealed class ChangeSnapshotExtractor(AuditOptions auditOptions, IAuditValueSerializer serializer)
     : IChangeSnapshotExtractor
 {
-    private static readonly HashSet<Type> AuditEntityTypes = [typeof(AuditLog), typeof(EntityChange), typeof(PropertyChange)];
+    private static readonly HashSet<Type> AuditEntityTypes = [typeof(AuditLog), typeof(EntityChange), typeof(PropertyChange), typeof(OutboxMessage), typeof(OutboxHandlerReceipt)];
 
     private static readonly HashSet<string> FrameworkShadowProperties =
     [

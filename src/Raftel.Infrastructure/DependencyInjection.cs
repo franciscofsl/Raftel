@@ -11,6 +11,7 @@ using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.Authentication;
 using Raftel.Application.Abstractions.Auditing;
 using Raftel.Application.Abstractions.Multitenancy;
+using Raftel.Application.Abstractions.Outbox;
 using Raftel.Domain.Features.Authorization;
 using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Users;
@@ -25,6 +26,7 @@ using Raftel.Infrastructure.Data.Repositories.Authorization;
 using Raftel.Infrastructure.Data.Repositories.Tenants;
 using Raftel.Infrastructure.Data.Repositories.Users;
 using Raftel.Infrastructure.Multitenancy;
+using Raftel.Infrastructure.Outbox;
 
 namespace Raftel.Infrastructure;
 
@@ -35,16 +37,19 @@ public static class DependencyInjection
         IConfiguration configuration,
         string connectionStringName = "Default",
         Action<AuditOptions>? configureAudit = null,
-        Action<TransactionOptions>? configureTransaction = null)
+        Action<TransactionOptions>? configureTransaction = null,
+        Action<OutboxOptions>? configureOutbox = null)
         where TDbContext : RaftelDbContext<TDbContext>
     {
-        services.AddDataAccess<TDbContext>(configuration, connectionStringName, configureAudit, configureTransaction);
+        services.AddDataAccess<TDbContext>(configuration, connectionStringName, configureAudit, configureTransaction,
+            configureOutbox);
         services.AddAuthentication<TDbContext>();
 
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
         services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
         services.AddScoped<ICurrentTenant, CurrentTenant>();
         services.AddScoped<ICorrelationContext, CorrelationContext>();
+        services.AddSingleton<ICorrelationScope, CorrelationScope>();
 
         return services;
     }
@@ -54,7 +59,8 @@ public static class DependencyInjection
         IConfiguration configuration,
         string connectionStringName,
         Action<AuditOptions>? configureAudit,
-        Action<TransactionOptions>? configureTransaction)
+        Action<TransactionOptions>? configureTransaction,
+        Action<OutboxOptions>? configureOutbox)
         where TDbContext : RaftelDbContext<TDbContext>
     {
         var connectionString = configuration.GetConnectionString(connectionStringName)
@@ -66,6 +72,11 @@ public static class DependencyInjection
         var transactionOptions = new TransactionOptions();
         configureTransaction?.Invoke(transactionOptions);
         services.AddSingleton(transactionOptions);
+
+        var outboxOptions = new OutboxOptions();
+        configureOutbox?.Invoke(outboxOptions);
+        services.AddSingleton(outboxOptions);
+        services.AddOutbox<TDbContext>(outboxOptions);
 
         services.AddDbContext<TDbContext>((serviceProvider, options) =>
         {
@@ -83,7 +94,9 @@ public static class DependencyInjection
                     serviceProvider.GetRequiredService<AuditPropertiesInterceptor>(),
                     serviceProvider.GetRequiredService<TenantInterceptor>(),
                     serviceProvider.GetRequiredService<EntityChangesTrackerInterceptor>(),
-                    serviceProvider.GetRequiredService<DomainEventsDispatchInterceptor>());
+                    outboxOptions.Enabled
+                        ? serviceProvider.GetRequiredService<OutboxWriteInterceptor>()
+                        : serviceProvider.GetRequiredService<DomainEventsDispatchInterceptor>());
         });
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TDbContext>());
@@ -99,6 +112,31 @@ public static class DependencyInjection
         services.AddScoped(typeof(IUsersRepository), typeof(UsersRepository<TDbContext>));
         services.AddScoped(typeof(ITenantsRepository), typeof(TenantsRepository<TDbContext>));
         services.AddScoped(typeof(IRolesRepository), typeof(RolesRepository<TDbContext>));
+    }
+
+    private static void AddOutbox<TDbContext>(this IServiceCollection services, OutboxOptions outboxOptions)
+        where TDbContext : RaftelDbContext<TDbContext>
+    {
+        if (!outboxOptions.Enabled)
+        {
+            return;
+        }
+
+        outboxOptions.Validate();
+
+        services.AddSingleton<IOutboxSerializer>(serviceProvider => new OutboxSerializer(
+            serviceProvider.GetService<IDomainEventTypeRegistry>()
+            ?? throw OutboxRegistrationException.MissingEventTypeRegistry()));
+        services.AddScoped<OutboxWriteInterceptor>();
+        services.AddScoped<IOutboxStore, OutboxStore<TDbContext>>();
+        services.AddScoped<IIdempotencyStore, EfIdempotencyStore<TDbContext>>();
+        services.AddLogging();
+        services.AddSingleton<OutboxMessageDispatcher>();
+        services.AddSingleton<OutboxBatchRunner>();
+        services.AddSingleton<IOutboxBatchRunner>(sp => sp.GetRequiredService<OutboxBatchRunner>());
+        services.AddHostedService<OutboxProcessor>();
+        services.AddSingleton<OutboxCleanupService>();
+        services.AddHostedService(serviceProvider => serviceProvider.GetRequiredService<OutboxCleanupService>());
     }
 
     private static void AddAuditing(this IServiceCollection services, Action<AuditOptions>? configureAudit)

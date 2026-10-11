@@ -6,10 +6,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Raftel.Application;
 using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Domain.Auditing;
+using Raftel.Domain.Outbox;
 using Raftel.Domain.Features.Users;
 using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Authorization;
 using Raftel.Infrastructure.Data.Filters;
+using Raftel.Infrastructure.Outbox;
 
 namespace Raftel.Infrastructure.Data;
 
@@ -61,6 +63,8 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
     public DbSet<Role> Role { get; set; }
     public DbSet<Permission> Permission { get; set; }
     public DbSet<AuditLog> AuditLog { get; set; }
+    public DbSet<OutboxMessage> OutboxMessage { get; set; }
+    internal DbSet<OutboxHandlerReceipt> OutboxHandlerReceipt { get; set; }
     
     protected bool IsSoftDeleteFilterEnabled => _dataFilter?.IsEnabled<ISoftDeleteFilter>() ?? false;
     protected bool IsTenantFilterEnabled => _dataFilter?.IsEnabled<ITenantFilter>() ?? true;
@@ -91,6 +95,7 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
         base.OnModelCreating(modelBuilder);
         modelBuilder.UseOpenIddict();
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(RaftelDbContext<TDbContext>).Assembly);
+        ConfigurePendingOutboxIndex(modelBuilder);
 
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
@@ -99,6 +104,26 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
                 .MakeGenericMethod(entityType.ClrType);
 
             method.Invoke(this, new object[] { modelBuilder, entityType });
+        }
+    }
+
+    /// <summary>
+    /// Maps the filtered index that keeps the processor's pending-message lookup cheap. The filter text is
+    /// provider specific, so it cannot live in the provider-agnostic entity configuration.
+    /// </summary>
+    private void ConfigurePendingOutboxIndex(ModelBuilder modelBuilder)
+    {
+        var index = modelBuilder.Entity<OutboxMessage>()
+            .HasIndex(x => x.OccurredOn)
+            .HasDatabaseName("IX_OutboxMessages_Pending");
+
+        if (Database.IsNpgsql())
+        {
+            index.HasFilter("\"ProcessedOn\" IS NULL");
+        }
+        else if (Database.IsSqlServer())
+        {
+            index.HasFilter("[ProcessedOn] IS NULL");
         }
     }
 

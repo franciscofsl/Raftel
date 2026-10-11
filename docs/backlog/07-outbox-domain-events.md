@@ -1,6 +1,6 @@
 # 07 — Outbox para eventos de dominio
 
-> Estado: **Pendiente**
+> Estado: **Implementado** (ver «Notas de implementación» al final)
 > Ámbito: `Raftel.Domain`, `Raftel.Application`, `Raftel.Infrastructure`
 > Rompe API pública: no (aditivo, opt-in)
 > Depende de: [04](04-logging-estructurado.md), [05](05-transacciones-explicitas.md)
@@ -221,3 +221,27 @@ un `BackgroundService` propio.
   externos ni da reintentos.
 - **Publicar directo a un broker desde el interceptor**: escritura dual sin
   atomicidad, el problema clásico que el outbox existe para resolver.
+
+## 8. Notas de implementación
+
+Desviaciones respecto al diseño de este documento (detalle en
+`openspec/changes/outbox-domain-events/design.md` y en [docs/outbox.md](../outbox.md)):
+
+- **`AttemptCount` se incrementa al reclamar**, no en `MarkFailed`: un mensaje que mata el proceso nunca llega
+  a `MarkFailed` y no llegaría a dead letter.
+- **Campos y opciones añadidos**: `NextAttemptOn`, `LockedUntil`, `OutboxOptions.MaxRetryDelay` (5 min) y
+  `LockDuration` (1 min). `LockedUntil` es además el token de concurrencia: un resultado guardado tras perder el
+  lease se descarta.
+- **Recibos por handler siempre activos** (no opcionales): un mensaje con dos handlers no re-ejecuta el primero
+  cuando falla el segundo. Cada handler corre en su propio scope y transacción.
+- **Los eventos sin handler no se almacenan.** La lista blanca de tipos son los eventos con handler
+  registrado (`IDomainEventTypeRegistry`), no «todos los `IDomainEvent`».
+- **Dos interceptores seleccionados al registrar** (`OutboxWriteInterceptor` vs. el `DomainEventsDispatchInterceptor`
+  intacto), en lugar de condicionar uno solo con `!Enabled`.
+- **`ICorrelationScope`** nuevo; `ICorrelationContext` sigue siendo de solo lectura.
+- **Serialización**: los ids tipados necesitan un `JsonConverter` y `OccurredOn { get; }` se restaura por su
+  campo de respaldo; si no, se perdería el instante original.
+- **Esquema**: las tablas del outbox se mapean aunque `Enabled = false`, así que quien use migraciones de EF
+  debe añadir una tras actualizar.
+- La limpieza (`OutboxCleanupService`) es un `BackgroundService` propio (el item 16 aún no existe).
+

@@ -47,9 +47,12 @@ public abstract class InfrastructureTestBase : IAsyncLifetime
         return Task.CompletedTask;
     }
 
+    /// <summary>Outbox configuration passed to the framework; <see langword="null"/> keeps the defaults.</summary>
+    protected virtual Action<OutboxOptions> ConfigureOutbox => null;
+
     protected virtual void ConfigureServices(IServiceCollection services)
     {
-        services.AddSampleInfrastructure(_fixture.ConnectionString, _fixture.Provider);
+        services.AddSampleInfrastructure(_fixture.ConnectionString, _fixture.Provider, ConfigureOutbox);
     }
 
     protected TService GetService<TService>() where TService : notnull

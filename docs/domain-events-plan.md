@@ -68,7 +68,7 @@ disparo se ancla en el interceptor de Infrastructure.
 
 > Nota: el despacho **in-process y síncrono** es el alcance de esta fase. Un
 > patrón **Outbox** (persistir los eventos en la misma transacción para entrega
-> fiable) se documenta como evolución futura en §9.
+> fiable) se implementó después como modo opt-in: ver [outbox.md](outbox.md).
 
 ## 4. Cambios por capa
 
@@ -255,8 +255,7 @@ Para mantener el demo como showcase del framework:
 
 ## 9. Evolución futura (fuera del alcance de esta fase)
 
-- **Outbox pattern**: persistir los eventos en la misma transacción y despacharlos
-  asíncronamente para entrega fiable e idempotente.
+- ~~**Outbox pattern**~~: implementado como modo opt-in, ver [outbox.md](outbox.md).
 - **Eventos de integración**: mapear eventos de dominio a eventos de integración
   publicados a un bus (RabbitMQ/Kafka) para comunicación entre microservicios.
 - **Despacho antes vs. después del commit configurable** (pre-commit para eventos

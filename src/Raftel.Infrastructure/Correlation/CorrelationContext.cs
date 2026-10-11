@@ -9,7 +9,7 @@ internal sealed class CorrelationContext(IHttpContextAccessor accessor) : ICorre
 
     private string? _correlationId;
 
-    public string CorrelationId => _correlationId ??= Resolve();
+    public string CorrelationId => CorrelationScope.Current ?? (_correlationId ??= Resolve());
 
     private string Resolve()
     {
