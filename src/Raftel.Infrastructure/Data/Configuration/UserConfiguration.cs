@@ -44,5 +44,7 @@ public sealed class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasTenantId();
 
         builder.HasSoftDelete();
+
+        builder.HasOptimisticConcurrency();
     }
 }

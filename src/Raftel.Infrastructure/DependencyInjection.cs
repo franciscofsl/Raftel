@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using OpenIddict.Abstractions;
@@ -9,6 +10,7 @@ using OpenIddict.Validation.AspNetCore;
 using Raftel.Application;
 using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.Authentication;
+using Raftel.Application.Abstractions.Concurrency;
 using Raftel.Application.Abstractions.Auditing;
 using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Domain.Features.Authorization;
@@ -83,6 +85,7 @@ public static class DependencyInjection
                 .AddInterceptors(
                     serviceProvider.GetRequiredService<AuditPropertiesInterceptor>(),
                     serviceProvider.GetRequiredService<TenantInterceptor>(),
+                    serviceProvider.GetRequiredService<ExpectedVersionInterceptor>(),
                     serviceProvider.GetRequiredService<EntityChangesTrackerInterceptor>(),
                     serviceProvider.GetRequiredService<DomainEventsDispatchInterceptor>());
         });
@@ -94,6 +97,9 @@ public static class DependencyInjection
         services.AddSingleton(TimeProvider.System);
         services.AddScoped<AuditPropertiesInterceptor>();
         services.AddScoped<TenantInterceptor>();
+        services.AddScoped<ExpectedVersionInterceptor>();
+        services.TryAddScoped<IExpectedVersion, ExpectedVersion>();
+        services.AddScoped<IEntityVersionReader, EntityVersionReader<TDbContext>>();
         services.AddScoped<DomainEventsDispatchInterceptor>();
 
         services.AddAuditing(configureAudit);

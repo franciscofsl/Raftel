@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Raftel.Application.Abstractions.Concurrency;
 using Raftel.Application.Commands;
+using Raftel.Domain.Abstractions;
 
 namespace Raftel.Api.Server.AutoEndpoints;
 
@@ -50,11 +52,17 @@ public static class CommandEndpointMapper
                     title: "Invalid JSON payload");
             }
 
+            var precondition = IfMatchPrecondition.Evaluate(context, typeof(TCommand));
+            if (precondition.Rejection is not null)
+            {
+                return precondition.Rejection;
+            }
+
             var result = await dispatcher.DispatchAsync(parsedCommand, cancellationToken);
 
             return result.IsSuccess
                 ? Results.NoContent()
-                : ErrorResults.ToProblem(result.Error);
+                : ToProblem(result.Error, precondition);
         }
     }
 
@@ -100,11 +108,17 @@ public static class CommandEndpointMapper
                     title: "Invalid JSON payload");
             }
 
+            var precondition = IfMatchPrecondition.Evaluate(context, typeof(TCommand));
+            if (precondition.Rejection is not null)
+            {
+                return precondition.Rejection;
+            }
+
             var result = await dispatcher.DispatchAsync<TCommand, TResult>(parsedCommand, cancellationToken);
 
             if (!result.IsSuccess)
             {
-                return ErrorResults.ToProblem(result.Error);
+                return ToProblem(result.Error, precondition);
             }
 
             return command.CreatedRouteName is not null
@@ -112,4 +126,9 @@ public static class CommandEndpointMapper
                 : Results.Ok(result.Value);
         }
     }
+
+    private static IResult ToProblem(Error error, IfMatchPrecondition.Outcome precondition) =>
+        precondition.ExpectedVersionSet && error.Code == ConcurrencyErrors.ConflictCode
+            ? ErrorResults.ToPreconditionFailedProblem(error)
+            : ErrorResults.ToProblem(error);
 }

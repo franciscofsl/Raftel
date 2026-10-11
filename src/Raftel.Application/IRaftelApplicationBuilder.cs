@@ -43,4 +43,10 @@ public interface IRaftelApplicationBuilder
     /// </summary>
     /// <param name="configure">A callback that mutates the authorization options.</param>
     void ConfigureAuthorization(Action<AuthorizationOptions> configure);
+
+    /// <summary>
+    /// Configures how optimistic concurrency is exposed over HTTP (ETag / If-Match).
+    /// </summary>
+    /// <param name="configure">A callback that mutates the concurrency options.</param>
+    void ConfigureConcurrency(Action<ConcurrencyOptions> configure);
 }

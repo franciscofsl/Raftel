@@ -30,9 +30,12 @@ builder.Services.AddRaftelApplication(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreatePirateCommand).Assembly);
     cfg.RegisterServicesFromAssembly(typeof(RegisterUserCommand).Assembly);
     cfg.RegisterServicesFromAssembly(typeof(CreateTestResourceCommand).Assembly);
+    cfg.ConfigureConcurrency(options => options.EnableETags = true);
     cfg.AddGlobalMiddleware(typeof(LoggingMiddleware<,>));
     cfg.AddGlobalMiddleware(typeof(ValidationMiddleware<,>));
     cfg.AddGlobalMiddleware(typeof(AuditLogMiddleware<,>));
+    cfg.AddCommandMiddleware(typeof(ConcurrencyMiddleware<>));
+    cfg.AddCommandMiddleware(typeof(ConcurrencyMiddleware<,>));
     cfg.AddCommandMiddleware(typeof(TransactionMiddleware<>));
     cfg.AddCommandMiddleware(typeof(TransactionMiddleware<,>));
     cfg.AddCommandMiddleware(typeof(UnitOfWorkMiddleware<>));
@@ -90,6 +93,16 @@ app.AddEndpointGroup(group =>
         group.Name = "TestResources";
         group.BaseUri = "/api/test/resources";
         group.AddCommand<CreateTestResourceCommand, Guid>("", HttpMethod.Post);
+    }
+);
+
+app.AddEndpointGroup(group =>
+    {
+        group.Name = "TestConcurrency";
+        group.BaseUri = "/api/test/concurrency";
+        group.AddCommand<RaceTenantCommand>("race", HttpMethod.Post);
+        group.AddCommand<RenameTenantCommand>("tenants", HttpMethod.Put);
+        group.AddCommand<RenameTenantRequiringVersionCommand>("tenants/versioned", HttpMethod.Put);
     }
 );
 

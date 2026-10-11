@@ -692,9 +692,16 @@ namespace Raftel.Demo.Infrastructure.Data.Migrations
                     b.Property<Guid?>("TenantId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.HasKey("Id");
 
                     b.ToTable("Role");
+
+                    b.HasAnnotation("Raftel:OptimisticConcurrency", true);
                 });
 
             modelBuilder.Entity("Raftel.Domain.Features.Tenants.Tenant", b =>
@@ -716,12 +723,19 @@ namespace Raftel.Demo.Infrastructure.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Code")
                         .IsUnique();
 
                     b.ToTable("Tenant");
+
+                    b.HasAnnotation("Raftel:OptimisticConcurrency", true);
                 });
 
             modelBuilder.Entity("Raftel.Domain.Features.Users.User", b =>
@@ -757,11 +771,18 @@ namespace Raftel.Demo.Infrastructure.Data.Migrations
                     b.Property<Guid?>("TenantId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<byte[]>("Version")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email");
 
                     b.ToTable("User");
+
+                    b.HasAnnotation("Raftel:OptimisticConcurrency", true);
                 });
 
             modelBuilder.Entity("EatenDevilFruitsByPirates", b =>

@@ -35,5 +35,7 @@ public sealed class TenantConfiguration : IEntityTypeConfiguration<Tenant>
 
         builder.HasIndex(x => x.Code)
             .IsUnique();
+
+        builder.HasOptimisticConcurrency();
     }
 } 

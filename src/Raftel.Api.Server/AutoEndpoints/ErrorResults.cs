@@ -26,6 +26,35 @@ public static class ErrorResults
     }
 
     /// <summary>
+    /// Renders a concurrency conflict as <c>412 Precondition Failed</c>, for a request whose
+    /// <c>If-Match</c> version no longer matches.
+    /// </summary>
+    public static IResult ToPreconditionFailedProblem(Error error) =>
+        Results.Problem(
+            detail: error.Message,
+            statusCode: StatusCodes.Status412PreconditionFailed,
+            title: "Precondition Failed",
+            extensions: new Dictionary<string, object?> { ["code"] = error.Code });
+
+    /// <summary>
+    /// Renders the rejection of a request that must carry an <c>If-Match</c> version but does not.
+    /// </summary>
+    public static IResult PreconditionRequired() =>
+        Results.Problem(
+            detail: "This operation requires the version you last read, sent in an If-Match header.",
+            statusCode: StatusCodes.Status428PreconditionRequired,
+            title: "Precondition Required");
+
+    /// <summary>
+    /// Renders the rejection of a request whose <c>If-Match</c> header is not a single strong entity tag.
+    /// </summary>
+    public static IResult MalformedIfMatch() =>
+        Results.Problem(
+            detail: "The If-Match header must be a single quoted strong entity tag, or '*'.",
+            statusCode: StatusCodes.Status400BadRequest,
+            title: "Invalid If-Match header");
+
+    /// <summary>
     /// Groups a <see cref="ValidationError"/>'s aggregated errors by field name, splitting each
     /// <see cref="Error.Code"/> on its first '.' (see the convention documented on
     /// <see cref="Raftel.Domain.Validators.Validator{TModel}"/>). A code without a '.' groups under

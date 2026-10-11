@@ -66,4 +66,23 @@ public static class IEntityTypeConfigurationExtensions
             .HasDefaultValue(null)
             .IsRequired(false);
     }
+
+    /// <summary>
+    /// The name of the model annotation that marks an entity type as version-tracked.
+    /// </summary>
+    internal const string OptimisticConcurrencyAnnotation = "Raftel:OptimisticConcurrency";
+
+    /// <summary>
+    /// Marks the specified entity type as protected by optimistic concurrency. The database-managed
+    /// concurrency token (a shadow property named <see cref="ShadowPropertyNames.Version"/>) is added by
+    /// <see cref="RaftelDbContext{TDbContext}"/> once the active database provider is known:
+    /// <c>rowversion</c> on SQL Server and the <c>xmin</c> system column on PostgreSQL.
+    /// </summary>
+    /// <typeparam name="TEntity">The type of the entity being configured.</typeparam>
+    /// <param name="builder">The <see cref="EntityTypeBuilder{TEntity}"/> used to configure the entity type.</param>
+    public static void HasOptimisticConcurrency<TEntity>(this EntityTypeBuilder<TEntity> builder)
+        where TEntity : class
+    {
+        builder.HasAnnotation(OptimisticConcurrencyAnnotation, true);
+    }
 }
