@@ -64,7 +64,7 @@ Each implementation task follows TDD: write the named failing test first, then t
 - [x] 8.2 Add the demo migration for `PermissionDefinition` and `SeedHistory`; verify `dotnet ef migrations has-pending-model-changes` reports none for the demo context
 - [x] 8.3 Make the functional-test fixture inject a randomly generated administrator password through configuration and update tests that referenced the lowercase `admin` role; verify `dotnet test tests/Raftel.Api.FunctionalTests` passes
 - [x] 8.4 Add a functional test for the acceptance path: empty database, start, log in as the seeded administrator in host context and verify, through a demo endpoint reporting the caller's permissions, that every declared permission reaches the caller (the demo pipeline does not register `PermissionAuthorizationMiddleware`, so no demo endpoint is permission-enforced)
-- [ ] 8.5 Write `docs/getting-started.md` covering the startup flow, `Raftel:Seed` settings, credential rules, writing a custom seeder and tenant seeder, the required migration, the multi-replica recommendation, and the host-context role limitation; verify every code snippet in it compiles against the demo
+- [x] 8.5 Write `docs/getting-started.md` covering the startup flow, `Raftel:Seed` settings, credential rules, writing a custom seeder and tenant seeder, the required migration, the multi-replica recommendation, and the host-context role limitation; verify every code snippet in it compiles against the demo
 
 ## 9. Integration checks
 
