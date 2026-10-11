@@ -11,6 +11,7 @@ using Raftel.Application.Abstractions;
 using Raftel.Application.Abstractions.Authentication;
 using Raftel.Application.Abstractions.Auditing;
 using Raftel.Application.Abstractions.Multitenancy;
+using Raftel.Application.Abstractions.Seeding;
 using Raftel.Domain.Features.Authorization;
 using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Users;
@@ -26,6 +27,8 @@ using Raftel.Infrastructure.Data.Repositories.Tenants;
 using Raftel.Infrastructure.Data.Repositories.Users;
 using Raftel.Infrastructure.Health;
 using Raftel.Infrastructure.Multitenancy;
+using Raftel.Infrastructure.Seeding;
+using Raftel.Infrastructure.Seeding.Seeders;
 
 namespace Raftel.Infrastructure;
 
@@ -36,10 +39,12 @@ public static class DependencyInjection
         IConfiguration configuration,
         string connectionStringName = "Default",
         Action<AuditOptions>? configureAudit = null,
-        Action<TransactionOptions>? configureTransaction = null)
+        Action<TransactionOptions>? configureTransaction = null,
+        Action<SeedOptions>? configureSeed = null)
         where TDbContext : RaftelDbContext<TDbContext>
     {
         services.AddDataAccess<TDbContext>(configuration, connectionStringName, configureAudit, configureTransaction);
+        services.AddSeeding<TDbContext>(configuration, configureSeed);
         services.AddAuthentication<TDbContext>();
 
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
@@ -101,6 +106,29 @@ public static class DependencyInjection
         services.AddScoped(typeof(IUsersRepository), typeof(UsersRepository<TDbContext>));
         services.AddScoped(typeof(ITenantsRepository), typeof(TenantsRepository<TDbContext>));
         services.AddScoped(typeof(IRolesRepository), typeof(RolesRepository<TDbContext>));
+        services.AddScoped(typeof(IPermissionDefinitionsRepository), typeof(PermissionDefinitionsRepository<TDbContext>));
+    }
+
+    private static void AddSeeding<TDbContext>(
+        this IServiceCollection services,
+        IConfiguration configuration,
+        Action<SeedOptions>? configureSeed)
+        where TDbContext : RaftelDbContext<TDbContext>
+    {
+        var seedOptions = services.AddOptions<SeedOptions>()
+            .Bind(configuration.GetSection(SeedOptions.SectionName));
+        if (configureSeed is not null)
+        {
+            seedOptions.Configure(configureSeed);
+        }
+
+        services.AddScoped<ISeedHistoryStore, SeedHistoryStore<TDbContext>>();
+        services.AddScoped<ISeedRunner, SeedRunner>();
+
+        services.AddScoped<IDataSeeder, DefaultTenantSeeder>();
+        services.AddScoped<IDataSeeder, PermissionsSeeder>();
+        services.AddScoped<IDataSeeder, DefaultRolesSeeder>();
+        services.AddScoped<IDataSeeder, AdminUserSeeder>();
     }
 
     private static void AddAuditing(this IServiceCollection services, Action<AuditOptions>? configureAudit)

@@ -4,7 +4,8 @@
 
 See [proposal.md](proposal.md) for motivation. Facts about the current code that shape the approach:
 
-- **`Permission` is a child of `Role`**, not a catalog. `PermissionConfiguration` gives it a required `RoleId` shadow FK and a unique `(RoleId, Name)` index; `Role` owns it through the internal `PermissionCollection`. There is no table listing "all permissions that exist". The backlog's "synchronize with the `Permissions` table" has nothing to synchronize with.
+- **`Permission` is a child of `Role`**, not a catalog. `PermissionConfiguration` gives it a required `RoleId` shadow FK and a unique `(RoleId, Name)` index. There is no table listing "all permissions that exist". The backlog's "synchronize with the `Permissions` table" has nothing to synchronize with.
+- **Role permissions are not persisted today.** `Role` keeps them in a private `PermissionCollection` that EF never maps; `RoleConfiguration` only declares a navigation-less `HasMany<Permission>().WithMany()` (a `PermissionRole` join table nothing writes) while `Permission.RoleId` is typed `Guid` and so cannot even point at `Role`. Verified empirically on PostgreSQL: a reloaded `Role` has no permissions, so `ClaimsPrincipalFactory` issues no permission claims from the database.
 - **Permission classes are plain static classes** of `const string` (`UsersPermissions`, `TenantsPermissions`, demo `PiratesPermissions`). Nothing marks them.
 - **Authorization resolves through Identity role names.** `ClaimsPrincipalFactory` reads `userManager.GetRolesAsync` and looks up `Role` aggregates by name; `AuthenticationService.AssignRoleAsync` calls `userManager.AddToRoleAsync`, which requires a matching `IdentityRole` row. Nothing in `src/` creates `IdentityRole` rows today.
 - **`Role` is tenant-scoped** (`HasTenantId`); the global query filter hides rows whose `TenantId` differs from the current tenant once one is set. `Tenant` itself has no tenant id and no "active" flag.
@@ -27,7 +28,7 @@ Constraints: layer rule (Application depends only on Domain; EF Core forbidden o
 
 **Non-Goals:**
 
-- Refactoring `Permission` out of `Role`.
+- Refactoring `Permission` out of `Role` (the child entity stays; only its mapping is fixed, D15).
 - `MustChangePassword` (backlog 21).
 - Built-in per-tenant seeders; per-tenant default roles.
 - Outbox delivery of `TenantCreated` (#131).
@@ -41,6 +42,16 @@ Constraints: layer rule (Application depends only on Domain; EF Core forbidden o
 New aggregate in `Raftel.Domain/Features/Authorization` with `Name`, `Description`, `IsObsolete` and intent methods `MarkObsolete()` / `Reinstate()`, plus `IPermissionDefinitionsRepository`. Own table, unique index on `Name`, **not** tenant-scoped and **not** soft-deleted: the catalog mirrors code, which is global.
 
 *Alternatives:* (a) no catalog, reconcile only the admin role — loses the obsolete flag and gives `DefaultRolesSeeder` nothing to validate against; (b) make `Permission` a shared entity — breaks the existing schema and the `Role` aggregate boundary, contradicting "no public API break". Confirmed with the user: new catalog table.
+
+### D15. Role permissions are mapped through the existing `Permission` child entity
+
+`Role` keeps a private `List<Permission>` that is the single store; the internal `PermissionCollection` becomes a view over that list (it takes the list in its constructor and is created lazily), so `AddPermission`, `HasPermission`, `PermissionNames` and the rest of the domain API behave exactly as before. `RoleConfiguration` maps the list as a one-to-many to `Permission` with required FK `RoleId` and cascade delete, and marks the navigation `AutoInclude()` so every load of a role (including `ClaimsPrincipalFactory`'s) brings its permissions. `PermissionConfiguration` types the `RoleId` shadow property as `RoleId` (with the same `Guid` conversion as `Role.Id`) so it can be a foreign key, and sets `ValueGeneratedNever()` on `Permission.Id`, because `Permission` ids are assigned in the domain and EF would otherwise treat a permission discovered through a tracked role as `Modified` instead of `Added`.
+
+`Permission` also stops being soft-deleted (`HasSoftDelete` removed from its configuration). The audit interceptor turns every delete into `IsDeleted = true`, so a removed permission would stay in the table and the unique `(RoleId, Name)` index would then reject granting that permission to the role again (found by the default-roles reconciliation test). A permission grant has no history worth keeping; removing it deletes the row.
+
+Schema effect for consumers: `PermissionRole` join table dropped, FK `Permission.RoleId -> Role.Id` added, `Permission.IsDeleted` column dropped. No data migration is needed because nothing could ever write any of these rows.
+
+*Alternatives:* (a) make `PermissionCollection` implement `ICollection<Permission>` and map it directly — larger domain change for no gain; (b) explicit `Include` in `RolesRepository` — every other loader of `Role` (seeders, `ClaimsPrincipalFactory`, handlers) would have to remember it; (c) leave unfixed and seed only the catalog — rejected with the user, the acceptance path (administrator holds every permission) would be unmet. Chosen with the user: fix inside this change.
 
 ### D2. Permission classes are marked with `[PermissionSet]`
 
@@ -161,6 +172,8 @@ Demo `SeedData` is removed. `Program.cs` calls `await app.MigrateAndSeedAsync()`
 - **Concurrent replicas seeding at once** → Unique indexes (`PermissionDefinition.Name`, `SeedHistory(Name, TenantId)`, `Tenant.Code`) make the loser fail rather than duplicate; with fail-fast the instance restarts and finds the work done. Docs recommend a single seeding job for multi-replica deployments.
 - **Consumers must add a migration** for two new tables → Called out in the proposal and getting-started; the pending-migrations check and D11 step 2 turn a forgotten migration into a clear message.
 - **`Tenant.Create` now raises an event** — every tenant creation dispatches `TenantCreated`, including in existing tests → With no tenant seeders registered the handler is a no-op; existing tenant tests are re-run as part of the tasks.
+- **Role-permission mapping fix changes the schema** (`PermissionRole` dropped, FK added, `Permission.IsDeleted` dropped) for consumers that already migrated → Nothing could write either table, so the migration is lossless; called out in getting-started. A persistence test locks the behaviour.
+- **`AutoInclude` loads permissions on every `Role` query**, including `ListPagedAsync` counts → Role permission sets are small; accepted.
 - **Demo role renamed** from lowercase `admin` to `Admin` → Functional tests referencing the role name are updated in the same task group.
 - **Development password in logs** → Only in Development, only when the user is created, tagged explicitly; never for a configured password.
 - **`FailFastOnError = false` lets a half-seeded app serve traffic** → Surfaces as degraded on readiness and in `/health/details`; default remains fail-fast.

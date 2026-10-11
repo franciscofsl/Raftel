@@ -11,7 +11,8 @@ Per [GitHub issue #134](https://github.com/franciscofsl/Raftel/issues/134) (back
 - Add a seeding contract in `Raftel.Application`: `IDataSeeder` (`Order`, `Name`, `Version`, `RunOnce`, `SeedAsync` returning `Result`), `ITenantDataSeeder` (adds `SeedForTenantAsync`), `ISeedRunner`, and `SeedOptions` bound from the `Raftel:Seed` configuration section.
 - Auto-discover consumer seeders in the assemblies already registered through `AddRaftelApplication`, alongside handlers and validators.
 - Add `SeedRunner` (`Raftel.Infrastructure`): runs seeders in ascending `Order`, each in its own scope and transaction, records outcomes in a new `SeedHistory` table, and honours `FailFastOnError`.
-- Add a standalone permission catalog: new `PermissionDefinition` aggregate and table (name, description, obsolete flag). `Role` and its child `Permission` entities are unchanged.
+- Add a standalone permission catalog: new `PermissionDefinition` aggregate and table (name, description, obsolete flag).
+- Fix role-permission persistence: today `Role`'s permissions live in a private collection EF never maps, so they are lost on reload and no permission claims reach tokens. Map them through the existing `Permission` child entity (real `RoleId` foreign key, no `PermissionRole` join table, hard delete instead of soft delete) and auto-include them when a role is loaded. Found while applying this change; seeding roles and the administrator cannot work without it.
 - Add a `[PermissionSet]` marker attribute; apply it to `UsersPermissions` and `TenantsPermissions`. Consumers mark their own permission classes.
 - Add four built-in seeders:
   - `DefaultTenantSeeder` (order 50) — creates the configured default tenant; no-op when none is configured.
@@ -24,7 +25,7 @@ Per [GitHub issue #134](https://github.com/franciscofsl/Raftel/issues/134) (back
 - Raise a `TenantCreated` domain event from `Tenant.Create`; an in-process handler runs tenant seeders for the new tenant. Migration to the outbox waits for #131.
 - Replace the demo's `SeedData` with the framework seeders plus one demo `IDataSeeder` for the OpenIddict client; write `docs/getting-started.md` (currently a bare heading).
 
-No **BREAKING** changes to public API. Consumers must add an EF Core migration for the two new tables.
+No **BREAKING** changes to public API. Consumers must add an EF Core migration: two new tables, plus the role-permission mapping fix (the always-empty `PermissionRole` join table is dropped and `Permission.RoleId` becomes a foreign key to `Role`, and `Permission.IsDeleted` is dropped).
 
 ### Out of scope
 
@@ -38,6 +39,8 @@ No **BREAKING** changes to public API. Consumers must add an EF Core migration f
 ### New Capabilities
 
 - `data-seeding`: Ordered, idempotent, individually transactional bootstrap of initial data at application startup — seeder contract and discovery, execution history, permission-catalog reconciliation, default roles, initial administrator and its credential rules, default tenant, per-tenant seeding, optional migration application, and readiness gating.
+- `role-permissions`: Permissions granted to a role are persisted, survive reloading the role, and reach the permission claims issued at login.
+
 
 ### Modified Capabilities
 
@@ -46,8 +49,8 @@ None. `openspec/specs/` holds no archived capabilities yet; the readiness behavi
 ## Impact
 
 - **New code**: `src/Raftel.Application/Abstractions/Seeding/**`, `src/Raftel.Application/SeedOptions.cs`, `src/Raftel.Application/Authorization/PermissionSetAttribute.cs`, `src/Raftel.Domain/Features/Authorization/PermissionDefinition*.cs`, `src/Raftel.Domain/Features/Tenants/TenantCreated.cs`, `src/Raftel.Infrastructure/Seeding/**`, EF configurations and repository for the two new tables.
-- **Modified code**: `Raftel.Application/DependencyInjection.cs` (seeder scan), `Raftel.Infrastructure/DependencyInjection.cs` (seeding services), `Raftel.Infrastructure/Health/HealthDependencyInjection.cs` (`seeding` check), `RaftelDbContext` (two `DbSet`s), `Tenant.Create` (raises event), `UsersPermissions`/`TenantsPermissions` (attribute), demo `Program.cs` and `SeedData`.
-- **Database**: two additive tables (`PermissionDefinition`, `SeedHistory`); a new demo migration.
+- **Modified code**: `Raftel.Application/DependencyInjection.cs` (seeder scan), `Raftel.Infrastructure/DependencyInjection.cs` (seeding services), `Raftel.Infrastructure/Health/HealthDependencyInjection.cs` (`seeding` check), `RaftelDbContext` (two `DbSet`s), `Role`/`RoleConfiguration`/`PermissionConfiguration` (permission persistence), `Tenant.Create` (raises event), `UsersPermissions`/`TenantsPermissions` (attribute), demo `Program.cs` and `SeedData`.
+- **Database**: two additive tables (`PermissionDefinition`, `SeedHistory`); `PermissionRole` join table dropped and `Permission.RoleId` made a real foreign key to `Role` (no data loss: role permissions were never persisted, so both are empty); a new demo migration.
 - **Configuration**: new `Raftel:Seed` section. `AdminPassword` must come from environment, user-secrets or a vault — never a committed file.
 - **Dependencies**: none added.
 - **Docs**: `docs/getting-started.md` written; `docs/health-checks.md` gains the `seeding` check.

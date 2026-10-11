@@ -7,7 +7,8 @@ namespace Raftel.Domain.Features.Authorization;
 
 public sealed class Role : AggregateRoot<RoleId>
 {
-    private readonly PermissionCollection _permissions = new();
+    private readonly List<Permission> _permissionItems = new();
+    private PermissionCollection? _permissionCollection;
 
     [ExcludeFromCodeCoverage]
     private Role()
@@ -19,6 +20,8 @@ public sealed class Role : AggregateRoot<RoleId>
         Name = name;
         Description = description;
     }
+
+    private PermissionCollection _permissions => _permissionCollection ??= new PermissionCollection(_permissionItems);
 
     public string Name { get; private set; } = string.Empty;
     public string? Description { get; set; }

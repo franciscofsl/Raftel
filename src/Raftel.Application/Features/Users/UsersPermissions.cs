@@ -1,5 +1,6 @@
 ﻿namespace Raftel.Application.Features.Users;
 
+[PermissionSet]
 public static class UsersPermissions
 {
     public const string View = "Users.View";
