@@ -53,6 +53,35 @@ public abstract class BuiltInSeedersTestsBase : InfrastructureTestBase
 
     private IReadOnlyCollection<string> Declared => ServiceProvider.GetRequiredService<IPermissionSetProvider>().PermissionNames;
 
+    // ---- idempotency ----------------------------------------------------------------------
+
+    [Fact]
+    public async Task Seeding_RunTwice_ShouldLeaveTheSameState()
+    {
+        _options.DefaultTenant = new SeedTenantOptions { Name = "Default", Code = "DEFAULT", Description = "d" };
+
+        (await RunAsync()).IsSuccess.ShouldBeTrue();
+        var first = await SnapshotAsync();
+        (await RunAsync()).IsSuccess.ShouldBeTrue();
+        var second = await SnapshotAsync();
+
+        second.ShouldBe(first);
+        first.Tenants.ShouldBe(1);
+        first.Users.ShouldBe(1);
+    }
+
+    private Task<StateCounts> SnapshotAsync() => QueryAsync(async db => new StateCounts(
+        await db.Set<Tenant>().CountAsync(),
+        await db.Set<PermissionDefinition>().CountAsync(),
+        await db.Set<Role>().CountAsync(),
+        await db.Set<Permission>().CountAsync(),
+        await db.Set<User>().CountAsync(),
+        await db.Users.CountAsync(),
+        await db.Roles.CountAsync()));
+
+    private sealed record StateCounts(
+        int Tenants, int Catalog, int Roles, int RolePermissions, int Users, int IdentityUsers, int IdentityRoles);
+
     // ---- default tenant -------------------------------------------------------------------
 
     [Fact]

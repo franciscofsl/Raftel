@@ -13,10 +13,11 @@ Abstractions/
     Authentication/   ICurrentUser, IAuthenticationService (interfaces, impl. in Infrastructure)
     Multitenancy/     ICurrentTenant
     DomainEvents/     IDomainEventHandler<TEvent>, IDomainEventsDispatcher + DomainEventsDispatcher impl.
+    Seeding/          IDataSeeder, ITenantDataSeeder, ISeedRunner, SeedingFailedException (impl. in Infrastructure); SeedOptions at the project root
 Commands/             ICommand, ICommand<TResult>, ICommandHandler<,>, ICommandDispatcher, CommandDispatcher
 Queries/              IQuery<TResult>, IQueryHandler<,>, IQueryDispatcher, QueryDispatcher
 Middlewares/          IGlobalMiddleware / ICommandMiddleware / IQueryMiddleware + implementations + MiddlewareRegistry
-Authorization/        RequiresPermissionAttribute
+Authorization/        RequiresPermissionAttribute, PermissionSetAttribute + IPermissionSetProvider (permission names declared in marked classes)
 Features/<Feature>/<UseCase>/   one use case per folder (see below)
 DependencyInjection.cs          AddRaftelApplication(cfg => ...)
 RaftelApplicationBuilder.cs     assembly and middleware registration
@@ -49,6 +50,11 @@ Raftel logs one structured "wide event" (canonical log line) per HTTP request, n
 - **Enriching from a handler**: inject `IRequestEvent` and call `Set("field.name", value)` / `Increment("field.name")` for domain context worth debugging with (e.g. `pirate.id`, `db.query_count`). Expose field names as a `<Feature>EventFields` constants class (mirroring `<Feature>Permissions`) rather than inline string literals, so additions are reviewable in a PR diff.
 - **Deny-list**: `IRequestEvent.Set`/`Increment` silently drop any field whose name contains `password`, `token`, `secret`, `apikey`, or `authorization` (case-insensitive) — never throws, never breaks the request. This is a safety net, not a substitute for not enriching with sensitive data in the first place.
 - Do not add ad hoc logging elsewhere in the pipeline, and do not serialize a request/command object into the event — enrichment is always explicit, field by field.
+
+## Seeding
+
+- `IDataSeeder` implementations are auto-discovered from the assemblies registered via `AddRaftelApplication` (scoped), like handlers. Mark permission classes with `[PermissionSet]`; `IPermissionSetProvider` lists their `const string` fields and is what the permission-catalog seeder reconciles.
+- `TenantCreatedHandler` (a `IDomainEventHandler<TenantCreated>`) calls `ISeedRunner.RunForTenantAsync` and throws `SeedingFailedException` on failure so the tenant-creating transaction rolls back.
 
 ## Domain Events
 

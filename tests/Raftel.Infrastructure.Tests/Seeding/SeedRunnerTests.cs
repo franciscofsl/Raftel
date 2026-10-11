@@ -169,8 +169,8 @@ public class SeedRunnerTests
         result.IsSuccess.ShouldBeTrue();
         var seeded = harness.Log.Entries.Where(e => e.StartsWith("seed:per-tenant")).ToList();
         seeded.Count.ShouldBe(2);
-        seeded.ShouldContain($"seed:per-tenant:{((Guid)first.Id)}:current={((Guid)first.Id)}");
-        seeded.ShouldContain($"seed:per-tenant:{((Guid)second.Id)}:current={((Guid)second.Id)}");
+        seeded.ShouldContain(e => e.StartsWith($"seed:per-tenant:{((Guid)first.Id)}:current={((Guid)first.Id)}"));
+        seeded.ShouldContain(e => e.StartsWith($"seed:per-tenant:{((Guid)second.Id)}:current={((Guid)second.Id)}"));
         harness.CurrentTenant.Id.ShouldBeNull();
         harness.History.Applied.ShouldContainKey(("per-tenant", (Guid?)((Guid)first.Id)));
         harness.History.Applied.ShouldContainKey(("per-tenant", (Guid?)((Guid)second.Id)));
@@ -204,6 +204,30 @@ public class SeedRunnerTests
 
         result.IsSuccess.ShouldBeTrue();
         harness.Log.Entries.ShouldNotContain("seed:global");
-        harness.Log.Entries.ShouldContain($"seed:per-tenant:{((Guid)tenant.Id)}:current={((Guid)tenant.Id)}");
+        harness.Log.Entries.ShouldContain(e => e.StartsWith($"seed:per-tenant:{((Guid)tenant.Id)}:current={((Guid)tenant.Id)}"));
+    }
+
+    [Fact]
+    public async Task RunForTenantAsync_ShouldRunInTheAmbientScope_SoItJoinsTheAmbientTransaction()
+    {
+        var tenant = Tenant.Create("First", "FIRST", "d").Value;
+        var harness = new SeedRunnerHarness().WithTenantSeeder("per-tenant", 100);
+
+        await harness.RunForTenantAsync(tenant.Id);
+
+        harness.Log.Entries.ShouldContain(e => e.EndsWith($"scope={harness.AmbientScopeId}"));
+    }
+
+    [Fact]
+    public async Task RunAsync_ShouldRunEachTenantExecutionInItsOwnScope()
+    {
+        var first = Tenant.Create("First", "FIRST", "d").Value;
+        var second = Tenant.Create("Second", "SECOND", "d").Value;
+        var harness = new SeedRunnerHarness(tenants: [first, second]).WithTenantSeeder("per-tenant", 100);
+
+        await harness.RunAsync();
+
+        var scopes = harness.Log.Entries.Where(e => e.StartsWith("seed:per-tenant")).Select(e => e[(e.IndexOf("scope=") + 6)..]).ToList();
+        scopes.Distinct().Count().ShouldBe(2);
     }
 }

@@ -110,9 +110,15 @@ internal class ScriptedSeeder(
     }
 }
 
+internal sealed class ScopeMarker
+{
+    public Guid Id { get; } = Guid.NewGuid();
+}
+
 internal sealed class ScriptedTenantSeeder(
     SeedLog log,
     FakeCurrentTenant currentTenant,
+    ScopeMarker marker,
     string name,
     int order,
     Func<TenantId, Task<Result>>? action = null) : ITenantDataSeeder
@@ -122,7 +128,7 @@ internal sealed class ScriptedTenantSeeder(
 
     public async Task<Result> SeedForTenantAsync(TenantId tenantId, CancellationToken cancellationToken = default)
     {
-        log.Add($"seed:{name}:{(Guid)tenantId}:current={currentTenant.Id}");
+        log.Add($"seed:{name}:{(Guid)tenantId}:current={currentTenant.Id}:scope={marker.Id}");
         return action is null ? Result.Success() : await action(tenantId);
     }
 }
@@ -145,6 +151,7 @@ internal sealed class SeedRunnerHarness
         _services.AddSingleton<ILogger<SeedRunner>>(NullLogger<SeedRunner>.Instance);
         _services.AddSingleton<IOptions<SeedOptions>>(Options.Create(options ?? new SeedOptions()));
         _services.AddScoped<IUnitOfWork, FakeUnitOfWork>();
+        _services.AddScoped<ScopeMarker>();
 
         var tenantsRepository = Substitute.For<ITenantsRepository>();
         tenantsRepository
@@ -167,7 +174,7 @@ internal sealed class SeedRunnerHarness
 
     public SeedRunnerHarness WithTenantSeeder(string name, int order, Func<TenantId, Task<Result>>? action = null)
     {
-        _services.AddScoped<IDataSeeder>(_ => new ScriptedTenantSeeder(Log, CurrentTenant, name, order, action));
+        _services.AddScoped<IDataSeeder>(sp => new ScriptedTenantSeeder(Log, CurrentTenant, sp.GetRequiredService<ScopeMarker>(), name, order, action));
         return this;
     }
 
@@ -178,10 +185,13 @@ internal sealed class SeedRunnerHarness
         return await scope.ServiceProvider.GetRequiredService<ISeedRunner>().RunAsync();
     }
 
+    public Guid AmbientScopeId { get; private set; }
+
     public async Task<Result> RunForTenantAsync(TenantId tenantId)
     {
         using var provider = _services.BuildServiceProvider();
         using var scope = provider.CreateScope();
+        AmbientScopeId = scope.ServiceProvider.GetRequiredService<ScopeMarker>().Id;
         return await scope.ServiceProvider.GetRequiredService<ISeedRunner>().RunForTenantAsync(tenantId);
     }
 }

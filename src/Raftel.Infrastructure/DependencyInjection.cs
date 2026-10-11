@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using OpenIddict.Abstractions;
@@ -124,6 +125,8 @@ public static class DependencyInjection
 
         services.AddScoped<ISeedHistoryStore, SeedHistoryStore<TDbContext>>();
         services.AddScoped<ISeedRunner, SeedRunner>();
+        services.AddScoped<IDatabaseMigrator, DatabaseMigrator<TDbContext>>();
+        services.TryAddSingleton<SeedingState>();
 
         services.AddScoped<IDataSeeder, DefaultTenantSeeder>();
         services.AddScoped<IDataSeeder, PermissionsSeeder>();

@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Raftel.Infrastructure.Seeding;
 using Raftel.Application.Abstractions.Health;
 using Microsoft.Extensions.Hosting;
 using Raftel.Application.Abstractions;
@@ -33,13 +35,15 @@ public static class HealthDependencyInjection
             o.EnableOutboxCheck = options.EnableOutboxCheck;
         });
 
+        services.TryAddSingleton<SeedingState>();
         services.AddSingleton<StartupHealthCheck>();
         services.AddHostedService<StartupHostedService>();
 
         var builder = services.AddHealthChecks()
             .AddCheck<DatabaseHealthCheck>(HealthCheckNames.Database, tags: [HealthCheckTags.Ready], timeout: options.CheckTimeout)
             .AddCheck<PendingMigrationsHealthCheck>(HealthCheckNames.Migrations, tags: [HealthCheckTags.Ready], timeout: options.CheckTimeout)
-            .AddCheck<StartupHealthCheck>(HealthCheckNames.Startup, tags: [HealthCheckTags.Ready], timeout: options.CheckTimeout);
+            .AddCheck<StartupHealthCheck>(HealthCheckNames.Startup, tags: [HealthCheckTags.Ready], timeout: options.CheckTimeout)
+            .AddCheck<SeedingHealthCheck>(HealthCheckNames.Seeding, tags: [HealthCheckTags.Ready], timeout: options.CheckTimeout);
 
         if (options.EnableTenantResolutionCheck)
         {

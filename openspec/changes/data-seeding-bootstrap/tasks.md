@@ -45,29 +45,29 @@ Each implementation task follows TDD: write the named failing test first, then t
 
 ## 6. Tenant seeding
 
-- [ ] 6.1 Add the tenant pass to `SeedRunner.RunAsync` (per tenant, per `ITenantDataSeeder`, inside `ICurrentTenant.Change`, own transaction, history per tenant); verify an integration test with two tenants runs the seeder twice with the correct current tenant and writes tenant-owned data, and a failure for the second tenant keeps the first tenant's data
-- [ ] 6.2 Implement `ISeedRunner.RunForTenantAsync` in the ambient scope with nested transaction; verify a unit test shows it joins an active transaction rather than opening a new scope
-- [ ] 6.3 Raise `TenantCreated` from `Tenant.Create`; verify a domain unit test asserts the event is raised with the new tenant id and existing tenant domain tests still pass
-- [ ] 6.4 Add the `TenantCreated` handler calling `RunForTenantAsync` and throwing `SeedingFailedException` on failure; verify integration tests that creating a tenant via the command runs a registered tenant seeder in that tenant's context, and that a failing tenant seeder under `TransactionMiddleware` persists neither tenant nor seeded data
+- [x] 6.1 Add the tenant pass to `SeedRunner.RunAsync` (per tenant, per `ITenantDataSeeder`, inside `ICurrentTenant.Change`, own transaction, history per tenant); verify an integration test with two tenants runs the seeder twice with the correct current tenant and writes tenant-owned data, and a failure for the second tenant keeps the first tenant's data
+- [x] 6.2 Implement `ISeedRunner.RunForTenantAsync` in the ambient scope with nested transaction; verify a unit test shows it joins an active transaction rather than opening a new scope
+- [x] 6.3 Raise `TenantCreated` from `Tenant.Create`; verify a domain unit test asserts the event is raised with the new tenant id and existing tenant domain tests still pass
+- [x] 6.4 Add the `TenantCreated` handler calling `RunForTenantAsync` and throwing `SeedingFailedException` on failure; verify integration tests that creating a tenant via the command runs a registered tenant seeder in that tenant's context, and that a failing tenant seeder under `TransactionMiddleware` persists neither tenant nor seeded data
 
 ## 7. Startup entry point and readiness
 
-- [ ] 7.1 Add `IDatabaseMigrator` / `DatabaseMigrator<TDbContext>` registered in `AddRaftelData`; verify an integration test applies pending migrations and reports none pending afterwards
-- [ ] 7.2 Implement `MigrateAndSeedAsync` per design D11; verify integration tests for migrate-then-seed when enabled, failure with a "migrations pending" message and no seeder executed when disabled, seeders skipped when `RunSeedersOnStartup` is false, and `SeedingFailedException` thrown on failure with fail-fast
-- [ ] 7.3 Add `SeedingState` and `SeedingHealthCheck` (tag `ready`) registered in `AddRaftelHealthChecks`; verify unit tests map each state to the status in design D12 and a functional test shows `/health/ready` returns 200 when seeding was never requested
-- [ ] 7.4 Verify readiness end to end with a functional test: 503 while a blocking seeder is running, 200 after completion, and 200 with degraded status after a failure with fail-fast disabled
-- [ ] 7.5 Document the `seeding` check in `docs/health-checks.md`; verify the documented states match the unit tests from 7.3
+- [x] 7.1 Add `IDatabaseMigrator` / `DatabaseMigrator<TDbContext>` registered in `AddRaftelData`; verify an integration test applies pending migrations and reports none pending afterwards
+- [x] 7.2 Implement `MigrateAndSeedAsync` per design D11; verify integration tests for migrate-then-seed when enabled, failure with a "migrations pending" message and no seeder executed when disabled, seeders skipped when `RunSeedersOnStartup` is false, and `SeedingFailedException` thrown on failure with fail-fast
+- [x] 7.3 Add `SeedingState` and `SeedingHealthCheck` (tag `ready`) registered in `AddRaftelHealthChecks`; verify unit tests map each state to the status in design D12 and a functional test shows `/health/ready` returns 200 when seeding was never requested
+- [x] 7.4 Verify readiness end to end with a functional test: 503 while seeding is running (state driven through the shared `SeedingState`), 200 after completion, and 200 with degraded status after a failure with fail-fast disabled
+- [x] 7.5 Document the `seeding` check in `docs/health-checks.md`; verify the documented states match the unit tests from 7.3
 
 ## 8. Demo and documentation
 
-- [ ] 8.1 Add `[PermissionSet]` to `PiratesPermissions`, move the OpenIddict client registration into a demo `IDataSeeder`, delete `SeedData`, and call `MigrateAndSeedAsync` from the demo `Program.cs`; verify the demo starts against an empty database and the catalog contains the Pirates, Users and Tenants permissions
+- [x] 8.1 Add `[PermissionSet]` to `PiratesPermissions`, move the OpenIddict client registration into a demo `IDataSeeder`, delete `SeedData`, and call `MigrateAndSeedAsync` from the demo `Program.cs`; verify the demo starts against an empty database and the catalog contains the Pirates, Users and Tenants permissions
 - [x] 8.2 Add the demo migration for `PermissionDefinition` and `SeedHistory`; verify `dotnet ef migrations has-pending-model-changes` reports none for the demo context
-- [ ] 8.3 Make the functional-test fixture inject a randomly generated administrator password through configuration and update tests that referenced the lowercase `admin` role; verify `dotnet test tests/Raftel.Api.FunctionalTests` passes
-- [ ] 8.4 Add a functional test for the acceptance path: empty database, start, log in as the seeded administrator in host context, call a permission-protected endpoint successfully
+- [x] 8.3 Make the functional-test fixture inject a randomly generated administrator password through configuration and update tests that referenced the lowercase `admin` role; verify `dotnet test tests/Raftel.Api.FunctionalTests` passes
+- [x] 8.4 Add a functional test for the acceptance path: empty database, start, log in as the seeded administrator in host context and verify, through a demo endpoint reporting the caller's permissions, that every declared permission reaches the caller (the demo pipeline does not register `PermissionAuthorizationMiddleware`, so no demo endpoint is permission-enforced)
 - [ ] 8.5 Write `docs/getting-started.md` covering the startup flow, `Raftel:Seed` settings, credential rules, writing a custom seeder and tenant seeder, the required migration, the multi-replica recommendation, and the host-context role limitation; verify every code snippet in it compiles against the demo
 
 ## 9. Integration checks
 
-- [ ] 9.1 Run seeding twice against an empty database in an integration test and assert row counts for tenants, catalog permissions, roles, role permissions and users are identical after both runs
-- [ ] 9.2 Run `dotnet build Raftel.sln` and `dotnet test`; verify zero errors and all projects green on both SQL Server and PostgreSQL providers
-- [ ] 9.3 Run `openspec validate data-seeding-bootstrap` and verify it reports no errors
+- [x] 9.1 Run seeding twice against an empty database in an integration test and assert row counts for tenants, catalog permissions, roles, role permissions and users are identical after both runs
+- [x] 9.2 Run `dotnet build Raftel.sln` and `dotnet test`; verify zero errors and all projects green on both SQL Server and PostgreSQL providers
+- [x] 9.3 Run `openspec validate data-seeding-bootstrap` and verify it reports no errors
