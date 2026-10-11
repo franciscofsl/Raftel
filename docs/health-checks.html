@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Health Checks | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Health Checks | Raftel ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/health-checks.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="health-checks">Health Checks</h1>
+
+<p>Raftel ships liveness, readiness, and diagnostic endpoints on top of
+<code>Microsoft.Extensions.Diagnostics.HealthChecks</code> — part of the ASP.NET Core
+shared framework, so no extra NuGet package is required.</p>
+<h2 id="endpoints">Endpoints</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Runs</th>
+<th>Meaning</th>
+<th>Auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/health/live</code></td>
+<td>no checks</td>
+<td>the process is responsive</td>
+<td>anonymous</td>
+</tr>
+<tr>
+<td><code>/health/ready</code></td>
+<td>checks tagged <code>ready</code></td>
+<td>dependencies are ready to serve traffic</td>
+<td>anonymous</td>
+</tr>
+<tr>
+<td><code>/health</code></td>
+<td>every registered check</td>
+<td>full diagnostic detail</td>
+<td>authorized by default</td>
+</tr>
+</tbody>
+</table>
+<p><code>/health/live</code> never touches the database or any other dependency: it exists
+so an orchestrator can tell &quot;the process is alive&quot; apart from &quot;the process is
+ready&quot;, and a database outage drains the instance from the load balancer
+instead of restarting it in a loop.</p>
+<p><code>/health</code> is the only endpoint that reports per-check detail (status,
+duration, a short description). <code>/health/live</code> and <code>/health/ready</code> only ever
+return the aggregate status — never a check name, a description, an
+exception message, or a connection string.</p>
+<h2 id="registration">Registration</h2>
+<pre><code class="lang-csharp">services.AddRaftelData&lt;MyDbContext&gt;(configuration);
+services.AddRaftelHealthChecks(options =&gt;
+{
+    options.EnableTenantResolutionCheck = true; // opt-in, off by default
+    options.EnableOutboxCheck = true;            // requires an IOutboxHealthProbe registration
+});
+</code></pre>
+<pre><code class="lang-csharp">app.MapRaftelHealthChecks();
+</code></pre>
+<p><code>AddRaftelHealthChecks</code> must run after <code>AddRaftelData&lt;TDbContext&gt;</code>, since the
+database checks depend on the <code>IDatabaseProbe</code> it registers.</p>
+<h2 id="checks">Checks</h2>
+<ul>
+<li><strong>Database connectivity</strong> (<code>ready</code>): <code>Healthy</code> on a fast connection,
+<code>Degraded</code> past <code>DatabaseSlowThreshold</code>, <code>Unhealthy</code> on failure.</li>
+<li><strong>Pending migrations</strong> (<code>ready</code>): <code>Unhealthy</code> while the schema has
+unapplied migrations, so traffic is never served against a stale schema.</li>
+<li><strong>Startup</strong> (<code>ready</code>): <code>Unhealthy</code> until the application's startup work
+(register an <code>IStartupTask</code>) completes; stays <code>Unhealthy</code> forever if that
+work fails, rather than restarting the check.</li>
+<li><strong>Tenant resolution</strong> (<code>ready</code>, opt-in via <code>EnableTenantResolutionCheck</code>):
+verifies the tenant store responds.</li>
+<li><strong>Outbox backlog</strong> (<code>ready</code>, opt-in via <code>EnableOutboxCheck</code>): <code>Degraded</code>
+when the oldest unprocessed message is older than <code>OutboxLagThreshold</code>,
+<code>Unhealthy</code> when dead letters exceed <code>DeadLetterThreshold</code>. Requires an
+<code>IOutboxHealthProbe</code> implementation to be registered — enabling the flag
+without one throws at startup.</li>
+</ul>
+<h2 id="options-healthoptions">Options (<code>HealthOptions</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RequireAuthorizationForDetails</code></td>
+<td><code>true</code></td>
+<td>require authorization for <code>/health</code></td>
+</tr>
+<tr>
+<td><code>DetailsPolicy</code></td>
+<td><code>null</code></td>
+<td>named authorization policy for <code>/health</code>; the default policy is used when unset</td>
+</tr>
+<tr>
+<td><code>CheckTimeout</code></td>
+<td>3s</td>
+<td>per-check timeout; a check that exceeds it is reported <code>Unhealthy</code> without blocking the others</td>
+</tr>
+<tr>
+<td><code>DatabaseSlowThreshold</code></td>
+<td>1s</td>
+<td>connection time above which the database check reports <code>Degraded</code></td>
+</tr>
+<tr>
+<td><code>OutboxLagThreshold</code></td>
+<td>5min</td>
+<td>oldest unprocessed message age above which the outbox check reports <code>Degraded</code></td>
+</tr>
+<tr>
+<td><code>DeadLetterThreshold</code></td>
+<td>10</td>
+<td>dead-letter count above which the outbox check reports <code>Unhealthy</code></td>
+</tr>
+<tr>
+<td><code>EnableTenantResolutionCheck</code></td>
+<td><code>false</code></td>
+<td>opt in to the tenant check</td>
+</tr>
+<tr>
+<td><code>EnableOutboxCheck</code></td>
+<td><code>false</code></td>
+<td>opt in to the outbox check</td>
+</tr>
+</tbody>
+</table>
+<h2 id="kubernetes-probes">Kubernetes probes</h2>
+<pre><code class="lang-yaml">livenessProbe:
+  httpGet:
+    path: /health/live
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /health/ready
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  failureThreshold: 3
+</code></pre>
+<h2 id="writing-a-custom-check">Writing a custom check</h2>
+<p>A check that plugs into <code>AddRaftelHealthChecks</code> (or is registered directly
+with <code>IHealthChecksBuilder</code>) must:</p>
+<ul>
+<li>honor the <code>CancellationToken</code> it is given, so <code>CheckTimeout</code> actually cuts
+the work short instead of only shortening how long the caller waits;</li>
+<li>never put an exception message, a stack trace, or a connection string into
+its <code>Description</code> or <code>Data</code> — catch internally and return
+<code>HealthCheckResult.Unhealthy(&quot;&lt;safe text&gt;&quot;)</code>; the real exception belongs in
+the application's structured logs, not in the health response body.</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/health-checks.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

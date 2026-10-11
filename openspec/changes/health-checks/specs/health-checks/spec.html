@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../../../favicon.ico">
+      <link rel="stylesheet" href="../../../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/health-checks/specs/health-checks/spec.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../../../index.html">
+            <img id="logo" class="svg" src="../../../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="purpose">Purpose</h2>
+<p>Lets an orchestrator, load balancer, or operator find out whether an application instance is alive, whether it is ready to receive traffic, and — for authorized callers only — which dependency is degraded, without a failing dependency causing restart loops or leaking internal detail to anonymous callers.</p>
+<h2 id="added-requirements">ADDED Requirements</h2>
+<h3 id="requirement-liveness-probe-independent-of-dependencies">Requirement: Liveness probe independent of dependencies</h3>
+<p>The system SHALL expose a liveness endpoint at <code>/health/live</code> that reports whether the process itself is responsive, and SHALL NOT contact the database or any other external dependency while serving it.</p>
+<h4 id="scenario-process-is-responsive-and-dependencies-are-healthy">Scenario: Process is responsive and dependencies are healthy</h4>
+<ul>
+<li><strong>WHEN</strong> a caller requests <code>/health/live</code> while the application is running normally</li>
+<li><strong>THEN</strong> the response status code is 200</li>
+</ul>
+<h4 id="scenario-database-is-unreachable">Scenario: Database is unreachable</h4>
+<ul>
+<li><strong>WHEN</strong> a caller requests <code>/health/live</code> while the database is unreachable</li>
+<li><strong>THEN</strong> the response status code is 200</li>
+<li><strong>THEN</strong> no database connection is attempted while serving the request</li>
+</ul>
+<h4 id="scenario-liveness-is-reachable-without-credentials">Scenario: Liveness is reachable without credentials</h4>
+<ul>
+<li><strong>WHEN</strong> an unauthenticated caller requests <code>/health/live</code></li>
+<li><strong>THEN</strong> the request is not rejected for lack of authentication</li>
+</ul>
+<h3 id="requirement-readiness-probe-reflecting-dependencies">Requirement: Readiness probe reflecting dependencies</h3>
+<p>The system SHALL expose a readiness endpoint at <code>/health/ready</code> that aggregates only the checks marked as readiness checks, returning 200 when the aggregate result is healthy or degraded, and 503 when it is unhealthy.</p>
+<h4 id="scenario-all-readiness-checks-pass">Scenario: All readiness checks pass</h4>
+<ul>
+<li><strong>WHEN</strong> a caller requests <code>/health/ready</code> and every readiness check reports healthy</li>
+<li><strong>THEN</strong> the response status code is 200</li>
+</ul>
+<h4 id="scenario-a-readiness-check-is-unhealthy">Scenario: A readiness check is unhealthy</h4>
+<ul>
+<li><strong>WHEN</strong> a caller requests <code>/health/ready</code> and at least one readiness check reports unhealthy</li>
+<li><strong>THEN</strong> the response status code is 503</li>
+</ul>
+<h4 id="scenario-a-readiness-check-is-degraded">Scenario: A readiness check is degraded</h4>
+<ul>
+<li><strong>WHEN</strong> a caller requests <code>/health/ready</code> and at least one readiness check reports degraded while none reports unhealthy</li>
+<li><strong>THEN</strong> the response status code is 200</li>
+<li><strong>THEN</strong> the aggregate status reported is degraded</li>
+</ul>
+<h4 id="scenario-readiness-is-reachable-without-credentials">Scenario: Readiness is reachable without credentials</h4>
+<ul>
+<li><strong>WHEN</strong> an unauthenticated caller requests <code>/health/ready</code></li>
+<li><strong>THEN</strong> the request is not rejected for lack of authentication</li>
+</ul>
+<h3 id="requirement-detailed-diagnostic-endpoint">Requirement: Detailed diagnostic endpoint</h3>
+<p>The system SHALL expose a diagnostic endpoint at <code>/health</code> that runs every registered check and reports each check's individual result.</p>
+<h4 id="scenario-authorized-caller-gets-per-check-detail">Scenario: Authorized caller gets per-check detail</h4>
+<ul>
+<li><strong>WHEN</strong> an authorized caller requests <code>/health</code></li>
+<li><strong>THEN</strong> the response body reports the aggregate status and one entry per registered check, each with its own status</li>
+</ul>
+<h4 id="scenario-aggregate-status-maps-to-a-status-code">Scenario: Aggregate status maps to a status code</h4>
+<ul>
+<li><strong>WHEN</strong> an authorized caller requests <code>/health</code> and at least one check reports unhealthy</li>
+<li><strong>THEN</strong> the response status code is 503</li>
+</ul>
+<h3 id="requirement-detail-endpoint-requires-authorization-by-default">Requirement: Detail endpoint requires authorization by default</h3>
+<p>The system SHALL require authorization for <code>/health</code> by default, and SHALL allow an operator to configure the authorization policy applied to it or to opt out of the requirement explicitly.</p>
+<h4 id="scenario-anonymous-caller-under-default-configuration">Scenario: Anonymous caller under default configuration</h4>
+<ul>
+<li><strong>WHEN</strong> an unauthenticated caller requests <code>/health</code> while the default configuration is in effect</li>
+<li><strong>THEN</strong> the response status code is 401</li>
+<li><strong>THEN</strong> the response body contains no check names, statuses, or descriptions</li>
+</ul>
+<h4 id="scenario-operator-configures-a-policy">Scenario: Operator configures a policy</h4>
+<ul>
+<li><strong>WHEN</strong> an operator configures an authorization policy for the detail endpoint and a caller who does not satisfy that policy requests <code>/health</code></li>
+<li><strong>THEN</strong> the request is rejected and the response body contains no check detail</li>
+</ul>
+<h4 id="scenario-operator-opts-out-of-the-requirement">Scenario: Operator opts out of the requirement</h4>
+<ul>
+<li><strong>WHEN</strong> an operator explicitly disables the authorization requirement for the detail endpoint and an unauthenticated caller requests <code>/health</code></li>
+<li><strong>THEN</strong> the detailed response body is returned</li>
+</ul>
+<h3 id="requirement-public-probe-responses-expose-status-only">Requirement: Public probe responses expose status only</h3>
+<p>The system SHALL limit the response body of <code>/health/live</code> and <code>/health/ready</code> to aggregate status information, and SHALL NOT include per-check descriptions, exception messages, stack traces, connection strings, or any other configuration value in any health response body, at any endpoint.</p>
+<h4 id="scenario-readiness-fails-because-of-a-database-error">Scenario: Readiness fails because of a database error</h4>
+<ul>
+<li><strong>WHEN</strong> a caller requests <code>/health/ready</code> while the database connection fails with an exception</li>
+<li><strong>THEN</strong> the response body contains no exception message, no stack trace, and no connection string</li>
+<li><strong>THEN</strong> the response body contains no per-check description</li>
+</ul>
+<h4 id="scenario-detailed-endpoint-reports-a-failing-check">Scenario: Detailed endpoint reports a failing check</h4>
+<ul>
+<li><strong>WHEN</strong> an authorized caller requests <code>/health</code> while a check has failed with an exception</li>
+<li><strong>THEN</strong> the response body reports that check's status and a description that does not contain the exception message, a stack trace, or a connection string</li>
+</ul>
+<h3 id="requirement-json-health-response-format">Requirement: JSON health response format</h3>
+<p>The system SHALL serialize health responses as JSON containing the aggregate <code>status</code> and the total duration in milliseconds, and — for the detailed endpoint — an <code>entries</code> object keyed by check name, where each entry carries that check's <code>status</code>, its duration in milliseconds, and an optional non-sensitive <code>description</code>.</p>
+<h4 id="scenario-detailed-response-shape">Scenario: Detailed response shape</h4>
+<ul>
+<li><strong>WHEN</strong> an authorized caller requests <code>/health</code></li>
+<li><strong>THEN</strong> the response content type is <code>application/json</code></li>
+<li><strong>THEN</strong> the body contains the aggregate status, the total duration in milliseconds, and an entry per check with that check's status and duration</li>
+</ul>
+<h4 id="scenario-public-probe-response-shape">Scenario: Public probe response shape</h4>
+<ul>
+<li><strong>WHEN</strong> a caller requests <code>/health/live</code> or <code>/health/ready</code></li>
+<li><strong>THEN</strong> the response content type is <code>application/json</code></li>
+<li><strong>THEN</strong> the body contains the aggregate status and no <code>entries</code> object</li>
+</ul>
+<h3 id="requirement-database-connectivity-check">Requirement: Database connectivity check</h3>
+<p>The system SHALL provide a readiness check that verifies the application can connect to its database, reporting healthy on a successful connection, degraded when the connection succeeds but takes longer than the configured slow threshold, and unhealthy when the connection fails or does not complete within the configured check timeout.</p>
+<h4 id="scenario-database-reachable-and-fast">Scenario: Database reachable and fast</h4>
+<ul>
+<li><strong>WHEN</strong> the database connectivity check runs and the connection succeeds within the slow threshold</li>
+<li><strong>THEN</strong> the check reports healthy</li>
+</ul>
+<h4 id="scenario-database-reachable-but-slow">Scenario: Database reachable but slow</h4>
+<ul>
+<li><strong>WHEN</strong> the database connectivity check runs and the connection succeeds but takes longer than the configured slow threshold</li>
+<li><strong>THEN</strong> the check reports degraded</li>
+</ul>
+<h4 id="scenario-database-unreachable">Scenario: Database unreachable</h4>
+<ul>
+<li><strong>WHEN</strong> the database connectivity check runs against an unreachable database or an invalid connection string</li>
+<li><strong>THEN</strong> the check reports unhealthy</li>
+<li><strong>THEN</strong> no exception propagates out of the check</li>
+</ul>
+<h3 id="requirement-pending-migrations-check">Requirement: Pending migrations check</h3>
+<p>The system SHALL provide a readiness check that reports unhealthy while the database schema has migrations that have not been applied, so that traffic is not served against an outdated schema.</p>
+<h4 id="scenario-schema-is-up-to-date">Scenario: Schema is up to date</h4>
+<ul>
+<li><strong>WHEN</strong> the pending migrations check runs and no migration is pending</li>
+<li><strong>THEN</strong> the check reports healthy</li>
+</ul>
+<h4 id="scenario-migrations-are-pending">Scenario: Migrations are pending</h4>
+<ul>
+<li><strong>WHEN</strong> the pending migrations check runs and at least one migration is pending</li>
+<li><strong>THEN</strong> the check reports unhealthy</li>
+</ul>
+<h4 id="scenario-migration-state-cannot-be-determined">Scenario: Migration state cannot be determined</h4>
+<ul>
+<li><strong>WHEN</strong> the pending migrations check cannot reach the database to determine migration state</li>
+<li><strong>THEN</strong> the check reports unhealthy</li>
+<li><strong>THEN</strong> no exception propagates out of the check</li>
+</ul>
+<h3 id="requirement-startup-readiness-gate">Requirement: Startup readiness gate</h3>
+<p>The system SHALL report the instance as not ready from process start until application startup work has completed, and SHALL report it ready afterwards, so no traffic is admitted during the window in which the process responds but startup is unfinished.</p>
+<h4 id="scenario-startup-work-still-running">Scenario: Startup work still running</h4>
+<ul>
+<li><strong>WHEN</strong> a caller requests <code>/health/ready</code> before startup work has completed</li>
+<li><strong>THEN</strong> the response status code is 503</li>
+</ul>
+<h4 id="scenario-startup-work-completed">Scenario: Startup work completed</h4>
+<ul>
+<li><strong>WHEN</strong> startup work has completed and a caller requests <code>/health/ready</code> while every other readiness check passes</li>
+<li><strong>THEN</strong> the response status code is 200</li>
+</ul>
+<h4 id="scenario-startup-work-failed">Scenario: Startup work failed</h4>
+<ul>
+<li><strong>WHEN</strong> application startup work fails</li>
+<li><strong>THEN</strong> the instance continues to report not ready</li>
+</ul>
+<h3 id="requirement-tenant-resolution-check">Requirement: Tenant resolution check</h3>
+<p>The system SHALL provide an opt-in readiness check that verifies the tenant store responds, reporting healthy when it does and unhealthy when it does not, and SHALL NOT register the check unless the application opts in.</p>
+<h4 id="scenario-tenant-store-responds">Scenario: Tenant store responds</h4>
+<ul>
+<li><strong>WHEN</strong> the tenant resolution check runs and the tenant store responds successfully</li>
+<li><strong>THEN</strong> the check reports healthy</li>
+</ul>
+<h4 id="scenario-tenant-store-does-not-respond">Scenario: Tenant store does not respond</h4>
+<ul>
+<li><strong>WHEN</strong> the tenant resolution check runs and the tenant store fails or times out</li>
+<li><strong>THEN</strong> the check reports unhealthy</li>
+<li><strong>THEN</strong> no exception propagates out of the check</li>
+</ul>
+<h4 id="scenario-check-not-opted-in">Scenario: Check not opted in</h4>
+<ul>
+<li><strong>WHEN</strong> an application does not opt in to the tenant resolution check</li>
+<li><strong>THEN</strong> no tenant entry appears in the detailed health response</li>
+</ul>
+<h3 id="requirement-outbox-backlog-check">Requirement: Outbox backlog check</h3>
+<p>The system SHALL provide a readiness check that reports degraded when unprocessed outbox messages are older than the configured lag threshold, unhealthy when the number of dead-lettered messages exceeds the configured dead-letter threshold, and healthy otherwise; the check SHALL only be registered when an outbox is present in the application.</p>
+<h4 id="scenario-outbox-keeping-up">Scenario: Outbox keeping up</h4>
+<ul>
+<li><strong>WHEN</strong> the outbox check runs, no unprocessed message is older than the lag threshold, and dead letters do not exceed the dead-letter threshold</li>
+<li><strong>THEN</strong> the check reports healthy</li>
+</ul>
+<h4 id="scenario-outbox-lagging">Scenario: Outbox lagging</h4>
+<ul>
+<li><strong>WHEN</strong> the outbox check runs and at least one unprocessed message is older than the configured lag threshold</li>
+<li><strong>THEN</strong> the check reports degraded</li>
+</ul>
+<h4 id="scenario-dead-letters-above-threshold">Scenario: Dead letters above threshold</h4>
+<ul>
+<li><strong>WHEN</strong> the outbox check runs and the number of dead-lettered messages exceeds the configured dead-letter threshold</li>
+<li><strong>THEN</strong> the check reports unhealthy</li>
+</ul>
+<h4 id="scenario-no-outbox-present">Scenario: No outbox present</h4>
+<ul>
+<li><strong>WHEN</strong> an application has no outbox</li>
+<li><strong>THEN</strong> no outbox entry appears in the detailed health response</li>
+</ul>
+<h3 id="requirement-a-hung-check-cannot-hang-the-endpoint">Requirement: A hung check cannot hang the endpoint</h3>
+<p>The system SHALL bound each individual check by the configured check timeout, reporting that check as unhealthy when it exceeds the timeout, while the remaining checks still report their own results and the endpoint still responds.</p>
+<h4 id="scenario-one-check-never-completes">Scenario: One check never completes</h4>
+<ul>
+<li><strong>WHEN</strong> a health endpoint is requested and one registered check does not complete within the configured check timeout</li>
+<li><strong>THEN</strong> the endpoint returns a response</li>
+<li><strong>THEN</strong> the timed-out check is reported as unhealthy</li>
+<li><strong>THEN</strong> every other check reports its own result</li>
+</ul>
+<h3 id="requirement-configurable-health-options">Requirement: Configurable health options</h3>
+<p>The system SHALL let an application configure the detail endpoint's authorization requirement and policy, the per-check timeout, the database slow threshold, the outbox lag threshold, and the dead-letter threshold, and SHALL apply documented defaults when they are not configured: authorization required for the detail endpoint, a 3-second check timeout, a 1-second database slow threshold, a 5-minute outbox lag threshold, and a dead-letter threshold of 10.</p>
+<h4 id="scenario-defaults-applied">Scenario: Defaults applied</h4>
+<ul>
+<li><strong>WHEN</strong> an application registers health checks without configuring options</li>
+<li><strong>THEN</strong> the documented default values are in effect</li>
+</ul>
+<h4 id="scenario-thresholds-overridden">Scenario: Thresholds overridden</h4>
+<ul>
+<li><strong>WHEN</strong> an application configures a different database slow threshold and a caller requests the detail endpoint while a database connection takes longer than the configured value</li>
+<li><strong>THEN</strong> the database check reports degraded according to the configured threshold</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/health-checks/specs/health-checks/spec.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

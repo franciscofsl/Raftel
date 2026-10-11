@@ -253,6 +253,48 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Health.HealthEndpointExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Health.HealthEndpointExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Health.HealthEndpointExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Health.HealthResponseWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Health.HealthResponseWriter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Health.HealthResponseWriter",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Health.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Health.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Health",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Api.Server.Middlewares.CorrelationIdMiddleware.yml",
       "output": {
         ".html": {
@@ -449,6 +491,48 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.Health.HealthCheckTags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.Health.HealthCheckTags.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.Health.HealthCheckTags",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.Health.HealthOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.Health.HealthOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.Health.HealthOptions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.Health.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.Health.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.Health",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Abstractions.ICorrelationContext.yml",
       "output": {
         ".html": {
@@ -460,6 +544,20 @@
       "IsMRef": true,
       "Title": "Raftel.Application.Abstractions.ICorrelationContext",
       "Summary": "<p sourcefile=\"api/Raftel.Application.Abstractions.ICorrelationContext.yml\" sourcestartlinenumber=\"1\">Exposes the correlation identifier resolved for the current HTTP request, so that any\ncomponent in the pipeline can tag work (e.g. audit entries, domain events) with it.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Application.Abstractions.IOutboxHealthProbe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Application.Abstractions.IOutboxHealthProbe.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Application.Abstractions.IOutboxHealthProbe",
+      "Summary": null
     },
     {
       "type": "ManagedReference",
@@ -2885,6 +2983,174 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.DatabaseHealthCheck.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.DatabaseHealthCheck.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.DatabaseHealthCheck",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.DatabaseProbe-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.DatabaseProbe-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.DatabaseProbe<TDbContext>",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.HealthCheckNames.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.HealthCheckNames.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.HealthCheckNames",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.HealthDependencyInjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.HealthDependencyInjection.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.HealthDependencyInjection",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.IDatabaseProbe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.IDatabaseProbe.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.IDatabaseProbe",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.IStartupTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.IStartupTask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.IStartupTask",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.OutboxHealthCheck.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.OutboxHealthCheck.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.OutboxHealthCheck",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.PendingMigrationsHealthCheck",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.StartupHealthCheck.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.StartupHealthCheck.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.StartupHealthCheck",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.StartupHostedService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.StartupHostedService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.StartupHostedService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.TenantResolutionHealthCheck.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.TenantResolutionHealthCheck.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health.TenantResolutionHealthCheck",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Health.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Health.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Health",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Infrastructure.Multitenancy.Middleware.TenantMiddlewareExtensions.yml",
       "output": {
         ".html": {
@@ -3376,6 +3642,16 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "docs/health-checks.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/health-checks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "docs/introduction.md",
       "output": {
         ".html": {
@@ -3543,6 +3819,46 @@
       "output": {
         ".html": {
           "relative_path": "openspec/changes/explicit-transactions/tasks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/health-checks/design.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/health-checks/design.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/health-checks/proposal.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/health-checks/proposal.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/health-checks/specs/health-checks/spec.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/health-checks/specs/health-checks/spec.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "openspec/changes/health-checks/tasks.md",
+      "output": {
+        ".html": {
+          "relative_path": "openspec/changes/health-checks/tasks.html"
         }
       },
       "version": ""

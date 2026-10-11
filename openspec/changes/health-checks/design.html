@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Raftel ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/health-checks/design.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="context">Context</h2>
+<p>See proposal.md — Why. Constraints that shape the approach:</p>
+<ul>
+<li><strong>Layering is non-negotiable</strong> (<code>CLAUDE.md</code>): <code>Raftel.Api.Server</code> depends only on <code>Raftel.Infrastructure</code>, and <code>Microsoft.EntityFrameworkCore</code> is forbidden in <code>Domain</code> and in the API layer. Every check that touches EF Core must therefore live in <code>Raftel.Infrastructure</code>; <code>Raftel.Api.Server</code> may only map endpoints and serialize results.</li>
+<li><strong>The DbContext is generic</strong>: <code>RaftelDbContext&lt;TDbContext&gt;</code>, registered through <code>AddRaftelData&lt;TDbContext&gt;(...)</code>. Health checks cannot depend on a single concrete context type, but the health-check registration API is not generic-friendly at the endpoint layer.</li>
+<li><strong>No new external dependency</strong>: <code>Microsoft.Extensions.Diagnostics.HealthChecks</code> and <code>Microsoft.AspNetCore.Diagnostics.HealthChecks</code> ship in the ASP.NET Core shared framework. The project deliberately avoids the <code>AspNetCore.HealthChecks.*</code> community catalog.</li>
+<li><strong>The outbox does not exist yet</strong> (backlog 07, issue #131). <code>grep -ri outbox src demo tests</code> returns nothing.</li>
+<li><strong>Multitenancy does exist</strong> (<code>Raftel.Infrastructure/Multitenancy</code>, <code>ITenantsRepository</code>), so the tenant check has something real to probe.</li>
+<li>Existing functional-test infrastructure (<code>tests/Raftel.Api.FunctionalTests</code>, <code>ApiTestFactory</code>) and Testcontainers-based integration tests give a place to assert probe status codes and database-down behavior.</li>
+</ul>
+<h2 id="goals--non-goals">Goals / Non-Goals</h2>
+<p><strong>Goals:</strong></p>
+<ul>
+<li>Liveness genuinely decoupled from dependencies, so a database outage drains instances instead of restarting them in a loop.</li>
+<li>One registration entry point, <code>AddRaftelHealthChecks(...)</code>, that works with any <code>TDbContext</code> the application registered.</li>
+<li>Detail exposure that is safe by default: anonymous callers learn only &quot;up / not up&quot;.</li>
+<li>Per-check isolation: a slow or hung dependency degrades one entry, not the endpoint.</li>
+</ul>
+<p><strong>Non-Goals:</strong></p>
+<ul>
+<li>Implementing the outbox itself, or a UI/dashboard for health results.</li>
+<li>Publishing health results to an external monitoring system (<code>IHealthCheckPublisher</code>) — an application can add one on top.</li>
+<li>Checks for dependencies the framework does not own (message brokers, caches, third-party HTTP APIs).</li>
+<li>Degraded-status semantics at the HTTP level beyond the standard mapping (degraded stays 200).</li>
+</ul>
+<h2 id="decisions">Decisions</h2>
+<h3 id="1-build-on-microsoftextensionsdiagnosticshealthchecks-not-a-hand-rolled-abstraction">1. Build on <code>Microsoft.Extensions.Diagnostics.HealthChecks</code>, not a hand-rolled abstraction</h3>
+<p>The shared-framework API already provides registration, tag filtering, per-registration timeout, result aggregation, and <code>MapHealthChecks</code>. Writing our own would duplicate it and break orchestrator tooling expectations.</p>
+<ul>
+<li><em>Alternative — <code>AspNetCore.HealthChecks.*</code> packages</em>: a large catalog, but an external dependency the project avoids, and we need four checks that are each a handful of lines.</li>
+<li><em>Alternative — custom <code>IRaftelHealthCheck</code></em>: no benefit; <code>IHealthCheck</code> is already a minimal interface with no framework coupling worth hiding.</li>
+</ul>
+<h3 id="2-checks-live-in-raftelinfrastructure-endpoints-live-in-raftelapiserver-shared-optionstag-live-in-raftelapplication">2. Checks live in <code>Raftel.Infrastructure</code>; endpoints live in <code>Raftel.Api.Server</code>; shared options/tag live in <code>Raftel.Application</code></h3>
+<p><code>DatabaseHealthCheck</code> / <code>PendingMigrationsHealthCheck</code> need <code>DbContext</code>. Mapping and serialization need <code>IEndpointRouteBuilder</code>. Splitting along that line keeps EF out of the API layer, as <code>.github/instructions/clean-architecture</code> and the architecture tests require.</p>
+<p><code>Raftel.Api.Server</code>'s actual project reference set is <code>Application</code> + <code>Domain</code> + <code>Shared</code> only — it does <strong>not</strong> reference <code>Infrastructure</code> (confirmed by the <code>Api_Should_Not_DependOn_Infrastructure</code> architecture test), unlike what the top-level <code>CLAUDE.md</code>'s prose summary suggests. <code>HealthEndpointExtensions</code> needs <code>HealthOptions</code> (for the detail endpoint's authorization policy) and the <code>ready</code> tag, so both <code>HealthOptions</code> and <code>HealthCheckTags</code> live in <code>Raftel.Application/Abstractions/Health/</code> instead of <code>Raftel.Infrastructure</code>. <code>Raftel.Infrastructure</code> references <code>Application</code> already, so <code>AddRaftelHealthChecks</code> binds and consumes the same <code>HealthOptions</code> type without issue. The per-check-name constants (<code>HealthCheckNames</code>) stay in <code>Raftel.Infrastructure</code> since only registration and infrastructure tests need them.</p>
+<h3 id="3-resolve-the-dbcontext-through-a-non-generic-probe-registered-by-the-generic-entry-point">3. Resolve the DbContext through a non-generic probe, registered by the generic entry point</h3>
+<p><code>AddRaftelHealthChecks(...)</code> is called without a type argument, but the checks need the concrete context. Resolution: <code>AddRaftelData&lt;TDbContext&gt;(...)</code> also registers a non-generic <code>IDatabaseProbe</code> implemented by a <code>DatabaseProbe&lt;TDbContext&gt;</code> that wraps <code>CanConnectAsync</code> and <code>GetPendingMigrationsAsync</code>. The checks depend on <code>IDatabaseProbe</code> only.</p>
+<ul>
+<li><em>Alternative — <code>AddRaftelHealthChecks&lt;TDbContext&gt;(...)</code></em>: forces every caller to repeat the context type already supplied to <code>AddRaftelData</code>, and makes the API-layer extension generic too.</li>
+<li><em>Alternative — resolve <code>DbContext</code> base type from DI</em>: <code>AddDbContext&lt;TDbContext&gt;</code> does not register the base <code>DbContext</code>, so this would need an extra registration anyway; the probe is the same cost with a clearer contract and a trivial test double.</li>
+</ul>
+<h3 id="4-tag-driven-endpoints-with-liveness-deliberately-running-zero-checks">4. Tag-driven endpoints, with liveness deliberately running zero checks</h3>
+<ul>
+<li><code>/health/live</code> → predicate <code>_ =&gt; false</code>: no check runs, so nothing can touch the database. This is the mechanism that satisfies the spec's &quot;liveness independent of dependencies&quot; requirement; it is stronger than &quot;no check is tagged live&quot;, because a later check added without tags cannot leak into liveness.</li>
+<li><code>/health/ready</code> → predicate <code>registration.Tags.Contains(&quot;ready&quot;)</code>.</li>
+<li><code>/health</code> → all checks.</li>
+</ul>
+<p>Tag constants live in one <code>HealthCheckTags</code> type so registrations and endpoint predicates cannot drift.</p>
+<h3 id="5-authorization-applies-to-the-detail-endpoint-only-via-the-standard-endpoint-metadata">5. Authorization applies to the detail endpoint only, via the standard endpoint metadata</h3>
+<p><code>MapHealthChecks(&quot;/health&quot;)</code> gets <code>.RequireAuthorization(...)</code> when <code>HealthOptions.RequireAuthorizationForDetails</code> is true (default), using <code>DetailsPolicy</code> when set and the default policy otherwise. <code>/health/live</code> and <code>/health/ready</code> get <code>.AllowAnonymous()</code> explicitly, so a global fallback authorization policy in a host application cannot accidentally lock out the orchestrator's probes.</p>
+<p>Defense in depth: even when an operator disables authorization, the public writer is still the one used for <code>live</code> and <code>ready</code>, so those two endpoints can never emit per-check detail.</p>
+<ul>
+<li><em>Alternative — separate internal port for <code>/health</code></em>: a valid deployment pattern, but it is a hosting decision, not a framework one; <code>RequireAuthorizationForDetails</code> composes with it rather than replacing it.</li>
+</ul>
+<h3 id="6-two-response-writers-not-one-with-a-flag-threaded-through-the-response">6. Two response writers, not one with a flag threaded through the response</h3>
+<p><code>HealthResponseWriter.WriteDetailed</code> emits <code>status</code>, <code>totalDurationMs</code>, <code>entries</code> (per check: <code>status</code>, <code>durationMs</code>, optional <code>description</code>). <code>HealthResponseWriter.WriteStatusOnly</code> emits <code>status</code> and <code>totalDurationMs</code> and nothing else. Two explicit writers make the &quot;public endpoints cannot leak detail&quot; property visible at the mapping site and hard to regress.</p>
+<p>Descriptions are framework-authored strings only (for example <code>&quot;34 messages pending older than 00:05:00&quot;</code>). No writer ever reads <code>HealthReportEntry.Exception</code>, and check implementations never place an exception message, connection string, or configuration value into <code>Description</code> or <code>Data</code>. Serialization uses <code>System.Text.Json</code> with the enum written as its name.</p>
+<h3 id="7-per-check-timeout-via-healthcheckregistrationtimeout-plus-cooperative-cancellation-inside-each-check">7. Per-check timeout via <code>HealthCheckRegistration.Timeout</code>, plus cooperative cancellation inside each check</h3>
+<p>Each registration gets <code>HealthOptions.CheckTimeout</code>. <code>HealthCheckService</code> links the timeout into the token it passes to the check and reports that entry as unhealthy when it elapses. Every check honors the token it is given (EF's <code>CanConnectAsync(cancellationToken)</code> etc.), which is what makes the timeout actually cut the work short rather than only shortening the reported wait.</p>
+<h3 id="8-checks-never-throw-they-translate-failure-into-a-status">8. Checks never throw; they translate failure into a status</h3>
+<p><code>HealthCheckService</code> already catches exceptions and records them as unhealthy — but it records the exception on the entry, and an entry carrying an exception is one careless writer away from leaking a connection string. Catching inside each check and returning <code>HealthCheckResult.Unhealthy(description: &lt;safe text&gt;)</code> keeps the failure detail out of the report object entirely. The exception detail is not lost: it is logged through the structured-logging capability (#128), which is where operators should read it.</p>
+<h3 id="9-startup-readiness-is-a-singleton-flag-flipped-by-a-hosted-service">9. Startup readiness is a singleton flag flipped by a hosted service</h3>
+<p><code>StartupHealthCheck</code> holds a <code>volatile bool</code> and reports <code>Unhealthy</code> until set. A <code>StartupHostedService</code> runs the application's startup work and sets the flag on success only — a failed startup leaves the instance permanently not ready, which is the correct behavior for a readiness probe (the orchestrator keeps it out of the balancer and the failure is visible).</p>
+<p>The framework does not run migrations itself here; it exposes the gate and a hook the application's startup work plugs into. That keeps &quot;who applies migrations&quot; an application decision, which the project already treats as such.</p>
+<h3 id="10-optional-checks-are-opted-into-explicitly-not-discovered">10. Optional checks are opted into explicitly, not discovered</h3>
+<p><code>AddRaftelHealthChecks</code> takes an options callback that also carries opt-ins:</p>
+<pre><code class="lang-csharp">services.AddRaftelHealthChecks(options =&gt;
+{
+    options.CheckTimeout = TimeSpan.FromSeconds(3);
+    options.EnableTenantResolutionCheck = true;
+    options.EnableOutboxCheck = true;   // requires an IOutboxHealthProbe registration
+});
+</code></pre>
+<p>Service-provider probing at registration time is order-dependent and silently wrong when the outbox is registered after health checks. An explicit flag fails loudly instead: enabling the outbox check without an <code>IOutboxHealthProbe</code> registered throws at startup with a message naming the missing registration.</p>
+<h3 id="11-outboxhealthcheck-ships-against-ioutboxhealthprobe-an-abstraction-the-outbox-will-implement">11. <code>OutboxHealthCheck</code> ships against <code>IOutboxHealthProbe</code>, an abstraction the outbox will implement</h3>
+<p>The check needs two numbers: the age of the oldest unprocessed message and the dead-letter count. <code>IOutboxHealthProbe</code> exposes exactly those, so this change can ship (and unit-test) the threshold logic now without the outbox, and backlog 07 only has to implement the probe. The probe interface lives in <code>Raftel.Application/Abstractions</code> next to the other framework abstractions, so the future outbox implementation does not have to reach into a health-specific namespace.</p>
+<h2 id="risks--trade-offs">Risks / Trade-offs</h2>
+<ul>
+<li><strong>An application with a fallback authorization policy locks out its own probes</strong> → <code>/health/live</code> and <code>/health/ready</code> are mapped with explicit <code>.AllowAnonymous()</code>, and a functional test asserts an unauthenticated call to both succeeds while <code>/health</code> returns 401.</li>
+<li><strong><code>/health</code> leaks internal structure to an authenticated but low-privilege user</strong> → the default requires authorization and <code>DetailsPolicy</code> lets an operator demand a specific policy; documentation states the endpoint should be treated as an operator surface.</li>
+<li><strong>A check that ignores its <code>CancellationToken</code> still blocks the endpoint</strong> → registration timeout bounds what the service reports, and every framework check honors the token; the documented extension guidance for custom checks repeats this requirement.</li>
+<li><strong><code>PendingMigrationsHealthCheck</code> on every readiness probe adds a database round trip</strong> → <code>GetPendingMigrationsAsync</code> is cheap relative to probe intervals; if it proves costly, the result can be cached once it is empty (a schema cannot regain pending migrations without a restart). Not done now — premature.</li>
+<li><strong><code>EnableOutboxCheck</code> throwing at startup is a hard failure</strong> → deliberate: silently skipping the check reproduces exactly the invisibility problem the outbox check exists to solve.</li>
+<li><strong>Liveness returning 200 while the process is deadlocked in a way that still serves requests</strong> → out of scope; liveness by definition can only prove the request pipeline responds.</li>
+</ul>
+<h2 id="migration-plan">Migration Plan</h2>
+<p>Purely additive. No public type is removed or renamed, so existing applications are unaffected until they opt in.</p>
+<ol>
+<li>Ship the checks, options, endpoints, and writer; nothing is registered unless the application calls <code>AddRaftelHealthChecks</code> and maps the endpoints.</li>
+<li>Wire the demo app (<code>demo/Raftel.Api.FunctionalTests.DemoApi/Program.cs</code>) so the functional tests exercise the real pipeline.</li>
+<li>Document the three endpoints, their meaning, the security defaults, and example Kubernetes <code>livenessProbe</code> / <code>readinessProbe</code> snippets in <code>docs/</code>.</li>
+<li>When backlog 07 lands, it implements <code>IOutboxHealthProbe</code> and applications flip <code>EnableOutboxCheck</code>.</li>
+</ol>
+<p>Rollback: remove the <code>AddRaftelHealthChecks</code> call and the endpoint mapping — no schema or data change is involved.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/openspec/changes/health-checks/design.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -532,6 +532,63 @@ references:
   isSpec: "True"
   fullName: Raftel.Api.Server.Features.Users.UsersDependencyInjection.AddRaftelUsers
   nameWithType: UsersDependencyInjection.AddRaftelUsers
+- uid: Raftel.Api.Server.Health
+  name: Raftel.Api.Server.Health
+  href: api/Raftel.Api.Server.Health.html
+  commentId: N:Raftel.Api.Server.Health
+  fullName: Raftel.Api.Server.Health
+  nameWithType: Raftel.Api.Server.Health
+- uid: Raftel.Api.Server.Health.HealthEndpointExtensions
+  name: HealthEndpointExtensions
+  href: api/Raftel.Api.Server.Health.HealthEndpointExtensions.html
+  commentId: T:Raftel.Api.Server.Health.HealthEndpointExtensions
+  fullName: Raftel.Api.Server.Health.HealthEndpointExtensions
+  nameWithType: HealthEndpointExtensions
+- uid: Raftel.Api.Server.Health.HealthEndpointExtensions.MapRaftelHealthChecks(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)
+  name: MapRaftelHealthChecks(IEndpointRouteBuilder)
+  href: api/Raftel.Api.Server.Health.HealthEndpointExtensions.html#Raftel_Api_Server_Health_HealthEndpointExtensions_MapRaftelHealthChecks_Microsoft_AspNetCore_Routing_IEndpointRouteBuilder_
+  commentId: M:Raftel.Api.Server.Health.HealthEndpointExtensions.MapRaftelHealthChecks(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)
+  fullName: Raftel.Api.Server.Health.HealthEndpointExtensions.MapRaftelHealthChecks(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)
+  nameWithType: HealthEndpointExtensions.MapRaftelHealthChecks(IEndpointRouteBuilder)
+- uid: Raftel.Api.Server.Health.HealthEndpointExtensions.MapRaftelHealthChecks*
+  name: MapRaftelHealthChecks
+  href: api/Raftel.Api.Server.Health.HealthEndpointExtensions.html#Raftel_Api_Server_Health_HealthEndpointExtensions_MapRaftelHealthChecks_
+  commentId: Overload:Raftel.Api.Server.Health.HealthEndpointExtensions.MapRaftelHealthChecks
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Health.HealthEndpointExtensions.MapRaftelHealthChecks
+  nameWithType: HealthEndpointExtensions.MapRaftelHealthChecks
+- uid: Raftel.Api.Server.Health.HealthResponseWriter
+  name: HealthResponseWriter
+  href: api/Raftel.Api.Server.Health.HealthResponseWriter.html
+  commentId: T:Raftel.Api.Server.Health.HealthResponseWriter
+  fullName: Raftel.Api.Server.Health.HealthResponseWriter
+  nameWithType: HealthResponseWriter
+- uid: Raftel.Api.Server.Health.HealthResponseWriter.WriteDetailed(Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport)
+  name: WriteDetailed(HttpContext, HealthReport)
+  href: api/Raftel.Api.Server.Health.HealthResponseWriter.html#Raftel_Api_Server_Health_HealthResponseWriter_WriteDetailed_Microsoft_AspNetCore_Http_HttpContext_Microsoft_Extensions_Diagnostics_HealthChecks_HealthReport_
+  commentId: M:Raftel.Api.Server.Health.HealthResponseWriter.WriteDetailed(Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport)
+  fullName: Raftel.Api.Server.Health.HealthResponseWriter.WriteDetailed(Microsoft.AspNetCore.Http.HttpContext, Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport)
+  nameWithType: HealthResponseWriter.WriteDetailed(HttpContext, HealthReport)
+- uid: Raftel.Api.Server.Health.HealthResponseWriter.WriteDetailed*
+  name: WriteDetailed
+  href: api/Raftel.Api.Server.Health.HealthResponseWriter.html#Raftel_Api_Server_Health_HealthResponseWriter_WriteDetailed_
+  commentId: Overload:Raftel.Api.Server.Health.HealthResponseWriter.WriteDetailed
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Health.HealthResponseWriter.WriteDetailed
+  nameWithType: HealthResponseWriter.WriteDetailed
+- uid: Raftel.Api.Server.Health.HealthResponseWriter.WriteStatusOnly(Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport)
+  name: WriteStatusOnly(HttpContext, HealthReport)
+  href: api/Raftel.Api.Server.Health.HealthResponseWriter.html#Raftel_Api_Server_Health_HealthResponseWriter_WriteStatusOnly_Microsoft_AspNetCore_Http_HttpContext_Microsoft_Extensions_Diagnostics_HealthChecks_HealthReport_
+  commentId: M:Raftel.Api.Server.Health.HealthResponseWriter.WriteStatusOnly(Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport)
+  fullName: Raftel.Api.Server.Health.HealthResponseWriter.WriteStatusOnly(Microsoft.AspNetCore.Http.HttpContext, Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport)
+  nameWithType: HealthResponseWriter.WriteStatusOnly(HttpContext, HealthReport)
+- uid: Raftel.Api.Server.Health.HealthResponseWriter.WriteStatusOnly*
+  name: WriteStatusOnly
+  href: api/Raftel.Api.Server.Health.HealthResponseWriter.html#Raftel_Api_Server_Health_HealthResponseWriter_WriteStatusOnly_
+  commentId: Overload:Raftel.Api.Server.Health.HealthResponseWriter.WriteStatusOnly
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Health.HealthResponseWriter.WriteStatusOnly
+  nameWithType: HealthResponseWriter.WriteStatusOnly
 - uid: Raftel.Api.Server.Middlewares
   name: Raftel.Api.Server.Middlewares
   href: api/Raftel.Api.Server.Middlewares.html
@@ -963,6 +1020,134 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.DomainEvents.IDomainEventsDispatcher.DispatchAsync
   nameWithType: IDomainEventsDispatcher.DispatchAsync
+- uid: Raftel.Application.Abstractions.Health
+  name: Raftel.Application.Abstractions.Health
+  href: api/Raftel.Application.Abstractions.Health.html
+  commentId: N:Raftel.Application.Abstractions.Health
+  fullName: Raftel.Application.Abstractions.Health
+  nameWithType: Raftel.Application.Abstractions.Health
+- uid: Raftel.Application.Abstractions.Health.HealthCheckTags
+  name: HealthCheckTags
+  href: api/Raftel.Application.Abstractions.Health.HealthCheckTags.html
+  commentId: T:Raftel.Application.Abstractions.Health.HealthCheckTags
+  fullName: Raftel.Application.Abstractions.Health.HealthCheckTags
+  nameWithType: HealthCheckTags
+- uid: Raftel.Application.Abstractions.Health.HealthCheckTags.Ready
+  name: Ready
+  href: api/Raftel.Application.Abstractions.Health.HealthCheckTags.html#Raftel_Application_Abstractions_Health_HealthCheckTags_Ready
+  commentId: F:Raftel.Application.Abstractions.Health.HealthCheckTags.Ready
+  fullName: Raftel.Application.Abstractions.Health.HealthCheckTags.Ready
+  nameWithType: HealthCheckTags.Ready
+- uid: Raftel.Application.Abstractions.Health.HealthOptions
+  name: HealthOptions
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html
+  commentId: T:Raftel.Application.Abstractions.Health.HealthOptions
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions
+  nameWithType: HealthOptions
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.CheckTimeout
+  name: CheckTimeout
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_CheckTimeout
+  commentId: P:Raftel.Application.Abstractions.Health.HealthOptions.CheckTimeout
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.CheckTimeout
+  nameWithType: HealthOptions.CheckTimeout
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.CheckTimeout*
+  name: CheckTimeout
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_CheckTimeout_
+  commentId: Overload:Raftel.Application.Abstractions.Health.HealthOptions.CheckTimeout
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.CheckTimeout
+  nameWithType: HealthOptions.CheckTimeout
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.DatabaseSlowThreshold
+  name: DatabaseSlowThreshold
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_DatabaseSlowThreshold
+  commentId: P:Raftel.Application.Abstractions.Health.HealthOptions.DatabaseSlowThreshold
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.DatabaseSlowThreshold
+  nameWithType: HealthOptions.DatabaseSlowThreshold
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.DatabaseSlowThreshold*
+  name: DatabaseSlowThreshold
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_DatabaseSlowThreshold_
+  commentId: Overload:Raftel.Application.Abstractions.Health.HealthOptions.DatabaseSlowThreshold
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.DatabaseSlowThreshold
+  nameWithType: HealthOptions.DatabaseSlowThreshold
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.DeadLetterThreshold
+  name: DeadLetterThreshold
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_DeadLetterThreshold
+  commentId: P:Raftel.Application.Abstractions.Health.HealthOptions.DeadLetterThreshold
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.DeadLetterThreshold
+  nameWithType: HealthOptions.DeadLetterThreshold
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.DeadLetterThreshold*
+  name: DeadLetterThreshold
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_DeadLetterThreshold_
+  commentId: Overload:Raftel.Application.Abstractions.Health.HealthOptions.DeadLetterThreshold
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.DeadLetterThreshold
+  nameWithType: HealthOptions.DeadLetterThreshold
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.DetailsPolicy
+  name: DetailsPolicy
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_DetailsPolicy
+  commentId: P:Raftel.Application.Abstractions.Health.HealthOptions.DetailsPolicy
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.DetailsPolicy
+  nameWithType: HealthOptions.DetailsPolicy
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.DetailsPolicy*
+  name: DetailsPolicy
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_DetailsPolicy_
+  commentId: Overload:Raftel.Application.Abstractions.Health.HealthOptions.DetailsPolicy
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.DetailsPolicy
+  nameWithType: HealthOptions.DetailsPolicy
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.EnableOutboxCheck
+  name: EnableOutboxCheck
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_EnableOutboxCheck
+  commentId: P:Raftel.Application.Abstractions.Health.HealthOptions.EnableOutboxCheck
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.EnableOutboxCheck
+  nameWithType: HealthOptions.EnableOutboxCheck
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.EnableOutboxCheck*
+  name: EnableOutboxCheck
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_EnableOutboxCheck_
+  commentId: Overload:Raftel.Application.Abstractions.Health.HealthOptions.EnableOutboxCheck
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.EnableOutboxCheck
+  nameWithType: HealthOptions.EnableOutboxCheck
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.EnableTenantResolutionCheck
+  name: EnableTenantResolutionCheck
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_EnableTenantResolutionCheck
+  commentId: P:Raftel.Application.Abstractions.Health.HealthOptions.EnableTenantResolutionCheck
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.EnableTenantResolutionCheck
+  nameWithType: HealthOptions.EnableTenantResolutionCheck
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.EnableTenantResolutionCheck*
+  name: EnableTenantResolutionCheck
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_EnableTenantResolutionCheck_
+  commentId: Overload:Raftel.Application.Abstractions.Health.HealthOptions.EnableTenantResolutionCheck
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.EnableTenantResolutionCheck
+  nameWithType: HealthOptions.EnableTenantResolutionCheck
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.OutboxLagThreshold
+  name: OutboxLagThreshold
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_OutboxLagThreshold
+  commentId: P:Raftel.Application.Abstractions.Health.HealthOptions.OutboxLagThreshold
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.OutboxLagThreshold
+  nameWithType: HealthOptions.OutboxLagThreshold
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.OutboxLagThreshold*
+  name: OutboxLagThreshold
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_OutboxLagThreshold_
+  commentId: Overload:Raftel.Application.Abstractions.Health.HealthOptions.OutboxLagThreshold
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.OutboxLagThreshold
+  nameWithType: HealthOptions.OutboxLagThreshold
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.RequireAuthorizationForDetails
+  name: RequireAuthorizationForDetails
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_RequireAuthorizationForDetails
+  commentId: P:Raftel.Application.Abstractions.Health.HealthOptions.RequireAuthorizationForDetails
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.RequireAuthorizationForDetails
+  nameWithType: HealthOptions.RequireAuthorizationForDetails
+- uid: Raftel.Application.Abstractions.Health.HealthOptions.RequireAuthorizationForDetails*
+  name: RequireAuthorizationForDetails
+  href: api/Raftel.Application.Abstractions.Health.HealthOptions.html#Raftel_Application_Abstractions_Health_HealthOptions_RequireAuthorizationForDetails_
+  commentId: Overload:Raftel.Application.Abstractions.Health.HealthOptions.RequireAuthorizationForDetails
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.Health.HealthOptions.RequireAuthorizationForDetails
+  nameWithType: HealthOptions.RequireAuthorizationForDetails
 - uid: Raftel.Application.Abstractions.ICorrelationContext
   name: ICorrelationContext
   href: api/Raftel.Application.Abstractions.ICorrelationContext.html
@@ -982,6 +1167,38 @@ references:
   isSpec: "True"
   fullName: Raftel.Application.Abstractions.ICorrelationContext.CorrelationId
   nameWithType: ICorrelationContext.CorrelationId
+- uid: Raftel.Application.Abstractions.IOutboxHealthProbe
+  name: IOutboxHealthProbe
+  href: api/Raftel.Application.Abstractions.IOutboxHealthProbe.html
+  commentId: T:Raftel.Application.Abstractions.IOutboxHealthProbe
+  fullName: Raftel.Application.Abstractions.IOutboxHealthProbe
+  nameWithType: IOutboxHealthProbe
+- uid: Raftel.Application.Abstractions.IOutboxHealthProbe.GetDeadLetterCountAsync(System.Threading.CancellationToken)
+  name: GetDeadLetterCountAsync(CancellationToken)
+  href: api/Raftel.Application.Abstractions.IOutboxHealthProbe.html#Raftel_Application_Abstractions_IOutboxHealthProbe_GetDeadLetterCountAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.IOutboxHealthProbe.GetDeadLetterCountAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Application.Abstractions.IOutboxHealthProbe.GetDeadLetterCountAsync(System.Threading.CancellationToken)
+  nameWithType: IOutboxHealthProbe.GetDeadLetterCountAsync(CancellationToken)
+- uid: Raftel.Application.Abstractions.IOutboxHealthProbe.GetDeadLetterCountAsync*
+  name: GetDeadLetterCountAsync
+  href: api/Raftel.Application.Abstractions.IOutboxHealthProbe.html#Raftel_Application_Abstractions_IOutboxHealthProbe_GetDeadLetterCountAsync_
+  commentId: Overload:Raftel.Application.Abstractions.IOutboxHealthProbe.GetDeadLetterCountAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.IOutboxHealthProbe.GetDeadLetterCountAsync
+  nameWithType: IOutboxHealthProbe.GetDeadLetterCountAsync
+- uid: Raftel.Application.Abstractions.IOutboxHealthProbe.GetOldestUnprocessedMessageAgeAsync(System.Threading.CancellationToken)
+  name: GetOldestUnprocessedMessageAgeAsync(CancellationToken)
+  href: api/Raftel.Application.Abstractions.IOutboxHealthProbe.html#Raftel_Application_Abstractions_IOutboxHealthProbe_GetOldestUnprocessedMessageAgeAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Application.Abstractions.IOutboxHealthProbe.GetOldestUnprocessedMessageAgeAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Application.Abstractions.IOutboxHealthProbe.GetOldestUnprocessedMessageAgeAsync(System.Threading.CancellationToken)
+  nameWithType: IOutboxHealthProbe.GetOldestUnprocessedMessageAgeAsync(CancellationToken)
+- uid: Raftel.Application.Abstractions.IOutboxHealthProbe.GetOldestUnprocessedMessageAgeAsync*
+  name: GetOldestUnprocessedMessageAgeAsync
+  href: api/Raftel.Application.Abstractions.IOutboxHealthProbe.html#Raftel_Application_Abstractions_IOutboxHealthProbe_GetOldestUnprocessedMessageAgeAsync_
+  commentId: Overload:Raftel.Application.Abstractions.IOutboxHealthProbe.GetOldestUnprocessedMessageAgeAsync
+  isSpec: "True"
+  fullName: Raftel.Application.Abstractions.IOutboxHealthProbe.GetOldestUnprocessedMessageAgeAsync
+  nameWithType: IOutboxHealthProbe.GetOldestUnprocessedMessageAgeAsync
 - uid: Raftel.Application.Abstractions.IRequestDispatcher
   name: IRequestDispatcher
   href: api/Raftel.Application.Abstractions.IRequestDispatcher.html
@@ -7714,6 +7931,431 @@ references:
   fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String, System.Action(Of Raftel.Infrastructure.Data.Auditing.AuditOptions), System.Action(Of Raftel.Application.TransactionOptions))
   nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?, Action<TransactionOptions>?)
   nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions), Action(Of TransactionOptions))
+- uid: Raftel.Infrastructure.Health
+  name: Raftel.Infrastructure.Health
+  href: api/Raftel.Infrastructure.Health.html
+  commentId: N:Raftel.Infrastructure.Health
+  fullName: Raftel.Infrastructure.Health
+  nameWithType: Raftel.Infrastructure.Health
+- uid: Raftel.Infrastructure.Health.DatabaseHealthCheck
+  name: DatabaseHealthCheck
+  href: api/Raftel.Infrastructure.Health.DatabaseHealthCheck.html
+  commentId: T:Raftel.Infrastructure.Health.DatabaseHealthCheck
+  fullName: Raftel.Infrastructure.Health.DatabaseHealthCheck
+  nameWithType: DatabaseHealthCheck
+- uid: Raftel.Infrastructure.Health.DatabaseHealthCheck.#ctor(Raftel.Infrastructure.Health.IDatabaseProbe,System.TimeProvider,Microsoft.Extensions.Options.IOptions{Raftel.Application.Abstractions.Health.HealthOptions})
+  name: DatabaseHealthCheck(IDatabaseProbe, TimeProvider, IOptions<HealthOptions>)
+  href: api/Raftel.Infrastructure.Health.DatabaseHealthCheck.html#Raftel_Infrastructure_Health_DatabaseHealthCheck__ctor_Raftel_Infrastructure_Health_IDatabaseProbe_System_TimeProvider_Microsoft_Extensions_Options_IOptions_Raftel_Application_Abstractions_Health_HealthOptions__
+  commentId: M:Raftel.Infrastructure.Health.DatabaseHealthCheck.#ctor(Raftel.Infrastructure.Health.IDatabaseProbe,System.TimeProvider,Microsoft.Extensions.Options.IOptions{Raftel.Application.Abstractions.Health.HealthOptions})
+  name.vb: New(IDatabaseProbe, TimeProvider, IOptions(Of HealthOptions))
+  fullName: Raftel.Infrastructure.Health.DatabaseHealthCheck.DatabaseHealthCheck(Raftel.Infrastructure.Health.IDatabaseProbe, System.TimeProvider, Microsoft.Extensions.Options.IOptions<Raftel.Application.Abstractions.Health.HealthOptions>)
+  fullName.vb: Raftel.Infrastructure.Health.DatabaseHealthCheck.New(Raftel.Infrastructure.Health.IDatabaseProbe, System.TimeProvider, Microsoft.Extensions.Options.IOptions(Of Raftel.Application.Abstractions.Health.HealthOptions))
+  nameWithType: DatabaseHealthCheck.DatabaseHealthCheck(IDatabaseProbe, TimeProvider, IOptions<HealthOptions>)
+  nameWithType.vb: DatabaseHealthCheck.New(IDatabaseProbe, TimeProvider, IOptions(Of HealthOptions))
+- uid: Raftel.Infrastructure.Health.DatabaseHealthCheck.#ctor*
+  name: DatabaseHealthCheck
+  href: api/Raftel.Infrastructure.Health.DatabaseHealthCheck.html#Raftel_Infrastructure_Health_DatabaseHealthCheck__ctor_
+  commentId: Overload:Raftel.Infrastructure.Health.DatabaseHealthCheck.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Infrastructure.Health.DatabaseHealthCheck.DatabaseHealthCheck
+  fullName.vb: Raftel.Infrastructure.Health.DatabaseHealthCheck.New
+  nameWithType: DatabaseHealthCheck.DatabaseHealthCheck
+  nameWithType.vb: DatabaseHealthCheck.New
+- uid: Raftel.Infrastructure.Health.DatabaseHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)
+  name: CheckHealthAsync(HealthCheckContext, CancellationToken)
+  href: api/Raftel.Infrastructure.Health.DatabaseHealthCheck.html#Raftel_Infrastructure_Health_DatabaseHealthCheck_CheckHealthAsync_Microsoft_Extensions_Diagnostics_HealthChecks_HealthCheckContext_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.DatabaseHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.DatabaseHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext, System.Threading.CancellationToken)
+  nameWithType: DatabaseHealthCheck.CheckHealthAsync(HealthCheckContext, CancellationToken)
+- uid: Raftel.Infrastructure.Health.DatabaseHealthCheck.CheckHealthAsync*
+  name: CheckHealthAsync
+  href: api/Raftel.Infrastructure.Health.DatabaseHealthCheck.html#Raftel_Infrastructure_Health_DatabaseHealthCheck_CheckHealthAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.DatabaseHealthCheck.CheckHealthAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.DatabaseHealthCheck.CheckHealthAsync
+  nameWithType: DatabaseHealthCheck.CheckHealthAsync
+- uid: Raftel.Infrastructure.Health.DatabaseProbe`1
+  name: DatabaseProbe<TDbContext>
+  href: api/Raftel.Infrastructure.Health.DatabaseProbe-1.html
+  commentId: T:Raftel.Infrastructure.Health.DatabaseProbe`1
+  name.vb: DatabaseProbe(Of TDbContext)
+  fullName: Raftel.Infrastructure.Health.DatabaseProbe<TDbContext>
+  fullName.vb: Raftel.Infrastructure.Health.DatabaseProbe(Of TDbContext)
+  nameWithType: DatabaseProbe<TDbContext>
+  nameWithType.vb: DatabaseProbe(Of TDbContext)
+- uid: Raftel.Infrastructure.Health.DatabaseProbe`1.#ctor(`0)
+  name: DatabaseProbe(TDbContext)
+  href: api/Raftel.Infrastructure.Health.DatabaseProbe-1.html#Raftel_Infrastructure_Health_DatabaseProbe_1__ctor__0_
+  commentId: M:Raftel.Infrastructure.Health.DatabaseProbe`1.#ctor(`0)
+  name.vb: New(TDbContext)
+  fullName: Raftel.Infrastructure.Health.DatabaseProbe<TDbContext>.DatabaseProbe(TDbContext)
+  fullName.vb: Raftel.Infrastructure.Health.DatabaseProbe(Of TDbContext).New(TDbContext)
+  nameWithType: DatabaseProbe<TDbContext>.DatabaseProbe(TDbContext)
+  nameWithType.vb: DatabaseProbe(Of TDbContext).New(TDbContext)
+- uid: Raftel.Infrastructure.Health.DatabaseProbe`1.#ctor*
+  name: DatabaseProbe
+  href: api/Raftel.Infrastructure.Health.DatabaseProbe-1.html#Raftel_Infrastructure_Health_DatabaseProbe_1__ctor_
+  commentId: Overload:Raftel.Infrastructure.Health.DatabaseProbe`1.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Infrastructure.Health.DatabaseProbe<TDbContext>.DatabaseProbe
+  fullName.vb: Raftel.Infrastructure.Health.DatabaseProbe(Of TDbContext).New
+  nameWithType: DatabaseProbe<TDbContext>.DatabaseProbe
+  nameWithType.vb: DatabaseProbe(Of TDbContext).New
+- uid: Raftel.Infrastructure.Health.DatabaseProbe`1.CanConnectAsync(System.Threading.CancellationToken)
+  name: CanConnectAsync(CancellationToken)
+  href: api/Raftel.Infrastructure.Health.DatabaseProbe-1.html#Raftel_Infrastructure_Health_DatabaseProbe_1_CanConnectAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.DatabaseProbe`1.CanConnectAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.DatabaseProbe<TDbContext>.CanConnectAsync(System.Threading.CancellationToken)
+  fullName.vb: Raftel.Infrastructure.Health.DatabaseProbe(Of TDbContext).CanConnectAsync(System.Threading.CancellationToken)
+  nameWithType: DatabaseProbe<TDbContext>.CanConnectAsync(CancellationToken)
+  nameWithType.vb: DatabaseProbe(Of TDbContext).CanConnectAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Health.DatabaseProbe`1.CanConnectAsync*
+  name: CanConnectAsync
+  href: api/Raftel.Infrastructure.Health.DatabaseProbe-1.html#Raftel_Infrastructure_Health_DatabaseProbe_1_CanConnectAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.DatabaseProbe`1.CanConnectAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.DatabaseProbe<TDbContext>.CanConnectAsync
+  fullName.vb: Raftel.Infrastructure.Health.DatabaseProbe(Of TDbContext).CanConnectAsync
+  nameWithType: DatabaseProbe<TDbContext>.CanConnectAsync
+  nameWithType.vb: DatabaseProbe(Of TDbContext).CanConnectAsync
+- uid: Raftel.Infrastructure.Health.DatabaseProbe`1.GetPendingMigrationsAsync(System.Threading.CancellationToken)
+  name: GetPendingMigrationsAsync(CancellationToken)
+  href: api/Raftel.Infrastructure.Health.DatabaseProbe-1.html#Raftel_Infrastructure_Health_DatabaseProbe_1_GetPendingMigrationsAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.DatabaseProbe`1.GetPendingMigrationsAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.DatabaseProbe<TDbContext>.GetPendingMigrationsAsync(System.Threading.CancellationToken)
+  fullName.vb: Raftel.Infrastructure.Health.DatabaseProbe(Of TDbContext).GetPendingMigrationsAsync(System.Threading.CancellationToken)
+  nameWithType: DatabaseProbe<TDbContext>.GetPendingMigrationsAsync(CancellationToken)
+  nameWithType.vb: DatabaseProbe(Of TDbContext).GetPendingMigrationsAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Health.DatabaseProbe`1.GetPendingMigrationsAsync*
+  name: GetPendingMigrationsAsync
+  href: api/Raftel.Infrastructure.Health.DatabaseProbe-1.html#Raftel_Infrastructure_Health_DatabaseProbe_1_GetPendingMigrationsAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.DatabaseProbe`1.GetPendingMigrationsAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.DatabaseProbe<TDbContext>.GetPendingMigrationsAsync
+  fullName.vb: Raftel.Infrastructure.Health.DatabaseProbe(Of TDbContext).GetPendingMigrationsAsync
+  nameWithType: DatabaseProbe<TDbContext>.GetPendingMigrationsAsync
+  nameWithType.vb: DatabaseProbe(Of TDbContext).GetPendingMigrationsAsync
+- uid: Raftel.Infrastructure.Health.HealthCheckNames
+  name: HealthCheckNames
+  href: api/Raftel.Infrastructure.Health.HealthCheckNames.html
+  commentId: T:Raftel.Infrastructure.Health.HealthCheckNames
+  fullName: Raftel.Infrastructure.Health.HealthCheckNames
+  nameWithType: HealthCheckNames
+- uid: Raftel.Infrastructure.Health.HealthCheckNames.Database
+  name: Database
+  href: api/Raftel.Infrastructure.Health.HealthCheckNames.html#Raftel_Infrastructure_Health_HealthCheckNames_Database
+  commentId: F:Raftel.Infrastructure.Health.HealthCheckNames.Database
+  fullName: Raftel.Infrastructure.Health.HealthCheckNames.Database
+  nameWithType: HealthCheckNames.Database
+- uid: Raftel.Infrastructure.Health.HealthCheckNames.Migrations
+  name: Migrations
+  href: api/Raftel.Infrastructure.Health.HealthCheckNames.html#Raftel_Infrastructure_Health_HealthCheckNames_Migrations
+  commentId: F:Raftel.Infrastructure.Health.HealthCheckNames.Migrations
+  fullName: Raftel.Infrastructure.Health.HealthCheckNames.Migrations
+  nameWithType: HealthCheckNames.Migrations
+- uid: Raftel.Infrastructure.Health.HealthCheckNames.Outbox
+  name: Outbox
+  href: api/Raftel.Infrastructure.Health.HealthCheckNames.html#Raftel_Infrastructure_Health_HealthCheckNames_Outbox
+  commentId: F:Raftel.Infrastructure.Health.HealthCheckNames.Outbox
+  fullName: Raftel.Infrastructure.Health.HealthCheckNames.Outbox
+  nameWithType: HealthCheckNames.Outbox
+- uid: Raftel.Infrastructure.Health.HealthCheckNames.Startup
+  name: Startup
+  href: api/Raftel.Infrastructure.Health.HealthCheckNames.html#Raftel_Infrastructure_Health_HealthCheckNames_Startup
+  commentId: F:Raftel.Infrastructure.Health.HealthCheckNames.Startup
+  fullName: Raftel.Infrastructure.Health.HealthCheckNames.Startup
+  nameWithType: HealthCheckNames.Startup
+- uid: Raftel.Infrastructure.Health.HealthCheckNames.Tenants
+  name: Tenants
+  href: api/Raftel.Infrastructure.Health.HealthCheckNames.html#Raftel_Infrastructure_Health_HealthCheckNames_Tenants
+  commentId: F:Raftel.Infrastructure.Health.HealthCheckNames.Tenants
+  fullName: Raftel.Infrastructure.Health.HealthCheckNames.Tenants
+  nameWithType: HealthCheckNames.Tenants
+- uid: Raftel.Infrastructure.Health.HealthDependencyInjection
+  name: HealthDependencyInjection
+  href: api/Raftel.Infrastructure.Health.HealthDependencyInjection.html
+  commentId: T:Raftel.Infrastructure.Health.HealthDependencyInjection
+  fullName: Raftel.Infrastructure.Health.HealthDependencyInjection
+  nameWithType: HealthDependencyInjection
+- uid: Raftel.Infrastructure.Health.HealthDependencyInjection.AddRaftelHealthChecks(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Raftel.Application.Abstractions.Health.HealthOptions})
+  name: AddRaftelHealthChecks(IServiceCollection, Action<HealthOptions>)
+  href: api/Raftel.Infrastructure.Health.HealthDependencyInjection.html#Raftel_Infrastructure_Health_HealthDependencyInjection_AddRaftelHealthChecks_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Raftel_Application_Abstractions_Health_HealthOptions__
+  commentId: M:Raftel.Infrastructure.Health.HealthDependencyInjection.AddRaftelHealthChecks(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Raftel.Application.Abstractions.Health.HealthOptions})
+  name.vb: AddRaftelHealthChecks(IServiceCollection, Action(Of HealthOptions))
+  fullName: Raftel.Infrastructure.Health.HealthDependencyInjection.AddRaftelHealthChecks(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action<Raftel.Application.Abstractions.Health.HealthOptions>)
+  fullName.vb: Raftel.Infrastructure.Health.HealthDependencyInjection.AddRaftelHealthChecks(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.Action(Of Raftel.Application.Abstractions.Health.HealthOptions))
+  nameWithType: HealthDependencyInjection.AddRaftelHealthChecks(IServiceCollection, Action<HealthOptions>)
+  nameWithType.vb: HealthDependencyInjection.AddRaftelHealthChecks(IServiceCollection, Action(Of HealthOptions))
+- uid: Raftel.Infrastructure.Health.HealthDependencyInjection.AddRaftelHealthChecks*
+  name: AddRaftelHealthChecks
+  href: api/Raftel.Infrastructure.Health.HealthDependencyInjection.html#Raftel_Infrastructure_Health_HealthDependencyInjection_AddRaftelHealthChecks_
+  commentId: Overload:Raftel.Infrastructure.Health.HealthDependencyInjection.AddRaftelHealthChecks
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.HealthDependencyInjection.AddRaftelHealthChecks
+  nameWithType: HealthDependencyInjection.AddRaftelHealthChecks
+- uid: Raftel.Infrastructure.Health.IDatabaseProbe
+  name: IDatabaseProbe
+  href: api/Raftel.Infrastructure.Health.IDatabaseProbe.html
+  commentId: T:Raftel.Infrastructure.Health.IDatabaseProbe
+  fullName: Raftel.Infrastructure.Health.IDatabaseProbe
+  nameWithType: IDatabaseProbe
+- uid: Raftel.Infrastructure.Health.IDatabaseProbe.CanConnectAsync(System.Threading.CancellationToken)
+  name: CanConnectAsync(CancellationToken)
+  href: api/Raftel.Infrastructure.Health.IDatabaseProbe.html#Raftel_Infrastructure_Health_IDatabaseProbe_CanConnectAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.IDatabaseProbe.CanConnectAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.IDatabaseProbe.CanConnectAsync(System.Threading.CancellationToken)
+  nameWithType: IDatabaseProbe.CanConnectAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Health.IDatabaseProbe.CanConnectAsync*
+  name: CanConnectAsync
+  href: api/Raftel.Infrastructure.Health.IDatabaseProbe.html#Raftel_Infrastructure_Health_IDatabaseProbe_CanConnectAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.IDatabaseProbe.CanConnectAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.IDatabaseProbe.CanConnectAsync
+  nameWithType: IDatabaseProbe.CanConnectAsync
+- uid: Raftel.Infrastructure.Health.IDatabaseProbe.GetPendingMigrationsAsync(System.Threading.CancellationToken)
+  name: GetPendingMigrationsAsync(CancellationToken)
+  href: api/Raftel.Infrastructure.Health.IDatabaseProbe.html#Raftel_Infrastructure_Health_IDatabaseProbe_GetPendingMigrationsAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.IDatabaseProbe.GetPendingMigrationsAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.IDatabaseProbe.GetPendingMigrationsAsync(System.Threading.CancellationToken)
+  nameWithType: IDatabaseProbe.GetPendingMigrationsAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Health.IDatabaseProbe.GetPendingMigrationsAsync*
+  name: GetPendingMigrationsAsync
+  href: api/Raftel.Infrastructure.Health.IDatabaseProbe.html#Raftel_Infrastructure_Health_IDatabaseProbe_GetPendingMigrationsAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.IDatabaseProbe.GetPendingMigrationsAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.IDatabaseProbe.GetPendingMigrationsAsync
+  nameWithType: IDatabaseProbe.GetPendingMigrationsAsync
+- uid: Raftel.Infrastructure.Health.IStartupTask
+  name: IStartupTask
+  href: api/Raftel.Infrastructure.Health.IStartupTask.html
+  commentId: T:Raftel.Infrastructure.Health.IStartupTask
+  fullName: Raftel.Infrastructure.Health.IStartupTask
+  nameWithType: IStartupTask
+- uid: Raftel.Infrastructure.Health.IStartupTask.ExecuteAsync(System.Threading.CancellationToken)
+  name: ExecuteAsync(CancellationToken)
+  href: api/Raftel.Infrastructure.Health.IStartupTask.html#Raftel_Infrastructure_Health_IStartupTask_ExecuteAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.IStartupTask.ExecuteAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.IStartupTask.ExecuteAsync(System.Threading.CancellationToken)
+  nameWithType: IStartupTask.ExecuteAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Health.IStartupTask.ExecuteAsync*
+  name: ExecuteAsync
+  href: api/Raftel.Infrastructure.Health.IStartupTask.html#Raftel_Infrastructure_Health_IStartupTask_ExecuteAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.IStartupTask.ExecuteAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.IStartupTask.ExecuteAsync
+  nameWithType: IStartupTask.ExecuteAsync
+- uid: Raftel.Infrastructure.Health.OutboxHealthCheck
+  name: OutboxHealthCheck
+  href: api/Raftel.Infrastructure.Health.OutboxHealthCheck.html
+  commentId: T:Raftel.Infrastructure.Health.OutboxHealthCheck
+  fullName: Raftel.Infrastructure.Health.OutboxHealthCheck
+  nameWithType: OutboxHealthCheck
+- uid: Raftel.Infrastructure.Health.OutboxHealthCheck.#ctor(Raftel.Application.Abstractions.IOutboxHealthProbe,Microsoft.Extensions.Options.IOptions{Raftel.Application.Abstractions.Health.HealthOptions})
+  name: OutboxHealthCheck(IOutboxHealthProbe, IOptions<HealthOptions>)
+  href: api/Raftel.Infrastructure.Health.OutboxHealthCheck.html#Raftel_Infrastructure_Health_OutboxHealthCheck__ctor_Raftel_Application_Abstractions_IOutboxHealthProbe_Microsoft_Extensions_Options_IOptions_Raftel_Application_Abstractions_Health_HealthOptions__
+  commentId: M:Raftel.Infrastructure.Health.OutboxHealthCheck.#ctor(Raftel.Application.Abstractions.IOutboxHealthProbe,Microsoft.Extensions.Options.IOptions{Raftel.Application.Abstractions.Health.HealthOptions})
+  name.vb: New(IOutboxHealthProbe, IOptions(Of HealthOptions))
+  fullName: Raftel.Infrastructure.Health.OutboxHealthCheck.OutboxHealthCheck(Raftel.Application.Abstractions.IOutboxHealthProbe, Microsoft.Extensions.Options.IOptions<Raftel.Application.Abstractions.Health.HealthOptions>)
+  fullName.vb: Raftel.Infrastructure.Health.OutboxHealthCheck.New(Raftel.Application.Abstractions.IOutboxHealthProbe, Microsoft.Extensions.Options.IOptions(Of Raftel.Application.Abstractions.Health.HealthOptions))
+  nameWithType: OutboxHealthCheck.OutboxHealthCheck(IOutboxHealthProbe, IOptions<HealthOptions>)
+  nameWithType.vb: OutboxHealthCheck.New(IOutboxHealthProbe, IOptions(Of HealthOptions))
+- uid: Raftel.Infrastructure.Health.OutboxHealthCheck.#ctor*
+  name: OutboxHealthCheck
+  href: api/Raftel.Infrastructure.Health.OutboxHealthCheck.html#Raftel_Infrastructure_Health_OutboxHealthCheck__ctor_
+  commentId: Overload:Raftel.Infrastructure.Health.OutboxHealthCheck.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Infrastructure.Health.OutboxHealthCheck.OutboxHealthCheck
+  fullName.vb: Raftel.Infrastructure.Health.OutboxHealthCheck.New
+  nameWithType: OutboxHealthCheck.OutboxHealthCheck
+  nameWithType.vb: OutboxHealthCheck.New
+- uid: Raftel.Infrastructure.Health.OutboxHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)
+  name: CheckHealthAsync(HealthCheckContext, CancellationToken)
+  href: api/Raftel.Infrastructure.Health.OutboxHealthCheck.html#Raftel_Infrastructure_Health_OutboxHealthCheck_CheckHealthAsync_Microsoft_Extensions_Diagnostics_HealthChecks_HealthCheckContext_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.OutboxHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.OutboxHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext, System.Threading.CancellationToken)
+  nameWithType: OutboxHealthCheck.CheckHealthAsync(HealthCheckContext, CancellationToken)
+- uid: Raftel.Infrastructure.Health.OutboxHealthCheck.CheckHealthAsync*
+  name: CheckHealthAsync
+  href: api/Raftel.Infrastructure.Health.OutboxHealthCheck.html#Raftel_Infrastructure_Health_OutboxHealthCheck_CheckHealthAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.OutboxHealthCheck.CheckHealthAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.OutboxHealthCheck.CheckHealthAsync
+  nameWithType: OutboxHealthCheck.CheckHealthAsync
+- uid: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck
+  name: PendingMigrationsHealthCheck
+  href: api/Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.html
+  commentId: T:Raftel.Infrastructure.Health.PendingMigrationsHealthCheck
+  fullName: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck
+  nameWithType: PendingMigrationsHealthCheck
+- uid: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.#ctor(Raftel.Infrastructure.Health.IDatabaseProbe)
+  name: PendingMigrationsHealthCheck(IDatabaseProbe)
+  href: api/Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.html#Raftel_Infrastructure_Health_PendingMigrationsHealthCheck__ctor_Raftel_Infrastructure_Health_IDatabaseProbe_
+  commentId: M:Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.#ctor(Raftel.Infrastructure.Health.IDatabaseProbe)
+  name.vb: New(IDatabaseProbe)
+  fullName: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.PendingMigrationsHealthCheck(Raftel.Infrastructure.Health.IDatabaseProbe)
+  fullName.vb: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.New(Raftel.Infrastructure.Health.IDatabaseProbe)
+  nameWithType: PendingMigrationsHealthCheck.PendingMigrationsHealthCheck(IDatabaseProbe)
+  nameWithType.vb: PendingMigrationsHealthCheck.New(IDatabaseProbe)
+- uid: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.#ctor*
+  name: PendingMigrationsHealthCheck
+  href: api/Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.html#Raftel_Infrastructure_Health_PendingMigrationsHealthCheck__ctor_
+  commentId: Overload:Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.PendingMigrationsHealthCheck
+  fullName.vb: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.New
+  nameWithType: PendingMigrationsHealthCheck.PendingMigrationsHealthCheck
+  nameWithType.vb: PendingMigrationsHealthCheck.New
+- uid: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)
+  name: CheckHealthAsync(HealthCheckContext, CancellationToken)
+  href: api/Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.html#Raftel_Infrastructure_Health_PendingMigrationsHealthCheck_CheckHealthAsync_Microsoft_Extensions_Diagnostics_HealthChecks_HealthCheckContext_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext, System.Threading.CancellationToken)
+  nameWithType: PendingMigrationsHealthCheck.CheckHealthAsync(HealthCheckContext, CancellationToken)
+- uid: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.CheckHealthAsync*
+  name: CheckHealthAsync
+  href: api/Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.html#Raftel_Infrastructure_Health_PendingMigrationsHealthCheck_CheckHealthAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.CheckHealthAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.PendingMigrationsHealthCheck.CheckHealthAsync
+  nameWithType: PendingMigrationsHealthCheck.CheckHealthAsync
+- uid: Raftel.Infrastructure.Health.StartupHealthCheck
+  name: StartupHealthCheck
+  href: api/Raftel.Infrastructure.Health.StartupHealthCheck.html
+  commentId: T:Raftel.Infrastructure.Health.StartupHealthCheck
+  fullName: Raftel.Infrastructure.Health.StartupHealthCheck
+  nameWithType: StartupHealthCheck
+- uid: Raftel.Infrastructure.Health.StartupHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)
+  name: CheckHealthAsync(HealthCheckContext, CancellationToken)
+  href: api/Raftel.Infrastructure.Health.StartupHealthCheck.html#Raftel_Infrastructure_Health_StartupHealthCheck_CheckHealthAsync_Microsoft_Extensions_Diagnostics_HealthChecks_HealthCheckContext_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.StartupHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.StartupHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext, System.Threading.CancellationToken)
+  nameWithType: StartupHealthCheck.CheckHealthAsync(HealthCheckContext, CancellationToken)
+- uid: Raftel.Infrastructure.Health.StartupHealthCheck.CheckHealthAsync*
+  name: CheckHealthAsync
+  href: api/Raftel.Infrastructure.Health.StartupHealthCheck.html#Raftel_Infrastructure_Health_StartupHealthCheck_CheckHealthAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.StartupHealthCheck.CheckHealthAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.StartupHealthCheck.CheckHealthAsync
+  nameWithType: StartupHealthCheck.CheckHealthAsync
+- uid: Raftel.Infrastructure.Health.StartupHealthCheck.IsReady
+  name: IsReady
+  href: api/Raftel.Infrastructure.Health.StartupHealthCheck.html#Raftel_Infrastructure_Health_StartupHealthCheck_IsReady
+  commentId: P:Raftel.Infrastructure.Health.StartupHealthCheck.IsReady
+  fullName: Raftel.Infrastructure.Health.StartupHealthCheck.IsReady
+  nameWithType: StartupHealthCheck.IsReady
+- uid: Raftel.Infrastructure.Health.StartupHealthCheck.IsReady*
+  name: IsReady
+  href: api/Raftel.Infrastructure.Health.StartupHealthCheck.html#Raftel_Infrastructure_Health_StartupHealthCheck_IsReady_
+  commentId: Overload:Raftel.Infrastructure.Health.StartupHealthCheck.IsReady
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.StartupHealthCheck.IsReady
+  nameWithType: StartupHealthCheck.IsReady
+- uid: Raftel.Infrastructure.Health.StartupHealthCheck.MarkReady
+  name: MarkReady()
+  href: api/Raftel.Infrastructure.Health.StartupHealthCheck.html#Raftel_Infrastructure_Health_StartupHealthCheck_MarkReady
+  commentId: M:Raftel.Infrastructure.Health.StartupHealthCheck.MarkReady
+  fullName: Raftel.Infrastructure.Health.StartupHealthCheck.MarkReady()
+  nameWithType: StartupHealthCheck.MarkReady()
+- uid: Raftel.Infrastructure.Health.StartupHealthCheck.MarkReady*
+  name: MarkReady
+  href: api/Raftel.Infrastructure.Health.StartupHealthCheck.html#Raftel_Infrastructure_Health_StartupHealthCheck_MarkReady_
+  commentId: Overload:Raftel.Infrastructure.Health.StartupHealthCheck.MarkReady
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.StartupHealthCheck.MarkReady
+  nameWithType: StartupHealthCheck.MarkReady
+- uid: Raftel.Infrastructure.Health.StartupHostedService
+  name: StartupHostedService
+  href: api/Raftel.Infrastructure.Health.StartupHostedService.html
+  commentId: T:Raftel.Infrastructure.Health.StartupHostedService
+  fullName: Raftel.Infrastructure.Health.StartupHostedService
+  nameWithType: StartupHostedService
+- uid: Raftel.Infrastructure.Health.StartupHostedService.#ctor(Raftel.Infrastructure.Health.StartupHealthCheck,System.Collections.Generic.IEnumerable{Raftel.Infrastructure.Health.IStartupTask},Microsoft.Extensions.Logging.ILogger{Raftel.Infrastructure.Health.StartupHostedService})
+  name: StartupHostedService(StartupHealthCheck, IEnumerable<IStartupTask>, ILogger<StartupHostedService>)
+  href: api/Raftel.Infrastructure.Health.StartupHostedService.html#Raftel_Infrastructure_Health_StartupHostedService__ctor_Raftel_Infrastructure_Health_StartupHealthCheck_System_Collections_Generic_IEnumerable_Raftel_Infrastructure_Health_IStartupTask__Microsoft_Extensions_Logging_ILogger_Raftel_Infrastructure_Health_StartupHostedService__
+  commentId: M:Raftel.Infrastructure.Health.StartupHostedService.#ctor(Raftel.Infrastructure.Health.StartupHealthCheck,System.Collections.Generic.IEnumerable{Raftel.Infrastructure.Health.IStartupTask},Microsoft.Extensions.Logging.ILogger{Raftel.Infrastructure.Health.StartupHostedService})
+  name.vb: New(StartupHealthCheck, IEnumerable(Of IStartupTask), ILogger(Of StartupHostedService))
+  fullName: Raftel.Infrastructure.Health.StartupHostedService.StartupHostedService(Raftel.Infrastructure.Health.StartupHealthCheck, System.Collections.Generic.IEnumerable<Raftel.Infrastructure.Health.IStartupTask>, Microsoft.Extensions.Logging.ILogger<Raftel.Infrastructure.Health.StartupHostedService>)
+  fullName.vb: Raftel.Infrastructure.Health.StartupHostedService.New(Raftel.Infrastructure.Health.StartupHealthCheck, System.Collections.Generic.IEnumerable(Of Raftel.Infrastructure.Health.IStartupTask), Microsoft.Extensions.Logging.ILogger(Of Raftel.Infrastructure.Health.StartupHostedService))
+  nameWithType: StartupHostedService.StartupHostedService(StartupHealthCheck, IEnumerable<IStartupTask>, ILogger<StartupHostedService>)
+  nameWithType.vb: StartupHostedService.New(StartupHealthCheck, IEnumerable(Of IStartupTask), ILogger(Of StartupHostedService))
+- uid: Raftel.Infrastructure.Health.StartupHostedService.#ctor*
+  name: StartupHostedService
+  href: api/Raftel.Infrastructure.Health.StartupHostedService.html#Raftel_Infrastructure_Health_StartupHostedService__ctor_
+  commentId: Overload:Raftel.Infrastructure.Health.StartupHostedService.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Infrastructure.Health.StartupHostedService.StartupHostedService
+  fullName.vb: Raftel.Infrastructure.Health.StartupHostedService.New
+  nameWithType: StartupHostedService.StartupHostedService
+  nameWithType.vb: StartupHostedService.New
+- uid: Raftel.Infrastructure.Health.StartupHostedService.StartAsync(System.Threading.CancellationToken)
+  name: StartAsync(CancellationToken)
+  href: api/Raftel.Infrastructure.Health.StartupHostedService.html#Raftel_Infrastructure_Health_StartupHostedService_StartAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.StartupHostedService.StartAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.StartupHostedService.StartAsync(System.Threading.CancellationToken)
+  nameWithType: StartupHostedService.StartAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Health.StartupHostedService.StartAsync*
+  name: StartAsync
+  href: api/Raftel.Infrastructure.Health.StartupHostedService.html#Raftel_Infrastructure_Health_StartupHostedService_StartAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.StartupHostedService.StartAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.StartupHostedService.StartAsync
+  nameWithType: StartupHostedService.StartAsync
+- uid: Raftel.Infrastructure.Health.StartupHostedService.StopAsync(System.Threading.CancellationToken)
+  name: StopAsync(CancellationToken)
+  href: api/Raftel.Infrastructure.Health.StartupHostedService.html#Raftel_Infrastructure_Health_StartupHostedService_StopAsync_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.StartupHostedService.StopAsync(System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.StartupHostedService.StopAsync(System.Threading.CancellationToken)
+  nameWithType: StartupHostedService.StopAsync(CancellationToken)
+- uid: Raftel.Infrastructure.Health.StartupHostedService.StopAsync*
+  name: StopAsync
+  href: api/Raftel.Infrastructure.Health.StartupHostedService.html#Raftel_Infrastructure_Health_StartupHostedService_StopAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.StartupHostedService.StopAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.StartupHostedService.StopAsync
+  nameWithType: StartupHostedService.StopAsync
+- uid: Raftel.Infrastructure.Health.TenantResolutionHealthCheck
+  name: TenantResolutionHealthCheck
+  href: api/Raftel.Infrastructure.Health.TenantResolutionHealthCheck.html
+  commentId: T:Raftel.Infrastructure.Health.TenantResolutionHealthCheck
+  fullName: Raftel.Infrastructure.Health.TenantResolutionHealthCheck
+  nameWithType: TenantResolutionHealthCheck
+- uid: Raftel.Infrastructure.Health.TenantResolutionHealthCheck.#ctor(Raftel.Domain.Features.Tenants.ITenantsRepository)
+  name: TenantResolutionHealthCheck(ITenantsRepository)
+  href: api/Raftel.Infrastructure.Health.TenantResolutionHealthCheck.html#Raftel_Infrastructure_Health_TenantResolutionHealthCheck__ctor_Raftel_Domain_Features_Tenants_ITenantsRepository_
+  commentId: M:Raftel.Infrastructure.Health.TenantResolutionHealthCheck.#ctor(Raftel.Domain.Features.Tenants.ITenantsRepository)
+  name.vb: New(ITenantsRepository)
+  fullName: Raftel.Infrastructure.Health.TenantResolutionHealthCheck.TenantResolutionHealthCheck(Raftel.Domain.Features.Tenants.ITenantsRepository)
+  fullName.vb: Raftel.Infrastructure.Health.TenantResolutionHealthCheck.New(Raftel.Domain.Features.Tenants.ITenantsRepository)
+  nameWithType: TenantResolutionHealthCheck.TenantResolutionHealthCheck(ITenantsRepository)
+  nameWithType.vb: TenantResolutionHealthCheck.New(ITenantsRepository)
+- uid: Raftel.Infrastructure.Health.TenantResolutionHealthCheck.#ctor*
+  name: TenantResolutionHealthCheck
+  href: api/Raftel.Infrastructure.Health.TenantResolutionHealthCheck.html#Raftel_Infrastructure_Health_TenantResolutionHealthCheck__ctor_
+  commentId: Overload:Raftel.Infrastructure.Health.TenantResolutionHealthCheck.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Raftel.Infrastructure.Health.TenantResolutionHealthCheck.TenantResolutionHealthCheck
+  fullName.vb: Raftel.Infrastructure.Health.TenantResolutionHealthCheck.New
+  nameWithType: TenantResolutionHealthCheck.TenantResolutionHealthCheck
+  nameWithType.vb: TenantResolutionHealthCheck.New
+- uid: Raftel.Infrastructure.Health.TenantResolutionHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)
+  name: CheckHealthAsync(HealthCheckContext, CancellationToken)
+  href: api/Raftel.Infrastructure.Health.TenantResolutionHealthCheck.html#Raftel_Infrastructure_Health_TenantResolutionHealthCheck_CheckHealthAsync_Microsoft_Extensions_Diagnostics_HealthChecks_HealthCheckContext_System_Threading_CancellationToken_
+  commentId: M:Raftel.Infrastructure.Health.TenantResolutionHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)
+  fullName: Raftel.Infrastructure.Health.TenantResolutionHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext, System.Threading.CancellationToken)
+  nameWithType: TenantResolutionHealthCheck.CheckHealthAsync(HealthCheckContext, CancellationToken)
+- uid: Raftel.Infrastructure.Health.TenantResolutionHealthCheck.CheckHealthAsync*
+  name: CheckHealthAsync
+  href: api/Raftel.Infrastructure.Health.TenantResolutionHealthCheck.html#Raftel_Infrastructure_Health_TenantResolutionHealthCheck_CheckHealthAsync_
+  commentId: Overload:Raftel.Infrastructure.Health.TenantResolutionHealthCheck.CheckHealthAsync
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Health.TenantResolutionHealthCheck.CheckHealthAsync
+  nameWithType: TenantResolutionHealthCheck.CheckHealthAsync
 - uid: Raftel.Infrastructure.Multitenancy.Middleware
   name: Raftel.Infrastructure.Multitenancy.Middleware
   href: api/Raftel.Infrastructure.Multitenancy.Middleware.html
