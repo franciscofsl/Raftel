@@ -17,7 +17,7 @@ WeatherForecast.cs / Controllers/WeatherForecastController.cs   ⚠️ ASP.NET t
 - **Infrastructure registration**: `AddSampleInfrastructure(connectionString)`.
 - **Startup seeding**: `await app.MigrateAndSeedAsync()` before `app.Run()`; `Raftel:Seed` settings come from configuration (the functional-test factory injects a random admin password, nothing is committed) and `ApplyMigrationsOnStartup` is enabled for this single-instance demo. `GET /api/test/permissions/{permission}` reports whether the caller holds a permission. `PermissionAuthorizationMiddleware` is not listed in `AddRaftelApplication` because the framework registers it by default.
 - **Endpoints**: `app.AddEndpointGroup(group => { group.AddQuery<...>(...); group.AddCommand<...>(...); })` — no controllers.
-- HTTP pipeline order: `UseCorrelationId()` → `UseRaftelExceptionHandling()` → `UseHttpsRedirection()` → `UseRouting()` → `UseTenantMiddleware()` → `UseAuthentication()` → `UseAuthorization()` → endpoints. `UseCorrelationId()` must come before `UseRaftelExceptionHandling()` so the correlation id is already in the logging scope when an exception gets logged.
+- HTTP pipeline order: `UseCorrelationId()` → `UseRaftelExceptionHandling()` → `UseHttpsRedirection()` → `UseRouting()` → `UseAuthentication()` → `UseTenantMiddleware()` → `UseAuthorization()` → endpoints. `UseCorrelationId()` must come before `UseRaftelExceptionHandling()` so the correlation id is already in the logging scope when an exception gets logged.
 
 ## Conventions
 

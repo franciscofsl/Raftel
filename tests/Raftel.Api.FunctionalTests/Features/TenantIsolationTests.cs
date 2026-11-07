@@ -58,16 +58,8 @@ public class TenantIsolationTests
         request.Headers.Add("X-Tenant-Id", "not-a-guid");
         var response = await _client.SendAsync(request);
 
-        if (response.StatusCode == HttpStatusCode.OK)
-        {
-            var names = (await response.Content.ReadFromJsonAsync<GetPirateByFilterResponse>())!
-                .Pirates.Select(p => p.Name);
-            names.ShouldNotContain(tenantPirate);
-        }
-        else
-        {
-            response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-        }
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+        (await response.Content.ReadAsStringAsync()).ShouldNotContain(tenantPirate);
     }
 
     private async Task AddPirateAsync(string name, Guid? tenantId)
