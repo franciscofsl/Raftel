@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -131,8 +131,11 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
             return null;
         }
 
+        // Tenant isolation never fails open: without a resolved tenant the predicate still applies and
+        // only matches host rows (TenantId IS NULL). Seeing every tenant's rows requires disabling the
+        // filter explicitly through IDataFilter.Disable<ITenantFilter>().
         return expression =>
             (!hasSoftDelete || !IsSoftDeleteFilterEnabled || !EF.Property<bool>(expression, ShadowPropertyNames.IsDeleted)) &&
-            (!hasTenantId || !IsTenantFilterEnabled || CurrentTenantId == null || EF.Property<Guid?>(expression, ShadowPropertyNames.TenantId) == CurrentTenantId);
+            (!hasTenantId || !IsTenantFilterEnabled || EF.Property<Guid?>(expression, ShadowPropertyNames.TenantId) == CurrentTenantId);
     }
 }
