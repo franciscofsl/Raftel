@@ -1,3 +1,4 @@
+using Raftel.Application.Abstractions.Multitenancy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Raftel.Application.Abstractions.Seeding;
@@ -81,6 +82,41 @@ public abstract class SeedRunnerIntegrationTestsBase : InfrastructureTestBase
             (await store.GetAppliedVersionAsync("seeder", null, CancellationToken.None)).ShouldBe(1);
             (await store.GetAppliedVersionAsync("seeder", tenantId, CancellationToken.None)).ShouldBe(3);
             (await store.GetAppliedVersionAsync("other", null, CancellationToken.None)).ShouldBeNull();
+        });
+    }
+
+    [Fact]
+    public async Task SeedHistoryStore_ShouldReadBackEveryTenantsEntryRegardlessOfTheCurrentTenant()
+    {
+        var tenantA = Guid.NewGuid();
+        var tenantB = Guid.NewGuid();
+        await ExecuteScopedAsync(async sp =>
+        {
+            var store = sp.GetRequiredService<ISeedHistoryStore>();
+            var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
+            var currentTenant = sp.GetRequiredService<ICurrentTenant>();
+
+            using (currentTenant.Change(tenantA))
+            {
+                await store.RecordAsync("seeder", tenantA, 2, CancellationToken.None);
+                await unitOfWork.CommitAsync();
+            }
+        });
+
+        await ExecuteScopedAsync(async sp =>
+        {
+            var store = sp.GetRequiredService<ISeedHistoryStore>();
+            var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
+            var currentTenant = sp.GetRequiredService<ICurrentTenant>();
+
+            using (currentTenant.Change(tenantB))
+            {
+                (await store.GetAppliedVersionAsync("seeder", tenantA, CancellationToken.None)).ShouldBe(2);
+                await store.RecordAsync("seeder", tenantA, 4, CancellationToken.None);
+                await unitOfWork.CommitAsync();
+            }
+
+            (await store.GetAppliedVersionAsync("seeder", tenantA, CancellationToken.None)).ShouldBe(4);
         });
     }
 

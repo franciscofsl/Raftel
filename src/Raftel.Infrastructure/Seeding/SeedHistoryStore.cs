@@ -28,7 +28,10 @@ internal sealed class SeedHistoryStore<TDbContext>(TDbContext dbContext, TimePro
 
     private Task<SeedHistory?> FindAsync(string name, Guid? tenantId, CancellationToken cancellationToken)
     {
+        // SeedHistory is cross-tenant bookkeeping keyed explicitly by tenantId; its TenantId column also matches
+        // the global tenant filter, which would otherwise hide entries recorded for another tenant scope.
         return dbContext.Set<SeedHistory>()
+            .IgnoreQueryFilters()
             .FirstOrDefaultAsync(h => h.Name == name && h.TenantId == tenantId, cancellationToken);
     }
 }

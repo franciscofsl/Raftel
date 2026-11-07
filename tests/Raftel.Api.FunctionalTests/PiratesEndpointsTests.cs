@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -17,9 +17,11 @@ namespace Raftel.Api.FunctionalTests;
 public class PiratesEndpointsTests
 {
     private readonly HttpClient _client;
+    private readonly ApiTestFactory _factory;
 
     public PiratesEndpointsTests(ApiTestFactory factory)
     {
+        _factory = factory;
         _client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {
             BaseAddress = new Uri("https://localhost:5128")
@@ -29,7 +31,7 @@ public class PiratesEndpointsTests
     [Fact]
     public async Task PostPirate_ShouldCreateAndReturnFilteredPirate()
     {
-        await _client.AuthenticateAsync();
+        await _client.AuthenticateAsAdminAsync(_factory);
         
         const string pirateName = "Created by Functional Test";
         var result = await _client.PostAsJsonAsync("/api/pirates", new
@@ -52,7 +54,7 @@ public class PiratesEndpointsTests
     [Fact]
     public async Task PostPirate_ShouldReturnCreatedPirateId()
     {
-        await _client.AuthenticateAsync();
+        await _client.AuthenticateAsAdminAsync(_factory);
 
         const string pirateName = "Pirate With Returned Id";
         var response = await _client.PostAsJsonAsync("/api/pirates", new
@@ -71,7 +73,7 @@ public class PiratesEndpointsTests
     [Fact]
     public async Task PostPirate_WithMalformedJson_ShouldReturnBadRequest()
     {
-        await _client.AuthenticateAsync();
+        await _client.AuthenticateAsAdminAsync(_factory);
 
         var content = new StringContent("{ invalid json }", Encoding.UTF8, "application/json");
         var response = await _client.PostAsync("/api/pirates", content);
@@ -82,7 +84,7 @@ public class PiratesEndpointsTests
     [Fact]
     public async Task PostPirate_WithEmptyName_ShouldReturnBadRequest_WithFieldKeyedErrorsBody()
     {
-        await _client.AuthenticateAsync();
+        await _client.AuthenticateAsAdminAsync(_factory);
 
         var response = await _client.PostAsJsonAsync("/api/pirates", new
         {

@@ -21,6 +21,10 @@ public static class HttpClientExtensions
         return await client.AuthenticateWithExistingUserAsync(email, password);
     }
 
+    /// <summary>Logs in as the administrator seeded at startup, who holds every declared permission.</summary>
+    public static Task<string> AuthenticateAsAdminAsync(this HttpClient client, ApiTestFactory factory) =>
+        client.AuthenticateWithExistingUserAsync(factory.AdminEmail, factory.AdminPassword);
+
     public static async Task<string> AuthenticateWithExistingUserAsync(this HttpClient client, string email,
         string password)
     {
