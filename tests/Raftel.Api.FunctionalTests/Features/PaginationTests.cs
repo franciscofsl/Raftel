@@ -9,9 +9,11 @@ namespace Raftel.Api.FunctionalTests.Features;
 public class PaginationTests
 {
     private readonly HttpClient _client;
+    private readonly ApiTestFactory _factory;
 
     public PaginationTests(ApiTestFactory factory)
     {
+        _factory = factory;
         _client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {
             BaseAddress = new Uri("https://localhost:5128")
@@ -21,7 +23,7 @@ public class PaginationTests
     [Fact]
     public async Task GetAllTenants_Should_ReturnRequestedPage_Sorted_With_TotalCountHeader()
     {
-        await _client.AuthenticateAsync();
+        await _client.AuthenticateAsAdminAsync(_factory);
 
         var marker = Guid.NewGuid().ToString("N")[..8];
         foreach (var index in Enumerable.Range(1, 6))
@@ -64,7 +66,7 @@ public class PaginationTests
     [Fact]
     public async Task GetAllTenants_With_UnknownSortField_Should_ReturnBadRequest()
     {
-        await _client.AuthenticateAsync();
+        await _client.AuthenticateAsAdminAsync(_factory);
 
         var response = await _client.GetAsync("/api/tenants?sort=secretInternalColumn");
 
@@ -75,7 +77,7 @@ public class PaginationTests
     [Fact]
     public async Task GetAllTenants_With_PageSizeAboveMaximum_Should_ReturnBadRequest()
     {
-        await _client.AuthenticateAsync();
+        await _client.AuthenticateAsAdminAsync(_factory);
 
         var response = await _client.GetAsync("/api/tenants?pageSize=999999");
 

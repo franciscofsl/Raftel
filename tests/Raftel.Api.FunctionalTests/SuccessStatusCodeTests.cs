@@ -10,9 +10,11 @@ namespace Raftel.Api.FunctionalTests;
 public class SuccessStatusCodeTests
 {
     private readonly HttpClient _client;
+    private readonly ApiTestFactory _factory;
 
     public SuccessStatusCodeTests(ApiTestFactory factory)
     {
+        _factory = factory;
         _client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {
             BaseAddress = new Uri("https://localhost:5128")
@@ -35,7 +37,7 @@ public class SuccessStatusCodeTests
     [Fact]
     public async Task CommandWithResultValueAndCreatedRouteName_ShouldReturn201_WithLocationHeader()
     {
-        await _client.AuthenticateAsync();
+        await _client.AuthenticateAsAdminAsync(_factory);
 
         var response = await _client.PostAsJsonAsync("/api/pirates", new
         {

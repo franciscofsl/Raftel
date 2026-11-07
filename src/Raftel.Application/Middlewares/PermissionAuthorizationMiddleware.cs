@@ -10,7 +10,7 @@ namespace Raftel.Application.Middlewares;
 /// </summary>
 /// <typeparam name="TRequest">The type of request being processed.</typeparam>
 /// <typeparam name="TResponse">The type of response expected.</typeparam>
-public class PermissionAuthorizationMiddleware<TRequest, TResponse>(
+public sealed class PermissionAuthorizationMiddleware<TRequest, TResponse>(
     ICurrentUser currentUser,
     AuthorizationOptions authorizationOptions)
     : IGlobalMiddleware<TRequest, TResponse>
@@ -19,8 +19,10 @@ public class PermissionAuthorizationMiddleware<TRequest, TResponse>(
 {
     /// <summary>
     /// Handles the request by checking if the current user has the required permissions.
-    /// If a required permission is missing, a failed <typeparamref name="TResponse"/> carrying a
-    /// <see cref="ErrorType.Forbidden"/> error is returned without invoking <paramref name="next"/>.
+    /// An anonymous caller gets a failed <typeparamref name="TResponse"/> carrying an
+    /// <see cref="ErrorType.Unauthorized"/> error; an authenticated caller missing a required
+    /// permission gets an <see cref="ErrorType.Forbidden"/> error. In both cases
+    /// <paramref name="next"/> is not invoked.
     /// </summary>
     /// <param name="request">The request to process.</param>
     /// <param name="next">The next middleware or handler in the pipeline.</param>
@@ -37,6 +39,14 @@ public class PermissionAuthorizationMiddleware<TRequest, TResponse>(
         if (requiredPermissions.Length == 0)
         {
             return next(cancellationToken);
+        }
+
+        if (!currentUser.IsAuthenticated)
+        {
+            var unauthorized = Error.Unauthorized("Authorization.Unauthorized",
+                "Authentication is required to perform this action.");
+
+            return Task.FromResult(ResultFactory.CreateFailure<TResponse>(unauthorized));
         }
 
         var missingPermissions = requiredPermissions.Where(p => !currentUser.HasPermission(p)).ToArray();
