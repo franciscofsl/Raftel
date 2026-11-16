@@ -21,6 +21,11 @@ public sealed class ApiTestFactory : WebApplicationFactory<DemoApi.Program>
 
     public TestLogCapture LogCapture { get; } = new();
 
+    /// <summary>Administrator seeded at startup; the password is random per run and never committed.</summary>
+    public string AdminEmail { get; } = "admin@functional.test";
+
+    public string AdminPassword { get; } = $"Aa1!{Guid.NewGuid():N}";
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         _container.StartAsync().GetAwaiter().GetResult();
@@ -33,7 +38,9 @@ public sealed class ApiTestFactory : WebApplicationFactory<DemoApi.Program>
             var inMemorySettings = new Dictionary<string, string?>
             {
                 ["ConnectionStrings:Default"] = _container.GetConnectionString(),
-                ["Logging:LogLevel:Default"] = "Trace"
+                ["Logging:LogLevel:Default"] = "Trace",
+                ["Raftel:Seed:AdminEmail"] = AdminEmail,
+                ["Raftel:Seed:AdminPassword"] = AdminPassword
             };
 
             configBuilder.AddInMemoryCollection(inMemorySettings);

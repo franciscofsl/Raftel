@@ -24,8 +24,14 @@ public sealed class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.Property(x => x.Description)
             .HasMaxLength(500);
 
-        builder.HasMany<Permission>()
-            .WithMany();
+        builder.HasMany<Permission>("_permissionItems")
+            .WithOne()
+            .HasForeignKey("RoleId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Navigation("_permissionItems")
+            .AutoInclude();
 
         builder.HasTenantId();
 

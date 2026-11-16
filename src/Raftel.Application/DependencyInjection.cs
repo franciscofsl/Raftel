@@ -1,8 +1,12 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Raftel.Application.Abstractions;
+using Raftel.Application.Abstractions.Authentication;
 using Raftel.Application.Abstractions.DomainEvents;
+using Raftel.Application.Abstractions.Seeding;
+using Raftel.Application.Authorization;
 using Raftel.Application.Commands;
 using Raftel.Application.Middlewares;
 using Raftel.Application.Queries;
@@ -22,6 +26,7 @@ public static class DependencyInjection
 
         RegisterHandlers(services, assemblies: builder.Assemblies);
         RegisterMiddlewares(services, builder);
+        RegisterPermissionSets(services, builder.Assemblies);
 
         services.AddSingleton(builder.PaginationOptions);
         services.AddSingleton(builder.AuthorizationOptions);
@@ -30,6 +35,7 @@ public static class DependencyInjection
         services.AddScoped<IQueryDispatcher, QueryDispatcher>();
         services.AddScoped<IDomainEventsDispatcher, DomainEventsDispatcher>();
         services.AddScoped<IRequestEvent, RequestEvent>();
+        services.TryAddScoped<ICurrentUser, AnonymousCurrentUser>();
     }
 
     private static void RegisterHandlers(IServiceCollection services, IEnumerable<Assembly> assemblies)
@@ -46,6 +52,7 @@ public static class DependencyInjection
             {
                 RegisterHandlers(services, type, handlerTypes);
                 RegisterValidators(services, type);
+                RegisterSeeders(services, type);
             }
         }
     }
@@ -64,6 +71,22 @@ public static class DependencyInjection
                 services.AddTransient(iface, type);
             }
         }
+    }
+
+    private static void RegisterSeeders(IServiceCollection services, Type type)
+    {
+        if (type.IsAbstract || type.IsInterface || !typeof(IDataSeeder).IsAssignableFrom(type))
+        {
+            return;
+        }
+
+        services.AddScoped(typeof(IDataSeeder), type);
+    }
+
+    private static void RegisterPermissionSets(IServiceCollection services, IEnumerable<Assembly> assemblies)
+    {
+        var scanned = assemblies.Append(typeof(PermissionSetAttribute).Assembly);
+        services.AddSingleton<IPermissionSetProvider>(new PermissionSetProvider(scanned));
     }
 
     private static void RegisterValidators(IServiceCollection services, Type type)
@@ -91,11 +114,12 @@ public static class DependencyInjection
 
     private static void RegisterMiddlewares(IServiceCollection services, RaftelApplicationBuilder builder)
     {
-        var middlewareRegistry = new MiddlewareRegistry(builder.GlobalMiddlewares, builder.CommandMiddlewares,
+        var globalMiddlewares = WithPermissionAuthorization(builder.GlobalMiddlewares);
+        var middlewareRegistry = new MiddlewareRegistry(globalMiddlewares, builder.CommandMiddlewares,
             builder.QueryMiddlewares);
         services.AddSingleton(middlewareRegistry);
 
-        foreach (var type in builder.GlobalMiddlewares)
+        foreach (var type in globalMiddlewares)
         {
             services.AddScoped(typeof(IGlobalMiddleware<,>), type);
         }
@@ -117,5 +141,26 @@ public static class DependencyInjection
         {
             services.AddScoped(typeof(IQueryMiddleware<,>), type);
         }
+    }
+
+    /// <summary>
+    /// Guarantees that <see cref="PermissionAuthorizationMiddleware{TRequest,TResponse}"/> is always part of
+    /// the global pipeline, so <see cref="RequiresPermissionAttribute"/> is enforced even when the host does
+    /// not register it explicitly. It is placed right after <see cref="LoggingMiddleware{TRequest,TResponse}"/>
+    /// (which must stay outermost) or first otherwise, so authorization runs before validation and handlers.
+    /// An explicit registration is kept where the host put it and never duplicated.
+    /// </summary>
+    private static List<Type> WithPermissionAuthorization(List<Type> configured)
+    {
+        var permissionMiddleware = typeof(PermissionAuthorizationMiddleware<,>);
+        var globalMiddlewares = new List<Type>(configured);
+        if (globalMiddlewares.Contains(permissionMiddleware))
+        {
+            return globalMiddlewares;
+        }
+
+        var loggingIndex = globalMiddlewares.IndexOf(typeof(LoggingMiddleware<,>));
+        globalMiddlewares.Insert(loggingIndex + 1, permissionMiddleware);
+        return globalMiddlewares;
     }
 }

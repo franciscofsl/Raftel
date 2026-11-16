@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +10,7 @@ using Raftel.Domain.Features.Users;
 using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Authorization;
 using Raftel.Infrastructure.Data.Filters;
+using Raftel.Infrastructure.Seeding;
 
 namespace Raftel.Infrastructure.Data;
 
@@ -60,6 +61,8 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
     public DbSet<Tenant> Tenant { get; set; }
     public DbSet<Role> Role { get; set; }
     public DbSet<Permission> Permission { get; set; }
+    public DbSet<PermissionDefinition> PermissionDefinition { get; set; }
+    public DbSet<SeedHistory> SeedHistory { get; set; }
     public DbSet<AuditLog> AuditLog { get; set; }
     
     protected bool IsSoftDeleteFilterEnabled => _dataFilter?.IsEnabled<ISoftDeleteFilter>() ?? false;
@@ -128,8 +131,11 @@ public abstract class RaftelDbContext<TDbContext> : IdentityDbContext, IUnitOfWo
             return null;
         }
 
+        // Tenant isolation never fails open: without a resolved tenant the predicate still applies and
+        // only matches host rows (TenantId IS NULL). Seeing every tenant's rows requires disabling the
+        // filter explicitly through IDataFilter.Disable<ITenantFilter>().
         return expression =>
             (!hasSoftDelete || !IsSoftDeleteFilterEnabled || !EF.Property<bool>(expression, ShadowPropertyNames.IsDeleted)) &&
-            (!hasTenantId || !IsTenantFilterEnabled || CurrentTenantId == null || EF.Property<Guid?>(expression, ShadowPropertyNames.TenantId) == CurrentTenantId);
+            (!hasTenantId || !IsTenantFilterEnabled || EF.Property<Guid?>(expression, ShadowPropertyNames.TenantId) == CurrentTenantId);
     }
 }

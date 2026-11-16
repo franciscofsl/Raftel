@@ -17,6 +17,7 @@ ApiDefinitionTests.cs       correct endpoint generation (AutoEndpoints)
 AuthenticationTest.cs       OpenIddict flow (/connect/token), tokens
 PiratesEndpointsTests.cs    business CRUD via HTTP
 ExceptionHandlingTests.cs   ProblemDetails responses (RFC 7807)
+SeedingTests.cs             startup seeding: permission catalog, seeded admin permissions, `/health/ready` seeding states
 ```
 
 ## Conventions
@@ -25,4 +26,4 @@ ExceptionHandlingTests.cs   ProblemDetails responses (RFC 7807)
 - Decorate every test class with `[Collection(ApiTestCollection.Name)]` (not `IClassFixture<ApiTestFactory>`) so it joins the shared container instead of starting a new one.
 - Test **observable HTTP contract**: status codes, JSON body, ProblemDetails format on error, authorization (401/403 without permission).
 - For protected endpoints, obtain a token via password flow first.
-- Data isn't reset between tests (no Respawn here, since the seeded admin role/OpenIddict client must survive); use unique values (GUIDs) for anything you create so tests don't collide.
+- Data isn't reset between tests (no Respawn here, since the seeded admin role/user and the OpenIddict client must survive); use unique values (GUIDs) for anything you create so tests don't collide.

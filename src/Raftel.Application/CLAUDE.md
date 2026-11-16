@@ -13,10 +13,11 @@ Abstractions/
     Authentication/   ICurrentUser, IAuthenticationService (interfaces, impl. in Infrastructure)
     Multitenancy/     ICurrentTenant
     DomainEvents/     IDomainEventHandler<TEvent>, IDomainEventsDispatcher + DomainEventsDispatcher impl.
+    Seeding/          IDataSeeder, ITenantDataSeeder, ISeedRunner, SeedingFailedException (impl. in Infrastructure); SeedOptions at the project root
 Commands/             ICommand, ICommand<TResult>, ICommandHandler<,>, ICommandDispatcher, CommandDispatcher
 Queries/              IQuery<TResult>, IQueryHandler<,>, IQueryDispatcher, QueryDispatcher
 Middlewares/          IGlobalMiddleware / ICommandMiddleware / IQueryMiddleware + implementations + MiddlewareRegistry
-Authorization/        RequiresPermissionAttribute
+Authorization/        RequiresPermissionAttribute, PermissionSetAttribute + IPermissionSetProvider (permission names declared in marked classes)
 Features/<Feature>/<UseCase>/   one use case per folder (see below)
 DependencyInjection.cs          AddRaftelApplication(cfg => ...)
 RaftelApplicationBuilder.cs     assembly and middleware registration
@@ -36,7 +37,8 @@ Each use case is a folder `Features/<Feature>/<UseCase>/` grouping everything:
 ## Pipeline and Mediator
 
 - `RequestDispatcher` reflects to detect if request is `ICommand`/`ICommand<T>`/`IQuery<T>` and chains: `IGlobalMiddleware` + command/query-specific middlewares, ending with handler.
-- Included middlewares: `ValidationMiddleware` (runs `Validator<T>`), `PermissionAuthorizationMiddleware` (via `[RequiresPermission]`), `TransactionMiddleware` (command-only, opens/commits/rolls back an explicit transaction — see below), `UnitOfWorkMiddleware` (commits **only if result succeeds**), `LoggingMiddleware` (wide-event enrichment — see below). Both `ValidationMiddleware` and `PermissionAuthorizationMiddleware` communicate failure exclusively through a failed `Result`/`Result<T>` (`ErrorType.Validation` / `ErrorType.Forbidden`) — they never throw, and both require `TResponse : Result`.
+- Included middlewares: `ValidationMiddleware` (runs `Validator<T>`), `PermissionAuthorizationMiddleware` (via `[RequiresPermission]`), `TransactionMiddleware` (command-only, opens/commits/rolls back an explicit transaction — see below), `UnitOfWorkMiddleware` (commits **only if result succeeds**), `LoggingMiddleware` (wide-event enrichment — see below). Both `ValidationMiddleware` and `PermissionAuthorizationMiddleware` communicate failure exclusively through a failed `Result`/`Result<T>` (`ErrorType.Validation`, or `ErrorType.Unauthorized` for an anonymous caller / `ErrorType.Forbidden` for a missing permission) — they never throw, and both require `TResponse : Result`.
+- **`PermissionAuthorizationMiddleware<,>` is always registered**: `AddRaftelApplication` adds it to the global pipeline even if the host does not call `AddGlobalMiddleware` for it — right after `LoggingMiddleware<,>` when present, first otherwise — so `[RequiresPermission]` is enforced for every dispatch (HTTP or not). An explicit registration keeps its position and is never duplicated. If the host registers no `ICurrentUser`, the internal `AnonymousCurrentUser` fallback (via `TryAddScoped`) makes protected requests fail closed with `Unauthorized`.
 - To add new cross-cutting behavior (caching, logging…), create a middleware of the appropriate type and register it in `AddRaftelApplication`.
 - Global middleware order is caller-defined by the order of `AddGlobalMiddleware` calls. **`LoggingMiddleware<,>` must be registered first** so it wraps every other global middleware and captures their outcome too.
 - Command middleware order is likewise caller-defined by `AddCommandMiddleware` call order, outermost first. **`TransactionMiddleware<>`/`TransactionMiddleware<,>` must be registered before `UnitOfWorkMiddleware<>`/`UnitOfWorkMiddleware<,>`** so the transaction wraps the commit (and, through it, auditing and domain event dispatch — both ride on `SaveChanges`). `TransactionMiddleware` is opt-in, like `UnitOfWorkMiddleware`: an app registers it explicitly if it wants command handling wrapped in an explicit, rollback-capable transaction instead of a bare `SaveChanges`.
@@ -49,6 +51,11 @@ Raftel logs one structured "wide event" (canonical log line) per HTTP request, n
 - **Enriching from a handler**: inject `IRequestEvent` and call `Set("field.name", value)` / `Increment("field.name")` for domain context worth debugging with (e.g. `pirate.id`, `db.query_count`). Expose field names as a `<Feature>EventFields` constants class (mirroring `<Feature>Permissions`) rather than inline string literals, so additions are reviewable in a PR diff.
 - **Deny-list**: `IRequestEvent.Set`/`Increment` silently drop any field whose name contains `password`, `token`, `secret`, `apikey`, or `authorization` (case-insensitive) — never throws, never breaks the request. This is a safety net, not a substitute for not enriching with sensitive data in the first place.
 - Do not add ad hoc logging elsewhere in the pipeline, and do not serialize a request/command object into the event — enrichment is always explicit, field by field.
+
+## Seeding
+
+- `IDataSeeder` implementations are auto-discovered from the assemblies registered via `AddRaftelApplication` (scoped), like handlers. Mark permission classes with `[PermissionSet]`; `IPermissionSetProvider` lists their `const string` fields and is what the permission-catalog seeder reconciles.
+- `TenantCreatedHandler` (a `IDomainEventHandler<TenantCreated>`) calls `ISeedRunner.RunForTenantAsync` and throws `SeedingFailedException` on failure so the tenant-creating transaction rolls back.
 
 ## Domain Events
 

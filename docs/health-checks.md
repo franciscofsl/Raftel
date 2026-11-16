@@ -49,6 +49,12 @@ database checks depend on the `IDatabaseProbe` it registers.
 - **Startup** (`ready`): `Unhealthy` until the application's startup work
   (register an `IStartupTask`) completes; stays `Unhealthy` forever if that
   work fails, rather than restarting the check.
+- **Seeding** (`ready`): reflects startup seeding (see
+  [Getting Started](getting-started.md)). `Unhealthy` while
+  `MigrateAndSeedAsync` is running and after it failed with fail-fast enabled;
+  `Degraded` (still HTTP 200) when it finished with failed seeders and
+  fail-fast is disabled; `Healthy` once it completed, and also when the
+  application never requests startup seeding.
 - **Tenant resolution** (`ready`, opt-in via `EnableTenantResolutionCheck`):
   verifies the tenant store responds.
 - **Outbox backlog** (`ready`, opt-in via `EnableOutboxCheck`): `Degraded`

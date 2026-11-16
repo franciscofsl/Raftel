@@ -6,7 +6,12 @@ namespace Raftel.Domain.Features.Authorization;
 
 internal class PermissionCollection : IEnumerable<Permission>
 {
-    private readonly List<Permission> _permissions = new();
+    private readonly List<Permission> _permissions;
+
+    internal PermissionCollection(List<Permission> permissions)
+    {
+        _permissions = permissions;
+    }
 
     internal Result Add(string permissionName, string? description = null)
     {

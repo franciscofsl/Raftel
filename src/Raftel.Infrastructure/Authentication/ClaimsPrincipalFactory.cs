@@ -1,14 +1,17 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
+using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Domain.Features.Authorization;
 
 namespace Raftel.Infrastructure.Authentication;
 
 internal sealed class ClaimsPrincipalFactory(
     UserManager<IdentityUser> userManager,
-    IRolesRepository rolesRepository)
+    IRolesRepository rolesRepository,
+    IUserTenantResolver userTenantResolver,
+    ICurrentTenant currentTenant)
     : IClaimsPrincipalFactory
 {
     public async Task<ClaimsPrincipal> CreateAsync(IdentityUser user)
@@ -19,9 +22,23 @@ internal sealed class ClaimsPrincipalFactory(
         identity.AddClaim(CreateClaim(OpenIddictConstants.Claims.Name, user.UserName));
         identity.AddClaim(CreateClaim(OpenIddictConstants.Claims.Email, user.Email ?? ""));
 
+        var tenantId = await userTenantResolver.ResolveAsync(user.Id);
+        if (tenantId is not null)
+        {
+            identity.AddClaim(CreateClaim(RaftelClaimTypes.TenantId, tenantId.Value.ToString()));
+        }
+
         var rolesFromUser = await userManager.GetRolesAsync(user);
-        var roles = await rolesRepository.ListAllAsync(_ => rolesFromUser.Contains(_.Name));
-        var permissions = roles.SelectMany(_ => _.PermissionNames()).ToArray();
+
+        // Roles (and so permissions) are resolved within the user's own tenant, never the tenant requested by
+        // the caller, so a login request cannot pick up roles of another tenant.
+        List<Role> roles;
+        using (currentTenant.Change(tenantId))
+        {
+            roles = await rolesRepository.ListAllAsync(_ => rolesFromUser.Contains(_.Name));
+        }
+
+        var permissions = roles.SelectMany(_ => _.PermissionNames()).Distinct().ToArray();
 
         foreach (var role in rolesFromUser)
         {

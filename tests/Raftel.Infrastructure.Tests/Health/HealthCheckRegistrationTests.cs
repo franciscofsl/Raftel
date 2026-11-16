@@ -28,7 +28,7 @@ public class HealthCheckRegistrationTests
         var registrations = GetRegistrations(services);
 
         registrations.Select(r => r.Name).ShouldBe(
-            [HealthCheckNames.Database, HealthCheckNames.Migrations, HealthCheckNames.Startup],
+            [HealthCheckNames.Database, HealthCheckNames.Migrations, HealthCheckNames.Startup, HealthCheckNames.Seeding],
             ignoreOrder: true);
         registrations.ShouldAllBe(r => r.Tags.Contains(HealthCheckTags.Ready));
         registrations.ShouldAllBe(r => r.Timeout == TimeSpan.FromSeconds(3));
