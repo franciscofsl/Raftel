@@ -2042,6 +2042,12 @@ references:
   commentId: F:Raftel.Application.Features.Tenants.TenantsPermissions.Management
   fullName: Raftel.Application.Features.Tenants.TenantsPermissions.Management
   nameWithType: TenantsPermissions.Management
+- uid: Raftel.Application.Features.Tenants.TenantsPermissions.Switch
+  name: Switch
+  href: api/Raftel.Application.Features.Tenants.TenantsPermissions.html#Raftel_Application_Features_Tenants_TenantsPermissions_Switch
+  commentId: F:Raftel.Application.Features.Tenants.TenantsPermissions.Switch
+  fullName: Raftel.Application.Features.Tenants.TenantsPermissions.Switch
+  nameWithType: TenantsPermissions.Switch
 - uid: Raftel.Application.Features.Tenants.TenantsPermissions.View
   name: View
   href: api/Raftel.Application.Features.Tenants.TenantsPermissions.html#Raftel_Application_Features_Tenants_TenantsPermissions_View

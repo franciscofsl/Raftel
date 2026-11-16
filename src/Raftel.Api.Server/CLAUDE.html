@@ -99,7 +99,7 @@ Health/               HealthEndpointExtensions (MapRaftelHealthChecks) + HealthR
 </code></pre>
 <ul>
 <li>Route/query parameters inferred via reflection on the Command/Query record <strong>constructor</strong>.</li>
-<li>If the type carries <code>[RequiresPermission]</code>, authorization is applied automatically.</li>
+<li>If the type carries <code>[RequiresPermission]</code>, the endpoint gets an authorization policy that requires an authenticated user (else 401) holding <strong>every</strong> declared permission through <code>ICurrentUser.HasPermission</code> (else 403), before the request reaches the pipeline. Types without the attribute are mapped <code>AllowAnonymous()</code>.</li>
 </ul>
 </li>
 <li><strong>Controllers</strong>: only as exception when AutoEndpoints doesn't fit (e.g., <code>AuthorizationController</code> for OpenIddict handshake). Always use Commands/Queries for business CRUD.</li>

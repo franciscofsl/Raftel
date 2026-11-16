@@ -102,7 +102,7 @@ Class PermissionAuthorizationMiddleware&lt;TRequest, TResponse&gt;  <a class="he
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PermissionAuthorizationMiddleware&lt;TRequest, TResponse&gt; : IGlobalMiddleware&lt;TRequest, TResponse&gt; where TRequest : IRequest&lt;TResponse&gt; where TResponse : Result</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class PermissionAuthorizationMiddleware&lt;TRequest, TResponse&gt; : IGlobalMiddleware&lt;TRequest, TResponse&gt; where TRequest : IRequest&lt;TResponse&gt; where TResponse : Result</code></pre>
   </div>
 
 
@@ -147,9 +147,6 @@ Class PermissionAuthorizationMiddleware&lt;TRequest, TResponse&gt;  <a class="he
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
     </div>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
@@ -210,12 +207,10 @@ Class PermissionAuthorizationMiddleware&lt;TRequest, TResponse&gt;  <a class="he
 
   <h3 id="Raftel_Application_Middlewares_PermissionAuthorizationMiddleware_2_HandleAsync__0_Raftel_Application_Abstractions_RequestHandlerDelegate__1__System_Threading_CancellationToken_" data-uid="Raftel.Application.Middlewares.PermissionAuthorizationMiddleware`2.HandleAsync(`0,Raftel.Application.Abstractions.RequestHandlerDelegate{`1},System.Threading.CancellationToken)">
   HandleAsync(TRequest, RequestHandlerDelegate&lt;TResponse&gt;, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/PermissionAuthorizationMiddleware.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Application/Middlewares/PermissionAuthorizationMiddleware.cs/#L27"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Handles the request by checking if the current user has the required permissions.
-If a required permission is missing, a failed <code class="typeparamref">TResponse</code> carrying a
-<a class="xref" href="Raftel.Domain.Abstractions.ErrorType.html#Raftel_Domain_Abstractions_ErrorType_Forbidden">Forbidden</a> error is returned without invoking <code class="paramref">next</code>.</p>
+  <div class="markdown level1 summary"><p>Handles the request by checking if the current user has the required permissions.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
