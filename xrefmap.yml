@@ -5774,6 +5774,19 @@ references:
   isSpec: "True"
   fullName: Raftel.Domain.Features.Authorization.RoleErrors.InvalidPermissionName
   nameWithType: RoleErrors.InvalidPermissionName
+- uid: Raftel.Domain.Features.Authorization.RoleErrors.NotFound
+  name: NotFound
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_NotFound
+  commentId: P:Raftel.Domain.Features.Authorization.RoleErrors.NotFound
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors.NotFound
+  nameWithType: RoleErrors.NotFound
+- uid: Raftel.Domain.Features.Authorization.RoleErrors.NotFound*
+  name: NotFound
+  href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_NotFound_
+  commentId: Overload:Raftel.Domain.Features.Authorization.RoleErrors.NotFound
+  isSpec: "True"
+  fullName: Raftel.Domain.Features.Authorization.RoleErrors.NotFound
+  nameWithType: RoleErrors.NotFound
 - uid: Raftel.Domain.Features.Authorization.RoleErrors.PermissionAlreadyExists
   name: PermissionAlreadyExists
   href: api/Raftel.Domain.Features.Authorization.RoleErrors.html#Raftel_Domain_Features_Authorization_RoleErrors_PermissionAlreadyExists
