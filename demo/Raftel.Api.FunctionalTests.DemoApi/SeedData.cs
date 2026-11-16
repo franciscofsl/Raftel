@@ -28,7 +28,7 @@ public static class SeedData
         }
 
         adminRole.AddPermissions([PiratesPermissions.Management, PiratesPermissions.View]);
-        adminRole.AddPermissions([TenantsPermissions.Management, TenantsPermissions.View]);
+        adminRole.AddPermissions([TenantsPermissions.Management, TenantsPermissions.View, TenantsPermissions.Switch]);
         adminRole.AddPermissions([UsersPermissions.View]);
         await dbContext.SaveChangesAsync();
 
