@@ -2549,6 +2549,34 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Authentication.Certificates.CertificateOptions",
+      "Summary": "<p sourcefile=\"api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.yml\" sourcestartlinenumber=\"1\">Signing and encryption certificates used by the OpenIddict server to issue tokens.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Infrastructure.Authentication.Certificates.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Infrastructure.Authentication.Certificates.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Infrastructure.Authentication.Certificates",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.yml",
       "output": {
         ".html": {

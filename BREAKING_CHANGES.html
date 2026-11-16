@@ -223,6 +223,24 @@ public Task&lt;TResponse&gt; HandleAsync(TRequest request, RequestHandlerDelegat
 <p><strong>Impact:</strong> Clients that parse <code>errors</code> as an array will break. Existing <code>Error.Code</code>s that don't follow the <code>&quot;&lt;Field&gt;.&lt;Reason&gt;&quot;</code> convention (e.g. some demo-app codes prefixed by feature name instead of field name) still work but group under a key that isn't a real field name.</p>
 <p><strong>Action required:</strong> Update clients to read <code>errors</code> as an object keyed by field name. If you author custom validators, prefix each rule's <code>Error.Code</code> with the field name it validates.</p>
 <hr>
+<h2 id="openiddict-certificates">OpenIddict Certificates</h2>
+<h3 id="outside-development-startup-fails-until-real-token-certificates-are-configured">Outside Development, startup fails until real token certificates are configured</h3>
+<p><strong>What changed:</strong> <code>AddRaftelData</code> no longer registers OpenIddict development certificates unconditionally. It loads the signing and encryption certificates from the new <code>Authentication:Certificates</code> configuration section (<code>CertificateOptions</code>: thumbprint in the X.509 store, or a <code>.pfx</code> file path and password), or from the new optional <code>configureCertificates</code> callback. Development certificates are generated only when no certificate is configured and the registered <code>IHostEnvironment</code> is <code>Development</code>. Otherwise the host fails at startup with an <code>InvalidOperationException</code> that names the configuration section.</p>
+<p><strong>Why:</strong> Development certificates are ephemeral and local to each machine. In production every replica signed tokens with its own key, so a token issued by one instance failed on another and every redeploy invalidated all tokens.</p>
+<p><strong>Impact:</strong> An application running in <code>Staging</code>, <code>Production</code>, or any non-<code>Development</code> environment without configured certificates no longer starts. A <code>ServiceCollection</code> built without a registered <code>IHostEnvironment</code> is treated as non-Development. Configuring only one of the two certificates also fails. The new parameter is optional and trailing, so existing calls compile unchanged.</p>
+<p><strong>Action required:</strong> Provide both certificates outside Development, for example through environment variables or a secret store:</p>
+<pre><code class="lang-json">{
+  &quot;Authentication&quot;: {
+    &quot;Certificates&quot;: {
+      &quot;SigningCertificateThumbprint&quot;: &quot;&lt;thumbprint&gt;&quot;,
+      &quot;EncryptionCertificateThumbprint&quot;: &quot;&lt;thumbprint&gt;&quot;,
+      &quot;StoreLocation&quot;: &quot;LocalMachine&quot;
+    }
+  }
+}
+</code></pre>
+<p>Or use <code>SigningCertificatePath</code>/<code>SigningCertificatePassword</code> and <code>EncryptionCertificatePath</code>/<code>EncryptionCertificatePassword</code> with <code>.pfx</code> files. Never commit certificate passwords to <code>appsettings.json</code>.</p>
+<hr>
 <h2 id="summary">Summary</h2>
 <p>The migration to .NET 10 is primarily focused on framework and dependency updates. The main breaking change that may affect consumers is the Microsoft.OpenApi 2.0 update, which requires namespace and type changes if you're customizing OpenAPI/Swagger configurations.</p>
 <p>A separate, later change introduced a typed <code>Error</code>/<code>ErrorType</code> taxonomy with corresponding HTTP status code mapping, immutable well-known <code>Error</code> values, and REST-appropriate success codes for command endpoints — see the &quot;Typed Error/HTTP Status Mapping&quot; section above.</p>

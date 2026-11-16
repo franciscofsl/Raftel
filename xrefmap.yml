@@ -6845,6 +6845,115 @@ references:
   commentId: N:Raftel.Infrastructure.Authentication
   fullName: Raftel.Infrastructure.Authentication
   nameWithType: Raftel.Infrastructure.Authentication
+- uid: Raftel.Infrastructure.Authentication.Certificates
+  name: Raftel.Infrastructure.Authentication.Certificates
+  href: api/Raftel.Infrastructure.Authentication.Certificates.html
+  commentId: N:Raftel.Infrastructure.Authentication.Certificates
+  fullName: Raftel.Infrastructure.Authentication.Certificates
+  nameWithType: Raftel.Infrastructure.Authentication.Certificates
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions
+  name: CertificateOptions
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html
+  commentId: T:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions
+  nameWithType: CertificateOptions
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePassword
+  name: EncryptionCertificatePassword
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_EncryptionCertificatePassword
+  commentId: P:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePassword
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePassword
+  nameWithType: CertificateOptions.EncryptionCertificatePassword
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePassword*
+  name: EncryptionCertificatePassword
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_EncryptionCertificatePassword_
+  commentId: Overload:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePassword
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePassword
+  nameWithType: CertificateOptions.EncryptionCertificatePassword
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePath
+  name: EncryptionCertificatePath
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_EncryptionCertificatePath
+  commentId: P:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePath
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePath
+  nameWithType: CertificateOptions.EncryptionCertificatePath
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePath*
+  name: EncryptionCertificatePath
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_EncryptionCertificatePath_
+  commentId: Overload:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePath
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificatePath
+  nameWithType: CertificateOptions.EncryptionCertificatePath
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificateThumbprint
+  name: EncryptionCertificateThumbprint
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_EncryptionCertificateThumbprint
+  commentId: P:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificateThumbprint
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificateThumbprint
+  nameWithType: CertificateOptions.EncryptionCertificateThumbprint
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificateThumbprint*
+  name: EncryptionCertificateThumbprint
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_EncryptionCertificateThumbprint_
+  commentId: Overload:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificateThumbprint
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.EncryptionCertificateThumbprint
+  nameWithType: CertificateOptions.EncryptionCertificateThumbprint
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SectionName
+  name: SectionName
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_SectionName
+  commentId: F:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SectionName
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SectionName
+  nameWithType: CertificateOptions.SectionName
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePassword
+  name: SigningCertificatePassword
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_SigningCertificatePassword
+  commentId: P:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePassword
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePassword
+  nameWithType: CertificateOptions.SigningCertificatePassword
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePassword*
+  name: SigningCertificatePassword
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_SigningCertificatePassword_
+  commentId: Overload:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePassword
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePassword
+  nameWithType: CertificateOptions.SigningCertificatePassword
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePath
+  name: SigningCertificatePath
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_SigningCertificatePath
+  commentId: P:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePath
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePath
+  nameWithType: CertificateOptions.SigningCertificatePath
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePath*
+  name: SigningCertificatePath
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_SigningCertificatePath_
+  commentId: Overload:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePath
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificatePath
+  nameWithType: CertificateOptions.SigningCertificatePath
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificateThumbprint
+  name: SigningCertificateThumbprint
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_SigningCertificateThumbprint
+  commentId: P:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificateThumbprint
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificateThumbprint
+  nameWithType: CertificateOptions.SigningCertificateThumbprint
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificateThumbprint*
+  name: SigningCertificateThumbprint
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_SigningCertificateThumbprint_
+  commentId: Overload:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificateThumbprint
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.SigningCertificateThumbprint
+  nameWithType: CertificateOptions.SigningCertificateThumbprint
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.StoreLocation
+  name: StoreLocation
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_StoreLocation
+  commentId: P:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.StoreLocation
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.StoreLocation
+  nameWithType: CertificateOptions.StoreLocation
+- uid: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.StoreLocation*
+  name: StoreLocation
+  href: api/Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.html#Raftel_Infrastructure_Authentication_Certificates_CertificateOptions_StoreLocation_
+  commentId: Overload:Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.StoreLocation
+  isSpec: "True"
+  fullName: Raftel.Infrastructure.Authentication.Certificates.CertificateOptions.StoreLocation
+  nameWithType: CertificateOptions.StoreLocation
 - uid: Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory
   name: IClaimsPrincipalFactory
   href: api/Raftel.Infrastructure.Authentication.IClaimsPrincipalFactory.html
@@ -7928,15 +8037,15 @@ references:
   isSpec: "True"
   fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData
   nameWithType: DependencyInjection.AddRaftelData
-- uid: Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions},System.Action{Raftel.Application.TransactionOptions})
-  name: AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?, Action<TransactionOptions>?)
-  href: api/Raftel.Infrastructure.DependencyInjection.html#Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_System_Action_Raftel_Infrastructure_Data_Auditing_AuditOptions__System_Action_Raftel_Application_TransactionOptions__
-  commentId: M:Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions},System.Action{Raftel.Application.TransactionOptions})
-  name.vb: AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions), Action(Of TransactionOptions))
-  fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData<TDbContext>(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, string, System.Action<Raftel.Infrastructure.Data.Auditing.AuditOptions>?, System.Action<Raftel.Application.TransactionOptions>?)
-  fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String, System.Action(Of Raftel.Infrastructure.Data.Auditing.AuditOptions), System.Action(Of Raftel.Application.TransactionOptions))
-  nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?, Action<TransactionOptions>?)
-  nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions), Action(Of TransactionOptions))
+- uid: Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions},System.Action{Raftel.Application.TransactionOptions},System.Action{Raftel.Infrastructure.Authentication.Certificates.CertificateOptions})
+  name: AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?, Action<TransactionOptions>?, Action<CertificateOptions>?)
+  href: api/Raftel.Infrastructure.DependencyInjection.html#Raftel_Infrastructure_DependencyInjection_AddRaftelData__1_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_String_System_Action_Raftel_Infrastructure_Data_Auditing_AuditOptions__System_Action_Raftel_Application_TransactionOptions__System_Action_Raftel_Infrastructure_Authentication_Certificates_CertificateOptions__
+  commentId: M:Raftel.Infrastructure.DependencyInjection.AddRaftelData``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Action{Raftel.Infrastructure.Data.Auditing.AuditOptions},System.Action{Raftel.Application.TransactionOptions},System.Action{Raftel.Infrastructure.Authentication.Certificates.CertificateOptions})
+  name.vb: AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions), Action(Of TransactionOptions), Action(Of CertificateOptions))
+  fullName: Raftel.Infrastructure.DependencyInjection.AddRaftelData<TDbContext>(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, string, System.Action<Raftel.Infrastructure.Data.Auditing.AuditOptions>?, System.Action<Raftel.Application.TransactionOptions>?, System.Action<Raftel.Infrastructure.Authentication.Certificates.CertificateOptions>?)
+  fullName.vb: Raftel.Infrastructure.DependencyInjection.AddRaftelData(Of TDbContext)(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, String, System.Action(Of Raftel.Infrastructure.Data.Auditing.AuditOptions), System.Action(Of Raftel.Application.TransactionOptions), System.Action(Of Raftel.Infrastructure.Authentication.Certificates.CertificateOptions))
+  nameWithType: DependencyInjection.AddRaftelData<TDbContext>(IServiceCollection, IConfiguration, string, Action<AuditOptions>?, Action<TransactionOptions>?, Action<CertificateOptions>?)
+  nameWithType.vb: DependencyInjection.AddRaftelData(Of TDbContext)(IServiceCollection, IConfiguration, String, Action(Of AuditOptions), Action(Of TransactionOptions), Action(Of CertificateOptions))
 - uid: Raftel.Infrastructure.Health
   name: Raftel.Infrastructure.Health
   href: api/Raftel.Infrastructure.Health.html
