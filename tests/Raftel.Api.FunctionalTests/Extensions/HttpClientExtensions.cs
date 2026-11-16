@@ -21,6 +21,9 @@ public static class HttpClientExtensions
         return await client.AuthenticateWithExistingUserAsync(email, password);
     }
 
+    public static Task<string> AuthenticateAsAdminAsync(this HttpClient client, ApiTestFactory factory) =>
+        client.AuthenticateWithExistingUserAsync(factory.AdminEmail, factory.AdminPassword);
+
     public static async Task<string> AuthenticateWithExistingUserAsync(this HttpClient client, string email,
         string password)
     {

@@ -446,21 +446,6 @@ namespace Raftel.Demo.Infrastructure.Data.Migrations
                     b.ToTable("OpenIddictTokens", (string)null);
                 });
 
-            modelBuilder.Entity("PermissionRole", b =>
-                {
-                    b.Property<Guid>("PermissionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("PermissionId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("PermissionRole");
-                });
-
             modelBuilder.Entity("Raftel.Demo.Domain.Pirates.DevilFruits.DevilFruit", b =>
                 {
                     b.Property<Guid>("Id")
@@ -645,11 +630,6 @@ namespace Raftel.Demo.Infrastructure.Data.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -854,21 +834,6 @@ namespace Raftel.Demo.Infrastructure.Data.Migrations
                     b.Navigation("Authorization");
                 });
 
-            modelBuilder.Entity("PermissionRole", b =>
-                {
-                    b.HasOne("Raftel.Domain.Features.Authorization.Permission", null)
-                        .WithMany()
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Raftel.Domain.Features.Authorization.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Raftel.Domain.Auditing.EntityChange", b =>
                 {
                     b.HasOne("Raftel.Domain.Auditing.AuditLog", null)
@@ -883,6 +848,15 @@ namespace Raftel.Demo.Infrastructure.Data.Migrations
                         .WithMany("AffectedProperties")
                         .HasForeignKey("EntityChangeId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Raftel.Domain.Features.Authorization.Permission", b =>
+                {
+                    b.HasOne("Raftel.Domain.Features.Authorization.Role", null)
+                        .WithMany("_permissionItems")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
@@ -905,6 +879,11 @@ namespace Raftel.Demo.Infrastructure.Data.Migrations
             modelBuilder.Entity("Raftel.Domain.Auditing.EntityChange", b =>
                 {
                     b.Navigation("AffectedProperties");
+                });
+
+            modelBuilder.Entity("Raftel.Domain.Features.Authorization.Role", b =>
+                {
+                    b.Navigation("_permissionItems");
                 });
 #pragma warning restore 612, 618
         }
