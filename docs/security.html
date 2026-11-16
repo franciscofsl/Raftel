@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Security: Rate Limiting, CORS and Security Headers | Raftel </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Security: Rate Limiting, CORS and Security Headers | Raftel ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/franciscofsl/Raftel/blob/main/docs/security.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Raftel">
+            Raftel
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="security-rate-limiting-cors-and-security-headers">Security: Rate Limiting, CORS and Security Headers</h1>
+
+<p><code>Raftel.Api.Server</code> ships rate limiting, an explicit CORS policy, security
+response headers and forwarded-header handling. Everything is built on
+ASP.NET Core APIs (<code>Microsoft.AspNetCore.RateLimiting</code>, CORS, <code>HttpOverrides</code>),
+so no extra NuGet package is required.</p>
+<h2 id="registration">Registration</h2>
+<pre><code class="lang-csharp">builder.Services.AddRaftelSecurity(builder.Configuration);
+
+var app = builder.Build();
+
+app.UseCorrelationId();
+app.UseRaftelExceptionHandling();
+app.UseRaftelSecurity();        // forwarded headers, security headers, CORS
+app.UseHttpsRedirection();
+app.UseRouting();
+app.UseAuthentication();
+app.UseTenantMiddleware();
+app.UseRaftelRateLimiting();    // after authentication and tenant resolution
+app.UseAuthorization();
+</code></pre>
+<p>The order matters:</p>
+<ul>
+<li><code>UseRaftelSecurity</code> runs early. Forwarded headers must rewrite the client
+IP and scheme before anything reads them, and CORS must answer preflight
+requests before authentication rejects them. Register Swagger UI after it,
+so documentation responses also get the security headers.</li>
+<li><code>UseRaftelRateLimiting</code> runs after <code>UseRouting</code>, <code>UseAuthentication</code> and
+the tenant middleware. Endpoint policies need routing, and the limits are
+partitioned by user and tenant.</li>
+</ul>
+<p>Settings are bound from the <code>Raftel:Security</code> section, then from the optional
+callback of <code>AddRaftelSecurity</code>. They are validated when the host starts.</p>
+<h2 id="rate-limiting">Rate limiting</h2>
+<table>
+<thead>
+<tr>
+<th>Policy</th>
+<th>Algorithm</th>
+<th>Default</th>
+<th>Partition</th>
+<th>Applied to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>raftel-global</code></td>
+<td>token bucket</td>
+<td>100 requests / minute</td>
+<td>tenant + user, or IP</td>
+<td>every endpoint</td>
+</tr>
+<tr>
+<td><code>raftel-auth</code></td>
+<td>fixed window</td>
+<td>5 attempts / 5 minutes</td>
+<td>client IP</td>
+<td><code>/connect/token</code>, <code>POST /api/users/register</code></td>
+</tr>
+<tr>
+<td><code>raftel-write</code></td>
+<td>sliding window</td>
+<td>30 requests / minute</td>
+<td>tenant + user, or IP</td>
+<td>every AutoEndpoints command</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Anonymous callers are partitioned by client IP. Authenticated callers are
+partitioned by user, prefixed with the tenant, so a noisy tenant cannot use up
+another tenant's quota.</li>
+<li>Credential endpoints are partitioned by IP only. One client cannot stay under
+the limit by spreading attempts across many user names.</li>
+<li>A command can use another policy:
+<code>group.AddCommand&lt;MyCommand&gt;(&quot;route&quot;, HttpMethod.Post, rateLimitPolicy: &quot;my-policy&quot;)</code>.</li>
+<li>Health endpoints are never rate limited.</li>
+</ul>
+<p>A rejected request gets <code>429 Too Many Requests</code> with a <code>ProblemDetails</code> body
+(<code>code</code>: <code>RateLimit.Exceeded</code>) and a <code>Retry-After</code> header. Its wide event is
+emitted at <code>Warning</code> with <code>rate_limit.rejected = true</code>: repeated rejections on
+credential endpoints signal a brute-force attempt.</p>
+<pre><code class="lang-json">{
+  &quot;Raftel&quot;: {
+    &quot;Security&quot;: {
+      &quot;RateLimiting&quot;: {
+        &quot;Enabled&quot;: true,
+        &quot;Auth&quot;: { &quot;PermitLimit&quot;: 5, &quot;Window&quot;: &quot;00:05:00&quot; },
+        &quot;Write&quot;: { &quot;PermitLimit&quot;: 30, &quot;Window&quot;: &quot;00:01:00&quot; },
+        &quot;Global&quot;: { &quot;PermitLimit&quot;: 100, &quot;Window&quot;: &quot;00:01:00&quot; }
+      }
+    }
+  }
+}
+</code></pre>
+<p>Rate limiting complements ASP.NET Identity's account lockout. It does not
+replace it: lockout alone lets anyone lock a known user out on purpose.</p>
+<h2 id="behind-a-reverse-proxy">Behind a reverse proxy</h2>
+<p>Behind a load balancer, the connection IP is the proxy's. Unless the proxy is
+trusted, every client shares one rate limit partition: either the limit is
+useless or it blocks everyone at once. List your proxies:</p>
+<pre><code class="lang-json">{
+  &quot;Raftel&quot;: {
+    &quot;Security&quot;: {
+      &quot;ForwardedHeaders&quot;: {
+        &quot;KnownProxies&quot;: [ &quot;10.0.0.10&quot; ],
+        &quot;KnownNetworks&quot;: [ &quot;10.0.0.0/8&quot; ],
+        &quot;ForwardLimit&quot;: 1
+      }
+    }
+  }
+}
+</code></pre>
+<p>Only loopback and the listed addresses are trusted. <code>X-Forwarded-For</code> sent by
+any other client is ignored, so a forged header cannot be used to evade the
+limits. Do not trust every address: that brings the evasion back.</p>
+<h2 id="cors">CORS</h2>
+<p>No origin is allowed by default. An empty <code>AllowedOrigins</code> disables CORS: it
+does not allow everything.</p>
+<pre><code class="lang-json">{
+  &quot;Raftel&quot;: {
+    &quot;Security&quot;: {
+      &quot;Cors&quot;: {
+        &quot;AllowedOrigins&quot;: [ &quot;https://app.example.com&quot; ],
+        &quot;AllowCredentials&quot;: false,
+        &quot;PreflightMaxAge&quot;: &quot;01:00:00&quot;
+      }
+    }
+  }
+}
+</code></pre>
+<ul>
+<li>Empty <code>AllowedMethods</code>, <code>AllowedHeaders</code> and <code>ExposedHeaders</code> use the
+framework defaults. The default exposed headers are <code>X-Correlation-Id</code> and
+<code>X-Total-Count</code>, so browsers can read the headers the framework emits.</li>
+<li><code>AllowCredentials: true</code> with the <code>*</code> origin stops the host at startup.
+Browsers reject that combination, and allowing it anyway is a classic hole.</li>
+<li><code>AllowDevelopmentOrigins: true</code> allows any origin in the Development
+environment only, and logs a warning. In any other environment it is ignored,
+also with a warning.</li>
+</ul>
+<h2 id="security-headers">Security headers</h2>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X-Content-Type-Options</code></td>
+<td><code>nosniff</code></td>
+</tr>
+<tr>
+<td><code>X-Frame-Options</code></td>
+<td><code>DENY</code></td>
+</tr>
+<tr>
+<td><code>Referrer-Policy</code></td>
+<td><code>strict-origin-when-cross-origin</code></td>
+</tr>
+<tr>
+<td><code>Content-Security-Policy</code></td>
+<td><code>default-src 'none'; frame-ancestors 'none'</code></td>
+</tr>
+<tr>
+<td><code>Strict-Transport-Security</code></td>
+<td><code>max-age=31536000; includeSubDomains</code>, only on HTTPS outside Development</td>
+</tr>
+<tr>
+<td><code>Server</code>, <code>X-Powered-By</code></td>
+<td>removed</td>
+</tr>
+</tbody>
+</table>
+<p>Requests under <code>DocumentationPath</code> (default <code>/swagger</code>) get
+<code>DocumentationContentSecurityPolicy</code> instead, so Swagger UI can load its
+scripts and styles. Set any header value to an empty string to omit that
+header.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/docs/security.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

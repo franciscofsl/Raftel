@@ -365,6 +365,146 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Security.RaftelCorsOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Security.RaftelCorsOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Security.RaftelCorsOptions",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Security.RaftelCorsOptions.yml\" sourcestartlinenumber=\"1\">Explicit CORS policy. No origin is allowed by default: an empty <xref href=\"Raftel.Api.Server.Security.RaftelCorsOptions.AllowedOrigins\" data-throw-if-not-resolved=\"false\"></xref> disables CORS.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Security.RaftelForwardedHeadersOptions",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.yml\" sourcestartlinenumber=\"1\">Reverse proxies trusted to set <code>X-Forwarded-For</code> and <code>X-Forwarded-Proto</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Security.RaftelRateLimitOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Security.RaftelRateLimitOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Security.RaftelRateLimitOptions",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Security.RaftelRateLimitOptions.yml\" sourcestartlinenumber=\"1\">Limits for the three named policies in <xref href=\"Raftel.Api.Server.Security.RaftelRateLimitPolicies\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Security.RaftelRateLimitPolicies.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Security.RaftelRateLimitPolicies.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Security.RaftelRateLimitPolicies",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Security.RaftelRateLimitPolicies.yml\" sourcestartlinenumber=\"1\">Names of the rate limiting policies registered by <code>AddRaftelSecurity</code>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.yml\" sourcestartlinenumber=\"1\">Pipeline half of <xref href=\"Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection%2cMicrosoft.Extensions.Configuration.IConfiguration%2cSystem.Action%7bRaftel.Api.Server.Security.RaftelSecurityOptions%7d)\" data-throw-if-not-resolved=\"false\"></xref>. The order is:</p>\n<pre><code class=\"lang-csharp\">app.UseCorrelationId();\napp.UseRaftelExceptionHandling();\napp.UseRaftelSecurity();        // forwarded headers, security headers, CORS\napp.UseHttpsRedirection();\napp.UseRouting();\napp.UseAuthentication();\napp.UseTenantMiddleware();\napp.UseRaftelRateLimiting();    // after authentication and tenant resolution\napp.UseAuthorization();</code></pre>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Security.RaftelSecurityOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Security.RaftelSecurityOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Security.RaftelSecurityOptions",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Security.RaftelSecurityOptions.yml\" sourcestartlinenumber=\"1\">Rate limiting, CORS, security headers and forwarded headers settings applied by\n<xref href=\"Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection%2cMicrosoft.Extensions.Configuration.IConfiguration%2cSystem.Action%7bRaftel.Api.Server.Security.RaftelSecurityOptions%7d)\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Security.RateLimitPolicyOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Security.RateLimitPolicyOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Security.RateLimitPolicyOptions",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Security.RateLimitPolicyOptions.yml\" sourcestartlinenumber=\"1\">Number of requests allowed per partition within a time window.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Security.SecurityHeadersOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Security.SecurityHeadersOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Security.SecurityHeadersOptions",
+      "Summary": "<p sourcefile=\"api/Raftel.Api.Server.Security.SecurityHeadersOptions.yml\" sourcestartlinenumber=\"1\">Values written by <xref href=\"Raftel.Api.Server.Middlewares.SecurityHeadersMiddleware\" data-throw-if-not-resolved=\"false\"></xref>. Set a value to an empty string to omit\nthat header.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Raftel.Api.Server.Security.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Raftel.Api.Server.Security.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Raftel.Api.Server.Security",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Raftel.Application.Abstractions.Auditing.IAuditLogScope.yml",
       "output": {
         ".html": {
@@ -3694,6 +3834,16 @@
       "output": {
         ".html": {
           "relative_path": "docs/plan-optimizacion-tests-integracion.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/security.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/security.html"
         }
       },
       "version": ""

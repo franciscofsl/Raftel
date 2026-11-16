@@ -217,24 +217,29 @@ Class RouteOptions  <a class="header-action link-secondary" title="View source" 
 
   <a id="Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand_" data-uid="Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand*"></a>
 
-  <h3 id="Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__1_System_String_System_Net_Http_HttpMethod_" data-uid="Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``1(System.String,System.Net.Http.HttpMethod)">
-  AddCommand&lt;TRequest&gt;(string, HttpMethod)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/AutoEndpoints/RouteOptions.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__1_System_String_System_Net_Http_HttpMethod_System_String_" data-uid="Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``1(System.String,System.Net.Http.HttpMethod,System.String)">
+  AddCommand&lt;TRequest&gt;(string, HttpMethod, string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/AutoEndpoints/RouteOptions.cs/#L26"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RouteOptions AddCommand&lt;TRequest&gt;(string route, HttpMethod method) where TRequest : ICommand</code></pre>
+    <pre><code class="lang-csharp hljs">public RouteOptions AddCommand&lt;TRequest&gt;(string route, HttpMethod method, string? rateLimitPolicy = null) where TRequest : ICommand</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>route</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>Route relative to the group's base URI.</p>
+</dd>
     <dt><code>method</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmethod">HttpMethod</a></dt>
-    <dd></dd>
+    <dd><p>HTTP method: POST, PUT or DELETE.</p>
+</dd>
+    <dt><code>rateLimitPolicy</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Rate limiting policy for the endpoint. Defaults to <a class="xref" href="Raftel.Api.Server.Security.RaftelRateLimitPolicies.html#Raftel_Api_Server_Security_RaftelRateLimitPolicies_Write">Write</a>.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
@@ -260,26 +265,32 @@ Class RouteOptions  <a class="header-action link-secondary" title="View source" 
 
   <a id="Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand_" data-uid="Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand*"></a>
 
-  <h3 id="Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__2_System_String_System_Net_Http_HttpMethod_System_String_" data-uid="Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``2(System.String,System.Net.Http.HttpMethod,System.String)">
-  AddCommand&lt;TRequest, TResult&gt;(string, HttpMethod, string?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/AutoEndpoints/RouteOptions.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__2_System_String_System_Net_Http_HttpMethod_System_String_System_String_" data-uid="Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``2(System.String,System.Net.Http.HttpMethod,System.String,System.String)">
+  AddCommand&lt;TRequest, TResult&gt;(string, HttpMethod, string?, string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/AutoEndpoints/RouteOptions.cs/#L41"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RouteOptions AddCommand&lt;TRequest, TResult&gt;(string route, HttpMethod method, string? createdRouteName = null) where TRequest : ICommand&lt;TResult&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public RouteOptions AddCommand&lt;TRequest, TResult&gt;(string route, HttpMethod method, string? createdRouteName = null, string? rateLimitPolicy = null) where TRequest : ICommand&lt;TResult&gt;</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>route</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>Route relative to the group's base URI.</p>
+</dd>
     <dt><code>method</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.http.httpmethod">HttpMethod</a></dt>
-    <dd></dd>
+    <dd><p>HTTP method: POST, PUT or DELETE.</p>
+</dd>
     <dt><code>createdRouteName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>Route name used to build the <code>201 Created</code> location, if any.</p>
+</dd>
+    <dt><code>rateLimitPolicy</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Rate limiting policy for the endpoint. Defaults to <a class="xref" href="Raftel.Api.Server.Security.RaftelRateLimitPolicies.html#Raftel_Api_Server_Security_RaftelRateLimitPolicies_Write">Write</a>.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>

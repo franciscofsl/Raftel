@@ -105,15 +105,15 @@ references:
   commentId: T:Raftel.Api.Server.AutoEndpoints.CommandDefinition
   fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition
   nameWithType: CommandDefinition
-- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor(System.Type,System.Type,System.String,System.Net.Http.HttpMethod,System.String)
-  name: CommandDefinition(Type, Type?, string, HttpMethod, string?)
-  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition__ctor_System_Type_System_Type_System_String_System_Net_Http_HttpMethod_System_String_
-  commentId: M:Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor(System.Type,System.Type,System.String,System.Net.Http.HttpMethod,System.String)
-  name.vb: New(Type, Type, String, HttpMethod, String)
-  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.CommandDefinition(System.Type, System.Type?, string, System.Net.Http.HttpMethod, string?)
-  fullName.vb: Raftel.Api.Server.AutoEndpoints.CommandDefinition.New(System.Type, System.Type, String, System.Net.Http.HttpMethod, String)
-  nameWithType: CommandDefinition.CommandDefinition(Type, Type?, string, HttpMethod, string?)
-  nameWithType.vb: CommandDefinition.New(Type, Type, String, HttpMethod, String)
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor(System.Type,System.Type,System.String,System.Net.Http.HttpMethod,System.String,System.String)
+  name: CommandDefinition(Type, Type?, string, HttpMethod, string?, string?)
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition__ctor_System_Type_System_Type_System_String_System_Net_Http_HttpMethod_System_String_System_String_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor(System.Type,System.Type,System.String,System.Net.Http.HttpMethod,System.String,System.String)
+  name.vb: New(Type, Type, String, HttpMethod, String, String)
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.CommandDefinition(System.Type, System.Type?, string, System.Net.Http.HttpMethod, string?, string?)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.CommandDefinition.New(System.Type, System.Type, String, System.Net.Http.HttpMethod, String, String)
+  nameWithType: CommandDefinition.CommandDefinition(Type, Type?, string, HttpMethod, string?, string?)
+  nameWithType.vb: CommandDefinition.New(Type, Type, String, HttpMethod, String, String)
 - uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.#ctor*
   name: CommandDefinition
   href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition__ctor_
@@ -150,6 +150,19 @@ references:
   isSpec: "True"
   fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Method
   nameWithType: CommandDefinition.Method
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.RateLimitPolicy
+  name: RateLimitPolicy
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_RateLimitPolicy
+  commentId: P:Raftel.Api.Server.AutoEndpoints.CommandDefinition.RateLimitPolicy
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.RateLimitPolicy
+  nameWithType: CommandDefinition.RateLimitPolicy
+- uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.RateLimitPolicy*
+  name: RateLimitPolicy
+  href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_RateLimitPolicy_
+  commentId: Overload:Raftel.Api.Server.AutoEndpoints.CommandDefinition.RateLimitPolicy
+  isSpec: "True"
+  fullName: Raftel.Api.Server.AutoEndpoints.CommandDefinition.RateLimitPolicy
+  nameWithType: CommandDefinition.RateLimitPolicy
 - uid: Raftel.Api.Server.AutoEndpoints.CommandDefinition.Request
   name: Request
   href: api/Raftel.Api.Server.AutoEndpoints.CommandDefinition.html#Raftel_Api_Server_AutoEndpoints_CommandDefinition_Request
@@ -384,24 +397,24 @@ references:
   isSpec: "True"
   fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand
   nameWithType: RouteOptions.AddCommand
-- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``1(System.String,System.Net.Http.HttpMethod)
-  name: AddCommand<TRequest>(string, HttpMethod)
-  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__1_System_String_System_Net_Http_HttpMethod_
-  commentId: M:Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``1(System.String,System.Net.Http.HttpMethod)
-  name.vb: AddCommand(Of TRequest)(String, HttpMethod)
-  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand<TRequest>(string, System.Net.Http.HttpMethod)
-  fullName.vb: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand(Of TRequest)(String, System.Net.Http.HttpMethod)
-  nameWithType: RouteOptions.AddCommand<TRequest>(string, HttpMethod)
-  nameWithType.vb: RouteOptions.AddCommand(Of TRequest)(String, HttpMethod)
-- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``2(System.String,System.Net.Http.HttpMethod,System.String)
-  name: AddCommand<TRequest, TResult>(string, HttpMethod, string?)
-  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__2_System_String_System_Net_Http_HttpMethod_System_String_
-  commentId: M:Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``2(System.String,System.Net.Http.HttpMethod,System.String)
-  name.vb: AddCommand(Of TRequest, TResult)(String, HttpMethod, String)
-  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand<TRequest, TResult>(string, System.Net.Http.HttpMethod, string?)
-  fullName.vb: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand(Of TRequest, TResult)(String, System.Net.Http.HttpMethod, String)
-  nameWithType: RouteOptions.AddCommand<TRequest, TResult>(string, HttpMethod, string?)
-  nameWithType.vb: RouteOptions.AddCommand(Of TRequest, TResult)(String, HttpMethod, String)
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``1(System.String,System.Net.Http.HttpMethod,System.String)
+  name: AddCommand<TRequest>(string, HttpMethod, string?)
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__1_System_String_System_Net_Http_HttpMethod_System_String_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``1(System.String,System.Net.Http.HttpMethod,System.String)
+  name.vb: AddCommand(Of TRequest)(String, HttpMethod, String)
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand<TRequest>(string, System.Net.Http.HttpMethod, string?)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand(Of TRequest)(String, System.Net.Http.HttpMethod, String)
+  nameWithType: RouteOptions.AddCommand<TRequest>(string, HttpMethod, string?)
+  nameWithType.vb: RouteOptions.AddCommand(Of TRequest)(String, HttpMethod, String)
+- uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``2(System.String,System.Net.Http.HttpMethod,System.String,System.String)
+  name: AddCommand<TRequest, TResult>(string, HttpMethod, string?, string?)
+  href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddCommand__2_System_String_System_Net_Http_HttpMethod_System_String_System_String_
+  commentId: M:Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand``2(System.String,System.Net.Http.HttpMethod,System.String,System.String)
+  name.vb: AddCommand(Of TRequest, TResult)(String, HttpMethod, String, String)
+  fullName: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand<TRequest, TResult>(string, System.Net.Http.HttpMethod, string?, string?)
+  fullName.vb: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddCommand(Of TRequest, TResult)(String, System.Net.Http.HttpMethod, String, String)
+  nameWithType: RouteOptions.AddCommand<TRequest, TResult>(string, HttpMethod, string?, string?)
+  nameWithType.vb: RouteOptions.AddCommand(Of TRequest, TResult)(String, HttpMethod, String, String)
 - uid: Raftel.Api.Server.AutoEndpoints.RouteOptions.AddQuery*
   name: AddQuery
   href: api/Raftel.Api.Server.AutoEndpoints.RouteOptions.html#Raftel_Api_Server_AutoEndpoints_RouteOptions_AddQuery_
@@ -712,6 +725,483 @@ references:
   isSpec: "True"
   fullName: Raftel.Api.Server.Middlewares.ExceptionHandlingMiddlewareExtensions.UseRaftelExceptionHandling
   nameWithType: ExceptionHandlingMiddlewareExtensions.UseRaftelExceptionHandling
+- uid: Raftel.Api.Server.Security
+  name: Raftel.Api.Server.Security
+  href: api/Raftel.Api.Server.Security.html
+  commentId: N:Raftel.Api.Server.Security
+  fullName: Raftel.Api.Server.Security
+  nameWithType: Raftel.Api.Server.Security
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions
+  name: RaftelCorsOptions
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html
+  commentId: T:Raftel.Api.Server.Security.RaftelCorsOptions
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions
+  nameWithType: RaftelCorsOptions
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.AllowCredentials
+  name: AllowCredentials
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_AllowCredentials
+  commentId: P:Raftel.Api.Server.Security.RaftelCorsOptions.AllowCredentials
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.AllowCredentials
+  nameWithType: RaftelCorsOptions.AllowCredentials
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.AllowCredentials*
+  name: AllowCredentials
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_AllowCredentials_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelCorsOptions.AllowCredentials
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.AllowCredentials
+  nameWithType: RaftelCorsOptions.AllowCredentials
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.AllowDevelopmentOrigins
+  name: AllowDevelopmentOrigins
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_AllowDevelopmentOrigins
+  commentId: P:Raftel.Api.Server.Security.RaftelCorsOptions.AllowDevelopmentOrigins
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.AllowDevelopmentOrigins
+  nameWithType: RaftelCorsOptions.AllowDevelopmentOrigins
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.AllowDevelopmentOrigins*
+  name: AllowDevelopmentOrigins
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_AllowDevelopmentOrigins_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelCorsOptions.AllowDevelopmentOrigins
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.AllowDevelopmentOrigins
+  nameWithType: RaftelCorsOptions.AllowDevelopmentOrigins
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedHeaders
+  name: AllowedHeaders
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_AllowedHeaders
+  commentId: P:Raftel.Api.Server.Security.RaftelCorsOptions.AllowedHeaders
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedHeaders
+  nameWithType: RaftelCorsOptions.AllowedHeaders
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedHeaders*
+  name: AllowedHeaders
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_AllowedHeaders_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelCorsOptions.AllowedHeaders
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedHeaders
+  nameWithType: RaftelCorsOptions.AllowedHeaders
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedMethods
+  name: AllowedMethods
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_AllowedMethods
+  commentId: P:Raftel.Api.Server.Security.RaftelCorsOptions.AllowedMethods
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedMethods
+  nameWithType: RaftelCorsOptions.AllowedMethods
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedMethods*
+  name: AllowedMethods
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_AllowedMethods_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelCorsOptions.AllowedMethods
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedMethods
+  nameWithType: RaftelCorsOptions.AllowedMethods
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedOrigins
+  name: AllowedOrigins
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_AllowedOrigins
+  commentId: P:Raftel.Api.Server.Security.RaftelCorsOptions.AllowedOrigins
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedOrigins
+  nameWithType: RaftelCorsOptions.AllowedOrigins
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedOrigins*
+  name: AllowedOrigins
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_AllowedOrigins_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelCorsOptions.AllowedOrigins
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.AllowedOrigins
+  nameWithType: RaftelCorsOptions.AllowedOrigins
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.ExposedHeaders
+  name: ExposedHeaders
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_ExposedHeaders
+  commentId: P:Raftel.Api.Server.Security.RaftelCorsOptions.ExposedHeaders
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.ExposedHeaders
+  nameWithType: RaftelCorsOptions.ExposedHeaders
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.ExposedHeaders*
+  name: ExposedHeaders
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_ExposedHeaders_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelCorsOptions.ExposedHeaders
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.ExposedHeaders
+  nameWithType: RaftelCorsOptions.ExposedHeaders
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.PreflightMaxAge
+  name: PreflightMaxAge
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_PreflightMaxAge
+  commentId: P:Raftel.Api.Server.Security.RaftelCorsOptions.PreflightMaxAge
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.PreflightMaxAge
+  nameWithType: RaftelCorsOptions.PreflightMaxAge
+- uid: Raftel.Api.Server.Security.RaftelCorsOptions.PreflightMaxAge*
+  name: PreflightMaxAge
+  href: api/Raftel.Api.Server.Security.RaftelCorsOptions.html#Raftel_Api_Server_Security_RaftelCorsOptions_PreflightMaxAge_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelCorsOptions.PreflightMaxAge
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelCorsOptions.PreflightMaxAge
+  nameWithType: RaftelCorsOptions.PreflightMaxAge
+- uid: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions
+  name: RaftelForwardedHeadersOptions
+  href: api/Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.html
+  commentId: T:Raftel.Api.Server.Security.RaftelForwardedHeadersOptions
+  fullName: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions
+  nameWithType: RaftelForwardedHeadersOptions
+- uid: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.ForwardLimit
+  name: ForwardLimit
+  href: api/Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.html#Raftel_Api_Server_Security_RaftelForwardedHeadersOptions_ForwardLimit
+  commentId: P:Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.ForwardLimit
+  fullName: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.ForwardLimit
+  nameWithType: RaftelForwardedHeadersOptions.ForwardLimit
+- uid: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.ForwardLimit*
+  name: ForwardLimit
+  href: api/Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.html#Raftel_Api_Server_Security_RaftelForwardedHeadersOptions_ForwardLimit_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.ForwardLimit
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.ForwardLimit
+  nameWithType: RaftelForwardedHeadersOptions.ForwardLimit
+- uid: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownNetworks
+  name: KnownNetworks
+  href: api/Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.html#Raftel_Api_Server_Security_RaftelForwardedHeadersOptions_KnownNetworks
+  commentId: P:Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownNetworks
+  fullName: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownNetworks
+  nameWithType: RaftelForwardedHeadersOptions.KnownNetworks
+- uid: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownNetworks*
+  name: KnownNetworks
+  href: api/Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.html#Raftel_Api_Server_Security_RaftelForwardedHeadersOptions_KnownNetworks_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownNetworks
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownNetworks
+  nameWithType: RaftelForwardedHeadersOptions.KnownNetworks
+- uid: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownProxies
+  name: KnownProxies
+  href: api/Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.html#Raftel_Api_Server_Security_RaftelForwardedHeadersOptions_KnownProxies
+  commentId: P:Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownProxies
+  fullName: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownProxies
+  nameWithType: RaftelForwardedHeadersOptions.KnownProxies
+- uid: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownProxies*
+  name: KnownProxies
+  href: api/Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.html#Raftel_Api_Server_Security_RaftelForwardedHeadersOptions_KnownProxies_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownProxies
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelForwardedHeadersOptions.KnownProxies
+  nameWithType: RaftelForwardedHeadersOptions.KnownProxies
+- uid: Raftel.Api.Server.Security.RaftelRateLimitOptions
+  name: RaftelRateLimitOptions
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitOptions.html
+  commentId: T:Raftel.Api.Server.Security.RaftelRateLimitOptions
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitOptions
+  nameWithType: RaftelRateLimitOptions
+- uid: Raftel.Api.Server.Security.RaftelRateLimitOptions.Auth
+  name: Auth
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitOptions.html#Raftel_Api_Server_Security_RaftelRateLimitOptions_Auth
+  commentId: P:Raftel.Api.Server.Security.RaftelRateLimitOptions.Auth
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitOptions.Auth
+  nameWithType: RaftelRateLimitOptions.Auth
+- uid: Raftel.Api.Server.Security.RaftelRateLimitOptions.Auth*
+  name: Auth
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitOptions.html#Raftel_Api_Server_Security_RaftelRateLimitOptions_Auth_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelRateLimitOptions.Auth
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitOptions.Auth
+  nameWithType: RaftelRateLimitOptions.Auth
+- uid: Raftel.Api.Server.Security.RaftelRateLimitOptions.Enabled
+  name: Enabled
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitOptions.html#Raftel_Api_Server_Security_RaftelRateLimitOptions_Enabled
+  commentId: P:Raftel.Api.Server.Security.RaftelRateLimitOptions.Enabled
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitOptions.Enabled
+  nameWithType: RaftelRateLimitOptions.Enabled
+- uid: Raftel.Api.Server.Security.RaftelRateLimitOptions.Enabled*
+  name: Enabled
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitOptions.html#Raftel_Api_Server_Security_RaftelRateLimitOptions_Enabled_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelRateLimitOptions.Enabled
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitOptions.Enabled
+  nameWithType: RaftelRateLimitOptions.Enabled
+- uid: Raftel.Api.Server.Security.RaftelRateLimitOptions.Global
+  name: Global
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitOptions.html#Raftel_Api_Server_Security_RaftelRateLimitOptions_Global
+  commentId: P:Raftel.Api.Server.Security.RaftelRateLimitOptions.Global
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitOptions.Global
+  nameWithType: RaftelRateLimitOptions.Global
+- uid: Raftel.Api.Server.Security.RaftelRateLimitOptions.Global*
+  name: Global
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitOptions.html#Raftel_Api_Server_Security_RaftelRateLimitOptions_Global_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelRateLimitOptions.Global
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitOptions.Global
+  nameWithType: RaftelRateLimitOptions.Global
+- uid: Raftel.Api.Server.Security.RaftelRateLimitOptions.Write
+  name: Write
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitOptions.html#Raftel_Api_Server_Security_RaftelRateLimitOptions_Write
+  commentId: P:Raftel.Api.Server.Security.RaftelRateLimitOptions.Write
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitOptions.Write
+  nameWithType: RaftelRateLimitOptions.Write
+- uid: Raftel.Api.Server.Security.RaftelRateLimitOptions.Write*
+  name: Write
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitOptions.html#Raftel_Api_Server_Security_RaftelRateLimitOptions_Write_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelRateLimitOptions.Write
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitOptions.Write
+  nameWithType: RaftelRateLimitOptions.Write
+- uid: Raftel.Api.Server.Security.RaftelRateLimitPolicies
+  name: RaftelRateLimitPolicies
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitPolicies.html
+  commentId: T:Raftel.Api.Server.Security.RaftelRateLimitPolicies
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitPolicies
+  nameWithType: RaftelRateLimitPolicies
+- uid: Raftel.Api.Server.Security.RaftelRateLimitPolicies.Auth
+  name: Auth
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitPolicies.html#Raftel_Api_Server_Security_RaftelRateLimitPolicies_Auth
+  commentId: F:Raftel.Api.Server.Security.RaftelRateLimitPolicies.Auth
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitPolicies.Auth
+  nameWithType: RaftelRateLimitPolicies.Auth
+- uid: Raftel.Api.Server.Security.RaftelRateLimitPolicies.Global
+  name: Global
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitPolicies.html#Raftel_Api_Server_Security_RaftelRateLimitPolicies_Global
+  commentId: F:Raftel.Api.Server.Security.RaftelRateLimitPolicies.Global
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitPolicies.Global
+  nameWithType: RaftelRateLimitPolicies.Global
+- uid: Raftel.Api.Server.Security.RaftelRateLimitPolicies.Write
+  name: Write
+  href: api/Raftel.Api.Server.Security.RaftelRateLimitPolicies.html#Raftel_Api_Server_Security_RaftelRateLimitPolicies_Write
+  commentId: F:Raftel.Api.Server.Security.RaftelRateLimitPolicies.Write
+  fullName: Raftel.Api.Server.Security.RaftelRateLimitPolicies.Write
+  nameWithType: RaftelRateLimitPolicies.Write
+- uid: Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions
+  name: RaftelSecurityApplicationBuilderExtensions
+  href: api/Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.html
+  commentId: T:Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions
+  fullName: Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions
+  nameWithType: RaftelSecurityApplicationBuilderExtensions
+- uid: Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelRateLimiting(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  name: UseRaftelRateLimiting(IApplicationBuilder)
+  href: api/Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.html#Raftel_Api_Server_Security_RaftelSecurityApplicationBuilderExtensions_UseRaftelRateLimiting_Microsoft_AspNetCore_Builder_IApplicationBuilder_
+  commentId: M:Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelRateLimiting(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  fullName: Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelRateLimiting(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  nameWithType: RaftelSecurityApplicationBuilderExtensions.UseRaftelRateLimiting(IApplicationBuilder)
+- uid: Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelRateLimiting*
+  name: UseRaftelRateLimiting
+  href: api/Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.html#Raftel_Api_Server_Security_RaftelSecurityApplicationBuilderExtensions_UseRaftelRateLimiting_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelRateLimiting
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelRateLimiting
+  nameWithType: RaftelSecurityApplicationBuilderExtensions.UseRaftelRateLimiting
+- uid: Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelSecurity(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  name: UseRaftelSecurity(IApplicationBuilder)
+  href: api/Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.html#Raftel_Api_Server_Security_RaftelSecurityApplicationBuilderExtensions_UseRaftelSecurity_Microsoft_AspNetCore_Builder_IApplicationBuilder_
+  commentId: M:Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelSecurity(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  fullName: Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelSecurity(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  nameWithType: RaftelSecurityApplicationBuilderExtensions.UseRaftelSecurity(IApplicationBuilder)
+- uid: Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelSecurity*
+  name: UseRaftelSecurity
+  href: api/Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.html#Raftel_Api_Server_Security_RaftelSecurityApplicationBuilderExtensions_UseRaftelSecurity_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelSecurity
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelSecurityApplicationBuilderExtensions.UseRaftelSecurity
+  nameWithType: RaftelSecurityApplicationBuilderExtensions.UseRaftelSecurity
+- uid: Raftel.Api.Server.Security.RaftelSecurityOptions
+  name: RaftelSecurityOptions
+  href: api/Raftel.Api.Server.Security.RaftelSecurityOptions.html
+  commentId: T:Raftel.Api.Server.Security.RaftelSecurityOptions
+  fullName: Raftel.Api.Server.Security.RaftelSecurityOptions
+  nameWithType: RaftelSecurityOptions
+- uid: Raftel.Api.Server.Security.RaftelSecurityOptions.Cors
+  name: Cors
+  href: api/Raftel.Api.Server.Security.RaftelSecurityOptions.html#Raftel_Api_Server_Security_RaftelSecurityOptions_Cors
+  commentId: P:Raftel.Api.Server.Security.RaftelSecurityOptions.Cors
+  fullName: Raftel.Api.Server.Security.RaftelSecurityOptions.Cors
+  nameWithType: RaftelSecurityOptions.Cors
+- uid: Raftel.Api.Server.Security.RaftelSecurityOptions.Cors*
+  name: Cors
+  href: api/Raftel.Api.Server.Security.RaftelSecurityOptions.html#Raftel_Api_Server_Security_RaftelSecurityOptions_Cors_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelSecurityOptions.Cors
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelSecurityOptions.Cors
+  nameWithType: RaftelSecurityOptions.Cors
+- uid: Raftel.Api.Server.Security.RaftelSecurityOptions.ForwardedHeaders
+  name: ForwardedHeaders
+  href: api/Raftel.Api.Server.Security.RaftelSecurityOptions.html#Raftel_Api_Server_Security_RaftelSecurityOptions_ForwardedHeaders
+  commentId: P:Raftel.Api.Server.Security.RaftelSecurityOptions.ForwardedHeaders
+  fullName: Raftel.Api.Server.Security.RaftelSecurityOptions.ForwardedHeaders
+  nameWithType: RaftelSecurityOptions.ForwardedHeaders
+- uid: Raftel.Api.Server.Security.RaftelSecurityOptions.ForwardedHeaders*
+  name: ForwardedHeaders
+  href: api/Raftel.Api.Server.Security.RaftelSecurityOptions.html#Raftel_Api_Server_Security_RaftelSecurityOptions_ForwardedHeaders_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelSecurityOptions.ForwardedHeaders
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelSecurityOptions.ForwardedHeaders
+  nameWithType: RaftelSecurityOptions.ForwardedHeaders
+- uid: Raftel.Api.Server.Security.RaftelSecurityOptions.Headers
+  name: Headers
+  href: api/Raftel.Api.Server.Security.RaftelSecurityOptions.html#Raftel_Api_Server_Security_RaftelSecurityOptions_Headers
+  commentId: P:Raftel.Api.Server.Security.RaftelSecurityOptions.Headers
+  fullName: Raftel.Api.Server.Security.RaftelSecurityOptions.Headers
+  nameWithType: RaftelSecurityOptions.Headers
+- uid: Raftel.Api.Server.Security.RaftelSecurityOptions.Headers*
+  name: Headers
+  href: api/Raftel.Api.Server.Security.RaftelSecurityOptions.html#Raftel_Api_Server_Security_RaftelSecurityOptions_Headers_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelSecurityOptions.Headers
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelSecurityOptions.Headers
+  nameWithType: RaftelSecurityOptions.Headers
+- uid: Raftel.Api.Server.Security.RaftelSecurityOptions.RateLimiting
+  name: RateLimiting
+  href: api/Raftel.Api.Server.Security.RaftelSecurityOptions.html#Raftel_Api_Server_Security_RaftelSecurityOptions_RateLimiting
+  commentId: P:Raftel.Api.Server.Security.RaftelSecurityOptions.RateLimiting
+  fullName: Raftel.Api.Server.Security.RaftelSecurityOptions.RateLimiting
+  nameWithType: RaftelSecurityOptions.RateLimiting
+- uid: Raftel.Api.Server.Security.RaftelSecurityOptions.RateLimiting*
+  name: RateLimiting
+  href: api/Raftel.Api.Server.Security.RaftelSecurityOptions.html#Raftel_Api_Server_Security_RaftelSecurityOptions_RateLimiting_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelSecurityOptions.RateLimiting
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelSecurityOptions.RateLimiting
+  nameWithType: RaftelSecurityOptions.RateLimiting
+- uid: Raftel.Api.Server.Security.RaftelSecurityOptions.SectionName
+  name: SectionName
+  href: api/Raftel.Api.Server.Security.RaftelSecurityOptions.html#Raftel_Api_Server_Security_RaftelSecurityOptions_SectionName
+  commentId: F:Raftel.Api.Server.Security.RaftelSecurityOptions.SectionName
+  fullName: Raftel.Api.Server.Security.RaftelSecurityOptions.SectionName
+  nameWithType: RaftelSecurityOptions.SectionName
+- uid: Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions
+  name: RaftelSecurityServiceCollectionExtensions
+  href: api/Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.html
+  commentId: T:Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions
+  fullName: Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions
+  nameWithType: RaftelSecurityServiceCollectionExtensions
+- uid: Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Action{Raftel.Api.Server.Security.RaftelSecurityOptions})
+  name: AddRaftelSecurity(IServiceCollection, IConfiguration, Action<RaftelSecurityOptions>)
+  href: api/Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.html#Raftel_Api_Server_Security_RaftelSecurityServiceCollectionExtensions_AddRaftelSecurity_Microsoft_Extensions_DependencyInjection_IServiceCollection_Microsoft_Extensions_Configuration_IConfiguration_System_Action_Raftel_Api_Server_Security_RaftelSecurityOptions__
+  commentId: M:Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration,System.Action{Raftel.Api.Server.Security.RaftelSecurityOptions})
+  name.vb: AddRaftelSecurity(IServiceCollection, IConfiguration, Action(Of RaftelSecurityOptions))
+  fullName: Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, System.Action<Raftel.Api.Server.Security.RaftelSecurityOptions>)
+  fullName.vb: Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.Configuration.IConfiguration, System.Action(Of Raftel.Api.Server.Security.RaftelSecurityOptions))
+  nameWithType: RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity(IServiceCollection, IConfiguration, Action<RaftelSecurityOptions>)
+  nameWithType.vb: RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity(IServiceCollection, IConfiguration, Action(Of RaftelSecurityOptions))
+- uid: Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity*
+  name: AddRaftelSecurity
+  href: api/Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.html#Raftel_Api_Server_Security_RaftelSecurityServiceCollectionExtensions_AddRaftelSecurity_
+  commentId: Overload:Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity
+  nameWithType: RaftelSecurityServiceCollectionExtensions.AddRaftelSecurity
+- uid: Raftel.Api.Server.Security.RateLimitPolicyOptions
+  name: RateLimitPolicyOptions
+  href: api/Raftel.Api.Server.Security.RateLimitPolicyOptions.html
+  commentId: T:Raftel.Api.Server.Security.RateLimitPolicyOptions
+  fullName: Raftel.Api.Server.Security.RateLimitPolicyOptions
+  nameWithType: RateLimitPolicyOptions
+- uid: Raftel.Api.Server.Security.RateLimitPolicyOptions.PermitLimit
+  name: PermitLimit
+  href: api/Raftel.Api.Server.Security.RateLimitPolicyOptions.html#Raftel_Api_Server_Security_RateLimitPolicyOptions_PermitLimit
+  commentId: P:Raftel.Api.Server.Security.RateLimitPolicyOptions.PermitLimit
+  fullName: Raftel.Api.Server.Security.RateLimitPolicyOptions.PermitLimit
+  nameWithType: RateLimitPolicyOptions.PermitLimit
+- uid: Raftel.Api.Server.Security.RateLimitPolicyOptions.PermitLimit*
+  name: PermitLimit
+  href: api/Raftel.Api.Server.Security.RateLimitPolicyOptions.html#Raftel_Api_Server_Security_RateLimitPolicyOptions_PermitLimit_
+  commentId: Overload:Raftel.Api.Server.Security.RateLimitPolicyOptions.PermitLimit
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RateLimitPolicyOptions.PermitLimit
+  nameWithType: RateLimitPolicyOptions.PermitLimit
+- uid: Raftel.Api.Server.Security.RateLimitPolicyOptions.Window
+  name: Window
+  href: api/Raftel.Api.Server.Security.RateLimitPolicyOptions.html#Raftel_Api_Server_Security_RateLimitPolicyOptions_Window
+  commentId: P:Raftel.Api.Server.Security.RateLimitPolicyOptions.Window
+  fullName: Raftel.Api.Server.Security.RateLimitPolicyOptions.Window
+  nameWithType: RateLimitPolicyOptions.Window
+- uid: Raftel.Api.Server.Security.RateLimitPolicyOptions.Window*
+  name: Window
+  href: api/Raftel.Api.Server.Security.RateLimitPolicyOptions.html#Raftel_Api_Server_Security_RateLimitPolicyOptions_Window_
+  commentId: Overload:Raftel.Api.Server.Security.RateLimitPolicyOptions.Window
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.RateLimitPolicyOptions.Window
+  nameWithType: RateLimitPolicyOptions.Window
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions
+  name: SecurityHeadersOptions
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html
+  commentId: T:Raftel.Api.Server.Security.SecurityHeadersOptions
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions
+  nameWithType: SecurityHeadersOptions
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.ContentSecurityPolicy
+  name: ContentSecurityPolicy
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_ContentSecurityPolicy
+  commentId: P:Raftel.Api.Server.Security.SecurityHeadersOptions.ContentSecurityPolicy
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.ContentSecurityPolicy
+  nameWithType: SecurityHeadersOptions.ContentSecurityPolicy
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.ContentSecurityPolicy*
+  name: ContentSecurityPolicy
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_ContentSecurityPolicy_
+  commentId: Overload:Raftel.Api.Server.Security.SecurityHeadersOptions.ContentSecurityPolicy
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.ContentSecurityPolicy
+  nameWithType: SecurityHeadersOptions.ContentSecurityPolicy
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.ContentTypeOptions
+  name: ContentTypeOptions
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_ContentTypeOptions
+  commentId: P:Raftel.Api.Server.Security.SecurityHeadersOptions.ContentTypeOptions
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.ContentTypeOptions
+  nameWithType: SecurityHeadersOptions.ContentTypeOptions
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.ContentTypeOptions*
+  name: ContentTypeOptions
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_ContentTypeOptions_
+  commentId: Overload:Raftel.Api.Server.Security.SecurityHeadersOptions.ContentTypeOptions
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.ContentTypeOptions
+  nameWithType: SecurityHeadersOptions.ContentTypeOptions
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationContentSecurityPolicy
+  name: DocumentationContentSecurityPolicy
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_DocumentationContentSecurityPolicy
+  commentId: P:Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationContentSecurityPolicy
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationContentSecurityPolicy
+  nameWithType: SecurityHeadersOptions.DocumentationContentSecurityPolicy
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationContentSecurityPolicy*
+  name: DocumentationContentSecurityPolicy
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_DocumentationContentSecurityPolicy_
+  commentId: Overload:Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationContentSecurityPolicy
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationContentSecurityPolicy
+  nameWithType: SecurityHeadersOptions.DocumentationContentSecurityPolicy
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationPath
+  name: DocumentationPath
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_DocumentationPath
+  commentId: P:Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationPath
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationPath
+  nameWithType: SecurityHeadersOptions.DocumentationPath
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationPath*
+  name: DocumentationPath
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_DocumentationPath_
+  commentId: Overload:Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationPath
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.DocumentationPath
+  nameWithType: SecurityHeadersOptions.DocumentationPath
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.FrameOptions
+  name: FrameOptions
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_FrameOptions
+  commentId: P:Raftel.Api.Server.Security.SecurityHeadersOptions.FrameOptions
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.FrameOptions
+  nameWithType: SecurityHeadersOptions.FrameOptions
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.FrameOptions*
+  name: FrameOptions
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_FrameOptions_
+  commentId: Overload:Raftel.Api.Server.Security.SecurityHeadersOptions.FrameOptions
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.FrameOptions
+  nameWithType: SecurityHeadersOptions.FrameOptions
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.ReferrerPolicy
+  name: ReferrerPolicy
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_ReferrerPolicy
+  commentId: P:Raftel.Api.Server.Security.SecurityHeadersOptions.ReferrerPolicy
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.ReferrerPolicy
+  nameWithType: SecurityHeadersOptions.ReferrerPolicy
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.ReferrerPolicy*
+  name: ReferrerPolicy
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_ReferrerPolicy_
+  commentId: Overload:Raftel.Api.Server.Security.SecurityHeadersOptions.ReferrerPolicy
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.ReferrerPolicy
+  nameWithType: SecurityHeadersOptions.ReferrerPolicy
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.StrictTransportSecurity
+  name: StrictTransportSecurity
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_StrictTransportSecurity
+  commentId: P:Raftel.Api.Server.Security.SecurityHeadersOptions.StrictTransportSecurity
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.StrictTransportSecurity
+  nameWithType: SecurityHeadersOptions.StrictTransportSecurity
+- uid: Raftel.Api.Server.Security.SecurityHeadersOptions.StrictTransportSecurity*
+  name: StrictTransportSecurity
+  href: api/Raftel.Api.Server.Security.SecurityHeadersOptions.html#Raftel_Api_Server_Security_SecurityHeadersOptions_StrictTransportSecurity_
+  commentId: Overload:Raftel.Api.Server.Security.SecurityHeadersOptions.StrictTransportSecurity
+  isSpec: "True"
+  fullName: Raftel.Api.Server.Security.SecurityHeadersOptions.StrictTransportSecurity
+  nameWithType: SecurityHeadersOptions.StrictTransportSecurity
 - uid: Raftel.Application
   name: Raftel.Application
   href: api/Raftel.Application.html

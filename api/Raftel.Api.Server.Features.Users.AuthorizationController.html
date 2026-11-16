@@ -89,7 +89,7 @@
 
 
   <h1 id="Raftel_Api_Server_Features_Users_AuthorizationController" data-uid="Raftel.Api.Server.Features.Users.AuthorizationController" class="text-break">
-Class AuthorizationController  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/AuthorizationController.cs/#L9"><i class="bi bi-code-slash"></i></a>
+Class AuthorizationController  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/AuthorizationController.cs/#L11"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -759,7 +759,7 @@ public class AuthorizationController : Controller, IActionFilter, IAsyncActionFi
 
   <h3 id="Raftel_Api_Server_Features_Users_AuthorizationController__ctor_Raftel_Application_Queries_IQueryDispatcher_" data-uid="Raftel.Api.Server.Features.Users.AuthorizationController.#ctor(Raftel.Application.Queries.IQueryDispatcher)">
   AuthorizationController(IQueryDispatcher)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/AuthorizationController.cs/#L9"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/AuthorizationController.cs/#L11"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -794,7 +794,7 @@ public class AuthorizationController : Controller, IActionFilter, IAsyncActionFi
 
   <h3 id="Raftel_Api_Server_Features_Users_AuthorizationController_Exchange" data-uid="Raftel.Api.Server.Features.Users.AuthorizationController.Exchange">
   Exchange()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/AuthorizationController.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/AuthorizationController.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -804,6 +804,7 @@ public class AuthorizationController : Controller, IActionFilter, IAsyncActionFi
     <pre><code class="lang-csharp hljs">[HttpPost(&quot;~/connect/token&quot;)]
 [Produces(&quot;application/json&quot;, new string[] { })]
 [AllowAnonymous]
+[EnableRateLimiting(&quot;raftel-auth&quot;)]
 public Task&lt;IActionResult&gt; Exchange()</code></pre>
   </div>
 
@@ -828,7 +829,7 @@ public Task&lt;IActionResult&gt; Exchange()</code></pre>
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/AuthorizationController.cs/#L9" class="edit-link">Edit this page</a>
+          <a href="https://github.com/franciscofsl/Raftel/blob/main/src/Raftel.Api.Server/Features/Users/AuthorizationController.cs/#L11" class="edit-link">Edit this page</a>
         </div>
 
 
