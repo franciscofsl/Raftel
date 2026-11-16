@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using OpenIddict.Abstractions;
+using OpenIddict.Server;
 using OpenIddict.Validation.AspNetCore;
 using Raftel.Application;
 using Raftel.Application.Abstractions;
@@ -16,6 +19,7 @@ using Raftel.Domain.Features.Tenants;
 using Raftel.Domain.Features.Users;
 using Raftel.Infrastructure.Auditing;
 using Raftel.Infrastructure.Authentication;
+using Raftel.Infrastructure.Authentication.Certificates;
 using Raftel.Infrastructure.Correlation;
 using Raftel.Infrastructure.Data;
 using Raftel.Infrastructure.Data.Auditing;
@@ -31,16 +35,26 @@ namespace Raftel.Infrastructure;
 
 public static class DependencyInjection
 {
+    /// <summary>
+    /// Registers Raftel data access, authentication, and multitenancy services.
+    /// </summary>
+    /// <remarks>
+    /// OpenIddict token certificates come from the <see cref="CertificateOptions.SectionName"/> configuration
+    /// section, then from <paramref name="configureCertificates"/>. Without configured certificates, development
+    /// certificates are generated only when the registered <see cref="IHostEnvironment"/> is Development;
+    /// otherwise the application fails at startup. See <see cref="CertificateOptions"/>.
+    /// </remarks>
     public static IServiceCollection AddRaftelData<TDbContext>(
         this IServiceCollection services,
         IConfiguration configuration,
         string connectionStringName = "Default",
         Action<AuditOptions>? configureAudit = null,
-        Action<TransactionOptions>? configureTransaction = null)
+        Action<TransactionOptions>? configureTransaction = null,
+        Action<CertificateOptions>? configureCertificates = null)
         where TDbContext : RaftelDbContext<TDbContext>
     {
         services.AddDataAccess<TDbContext>(configuration, connectionStringName, configureAudit, configureTransaction);
-        services.AddAuthentication<TDbContext>();
+        services.AddAuthentication<TDbContext>(BuildCertificateOptions(configuration, configureCertificates));
 
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
         services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
@@ -118,9 +132,32 @@ public static class DependencyInjection
         services.AddScoped<EntityChangesTrackerInterceptor>();
     }
 
-    private static void AddAuthentication<TDbContext>(this IServiceCollection services)
+    private static CertificateOptions BuildCertificateOptions(
+        IConfiguration configuration,
+        Action<CertificateOptions>? configureCertificates)
+    {
+        var certificates = new CertificateOptions();
+        configuration.GetSection(CertificateOptions.SectionName).Bind(certificates);
+        configureCertificates?.Invoke(certificates);
+        return certificates;
+    }
+
+    private static IHostEnvironment? FindHostEnvironment(this IServiceCollection services)
+    {
+        return services.LastOrDefault(descriptor => descriptor.ServiceType == typeof(IHostEnvironment))
+            ?.ImplementationInstance as IHostEnvironment;
+    }
+
+    private static void AddAuthentication<TDbContext>(this IServiceCollection services, CertificateOptions certificates)
         where TDbContext : RaftelDbContext<TDbContext>
     {
+        var environment = services.FindHostEnvironment();
+
+        // Registered before AddOpenIddict so its message runs ahead of OpenIddict's own key validation.
+        services.TryAddEnumerable(ServiceDescriptor
+            .Singleton<IPostConfigureOptions<OpenIddictServerOptions>, RequireServerCertificates>());
+        services.AddOptions<OpenIddictServerOptions>().ValidateOnStart();
+
         services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<TDbContext>()
             .AddDefaultTokenProviders();
@@ -135,8 +172,7 @@ public static class DependencyInjection
                     .AllowPasswordFlow()
                     .AllowRefreshTokenFlow();
 
-                opt.AddDevelopmentEncryptionCertificate()
-                    .AddDevelopmentSigningCertificate();
+                ServerCertificates.Configure(opt, certificates, environment);
 
                 opt.RegisterScopes(OpenIddictConstants.Scopes.Email,
                     OpenIddictConstants.Scopes.OfflineAccess,

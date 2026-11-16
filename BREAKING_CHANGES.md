@@ -225,6 +225,33 @@ public Task<TResponse> HandleAsync(TRequest request, RequestHandlerDelegate<TRes
 
 ---
 
+## OpenIddict Certificates
+
+### Outside Development, startup fails until real token certificates are configured
+**What changed:** `AddRaftelData` no longer registers OpenIddict development certificates unconditionally. It loads the signing and encryption certificates from the new `Authentication:Certificates` configuration section (`CertificateOptions`: thumbprint in the X.509 store, or a `.pfx` file path and password), or from the new optional `configureCertificates` callback. Development certificates are generated only when no certificate is configured and the registered `IHostEnvironment` is `Development`. Otherwise the host fails at startup with an `InvalidOperationException` that names the configuration section.
+
+**Why:** Development certificates are ephemeral and local to each machine. In production every replica signed tokens with its own key, so a token issued by one instance failed on another and every redeploy invalidated all tokens.
+
+**Impact:** An application running in `Staging`, `Production`, or any non-`Development` environment without configured certificates no longer starts. A `ServiceCollection` built without a registered `IHostEnvironment` is treated as non-Development. Configuring only one of the two certificates also fails. The new parameter is optional and trailing, so existing calls compile unchanged.
+
+**Action required:** Provide both certificates outside Development, for example through environment variables or a secret store:
+
+```json
+{
+  "Authentication": {
+    "Certificates": {
+      "SigningCertificateThumbprint": "<thumbprint>",
+      "EncryptionCertificateThumbprint": "<thumbprint>",
+      "StoreLocation": "LocalMachine"
+    }
+  }
+}
+```
+
+Or use `SigningCertificatePath`/`SigningCertificatePassword` and `EncryptionCertificatePath`/`EncryptionCertificatePassword` with `.pfx` files. Never commit certificate passwords to `appsettings.json`.
+
+---
+
 ## Summary
 
 The migration to .NET 10 is primarily focused on framework and dependency updates. The main breaking change that may affect consumers is the Microsoft.OpenApi 2.0 update, which requires namespace and type changes if you're customizing OpenAPI/Swagger configurations.
