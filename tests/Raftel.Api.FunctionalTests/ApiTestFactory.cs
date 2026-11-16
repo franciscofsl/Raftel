@@ -25,10 +25,23 @@ public sealed class ApiTestFactory : WebApplicationFactory<DemoApi.Program>
 
     public string AdminPassword { get; } = $"Aa1!{Guid.NewGuid():N}";
 
+    /// <summary>
+    /// Limits high enough that the shared suite, where every request comes from the same test client,
+    /// never hits them. Rate limiting tests start a separate host with the framework defaults.
+    /// </summary>
+    internal static readonly IReadOnlyDictionary<string, string?> SuiteRateLimits = new Dictionary<string, string?>
+    {
+        ["Raftel:Security:RateLimiting:Global:PermitLimit"] = "1000000",
+        ["Raftel:Security:RateLimiting:Auth:PermitLimit"] = "1000000",
+        ["Raftel:Security:RateLimiting:Write:PermitLimit"] = "1000000"
+    };
+
+    private readonly object _containerLock = new();
+    private bool _containerStarted;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        _container.StartAsync().GetAwaiter().GetResult();
-        WaitForDatabaseReady(_container.GetConnectionString()).GetAwaiter().GetResult();
+        EnsureContainerStarted();
 
         builder.ConfigureLogging(logging => logging.AddProvider(new TestLoggerProvider(LogCapture)));
 
@@ -43,10 +56,13 @@ public sealed class ApiTestFactory : WebApplicationFactory<DemoApi.Program>
             };
 
             configBuilder.AddInMemoryCollection(inMemorySettings);
+            configBuilder.AddInMemoryCollection(SuiteRateLimits);
         });
         
         builder.ConfigureServices(services =>
-        { 
+        {
+            services.AddSingleton<IStartupFilter, TestRemoteIpStartupFilter>();
+
             var descriptor = services.SingleOrDefault(
                 d => d.ServiceType == typeof(DbContextOptions<TestingRaftelDbContext>));
 
@@ -59,6 +75,21 @@ public sealed class ApiTestFactory : WebApplicationFactory<DemoApi.Program>
                 options.UseSqlServer(_container.GetConnectionString()));
         });
         builder.UseSetting("https_port", "5128");
+    }
+
+    private void EnsureContainerStarted()
+    {
+        lock (_containerLock)
+        {
+            if (_containerStarted)
+            {
+                return;
+            }
+
+            _container.StartAsync().GetAwaiter().GetResult();
+            WaitForDatabaseReady(_container.GetConnectionString()).GetAwaiter().GetResult();
+            _containerStarted = true;
+        }
     }
 
     private async Task WaitForDatabaseReady(string connectionString)

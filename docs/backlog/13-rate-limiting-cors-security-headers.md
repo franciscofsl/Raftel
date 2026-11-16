@@ -1,6 +1,6 @@
 # 13 — Rate limiting, CORS y cabeceras de seguridad
 
-> Estado: **Pendiente**
+> Estado: **Implementado** (ver [docs/security.md](../security.md))
 > Ámbito: `Raftel.Api.Server`
 > Rompe API pública: no (aditivo, opt-in)
 > Depende de: [01](01-error-tipado-y-mapeo-http.md), [04](04-logging-estructurado.md)

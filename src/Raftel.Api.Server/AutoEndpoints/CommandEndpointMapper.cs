@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Raftel.Api.Server.Security;
 using Raftel.Application.Commands;
 
 namespace Raftel.Api.Server.AutoEndpoints;
@@ -22,6 +23,7 @@ public static class CommandEndpointMapper
         endpoint
             .WithName($"{command.Method}_{typeof(TCommand).Name}")
             .WithOpenApi()
+            .RequireRateLimiting(command.RateLimitPolicy ?? RaftelRateLimitPolicies.Write)
             .AuthorizeByRequiresPermissionAttribute<TCommand>();
 
         return;
@@ -72,6 +74,7 @@ public static class CommandEndpointMapper
         endpoint
             .WithName($"{command.Method}_{typeof(TCommand).Name}")
             .WithOpenApi()
+            .RequireRateLimiting(command.RateLimitPolicy ?? RaftelRateLimitPolicies.Write)
             .AuthorizeByRequiresPermissionAttribute<TCommand>();
 
         return;

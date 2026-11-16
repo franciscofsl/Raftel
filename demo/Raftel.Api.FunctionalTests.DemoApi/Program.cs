@@ -1,4 +1,4 @@
-using Raftel.Application.Abstractions.Authentication;
+﻿using Raftel.Application.Abstractions.Authentication;
 using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.FunctionalTests.DemoApi.TestSupport;
@@ -7,6 +7,7 @@ using Raftel.Api.Server.Features.Tenants;
 using Raftel.Api.Server.Features.Users;
 using Raftel.Api.Server.Health;
 using Raftel.Api.Server.Middlewares;
+using Raftel.Api.Server.Security;
 using Raftel.Application;
 using Raftel.Application.Features.Users.RegisterUser;
 using Raftel.Application.Middlewares;
@@ -42,6 +43,7 @@ builder.Services.AddRaftelApplication(cfg =>
 });
 
 builder.Services.AddSampleInfrastructure(builder.Configuration.GetConnectionString("Default")!);
+builder.Services.AddRaftelSecurity(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -56,19 +58,22 @@ builder.Services.AddScoped<IDatabaseProbe>(sp =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseCorrelationId();
+app.UseRaftelExceptionHandling();
+app.UseRaftelSecurity();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseCorrelationId();
-app.UseRaftelExceptionHandling();
 app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseTenantMiddleware();
+app.UseRaftelRateLimiting();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -14,7 +14,10 @@ Features/<Feature>/   <Feature>DependencyInjection.cs (feature endpoint registra
     Users/AuthorizationController.cs   classic controller for OpenIddict flow (/connect/token)
 Middlewares/          ExceptionHandlingMiddleware (+ extensions) → errors in ProblemDetails (RFC 7807)
                        CorrelationIdMiddleware (+ extensions) → resolves/echoes X-Correlation-Id
+                       SecurityHeadersMiddleware → security response headers (written in OnStarting), strips Server/X-Powered-By
 Health/               HealthEndpointExtensions (MapRaftelHealthChecks) + HealthResponseWriter (JSON, status-only vs detailed)
+Security/             AddRaftelSecurity / UseRaftelSecurity / UseRaftelRateLimiting, RaftelSecurityOptions (+ validator),
+                       rate limit policies (RaftelRateLimitPolicies, RateLimitPartitions, RateLimitRejection), CORS and forwarded headers
 ```
 
 ## Patterns and Practices
@@ -35,6 +38,8 @@ Health/               HealthEndpointExtensions (MapRaftelHealthChecks) + HealthR
 - **Errors**: business, validation, and authorization failures flow through `Result`/`Result<T>` and `ErrorResults.ToProblem` (see `Raftel.Application/CLAUDE.md`'s Pipeline section) — they never throw. `ExceptionHandlingMiddleware` only catches genuinely unexpected exceptions, mapping them to a `500` `ProblemDetails` response (no stack trace leaked) and enriching the current request's `IRequestEvent` at `Error` level before producing the response; it no longer logs directly.
 - **Correlation & wide events**: `CorrelationIdMiddleware` must be registered **before** `ExceptionHandlingMiddleware` (`app.UseCorrelationId(); app.UseRaftelExceptionHandling();`), since it wraps everything else. It resolves/echoes `X-Correlation-Id`, sets `request_id`/`method`/`path`/`status_code`/`duration_ms` on `IRequestEvent`, and is the **single point that emits the request's wide event** — exactly once per request, at whatever `level` was recorded (defaulting to `Information`). This is what guarantees "exactly one log entry per request" holds even for requests that never reach command/query dispatch (malformed JSON body, a 404 with no matching route, an ASP.NET-level 401/403). Never add a competing `ILogger` call in another middleware — enrich `IRequestEvent` instead (see `Raftel.Application/CLAUDE.md`'s "Wide Events" section).
 - **Health checks**: `app.MapRaftelHealthChecks()` maps `/health/live` (no checks, anonymous), `/health/ready` (checks tagged `ready`, anonymous), and `/health` (every check, authorized by default per `HealthOptions`) — see `docs/health-checks.md`. This layer only maps endpoints and writes the JSON response (`HealthResponseWriter`); the checks themselves live in `Raftel.Infrastructure/Health` since they need EF Core, which this layer must not reference. `HealthOptions` and the `ready` tag live in `Raftel.Application.Abstractions.Health` specifically so this mapping code can read them without an `Infrastructure` reference.
+
+- **Security** (see `docs/security.md`): `AddRaftelSecurity(configuration)` binds `Raftel:Security` and validates it on start (`AllowCredentials` + `*` origin fails). It takes two pipeline calls, not one: `UseRaftelSecurity()` (forwarded headers → security headers → CORS) goes right after `UseRaftelExceptionHandling()`, and `UseRaftelRateLimiting()` goes after `UseAuthentication()` + `UseTenantMiddleware()`, because the global and write limits partition by tenant + user, which only exist after authentication. Every AutoEndpoints command gets `raftel-write` unless `AddCommand(..., rateLimitPolicy:)` overrides it; `/connect/token` and user registration use `raftel-auth`, partitioned by IP only. Health endpoints are `DisableRateLimiting()`. A rejection enriches `IRequestEvent` (level `Warning`, `rate_limit.rejected`) instead of logging. Kestrel's `Server` header is turned off in `AddRaftelSecurity`.
 
 ## Conventions
 
