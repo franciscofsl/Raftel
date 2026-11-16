@@ -111,6 +111,7 @@ public sealed class AssignRoleToUserCommandHandlerTests
         // Assert
         result.IsSuccess.ShouldBeFalse();
         result.Error.ShouldBe(UserErrors.RoleAlreadyAssigned);
+        await _authenticationService.DidNotReceiveWithAnyArgs().AssignRoleAsync(default, default, default);
         _userRepository.DidNotReceive().Update(user);
     }
 
