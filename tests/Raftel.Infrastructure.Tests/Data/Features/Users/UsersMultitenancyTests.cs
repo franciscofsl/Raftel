@@ -125,7 +125,7 @@ public abstract class UsersMultitenancyTestsBase : InfrastructureTestBase
     }
 
     [Fact]
-    public async Task ListAllAsync_ShouldReturnAllUsers_WhenNoTenantIsSet()
+    public async Task ListAllAsync_WhenNoTenantIsSet_ShouldReturnOnlyHostUsers()
     {
         await ExecuteScopedAsync(async sp =>
         {
@@ -151,10 +151,14 @@ public abstract class UsersMultitenancyTestsBase : InfrastructureTestBase
                 await unitOfWork.CommitAsync();
             }
 
-            var allUsers = await repository.ListAllAsync();
-            allUsers.Count.ShouldBe(2);
-            allUsers.ShouldContain(luffy);
-            allUsers.ShouldContain(bigMom);
+            var shanks = CreateUser("shanks@redhair.crew", "Red-Haired", "Shanks");
+            await repository.AddAsync(shanks);
+            await unitOfWork.CommitAsync();
+
+            var hostUsers = await repository.ListAllAsync();
+            hostUsers.ShouldBe([shanks]);
+            hostUsers.ShouldNotContain(luffy);
+            hostUsers.ShouldNotContain(bigMom);
         });
     }
 

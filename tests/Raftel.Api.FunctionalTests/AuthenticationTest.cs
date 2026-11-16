@@ -1,9 +1,10 @@
-﻿using System.Net;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Raftel.Api.FunctionalTests.Extensions;
 using Raftel.Application.Features.Users.GetUserProfile;
 using Raftel.Domain.Features.Users;
 using Shouldly;
@@ -97,7 +98,7 @@ public class AuthenticationTest
     }
 
     [Fact]
-    public async Task Login_AfterRegistration_ShouldReturnToken_AndCallPerfil()
+    public async Task Login_AfterRegistration_ShouldReturnToken_ButProfileRequiresTheUsersViewPermission()
     {
         var email = $"user_{Guid.NewGuid():N}@test.com";
         var password = "Password123!";
@@ -128,10 +129,19 @@ public class AuthenticationTest
             new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tokenData.Token);
 
         var me = await _client.GetAsync("/api/users/me");
+        me.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
+    }
+
+    [Fact]
+    public async Task Login_AsAdministrator_ShouldCallProfile()
+    {
+        await _client.AuthenticateAsAdminAsync(_factory);
+
+        var me = await _client.GetAsync("/api/users/me");
         me.StatusCode.ShouldBe(HttpStatusCode.OK);
         var response = await me.Content.ReadFromJsonAsync<GetUserProfileResponse>();
-        response.IsAuthenticated.ShouldBeTrue();
+        response!.IsAuthenticated.ShouldBeTrue();
         response.UserId.ShouldNotBe(Guid.Empty);
-        response.UserName.ShouldBe(email);
+        response.UserName.ShouldBe(_factory.AdminEmail);
     }
 }

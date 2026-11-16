@@ -1,7 +1,9 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Raftel.Application.Abstractions;
+using Raftel.Application.Abstractions.Authentication;
 using Raftel.Application.Abstractions.DomainEvents;
 using Raftel.Application.Commands;
 using Raftel.Application.Middlewares;
@@ -30,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<IQueryDispatcher, QueryDispatcher>();
         services.AddScoped<IDomainEventsDispatcher, DomainEventsDispatcher>();
         services.AddScoped<IRequestEvent, RequestEvent>();
+        services.TryAddScoped<ICurrentUser, AnonymousCurrentUser>();
     }
 
     private static void RegisterHandlers(IServiceCollection services, IEnumerable<Assembly> assemblies)
@@ -91,11 +94,12 @@ public static class DependencyInjection
 
     private static void RegisterMiddlewares(IServiceCollection services, RaftelApplicationBuilder builder)
     {
-        var middlewareRegistry = new MiddlewareRegistry(builder.GlobalMiddlewares, builder.CommandMiddlewares,
+        var globalMiddlewares = WithPermissionAuthorization(builder.GlobalMiddlewares);
+        var middlewareRegistry = new MiddlewareRegistry(globalMiddlewares, builder.CommandMiddlewares,
             builder.QueryMiddlewares);
         services.AddSingleton(middlewareRegistry);
 
-        foreach (var type in builder.GlobalMiddlewares)
+        foreach (var type in globalMiddlewares)
         {
             services.AddScoped(typeof(IGlobalMiddleware<,>), type);
         }
@@ -117,5 +121,19 @@ public static class DependencyInjection
         {
             services.AddScoped(typeof(IQueryMiddleware<,>), type);
         }
+    }
+
+    private static List<Type> WithPermissionAuthorization(List<Type> configured)
+    {
+        var permissionMiddleware = typeof(PermissionAuthorizationMiddleware<,>);
+        var globalMiddlewares = new List<Type>(configured);
+        if (globalMiddlewares.Contains(permissionMiddleware))
+        {
+            return globalMiddlewares;
+        }
+
+        var loggingIndex = globalMiddlewares.IndexOf(typeof(LoggingMiddleware<,>));
+        globalMiddlewares.Insert(loggingIndex + 1, permissionMiddleware);
+        return globalMiddlewares;
     }
 }

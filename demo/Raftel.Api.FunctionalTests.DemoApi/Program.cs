@@ -1,3 +1,5 @@
+using Raftel.Application.Abstractions.Authentication;
+using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Api.FunctionalTests.DemoApi;
 using Raftel.Api.FunctionalTests.DemoApi.TestSupport;
 using Raftel.Api.Server.AutoEndpoints;
@@ -65,9 +67,8 @@ app.UseRaftelExceptionHandling();
 app.UseHttpsRedirection();
 app.UseRouting();
 
-app.UseTenantMiddleware();
-
 app.UseAuthentication();
+app.UseTenantMiddleware();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -113,6 +114,14 @@ app.MapGet("/api/test/error/{type}", (string type) => ErrorResults.ToProblem(typ
     "failure" => Error.Failure("Test.Failure", "Unclassified failure"),
     _ => throw new NotSupportedException($"Unknown error type '{type}'")
 }));
+
+app.MapGet("/api/test/permissions/{permission}",
+    (string permission, ICurrentUser currentUser) => Results.Ok(currentUser.HasPermission(permission)))
+    .RequireAuthorization();
+
+app.MapGet("/api/test/current-tenant",
+    (ICurrentTenant currentTenant) => Results.Ok(new CurrentTenantProbe(currentTenant.Id)))
+    .AllowAnonymous();
 
 app.MapPost("/api/test/database-failure/enable", (DatabaseFailureSwitch databaseFailureSwitch) =>
 {
