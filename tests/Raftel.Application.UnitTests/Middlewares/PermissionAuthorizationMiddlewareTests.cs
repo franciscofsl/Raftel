@@ -21,6 +21,7 @@ public class PermissionAuthorizationMiddlewareTests
     public PermissionAuthorizationMiddlewareTests()
     {
         _currentUser = Substitute.For<ICurrentUser>();
+        _currentUser.IsAuthenticated.Returns(true);
         _authorizationOptions = new AuthorizationOptions();
         _next = _ => Task.FromResult(Result.Success());
 
@@ -38,6 +39,59 @@ public class PermissionAuthorizationMiddlewareTests
         var result = await _middlewareWithoutPermission.HandleAsync(new CommandWithoutPermission(), _next, CancellationToken.None);
 
         result.IsSuccess.ShouldBeTrue();
+    }
+
+    [Fact]
+    public async Task HandleAsync_WhenAnonymousCallerSendsARequestWithoutPermissionRequirements_ShouldAllowAccess()
+    {
+        _currentUser.IsAuthenticated.Returns(false);
+
+        var result = await _middlewareWithoutPermission.HandleAsync(new CommandWithoutPermission(), _next, CancellationToken.None);
+
+        result.IsSuccess.ShouldBeTrue();
+    }
+
+    [Fact]
+    public async Task HandleAsync_WhenCallerIsAnonymous_ShouldReturnUnauthorizedResultWithoutInvokingNext()
+    {
+        _currentUser.IsAuthenticated.Returns(false);
+        var nextInvoked = false;
+        RequestHandlerDelegate<Result> next = _ =>
+        {
+            nextInvoked = true;
+            return Task.FromResult(Result.Success());
+        };
+
+        var result = await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), next, CancellationToken.None);
+
+        nextInvoked.ShouldBeFalse();
+        result.IsFailure.ShouldBeTrue();
+        result.Error.Type.ShouldBe(ErrorType.Unauthorized);
+    }
+
+    [Fact]
+    public async Task HandleAsync_WhenCallerIsAnonymousEvenIfThePermissionCheckWouldPass_ShouldReturnUnauthorizedResult()
+    {
+        _currentUser.IsAuthenticated.Returns(false);
+        _currentUser.HasPermission("test.permission").Returns(true);
+
+        var result = await _middlewareWithPermission.HandleAsync(new CommandWithPermission(), _next, CancellationToken.None);
+
+        result.IsFailure.ShouldBeTrue();
+        result.Error.Type.ShouldBe(ErrorType.Unauthorized);
+    }
+
+    [Fact]
+    public async Task HandleAsync_WhenTypedResultRequestIsDeniedToAnAnonymousCaller_ShouldReturnTypedUnauthorizedResult()
+    {
+        _currentUser.IsAuthenticated.Returns(false);
+        var middleware = new PermissionAuthorizationMiddleware<QueryWithPermission, Result<string>>(_currentUser, _authorizationOptions);
+
+        var result = await middleware.HandleAsync(new QueryWithPermission(), _ => Task.FromResult(Result.Success("value")),
+            CancellationToken.None);
+
+        result.IsFailure.ShouldBeTrue();
+        result.Error.Type.ShouldBe(ErrorType.Unauthorized);
     }
 
     [Fact]
@@ -119,6 +173,11 @@ public class PermissionAuthorizationMiddlewareTests
 
     [RequiresPermission("test.permission")]
     private class CommandWithPermission : IRequest<Result>
+    {
+    }
+
+    [RequiresPermission("test.permission")]
+    private class QueryWithPermission : IRequest<Result<string>>
     {
     }
 

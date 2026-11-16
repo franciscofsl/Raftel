@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -50,6 +50,7 @@ public static class DependencyInjection
 
         services.AddScoped<ICurrentUser, CurrentHttpUser>();
         services.AddScoped<IClaimsPrincipalFactory, ClaimsPrincipalFactory>();
+        services.AddScoped<IUserTenantResolver, UserTenantResolver<TDbContext>>();
         services.AddScoped<ICurrentTenant, CurrentTenant>();
         services.AddScoped<ICorrelationContext, CorrelationContext>();
 

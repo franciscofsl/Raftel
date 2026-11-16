@@ -1,5 +1,7 @@
-﻿using Raftel.Application.Abstractions.Multitenancy;
+using Raftel.Application.Abstractions.Multitenancy;
 using Raftel.Demo.Domain.Pirates;
+using Raftel.Domain.Abstractions;
+using Raftel.Domain.Features.Users;
 using Raftel.Demo.Infrastructure.Data;
 using Raftel.Infrastructure.Data;
 using Raftel.Infrastructure.Data.Filters;
@@ -67,36 +69,114 @@ public abstract class MultitenancyTestsBase : InfrastructureTestBase
     }
 
     [Fact]
-    public async Task ListAllAsync_ShouldReturnAllEntities_WhenNoTenantIsSet()
+    public async Task ListAllAsync_WhenNoTenantIsSet_ShouldReturnOnlyHostEntities()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var (host, tenant1Pirate, tenant2Pirate) = await SeedHostAndTwoTenantsAsync(sp);
+            var repository = sp.GetRequiredService<IPirateRepository>();
+
+            var pirates = await repository.ListAllAsync();
+
+            pirates.Count.ShouldBe(1);
+            pirates.ShouldContain(host);
+            pirates.ShouldNotContain(tenant1Pirate);
+            pirates.ShouldNotContain(tenant2Pirate);
+        });
+    }
+
+    [Fact]
+    public async Task ListAllAsync_WhenTenantIsSet_ShouldNotReturnHostEntities()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var (host, tenant1Pirate, _) = await SeedHostAndTwoTenantsAsync(sp);
+            var repository = sp.GetRequiredService<IPirateRepository>();
+            var currentTenant = sp.GetRequiredService<ICurrentTenant>();
+
+            using (currentTenant.Change(TenantOf(sp, tenant1Pirate)))
+            {
+                var pirates = await repository.ListAllAsync();
+
+                pirates.ShouldBe([tenant1Pirate]);
+                pirates.ShouldNotContain(host);
+            }
+        });
+    }
+
+    [Fact]
+    public async Task ListAllAsync_WithAPredicateAndNoTenantSet_ShouldStillExcludeOtherTenantsEntities()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var (_, tenant1Pirate, _) = await SeedHostAndTwoTenantsAsync(sp);
+            var repository = sp.GetRequiredService<IPirateRepository>();
+
+            var pirates = await repository.ListAllAsync(p => p.Bounty > 0);
+
+            pirates.ShouldNotContain(tenant1Pirate);
+            pirates.Count.ShouldBe(1);
+        });
+    }
+
+    [Fact]
+    public async Task ListPagedAsync_WhenNoTenantIsSet_ShouldPageAndCountOnlyHostEntities()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var (host, _, _) = await SeedHostAndTwoTenantsAsync(sp);
+            var repository = sp.GetRequiredService<IPirateRepository>();
+
+            var page = await repository.ListPagedAsync(PageRequest.Create(1, 50).Value);
+
+            page.TotalCount.ShouldBe(1);
+            page.Items.ShouldBe([host]);
+        });
+    }
+
+    [Fact]
+    public async Task ListAllAsync_WhenNoTenantIsSetAndTenantFilterIsDisabled_ShouldReturnEveryTenantsEntities()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var (host, tenant1Pirate, tenant2Pirate) = await SeedHostAndTwoTenantsAsync(sp);
+            var repository = sp.GetRequiredService<IPirateRepository>();
+            var dataFilter = sp.GetRequiredService<IDataFilter>();
+
+            using (dataFilter.Disable<ITenantFilter>())
+            {
+                var pirates = await repository.ListAllAsync();
+
+                pirates.Count.ShouldBe(3);
+                pirates.ShouldContain(host);
+                pirates.ShouldContain(tenant1Pirate);
+                pirates.ShouldContain(tenant2Pirate);
+            }
+
+            (await repository.ListAllAsync()).ShouldBe([host]);
+        });
+    }
+
+    [Fact]
+    public async Task UsersRepository_WhenNoTenantIsSet_ShouldNotExposeUsersOfATenant()
     {
         await ExecuteScopedAsync(async sp =>
         {
             var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
-            var repository = sp.GetRequiredService<IPirateRepository>();
+            var users = sp.GetRequiredService<IUsersRepository>();
             var currentTenant = sp.GetRequiredService<ICurrentTenant>();
+            var tenantUser = User.Create("tenant.user@test.com", "Tenant", "User");
+            tenantUser.BindTo(Guid.NewGuid().ToString());
 
-            var tenant1Id = Guid.NewGuid();
-            var tenant2Id = Guid.NewGuid();
-
-            var luffy = Pirate.Normal("Luffy", 500_000_000);
-            var kaido = Pirate.Normal("Kaido", 800_000_000);
-
-            using (currentTenant.Change(tenant1Id))
+            using (currentTenant.Change(Guid.NewGuid()))
             {
-                await repository.AddAsync(luffy);
+                await users.AddAsync(tenantUser);
                 await unitOfWork.CommitAsync();
             }
 
-            using (currentTenant.Change(tenant2Id))
-            {
-                await repository.AddAsync(kaido);
-                await unitOfWork.CommitAsync();
-            }
-
-            var allPirates = await repository.ListAllAsync();
-            allPirates.Count.ShouldBe(2);
-            allPirates.ShouldContain(luffy);
-            allPirates.ShouldContain(kaido);
+            (await users.ListAllAsync()).ShouldNotContain(tenantUser);
+            (await users.GetByIdAsync(tenantUser.Id)).ShouldBeNull();
+            (await users.EmailIsUniqueAsync("tenant.user@test.com", CancellationToken.None)).ShouldBeTrue();
         });
     }
 
@@ -136,27 +216,31 @@ public abstract class MultitenancyTestsBase : InfrastructureTestBase
     }
 
     [Fact]
-    public async Task GetByIdAsync_ShouldReturnEntity_WhenNoTenantIsSet()
+    public async Task GetByIdAsync_WhenNoTenantIsSet_ShouldNotReturnAnotherTenantsEntity()
     {
         await ExecuteScopedAsync(async sp =>
         {
-            var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
+            var (host, tenant1Pirate, _) = await SeedHostAndTwoTenantsAsync(sp);
+            var repository = sp.GetRequiredService<IPirateRepository>();
+
+            (await repository.GetByIdAsync(tenant1Pirate.Id)).ShouldBeNull();
+            (await repository.GetByIdAsync(host.Id)).ShouldBe(host);
+        });
+    }
+
+    [Fact]
+    public async Task GetByIdAsync_WhenTenantIsSet_ShouldNotReturnAHostEntity()
+    {
+        await ExecuteScopedAsync(async sp =>
+        {
+            var (host, tenant1Pirate, _) = await SeedHostAndTwoTenantsAsync(sp);
             var repository = sp.GetRequiredService<IPirateRepository>();
             var currentTenant = sp.GetRequiredService<ICurrentTenant>();
 
-            var tenantId = Guid.NewGuid();
-
-            var luffy = Pirate.Normal("Luffy", 500_000_000);
-
-            using (currentTenant.Change(tenantId))
+            using (currentTenant.Change(TenantOf(sp, tenant1Pirate)))
             {
-                await repository.AddAsync(luffy);
-                await unitOfWork.CommitAsync();
+                (await repository.GetByIdAsync(host.Id)).ShouldBeNull();
             }
-
-            var pirateWithoutTenant = await repository.GetByIdAsync(luffy.Id);
-            pirateWithoutTenant.ShouldNotBeNull();
-            pirateWithoutTenant.ShouldBe(luffy);
         });
     }
 
@@ -276,6 +360,37 @@ public abstract class MultitenancyTestsBase : InfrastructureTestBase
             }
         });
     }
+
+    private static async Task<(Pirate Host, Pirate Tenant1, Pirate Tenant2)> SeedHostAndTwoTenantsAsync(IServiceProvider sp)
+    {
+        var unitOfWork = sp.GetRequiredService<IUnitOfWork>();
+        var repository = sp.GetRequiredService<IPirateRepository>();
+        var currentTenant = sp.GetRequiredService<ICurrentTenant>();
+
+        var host = Pirate.Normal("Shanks", 4_048_900_000);
+        await repository.AddAsync(host);
+        await unitOfWork.CommitAsync();
+
+        var tenant1Pirate = Pirate.Normal("Luffy", 500_000_000);
+        using (currentTenant.Change(Guid.NewGuid()))
+        {
+            await repository.AddAsync(tenant1Pirate);
+            await unitOfWork.CommitAsync();
+        }
+
+        var tenant2Pirate = Pirate.Normal("Kaido", 800_000_000);
+        using (currentTenant.Change(Guid.NewGuid()))
+        {
+            await repository.AddAsync(tenant2Pirate);
+            await unitOfWork.CommitAsync();
+        }
+
+        return (host, tenant1Pirate, tenant2Pirate);
+    }
+
+    private static Guid TenantOf(IServiceProvider sp, Pirate pirate) =>
+        (Guid)sp.GetRequiredService<TestingRaftelDbContext>().Entry(pirate)
+            .Property(ShadowPropertyNames.TenantId).CurrentValue!;
 }
 
 [Collection(SqlServerTestCollection.Name)]

@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Raftel.Api.Client;
 using Raftel.Api.FunctionalTests.Extensions;
@@ -11,9 +11,11 @@ namespace Raftel.Api.FunctionalTests.Features;
 public class MultitenancyTests
 {
     private readonly HttpClient _client;
+    private readonly ApiTestFactory _factory;
 
     public MultitenancyTests(ApiTestFactory factory)
     {
+        _factory = factory;
         _client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {
             BaseAddress = new Uri("https://localhost:5128")
@@ -23,7 +25,7 @@ public class MultitenancyTests
     [Fact]
     public async Task ApiShould_CreateTenant()
     {
-        await _client.AuthenticateAsync();
+        await _client.AuthenticateAsAdminAsync(_factory);
         
         await Should.NotThrowAsync(async () =>
         {
@@ -40,7 +42,7 @@ public class MultitenancyTests
     [Fact]
     public async Task ApiShould_CreateTenant_GetAllTenants_SelectRandomTenant_AndExecuteWithinTenantContext()
     {
-        await _client.AuthenticateAsync();
+        await _client.AuthenticateAsAdminAsync(_factory);
         
         var createTenantResponse = await _client.PostAsJsonAsync("/api/tenants", new
         {
