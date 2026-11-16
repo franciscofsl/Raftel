@@ -18,9 +18,17 @@ internal sealed class AssignRoleToUserCommandHandler(
     {
         var userId = new UserId(request.UserId);
         var user = await userRepository.GetByIdAsync(userId, token);
+        if (user is null)
+        {
+            return Result.Failure(UserErrors.NotFound);
+        }
 
         var roleId = new RoleId(request.RoleId);
         var role = await roleRepository.GetByIdAsync(roleId, token);
+        if (role is null)
+        {
+            return Result.Failure(RoleErrors.NotFound);
+        }
 
         var identityResult = await authenticationService.AssignRoleAsync(user, role, token);
         if (identityResult.IsFailure)

@@ -4,6 +4,7 @@ namespace Raftel.Domain.Features.Authorization;
 
 public static class RoleErrors
 {
+    public static Error NotFound => Error.NotFound("Role.NotFound", "Role was not found");
     public static Error PermissionAlreadyExists => Error.Conflict("Role.PermissionAlreadyExists", "Permission already exists in this role");
     public static Error PermissionNotFound => Error.NotFound("Role.PermissionNotFound", "Permission not found in this role");
     public static Error InvalidName => Error.Validation("Role.InvalidName", "Role name cannot be null or empty");
