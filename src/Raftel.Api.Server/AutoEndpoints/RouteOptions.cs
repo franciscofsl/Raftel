@@ -18,18 +18,32 @@ public sealed class RouteOptions
         return this;
     }
 
-    public RouteOptions AddCommand<TRequest>(string route, HttpMethod method)
+    /// <param name="route">Route relative to the group's base URI.</param>
+    /// <param name="method">HTTP method: POST, PUT or DELETE.</param>
+    /// <param name="rateLimitPolicy">
+    /// Rate limiting policy for the endpoint. Defaults to <see cref="Security.RaftelRateLimitPolicies.Write"/>.
+    /// </param>
+    public RouteOptions AddCommand<TRequest>(string route, HttpMethod method, string? rateLimitPolicy = null)
         where TRequest : ICommand
     {
-        var definition = new CommandDefinition(typeof(TRequest), null, route, method);
+        var definition = new CommandDefinition(typeof(TRequest), null, route, method,
+            RateLimitPolicy: rateLimitPolicy);
         Commands.Add(definition);
         return this;
     }
 
-    public RouteOptions AddCommand<TRequest, TResult>(string route, HttpMethod method, string? createdRouteName = null)
+    /// <param name="route">Route relative to the group's base URI.</param>
+    /// <param name="method">HTTP method: POST, PUT or DELETE.</param>
+    /// <param name="createdRouteName">Route name used to build the <c>201 Created</c> location, if any.</param>
+    /// <param name="rateLimitPolicy">
+    /// Rate limiting policy for the endpoint. Defaults to <see cref="Security.RaftelRateLimitPolicies.Write"/>.
+    /// </param>
+    public RouteOptions AddCommand<TRequest, TResult>(string route, HttpMethod method, string? createdRouteName = null,
+        string? rateLimitPolicy = null)
         where TRequest : ICommand<TResult>
     {
-        var definition = new CommandDefinition(typeof(TRequest), typeof(TResult), route, method, createdRouteName);
+        var definition = new CommandDefinition(typeof(TRequest), typeof(TResult), route, method, createdRouteName,
+            rateLimitPolicy);
         Commands.Add(definition);
         return this;
     }

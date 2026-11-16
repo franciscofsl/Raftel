@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
+using Raftel.Api.Server.Security;
 using Raftel.Application.Features.Users.LogInUser;
 using Raftel.Application.Queries;
 
@@ -12,6 +14,7 @@ public class AuthorizationController(IQueryDispatcher dispatcher) : Controller
     [HttpPost("~/connect/token")]
     [Produces("application/json")]
     [AllowAnonymous]
+    [EnableRateLimiting(RaftelRateLimitPolicies.Auth)]
     public async Task<IActionResult> Exchange()
     {
         var request = HttpContext.GetOpenIddictServerRequest()!;

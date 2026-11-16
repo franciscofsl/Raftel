@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -18,19 +19,19 @@ public static class HealthEndpointExtensions
         {
             Predicate = _ => false,
             ResponseWriter = HealthResponseWriter.WriteStatusOnly
-        }).AllowAnonymous();
+        }).AllowAnonymous().DisableRateLimiting();
 
         endpoints.MapHealthChecks("/health/ready", new HealthCheckOptions
         {
             Predicate = registration => registration.Tags.Contains(HealthCheckTags.Ready),
             ResponseWriter = HealthResponseWriter.WriteStatusOnly
-        }).AllowAnonymous();
+        }).AllowAnonymous().DisableRateLimiting();
 
         var detailedEndpoint = endpoints.MapHealthChecks("/health", new HealthCheckOptions
         {
             Predicate = _ => true,
             ResponseWriter = HealthResponseWriter.WriteDetailed
-        });
+        }).DisableRateLimiting();
 
         if (options.RequireAuthorizationForDetails)
         {
