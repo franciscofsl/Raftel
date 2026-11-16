@@ -113,4 +113,42 @@ public sealed class AssignRoleToUserCommandHandlerTests
         result.Error.ShouldBe(UserErrors.RoleAlreadyAssigned);
         _userRepository.DidNotReceive().Update(user);
     }
+
+    [Fact]
+    public async Task HandleAsync_Should_ReturnUserNotFound_When_UserDoesNotExist()
+    {
+        var command = new AssignRoleToUserCommand(Guid.NewGuid(), Guid.NewGuid());
+        var role = Role.Create("TestRole", "Test Role Description").Value;
+
+        _userRepository.GetByIdAsync(Arg.Any<UserId>(), Arg.Any<CancellationToken>())
+            .Returns((User)null);
+        _roleRepository.GetByIdAsync(Arg.Any<RoleId>(), Arg.Any<CancellationToken>())
+            .Returns(role);
+
+        var result = await _handler.HandleAsync(command, CancellationToken.None);
+
+        result.IsFailure.ShouldBeTrue();
+        result.Error.ShouldBe(UserErrors.NotFound);
+        await _authenticationService.DidNotReceiveWithAnyArgs().AssignRoleAsync(default, default, default);
+        _userRepository.DidNotReceiveWithAnyArgs().Update(default);
+    }
+
+    [Fact]
+    public async Task HandleAsync_Should_ReturnRoleNotFound_When_RoleDoesNotExist()
+    {
+        var command = new AssignRoleToUserCommand(Guid.NewGuid(), Guid.NewGuid());
+        var user = User.Create("user@example.com", "Test", "User");
+
+        _userRepository.GetByIdAsync(Arg.Any<UserId>(), Arg.Any<CancellationToken>())
+            .Returns(user);
+        _roleRepository.GetByIdAsync(Arg.Any<RoleId>(), Arg.Any<CancellationToken>())
+            .Returns((Role)null);
+
+        var result = await _handler.HandleAsync(command, CancellationToken.None);
+
+        result.IsFailure.ShouldBeTrue();
+        result.Error.ShouldBe(RoleErrors.NotFound);
+        await _authenticationService.DidNotReceiveWithAnyArgs().AssignRoleAsync(default, default, default);
+        _userRepository.DidNotReceiveWithAnyArgs().Update(default);
+    }
 }

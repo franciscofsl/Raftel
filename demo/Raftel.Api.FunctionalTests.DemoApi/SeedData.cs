@@ -29,7 +29,7 @@ public static class SeedData
 
         adminRole.AddPermissions([PiratesPermissions.Management, PiratesPermissions.View]);
         adminRole.AddPermissions([TenantsPermissions.Management, TenantsPermissions.View, TenantsPermissions.Switch]);
-        adminRole.AddPermissions([UsersPermissions.View]);
+        adminRole.AddPermissions([UsersPermissions.View, UsersPermissions.AssignRoleToUser]);
         await dbContext.SaveChangesAsync();
 
         await SeedAdministratorAsync(services, dbContext, adminRole);
